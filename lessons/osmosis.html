@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>الأسموزية – تجربة حية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1a2b;--panel:#12263d;--line:#22405f;--txt:#eaf2fb;--soft:#9fb6cf;--gold:#f2b84b;--blue:#4cc3ff;--green:#4fd18b;--red:#ff6b6b;--pink:#ff8fb1}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:radial-gradient(ellipse at top,#16304d,#0b1a2b 60%);color:var(--txt);font-family:'Cairo',Tahoma,sans-serif;min-height:100vh}
+button{font-family:inherit;color:var(--txt)}
+.wrap{max-width:720px;margin:0 auto;padding:12px 14px 90px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0 10px}
+.brand{font-weight:800;font-size:1rem;color:var(--gold)}
+.dots{display:flex;gap:6px}
+.dot{width:10px;height:10px;border-radius:50%;background:#2a4868;transition:.3s}
+.dot.on{background:var(--gold);width:26px;border-radius:6px}
+.scene{display:none;animation:in .5s ease}
+.scene.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+h1{font-size:2.1rem;font-weight:900;margin:8px 0 4px;line-height:1.3}
+h2{font-size:1.45rem;font-weight:800;margin:6px 0 8px;line-height:1.4}
+p{line-height:1.8}
+.soft{color:var(--soft)}
+.gold{color:var(--gold)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.vs .card{margin:0;text-align:center}
+.vs .ic{font-size:2.4rem}
+.big-btn{display:block;width:100%;border:none;border-radius:16px;padding:16px;font-size:1.25rem;font-weight:800;background:linear-gradient(135deg,#f2b84b,#ff9f43);color:#1b1300;cursor:pointer;box-shadow:0 8px 24px #f2b84b33}
+.big-btn:active{transform:scale(.98)}
+.opt{display:block;width:100%;text-align:right;background:#183251;border:2px solid var(--line);border-radius:14px;padding:14px 16px;margin:8px 0;font-size:1.1rem;font-weight:700;cursor:pointer;transition:.2s}
+.opt.sel{border-color:var(--gold);background:#2a3a2a1a;box-shadow:0 0 0 3px #f2b84b33}
+.seg{display:flex;gap:6px;background:#0e2034;border-radius:14px;padding:5px;margin:8px 0}
+.seg button{flex:1;border:none;background:transparent;border-radius:10px;padding:10px 4px;font-weight:700;font-size:.95rem;cursor:pointer;color:var(--soft)}
+.seg button.on{background:#24486e;color:#fff;box-shadow:inset 0 0 0 2px var(--blue)}
+.stage{position:relative;margin:8px auto;width:100%;max-width:560px;aspect-ratio:1}
+.stage canvas{width:100%;height:100%;display:block}
+.badge{position:absolute;top:10px;right:10px;background:#0b1a2bcc;border:1px solid var(--line);border-radius:12px;padding:6px 10px;font-size:.85rem;font-weight:700;backdrop-filter:blur(4px)}
+.badge.l{right:auto;left:10px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.stat{background:#0e2034;border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.stat b{display:block;font-size:1.25rem}
+.stat span{font-size:.75rem;color:var(--soft)}
+.row{display:flex;gap:8px}
+.btn{flex:1;border:2px solid var(--line);background:#183251;border-radius:12px;padding:12px;font-size:1rem;font-weight:800;cursor:pointer}
+.btn.go{background:var(--green);border-color:var(--green);color:#062312}
+.btn.warn{border-color:var(--red);color:#ffd2d2}
+.result{display:none;border-radius:16px;padding:14px;margin:10px 0;font-size:1.05rem;line-height:1.9;animation:in .5s}
+.result.show{display:block}
+.r-bad{background:#3a1620;border:2px solid var(--red)}
+.r-good{background:#123526;border:2px solid var(--green)}
+.r-mid{background:#2b2a14;border:2px solid var(--gold)}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#0b1a2bee;border-top:1px solid var(--line);padding:10px 14px;display:flex;gap:10px;justify-content:center;backdrop-filter:blur(6px);z-index:9}
+.nav button{max-width:340px;flex:1;border:none;border-radius:12px;padding:12px;font-size:1.05rem;font-weight:800;cursor:pointer}
+#next{background:var(--blue);color:#04263a}
+#prev{background:#1d3654}
+.meter{height:12px;background:#0e2034;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--gold),var(--red));transition:width .2s}
+.q{margin:14px 0}
+.q .opt.ok{border-color:var(--green);background:#123526}
+.q .opt.no{border-color:var(--red);background:#3a1620}
+.exp{font-size:.95rem;color:var(--soft);display:none;margin-top:4px}
+.final{text-align:center;font-size:3rem;letter-spacing:4px}
+.hint{font-size:.9rem;color:var(--soft);text-align:center}
+.shake{animation:shake .5s}
+@keyframes shake{0%,100%{transform:none}20%{transform:translate(-8px,4px)}40%{transform:translate(7px,-5px)}60%{transform:translate(-5px,3px)}80%{transform:translate(3px,-2px)}}
+</style>
+<style>/*darkfix*/input,select,textarea,.cf,.M input.c{background-color:#fff !important;color:#1f2a44 !important;-webkit-text-fill-color:#1f2a44 !important;caret-color:#1f2a44}input.cf.ok{background-color:#eefaf2 !important}input.cf.no{background-color:#fdeeee !important}svg text{font-family:Cairo,Tahoma,Arial,sans-serif}</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div class="brand">📗 الكتاب المدرسي الحي</div><div class="dots" id="dots"></div></div>
+
+  <!-- 0 INTRO -->
+  <section class="scene on">
+    <div class="soft">علوم الصف الثامن · الفصل الرابع · ص 76</div>
+    <h1>الأسموزية <span class="gold">في الخلايا الحية</span></h1>
+    <p class="soft">ماذا يحدث للخلية إذا وُضعت في ماء نقي؟ الكتاب يجيب بصورة ثابتة… نحن نجعل الطالب يرى الإجابة بعينه.</p>
+    <div class="vs">
+      <div class="card"><div class="ic">📖</div><b>الكتاب اليوم</b><p class="soft" style="margin:4px 0;font-size:.9rem">صورة ثابتة وجملة يحفظها الطالب للامتحان</p></div>
+      <div class="card" style="border-color:var(--gold)"><div class="ic">🔬</div><b class="gold">الكتاب الحي</b><p class="soft" style="margin:4px 0;font-size:.9rem">مجهر حي، يتوقّع الطالب ثم يجرّب ويكتشف بنفسه</p></div>
+    </div>
+    <div style="height:14px"></div>
+    <button class="big-btn" onclick="go(1)">ابدأ التجربة ←</button>
+  </section>
+
+  <!-- 1 PREDICT -->
+  <section class="scene">
+    <div class="soft">الخطوة 1 من 4</div>
+    <h2>🔮 توقّع قبل أن ترى</h2>
+    <div class="card">
+      <p style="margin:0;font-size:1.15rem">وضعنا <b class="gold">خلية دم حمراء</b> في <b style="color:var(--blue)">ماء مقطّر</b> نقي. ماذا سيحدث لها؟</p>
+    </div>
+    <button class="opt" data-p="0">🔽 تنكمش وتصغر</button>
+    <button class="opt" data-p="1">💥 تنتفخ ثم تنفجر</button>
+    <button class="opt" data-p="2">⏸️ لا يحدث لها شيء</button>
+    <p class="hint" id="pHint">اختر إجابة، ثم انتقل إلى المجهر لتكتشف</p>
+  </section>
+
+  <!-- 2 LAB -->
+  <section class="scene">
+    <div class="soft">الخطوة 2 من 4</div>
+    <h2>🔬 تحت المجهر</h2>
+    <div class="seg" id="segType"><button data-v="a" class="on">🔴 خلية حيوانية</button><button data-v="p">🟩 خلية نباتية</button></div>
+    <div class="seg" id="segSol"><button data-v="w" class="on">💧 ماء مقطّر</button><button data-v="i">⚖️ محلول مساوٍ</button><button data-v="s">🧂 محلول ملحي</button></div>
+    <div class="stage" id="stage">
+      <canvas id="lab"></canvas>
+      <div class="badge" id="bSol">💧 ماء مقطّر</div>
+      <div class="badge l" id="bZoom">× 400</div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="sSize">100%</b><span>حجم الخلية</span></div>
+      <div class="stat"><b id="sIn" style="color:var(--blue)">0</b><span>جزيء ماء دخل</span></div>
+      <div class="stat"><b id="sOut" style="color:var(--pink)">0</b><span>جزيء ماء خرج</span></div>
+    </div>
+    <div class="meter"><i id="mPress"></i></div>
+    <div class="hint" id="labHint" style="margin-top:4px">الضغط على غشاء الخلية</div>
+    <div class="row" style="margin-top:10px"><button class="btn go" id="run">▶ ابدأ التجربة</button><button class="btn" id="reset">↺ إعادة</button></div>
+    <div class="result" id="res"></div>
+  </section>
+
+  <!-- 3 AMOEBA -->
+  <section class="scene">
+    <div class="soft">الخطوة 3 من 4 · هل تعلم؟</div>
+    <h2>🦠 الأميبا: كيف لا تنفجر؟</h2>
+    <p class="soft" style="margin:0 0 6px">تعيش الأميبا في الماء العذب، فيدخلها الماء باستمرار. لديها <b class="gold">فجوة منقبضة</b> تجمع الماء الزائد وتطرده.</p>
+    <div class="stage"><canvas id="amb"></canvas><div class="badge" id="aState">✅ الفجوة المنقبضة تعمل</div></div>
+    <div class="meter"><i id="aPress"></i></div>
+    <div class="hint" style="margin-top:4px">كمية الماء داخل الأميبا</div>
+    <div class="row" style="margin-top:10px"><button class="btn warn" id="aToggle">⛔ عطّل الفجوة المنقبضة</button><button class="btn" id="aReset">↺ إعادة</button></div>
+    <div class="result" id="aRes"></div>
+  </section>
+
+  <!-- 4 QUIZ -->
+  <section class="scene">
+    <div class="soft">الخطوة 4 من 4</div>
+    <h2>✅ هل فهمت؟</h2>
+    <div id="quiz"></div>
+    <div class="card" id="final" style="display:none;text-align:center">
+      <div class="final" id="stars"></div>
+      <h2 id="fTitle" style="margin:4px 0"></h2>
+      <p class="soft" style="margin:0">الطالب لم يحفظ الإجابة… بل رآها بعينه.</p>
+    </div>
+  </section>
+</div>
+<div class="nav"><button id="prev">→ السابق</button><button id="next">التالي ←</button></div>
+
+<script>
+/* ---------- navigation ---------- */
+const scenes=[...document.querySelectorAll('.scene')];let cur=0;
+const dots=document.getElementById('dots');scenes.forEach(()=>dots.appendChild(Object.assign(document.createElement('div'),{className:'dot'})));
+function go(i){cur=Math.max(0,Math.min(scenes.length-1,i));scenes.forEach((s,k)=>s.classList.toggle('on',k===cur));[...dots.children].forEach((d,k)=>d.classList.toggle('on',k===cur));
+  document.getElementById('prev').style.visibility=cur?'visible':'hidden';document.getElementById('next').textContent=cur===scenes.length-1?'↺ من البداية':'التالي ←';window.scrollTo({top:0,behavior:'smooth'});audio()}
+document.getElementById('next').onclick=()=>go(cur===scenes.length-1?0:cur+1);document.getElementById('prev').onclick=()=>go(cur-1);go(0);
+
+/* ---------- sound ---------- */
+let AC=null;function audio(){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();AC.resume()}catch(e){}}
+function pop(){if(!AC)return;try{const n=AC.sampleRate*.6,b=AC.createBuffer(1,n,AC.sampleRate),d=b.getChannelData(0);for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,3);
+  const s=AC.createBufferSource();s.buffer=b;const f=AC.createBiquadFilter();f.type='lowpass';f.frequency.value=1400;const g=AC.createGain();g.gain.value=.9;s.connect(f).connect(g).connect(AC.destination);s.start();
+  const o=AC.createOscillator(),og=AC.createGain();o.frequency.setValueAtTime(160,AC.currentTime);o.frequency.exponentialRampToValueAtTime(40,AC.currentTime+.35);og.gain.setValueAtTime(.6,AC.currentTime);og.gain.exponentialRampToValueAtTime(.001,AC.currentTime+.4);o.connect(og).connect(AC.destination);o.start();o.stop(AC.currentTime+.4)}catch(e){}}
+function chime(){if(!AC)return;try{[660,880,1320].forEach((f,i)=>{const o=AC.createOscillator(),g=AC.createGain();o.type='sine';o.frequency.value=f;const t=AC.currentTime+i*.09;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.18,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+.5);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+.5)})}catch(e){}}
+function blip(f){if(!AC)return;try{const o=AC.createOscillator(),g=AC.createGain();o.frequency.value=f;g.gain.setValueAtTime(.05,AC.currentTime);g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+.08);o.connect(g).connect(AC.destination);o.start();o.stop(AC.currentTime+.08)}catch(e){}}
+
+/* ---------- prediction ---------- */
+let pred=null;const predTxt=['تنكمش','تنتفخ ثم تنفجر','لا يحدث لها شيء'];
+document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{pred=+b.dataset.p;document.querySelectorAll('[data-p]').forEach(x=>x.classList.toggle('sel',x===b));blip(700);
+  document.getElementById('pHint').innerHTML='توقعك: <b class="gold">'+predTxt[pred]+'</b>. اضغط «التالي» لنرى ما سيحدث فعلًا 🔬'});
+
+/* ---------- canvas helper ---------- */
+function setup(c){const d=Math.min(window.devicePixelRatio||1,2);c.width=600*d;c.height=600*d;const g=c.getContext('2d');g.scale(d,d);return g}
+const rnd=(a,b)=>a+Math.random()*(b-a);
+function scope(g,tint){ // microscope field
+  g.save();g.beginPath();g.arc(300,300,292,0,7);g.clip();
+  const bg=g.createRadialGradient(300,300,40,300,300,300);bg.addColorStop(0,tint[0]);bg.addColorStop(1,tint[1]);g.fillStyle=bg;g.fillRect(0,0,600,600)}
+function scopeEnd(g){g.restore();const v=g.createRadialGradient(300,300,230,300,300,300);v.addColorStop(0,'rgba(0,0,0,0)');v.addColorStop(1,'rgba(0,0,0,.55)');g.fillStyle=v;g.beginPath();g.arc(300,300,292,0,7);g.fill();
+  g.strokeStyle='#2c4a6b';g.lineWidth=10;g.beginPath();g.arc(300,300,295,0,7);g.stroke();g.strokeStyle='#5c84ad55';g.lineWidth=2;g.beginPath();g.arc(300,300,288,0,7);g.stroke()}
+
+/* ---------- LAB ---------- */
+const lc=document.getElementById('lab'),lg=setup(lc);
+const L={type:'a',sol:'w',run:false,t:0,s:1,p:0,burst:false,bt:0,frags:[],nIn:0,nOut:0,done:false};
+const tints={w:['#d9f1ff','#8fc8ec'],i:['#dff3ea','#94c9b4'],s:['#fff1d6','#e3bf86']};
+const solName={w:'💧 ماء مقطّر',i:'⚖️ محلول مساوٍ',s:'🧂 محلول ملحي'};
+let water=[],salt=[],inner=[];
+const gran=[...Array(36)].map(()=>{const a=rnd(0,6.28),r=Math.sqrt(Math.random())*.82;return[Math.cos(a)*r,Math.sin(a)*r,rnd(1.5,3)]});
+const mitos=[[.45,.25,.3],[-.35,.5,1.2],[.2,-.55,2.1],[-.55,-.2,.6]];
+function initLab(){L.run=false;L.t=0;L.s=1;L.p=0;L.burst=false;L.frags=[];L.nIn=0;L.nOut=0;L.done=false;
+  water=[...Array(170)].map(()=>{const a=rnd(0,6.28),r=Math.sqrt(Math.random())*280;return{x:300+Math.cos(a)*r,y:300+Math.sin(a)*r,vx:rnd(-1,1),vy:rnd(-1,1),in:null}});
+  const ns={w:0,i:26,s:90}[L.sol];salt=[...Array(ns)].map(()=>{let x,y;do{const a=rnd(0,6.28),r=rnd(170,280);x=300+Math.cos(a)*r;y=300+Math.sin(a)*r}while(0);return{x,y,vx:rnd(-.6,.6),vy:rnd(-.6,.6)}});
+  inner=[...Array(26)].map(()=>{const a=rnd(0,6.28),r=Math.sqrt(Math.random())*.75;return{ux:Math.cos(a)*r,uy:Math.sin(a)*r}});
+  water.forEach(w=>w.in=isIn(w.x,w.y));
+  document.getElementById('res').className='result';document.getElementById('run').textContent='▶ ابدأ التجربة';document.getElementById('bSol').textContent=solName[L.sol];updStats()}
+function R(){return 125*L.s}
+function prot(){ // plant protoplast rect
+  const p=L.p,ins=p>=0?16-10*p:16+70*(-p);return{x:110+ins,y:160+ins,w:380-2*ins,h:280-2*ins,r:24+(p<0?-p*40:0)}}
+function isIn(x,y){if(L.burst)return false;if(L.type==='a')return Math.hypot(x-300,y-300)<R();const q=prot();return x>q.x&&x<q.x+q.w&&y>q.y&&y<q.y+q.h}
+function target(){if(L.type==='a')return{w:1.48,i:1,s:.72}[L.sol];return{w:1,i:0,s:-1}[L.sol]}
+function flow(){if(!L.run||L.burst)return 0;const cur=L.type==='a'?L.s:L.p,tg=target();return Math.abs(tg-cur)<.01?0:Math.sign(tg-cur)}
+function rr(g,x,y,w,h,r){g.beginPath();g.moveTo(x+r,y);g.arcTo(x+w,y,x+w,y+h,r);g.arcTo(x+w,y+h,x,y+h,r);g.arcTo(x,y+h,x,y,r);g.arcTo(x,y,x+w,y,r);g.closePath()}
+function drawAnimal(g){const Rr=R(),t=L.t,stress=Math.max(0,(L.s-1.15)/.33),cren=Math.max(0,(.88-L.s)/.16);
+  g.beginPath();for(let i=0;i<=90;i++){const a=i/90*6.283;let r=Rr*(1+.025*Math.sin(3*a+t*1.4)+.018*Math.sin(5*a-t)+cren*.07*Math.sin(16*a));const x=300+r*Math.cos(a),y=300+r*Math.sin(a);i?g.lineTo(x,y):g.moveTo(x,y)}g.closePath();
+  const f=g.createRadialGradient(285,280,10,300,300,Rr);f.addColorStop(0,stress>.5?'#ffd0d8':'#ffb3bf');f.addColorStop(1,cren>0?'#c9445e':'#e5637c');g.fillStyle=f;g.globalAlpha=.92;g.fill();g.globalAlpha=1;
+  g.lineWidth=Math.max(1.2,5-stress*3.6);g.strokeStyle=stress>.6&&Math.sin(t*20)>0?'#fff':'#9e2440';g.stroke();
+  gran.forEach(([x,y,r])=>{g.fillStyle='#b8405a88';g.beginPath();g.arc(300+x*Rr,300+y*Rr,r,0,7);g.fill()});
+  mitos.forEach(([x,y,a])=>{g.save();g.translate(300+x*Rr,300+y*Rr);g.rotate(a);g.fillStyle='#f5935f';g.strokeStyle='#a4502a';g.lineWidth=2;g.beginPath();g.ellipse(0,0,18,8,0,0,7);g.fill();g.stroke();g.beginPath();g.moveTo(-12,0);for(let k=-12;k<=12;k+=6)g.lineTo(k,k%12?4:-4);g.stroke();g.restore()});
+  const nx=300-20*L.s,ny=295-10*L.s,ng=g.createRadialGradient(nx-8,ny-8,4,nx,ny,36);ng.addColorStop(0,'#c6a2ff');ng.addColorStop(1,'#6a3fc2');g.fillStyle=ng;g.beginPath();g.ellipse(nx,ny,38,32,.3,0,7);g.fill();g.fillStyle='#3c1f80';g.beginPath();g.arc(nx+6,ny+2,10,0,7);g.fill();
+  if(stress>.4){g.strokeStyle='rgba(255,255,255,'+(stress*.6)+')';g.lineWidth=1.5;for(let k=0;k<6;k++){const a=k*1.05+t*.3;g.beginPath();g.arc(300,300,Rr-6,a,a+.25);g.stroke()}}}
+function drawPlant(g){const q=prot(),t=L.t;
+  // wall
+  g.fillStyle='#e9f7d8';rr(g,96,146,408,308,30);g.fill();g.lineWidth=16;g.strokeStyle='#3f9a3a';g.stroke();g.lineWidth=2;g.strokeStyle='#2c7a2a';rr(g,88,138,424,324,36);g.stroke();
+  g.strokeStyle='#5db85633';g.lineWidth=1;for(let x=110;x<500;x+=14){g.beginPath();g.moveTo(x,139);g.lineTo(x+6,153);g.stroke();g.beginPath();g.moveTo(x,447);g.lineTo(x+6,461);g.stroke()}
+  // protoplast
+  rr(g,q.x,q.y,q.w,q.h,q.r);const f=g.createLinearGradient(0,q.y,0,q.y+q.h);f.addColorStop(0,'#c9f0b9');f.addColorStop(1,'#a8de95');g.fillStyle=f;g.fill();g.lineWidth=3;g.strokeStyle='#e6862f';g.stroke();
+  // vacuole
+  const v=.55+.28*L.p,vw=(q.w-50)*Math.min(1,v+.1),vh=(q.h-50)*Math.min(1,v+.05);const vx=300-vw/2+10,vy=300-vh/2;
+  rr(g,vx,vy,vw,vh,Math.min(vw,vh)/3);const vg=g.createRadialGradient(300,300,10,300,300,vw/1.5);vg.addColorStop(0,'#e6f7ff');vg.addColorStop(1,'#8fd0f5');g.fillStyle=vg;g.fill();g.strokeStyle='#4a9fd0';g.lineWidth=2;g.stroke();
+  // chloroplasts along edge
+  for(let k=0;k<14;k++){const u=k/14;let x,y;const per=2*(q.w+q.h),d=u*per;
+    if(d<q.w){x=q.x+d;y=q.y+14}else if(d<q.w+q.h){x=q.x+q.w-14;y=q.y+d-q.w}else if(d<2*q.w+q.h){x=q.x+q.w-(d-q.w-q.h);y=q.y+q.h-14}else{x=q.x+14;y=q.y+q.h-(d-2*q.w-q.h)}
+    x=Math.max(q.x+14,Math.min(q.x+q.w-14,x));y=Math.max(q.y+12,Math.min(q.y+q.h-12,y));
+    g.save();g.translate(x,y);g.rotate(k+t*.2);g.fillStyle='#2f9e44';g.beginPath();g.ellipse(0,0,11,6,0,0,7);g.fill();g.fillStyle='#1f7a32';g.fillRect(-6,-1,12,2);g.restore()}
+  // nucleus
+  const nx=q.x+46,ny=q.y+46;g.fillStyle='#8a5fd6';g.beginPath();g.arc(nx,ny,22,0,7);g.fill();g.fillStyle='#4b2a96';g.beginPath();g.arc(nx+4,ny+2,7,0,7);g.fill();
+  if(L.p<-.3){g.fillStyle='#7a3b00';g.font='800 18px Cairo';g.textAlign='center';g.fillText('⬆ فراغ بين الغشاء والجدار ⬆',300,492)}}
+function stepLab(){const g=lg,dt=1/60;
+  if(L.run&&!L.burst){L.t+=dt;const tg=target(),sp=.085*dt*1.2;
+    if(L.type==='a'){L.s+=Math.sign(tg-L.s)*Math.min(Math.abs(tg-L.s),sp*(L.sol==='s'?.8:1));if(L.sol==='w'&&L.s>=1.47)burst()}
+    else L.p+=Math.sign(tg-L.p)*Math.min(Math.abs(tg-L.p),sp*2.4);
+    if(flow()===0&&!L.done&&L.sol!=='w'||(!L.done&&L.type==='p'&&flow()===0)){L.done=true;finish()}}
+  else L.t+=dt*.5;
+  const fl=flow();
+  scope(g,tints[L.sol]);
+  // water + salt movement
+  const cx=300,cy=300;
+  water.forEach(w=>{w.vx+=rnd(-.35,.35);w.vy+=rnd(-.35,.35);
+    if(fl&&!L.burst){const dx=w.x-cx,dy=w.y-cy,d=Math.hypot(dx,dy)||1,ins=isIn(w.x,w.y);
+      if(fl>0&&!ins&&d<R()+140){w.vx-=dx/d*.32;w.vy-=dy/d*.32}
+      if(fl<0&&ins){w.vx+=dx/d*.32;w.vy+=dy/d*.32}}
+    w.vx*=.9;w.vy*=.9;w.x+=w.vx*1.6;w.y+=w.vy*1.6;
+    const d=Math.hypot(w.x-cx,w.y-cy);if(d>284){w.x=cx+(w.x-cx)/d*284;w.y=cy+(w.y-cy)/d*284;w.vx*=-1;w.vy*=-1}
+    const ins=isIn(w.x,w.y);if(w.in!==null&&ins!==w.in&&L.run&&!L.burst){if(ins)L.nIn++;else L.nOut++}w.in=ins});
+  salt.forEach(s=>{s.vx+=rnd(-.2,.2);s.vy+=rnd(-.2,.2);s.vx*=.92;s.vy*=.92;s.x+=s.vx;s.y+=s.vy;const d=Math.hypot(s.x-cx,s.y-cy);if(d>282){s.x=cx+(s.x-cx)/d*282;s.y=cy+(s.y-cy)/d*282}
+    if(!L.burst&&(L.type==='a'?d<R()+10:(s.x>90&&s.x<510&&s.y>130&&s.y<470))){if(L.type==='a'){s.x=cx+(s.x-cx)/d*(R()+12);s.y=cy+(s.y-cy)/d*(R()+12)}else{const nx=s.x<300?86:514;if(Math.abs(s.x-300)/210>Math.abs(s.y-300)/170)s.x=nx;else s.y=s.y<300?126:474}}});
+  // draw cell
+  if(!L.burst){L.type==='a'?drawAnimal(g):drawPlant(g)}
+  // salt particles
+  salt.forEach(s=>{g.fillStyle='#e8892d';g.beginPath();g.rect(s.x-3.5,s.y-3.5,7,7);g.fill()});
+  // inner solute (dots inside cell)
+  if(!L.burst){inner.forEach(o=>{let x,y;if(L.type==='a'){x=cx+o.ux*R()*.95;y=cy+o.uy*R()*.95}else{const q=prot();x=300+o.ux*q.w*.5;y=300+o.uy*q.h*.5}g.fillStyle='#d9772688';g.beginPath();g.rect(x-3,y-3,6,6);g.fill()})}
+  // water
+  water.forEach(w=>{g.fillStyle=w.in?'#1f86d9':'#2f9be8';g.beginPath();g.arc(w.x,w.y,3.2,0,7);g.fill();g.fillStyle='#ffffffaa';g.beginPath();g.arc(w.x-1,w.y-1,1.1,0,7);g.fill()});
+  // burst frags
+  if(L.burst){L.bt+=dt;L.frags.forEach(f=>{f.x+=f.vx;f.y+=f.vy;f.vx*=.97;f.vy*=.97;f.a+=f.va;g.save();g.translate(f.x,f.y);g.rotate(f.a);g.globalAlpha=Math.max(0,1-L.bt/3);
+      if(f.k==='m'){g.strokeStyle='#9e2440';g.lineWidth=4;g.beginPath();g.arc(0,0,f.r,0,.5);g.stroke()}else if(f.k==='n'){g.fillStyle='#6a3fc2';g.beginPath();g.ellipse(0,0,30,24,0,0,7);g.fill()}else{g.fillStyle=f.c;g.beginPath();g.arc(0,0,f.r,0,7);g.fill()}g.restore()});
+    g.globalAlpha=1;if(L.bt<.35){g.fillStyle='rgba(255,255,255,'+(1-L.bt/.35)*.8+')';g.fillRect(0,0,600,600)}}
+  // flow arrows
+  if(fl&&!L.burst){g.fillStyle=fl>0?'#0b5fa5':'#c2185b';g.font='800 22px Cairo';g.textAlign='center';const txt=fl>0?'⬇ الماء يدخل الخلية ⬇':'⬆ الماء يخرج من الخلية ⬆';g.fillText(txt,300,62)}
+  if(L.run&&!L.burst&&!fl&&L.sol==='i'){g.fillStyle='#145c43';g.font='800 22px Cairo';g.textAlign='center';g.fillText('⇄ دخول = خروج',300,62)}
+  scopeEnd(g);updStats();requestAnimationFrame(stepLab)}
+function burst(){L.burst=true;L.bt=0;L.run=false;const Rr=R();
+  for(let i=0;i<34;i++){const a=i/34*6.283;L.frags.push({k:'m',x:300+Math.cos(a)*Rr,y:300+Math.sin(a)*Rr,vx:Math.cos(a)*rnd(4,9),vy:Math.sin(a)*rnd(4,9),a:a,va:rnd(-.2,.2),r:rnd(16,26)})}
+  for(let i=0;i<40;i++){const a=rnd(0,6.28),v=rnd(2,8);L.frags.push({k:'g',x:300,y:300,vx:Math.cos(a)*v,vy:Math.sin(a)*v,a:0,va:0,r:rnd(2,5),c:['#e5637c','#f5935f','#b8405a'][i%3]})}
+  L.frags.push({k:'n',x:280,y:290,vx:rnd(-1,1),vy:rnd(-1,1),a:0,va:.02});
+  water.forEach(w=>{const a=Math.atan2(w.y-300,w.x-300);w.vx+=Math.cos(a)*6;w.vy+=Math.sin(a)*6});
+  pop();const st=document.getElementById('stage');st.classList.remove('shake');void st.offsetWidth;st.classList.add('shake');
+  if(navigator.vibrate)try{navigator.vibrate([80,40,120])}catch(e){}
+  setTimeout(finish,900)}
+function updStats(){const sz=L.burst?'💥':L.type==='a'?Math.round(L.s*100)+'%':Math.round(100+L.p*(L.p>0?8:40))+'%';document.getElementById('sSize').textContent=sz;
+  document.getElementById('sIn').textContent=L.nIn;document.getElementById('sOut').textContent=L.nOut;
+  const pr=L.burst?100:L.type==='a'?Math.max(0,Math.min(100,(L.s-.7)/.78*100)):Math.max(0,Math.min(100,50+L.p*45));document.getElementById('mPress').style.width=pr+'%';
+  document.getElementById('labHint').textContent=L.type==='a'?'الضغط على غشاء الخلية':'الضغط الاكتنازي (ضغط الماء على الجدار)'}
+function finish(){const r=document.getElementById('res');let cls='r-mid',h='';
+  if(L.type==='a'&&L.sol==='w'){cls='r-bad';const ok=pred===1;h='<b>💥 انفجرت الخلية!</b><br>تركيز الماء خارج الخلية أعلى منه داخلها، فدخل بالأسموزية <b>'+L.nIn+'</b> جزيء ماء، ولا يوجد جدار يحمي الخلية الحيوانية.'+(pred!==null?'<br><br>🔮 توقعك كان: <b>'+predTxt[pred]+'</b> '+(ok?'✅ <b>صحيح!</b>':'❌ والآن رأيت الإجابة بعينك.'):'')+'<br><br>👈 جرّب الآن <b>الخلية النباتية</b> في نفس الماء.';chime()}
+  else if(L.type==='p'&&L.sol==='w'){cls='r-good';h='<b>🛡️ الخلية النباتية لم تنفجر!</b><br>دخل الماء فأصبحت <b>مكتنزة</b>، لكن <b>الجدار السليلوزي</b> الصلب منعها من الانفجار. هذا الضغط الاكتنازي هو ما يُبقي النبات منتصبًا.';chime()}
+  else if(L.sol==='s'){cls='r-mid';h=L.type==='a'?'<b>🔽 انكمشت الخلية!</b><br>المحلول الملحي أكثر تركيزًا، فخرج منها الماء بالأسموزية وأصبح سطحها متعرّجًا.':'<b>🔽 انفصلت محتويات الخلية عن الجدار!</b><br>خرج الماء فانكمشت الفجوة والسيتوبلازم، وهذا ما يحدث عندما <b>يذبل</b> النبات.';chime()}
+  else{cls='r-good';h='<b>⚖️ لم يتغير شيء</b><br>التركيز متساوٍ داخل الخلية وخارجها: يدخل من الماء بقدر ما يخرج، فلا يوجد صافي حركة.';chime()}
+  r.className='result show '+cls;r.innerHTML=h;document.getElementById('run').textContent='▶ ابدأ التجربة'}
+document.getElementById('run').onclick=()=>{audio();if(L.burst||L.done){initLab()}L.run=!L.run;document.getElementById('run').textContent=L.run?'⏸ إيقاف مؤقت':'▶ متابعة'};
+document.getElementById('reset').onclick=initLab;
+function seg(id,key){document.querySelectorAll('#'+id+' button').forEach(b=>b.onclick=()=>{L[key]=b.dataset.v;document.querySelectorAll('#'+id+' button').forEach(x=>x.classList.toggle('on',x===b));blip(600);initLab()})}
+seg('segType','type');seg('segSol','sol');initLab();stepLab();
+
+/* ---------- AMOEBA ---------- */
+const ac=document.getElementById('amb'),ag=setup(ac);
+const A={};function initA(){Object.assign(A,{R:110,vr:6,cv:true,ph:'fill',drops:[],out:[],gas:[],burst:false,bt:0,frags:[],t:0});
+  document.getElementById('aToggle').textContent='⛔ عطّل الفجوة المنقبضة';document.getElementById('aState').textContent='✅ الفجوة المنقبضة تعمل';document.getElementById('aRes').className='result'}
+initA();
+document.getElementById('aToggle').onclick=()=>{audio();if(A.burst){initA();return}A.cv=!A.cv;blip(A.cv?800:300);
+  document.getElementById('aToggle').textContent=A.cv?'⛔ عطّل الفجوة المنقبضة':'✅ شغّل الفجوة المنقبضة';document.getElementById('aState').textContent=A.cv?'✅ الفجوة المنقبضة تعمل':'⚠️ الفجوة المنقبضة معطّلة!'};
+document.getElementById('aReset').onclick=initA;
+function shape(t,Rr){const pts=[];for(let i=0;i<64;i++){const a=i/64*6.283;const r=Rr*(1+.16*Math.sin(2*a+t*.5)+.12*Math.sin(3*a-t*.35+1)+.07*Math.sin(5*a+t*.8));pts.push([300+r*Math.cos(a),300+r*.85*Math.sin(a)])}return pts}
+function stepA(){const g=ag,dt=1/60;A.t+=dt;scope(g,['#e3f6ff','#9fd3ee']);
+  const vx=330,vy=255;
+  if(!A.burst){
+    if(Math.random()<.5){const a=rnd(0,6.28);A.drops.push({a,d:A.R*1.9+rnd(0,40)})}
+    A.drops.forEach(d=>d.d-=1.6);A.drops=A.drops.filter(d=>{if(d.d<A.R*.8){if(A.cv)A.vr=Math.min(A.vr+.55,34);else A.R+=.42;return false}return true});
+    if(A.cv){if(A.vr>=34&&A.ph==='fill'){A.ph='pump';blip(220)}if(A.ph==='pump'){A.vr-=1.6;for(let k=0;k<2;k++)A.out.push({x:vx,y:vy,vx:rnd(2,4),vy:rnd(-3,-1)});if(A.vr<=6){A.vr=6;A.ph='fill'}}if(A.R>110)A.R-=.25}
+    else if(A.R>185){A.burst=true;A.bt=0;const pts=shape(A.t,A.R);pts.forEach(([x,y],i)=>{if(i%2)return;const a=Math.atan2(y-300,x-300);A.frags.push({x,y,vx:Math.cos(a)*rnd(3,8),vy:Math.sin(a)*rnd(3,8),r:rnd(10,22),a,va:rnd(-.2,.2)})});pop();
+      const st=ac.parentElement;st.classList.remove('shake');void st.offsetWidth;st.classList.add('shake');
+      const r=document.getElementById('aRes');r.className='result show r-bad';r.innerHTML='<b>💥 انفجرت الأميبا!</b><br>بدون الفجوة المنقبضة تجمّع الماء الداخل بالأسموزية حتى لم يتحمّله الغشاء. إذن وظيفة الفجوة المنقبضة: <b>طرد الماء الزائد</b> لحماية الخلية.<br>اضغط «إعادة» لتشغيلها من جديد.';
+      document.getElementById('aToggle').textContent='↺ أعد المحاولة'}
+    if(Math.random()<.04)A.gas.push({k:'o',a:rnd(0,6.28),d:A.R*1.8});if(Math.random()<.04)A.gas.push({k:'c',a:rnd(0,6.28),d:A.R*.6});
+    A.gas.forEach(q=>q.d+=q.k==='o'?-1:1);A.gas=A.gas.filter(q=>q.k==='o'?q.d>A.R*.6:q.d<A.R*2);
+    // body
+    const pts=shape(A.t,A.R);g.beginPath();pts.forEach(([x,y],i)=>{const [nx,ny]=pts[(i+1)%pts.length];const mx=(x+nx)/2,my=(y+ny)/2;i?g.quadraticCurveTo(x,y,mx,my):g.moveTo(mx,my)});g.closePath();
+    const f=g.createRadialGradient(290,290,20,300,300,A.R*1.3);f.addColorStop(0,'#f2fbff');f.addColorStop(1,A.cv?'#bfe3f4':'#f7c5cf');g.fillStyle=f;g.globalAlpha=.95;g.fill();g.globalAlpha=1;
+    const stress=Math.max(0,(A.R-120)/65);g.lineWidth=Math.max(1.2,4-stress*2.6);g.strokeStyle=stress>.6&&Math.sin(A.t*25)>0?'#ff4d6d':'#3b7fa8';g.stroke();
+    // granules
+    for(let k=0;k<40;k++){const a=k*2.4+A.t*.05,r=(k%7+1)/8*A.R*.75;g.fillStyle='#6fa7c444';g.beginPath();g.arc(300+Math.cos(a)*r,300+Math.sin(a)*r*.85,2.4,0,7);g.fill()}
+    // food vacuole + nucleus
+    g.fillStyle='#ffe0a3';g.strokeStyle='#d39b2a';g.lineWidth=2;g.beginPath();g.arc(225,320,14,0,7);g.fill();g.stroke();
+    const ng=g.createRadialGradient(270,300,4,276,306,30);ng.addColorStop(0,'#b88cff');ng.addColorStop(1,'#5a32a8');g.fillStyle=ng;g.beginPath();g.ellipse(276,306,32,24,.4,0,7);g.fill();
+    // contractile vacuole
+    g.fillStyle=A.cv?'rgba(90,180,255,.85)':'rgba(140,140,160,.6)';g.strokeStyle=A.cv?'#1f6fb2':'#666';g.lineWidth=2;g.beginPath();g.arc(vx,vy,A.vr,0,7);g.fill();g.stroke();
+    if(A.cv)for(let k=0;k<5;k++){const a=k*1.25;g.strokeStyle='rgba(90,180,255,.5)';g.lineWidth=3;g.beginPath();g.moveTo(vx+Math.cos(a)*(A.vr+2),vy+Math.sin(a)*(A.vr+2));g.lineTo(vx+Math.cos(a)*(A.vr+22),vy+Math.sin(a)*(A.vr+22));g.stroke()}
+    // drops
+    g.fillStyle='#1f86d9';A.drops.forEach(d=>{g.beginPath();g.arc(300+Math.cos(d.a)*d.d,300+Math.sin(d.a)*d.d*.85,3.2,0,7);g.fill()});
+    A.gas.forEach(q=>{const x=300+Math.cos(q.a)*q.d,y=300+Math.sin(q.a)*q.d*.85;g.fillStyle=q.k==='o'?'#e53935':'#7a7a7a';g.beginPath();g.arc(x,y,4,0,7);g.fill()});
+    // labels
+    g.font='700 16px Cairo';g.textAlign='center';g.fillStyle='#0b3d63';g.fillText('فجوة منقبضة',vx,vy-A.vr-10);g.fillStyle='#3a1a78';g.fillText('نواة',290,345);
+    g.font='800 17px Cairo';g.textAlign='center';g.fillStyle='#c62828';g.fillText('● أكسجين يدخل',390,500);g.fillStyle='#555';g.fillText('● ثاني أكسيد الكربون يخرج',220,500);
+  } else {A.bt+=dt;A.frags.forEach(f=>{f.x+=f.vx;f.y+=f.vy;f.vx*=.97;f.vy*=.97;f.a+=f.va;g.save();g.translate(f.x,f.y);g.rotate(f.a);g.globalAlpha=Math.max(0,1-A.bt/3);g.strokeStyle='#3b7fa8';g.lineWidth=4;g.beginPath();g.arc(0,0,f.r,0,.7);g.stroke();g.restore()});g.globalAlpha=1;
+    if(A.bt<.35){g.fillStyle='rgba(255,255,255,'+(1-A.bt/.35)*.8+')';g.fillRect(0,0,600,600)}}
+  A.out.forEach(o=>{o.x+=o.vx;o.y+=o.vy;g.fillStyle='#1f86d9';g.beginPath();g.arc(o.x,o.y,3.2,0,7);g.fill()});A.out=A.out.filter(o=>o.x<600&&o.y>0);
+  scopeEnd(g);document.getElementById('aPress').style.width=(A.burst?100:Math.min(100,(A.R-100)/85*100+(A.cv?A.vr:0)))+'%';requestAnimationFrame(stepA)}
+stepA();
+
+/* ---------- QUIZ ---------- */
+const Q=[["خلية حيوانية وُضعت في ماء مقطّر. ماذا يحدث؟",["تنكمش","تنتفخ ثم تنفجر","لا يحدث شيء"],1,"يدخل الماء بالأسموزية ولا يوجد جدار يحميها."],
+ ["لماذا لا تنفجر الخلية النباتية في الماء المقطّر؟",["لأنها لا تمتص الماء","لأن الجدار السليلوزي الصلب يحميها","لأن فجوتها صغيرة"],1,"تصبح مكتنزة، والجدار يمنع تمددها أكثر."],
+ ["خلية في محلول ملحي مركّز. اتجاه حركة الماء:",["من الخلية إلى المحلول","من المحلول إلى الخلية","لا يتحرك"],0,"يتحرك الماء إلى المحلول الأكثر تركيزًا."],
+ ["ما وظيفة الفجوة المنقبضة في الأميبا؟",["هضم الغذاء","طرد الماء الزائد","تبادل الغازات"],1,"بدونها يتجمّع الماء حتى تنفجر الخلية."]];
+let qd=0,qr=0;const qz=document.getElementById('quiz');
+Q.forEach(([q,o,a,e],i)=>{const d=document.createElement('div');d.className='q card';d.innerHTML='<b>'+(i+1)+'. '+q+'</b>';let done=false;const ex=document.createElement('div');ex.className='exp';ex.textContent='💡 '+e;
+  o.forEach((t,k)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>{if(done)return;done=true;qd++;audio();
+    if(k===a){b.classList.add('ok');qr++;chime()}else{b.classList.add('no');d.querySelectorAll('.opt')[a].classList.add('ok');blip(200)}ex.style.display='block';
+    if(qd===Q.length){const f=document.getElementById('final');f.style.display='block';document.getElementById('stars').textContent='⭐'.repeat(qr)+'☆'.repeat(Q.length-qr);
+      document.getElementById('fTitle').textContent=qr===Q.length?'ممتاز! '+qr+' من '+Q.length:qr+' من '+Q.length+' – أحسنت';setTimeout(()=>f.scrollIntoView({behavior:'smooth'}),300)}};d.appendChild(b)});
+  d.appendChild(ex);qz.appendChild(d)});
+</script>
+<script>(function(){function s(t,q){try{parent.postMessage(q?{lbt:t,qq:q}:{lbt:t},'*')}catch(e){}}
+var seen=new WeakSet();
+function qinfo(b,cb){setTimeout(function(){try{var G=b.parentElement,opts=[].slice.call(G.children).filter(function(x){return x.classList.contains('opt')});if(opts.length<2)return cb(null);
+ var p=G,qEl=null;for(var i=0;i<4&&p&&!qEl;i++){qEl=[].slice.call(p.children).filter(function(c){return !c.classList.contains('opt')&&!c.querySelector('.opt')&&!c.classList.contains('fb')&&!c.classList.contains('sc')&&c.textContent.trim().length>2})[0];if(!qEl)p=p.parentElement}
+ if(!qEl||qEl.querySelector('canvas,svg,img,input,table'))return cb(null);
+ var o=opts.map(function(x){return x.textContent.trim()}),r=-1,w=opts.indexOf(b);opts.forEach(function(x,i){if(x.classList.contains('ok'))r=i});
+ cb({q:qEl.textContent.replace(/\s+/g,' ').trim().replace(/^\d+\)\s*/,'').slice(0,300),o:o,r:r,w:w})}catch(e){cb(null)}},60)}
+new MutationObserver(function(ms){ms.forEach(function(m){
+ if(m.type==='attributes'){var t=m.target,c=t.classList,o=' '+(m.oldValue||'')+' ';
+  if((c.contains('ok')||c.contains('good'))&&!/ (ok|good) /.test(o)){if(c.contains('opt')&&!t.parentElement.querySelector('.opt.no'))qinfo(t,function(q){s('ok',q)});else s('ok')}
+  if((c.contains('no')||c.contains('bad'))&&!/ (no|bad) /.test(o)){if(c.contains('opt'))qinfo(t,function(q){s('no',q)});else s('no')}}
+ else m.addedNodes.forEach(function(n){if(n.nodeType===1&&n.tagName==='SPAN'&&!seen.has(n)){seen.add(n);if(n.classList.contains('ok'))s('ok');if(n.classList.contains('no'))s('no')}});
+})}).observe(document.documentElement,{attributes:true,subtree:true,attributeOldValue:true,attributeFilter:['class'],childList:true});
+document.addEventListener('click',function(){s('act')},true);})();</script>
+
+</body>
+</html>

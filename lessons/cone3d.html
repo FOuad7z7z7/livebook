@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>المخروط ثلاثي الأبعاد – رياضيات الصف التاسع</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+html{color-scheme:light}button,input{font-family:inherit;color:#1f2a44}
+:root{--tl:#1a9aa5;--or:#f08c2e;--pu:#6b4fd8;--gr:#2e9e5b;--rd:#d64545;--ink:#1f2a44}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Cairo',Tahoma,sans-serif;background:#0f1b2d;color:var(--ink);line-height:1.8}
+.wrap{max-width:820px;margin:0 auto;background:#fff;min-height:100vh}
+header{background:linear-gradient(135deg,#127b85,#1a9aa5);color:#fff;padding:14px 16px;text-align:center}
+header h1{margin:0;font-size:1.3rem;font-weight:900}header div{font-size:.85rem;opacity:.9}
+#stage{position:relative;height:56vh;min-height:330px;background:radial-gradient(circle at 50% 35%,#24406b,#0f1b2d)}
+#stage canvas{display:block;width:100%;height:100%}
+.tag{position:absolute;padding:1px 9px;border-radius:10px;font-weight:900;font-size:.9rem;color:#fff;pointer-events:none;white-space:nowrap;transform:translate(-50%,-50%)}
+.modes{position:absolute;top:10px;right:10px;left:10px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.modes button{border:2px solid #fff6;background:#0008;color:#fff;border-radius:20px;padding:3px 12px;font-weight:800;cursor:pointer;font-size:.88rem}
+.modes button.on{background:var(--or);border-color:var(--or);color:#2a1600}
+.hint{position:absolute;bottom:8px;left:0;right:0;text-align:center;color:#fff9;font-size:.78rem}
+.panel{padding:12px 16px 30px}
+.sl{display:flex;align-items:center;gap:10px;margin:2px 0}
+.sl label{min-width:118px;font-weight:800}.sl input{flex:1;accent-color:var(--tl)}
+.law{background:#fff7e8;border:2px solid #f5c27a;border-radius:14px;padding:8px 12px;margin:10px 0;font-weight:800;text-align:center;font-size:1.08rem}
+.box{border:2px solid #e2e8ee;border-radius:16px;padding:12px;margin:12px 0}
+.box h3{margin:0 0 6px;color:#127b85;font-size:1.05rem}
+.calc div{font-weight:800;font-size:1.05rem}
+.c-r{color:var(--pu)}.c-h{color:var(--gr)}.c-l{color:var(--or)}
+.btn{border:2px solid var(--ink);background:#fff;border-radius:10px;padding:6px 14px;font-weight:800;cursor:pointer;font-size:.95rem}
+.btn.main{background:var(--tl);border-color:var(--tl);color:#fff}.btn.or{background:var(--or);border-color:var(--or)}
+.btns{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:8px 0}
+.fb{font-weight:800;text-align:center;min-height:1.4em}.fb.ok{color:var(--gr)}.fb.no{color:var(--rd)}
+input.cf{width:78px;height:44px;font-size:1.2rem;font-weight:900;text-align:center;border:3px solid #c9dfe2;border-radius:10px;direction:ltr}
+input.cf.ok{border-color:var(--gr);background:#eefaf2}input.cf.no{border-color:var(--rd);background:#fdeeee}
+.q{background:#f6fbfb;border-radius:12px;padding:10px;text-align:center;font-weight:800;font-size:1.08rem}
+.sc{text-align:center;font-weight:900;background:#e3f5f6;border-radius:12px;padding:6px}
+.pred .btn.ok{background:#dff5e7;border-color:var(--gr)}.pred .btn.no{background:#fde4e4;border-color:var(--rd)}
+.note{font-size:.85rem;color:#6b7690;text-align:center}
+</style>
+<style>/*darkfix*/input,select,textarea,.cf,.M input.c{background-color:#fff !important;color:#1f2a44 !important;-webkit-text-fill-color:#1f2a44 !important;caret-color:#1f2a44}input.cf.ok{background-color:#eefaf2 !important}input.cf.no{background-color:#fdeeee !important}svg text{font-family:Cairo,Tahoma,Arial,sans-serif}</style>
+</head>
+<body>
+<div class="wrap">
+<header><h1>🍦 المخروط: المساحة المنحنية والحجم</h1><div>رياضيات الصف التاسع · الفصل 5 «مساحات السطوح» · درس 5-4 · تجربة ثلاثية الأبعاد</div></header>
+<div id="stage">
+  <div class="modes">
+    <button data-m="see" class="on">👁️ تعرّف عليه</button>
+    <button data-m="unfold">✂️ افتح المخروط</button>
+    <button data-m="vol">💧 تجربة الحجم</button>
+  </div>
+  <div class="hint">اسحب بإصبعك لتدوير المخروط · قرّب وبعّد بإصبعين</div>
+</div>
+<div class="panel">
+  <div class="sl"><label class="c-r">نصف القطر نق = <b id="vr">3</b></label><input type="range" id="sr" min="1" max="6" step="0.5" value="3"></div>
+  <div class="sl"><label class="c-h">الارتفاع ع = <b id="vh">4</b></label><input type="range" id="sh" min="2" max="10" step="0.5" value="4"></div>
+
+  <div id="mSee">
+    <div class="box"><h3>👁️ أجزاء المخروط</h3>
+      <p style="margin:0">للمخروط <b>قاعدة دائرية</b> و<b>رأس</b>. الخط البنفسجي هو <b class="c-r">نصف القطر (نق)</b>، والأخضر هو <b class="c-h">الارتفاع (ع)</b>، والبرتقالي هو <b class="c-l">الراسم (ل)</b>، أي المسافة من الرأس إلى حافة القاعدة.</p>
+      <div class="law">الثلاثة يكوّنون مثلثًا قائمًا، لذلك: ل² = نق² + ع² (فيثاغورس)</div>
+      <div class="calc" id="cSee"></div>
+    </div>
+  </div>
+
+  <div id="mUnfold" style="display:none">
+    <div class="box"><h3>✂️ لماذا المساحة المنحنية = ط × نق × ل ؟</h3>
+      <div class="sl"><label>افتح المخروط</label><input type="range" id="su" min="0" max="1" step="0.01" value="0"></div>
+      <div class="btns"><button class="btn or" id="bPlay">▶️ شغّل الفتح</button></div>
+      <p style="margin:0">عندما نقصّ المخروط على طول الراسم ونفرده، يصير <b>قطاعًا دائريًا</b>:</p>
+      <div class="calc">
+        <div>• نصف قطر القطاع = <span class="c-l">الراسم ل</span></div>
+        <div>• طول قوس القطاع = محيط القاعدة = 2 ط <span class="c-r">نق</span></div>
+      </div>
+      <div class="law">المساحة المنحنية = ط × نق × ل</div>
+      <div class="law" style="background:#eef6ff;border-color:#9cc3f0">المساحة الكلية = ط نق ل + ط نق² (نضيف مساحة القاعدة)</div>
+      <div class="calc" id="cUnf"></div>
+    </div>
+  </div>
+
+  <div id="mVol" style="display:none">
+    <div class="box pred"><h3>🤔 توقّع قبل التجربة</h3>
+      <p style="margin:0">عندنا مخروط وأسطوانة لهما <b>نفس القاعدة ونفس الارتفاع</b>. كم مخروطًا من الماء نحتاج لنملأ الأسطوانة؟</p>
+      <div class="btns" id="predB"><button class="btn" data-a="2">2</button><button class="btn" data-a="3">3</button><button class="btn" data-a="4">4</button></div>
+      <div class="fb" id="predF"></div>
+    </div>
+    <div class="box"><h3>💧 جرّب بنفسك</h3>
+      <div class="btns"><button class="btn main" id="bPour">💧 اسكب المخروط في الأسطوانة</button><button class="btn" id="bEmpty">↺ أفرغ</button></div>
+      <div class="fb ok" id="pourF">عدد المرات: 0</div>
+      <div class="law">حجم المخروط = ⅓ × ط × نق² × ع</div>
+      <div class="calc" id="cVol"></div>
+    </div>
+  </div>
+
+  <div class="box"><h3>✏️ تمارين (أسئلة جديدة في كل مرة)</h3>
+    <p class="note" style="margin:0">اكتب الإجابة بدلالة ط، مثلًا إذا كانت 15ط اكتب 15</p>
+    <div id="prac"></div>
+    <div class="sc" id="sc">ابدأ الحل ✍️</div>
+  </div>
+  <p class="note">نسخة تجريبية · ستُطابق رموز وأمثلة كتابك عند إرسال صفحات الفصل الخامس</p>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const stage=$('stage');
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));stage.prepend(renderer.domElement);
+const scene=new THREE.Scene();const cam=new THREE.PerspectiveCamera(45,1,.1,200);cam.position.set(9,7,13);
+const ctl=new THREE.OrbitControls(cam,renderer.domElement);ctl.enableDamping=true;ctl.target.set(0,2,0);ctl.enablePan=false;ctl.minDistance=6;ctl.maxDistance=40;
+scene.add(new THREE.AmbientLight(0xffffff,.55));const dl=new THREE.DirectionalLight(0xffffff,.8);dl.position.set(6,12,8);scene.add(dl);
+const grid=new THREE.GridHelper(30,30,0x335577,0x223a5c);scene.add(grid);
+
+let R=3,H=4,mode='see',U=0;
+const SEG=64,VS=20;
+// lateral surface (morphable)
+const latGeo=new THREE.BufferGeometry();const pos=new Float32Array((SEG+1)*(VS+1)*3);latGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+const idx=[];for(let i=0;i<SEG;i++)for(let j=0;j<VS;j++){const a=i*(VS+1)+j,b=(i+1)*(VS+1)+j;idx.push(a,b,a+1,b,b+1,a+1)}latGeo.setIndex(idx);
+const latMat=new THREE.MeshPhongMaterial({color:0xf2a65a,side:THREE.DoubleSide,shininess:40,transparent:true,opacity:.95});
+const lat=new THREE.Mesh(latGeo,latMat);scene.add(lat);
+const latWire=new THREE.LineSegments(new THREE.WireframeGeometry(latGeo),new THREE.LineBasicMaterial({color:0x7a3e10,transparent:true,opacity:.18}));scene.add(latWire);
+// base
+const base=new THREE.Mesh(new THREE.CircleGeometry(1,64),new THREE.MeshPhongMaterial({color:0x9b87f5,side:THREE.DoubleSide,transparent:true,opacity:.85}));base.rotation.x=-Math.PI/2;base.position.y=.01;scene.add(base);
+// lines
+function mkLine(c){const m=new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,1,12),new THREE.MeshBasicMaterial({color:c,depthTest:false}));m.renderOrder=5;scene.add(m);return m}
+const lnR=mkLine(0x8b6cff),lnH=mkLine(0x37c46f),lnL=mkLine(0xff9a2e);
+function setLine(l,a,b){const A=new THREE.Vector3(...a),B=new THREE.Vector3(...b),d=B.clone().sub(A);l.position.copy(A).add(B).multiplyScalar(.5);l.scale.set(1,d.length(),1);l.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),d.normalize())}
+// arc highlight (base edge -> becomes sector arc)
+const arcGeo=new THREE.BufferGeometry();const arcPos=new Float32Array((SEG+1)*3);arcGeo.setAttribute('position',new THREE.BufferAttribute(arcPos,3));
+const arc=new THREE.Line(arcGeo,new THREE.LineBasicMaterial({color:0xffe066}));scene.add(arc);
+// volume mode objects
+const cylMat=new THREE.MeshPhongMaterial({color:0xbfe9ff,transparent:true,opacity:.22,side:THREE.DoubleSide,depthWrite:false});
+const cyl=new THREE.Mesh(new THREE.CylinderGeometry(1,1,1,64,1,true),cylMat);scene.add(cyl);
+const cylEdge=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.CylinderGeometry(1,1,1,64,1)),new THREE.LineBasicMaterial({color:0x9fd8ff,transparent:true,opacity:.5}));scene.add(cylEdge);
+const water=new THREE.Mesh(new THREE.CylinderGeometry(1,1,1,64),new THREE.MeshPhongMaterial({color:0x2f8fe0,transparent:true,opacity:.75}));scene.add(water);
+const coneWater=new THREE.Mesh(new THREE.ConeGeometry(1,1,64),new THREE.MeshPhongMaterial({color:0x2f8fe0,transparent:true,opacity:.8}));scene.add(coneWater);
+let pours=0,level=0,levelT=0,pourAnim=0;
+
+// tags
+function tag(t,c){const d=document.createElement('div');d.className='tag';d.style.background=c;d.textContent=t;stage.appendChild(d);return d}
+const tR=tag('نق','#6b4fd8'),tH=tag('ع','#2e9e5b'),tL=tag('ل','#f08c2e'),tA=tag('قوس = 2ط نق','#b8860b');
+function place(el,v,show){if(!show){el.style.display='none';return}const p=v.clone().project(cam);if(p.z>1){el.style.display='none';return}el.style.display='block';el.style.left=((p.x+1)/2*stage.clientWidth)+'px';el.style.top=((1-p.y)/2*stage.clientHeight)+'px'}
+
+function build(){const L=Math.hypot(R,H),th=2*Math.PI*R/L;const off=mode==='vol'?-R-0.8:0;
+ // easing for unfolding: first rotate cone onto its side, then flatten
+ const t=U;const Phi=2*Math.PI+(th-2*Math.PI)*t,rho=Math.min(L,th*L/Phi),hh=Math.sqrt(Math.max(0,L*L-rho*rho)),ang=t*Math.PI/2,ca=Math.cos(ang),sa=Math.sin(ang),ay=H+t*(Math.max(0,L-H)+.4);
+ for(let i=0;i<=SEG;i++){const u=i/SEG,psi=Phi*(u-.5);
+  for(let j=0;j<=VS;j++){const v=j/VS,k=(i*(VS+1)+j)*3;
+   const x=v*rho*Math.sin(psi),y=-v*hh,z=v*rho*Math.cos(psi);
+   pos[k]=off+x;pos[k+1]=ay+y*ca-z*sa;pos[k+2]=y*sa+z*ca;
+   if(j===VS){arcPos[i*3]=pos[k];arcPos[i*3+1]=pos[k+1];arcPos[i*3+2]=pos[k+2]}}}
+ latGeo.attributes.position.needsUpdate=true;latGeo.computeVertexNormals();arcGeo.attributes.position.needsUpdate=true;
+ latWire.geometry.dispose();latWire.geometry=new THREE.WireframeGeometry(latGeo);
+ base.scale.set(R,R,1);base.position.x=off;base.visible=t<.05||mode!=='unfold';base.material.opacity=1-t;
+ setLine(lnR,[off,.03,0],[off+R,.03,0]);setLine(lnH,[off,0,0],[off,H,0]);setLine(lnL,[off,H,0],[off+R,0,0]);
+ const sideLines=mode==='see'||(mode==='unfold'&&t<.05);[lnR,lnH].forEach(l=>l.visible=sideLines);lnL.visible=mode!=='vol'&&t<.05;
+ arc.visible=mode==='unfold';
+ lat.visible=true;latWire.visible=mode!=='see';latMat.opacity=mode==='vol'?.35:mode==='see'?.5:.95;latMat.depthWrite=mode==='unfold';
+ // volume
+ const vv=mode==='vol';[cyl,cylEdge,water,coneWater].forEach(o=>o.visible=vv);
+ const cx2=R+0.8;cyl.scale.set(R,H,R);cyl.position.set(cx2,H/2,0);cylEdge.scale.set(R,H,R);cylEdge.position.set(cx2,H/2,0);
+ water.scale.set(R*.995,Math.max(level,.001)*H,R*.995);water.position.set(cx2,level*H/2,0);water.visible=vv&&level>0;
+ coneWater.scale.set(R*.97,H*.97,R*.97);coneWater.position.set(off,H/2,0);coneWater.visible=vv&&pourAnim===0&&pours<3;
+ ctl.target.set(mode==='vol'?0:off,mode==='unfold'?H/2+.5:H/2,0);
+ updateText()}
+function f(x){return(Math.round(x*100)/100).toString()}
+function updateText(){const L=Math.hypot(R,H);$('vr').textContent=R;$('vh').textContent=H;
+ $('cSee').innerHTML='<div>ل² = <span class="c-r">'+R+'²</span> + <span class="c-h">'+H+'²</span> = '+f(R*R)+' + '+f(H*H)+' = '+f(R*R+H*H)+'</div><div>ل = √'+f(R*R+H*H)+' = <span class="c-l">'+f(L)+'</span></div>';
+ $('cUnf').innerHTML='<div>المساحة المنحنية = ط × '+R+' × '+f(L)+' = <b>'+f(R*L)+' ط</b> ≈ '+f(Math.PI*R*L)+'</div><div>المساحة الكلية = '+f(R*L)+' ط + '+f(R*R)+' ط = <b>'+f(R*L+R*R)+' ط</b> ≈ '+f(Math.PI*(R*L+R*R))+'</div>';
+ $('cVol').innerHTML='<div>حجم الأسطوانة = ط × '+R+'² × '+H+' = '+f(R*R*H)+' ط</div><div>حجم المخروط = ⅓ × '+f(R*R*H)+' ط = <b>'+f(R*R*H/3)+' ط</b> ≈ '+f(Math.PI*R*R*H/3)+'</div>'}
+
+$('sr').oninput=e=>{R=+e.target.value;build()};$('sh').oninput=e=>{H=+e.target.value;build()};
+$('su').oninput=e=>{U=+e.target.value;build()};
+let playing=null;$('bPlay').onclick=()=>{const from=U>.5?1:0,to=1-from,t0=performance.now();cancelAnimationFrame(playing);$('bPlay').textContent=to?'⏪ أغلق المخروط':'▶️ شغّل الفتح';
+ (function st(n){const k=Math.min(1,(n-t0)/1800),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;U=from+(to-from)*e;$('su').value=U;build();if(k<1)playing=requestAnimationFrame(st)})(t0)};
+document.querySelectorAll('.modes button').forEach(b=>b.onclick=()=>{mode=b.dataset.m;document.querySelectorAll('.modes button').forEach(x=>x.classList.toggle('on',x===b));
+ $('mSee').style.display=mode==='see'?'':'none';$('mUnfold').style.display=mode==='unfold'?'':'none';$('mVol').style.display=mode==='vol'?'':'none';
+ const D=mode==='vol'?(4*R+3)*1.5+H:Math.max(14,H*2.2);cam.position.set(D*.45,H*.9+3,D*.85);
+ if(mode!=='unfold'){U=0;$('su').value=0;$('bPlay').textContent='▶️ شغّل الفتح'}build()});
+// pour
+$('bPour').onclick=()=>{if(pours>=3||pourAnim)return;pourAnim=1;const t0=performance.now(),from=level,to=(pours+1)/3;build();
+ (function st(n){const k=Math.min(1,(n-t0)/1300);level=from+(to-from)*k;build();if(k<1)requestAnimationFrame(st);else{pourAnim=0;pours++;$('pourF').textContent='عدد المرات: '+pours+(pours===3?' 🎉 امتلأت الأسطوانة! إذن حجم المخروط = ⅓ حجم الأسطوانة':'');build()}})(t0)};
+$('bEmpty').onclick=()=>{pours=0;level=0;$('pourF').textContent='عدد المرات: 0';build()};
+document.querySelectorAll('#predB .btn').forEach(b=>b.onclick=()=>{if($('predB').dataset.d)return;$('predB').dataset.d=1;const ok=b.dataset.a==='3';b.classList.add(ok?'ok':'no');
+ $('predF').className='fb '+(ok?'ok':'no');$('predF').textContent=ok?'🎉 توقّع ممتاز! جرّب الآن وتأكد بنفسك':'جرّب السكب بنفسك واكتشف الجواب الصحيح 👇'});
+
+function resize(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+addEventListener('resize',resize);resize();build();
+(function loop(){requestAnimationFrame(loop);ctl.update();renderer.render(scene,cam);const off=mode==='vol'?-R-0.8:0;
+ place(tR,new THREE.Vector3(off+R/2,.25,0),lnR.visible);place(tH,new THREE.Vector3(off-.35,H/2,0),lnH.visible);place(tL,new THREE.Vector3(off+R/2+.35,H/2,0),lnL.visible);
+ place(tA,new THREE.Vector3(arcPos[SEG/2*3],arcPos[SEG/2*3+1]-.4,arcPos[SEG/2*3+2]),mode==='unfold'&&U>.9)})();
+
+/* practice */
+const TR=[[3,4,5],[6,8,10],[5,12,13],[8,15,17],[9,12,15],[7,24,25]];const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+let score=0,done=0;
+function gen(){const t=rnd(0,3),[r,h,l]=TR[rnd(0,TR.length-1)];
+ if(t===0)return{q:'مخروط نصف قطره '+r+' سم وارتفاعه '+h+' سم. أوجد طول الراسم ل.',u:'سم',a:l,s:['ل² = '+r+'² + '+h+'² = '+(r*r)+' + '+(h*h)+' = '+(l*l),'ل = √'+(l*l)+' = '+l+' سم']};
+ if(t===1)return{q:'مخروط نصف قطره '+r+' سم وراسمه '+l+' سم. أوجد المساحة المنحنية بدلالة ط.',u:'ط سم²',a:r*l,s:['المساحة المنحنية = ط × نق × ل','= ط × '+r+' × '+l+' = '+(r*l)+' ط سم²']};
+ if(t===2)return{q:'مخروط نصف قطره '+r+' سم وارتفاعه '+h+' سم. أوجد المساحة الكلية بدلالة ط.',u:'ط سم²',a:r*l+r*r,s:['أولًا الراسم: ل = √('+r+'² + '+h+'²) = '+l,'المنحنية = ط × '+r+' × '+l+' = '+(r*l)+' ط','القاعدة = ط × '+r+'² = '+(r*r)+' ط','الكلية = '+(r*l+r*r)+' ط سم²']};
+ const rr=rnd(1,6),hh=3*rnd(1,4);return{q:'مخروط نصف قطره '+rr+' سم وارتفاعه '+hh+' سم. أوجد حجمه بدلالة ط.',u:'ط سم³',a:rr*rr*hh/3,s:['الحجم = ⅓ × ط × نق² × ع','= ⅓ × ط × '+(rr*rr)+' × '+hh+' = '+(rr*rr*hh/3)+' ط سم³']}}
+function render(){const g=gen();let tries=0;const P=$('prac');
+ P.innerHTML='<div class="q">'+g.q+'</div><div class="btns" style="align-items:center"><input class="cf" inputmode="decimal"><b>'+g.u+'</b></div><div class="btns"><button class="btn main" id="pc">✔️ تحقّق</button><button class="btn" id="ph">💡 أرني الحل</button><button class="btn or" id="pn">سؤال جديد ⬅</button></div><div class="fb" id="pf"></div><div id="ps"></div>';
+ const inp=P.querySelector('input');const steps=()=>$('ps').innerHTML='<div class="box" style="margin:6px 0;background:#f8f9fc">'+g.s.map(x=>'<div style="font-weight:800">'+x+'</div>').join('')+'</div>';
+ const chk=()=>{const v=parseFloat(inp.value.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)));if(isNaN(v))return;tries++;const ok=Math.abs(v-g.a)<.01;inp.className='cf '+(ok?'ok':'no');
+  if(tries===1){done++;if(ok)score++}$('sc').textContent='✔️ صحيح من أول محاولة: '+score+' من '+done;
+  $('pf').className='fb '+(ok?'ok':'no');$('pf').textContent=ok?'🎉 صحيح!':'🤔 ليس صحيحًا، راجع القانون وحاول مرة أخرى';if(ok||tries>=2)steps();if(ok)setTimeout(render,2300)};
+ $('pc').onclick=chk;inp.onkeydown=e=>{if(e.key==='Enter')chk()};$('ph').onclick=()=>{inp.value=g.a;inp.className='cf ok';steps()};$('pn').onclick=render}
+render();
+</script>
+<script>(function(){function s(t,q){try{parent.postMessage(q?{lbt:t,qq:q}:{lbt:t},'*')}catch(e){}}
+var seen=new WeakSet();
+function qinfo(b,cb){setTimeout(function(){try{var G=b.parentElement,opts=[].slice.call(G.children).filter(function(x){return x.classList.contains('opt')});if(opts.length<2)return cb(null);
+ var p=G,qEl=null;for(var i=0;i<4&&p&&!qEl;i++){qEl=[].slice.call(p.children).filter(function(c){return !c.classList.contains('opt')&&!c.querySelector('.opt')&&!c.classList.contains('fb')&&!c.classList.contains('sc')&&c.textContent.trim().length>2})[0];if(!qEl)p=p.parentElement}
+ if(!qEl||qEl.querySelector('canvas,svg,img,input,table'))return cb(null);
+ var o=opts.map(function(x){return x.textContent.trim()}),r=-1,w=opts.indexOf(b);opts.forEach(function(x,i){if(x.classList.contains('ok'))r=i});
+ cb({q:qEl.textContent.replace(/\s+/g,' ').trim().replace(/^\d+\)\s*/,'').slice(0,300),o:o,r:r,w:w})}catch(e){cb(null)}},60)}
+new MutationObserver(function(ms){ms.forEach(function(m){
+ if(m.type==='attributes'){var t=m.target,c=t.classList,o=' '+(m.oldValue||'')+' ';
+  if((c.contains('ok')||c.contains('good'))&&!/ (ok|good) /.test(o)){if(c.contains('opt')&&!t.parentElement.querySelector('.opt.no'))qinfo(t,function(q){s('ok',q)});else s('ok')}
+  if((c.contains('no')||c.contains('bad'))&&!/ (no|bad) /.test(o)){if(c.contains('opt'))qinfo(t,function(q){s('no',q)});else s('no')}}
+ else m.addedNodes.forEach(function(n){if(n.nodeType===1&&n.tagName==='SPAN'&&!seen.has(n)){seen.add(n);if(n.classList.contains('ok'))s('ok');if(n.classList.contains('no'))s('no')}});
+})}).observe(document.documentElement,{attributes:true,subtree:true,attributeOldValue:true,attributeFilter:['class'],childList:true});
+document.addEventListener('click',function(){s('act')},true);})();</script>
+
+</body>
+</html>

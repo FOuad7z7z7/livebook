@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>كتاب الرياضيات الحي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+html{color-scheme:light}
+button,input{color:#2b2a33;font-family:inherit}
+:root{--ink:#2b2a33;--pur:#6b4fd8;--soft:#f1edff;--green:#2e9e5b;--red:#d64545;--org:#f08c2e;--paper:#fffdf8}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Cairo',sans-serif;background:#e9e4f7;color:var(--ink);line-height:1.8}
+.book{max-width:760px;margin:14px auto;background:var(--paper);border-radius:14px;box-shadow:0 10px 30px #0002;overflow:hidden}
+header{background:linear-gradient(135deg,#6b4fd8,#a06bf0);color:#fff;padding:16px;text-align:center}
+header h1{margin:0;font-size:1.4rem}
+.page{padding:14px 16px 30px}
+.tag{display:inline-block;background:var(--pur);color:#fff;border-radius:20px;padding:0 14px;font-weight:700;font-size:.85rem}
+h2{color:var(--pur);margin:6px 0;font-size:1.5rem}
+.box{border:2px solid #d9d0f5;border-radius:16px;padding:14px;margin:14px 0;background:#fff}
+.box h3{margin:0 0 6px;font-size:1.05rem}
+.expr{font-size:2rem;font-weight:900;text-align:center;background:var(--soft);border-radius:12px;padding:6px;margin:8px 0;letter-spacing:1px}
+.expr .v{color:var(--pur)}
+.expr .n{color:var(--org)}
+.fruits{display:flex;flex-wrap:wrap;justify-content:center;gap:2px;font-size:1.6rem;min-height:2.4rem}
+.bagwrap{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:8px 0}
+.bag{width:110px;height:110px;border-radius:18px;background:linear-gradient(#b98852,#8a5a2b);color:#fff;display:grid;place-items:center;font-size:3rem;font-weight:900;box-shadow:inset 0 -8px 0 #0002;position:relative;transition:transform .3s}
+.bag.open{transform:rotate(-6deg) scale(1.03)}
+.bag small{position:absolute;bottom:4px;font-size:.75rem;font-weight:700;opacity:.9}
+.plus{font-size:2rem;font-weight:900;color:var(--pur)}
+input[type=range]{width:100%;accent-color:var(--pur)}
+.btn{border:2px solid var(--ink);background:#fff;border-radius:10px;padding:6px 14px;font-weight:800;cursor:pointer;font-size:1rem}
+.btn.main{background:var(--pur);border-color:var(--pur);color:#fff}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;justify-content:center}
+.wallet{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;min-height:44px}
+.coin{background:#2e9e5b;color:#fff;border-radius:6px;padding:2px 8px;font-weight:800;font-size:.9rem;transition:.3s}
+.coin.spent{background:#ccc;color:#888;text-decoration:line-through}
+.q{border-top:2px dashed #e3dcf7;padding:10px 0}
+.q:first-child{border-top:none}
+.q p{margin:0 0 6px;font-size:1.05rem}
+.slots{display:flex;gap:6px;justify-content:center;margin:6px 0}
+.slot{min-width:56px;height:52px;border:3px dashed #b9aee6;border-radius:12px;display:grid;place-items:center;font-size:1.5rem;font-weight:900;background:#faf8ff;cursor:pointer}
+.slot.f{border-style:solid;border-color:var(--pur);background:var(--soft)}
+.tiles{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.tile{min-width:48px;height:46px;border:none;border-radius:10px;background:#fff3e2;box-shadow:0 3px 0 #f0c48f;font-size:1.35rem;font-weight:900;cursor:pointer}
+.tile.v{background:#efe9ff;box-shadow:0 3px 0 #c7b8f5;color:var(--pur)}
+.tile.o{background:#e8f6ee;box-shadow:0 3px 0 #a8dcbc;color:var(--green)}
+.tile:active{transform:translateY(2px);box-shadow:none}
+.fb{text-align:center;font-weight:800;min-height:1.4em;margin-top:4px}
+.ok{color:var(--green)}.no{color:var(--red)}
+.score{text-align:center;font-weight:900;background:var(--soft);border-radius:12px;padding:8px}
+.note{background:#fff7d6;border-radius:10px;padding:8px 12px;font-size:.95rem}
+.toc2{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:8px;background:#f4f0ff;border-bottom:2px solid #e3dcf7;position:sticky;top:0;z-index:5}
+.toc2 a{background:#fff;border:2px solid var(--pur);color:var(--pur);border-radius:20px;padding:2px 14px;font-weight:800;text-decoration:none;font-size:.9rem}
+.oprob{border:2px solid #e3dcf7;border-radius:14px;padding:10px;margin:10px 0;background:#fff}
+.oprob .hd{display:flex;justify-content:space-between;align-items:center}
+.onum{background:#f08c2e;color:#fff;border-radius:50%;width:30px;height:30px;display:inline-grid;place-items:center;font-weight:900}
+.exrow{display:flex;flex-direction:row;direction:rtl;justify-content:center;align-items:center;gap:3px;flex-wrap:wrap;margin:10px 0;min-height:56px}
+.tk{font-size:1.45rem;font-weight:900;padding:0 2px;transition:all .35s}
+.tk.p{color:#999}
+.tk.op{min-width:38px;height:40px;padding:0;border-radius:12px;border:2px solid #c7b8f5;background:#f4f0ff;color:var(--pur);cursor:pointer;font-size:1.5rem;font-weight:900}
+.tk.op.bad{animation:wob .4s;border-color:var(--red);background:#fde4e4}
+.tk.new{color:var(--green);transform:scale(1.25)}
+@keyframes wob{0%,100%{transform:none}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.steps{font-size:1rem;color:#555;text-align:center}
+.steps div{direction:rtl}
+.rule{display:flex;gap:10px;align-items:center;background:#fff;border-radius:12px;padding:8px 12px;margin:6px 0;border:2px solid #e3dcf7}
+.rule b.k{background:var(--pur);color:#fff;border-radius:50%;min-width:30px;height:30px;display:grid;place-items:center}
+footer{text-align:center;color:#888;font-size:.8rem;padding:10px}
+</style>
+<style>/*darkfix*/input,select,textarea,.cf,.M input.c{background-color:#fff !important;color:#1f2a44 !important;-webkit-text-fill-color:#1f2a44 !important;caret-color:#1f2a44}input.cf.ok{background-color:#eefaf2 !important}input.cf.no{background-color:#fdeeee !important}svg text{font-family:Cairo,Tahoma,Arial,sans-serif}</style>
+</head>
+<body>
+<div class="book">
+<header><h1>📐 كتاب الرياضيات الحي</h1><div style="opacity:.9;font-size:.9rem">نسخة تجريبية تفاعلية</div></header>
+<div class="toc2"><a href="#l1">حروف كأعداد</a><a href="#l2">ترتيب العمليات</a></div>
+<div class="page" id="l1">
+  <span class="tag">تدريب 1 · ص 9</span>
+  <h2>استخدام الحروف كأعداد</h2>
+  <p>أحيانًا لا نعرف العدد، فنكتب مكانه <b style="color:var(--pur)">حرفًا</b> مثل <b style="color:var(--pur)">س</b> أو <b style="color:var(--pur)">ص</b>. الحرف يمثّل عددًا مجهولًا، ويُسمّى <b>متغيّرًا</b>. والعبارة التي فيها حروف وأعداد تُسمّى <b>مقدارًا جبريًا</b>، مثل: <b>س + 8</b></p>
+
+  <div class="box">
+    <h3>🧺 مختبر 1: الكيس السحري (الجمع)</h3>
+    <p style="margin:0;font-size:.95rem">مع ثريا <b style="color:var(--pur)">س</b> تفاحة داخل الكيس، و<b style="color:var(--org)">8</b> برتقالات. كم عدد الفواكه معًا؟</p>
+    <div class="bagwrap">
+      <div class="bag" id="bag">س<small>تفاحات</small></div>
+      <div class="plus">+</div>
+      <div class="fruits" style="max-width:150px" id="oranges"></div>
+    </div>
+    <div class="expr" id="e1"><span class="v">س</span> + <span class="n">8</span></div>
+    <div class="note">💡 ما دمنا لا نعرف ما في الكيس، فالإجابة هي المقدار الجبري <b>س + 8</b>. افتح الكيس لترى!</div>
+    <label style="display:block;margin-top:8px">🔓 افتح الكيس: س = <b id="sv">؟</b></label>
+    <input type="range" id="sS" min="0" max="12" value="0">
+    <div class="fruits" id="apples"></div>
+  </div>
+
+  <div class="box">
+    <h3>👛 مختبر 2: محفظة هارون (الطرح)</h3>
+    <p style="margin:0;font-size:.95rem">مع هارون <b style="color:var(--pur)">م</b> دينار. صرف <b style="color:var(--org)">5</b> دنانير. كم تبقّى معه؟</p>
+    <div class="expr" id="e2"><span class="v">م</span> − <span class="n">5</span></div>
+    <label>💰 كم دينارًا كان مع هارون؟ م = <b id="mv">؟</b></label>
+    <input type="range" id="mS" min="5" max="20" value="12">
+    <div class="wallet" id="wallet"></div>
+    <div class="btns"><button class="btn main" id="spend">🛒 اصرف 5 دنانير</button></div>
+    <div class="fb" id="mMsg"></div>
+  </div>
+
+  <div class="box">
+    <h3>✏️ تمارين الصفحة: كوّن المقدار الجبري</h3>
+    <p style="margin:0;font-size:.9rem">اضغط على البطاقات بالترتيب لتكوين الإجابة، واضغط على أي خانة لمسحها.</p>
+    <div id="qs"></div>
+    <div class="score" id="score">0 من 6</div>
+  </div>
+
+  <div class="box" style="border-color:var(--org)">
+    <h3>🎲 تدرّب أكثر: أسئلة جديدة بلا نهاية</h3>
+    <div id="gen"></div>
+    <div class="btns"><button class="btn main" id="newQ">🔄 سؤال جديد</button></div>
+    <div class="score" id="gScore">صحيح: 0</div>
+  </div>
+</div>
+<div class="page" id="l2" style="border-top:6px solid #e3dcf7">
+  <span class="tag" style="background:#e8604c">هيا نتدرب معًا! 2ب</span>
+  <h2>ترتيب العمليات الحسابية</h2>
+  <p style="margin:0">عندما يكون في المسألة أكثر من عملية، نحسبها بهذا الترتيب:</p>
+  <div class="rule"><b class="k">1</b><span>ما بداخل <b>الأقواس ( )</b> أولًا</span></div>
+  <div class="rule"><b class="k">2</b><span>ثم <b>الضرب × والقسمة ÷</b></span></div>
+  <div class="rule"><b class="k">3</b><span>ثم <b>الجمع + والطرح −</b></span></div>
+  <div class="note">↩️ العمليات المتساوية في الأولوية نحسبها بالترتيب <b>من اليمين إلى اليسار</b> كما نقرأ.</div>
+  <div class="box">
+    <h3>👆 اضغط على العملية التي تُحسب أولًا</h3>
+    <p style="margin:0;font-size:.9rem">العملية الصحيحة تتحول إلى ناتجها، وإذا أخطأت يظهر لك تلميح.</p>
+    <div class="btns"><button class="btn main" data-set="A">أ) أوجد قيمة (بدون أقواس)</button><button class="btn" data-set="B">ب) أوجد قيمة (مع أقواس)</button></div>
+    <div id="oList"></div>
+    <div class="score" id="oScore"></div>
+  </div>
+</div>
+<footer>نسخة تجريبية – تدريب 1: استخدام الحروف كأعداد</footer>
+</div>
+<script>
+const APL='🍎',ORG='🍊';
+document.getElementById('oranges').textContent=ORG.repeat(8);
+// lab 1
+const sS=document.getElementById('sS');
+sS.oninput=()=>{const v=+sS.value;document.getElementById('sv').textContent=v;const bag=document.getElementById('bag');bag.classList.add('open');bag.innerHTML=v+'<small>تفاحات</small>';
+  document.getElementById('apples').textContent=APL.repeat(v);
+  document.getElementById('e1').innerHTML='<span class="v">س</span> + <span class="n">8</span> = <span class="v">'+v+'</span> + <span class="n">8</span> = <b>'+(v+8)+'</b>'};
+// lab 2
+const mS=document.getElementById('mS');let spent=false;
+function wal(){const m=+mS.value;document.getElementById('mv').textContent=m;let h='';for(let i=0;i<m;i++)h+='<span class="coin'+(spent&&i>=m-5?' spent':'')+'">1 د</span>';document.getElementById('wallet').innerHTML=h;
+  document.getElementById('e2').innerHTML='<span class="v">م</span> − <span class="n">5</span> = <span class="v">'+m+'</span> − <span class="n">5</span>'+(spent?' = <b>'+(m-5)+'</b>':'');
+  document.getElementById('mMsg').innerHTML=spent?'<span class="ok">تبقّى مع هارون '+(m-5)+' دنانير. وبلغة الجبر: م − 5</span>':''}
+mS.oninput=()=>{spent=false;wal()};document.getElementById('spend').onclick=()=>{spent=true;wal()};wal();
+
+// tile builder
+function builder(host,q,tiles,check,onDone){
+  const d=document.createElement('div');d.className='q';d.innerHTML='<p>'+q+'</p>';
+  const slots=document.createElement('div');slots.className='slots';const n=3;const val=[];
+  for(let i=0;i<n;i++){const s=document.createElement('div');s.className='slot';s.onclick=()=>{if(done)return;val.splice(i);render()};slots.appendChild(s)}
+  const tl=document.createElement('div');tl.className='tiles';let done=false;
+  tiles.forEach(t=>{const b=document.createElement('button');b.className='tile'+(/[؀-ۿ]/.test(t)?' v':/[+−]/.test(t)?' o':'');b.textContent=t;b.onclick=()=>{if(done||val.length>=n)return;val.push(t);render();if(val.length===n)test()};tl.appendChild(b)});
+  const fb=document.createElement('div');fb.className='fb';
+  function render(){[...slots.children].forEach((s,i)=>{s.textContent=val[i]||'';s.classList.toggle('f',!!val[i])});fb.textContent=''}
+  function test(){const r=check(val);if(r===true){done=true;fb.innerHTML='<span class="ok">🎉 أحسنت! '+val.join(' ')+'</span>';onDone&&onDone()}else fb.innerHTML='<span class="no">🤔 '+r+'</span>'}
+  d.appendChild(slots);d.appendChild(tl);d.appendChild(fb);host.appendChild(d)}
+const sum=(a,b)=>v=>(v[1]==='+'&&((v[0]===a&&v[2]===b)||(v[0]===b&&v[2]===a)))||(v[1]!=='+'?'هل نجمع أم نطرح؟ فكّر: هل زادت الأشياء أم نقصت؟':'استخدم العددين المذكورين في السؤال');
+const sub=(a,b)=>v=>(v[1]==='−'&&v[0]===a&&v[2]===b)||(v[1]!=='−'?'هل نجمع أم نطرح؟ فكّر: هل زادت الأشياء أم نقصت؟':v[0]===b&&v[2]===a?'في الطرح الترتيب مهم: نبدأ بما كان معه أولًا':'استخدم العددين المذكورين في السؤال');
+let sc=0;const up=()=>{sc++;document.getElementById('score').textContent=sc+' من 6'};
+const QS=[
+ ['(أ) مع فاطمة 10 تفاحات و6 برتقالات. ما عدد التفاح والبرتقال معًا؟ (اكتب العملية)',['10','6','16','+','−'],sum('10','6')],
+ ['مع ثريا <b style="color:var(--pur)">س</b> تفاحة و8 برتقالات. ما عدد التفاح والبرتقال معًا؟',['س','8','10','+','−'],sum('س','8')],
+ ['مع سماح 9 تفاحات و<b style="color:var(--pur)">ص</b> برتقالة. ما عدد التفاح والبرتقال معًا؟',['ص','9','6','+','−'],sum('9','ص')],
+ ['(ب) مع هاني 18 د. صرف 2 د. ما المبلغ الذي تبقّى مع هاني؟ (اكتب العملية)',['18','2','16','+','−'],sub('18','2')],
+ ['مع هارون <b style="color:var(--pur)">م</b> دينار. صرف 5 د. ما المبلغ الذي تبقّى؟',['م','5','18','+','−'],sub('م','5')],
+ ['مع هلال 20 د. صرف <b style="color:var(--pur)">ن</b> دينار. ما المبلغ الذي تبقّى؟',['ن','20','5','+','−'],sub('20','ن')]];
+QS.forEach(([q,t,c])=>builder(document.getElementById('qs'),q,t,c,up));
+// generator
+const names=['علي','مريم','يوسف','سارة','خالد','هدى','عمر','نور','أحمد','ليلى'];const L=['س','ص','ع','ك','م','ن','ل'];
+const items=[['أقلام','كراسات'],['كرات','دمى'],['تمرات','حبات بسكويت'],['طوابع','صور']];
+let gs=0;
+function newQ(){const g=document.getElementById('gen');g.innerHTML='';const nm=names[Math.floor(Math.random()*names.length)],l=L[Math.floor(Math.random()*L.length)],k=String(2+Math.floor(Math.random()*15));
+  const typ=Math.floor(Math.random()*3);let q,c,t;
+  if(typ===0){const it=items[Math.floor(Math.random()*items.length)];q='مع '+nm+' <b style="color:var(--pur)">'+l+'</b> '+it[0]+' و'+k+' '+it[1]+'. كم عددها معًا؟ أعطِ الإجابة بدلالة '+l+'.';c=sum(l,k)}
+  else if(typ===1){q='مع '+nm+' <b style="color:var(--pur)">'+l+'</b> دينار. صرف '+k+' د. ما المبلغ الذي تبقّى؟';c=sub(l,k)}
+  else{const big=String(+k+10);q='مع '+nm+' '+big+' د. صرف <b style="color:var(--pur)">'+l+'</b> دينار. ما المبلغ الذي تبقّى؟';c=sub(big,l)}
+  const nums=typ===2?[String(+k+10)]:[k];const extra=String(+k+3);t=[l,...nums,extra,'+','−'].sort(()=>Math.random()-.5);
+  builder(g,q,t,c,()=>{gs++;document.getElementById('gScore').textContent='صحيح: '+gs;setTimeout(newQ,1400)})}
+document.getElementById('newQ').onclick=newQ;newQ();
+
+// order of operations
+(function(){
+ const SETS={A:[['43','+','3','−','6'],['10','−','5','+','4'],['16','−','3','−','9'],['32','+','8','+','5'],['78','−','10','+','5','−','2'],['26','+','4','−','2','−','7'],['16','+','4','×','5'],['17','−','12','÷','6']],
+  B:[['(','27','−','9',')','×','4'],['9','×','(','36','+','15',')'],['50','×','(','12','÷','4',')'],['60','−','(','4','×','5',')','+','9'],['(','57','÷','3',')','+','(','30','−','5',')'],['(','97','+','5',')','÷','3','×','4'],['400','−','50','×','(','14','÷','2',')'],['(','20','−','4',')','×','2','+','9']]};
+ const isOp=t=>'+−×÷'.includes(t),hi=t=>t==='×'||t==='÷';
+ const calc=(a,o,b)=>{a=+a;b=+b;return o==='+'?a+b:o==='−'?a-b:o==='×'?a*b:a/b};
+ function scope(T){let open=-1;for(let i=0;i<T.length;i++){if(T[i]==='(')open=i;if(T[i]===')')return[open+1,i]}return[0,T.length]}
+ function next(T){const[a,b]=scope(T);for(let i=a;i<b;i++)if(hi(T[i]))return i;for(let i=a;i<b;i++)if(isOp(T[i]))return i;return -1}
+ function apply(T,i){const r=String(calc(T[i-1],T[i],T[i+1]));const n=[...T.slice(0,i-1),r,...T.slice(i+2)];const k=i-1;if(n[k-1]==='('&&n[k+1]===')'){n.splice(k+1,1);n.splice(k-1,1);return[n,k-1]}return[n,k]}
+ function naive(T){let t=T.filter(x=>x!=='('&&x!==')'),v=+t[0];for(let i=1;i<t.length;i+=2)v=calc(v,t[i],t[i+1]);return v}
+ function full(T){let t=[...T];while(t.length>1){const i=next(t);if(i<0)break;[t]=apply(t,i)}return +t[0]}
+ const show=t=>'<span style="display:inline-flex;direction:rtl;gap:4px">'+t.map(x=>'<span>'+x+'</span>').join('')+'</span>';
+ let solved=0,total=0;
+ function hint(T,i){const[a,b]=scope(T),j=next(T);if(T.includes('(')&&(i<a||i>=b))return'ابدأ بما داخل الأقواس أولًا 👆';if(hi(T[j])&&!hi(T[i]))return'الضرب والقسمة قبل الجمع والطرح ✋';return'العمليات المتساوية نحسبها بالترتيب من اليمين إلى اليسار ↩️'}
+ function card(T0,n){const d=document.createElement('div');d.className='oprob';let T=[...T0],done=false,errs=0;
+  d.innerHTML='<div class="hd"><span class="onum">'+n+'</span><span class="fb" style="margin:0"></span></div><div class="exrow"></div><div class="steps"></div><div class="btns"><button class="btn" style="font-size:.85rem">💡 أظهر الحل خطوة</button></div>';
+  const row=d.querySelector('.exrow'),st=d.querySelector('.steps'),fb=d.querySelector('.fb');
+  function render(nw){row.innerHTML='';T.forEach((t,i)=>{let e;if(isOp(t)&&!done){e=document.createElement('button');e.className='tk op';e.textContent=t;e.onclick=()=>tap(i,e)}else{e=document.createElement('span');e.className='tk'+(t==='('||t===')'?' p':'')+(i===nw?' new':'');e.textContent=t==='('?')':t===')'?'(':t;if(t==='('||t===')')e.style.direction='ltr'}row.appendChild(e)})}
+  function step(i){const a=T[i-1],o=T[i],b=T[i+1];const[n2,k]=apply(T,i);st.innerHTML+='<div>'+show([a,o,b])+' = <b>'+n2[k]+'</b></div>';T=n2;
+   if(T.length===1){done=true;solved++;fb.innerHTML='<span class="ok">🎉 '+T[0]+'</span>';const nv=naive(T0);
+    if(nv!==+T[0])st.innerHTML+='<div style="color:var(--red);font-size:.9rem">⚠️ لو حسبناها بالترتيب دون قواعد لكان الناتج '+nv+' (خطأ)</div>';upd()}
+   render(k)}
+  function tap(i,e){if(done)return;if(i===next(T))step(i);else{errs++;e.classList.remove('bad');void e.offsetWidth;e.classList.add('bad');fb.innerHTML='<span class="no" style="font-size:.85rem">'+hint(T,i)+'</span>'}}
+  d.querySelector('.btns .btn').onclick=()=>{if(!done)step(next(T))};render(-1);return d}
+ function upd(){document.getElementById('oScore').textContent='حللت '+solved+' من '+total}
+ function load(k){const L=document.getElementById('oList');L.innerHTML='';solved=0;total=SETS[k].length;SETS[k].forEach((t,i)=>L.appendChild(card(t,i+1)));upd();
+  document.querySelectorAll('[data-set]').forEach(b=>b.classList.toggle('main',b.dataset.set===k))}
+ document.querySelectorAll('[data-set]').forEach(b=>b.onclick=()=>load(b.dataset.set));load('A');
+})();
+</script>
+<script>(function(){function s(t,q){try{parent.postMessage(q?{lbt:t,qq:q}:{lbt:t},'*')}catch(e){}}
+var seen=new WeakSet();
+function qinfo(b,cb){setTimeout(function(){try{var G=b.parentElement,opts=[].slice.call(G.children).filter(function(x){return x.classList.contains('opt')});if(opts.length<2)return cb(null);
+ var p=G,qEl=null;for(var i=0;i<4&&p&&!qEl;i++){qEl=[].slice.call(p.children).filter(function(c){return !c.classList.contains('opt')&&!c.querySelector('.opt')&&!c.classList.contains('fb')&&!c.classList.contains('sc')&&c.textContent.trim().length>2})[0];if(!qEl)p=p.parentElement}
+ if(!qEl||qEl.querySelector('canvas,svg,img,input,table'))return cb(null);
+ var o=opts.map(function(x){return x.textContent.trim()}),r=-1,w=opts.indexOf(b);opts.forEach(function(x,i){if(x.classList.contains('ok'))r=i});
+ cb({q:qEl.textContent.replace(/\s+/g,' ').trim().replace(/^\d+\)\s*/,'').slice(0,300),o:o,r:r,w:w})}catch(e){cb(null)}},60)}
+new MutationObserver(function(ms){ms.forEach(function(m){
+ if(m.type==='attributes'){var t=m.target,c=t.classList,o=' '+(m.oldValue||'')+' ';
+  if((c.contains('ok')||c.contains('good'))&&!/ (ok|good) /.test(o)){if(c.contains('opt')&&!t.parentElement.querySelector('.opt.no'))qinfo(t,function(q){s('ok',q)});else s('ok')}
+  if((c.contains('no')||c.contains('bad'))&&!/ (no|bad) /.test(o)){if(c.contains('opt'))qinfo(t,function(q){s('no',q)});else s('no')}}
+ else m.addedNodes.forEach(function(n){if(n.nodeType===1&&n.tagName==='SPAN'&&!seen.has(n)){seen.add(n);if(n.classList.contains('ok'))s('ok');if(n.classList.contains('no'))s('no')}});
+})}).observe(document.documentElement,{attributes:true,subtree:true,attributeOldValue:true,attributeFilter:['class'],childList:true});
+document.addEventListener('click',function(){s('act')},true);})();</script>
+
+</body>
+</html>

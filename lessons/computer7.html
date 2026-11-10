@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>حاسوب الصف السابع – الكتاب الحي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+html{color-scheme:light}button,input,select{font-family:inherit;color:#1f2a44}
+:root{--ink:#1f2a44;--tl:#7048e8;--tl2:#efeafe;--or:#f08c2e;--gr:#2e9e5b;--rd:#d64545;--pu:#6b4fd8;--line:#e2e8ee;--soft:#6b7690}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Cairo',Tahoma,sans-serif;background:#e9eef6;color:var(--ink);line-height:1.85}
+.book{max-width:800px;margin:12px auto;background:#fff;border-radius:16px;box-shadow:0 10px 30px #0002;overflow:hidden}
+header{background:linear-gradient(135deg,#3b1f8f,#7048e8);color:#fff;padding:16px;text-align:center}
+header h1{margin:0;font-size:1.3rem;font-weight:900}header div{opacity:.9;font-size:.85rem}
+.bar{display:flex;gap:6px;padding:8px 10px;background:var(--tl2);border-bottom:2px solid #c9d8f0;position:sticky;top:0;z-index:5;overflow-x:auto}
+.bar button{flex:0 0 auto;border:2px solid var(--tl);background:#fff;color:#1b3f73;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.86rem}
+.bar button.on{background:var(--tl);color:#fff}
+.page{display:none;padding:14px 16px 40px;animation:in .35s}.page.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h2{color:#1b3f73;margin:4px 0 6px;font-size:1.35rem;line-height:1.5}
+.num{display:inline-block;background:var(--tl);color:#fff;border-radius:10px;padding:0 10px;margin-left:6px;font-size:1rem}
+.box{border:2px solid var(--line);border-radius:16px;padding:14px;margin:14px 0;background:#fff}
+.box h3{margin:0 0 6px;font-size:1.05rem;color:#1b3f73}
+.lab{border-style:dashed;border-color:#a9c3ea;background:#fbfcff}
+.idea{background:linear-gradient(135deg,#3b1f8f,#7048e8);color:#fff;border-radius:16px;padding:12px 16px;margin:10px 0;font-weight:800}
+.idea small{display:block;opacity:.85;font-weight:600}
+.life{background:#fff7e8;border-right:5px solid var(--or);border-radius:10px;padding:8px 12px;margin:10px 0}
+.law{background:#fff7e8;border:2px solid #f5c27a;border-radius:14px;padding:10px 14px;margin:10px 0;font-weight:800;text-align:center;font-size:1.05rem}
+.warn{background:#fdeeee;border-right:5px solid var(--rd);border-radius:10px;padding:8px 12px;margin:10px 0}
+.btn{border:2px solid var(--ink);background:#fff;border-radius:10px;padding:6px 14px;font-weight:800;cursor:pointer;font-size:.95rem}
+.btn.main{background:var(--tl);border-color:var(--tl);color:#fff}.btn.or{background:var(--or);border-color:var(--or);color:#2a1600}
+.btn.ok{background:#dff5e7;border-color:var(--gr)}.btn.no{background:#fde4e4;border-color:var(--rd)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;justify-content:center}
+.fb{font-weight:800;min-height:1.4em;text-align:center;margin-top:6px}.fb.ok{color:var(--gr)}.fb.no{color:var(--rd)}
+.prob{background:#f5f8fd;border-radius:14px;padding:10px;text-align:center;font-weight:700}
+.mx{font-size:1.2rem;font-weight:800;line-height:2.1}
+.sc{text-align:center;font-weight:900;background:var(--tl2);border-radius:12px;padding:8px}
+.steps{background:#f8f9fc;border-radius:12px;padding:8px 12px;margin-top:8px;display:none}
+.opt{display:block;width:100%;text-align:right;margin:5px 0}.opt.ok{background:#dff5e7;border-color:var(--gr)}.opt.no{background:#fde4e4;border-color:var(--rd)}
+input.cf{width:60px;height:42px;font-size:1.15rem;font-weight:900;text-align:center;border:3px solid #c9d8f0;border-radius:10px;direction:ltr;vertical-align:middle;margin:0 2px}
+input.cf.ok{border-color:var(--gr);background:#eefaf2}input.cf.no{border-color:var(--rd);background:#fdeeee}
+/* matrix */
+.M{display:inline-flex;align-items:stretch;vertical-align:middle;margin:2px 4px}
+.M .br{width:8px;border:3px solid var(--ink)}.M .br.r{border-left:none;border-radius:0 6px 6px 0}.M .br.l{border-right:none;border-radius:6px 0 0 6px}
+.M.det .br{width:0;border-width:0 0 0 3px;border-radius:0}.M.det .br.l{border-width:0 3px 0 0}
+.M .g{display:grid;direction:rtl;gap:2px 4px;padding:2px 4px}
+.M .c{min-width:36px;text-align:center;font-weight:900;font-size:1.1rem;padding:2px 4px;border-radius:8px;direction:ltr;transition:.25s}
+.M .c.h1{background:#ffe08a}.M .c.h2{background:#b9e4ff}.M .c.x{opacity:.18;text-decoration:line-through}.M .c.h3{background:#c8f0d2}
+.M input.c{width:48px;height:36px;border:2px solid #c9d8f0;border-radius:8px;background:#fff;font-family:inherit}
+.chap{border:2px solid var(--line);border-radius:14px;margin:8px 0;overflow:hidden}
+.chap>div:first-child{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;font-weight:800;background:#f8faff}
+.chap .cn{background:var(--tl);color:#fff;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;flex:0 0 auto}
+.chap .ls{display:none;padding:4px 12px 10px}.chap.open .ls{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px dashed var(--line);font-size:.95rem}
+.li .pg{margin-right:auto;color:var(--soft);font-size:.8rem}.li.ready{cursor:pointer;font-weight:800;color:#1b3f73}
+.tg{font-size:.72rem;border-radius:8px;padding:0 8px;font-weight:800}.tg.r{background:#e6f6ec;color:#1d7a3f}.tg.s{background:#f1f1f1;color:#999}
+table.t{border-collapse:collapse;width:100%;font-size:.92rem;margin:6px 0}table.t td,table.t th{border:1px solid #d6e1f2;padding:5px 8px}table.t th{background:var(--tl2)}
+.sl{display:flex;align-items:center;gap:8px;margin:4px 0}.sl label{min-width:90px;font-weight:800}.sl input{flex:1;accent-color:var(--tl)}
+footer{text-align:center;color:#999;font-size:.8rem;padding:10px 10px 70px}
+.rt{direction:ltr;unicode-bidi:isolate;display:inline-block}.wx,.bx{border:1px solid #dbe5f5;border-radius:12px;padding:8px 10px;margin:8px 0;background:#fbfcff}.wxq{font-weight:700;line-height:2}.wst{background:#fff;border-right:4px solid var(--tl);border-radius:8px;padding:4px 10px;margin:5px 0;animation:in .3s;line-height:2}.wst.fin{border-color:var(--gr);background:#eefaf2}.sn{display:inline-block;background:var(--tl);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:.8rem;margin-left:6px}.bh{background:#fff7e8;border-radius:8px;padding:6px 10px;margin:4px 0}.ans{font-weight:900;color:var(--gr);margin-top:4px}.exb{border-color:#a9c3ea}.M.det .br.r,.M.det .br.l{border:none;border-radius:0;width:0}.M.det .br.r{border-right:3px solid var(--ink)}.M.det .br.l{border-left:3px solid var(--ink)}.bkb{border-color:#f5c27a;background:#fffdf8}/*darkfix*/input,select,textarea,.cf,.M input.c{background-color:#fff !important;color:#1f2a44 !important;-webkit-text-fill-color:#1f2a44 !important;caret-color:#1f2a44}input.cf.ok{background-color:#eefaf2 !important}input.cf.no{background-color:#fdeeee !important}svg text{font-family:Cairo,Tahoma,Arial,sans-serif}
+canvas{touch-action:manipulation;max-width:100%;height:auto}
+.shk{animation:shk .4s}@keyframes shk{25%{transform:translateX(6px)}75%{transform:translateX(-6px)}}
+.mtab button.on{background:var(--tl)}
+</style>
+</head>
+<body>
+<div class="book">
+<header><h1>💻 الحاسوب – الصف السابع</h1><div>الكتاب الحي · الوسائط المتعددة والعروض التقديمية · جرّب البرنامج بنفسك</div></header>
+<div class="bar" id="bar">
+  <button data-p="home" class="on">📚 الفهرس</button>
+  <button data-p="m1">1 الوسائط المتعددة</button>
+  <button data-p="m2">2 عناصر الوسائط</button>
+  <button data-p="m3">3 مجالات الاستخدام</button>
+  <button data-p="rv1">🏁 مراجعة 1</button>
+  <button data-p="p4">4-5 العروض التقديمية</button>
+  <button data-p="p6">6 ابدأ مع البرنامج</button>
+  <button data-p="p7">7-8 إدخال وتنسيق</button>
+  <button data-p="p9">9 التعامل مع الشرائح</button>
+  <button data-p="p10">10 الملفات</button>
+  <button data-p="p11">11 تنسيق الشرائح</button>
+  <button data-p="p12">12 الأدوات الذكية</button>
+  <button data-p="rv2">🏁 مراجعة 2</button>
+</div>
+<style>
+.pool{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.pool button{border:2px solid var(--line);border-radius:12px;background:#fff;padding:7px 11px;font-family:inherit;font-weight:800;cursor:pointer;font-size:.92rem}
+.pool button.sel{border-color:var(--tl);background:var(--tl2)}.pool button.ok{border-color:#2fb24c;background:#e6f7ea}
+.cat{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}
+.cat>div{border:2px dashed var(--line);border-radius:14px;padding:8px;min-height:64px;text-align:center;cursor:pointer}
+.cat>div b{display:block;margin-bottom:4px}.cat>div small{display:block;color:var(--soft)}
+.sc{text-align:center;font-weight:800;color:var(--tl);margin:6px 0}
+.hint{color:var(--soft);font-size:.85rem;font-weight:700}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}
+.card{border:2px solid var(--line);border-radius:14px;padding:10px;text-align:center;cursor:pointer;background:#fff;font-weight:800;min-height:84px;transition:.3s}
+.card .big{font-size:1.8rem;display:block}.card .bk{display:none;font-weight:600;font-size:.88rem;color:#333}.card.flip{background:var(--tl2);border-color:var(--tl)}.card.flip .bk{display:block}.card.flip .fr{display:none}
+.mtab{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin:6px 0}.mtab button{border:2px solid var(--line);background:#fff;border-radius:20px;padding:5px 11px;font-weight:800;cursor:pointer;font-family:inherit}.mtab button.on{background:var(--tl);color:#fff;border-color:var(--tl)}
+.stage{border:2px solid #ddd;border-radius:14px;min-height:170px;background:#0f172a;color:#fff;position:relative;overflow:hidden;padding:10px}
+.meter{height:14px;border-radius:8px;background:#eee;overflow:hidden;margin:6px 0}.meter i{display:block;height:100%;background:linear-gradient(90deg,#f59e0b,#22c55e);width:0;transition:.5s}
+.mis{margin:4px 0;padding-right:22px}.mis li{margin:4px 0;font-weight:700;font-size:.92rem;color:#444}.mis li.ok{color:#15803d;text-decoration:line-through}.mis li.ok::marker{content:'✅ '}.mis li.next{color:var(--tl);font-weight:800}
+.mh{font-weight:800;color:var(--tl);display:flex;justify-content:space-between}
+.mbox{border:2px solid var(--tl);border-radius:14px;padding:8px 12px;background:var(--tl2);margin:8px 0}
+.keys{display:flex;gap:6px;justify-content:center;margin:6px 0}.keys button{min-width:58px;padding:8px;border:2px solid #333;border-bottom-width:5px;border-radius:9px;background:#fff;font-weight:800;font-family:inherit;cursor:pointer}.keys button.dn{background:#ddd6fe;border-bottom-width:2px;transform:translateY(3px)}
+/* ===== نافذة البرنامج ===== */
+.pw{position:relative;border:2px solid #b7472a;border-radius:10px;overflow:hidden;background:#f3f3f3;font-size:12px;user-select:none;-webkit-user-select:none;direction:rtl;margin:8px 0}
+.pw [contenteditable]{user-select:text;-webkit-user-select:text;outline:none;cursor:text}
+.ptb{display:flex;align-items:center;justify-content:space-between;background:#b7472a;color:#fff;padding:3px 6px;gap:4px}
+.ptb button{background:none;border:none;color:#fff;font-size:13px;cursor:pointer;padding:2px 6px;border-radius:4px}.ptb button:hover{background:rgba(255,255,255,.2)}.ptb .x:hover{background:#e81123}
+.pn{font-weight:700;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pmb{display:flex;background:#fff;border-bottom:1px solid #ddd;overflow-x:auto;scrollbar-width:none}.pmb button{border:none;background:none;padding:6px 9px;font-family:inherit;font-weight:700;font-size:11.5px;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent}
+.pmb button.on{border-bottom-color:#b7472a;color:#b7472a}.pmb button.fl{background:#b7472a;color:#fff;border-radius:0 0 0 0}.pmb button.ctxT{color:#7e22ce;background:#f3e8ff}
+.prb{display:flex;align-items:center;gap:3px;padding:4px;background:#fafafa;border-bottom:1px solid #ddd;overflow-x:auto;min-height:44px;flex-wrap:nowrap;scrollbar-width:thin}
+.rb{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;border:1px solid transparent;background:none;border-radius:5px;padding:2px 5px;font-family:inherit;font-size:10px;cursor:pointer;white-space:nowrap;min-width:28px;color:#222}
+.rb span{font-size:15px;line-height:1.1}.rb:hover{background:#fde8e1;border-color:#f3b8a5}.rb.on{background:#f9d7cb;border-color:#b7472a}
+.prb select,.prb input{font-family:inherit;font-size:11px;padding:2px;border:1px solid #bbb;border-radius:4px;background:#fff}.prb input[type=number]{width:46px}
+.sep{width:1px;align-self:stretch;background:#ddd;margin:0 3px;flex:none}.rl{font-size:11px;font-weight:700;white-space:nowrap;display:inline-flex;align-items:center;gap:3px;margin:3px 0}
+.sw{display:inline-flex;gap:2px}.sw button{width:16px;height:16px;border:1px solid #999;border-radius:3px;cursor:pointer;padding:0}.sw.big button{width:30px;height:30px;border-radius:6px;margin:2px}
+.th{width:34px;height:26px;border:2px solid #ccc;border-radius:4px;font-weight:800;cursor:pointer;flex:none;font-family:inherit}.th.on{border-color:#b7472a;box-shadow:0 0 0 2px #f9d7cb}
+.pmain{display:flex;gap:6px;padding:6px;min-height:150px;background:#e9e9e9}
+.pol{width:24%;max-height:300px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;flex:none}
+.th1{position:relative;display:flex;gap:3px;cursor:pointer;align-items:flex-start}.th1>b{font-size:10px;color:#555}.th1 .sld{flex:1;border:2px solid #ccc}.th1.on .sld{border-color:#b7472a;box-shadow:0 0 0 1px #b7472a}
+.th1 .tm{position:absolute;left:2px;top:2px;background:#b7472a;color:#fff;border:none;border-radius:4px;font-size:12px;width:18px;height:18px;cursor:pointer;line-height:1}
+.pwa{flex:1;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.sld{position:relative;aspect-ratio:16/9;container-type:inline-size;background:#fff;overflow:hidden;border-radius:2px;line-height:1.25}
+.sld.live{box-shadow:0 1px 6px rgba(0,0,0,.25)}
+.it{position:absolute;box-sizing:border-box}
+.sld.live .it.k-title,.sld.live .it.k-sub,.sld.live .it.k-body,.sld.live .it.k-tx{outline:1px dashed #aaa}
+.it.sel{outline:1.5px solid #7c7c7c!important;box-shadow:0 0 0 1px #fff}
+.tx{width:100%;height:100%;overflow:hidden;padding:1%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}.tx.bl{justify-content:flex-start}
+.tx.bl>div::before{content:'• ';color:var(--ac)}
+.tx:empty::before,.st:empty::before,.nt:empty::before{content:attr(data-ph);color:#888}
+.phi{position:absolute;inset:auto 0 18% 0;display:flex;justify-content:center;gap:3%}.phi button{font-size:3.2cqw;border:1px solid #ccc;background:#fff;border-radius:4px;cursor:pointer;padding:.5cqw}
+.hm,.hr,.hrot{position:absolute;font-style:normal;z-index:3}
+.hm{top:-11px;left:50%;transform:translateX(-50%);background:#fff;border:1px solid #777;border-radius:50%;width:20px;height:20px;display:grid;place-items:center;cursor:move;font-size:13px;touch-action:none}
+.hr{bottom:-7px;left:-7px;width:14px;height:14px;background:#fff;border:2px solid #777;border-radius:2px;cursor:nesw-resize;touch-action:none}
+.hrot{top:-13px;right:-6px;font-size:12px;color:#777}
+.pic{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:3px;overflow:hidden;position:relative}.pic span{font-size:16cqw;line-height:1}.pic i{font-style:normal;font-size:3.2cqw;font-weight:800;color:#fff;text-shadow:0 1px 3px #000;position:absolute;bottom:4%}
+.sld.mini .pic i{display:none}
+.vid{width:100%;height:100%;background:#111;display:flex;flex-direction:column;border-radius:3px;overflow:hidden}.vs{flex:1;display:grid;place-items:center;font-size:14cqw;background:linear-gradient(#d4a373,#7f5539);position:relative}.vm{position:absolute;font-size:5cqw;animation:vfly 4s linear infinite}
+@keyframes vfly{from{left:0;top:20%}to{left:90%;top:10%}}.vb{color:#fff;font-size:2.6cqw;padding:1% 2%;background:#000}.vid.sm{width:90px;height:60px}.vid.sm .vs{font-size:30px}
+.smh,.smc,.sml{width:100%;height:100%;position:relative;font-size:2.6cqw}
+.smt{display:flex;flex-direction:column;align-items:center;flex:1}.smk{display:flex;gap:3%;justify-content:center;width:100%;margin-top:4%;position:relative}
+.smk::before{content:'';position:absolute;top:-2.5cqw;left:12%;right:12%;border-top:1.5px solid #888}
+.sn{background:var(--ac,#4472c4);color:#fff;border-radius:3px;padding:1% 2%;width:88%;white-space:nowrap;overflow:hidden;line-height:1.5;display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;border:2px solid transparent;box-sizing:border-box}.sn.on{border-color:#000;box-shadow:0 0 0 2px #fde047}
+.smh>.smt>.sn{width:32%}.smk>.smt:only-child>.sn{width:34%}.smk>.smt:only-child{flex:1}.sml .sn{width:auto}
+.smc .smcc{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:26%}.smc .smcc .sn{border-radius:50%;aspect-ratio:1;display:grid;place-items:center}
+.smco{position:absolute;transform:translate(-50%,-50%);width:20%}.smco .sn{border-radius:50%;aspect-ratio:1;display:grid;place-items:center;opacity:.9;padding:4%}
+.sml{display:flex;flex-direction:column;gap:3%}.sml .sn{min-width:0}
+.tb{width:100%;border-collapse:collapse}.tb td{border:1px solid var(--ac,#4472c4);padding:1.2% 2%;text-align:center;min-width:3em;height:1.3em}.tb tr:first-child td{background:var(--ac,#4472c4);color:#fff;font-weight:800}.tb tr:nth-child(even) td{background:rgba(0,0,0,.05)}
+.pnote{background:#fff;border-top:1px solid #ddd;padding:3px 8px}.nt{min-height:16px;font-size:11px}
+.psb{display:flex;justify-content:space-between;align-items:center;background:#f0f0f0;border-top:1px solid #ccc;padding:2px 6px;font-size:10.5px;color:#444}
+.psb .pvb button{border:none;background:none;cursor:pointer;font-size:13px;padding:1px 4px;border-radius:3px}.psb .pvb button.on{background:#ddd}
+.pempty{min-height:200px;display:grid;place-items:center;text-align:center;color:#777;font-weight:800;background:#ddd}
+.sorter{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.rnav{display:flex;justify-content:center;gap:8px;margin-top:6px}.rnav button{font-family:inherit;font-weight:800;border:1px solid #999;border-radius:6px;background:#fff;cursor:pointer;padding:3px 10px}
+.pdlg{position:absolute;inset:0;background:rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;z-index:20;padding:6px}
+.pdb{background:#fff;border-radius:8px;padding:10px;max-width:96%;max-height:92%;overflow:auto;box-shadow:0 6px 24px rgba(0,0,0,.35);min-width:220px;font-size:12px;user-select:none}
+.pdb .btn{font-size:12px;padding:4px 12px}
+.dh{font-weight:800;font-size:13px;margin-bottom:6px;color:#b7472a}
+.lays{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}.lays button{border:1px solid #ccc;background:#fff;border-radius:5px;cursor:pointer;font-family:inherit;font-size:10.5px;padding:4px}.lays button:hover{border-color:#b7472a;background:#fde8e1}.lays pre{margin:0;font-size:13px;line-height:1.1;min-height:28px;font-family:inherit;border:1px dashed #bbb;background:#fafafa}
+.cm{display:flex;flex-direction:column}.cm button{text-align:right;border:none;background:none;padding:6px 8px;font-family:inherit;font-size:12.5px;cursor:pointer;border-radius:4px}.cm button:hover{background:#fde8e1}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:6px}.fg label{display:flex;flex-direction:column;font-weight:700;font-size:11px}.fg select,.fg input{font-family:inherit;padding:2px}
+.fx2{display:grid;grid-template-columns:1fr 1fr;gap:2px;font-size:11.5px}
+.fprev{border:1px solid #ccc;margin:6px 0;padding:6px;text-align:center;font-size:16px;border-radius:4px}
+.bs .pdb{width:100%;height:100%;max-width:100%;max-height:100%;display:flex;padding:0;border-radius:0}
+.bss{background:#b7472a;display:flex;flex-direction:column;padding:6px 0;min-width:92px}.bss button{background:none;border:none;color:#fff;text-align:right;padding:7px 10px;font-family:inherit;font-weight:700;cursor:pointer;font-size:12px}.bss button.on,.bss button:hover{background:rgba(255,255,255,.2)}
+.bsm{flex:1;padding:8px;overflow:auto}.bsm h4{margin:0 0 6px;font-size:16px}
+.tpl{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.tpl button{border:1px solid #ccc;background:#fff;border-radius:5px;cursor:pointer;font-family:inherit;font-size:10.5px;padding:3px}.tpl .sld{margin-bottom:2px}
+.fdlg .fi{display:block;width:100%;text-align:right;border:1px solid #ddd;background:#fff;padding:6px;margin:3px 0;border-radius:5px;cursor:pointer;font-family:inherit;font-size:12px}.fdlg .fi:hover{background:#fde8e1}.loc{color:#555;margin-bottom:4px}
+.sav{display:flex;gap:6px;margin-bottom:6px}.locs{display:flex;flex-direction:column;gap:2px}.locs button{border:none;background:#f3f3f3;padding:5px 8px;text-align:right;font-family:inherit;cursor:pointer;border-radius:4px;font-size:11.5px}.locs button.on{background:#dbeafe;font-weight:800}
+.flist{flex:1;border:1px solid #ddd;border-radius:4px;padding:4px;min-height:60px;font-size:11.5px}
+.prt{display:flex;gap:8px;flex-wrap:wrap}.pset{display:flex;flex-direction:column;gap:2px;flex:1;min-width:170px}.pset select{max-width:200px}.ppv{flex:1;min-width:140px;background:#ddd;padding:6px;border-radius:4px}
+.ppv .pg{background:#fff;aspect-ratio:.75;display:grid;grid-template-columns:repeat(var(--n),1fr);gap:4px;padding:6px;align-content:start;box-shadow:0 1px 4px #999}.ppv .pg .sld{border:1px solid #bbb}
+.pout{margin-top:6px;font-weight:800;text-align:center}.printer{font-size:34px;position:relative;height:60px}.paper{position:absolute;left:50%;top:30px;width:26px;height:0;background:#fff;border:1px solid #999;transform:translateX(-50%);animation:paper 1.2s forwards}@keyframes paper{to{height:30px}}
+.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:6px}.gal button{border:2px solid transparent;background:#fff;padding:2px;cursor:pointer;border-radius:5px;font-family:inherit}.gal button.on{border-color:#2563eb;background:#dbeafe}.gal .pic{height:46px;container-type:inline-size}.gal .pic span{font-size:30px}.gal small{font-size:9.5px;display:block}
+.ptoast{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:6px 12px;border-radius:8px;font-weight:700;z-index:30;white-space:nowrap;max-width:94%;overflow:hidden;text-overflow:ellipsis}
+.ask{z-index:25}
+.pshow{position:fixed;inset:0;background:#000;z-index:9999;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.psw{width:min(100vw,177vh);perspective:900px}.pshow .sld{width:100%}.psx{position:absolute;top:8px;left:8px;background:rgba(255,255,255,.2);color:#fff;border:none;border-radius:8px;padding:6px 10px;font-family:inherit;font-weight:800;cursor:pointer;z-index:2}
+.psh{position:absolute;bottom:8px;width:100%;text-align:center;color:#aaa;font-size:.8rem}.pend{color:#fff;text-align:center;font-weight:800;padding:40px}
+.a-app{animation:a-app .01s}.a-fade{animation:a-fade 1s}.a-fly{animation:a-fly .8s ease-out}.a-zoom{animation:a-zoom .7s}.a-bounce{animation:a-bounce 1s}.a-spin{animation:a-spin .9s}
+@keyframes a-app{from{opacity:0}}@keyframes a-fade{from{opacity:0}}@keyframes a-fly{from{transform:translateY(120cqw);opacity:0}}@keyframes a-zoom{from{transform:scale(0)}}@keyframes a-bounce{0%{transform:translateY(-60cqw)}50%{transform:translateY(0)}65%{transform:translateY(-8cqw)}80%{transform:translateY(0)}90%{transform:translateY(-2cqw)}}@keyframes a-spin{from{transform:rotate(-360deg) scale(.2);opacity:0}}
+.t-fade{animation:t-fade 1s}.t-push{animation:t-push 1s}.t-wipe{animation:t-wipe 1s}.t-zoom{animation:t-zoom 1s}.t-cube{animation:t-cube 1s}
+@keyframes t-fade{from{opacity:0}}@keyframes t-push{from{transform:translateX(-100%)}}@keyframes t-wipe{from{clip-path:inset(0 0 0 100%)}to{clip-path:inset(0 0 0 0)}}@keyframes t-zoom{from{transform:scale(.1);opacity:0}}@keyframes t-cube{from{transform:rotateY(90deg)}}
+/* محاكي ابدأ */
+.desk{border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#0f2b5b,#1d4ed8 60%,#60a5fa);min-height:260px;position:relative;color:#fff;user-select:none}
+.smenu{position:absolute;bottom:34px;right:8px;width:min(92%,330px);background:rgba(24,24,32,.95);border-radius:10px;padding:8px;display:none}.smenu.on{display:block}
+.smenu input{width:100%;box-sizing:border-box;border-radius:6px;border:none;padding:6px;font-family:inherit;margin-bottom:6px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.tiles button{border:none;border-radius:8px;color:#fff;font-family:inherit;font-weight:700;font-size:10px;padding:8px 2px;cursor:pointer}.tiles button b{display:block;font-size:20px}
+.task{position:absolute;bottom:0;left:0;right:0;height:32px;background:rgba(0,0,0,.6);display:flex;align-items:center;gap:6px;padding:0 6px}.task button{background:none;border:none;color:#fff;font-size:18px;cursor:pointer}
+.splash{position:absolute;inset:18% 12%;background:#c43e1c;border-radius:6px;display:none;flex-direction:column;justify-content:center;padding:10px 16px}.splash.on{display:flex}.splash b{font-size:30px;font-weight:400}
+.part-hi{outline:3px solid #facc15!important;outline-offset:-2px;animation:phi 1s infinite}@keyframes phi{50%{outline-color:#ef4444}}
+.slideD{aspect-ratio:16/9;border:2px solid #ccc;border-radius:8px;position:relative;overflow:hidden;container-type:inline-size;transition:.4s}
+.gen{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0}.gen>div:first-child{grid-column:1/3}.prb .hint{white-space:nowrap}
+.flip{font-size:3rem;text-align:center;height:90px;display:grid;place-items:center}
+.piano{display:flex;justify-content:center;gap:3px;margin:8px 0}.piano button{width:34px;height:90px;border:1px solid #333;border-radius:0 0 6px 6px;background:#fff;cursor:pointer;font-weight:800;font-family:inherit;display:flex;align-items:flex-end;justify-content:center;padding-bottom:4px;font-size:.75rem}.piano button:active,.piano button.dn{background:#c4b5fd}
+@media (max-width:520px){.pol{width:26%}.lays,.tpl{grid-template-columns:repeat(2,1fr)}.gal{grid-template-columns:repeat(3,1fr)}.fg,.fx2{grid-template-columns:1fr}}
+</style>
+
+<section class="page on" id="home">
+  <h2>فهرس الكتاب</h2>
+  <div class="idea">🖱️ أهلًا! أنا الفأرة «ماوس»، مرشدك في هذا الكتاب.<small>هنا لا تقرأ عن برنامج العروض التقديمية فقط… بل تستخدمه! في كل درس نافذة برنامج حقيقية الشكل تكتب فيها، وتنسّق، وتدرج صورًا ورسوم SmartArt، وتحفظ وتطبع، وتضيف حركات، ثم تعرض عرضك بملء الشاشة. ومعها مهام ونجوم وأسئلة الكتاب مع الحل.</small></div>
+  <div id="toc"></div>
+</section>
+
+<section class="page" id="m1">
+  <div style="color:var(--soft);font-size:.85rem">الدرس الأول · ص 6–8</div>
+  <h2><span class="num">1</span>مقدمة عن الوسائط المتعددة</h2>
+  <div class="idea">💡 <b>الوسائط المتعددة Multimedia</b> مصطلح يشير إلى استعمال ودمج عدة وسائط مختلفة مثل (النص، الصوت، الرسومات، الصور المتحركة، الفيديو) لتقديم المحتوى بطريقة تفاعلية لتحقيق هدف محدد.<small>من أكثر المفاهيم ارتباطًا بحياتنا اليومية والمهنية: في التدريب والتعليم والإنتاج والبحث العلمي، وتوفّر الجهد والوقت.</small></div>
+  <div class="box lab"><h3>🎛️ المختبر: خلّاط الوسائط</h3>
+    <div class="hint" style="text-align:center">شغّل الوسائط واحدة تلو الأخرى، وشاهد كيف يصبح العرض أكثر متعة وتشويقًا 👇</div>
+    <div class="mtab" id="mxB"></div>
+    <div class="stage" id="mxS"></div>
+    <div style="font-weight:800;font-size:.9rem;margin-top:6px">مقياس المتعة والتشويق:</div><div class="meter"><i id="mxM"></i></div><div class="fb" id="mxOut"></div></div>
+  <div class="box"><h3>⭐ خصائص الوسائط المتعددة</h3><div class="hint">اضغط على كل بطاقة لتكتشفها</div><div class="cards" id="chC"></div></div>
+  <div class="box lab"><h3>🤝 جرّب «التفاعل» بنفسك</h3><div class="hint" style="text-align:center">التفاعل: فعل (منك) ورد فعل (من الحاسوب). اضغط على أي حيوان!</div>
+    <div class="btns" id="itB"></div><div class="fb" id="itOut"></div></div>
+  <div class="box"><h3>🌟 أهمية الوسائط المتعددة</h3><ul style="font-weight:700;line-height:1.9;margin:0">
+    <li>تُضفي على المحتوى المعروض المتعة والتشويق لما يحتويه من صور ومؤثرات.</li><li>تسهّل التعامل مع أنواع مختلفة من البيانات.</li><li>تساعد على إيصال المعلومات بسرعة.</li><li>تستثير معظم الحواس بعرض المعلومة بأشكال مختلفة (نص، صورة، صوت، فيديو).</li><li>تساعد على بناء عالم افتراضي شبيه بالواقع لتجريب ما يصعب تجريبه في الواقع (لخطورته أو كلفته).</li></ul></div>
+  <div class="box"><h3>✏️ تمرينات (ص 8): صح أم خطأ؟</h3><div id="q1"></div></div>
+</section>
+
+<section class="page" id="m2">
+  <div style="color:var(--soft);font-size:.85rem">الدرس الثاني · ص 9–11</div>
+  <h2><span class="num">2</span>عناصر الوسائط المتعددة</h2>
+  <div class="idea">💡 لإنتاج مشروع وسائط متعددة متكامل تفاعلي لا بد من معرفة جميع العناصر، وفهم كل عنصر على حدة، وكيفية التعامل معه.<small>النص الكتابي Text · الصورة Image · الفيديو Video · الرسوم المتحركة Animation · الرسوم البيانية Graphics · الصوت Audio</small></div>
+  <div class="box lab"><h3>🧪 معمل العناصر الستة</h3><div class="mtab" id="elT"></div><div id="elB"></div></div>
+  <div class="box lab"><h3>🗂️ المختبر: إلى أي عنصر ينتمي؟</h3><div class="hint" style="text-align:center">اختر ملفًا ثم اضغط على العنصر المناسب</div>
+    <div class="pool" id="ftP"></div><div class="cat" id="ftC"></div><div class="fb" id="ftOut"></div></div>
+  <div class="box"><h3>✏️ تمرينات (ص 11): أكمل</h3><div id="q2"></div></div>
+</section>
+
+<section class="page" id="m3">
+  <div style="color:var(--soft);font-size:.85rem">الدرس الثالث · ص 12–14</div>
+  <h2><span class="num">3</span>مجالات استخدام الوسائط المتعددة</h2>
+  <div class="idea">💡 لا يكاد يكون هناك دعاية أو طرح لفكرة دون دمج عناصر الوسائط المتعددة.<small>فهي تحسّن الفهم الشامل للمعلومات وتنقل المفاهيم المعقدة بأسلوب أبسط: في التعليم، والتدريب، والتسلية، والتجارة، والصحافة والإعلام.</small></div>
+  <div class="cards" id="fdC"></div>
+  <div class="box lab"><h3>🔗 تمرين (ص 14): أصِل كل مجال بما يناسبه</h3><div class="hint" style="text-align:center">اختر الاستخدام ثم اضغط على مجاله</div>
+    <div class="pool" id="mfP"></div><div class="cat" id="mfC"></div><div class="fb" id="mfOut"></div></div>
+  <div class="box lab"><h3>🕵️ تحدّي: أين الوسائط المتعددة هنا؟</h3><div class="pool" id="wsP"></div><div class="cat" id="wsC"></div><div class="fb" id="wsOut"></div></div>
+  <div class="box"><h3>💬 نشاط (ص 14)</h3><div class="hint">ناقش مع زملائك بإشراف معلمك المجالات الأخرى التي تُستخدم فيها الوسائط المتعددة، وهل استخدامها مؤثر أم لا؟ وكيف؟ (مثل: الطب، الطيران، المتاحف، الرياضة…)</div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="q3"></div></div>
+</section>
+
+<section class="page" id="rv1">
+  <div style="color:var(--soft);font-size:.85rem">الدروس 1–3 · مراجعة</div>
+  <h2>🏁 مراجعة الوسائط المتعددة</h2>
+  <div class="box"><h3>🗺️ في سطور</h3><div class="idea" style="margin:0">الوسائط المتعددة = دمج (نص + صورة + فيديو + رسوم متحركة + رسوم بيانية + صوت) بطريقة تفاعلية · خصائصها: التنوع، التفاعل، التناسب، التوافر · مجالاتها: التعليم، التدريب، التسلية، التجارة، الصحافة والإعلام.</div></div>
+  <div class="sc" id="rv1Sc"></div><div id="rv1Q"></div><div class="btns"><button class="btn or" id="rv1New">🔄 اختبار جديد</button></div>
+</section>
+
+<section class="page" id="p4">
+  <div style="color:var(--soft);font-size:.85rem">الدرسان الرابع والخامس · ص 15–20</div>
+  <h2><span class="num">4-5</span>العروض التقديمية</h2>
+  <div class="idea">💡 <b>العروض التقديمية</b> أسلوب منظم ومصمم جيدًا لعرض وتقديم المعلومات والبيانات المختلفة، تتكون من الصوت والفيديو والرسوم المتحركة والصور بالإضافة إلى النصوص، بحيث تعرض المحتوى بطريقة مميزة وواضحة تستثير انتباه المستخدم.<small>تُستخدم في المؤتمرات والاجتماعات والدورات التدريبية والعملية التعليمية، وسندرس تصميمها باستخدام برنامج MS PowerPoint.</small></div>
+  <div class="box"><h3>🔺 عناصر العرض التقديمي الناجح الثلاثة</h3><div class="cards" id="elC" style="grid-template-columns:repeat(3,1fr)"></div>
+   <div class="hint">⚠️ كثير من العروض تفشل بسبب تعقيد المحتوى أكثر من اللازم والرتابة والتركيز على ما يريد قوله المتحدث وليس ما يثير اهتمام الجمهور.</div></div>
+  <div class="box lab"><h3>🩺 المختبر: طبيب الشرائح</h3><div class="hint" style="text-align:center">هذه شريحة «مريضة» 🤒 اكتشف مشكلاتها وعالجها واحدة واحدة</div>
+    <div class="slideD" id="drS"></div><div class="btns" id="drB"></div>
+    <div style="font-weight:800;font-size:.9rem">جودة الشريحة:</div><div class="meter"><i id="drM"></i></div><div class="fb" id="drOut"></div></div>
+  <div class="box"><h3>🎓 أهمية العروض التقديمية في التعليم</h3><div class="cards" id="imC"></div></div>
+  <div class="box"><h3>✏️ تمرينات (ص 19)</h3><div id="sec4"></div><div id="q4"></div></div>
+</section>
+
+<section class="page" id="p6">
+  <div style="color:var(--soft);font-size:.85rem">الدرس السادس · ص 21–28</div>
+  <h2><span class="num">6</span>ابدأ مع برنامج العروض التقديمية</h2>
+  <div class="idea">💡 برنامج العروض التقديمية من البرامج المفيدة للتلميذ: يعمل به مشروعًا خاصًا يحتوي على صوت وصورة وفيديو.<small>مزاياه: سهولة إضافة وحذف الشرائح · رسوم كثيرة · سهولة حفظ واسترجاع الشرائح · مؤثرات صوتية وحركية · مقاطع فيديو · تحويل شاشة العرض إلى ما يشبه (الشاشة).</small></div>
+  <div class="box lab"><h3>🖥️ أولًا: شغّل البرنامج بنفسك</h3><div class="hint" style="text-align:center">1) اضغط زر ابدأ ⊞ &nbsp; 2) ابحث عن أيقونة PowerPoint واضغطها &nbsp; 3) اضغط «عرض تقديمي فارغ»</div>
+    <div class="desk" id="dk"></div><div class="fb" id="dkOut"></div></div>
+  <div class="box lab"><h3>🔍 ثانيًا: أجزاء الشاشة الرئيسية</h3>
+    <div class="btns"><button class="btn main" id="ptE">🔎 وضع الاستكشاف</button><button class="btn or" id="ptQ">🎯 تحدّي: أين هو؟</button></div>
+    <div class="fb" id="ptOut" style="min-height:2.6em"></div><div id="ptW"></div><div class="sc" id="ptSc"></div></div>
+  <div class="box"><h3>📽️ شريط العرض والمعاينة</h3><div class="hint">في أسفل النافذة أعلاه 4 أيقونات: ▭ عرض عادي (Normal View) · ▦ فارز الشرائح (Slide Sorter View) · 📖 عرض القراءة (Reading View) · 📽️ عرض الشرائح بدءًا من الشريحة الحالية (Slide Show). جرّبها كلها!</div></div>
+  <div class="box lab"><h3>🔤 نشاط (ص 28): الاسم بالإنجليزية</h3><div class="hint" style="text-align:center">اختر الاسم الإنجليزي ثم اضغط على الجزء العربي المناسب</div>
+    <div class="pool" id="enP"></div><div class="cat" id="enC"></div><div class="fb" id="enOut"></div></div>
+  <div class="box"><h3>✏️ تمرينات (ص 28)</h3><div id="sec6"></div><div id="q6"></div></div>
+</section>
+
+<section class="page" id="p7">
+  <div style="color:var(--soft);font-size:.85rem">الدرسان السابع والثامن · ص 29–35</div>
+  <h2><span class="num">7-8</span>إدخال البيانات إلى الشرائح وتنسيقها</h2>
+  <div class="idea">💡 بعد تشغيل البرنامج تظهر <b>شريحة عنوان</b>: مستطيل «انقر لإضافة عنوان» ومستطيل «انقر لإضافة عنوان فرعي».<small>التنسيق لا يختلف عن باقي البرامج: حدّد النص ← اختر التنسيق من الشريط الرئيسي، أو اضغط السهم أسفل مجموعة «خط» لفتح شاشة الخط.</small></div>
+  <div class="box lab"><h3>🧑‍💻 جرّب في البرنامج</h3><div class="mbox" id="ms7"></div><div id="pp7"></div>
+    <div class="hint">💡 اضغط على المستطيل لتحديده ثم اكتب. أوامر التنسيق في «الشريط الرئيسي». شاشة «خط…» في آخر الشريط ➡️ (اسحب الشريط يمينًا ويسارًا).</div></div>
+  <div class="box"><h3>🔎 نشاط (ص 31): الأجزاء المشار إليها</h3><div id="q7a"></div></div>
+  <div class="box"><h3>🧩 نشاط (ص 35): عمل الأيقونات في الشريط الرئيسي</h3><div id="q7"></div></div>
+</section>
+
+<section class="page" id="p9">
+  <div style="color:var(--soft);font-size:.85rem">الدرس التاسع · ص 36–52</div>
+  <h2><span class="num">9</span>التعامل مع الشرائح</h2>
+  <div class="idea">💡 نتحكم في المستطيلات بتغيير موضعها وحجمها، ونضيف شرائح جديدة بأنواع مختلفة، ونُدرج داخلها مخططات SmartArt وصورًا وقصاصات فيديو.<small>تغيير الموضع: اضغط داخل المستطيل ← ضع المؤشر على الإطار فيتغير إلى ✥ ← اسحب. تغيير الحجم: اسحب أحد المربعات الصغيرة على الإطار.</small></div>
+  <div class="box lab"><h3>🧑‍💻 جرّب في البرنامج</h3><div class="mbox" id="ms9"></div><div id="pp9"></div>
+   <div class="hint">✥ للتحريك و ◽ (الزاوية) لتغيير الحجم · أيقونات 🧩🖼️🎬 تظهر داخل مستطيل المحتوى الفارغ · «تصميم SmartArt» يظهر عند الضغط على شكل داخل المخطط.</div></div>
+  <div class="box"><h3>➕ إضافة أشكال فرعية للمخطط (ص 46)</h3><div class="hint">إضافة شكل بعد/قبل: شكل جديد في نفس المستوى · أعلى: شكل فوق المحدد · أسفل: شكل فرعي تحت المحدد.</div><div id="q9a"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="q9"></div></div>
+</section>
+
+<section class="page" id="p10">
+  <div style="color:var(--soft);font-size:.85rem">الدرس العاشر · ص 53–62</div>
+  <h2><span class="num">10</span>التعامل مع الملفات</h2>
+  <div class="idea">💡 حفظ الملف لأول مرة: ملف ← حفظ باسم ← حدد الموقع ← اكتب الاسم ← حفظ.<small>لحفظ ملف محفوظ مسبقًا: ملف ← حفظ، أو Ctrl + S، أو أيقونة 💾 في شريط أدوات الوصول السريع. الخروج: ملف ← إغلاق أو ✕.</small></div>
+  <div class="box lab"><h3>🧑‍💻 جرّب في البرنامج</h3><div class="mbox" id="ms10"></div><div id="pp10"></div>
+    <div class="hint" style="text-align:center">⌨️ لوحة مفاتيح صغيرة: اضغط Ctrl ثم S للحفظ السريع</div><div class="keys"><button id="kC">Ctrl</button><button id="kS">S</button></div></div>
+  <div class="box"><h3>🖨️ طباعة: ترتيب الصفحات</h3><div class="hint">«بترتيب الصفحات» تخرج النسخ كاملة واحدة بعد أخرى: 1,2,3 ثم 1,2,3 · «بدون ترتيب» تخرج نسخ كل صفحة معًا: 1,1 ثم 2,2 ثم 3,3.</div><div id="q10a"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="q10"></div></div>
+</section>
+
+<section class="page" id="p11">
+  <div style="color:var(--soft);font-size:.85rem">الدرس الحادي عشر · ص 63–74</div>
+  <h2><span class="num">11</span>تنسيق الشرائح</h2>
+  <div class="idea">💡 ننسخ الشرائح ونحذفها ونغيّر تخطيطها وخلفيتها وتصميمها، ثم نضيف <b>الحركات المخصصة</b> للعناصر و<b>المراحل الانتقالية</b> بين الشرائح.<small>نسخ شريحة: زر الفأرة الأيمن ← نسخ ← (على الشريحة التي بعدها) لصق. في المحاكي: اضغط ⋮ على الشريحة المحددة (أو اضغط عليها بالزر الأيمن).</small></div>
+  <div class="box lab"><h3>🧑‍💻 جرّب في البرنامج</h3><div class="mbox" id="ms11"></div><div id="pp11"></div></div>
+  <div class="box lab"><h3>🏫 مشروع (ص 64): «مدرستي الجميلة»</h3><div class="mbox" id="ms11b"></div><div id="pp11b"></div>
+   <div class="hint">جدول الشريحة الرابعة: الاسم | لغة عربية | رياضيات — أنسام عبد الغني 95 97 — عمار عبد الباسط 65 77</div><div class="hint">📤 بعد ما تخلص: ملف ← «مشاركة العرض» وأرسل مشروعك لأهلك أو لمعلمك!</div></div>
+  <div class="box"><h3>⏱️ الحركات الانتقالية (ص 72)</h3><div class="hint">تُستخدم المراحل الانتقالية «عند النقر بالماوس» أو بتحديد زمن «بعد» لظهور الشرائح تلقائيًا.</div><div id="q11a"></div></div>
+  <div class="box"><h3>✏️ تمرينات (ص 73–74)</h3><div id="sec11"></div><div id="q11"></div></div>
+</section>
+
+<section class="page" id="p12">
+  <div style="color:var(--soft);font-size:.85rem">الدرس الثاني عشر · ص 75–81</div>
+  <h2><span class="num">12</span>الأدوات الذكية في تصميم العروض التقديمية</h2>
+  <div class="idea">🤖 <b>الذكاء الاصطناعي</b> قدرة البرامج على التفكير والتعلّم مثلنا لمساعدتنا في مهام مثل التصميم.<small>بدلًا من عمل كل شيء يدويًا، يقترح عليك التصميم والألوان والصور، ويوفّر وقتك وجهدك. أدوات ذكية مثل: Canva AI و Visme و Google Slides.</small></div>
+  <div class="box lab"><h3>✨ المختبر: صمّم بلمسة سحرية</h3>
+    <div class="mtab" id="aiT"></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center"><input id="aiI" placeholder="اكتب فكرتك… مثلًا: الفضاء الخارجي" style="flex:1;min-width:180px;padding:8px;border-radius:10px;border:2px solid var(--line);font-family:inherit"><button class="btn main" id="aiGo">✨ صمّم</button></div>
+    <div class="btns" id="aiS"></div><div id="aiOut"></div></div>
+  <div class="box lab"><h3>🧰 أي أداة تناسب؟</h3><div class="pool" id="tlP"></div><div class="cat" id="tlC"></div><div class="fb" id="tlOut"></div></div>
+  <div class="box lab"><h3>⚖️ أنت أم الآلة؟ القيم السلوكية والأخلاقية</h3><div class="hint" style="text-align:center">هل هذا استخدام مسؤول للذكاء الاصطناعي؟</div><div class="pool" id="vlP"></div><div class="cat" id="vlC"></div><div class="fb" id="vlOut"></div>
+   <ol style="font-weight:700;line-height:1.8;font-size:.92rem"><li>الأداة تسرّع العمل، والعقل يُبدع: استخدم الذكاء الاصطناعي بذكاء لا باتّكال.</li><li>لا تدع سهولة الأداة تُنسيك أهمية الفهم: ابحث، تحقّق، وتعلّم دائمًا.</li><li>كن أمينًا في استخدامك للتكنولوجيا؛ فالأصالة تبدأ من فكرك ولمستك الخاصة.</li><li>وراء كل تصميم ذكي عين ناقدة وفكر واعٍ: راجع، عدّل، وأضف بصمتك.</li></ol></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="q12"></div></div>
+</section>
+
+<section class="page" id="rv2">
+  <div style="color:var(--soft);font-size:.85rem">الدروس 4–12 · مراجعة</div>
+  <h2>🏁 مراجعة العروض التقديمية</h2>
+  <div class="box"><h3>🗺️ في سطور</h3><div class="idea" style="margin:0">تشغيل البرنامج ← أجزاء النافذة (8) ← إدخال النص وتنسيقه ← شرائح جديدة و SmartArt وصور وفيديو ← حفظ وفتح وطباعة ← نسخ وحذف وخلفية وتصميم ← حركات مخصصة ومراحل انتقالية ← أدوات ذكية بمسؤولية.</div></div>
+  <div class="sc" id="rv2Sc"></div><div id="rv2Q"></div><div class="btns"><button class="btn or" id="rv2New">🔄 اختبار جديد</button></div>
+</section>
+<footer>الكتاب الحي · مبني على كتاب الحاسوب للصف السابع من مرحلة التعليم الأساسي 2025–2026 (مركز المناهج التعليمية والبحوث التربوية – ليبيا)</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const pages=[...document.querySelectorAll('.page')],nb=[...document.querySelectorAll('#bar button')];
+function go(id){pages.forEach(p=>p.classList.toggle('on',p.id===id));nb.forEach(b=>b.classList.toggle('on',b.dataset.p===id));window.scrollTo({top:0,behavior:'smooth'})}
+nb.forEach(b=>b.onclick=()=>go(b.dataset.p));
+(function(){const h=location.hash.slice(1);if(h&&$(h))go(h);addEventListener('hashchange',()=>{const x=location.hash.slice(1);if($(x))go(x)})})();
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),nz=(a,b)=>{let x;do{x=rnd(a,b)}while(!x);return x},pick=a=>a[rnd(0,a.length-1)];
+const ms=n=>n<0?'−'+(-n):String(n);const pr=n=>n<0?'('+ms(n)+')':String(n);
+const V='س';
+const parse=s=>{s=(s||'').trim().replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[−–—]/g,'-').replace(/\s/g,'');if(s===''||s==='+'||s==='-')return NaN;if(/^-?\d+\/\d+$/.test(s)){const[a,b]=s.split('/');return a/b}return Number(s)};
+function term(c,p,first,v){v=v||V;if(c===0)return'';const a=Math.abs(c);const cs=(a===1&&p>0)?'':String(a);const vs=p===0?'':(p===1?v:v+'<sup>'+p+'</sup>');const s=c<0?(first?'−':' − '):(first?'':' + ');return s+cs+vs}
+function poly(cs,v){let out='',f=true;cs.forEach(([c,p])=>{if(c){out+=term(c,p,f,v);f=false}});return out||'0'}
+/* matrix renderer: A 2D array, o:{det, cls(i,j)->class, inp:prefix} */
+function M(A,o){o=o||{};const r=A.length,c=A[0].length;let g='<div class="g" style="grid-template-columns:repeat('+c+',auto)">';
+ A.forEach((row,i)=>row.forEach((v,j)=>{const cl=o.cls?o.cls(i,j)||'':'';g+=o.inp?'<input class="c '+cl+'" data-i="'+i+'" data-j="'+j+'" data-m="'+o.inp+'" value="'+(v===''?'':ms(v))+'" inputmode="text">':'<div class="c '+cl+'" data-i="'+i+'" data-j="'+j+'">'+(typeof v==='number'?ms(Math.round(v*1000)/1000):v)+'</div>'}));
+ return '<span class="M'+(o.det?' det':'')+'"'+(o.id?' id="'+o.id+'"':'')+'><span class="br r"></span>'+g+'</div><span class="br l"></span></span>'}
+function readM(host,name,r,c){const A=Array.from({length:r},()=>Array(c).fill(0));host.querySelectorAll('input[data-m="'+name+'"]').forEach(x=>{const v=parse(x.value);A[+x.dataset.i][+x.dataset.j]=isNaN(v)?0:v});return A}
+const det2=a=>a[0][0]*a[1][1]-a[0][1]*a[1][0];
+const minor=(a,i,j)=>a.filter((_,r)=>r!==i).map(row=>row.filter((_,c)=>c!==j));
+const det3=a=>a[0][0]*det2(minor(a,0,0))-a[0][1]*det2(minor(a,0,1))+a[0][2]*det2(minor(a,0,2));
+const det=a=>a.length===2?det2(a):det3(a);
+const rM=(r,c,lo,hi)=>Array.from({length:r},()=>Array.from({length:c},()=>rnd(lo==null?-5:lo,hi==null?9:hi)));
+const mul=(A,B)=>A.map(row=>B[0].map((_,j)=>row.reduce((s,v,k)=>s+v*B[k][j],0)));
+const T=A=>A[0].map((_,j)=>A.map(r=>r[j]));
+const sub='₀₁₂₃₄₅₆₇₈₉';const ij=(i,j)=>''+sub[i]+sub[j];
+function mcq(host,q,opts,right,onAns){const d=document.createElement('div');d.className='box';d.style.margin='8px 0';d.innerHTML='<div style="font-weight:800">'+q+'</div>';let dn=false;const order=opts.map((o,i)=>i).sort(()=>Math.random()-.5);
+ order.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=opts[i];b.onclick=()=>{if(dn)return;dn=true;b.classList.add(i===right?'ok':'no');if(i!==right)[...d.querySelectorAll('.opt')][order.indexOf(right)].classList.add('ok');onAns&&onAns(i===right)};d.appendChild(b)});host.appendChild(d)}
+function MCQP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();g.o=g.o.filter((x,i)=>g.o.indexOf(x)===i);const ord=g.o.map((x,i)=>i).sort(()=>Math.random()-.5);let done=false;
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div>';const opts=document.createElement('div');box.appendChild(opts);const fb=document.createElement('div');fb.className='fb';const nx=document.createElement('div');nx.className='btns';box.appendChild(fb);box.appendChild(nx);
+  ord.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=g.o[i];b.onclick=()=>{if(done)return;done=true;const r=i===0;b.classList.add(r?'ok':'no');if(!r)[...opts.children][ord.indexOf(0)].classList.add('ok');dn++;if(r)ok++;sc.textContent='✔️ صحيح: '+ok+' من '+dn;fb.className='fb '+(r?'ok':'no');fb.innerHTML=(r?'🎉 صحيح! ':'❌ ليس صحيحًا. ')+(g.ex?'<div style="font-size:.95rem;color:var(--ink);font-weight:700">'+g.ex+'</div>':'');nx.innerHTML='<button class="btn or">سؤال جديد ⬅</button>';nx.firstChild.onclick=render};opts.appendChild(b)})}render()}
+/* matrix-answer practice: gen -> {q, ans(2D), steps[]} */
+function MatP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();let tries=0;const E=g.ans.map(r=>r.map(()=>''));
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div><div style="text-align:center;margin:8px 0">= '+M(E,{inp:'z'})+'</div><div class="btns"><button class="btn main" data-k="chk">✔️ تحقّق</button><button class="btn" data-k="help">💡 أرني الحل</button><button class="btn or" data-k="new">سؤال جديد ⬅</button></div><div class="fb"></div><div class="steps"></div>';
+  const ins=[...box.querySelectorAll('input.c')],fb=box.querySelector('.fb'),st=box.querySelector('.steps');const steps=()=>{st.style.display='block';st.innerHTML='<b>الحل:</b>'+g.steps.map(s=>'<div class="mx" style="font-size:1rem">'+s+'</div>').join('')};
+  box.querySelector('[data-k=chk]').onclick=()=>{let all=true,emp=false;ins.forEach(x=>{const v=parse(x.value);if(isNaN(v)){emp=true;all=false;return}const g2=Math.abs(v-g.ans[+x.dataset.i][+x.dataset.j])<.001;x.classList.remove('ok','no');x.classList.add(g2?'ok':'no');if(!g2)all=false});
+   if(emp&&!all){fb.className='fb';fb.textContent='املأ كل الخانات';return}tries++;if(tries===1){dn++;if(all)ok++;sc.textContent='✔️ صحيح من أول محاولة: '+ok+' من '+dn}fb.className='fb '+(all?'ok':'no');fb.textContent=all?'🎉 ممتاز!':'🤔 الخانات الحمراء غير صحيحة';if(all||tries>=2)steps();if(all)setTimeout(render,2400)};
+  box.querySelector('[data-k=help]').onclick=()=>{ins.forEach(x=>{x.value=ms(g.ans[+x.dataset.i][+x.dataset.j]);x.classList.add('ok')});steps()};box.querySelector('[data-k=new]').onclick=render}render()}
+
+
+const TOC=[['الوسائط المتعددة',6,[['1','مقدمة عن الوسائط المتعددة',6,'m1'],['2','عناصر الوسائط المتعددة',9,'m2'],['3','مجالات استخدام الوسائط المتعددة',12,'m3'],['','مراجعة الوسائط المتعددة',14,'rv1']]],
+ ['العروض التقديمية',15,[['4','مقدمة عن العروض التقديمية',15,'p4'],['5','برنامج العروض التقديمية',20,'p4'],['6','ابدأ مع برنامج العروض التقديمية',21,'p6'],['7','إدخال البيانات إلى الشرائح',29,'p7'],['8','تنسيق بيانات الشرائح',32,'p7'],['9','التعامل مع الشرائح',36,'p9'],['10','التعامل مع الملفات',53,'p10'],['11','تنسيق الشرائح',64,'p11'],['12','الأدوات الذكية في تصميم العروض التقديمية',76,'p12'],['','مراجعة العروض التقديمية',81,'rv2']]]];
+(function(){const t=$('toc');TOC.forEach(([n,pg,ls],i)=>{const r=ls.filter(l=>l[3]).length;const d=document.createElement('div');d.className='chap'+(i===0?' open':'');
+ d.innerHTML='<div><span class="cn">'+(i+1)+'</span><span style="flex:1">'+n+'</span><span class="tg '+(r?'r':'s')+'">'+(r?'جاهز ✅':'قريبًا')+'</span></div><div class="ls">'+ls.map(l=>'<div class="li'+(l[3]?' ready" data-go="'+l[3]:'')+'"><span>'+(l[3]?'✅':'⏳')+'</span><span>'+(l[0]?'<b>'+l[0]+'</b> ':'')+l[1]+'</span><span class="pg">ص '+l[2]+'</span></div>').join('')+'</div>';
+ d.firstChild.onclick=()=>d.classList.toggle('open');t.appendChild(d)});t.querySelectorAll('[data-go]').forEach(x=>x.onclick=()=>go(x.dataset.go))})();
+
+/* ================= أمثلة الكتاب وتمارينه (عام) ================= */
+const QB=s=>s.replace(/ (?=(?:أ|ب|ج|د|هـ|و)\) )/g,'<br>').replace(/ (?=\((?:i|ii|iii|iv|1|2|3)\) )/g,'<br>');
+const FX=s=>s.replace(/(−?\d+(?:\.\d+)?)\/(\d+)/g,'<span class="rt">$1/$2</span>');
+function addSecs(pid,exs,bks){const pg=$(pid);if(!pg)return;const first=[...pg.querySelectorAll('.box')].find(b=>(b.querySelector('h3')||{}).textContent&&b.querySelector('h3').textContent.trim().startsWith('✏️'));
+ if(exs&&exs.length){const b=document.createElement('div');b.className='box exb';b.innerHTML='<h3>📖 أمثلة الكتاب محلولة خطوة بخطوة</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">اضغط «الخطوة التالية» وحاول أن تتوقع الخطوة قبل أن تظهر 🤔</p>';exs.forEach(e=>b.appendChild(wex(e)));first?pg.insertBefore(b,first):pg.appendChild(b)}
+ if(bks&&bks.length){const b=document.createElement('div');b.className='box bkb';b.innerHTML='<h3>📝 تمارين الكتاب مع الحلول</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">✍️ حلّ في دفترك أولًا، ثم اضغط «تلميح» إذا احتجت، و«الحل» لتتأكد.</p>';bks.forEach(e=>b.appendChild(bkx(e)));pg.appendChild(b)}}
+function wex(e){const d=document.createElement('div');d.className='wx';let k=0;
+ d.innerHTML='<div class="wxq"><b style="color:var(--tl)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="wxs"></div><div class="btns"><button class="btn main" data-a="n">▶️ الخطوة التالية</button><button class="btn" data-a="all">📜 الحل كاملًا</button><button class="btn" data-a="r">↺ من جديد</button></div>';
+ const S=d.querySelector('.wxs'),nb=d.querySelector('[data-a=n]');const add=()=>{if(k>=e.s.length)return;const x=document.createElement('div');x.className='wst';x.innerHTML='<span class="sn">'+(k+1)+'</span>'+FX(e.s[k]);S.appendChild(x);k++;if(k>=e.s.length){nb.textContent='✅ انتهى الحل';nb.disabled=true;try{S.lastChild.classList.add('fin')}catch(_){}}};
+ nb.onclick=add;d.querySelector('[data-a=all]').onclick=()=>{while(k<e.s.length)add()};d.querySelector('[data-a=r]').onclick=()=>{k=0;S.innerHTML='';nb.disabled=false;nb.textContent='▶️ الخطوة التالية'};return d}
+function bkx(e){const d=document.createElement('div');d.className='bx';
+ d.innerHTML='<div class="wxq"><b style="color:var(--or)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="btns" style="justify-content:flex-start"><button class="btn" data-a="h">💡 تلميح</button><button class="btn ok" data-a="s">✅ الحل</button></div><div class="bh" style="display:none"></div><div class="bs" style="display:none"></div>';
+ const H=d.querySelector('.bh'),S=d.querySelector('.bs');H.innerHTML='💡 '+FX(e.h);S.innerHTML=e.s.map(x=>'<div class="wst">'+FX(x)+'</div>').join('')+(e.a?'<div class="ans">🎯 الجواب: '+FX(e.a)+'</div>':'');
+ d.querySelector('[data-a=h]').onclick=()=>{H.style.display=H.style.display==='none'?'block':'none'};d.querySelector('[data-a=s]').onclick=()=>{S.style.display=S.style.display==='none'?'block':'none'};return d}
+
+
+const nf=(v,d)=>{d=d==null?3:d;const r=Math.round(v*10**d)/10**d;return ms(r)};
+/* ================= فيزياء: الوحدة 1 ================= */
+const sci=(v,d)=>{d=d==null?2:d;if(v===0)return'0';const e=Math.floor(Math.log10(Math.abs(v)));if(e>=-2&&e<=4)return nf(v,Math.max(0,d+1-Math.max(0,e)));const m=v/10**e;return '<span dir="ltr" style="unicode-bidi:isolate">'+(+m.toFixed(d))+' × 10<sup>'+e+'</sup></span>'};
+function cv(id){const c=$(id),x=c.getContext('2d');return{c,x,W:c.width,H:c.height}}
+const loops={};function loop(id,fn){if(loops[id])return;let last=performance.now();const st=()=>{const now=performance.now(),dt=Math.min(0.05,(now-last)/1000);last=now;const pg=$(id).closest('.page');if(pg.classList.contains('on'))fn(dt);loops[id]=requestAnimationFrame(st)};loops[id]=requestAnimationFrame(st)}
+function glow(x,X,Y,r,col){const g=x.createRadialGradient(X,Y,0,X,Y,r);g.addColorStop(0,col);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.beginPath();x.arc(X,Y,r,0,7);x.fill()}
+function chg(x,X,Y,q,r){r=r||10;x.fillStyle=q>0?'#ff6b6b':'#5ab0ff';x.beginPath();x.arc(X,Y,r,0,7);x.fill();x.fillStyle='#fff';x.font='bold '+(r*1.6)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(q>0?'+':'−',X,Y+1)}
+function label(x,t,X,Y,col,sz){x.fillStyle=col||'#fff';x.font='bold '+(sz||16)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(t,X,Y)}
+
+/* ================= الحاسوب – الصف السابع : محاكي برنامج العروض التقديمية ================= */
+const shake=el=>{el.classList.remove('shk');void el.offsetWidth;el.classList.add('shk')};
+const cheer=()=>{try{window.FX&&FX.ok()}catch(e){}};
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const clone=o=>JSON.parse(JSON.stringify(o));
+function sortGame(poolId,catId,outId,cats,items,done){const P=$(poolId),Cc=$(catId);let sel=null,left=items.length;P.innerHTML='';Cc.innerHTML='';
+ shuf(items).forEach(([lab,k,why])=>{const b=document.createElement('button');b.innerHTML=lab;b.dataset.k=k;b.dataset.why=why||'';b.onclick=()=>{P.querySelectorAll('button').forEach(y=>y.classList.remove('sel'));b.classList.add('sel');sel=b};P.appendChild(b)});
+ cats.forEach(([n,s,c],i)=>{const d=document.createElement('div');d.style.borderColor=c;d.innerHTML='<b style="color:'+c+'">'+n+'</b>'+(s?'<small>'+s+'</small>':'')+'<div class="pool" style="margin:4px 0"></div>';
+  d.onclick=()=>{if(!sel)return;if(+sel.dataset.k===i){sel.classList.remove('sel');sel.classList.add('ok');sel.onclick=null;d.querySelector('.pool').appendChild(sel);$(outId).innerHTML='✅ صحيح! '+sel.dataset.why;sel=null;left--;if(!left){$(outId).innerHTML='🎉 أحسنت! رتّبت كل شيء.';cheer();done&&done()}}else{shake(d);$(outId).innerHTML='🤔 حاول مرة أخرى'}};Cc.appendChild(d)});$(outId).textContent=''}
+function chapterTest(pfx,G){let ok=0,dn=0;const host=$(pfx+'Q');function upd(){$(pfx+'Sc').textContent=dn<G.length?'أجبت عن '+dn+' من '+G.length+' · صحيح: '+ok:(ok>=G.length-1?'🌟 ممتاز! ':ok>=G.length-3?'👍 جيد جدًا! ':'💪 راجع الدروس. ')+'النتيجة: '+ok+' من '+G.length}
+ function make(){host.innerHTML='';ok=0;dn=0;shuf(G).forEach((g,i)=>{const [q,o]=g;mcq(host,(i+1)+') '+q,o,0,r=>{dn++;if(r)ok++;upd();if(dn===G.length&&ok>=G.length-3)cheer()})});upd()}
+ $(pfx+'New').onclick=make;make()}
+const bank=(arr)=>()=>{const [q,o,ex]=pick(arr);return{q,o,ex:ex||''}};
+/* أصوات صغيرة */
+let _ac=null;function tone(f,d,type,vol){try{_ac=_ac||new (window.AudioContext||window.webkitAudioContext)();const o=_ac.createOscillator(),g=_ac.createGain();o.type=type||'sine';o.frequency.value=f;g.gain.setValueAtTime(vol||.15,_ac.currentTime);g.gain.exponentialRampToValueAtTime(.001,_ac.currentTime+(d||.3));o.connect(g);g.connect(_ac.destination);o.start();o.stop(_ac.currentTime+(d||.3))}catch(e){}}
+function noise(d){try{_ac=_ac||new (window.AudioContext||window.webkitAudioContext)();const n=_ac.sampleRate*d,b=_ac.createBuffer(1,n,_ac.sampleRate),x=b.getChannelData(0);for(let i=0;i<n;i++)x[i]=(Math.random()*2-1)*(Math.random()<.3?1:.2)*(1-i/n);const s=_ac.createBufferSource(),g=_ac.createGain();g.gain.value=.15;s.buffer=b;s.connect(g);g.connect(_ac.destination);s.start()}catch(e){}}
+const SND={'[بلا صوت]':null,'تصفيق':()=>noise(.6),'جرس':()=>{tone(880,.5);setTimeout(()=>tone(1320,.5),120)},'سهم':()=>{tone(500,.12,'sawtooth',.08);setTimeout(()=>tone(900,.15,'sawtooth',.08),90)},'كاميرا':()=>{noise(.08);setTimeout(()=>noise(.06),90)},'طبل':()=>{tone(90,.35,'sine',.4)}};
+
+/* ---------- صور ليبية مرسومة (بدون صور حقيقية) ---------- */
+const PICS=[['🏛️','لبدة الكبرى','#f6d365,#fda085'],['🌴','واحة غدامس','#a8e063,#56ab2f'],['🏖️','شاطئ زوارة','#89f7fe,#66a6ff'],['🏰','السرايا الحمراء','#ff9a9e,#c0392b'],['🐪','الصحراء الليبية','#fbd786,#c6a14a'],['🌊','بحر طرابلس','#4facfe,#00f2fe'],['🏺','آثار شحات','#d4a373,#7f5539'],['🌙','ليلة في الجبل الأخضر','#2c3e50,#4ca1af']];
+const picHTML=(i,cap)=>{const p=PICS[i%PICS.length];return '<div class="pic" style="background:linear-gradient(135deg,'+p[2]+')"><span>'+p[0]+'</span>'+(cap!==false?'<i>'+p[1]+'</i>':'')+'</div>'};
+
+/* ---------- القوالب (التصميم) ---------- */
+const THEMES=[
+ {n:'سمة Office',bg:'#ffffff',fg:'#222',ac:'#c43e1c',deco:''},
+ {n:'أوجه',bg:'#ffffff',fg:'#2b4a1b',ac:'#3f9b2f',deco:'linear-gradient(100deg,transparent 86%,#9bd36a 86%,#3f9b2f 93%,#2b6b1f 93%)'},
+ {n:'المعرض',bg:'#fdf6e3',fg:'#5b3a29',ac:'#b5651d',deco:'radial-gradient(circle at 0 100%,#f4a261 0 18%,transparent 18%)'},
+ {n:'أطلس',bg:'#fff',fg:'#7a1d1d',ac:'#d62828',deco:'linear-gradient(#d62828 0 9%,transparent 9%)'},
+ {n:'سماوي',bg:'#e8f4fd',fg:'#0b3c5d',ac:'#1d7fc1',deco:'linear-gradient(170deg,transparent 80%,#7cc4f0 80%,#1d7fc1 92%)'},
+ {n:'شريحة الليل',bg:'#1e1b4b',fg:'#f5f3ff',ac:'#facc15',deco:'radial-gradient(circle at 85% 15%,#facc15 0 3%,transparent 3%),radial-gradient(circle at 70% 30%,#fff 0 .6%,transparent .6%)'},
+ {n:'برتقالي حيوي',bg:'#fff4e6',fg:'#7c2d12',ac:'#f97316',deco:'linear-gradient(90deg,#f97316 0 4%,transparent 4%)'}];
+
+/* ---------- التخطيطات ---------- */
+const LAYS={title:'شريحة عنوان',tc:'عنوان ومحتوى',sec:'عنوان المقطع',two:'محتويان',cmp:'مقارنة',to:'عنوان فقط',blank:'فارغ',pic:'صورة مع تسمية توضيحية'};
+const LAYICO={title:'▭\n▬',tc:'▬\n▦',sec:'▬\n▭',two:'▬\n▦▦',cmp:'▬\n▤▤',to:'▬',blank:'',pic:'▬\n🖼'};
+function TI(k,x,y,w,h,sz,al,extra){return Object.assign({k,t:'',x,y,w,h,f:{sz,al:al||'right',b:false,i:false,u:false,s:false,c:'',font:'Cairo'}},extra||{})}
+function layItems(l){switch(l){
+ case 'title':return [TI('title',10,26,80,24,40,'center'),TI('sub',15,54,70,14,20,'center')];
+ case 'tc':return [TI('title',5,5,90,16,32),TI('body',5,25,90,68,20)];
+ case 'sec':return [TI('title',8,40,84,22,36),TI('sub',8,64,84,12,18)];
+ case 'two':return [TI('title',5,5,90,16,32),TI('body',5,25,44,68,18),TI('body',51,25,44,68,18)];
+ case 'cmp':return [TI('title',5,5,90,14,30),TI('sub',5,21,44,9,18),TI('sub',51,21,44,9,18),TI('body',5,32,44,62,16),TI('body',51,32,44,62,16)];
+ case 'to':return [TI('title',5,5,90,16,32)];
+ case 'pic':return [TI('title',5,6,40,18,24),TI('body',50,6,45,86,18,'right',{ph:'pic'}),TI('sub',5,28,40,60,14)];
+ default:return []}}
+const newSlide=l=>({lay:l,items:layItems(l),bg:null,tr:{t:'بلا',d:1},note:''});
+const PH={title:'انقر لإضافة عنوان',sub:'انقر لإضافة عنوان فرعي',body:'انقر لإضافة نص',tx:'اكتب هنا'};
+const ANIMS=['ظهور','تلاشي','طيران للداخل','تكبير','ارتداد','دوران'];
+const ANCLS={'ظهور':'a-app','تلاشي':'a-fade','طيران للداخل':'a-fly','تكبير':'a-zoom','ارتداد':'a-bounce','دوران':'a-spin'};
+const TRANS=['بلا','تلاشي','دفع','مسح','تكبير/تصغير','مكعب','عشوائي'];
+const TRCLS={'تلاشي':'t-fade','دفع':'t-push','مسح':'t-wipe','تكبير/تصغير':'t-zoom','مكعب':'t-cube'};
+
+/* رسم الشريحة: live=true للتحرير */
+function smartHTML(sm,live){const ed=live?' contenteditable="true"':'';
+ const node=(n,p)=>'<div class="sn'+(sm.sel===p?' on':'')+'" data-p="'+p+'"><div class="st"'+ed+' data-ph="[نص]">'+esc(n.t)+'</div></div>';
+ if(sm.lay==='cycle'){const all=[];(function w(n,p){all.push([n,p]);(n.k||[]).forEach((c,i)=>w(c,p+'.'+i))})(sm.root,'0');
+  const R=all.slice(1),c=R.length||1;return '<div class="smc">'+'<div class="smcc">'+node(sm.root,'0')+'</div>'+R.map(([n,p],i)=>{const a=-Math.PI/2+i*2*Math.PI/c;return '<div class="smco" style="left:'+(50+38*Math.cos(a))+'%;top:'+(50+38*Math.sin(a))+'%">'+node(n,p)+'</div>'}).join('')+'</div>'}
+ if(sm.lay==='list'){const all=[];(function w(n,p){all.push([n,p]);(n.k||[]).forEach((c,i)=>w(c,p+'.'+i))})(sm.root,'0');return '<div class="sml">'+all.map(([n,p])=>node(n,p)).join('')+'</div>'}
+ const tree=(n,p)=>'<div class="smt">'+node(n,p)+((n.k&&n.k.length)?'<div class="smk">'+n.k.map((c,i)=>tree(c,p+'.'+i)).join('')+'</div>':'')+'</div>';
+ return '<div class="smh">'+tree(sm.root,'0')+'</div>'}
+function itemHTML(it,live,idx){const f=it.f||{};let st='left:'+it.x+'%;top:'+it.y+'%;width:'+it.w+'%;height:'+it.h+'%;';
+ const ts='font-size:calc('+(f.sz||18)+' * .14cqw);text-align:'+(f.al||'right')+';'+(f.b?'font-weight:800;':'font-weight:400;')+(f.i?'font-style:italic;':'')+'text-decoration:'+([f.u?'underline':'',f.s?'line-through':''].join(' ').trim()||'none')+(f.s2?' ;text-decoration-style:double':'')+';'+(f.c?'color:'+f.c+';':'')+(f.font?'font-family:'+f.font+',Cairo,sans-serif;':'')+(f.sc?'font-variant:small-caps;':'')+(f.sh?'text-shadow:2px 2px 3px rgba(0,0,0,.35);':'');
+ let inner='';const ed=live?' contenteditable="true"':'';
+ if(['title','sub','body','tx'].includes(it.k)){const txt=f.sup?'<sup>'+esc(it.t)+'</sup>':f.sub2?'<sub>'+esc(it.t)+'</sub>':esc(it.t);
+  inner='<div class="tx'+(it.k==='body'?' bl':'')+'"'+ed+' data-ph="'+PH[it.k]+'" style="'+ts+'">'+(it.k==='body'&&it.t?it.t.split('\n').map(l=>'<div>'+esc(l)+'</div>').join(''):txt)+'</div>';
+  if(live&&it.k==='body'&&!it.t)inner+='<div class="phi">'+(it.ph==='pic'?'<button data-ins="img" title="إدراج صورة">🖼️</button>':'<button data-ins="tbl" title="جدول">▦</button><button data-ins="smart" title="SmartArt">🧩</button><button data-ins="img" title="صورة">🖼️</button><button data-ins="video" title="فيديو">🎬</button>')+'</div>'}
+ else if(it.k==='img')inner=picHTML(it.img);
+ else if(it.k==='video')inner='<div class="vid"><div class="vs">'+PICS[6][0]+'<b class="vm">🐦</b></div><div class="vb">▶︎ آثار شحات في ليبيا · 0:12</div></div>';
+ else if(it.k==='smart')inner=smartHTML(it.sm,live);
+ else if(it.k==='tbl')inner='<table class="tb" style="font-size:calc('+(f.sz||16)+' * .14cqw)">'+it.tb.map((r,i)=>'<tr>'+r.map((c,j)=>'<td'+ed+' data-r="'+i+'" data-c="'+j+'">'+esc(c)+'</td>').join('')+'</tr>').join('')+'</table>';
+ return '<div class="it k-'+it.k+'" data-i="'+idx+'" style="'+st+'">'+inner+'</div>'}
+function renderSlide(el,sl,theme,live){const th=THEMES[theme||0];const bg=sl.bg?sl.bg.c:th.bg;
+ el.style.background=(th.deco&&!(sl.bg&&sl.bg.c)?th.deco+',':'')+bg;el.style.color=th.fg;el.style.setProperty('--ac',th.ac);
+ el.innerHTML=sl.items.map((it,i)=>itemHTML(it,live,i)).join('')}
+
+/* VFS مشترك */
+let VFS;try{VFS=JSON.parse(localStorage.getItem('c7vfs'))}catch(e){}VFS=VFS||{'المستندات':[],'سطح المكتب':[],'الصور':[]};
+const saveVFS=()=>{try{localStorage.setItem('c7vfs',JSON.stringify(VFS))}catch(e){}};
+
+/* ================== المحاكي ================== */
+let PP_ACTIVE=null;
+function PPT(host,o){o=o||{};const S={slides:o.slides?clone(o.slides):[newSlide('title')],cur:0,sel:-1,theme:o.theme||0,name:'عرض تقديمي1',saved:false,dirty:false,open:true,tab:o.tab||'home',view:'normal',clip:null,hist:[],file:null};
+ const W=document.createElement('div');W.className='pw';host.innerHTML='';host.appendChild(W);
+ const api={S,W,emit,ok:o.ok||(()=>{}),render};
+ const TABS=[['file','ملف'],['home','الشريط الرئيسي'],['ins','إدراج'],['des','تصميم'],['tr','انتقالات'],['an','حركات'],['show','عرض الشرائح']].filter(t=>!o.tabs||o.tabs.includes(t[0])||t[0]==='file');
+ function emit(t,d){(o.on||(()=>{}))(t,d||{},S,api)}
+ function snap(){S.hist.push(JSON.stringify([S.slides,S.theme]));if(S.hist.length>40)S.hist.shift();S.dirty=true;S.saved=false}
+ const sl=()=>S.slides[S.cur],it=()=>sl()&&sl().items[S.sel];
+ function tbtn(lbl,ic,act,on){return '<button class="rb'+(on?' on':'')+'" data-a="'+act+'"><span>'+ic+'</span>'+lbl+'</button>'}
+ function ribbon(){const f=(it()&&it().f)||{};const smart=it()&&it().k==='smart';
+  if(S.tab==='home')return tbtn('شريحة جديدة','➕','newsl')+tbtn('تخطيط','▤','lay')+'<span class="sep"></span>'+
+   '<select data-a="font" title="نوع الخط">'+['Cairo','Arial','Times New Roman','Tahoma','Courier New'].map(x=>'<option'+(f.font===x?' selected':'')+'>'+x+'</option>').join('')+'</select>'+
+   '<select data-a="size" title="حجم الخط">'+[10,12,14,16,18,20,24,28,32,36,40,44,48,54,60,66,72].map(x=>'<option'+(+f.sz===x?' selected':'')+'>'+x+'</option>').join('')+'</select>'+
+   tbtn('','A⁺','grow')+tbtn('','A⁻','shrink')+'<span class="sep"></span>'+tbtn('','<b>B</b>','b',f.b)+tbtn('','<i style="font-family:serif">I</i>','i',f.i)+tbtn('','<u>U</u>','u',f.u)+tbtn('','<s>S</s>','s',f.s)+tbtn('','<span style="text-shadow:1px 1px 1px #888">S</span>','sh',f.sh)+
+   '<span class="sep"></span><span class="sw">'+['#000000','#c0392b','#1d4ed8','#15803d','#f59e0b','#7e22ce','#ffffff'].map(c=>'<button data-a="col" data-v="'+c+'" style="background:'+c+'" title="لون الخط"></button>').join('')+'</span>'+
+   '<span class="sep"></span>'+tbtn('','⫸','al-right',f.al==='right')+tbtn('','☰','al-center',f.al==='center')+tbtn('','⫷','al-left',f.al==='left')+tbtn('','≣','al-justify',f.al==='justify')+'<span class="sep"></span>'+tbtn('خط…','🅰️','fontdlg');
+  if(S.tab==='ins')return tbtn('شريحة جديدة','➕','newsl')+tbtn('صور','🖼️','img')+tbtn('فيديو','🎬','video')+tbtn('SmartArt','🧩','smart')+tbtn('جدول','▦','tbl')+tbtn('مربع نص','🔤','tx');
+  if(S.tab==='des')return THEMES.map((t,i)=>'<button class="th'+(S.theme===i?' on':'')+'" data-a="theme" data-v="'+i+'" title="'+t.n+'" style="background:'+(t.deco?t.deco+',':'')+t.bg+';color:'+t.fg+'">أ</button>').join('')+'<span class="sep"></span>'+tbtn('تنسيق الخلفية','🎨','bgpane');
+  if(S.tab==='tr')return TRANS.map(t=>tbtn(t,{'بلا':'⬜','تلاشي':'🌫️','دفع':'⏩','مسح':'🧽','تكبير/تصغير':'🔍','مكعب':'🧊','عشوائي':'🎲'}[t],'tr:'+t,sl()&&sl().tr.t===t)).join('')+'<span class="sep"></span><label class="rl">⏱ المدة <input type="number" min=".25" max="5" step=".25" data-a="trd" value="'+(sl()?sl().tr.d:1)+'"></label><label class="rl">🔊 <select data-a="trs">'+Object.keys(SND).map(k=>'<option'+(sl()&&sl().tr.s===k?' selected':'')+'>'+k+'</option>').join('')+'</select></label>'+tbtn('تطبيق على الكل','🗂️','trall')+tbtn('معاينة','👁️','trprev');
+  if(S.tab==='an')return (S.sel<0?'<span class="hint">👈 حدّد عنصرًا في الشريحة أولًا (النص أو الصورة…)</span>':ANIMS.map(a=>tbtn(a,{'ظهور':'⭐','تلاشي':'🌫️','طيران للداخل':'🛫','تكبير':'🔍','ارتداد':'🏀','دوران':'🌀'}[a],'an:'+a,it()&&it().an===a)).join('')+tbtn('بلا','✖','an:'))+'<span class="sep"></span><label class="rl">🔊 <select data-a="ans">'+Object.keys(SND).map(k=>'<option'+(it()&&it().as===k?' selected':'')+'>'+k+'</option>').join('')+'</select></label>'+tbtn('جزء الحركة','📋','anpane')+tbtn('معاينة','👁️','anprev');
+  if(S.tab==='show')return tbtn('من البداية','▶️','show0')+tbtn('من الشريحة الحالية','⏯️','showc');
+  if(S.tab==='smart')return '<span class="hint">🧩 '+(smart&&it().sm.sel?'الشكل المحدد: «'+esc(nodeAt(it().sm,it().sm.sel).t||'[نص]')+'»':'اضغط على شكل داخل الرسم أولًا')+'</span>'+tbtn('إضافة شكل بعد','➕↤','sa:after')+tbtn('إضافة شكل قبل','↦➕','sa:before')+tbtn('إضافة شكل أعلى','⬆️','sa:above')+tbtn('إضافة شكل أسفل','⬇️','sa:below')+tbtn('حذف الشكل','🗑️','sa:del')+'<span class="sep"></span>'+tbtn('هرمي','🏢','sl:hier',smart&&it().sm.lay==='hier')+tbtn('دائري','🔄','sl:cycle',smart&&it().sm.lay==='cycle')+tbtn('قائمة','📃','sl:list',smart&&it().sm.lay==='list');
+  return ''}
+ function nodeAt(sm,p){let n=sm.root;p.split('.').slice(1).forEach(i=>n=n.k[+i]);return n}
+ function parentOf(sm,p){const a=p.split('.');a.pop();return a.length?nodeAt(sm,a.join('.')):null}
+ function thumb(i){const d=document.createElement('div');d.className='th1'+(i===S.cur?' on':'');d.innerHTML='<b>'+(i+1)+'</b><div class="sld mini"></div>'+(i===S.cur?'<button class="tm" data-a="ctx" title="خيارات الشريحة">⋮</button>':'');renderSlide(d.querySelector('.sld'),S.slides[i],S.theme,false);d.onclick=e=>{if(e.target.dataset.a==='ctx')return;S.cur=i;S.sel=-1;render();emit('pick',{i})};d.oncontextmenu=e=>{e.preventDefault();S.cur=i;render();ctx()};return d}
+ function render(){const smart=it()&&it().k==='smart';if(S.tab==='smart'&&!smart)S.tab='home';
+  const tabs=TABS.concat(smart?[['smart','تصميم SmartArt']]:[]);
+  W.innerHTML='<div class="ptb" data-part="title"><span class="qa" data-part="qa"><button data-a="save" title="حفظ (Ctrl+S)">💾</button><button data-a="undo" title="تراجع">↶</button></span><span class="pn">'+esc(S.open?S.name:'')+(S.open&&!S.saved&&S.file?' •':'')+' - PowerPoint</span><span class="wb"><button data-a="min">—</button><button data-a="max">▢</button><button class="x" data-a="close">✕</button></span></div>'+
+  '<div class="pmb" data-part="menu">'+tabs.map(([k,n])=>'<button class="'+(S.tab===k&&k!=='file'?'on ':'')+(k==='file'?'fl ':'')+(k==='smart'?'ctxT ':'')+'" data-tab="'+k+'">'+n+'</button>').join('')+'</div>'+
+  '<div class="prb" data-part="tool">'+(S.open?ribbon():'')+'</div>'+
+  (S.open?'<div class="pmain"><div class="pol" data-part="outline"></div><div class="pwa" data-part="work"><div class="sld live"></div></div></div>'+
+  '<div class="pnote" data-part="notes"><div contenteditable="true" data-ph="انقر لإضافة ملاحظات" class="nt">'+esc(sl().note)+'</div></div>':'<div class="pempty">📂 لا يوجد ملف مفتوح<br><small>اضغط «ملف» ثم «جديد» أو «فتح»</small></div>')+
+  '<div class="psb"><span data-part="status">'+(S.open?'شريحة '+(S.cur+1)+' من '+S.slides.length+' &nbsp;|&nbsp; العربية (ليبيا)':'جاهز')+'</span><span class="pvb" data-part="views">'+[['normal','▭','عادي'],['sorter','▦','فارز الشرائح'],['read','📖','القراءة'],['showv','📽️','عرض الشرائح']].map(([k,ic,t])=>'<button data-a="view:'+k+'" title="'+t+'" class="'+(S.view===k?'on':'')+'">'+ic+'</button>').join('')+'</span></div>';
+  if(S.open){const ol=W.querySelector('.pol');S.slides.forEach((_,i)=>ol.appendChild(thumb(i)));
+   const L=W.querySelector('.sld.live');renderSlide(L,sl(),S.theme,true);
+   if(S.sel>=0&&L.children[S.sel]){const e=L.children[S.sel];e.classList.add('sel');e.insertAdjacentHTML('beforeend','<i class="hm" title="اسحب للتحريك">✥</i><i class="hr" title="اسحب لتغيير الحجم"></i><i class="hrot">⟳</i>')}
+   if(S.view==='sorter'){const wa=W.querySelector('.pwa');wa.innerHTML='<div class="sorter"></div>';S.slides.forEach((_,i)=>wa.firstChild.appendChild(thumb(i)));W.querySelector('.pol').style.display='none'}
+   if(S.view==='read'){const wa=W.querySelector('.pwa');W.querySelector('.prb').style.display='none';W.querySelector('.pol').style.display='none';W.querySelector('.pnote').style.display='none';
+    wa.insertAdjacentHTML('beforeend','<div class="rnav"><button data-a="rprev">◀ السابقة</button><button data-a="rnext">التالية ▶</button></div>');W.querySelectorAll('.sld.live [contenteditable]').forEach(x=>x.removeAttribute('contenteditable'))}}
+  W.classList.toggle('closed',!S.open)}
+ /* ---------- القوائم والحوارات ---------- */
+ function dlg(html,cls){const d=document.createElement('div');d.className='pdlg '+(cls||'');d.innerHTML='<div class="pdb">'+html+'</div>';W.appendChild(d);d.onclick=e=>{if(e.target===d)d.remove()};return d}
+ function layMenu(cb,title){const d=dlg('<div class="dh">'+(title||'نُسق Office')+'</div><div class="lays">'+Object.keys(LAYS).map(k=>'<button data-l="'+k+'"><pre>'+LAYICO[k]+'</pre>'+LAYS[k]+'</button>').join('')+'</div>');
+  d.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{d.remove();cb(b.dataset.l)})}
+ function ctx(){const d=dlg('<div class="dh">خيارات الشريحة '+(S.cur+1)+'</div><div class="cm">'+[['cut','✂️ قص'],['copy','📄 نسخ'],['paste','📋 لصق'+(S.clip?'':' (الحافظة فارغة)')],['newsl','➕ شريحة جديدة'],['dup','🗐 تكرار الشريحة'],['del','🗑️ حذف شريحة'],['lay','▤ تخطيط'],['bgpane','🎨 تنسيق الخلفية…'],['up','⬆️ نقل لأعلى'],['down','⬇️ نقل لأسفل']].map(([a,t])=>'<button data-c="'+a+'">'+t+'</button>').join('')+'</div>','ctxm');
+  d.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{d.remove();act(b.dataset.c)})}
+ function bgPane(){const s=sl();const d=dlg('<div class="dh">تنسيق الخلفية</div><div style="font-weight:800">◉ تعبئة خالصة · اللون:</div><div class="sw big">'+['#ffffff','#fde68a','#bbf7d0','#bfdbfe','#fbcfe8','#ddd6fe','#fecaca','#1e293b','#14532d','#7c2d12'].map(c=>'<button data-c="'+c+'" style="background:'+c+'"></button>').join('')+'</div><label class="rl">الشفافية <input type="range" min="0" max="90" value="0" id="bgT"> <b id="bgTv">0%</b></label><div class="btns"><button class="btn" data-k="all">🗂️ تطبيق على الكل</button><button class="btn" data-k="reset">↺ إعادة تعيين الخلفية</button><button class="btn main" data-k="ok">إغلاق</button></div>');
+  let col=s.bg?s.bg.c0||'#ffffff':'#ffffff';const T0=d.querySelector('#bgT');
+  const mix=()=>{const t=+T0.value/100;const h=col.replace('#','');const r=parseInt(h.substr(0,2),16),g=parseInt(h.substr(2,2),16),b=parseInt(h.substr(4,2),16);const m=v=>Math.round(v+(255-v)*t);return 'rgb('+m(r)+','+m(g)+','+m(b)+')'};
+  const ap=()=>{snap();sl().bg={c:mix(),c0:col};render();W.appendChild(d);emit('bg',{c:col})};
+  d.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{col=b.dataset.c;ap()});T0.oninput=()=>{d.querySelector('#bgTv').textContent=T0.value+'%';ap()};
+  d.querySelector('[data-k=all]').onclick=()=>{snap();const bg=sl().bg;S.slides.forEach(x=>x.bg=bg?clone(bg):null);render();W.appendChild(d);emit('bgall')};
+  d.querySelector('[data-k=reset]').onclick=()=>{snap();sl().bg=null;render();W.appendChild(d)};d.querySelector('[data-k=ok]').onclick=()=>d.remove()}
+ function fontDlg(){const x=it();if(!x||!x.f){msg('حدّد مربع النص أولًا 👆');return}const f=x.f;
+  const d=dlg('<div class="dh">خط</div><div class="fg"><label>خط النص اللاتيني<select id="fdL">'+['+العنوان','Arial','Times New Roman','Courier New'].map(v=>'<option>'+v+'</option>').join('')+'</select></label><label>خط النص العربي<select id="fdA">'+['Cairo','Tahoma','Arial','Times New Roman'].map(v=>'<option'+(f.font===v?' selected':'')+'>'+v+'</option>').join('')+'</select></label>'+
+  '<label>نمط الخط<select id="fdS"><option>عادي</option><option'+(f.b&&!f.i?' selected':'')+'>غامق</option><option'+(f.i&&!f.b?' selected':'')+'>مائل</option><option'+(f.b&&f.i?' selected':'')+'>غامق مائل</option></select></label><label>الحجم<input type="number" id="fdZ" min="8" max="96" value="'+f.sz+'"></label>'+
+  '<label>لون الخط<input type="color" id="fdC" value="'+(f.c&&f.c[0]==='#'?f.c:'#000000')+'"></label></div><div style="font-weight:800;margin-top:6px">تأثيرات</div><div class="fx2">'+[['s','يتوسطه خط'],['s2','يتوسطه خط مزدوج'],['sup','مرتفع'],['sub2','منخفض'],['sc','أحرف استهلالية صغيرة'],['sh','ظل']].map(([k,t])=>'<label><input type="checkbox" data-e="'+k+'"'+(f[k]?' checked':'')+'> '+t+'</label>').join('')+'</div>'+
+  '<div class="fprev" id="fdP">نموذج: حوسبة التعليم AaBb</div><div class="btns"><button class="btn main" data-k="ok">موافق</button><button class="btn" data-k="no">إلغاء الأمر</button></div>','fdl');
+  const P=d.querySelector('#fdP');const read=()=>{const s=d.querySelector('#fdS').value;const n={font:d.querySelector('#fdA').value,b:/غامق/.test(s),i:/مائل/.test(s),sz:+d.querySelector('#fdZ').value||f.sz,c:d.querySelector('#fdC').value};d.querySelectorAll('[data-e]').forEach(c=>n[c.dataset.e]=c.checked);if(n.s2)n.s=true;return n};
+  const pv=()=>{const n=read();P.style.cssText='font-family:'+n.font+';font-weight:'+(n.b?800:400)+';font-style:'+(n.i?'italic':'normal')+';color:'+n.c+';text-decoration:'+(n.s?'line-through':'none')+(n.s2?' double':'')+';font-variant:'+(n.sc?'small-caps':'normal')+';text-shadow:'+(n.sh?'2px 2px 3px #999':'none')+';vertical-align:'+(n.sup?'super':n.sub2?'sub':'baseline')};
+  d.querySelectorAll('select,input').forEach(e=>e.oninput=e.onchange=pv);pv();
+  d.querySelector('[data-k=no]').onclick=()=>d.remove();
+  d.querySelector('[data-k=ok]').onclick=()=>{snap();const n=read();Object.assign(x.f,n);if(!n.s2&&!n.s)x.f.s=false;d.remove();render();emit('fontdlg',n);emit('fmt',{p:'dlg'})}}
+ function msg(t){const m=document.createElement('div');m.className='ptoast';m.innerHTML=t;W.appendChild(m);setTimeout(()=>m.remove(),2200)}
+ /* ----- الملف (Backstage) ----- */
+ function backstage(page){const d=dlg('','bs');const side=[['info','⬅️ رجوع'],['new','🗋 جديد'],['open','📂 فتح'],['save','💾 حفظ'],['saveas','💾 حفظ باسم'],['print','🖨️ طباعة'],['share','📤 مشاركة العرض'],['close','✖ إغلاق']];
+  d.firstChild.innerHTML='<div class="bss">'+side.map(([k,t])=>'<button data-b="'+k+'" class="'+(page===k?'on':'')+'">'+t+'</button>').join('')+'</div><div class="bsm"></div>';
+  const M=d.querySelector('.bsm');d.querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{const k=b.dataset.b;if(k==='info'){d.remove();return}if(k==='save'){d.remove();doSave();return}if(k==='close'){d.remove();doClose();return}if(k==='share'){if(!S.open){msg('لا يوجد ملف مفتوح');return}d.remove();exportDeck();return}if(!S.open&&(k==='saveas'||k==='print')){msg('لا يوجد ملف مفتوح');return}d.remove();backstage(k)});
+  if(page==='new'){M.innerHTML='<h4>جديد</h4><div class="tpl">'+THEMES.map((t,i)=>'<button data-t="'+i+'"><div class="sld mini" style="background:'+(t.deco?t.deco+',':'')+t.bg+';color:'+t.fg+'"><div style="position:absolute;inset:30% 10%;text-align:center;font-size:7cqw;font-weight:800">'+(i?t.n:'')+'</div></div>'+(i?t.n:'عرض تقديمي فارغ')+'</button>').join('')+'</div>';
+   M.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{const go2=()=>{S.slides=[newSlide('title')];S.theme=+b.dataset.t;S.cur=0;S.sel=-1;S.open=true;S.saved=false;S.dirty=false;S.file=null;S.name='عرض تقديمي'+(1+Math.floor(Math.random()*8));S.hist=[];S.view='normal';d.remove();render();emit('new',{theme:S.theme})};
+    if(S.open&&S.dirty&&!S.saved){d.remove();askSave(go2)}else go2()})}
+  if(page==='open'){const all=[];Object.keys(VFS).forEach(f=>VFS[f].forEach(x=>all.push([f,x])));M.innerHTML='<h4>فتح</h4><div class="fdlg"><div class="loc">📁 المستندات · سطح المكتب · الصور</div>'+(all.length?all.map(([f,x],i)=>'<button class="fi" data-o="'+i+'">📊 '+esc(x.name)+'.pptx <small>'+f+'</small></button>').join(''):'<div class="hint">لا توجد ملفات محفوظة بعد. احفظ عرضًا أولًا 💾</div>')+'</div>';
+   M.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{const [f,x]=all[+b.dataset.o];const go2=()=>{const D=JSON.parse(x.data);S.slides=D.slides;S.theme=D.theme;S.cur=0;S.sel=-1;S.open=true;S.name=x.name;S.file={f,name:x.name};S.saved=true;S.dirty=false;S.hist=[];d.remove();render();emit('open',{name:x.name,folder:f})};if(S.open&&S.dirty&&!S.saved){d.remove();askSave(go2)}else go2()})}
+  if(page==='saveas'){d.remove();saveAs();return}
+  if(page==='print'){printPage(M)}}
+ function store(f,name){const data=JSON.stringify({slides:S.slides,theme:S.theme});const L=VFS[f];const e=L.find(x=>x.name===name);if(e)e.data=data;else L.push({name,data});saveVFS();S.file={f,name};S.name=name;S.saved=true;S.dirty=false}
+ function saveAs(after){const d=dlg('<div class="dh">💾 حفظ باسم</div><div class="sav"><div class="locs">'+Object.keys(VFS).map((f,i)=>'<button data-f="'+f+'" class="'+(i===0?'on':'')+'">'+(f==='المستندات'?'📄':f==='الصور'?'🖼️':'🖥️')+' '+f+'</button>').join('')+'</div><div class="flist"></div></div><label class="rl" style="display:flex">اسم الملف: <input id="svN" value="'+esc(S.file?S.file.name:S.name)+'" style="flex:1"></label><div style="font-size:.8rem;color:#666">حفظ بنوع: PowerPoint Presentation (.pptx)</div><div class="btns"><button class="btn main" data-k="ok">حفظ</button><button class="btn" data-k="no">إلغاء الأمر</button></div>');
+  let fo='المستندات';const FL=d.querySelector('.flist');const lst=()=>{FL.innerHTML=VFS[fo].length?VFS[fo].map(x=>'<div>📊 '+esc(x.name)+'.pptx</div>').join(''):'<div style="color:#999">(المجلد فارغ)</div>'};lst();
+  d.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{d.querySelectorAll('[data-f]').forEach(y=>y.classList.remove('on'));b.classList.add('on');fo=b.dataset.f;lst()});
+  d.querySelector('[data-k=no]').onclick=()=>{d.remove();emit('savecancel')};
+  d.querySelector('[data-k=ok]').onclick=()=>{const n=d.querySelector('#svN').value.trim().replace(/\.pptx$/,'');if(!n){shake(d.firstChild);return}store(fo,n);d.remove();render();msg('✅ تم الحفظ: '+esc(n)+'.pptx في «'+fo+'»');emit('saveas',{name:n,folder:fo});after&&after()}}
+ function doSave(how){if(!S.open)return;if(!S.file){saveAs();return}store(S.file.f,S.file.name);render();msg('💾 تم حفظ التغييرات');emit('save',{how:how||'menu',name:S.file.name})}
+ function askSave(next){const d=dlg('<div class="dh" style="color:#c0392b">هل تريد حفظ التغييرات التي أجريتها على هذا الملف؟</div><div style="font-size:.85rem">اسم الملف: <b>'+esc(S.file?S.file.name:S.name)+'.pptx</b></div><div class="btns"><button class="btn main" data-k="s" style="background:#c0392b;border-color:#c0392b">حفظ</button><button class="btn" data-k="n">عدم الحفظ</button><button class="btn" data-k="c">إلغاء الأمر</button></div>','ask');
+  d.onclick=null;d.querySelector('[data-k=s]').onclick=()=>{d.remove();if(S.file){store(S.file.f,S.file.name);emit('closeask',{c:'save'});next()}else saveAs(()=>{emit('closeask',{c:'save'});next()})};
+  d.querySelector('[data-k=n]').onclick=()=>{d.remove();emit('closeask',{c:'nosave'});next()};d.querySelector('[data-k=c]').onclick=()=>{d.remove();emit('closeask',{c:'cancel'})}}
+ function doClose(){if(!S.open)return;const fin=()=>{S.open=false;S.sel=-1;render();emit('close')};if(S.dirty&&!S.saved)askSave(fin);else fin()}
+ function printPage(M){let rng='all',per=1,col=true,copies=1,cust='1-2';
+  M.innerHTML='<h4>طباعة</h4><div class="prt"><div class="pset"><button class="btn main" data-k="go" id="pGo">🖨️ طباعة</button> <label class="rl">عدد النسخ <input type="number" id="pC" min="1" max="5" value="1" style="width:50px"></label>'+
+  '<label class="rl">الطابعة <select id="pP"><option>HP LaserJet Professional</option><option>EPSON L3210 Series</option><option>Microsoft Print to PDF</option></select></label>'+
+  '<label class="rl">الإعدادات <select id="pR"><option value="all">طباعة كافة الشرائح</option><option value="cur">طباعة الشريحة الحالية</option><option value="cust">نطاق مخصص</option></select></label><label class="rl" id="pCw" style="display:none">الشرائح: <input id="pCu" value="1-2" style="width:70px"></label>'+
+  '<label class="rl">التخطيط <select id="pN">'+[[1,'شريحة في صفحة كاملة'],[2,'شريحتان'],[3,'3 شرائح'],[4,'4 شرائح أفقية'],[6,'6 شرائح أفقية'],[9,'9 شرائح أفقية']].map(([v,t])=>'<option value="'+v+'">'+t+'</option>').join('')+'</select></label>'+
+  '<label class="rl">الترتيب <select id="pO"><option value="1">بترتيب الصفحات 1,2,3 1,2,3</option><option value="0">بدون ترتيب 1,1 2,2 3,3</option></select></label></div><div class="ppv" id="pV"></div></div><div class="pout" id="pOut"></div>';
+  const g=id=>M.querySelector('#'+id);
+  const which=()=>{if(rng==='cur')return [S.cur];if(rng==='cust'){const r=[];cust.split(',').forEach(p=>{const m=p.trim().match(/^(\d+)(?:-(\d+))?$/);if(m){const a=+m[1],b=+(m[2]||m[1]);for(let i=a;i<=b;i++)if(i>=1&&i<=S.slides.length)r.push(i-1)}});return r}return S.slides.map((_,i)=>i)};
+  const pages=()=>{const w=which(),P=[];for(let i=0;i<w.length;i+=per)P.push(w.slice(i,i+per));return P};
+  const pv=()=>{rng=g('pR').value;per=+g('pN').value;col=g('pO').value==='1';copies=+g('pC').value||1;cust=g('pCu').value;g('pCw').style.display=rng==='cust'?'':'none';
+   const P=pages();const V=g('pV');V.innerHTML='<div class="pg" style="--n:'+Math.ceil(Math.sqrt(per))+'"></div><div style="text-align:center;font-size:.8rem">◀ 1 من '+P.length+' ▶</div>';
+   (P[0]||[]).forEach(i=>{const s=document.createElement('div');s.className='sld mini';renderSlide(s,S.slides[i],S.theme,false);V.firstChild.appendChild(s)})};
+  M.querySelectorAll('select,input').forEach(e=>e.oninput=e.onchange=pv);pv();
+  g('pGo').onclick=()=>{const P=pages();if(!P.length){g('pOut').innerHTML='⚠️ النطاق غير صحيح';return}const seq=[];if(col){for(let c=0;c<copies;c++)P.forEach((p,i)=>seq.push(i+1))}else P.forEach((p,i)=>{for(let c=0;c<copies;c++)seq.push(i+1)});
+   g('pOut').innerHTML='<div class="printer">🖨️<div class="paper"></div></div><div>تخرج الأوراق بهذا الترتيب: <b dir="ltr">'+seq.join(', ')+'</b></div>';tone(300,.6,'square',.04);
+   emit('print',{rng,per,col,copies,pages:P.length,printer:g('pP').value})}}
+ /* ----- مشاركة العرض كملف ----- */
+ function exportDeck(){const css=[...document.querySelectorAll('style')].map(x=>x.textContent).filter(t=>t.includes('.sld{')).join('\n');
+  const tmp=document.createElement('div');const sl=S.slides.map(x=>{const e=document.createElement('div');e.className='sld';renderSlide(e,x,S.theme,false);tmp.appendChild(e);return e.outerHTML});
+  const nm=S.file?S.file.name:S.name;
+  const html='<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(nm)+'</title><style>'+css+'\nbody{margin:0;background:#111;font-family:Cairo,Tahoma,sans-serif;color:#fff}.dk{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:10px;box-sizing:border-box}.dk .sld{width:min(96vw,170vh);display:none;box-shadow:0 4px 30px #000}.dk .sld.on{display:block;animation:t-fade .6s}.nv{display:flex;gap:10px;align-items:center}.nv button{font:inherit;font-weight:800;border:none;border-radius:10px;padding:8px 16px;cursor:pointer}.ft{opacity:.7;font-size:.85rem}</style></head><body><div class="dk">'+sl.join('')+
+   '<div class="nv"><button id="pv">▶ السابقة</button><b id="cn"></b><button id="nx">التالية ◀</button></div><div class="ft">'+esc(nm)+' · صُنع في محاكي «الكتاب الحي» 📗</div></div><script>var i=0,L=document.querySelectorAll(".dk .sld");function sh(){L.forEach(function(e,j){e.classList.toggle("on",j===i)});document.getElementById("cn").textContent=(i+1)+" / "+L.length}document.getElementById("nx").onclick=function(){if(i<L.length-1)i++;sh()};document.getElementById("pv").onclick=function(){if(i>0)i--;sh()};L.forEach(function(e){e.onclick=function(){if(i<L.length-1)i++;sh()}});sh()<\/script><\/body><\/html>';
+  const f=new File([html],nm+'.html',{type:'text/html'});emit('share');
+  if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],text:'شوف العرض التقديمي اللي صممته: '+nm+' 📊'}).catch(()=>{});return}
+  const u=URL.createObjectURL(f);dlg('<div class="dh">📤 مشاركة العرض</div><div style="font-size:12px">تم تجهيز عرضك كملف يفتح في أي متصفح. احفظه ثم أرسله لأهلك أو لمعلمك 👇</div><div class="btns"><a class="btn main" download="'+esc(nm)+'.html" href="'+u+'" style="text-decoration:none">⬇️ حفظ الملف</a></div>')}
+ /* ----- عرض الشرائح ----- */
+ function slideshow(from){const ov=document.createElement('div');ov.className='pshow';ov.innerHTML='<div class="psw"><div class="sld show"></div></div><button class="psx">✕ إنهاء العرض</button><div class="psh">اضغط على الشاشة للمتابعة ⏩</div>';document.body.appendChild(ov);
+  let i=from,q=[];const box=ov.querySelector('.sld');
+  const show=(k,first)=>{const s=S.slides[k];renderSlide(box,s,S.theme,false);q=[];[...box.children].forEach((e,j)=>{const a=s.items[j].an;if(a){e.style.visibility='hidden';q.push([e,a,s.items[j].as])}});
+   let t=s.tr.t;if(t==='عشوائي')t=pick(TRANS.slice(1,6));const c=TRCLS[t];box.className='sld show';if(c&&!first||c&&first){void box.offsetWidth;box.style.animationDuration=(s.tr.d||1)+'s';box.classList.add(c)}const snd=SND[s.tr.s];snd&&snd()};
+  const next=()=>{if(q.length){const [e,a,snd]=q.shift();e.style.visibility='visible';e.classList.add(ANCLS[a]);const f=SND[snd];f&&f();return}i++;if(i>=S.slides.length){ov.querySelector('.psw').innerHTML='<div class="pend">انتهى عرض الشرائح. اضغط للخروج.</div>';ov.onclick=()=>ov.remove();return}show(i)};
+  show(i,true);ov.onclick=e=>{if(e.target.classList.contains('psx')){ov.remove();return}next()};emit('show',{from})}
+ function previewAnim(){const L=W.querySelector('.sld.live');sl().items.forEach((x,j)=>{if(x.an){const e=L.children[j];e.classList.remove(ANCLS[x.an]);void e.offsetWidth;e.classList.add(ANCLS[x.an]);const f=SND[x.as];f&&f()}})}
+ function previewTr(){const L=W.querySelector('.sld.live');const c=TRCLS[sl().tr.t==='عشوائي'?'تلاشي':sl().tr.t];if(!c)return;L.style.animationDuration=sl().tr.d+'s';L.classList.remove(c);void L.offsetWidth;L.classList.add(c);const f=SND[sl().tr.s];f&&f()}
+ /* ----- إدراج ----- */
+ function addItem(x){snap();sl().items.push(x);S.sel=sl().items.length-1;render()}
+ function body(){const s=sl();let j=s.items.findIndex((x,i)=>x.k==='body'&&!x.t&&(S.sel<0||i===S.sel||true));return j}
+ function insert(kind,j){const s=sl();const slot=(j!=null&&j>=0)?j:body();const box=slot>=0?s.items[slot]:{x:20,y:24,w:60,h:66};
+  const mk=x=>{snap();x.x=box.x;x.y=box.y;x.w=box.w;x.h=box.h;if(slot>=0)s.items[slot]=x;else s.items.push(x);S.sel=slot>=0?slot:s.items.length-1;render()};
+  if(kind==='img'){const d=dlg('<div class="dh">🖼️ إدراج صورة · 📁 الصور</div><div class="gal">'+PICS.map((p,i)=>'<button data-g="'+i+'">'+picHTML(i,false)+'<small>0'+(i+1)+' '+p[1]+'</small></button>').join('')+'</div><label class="rl">اسم الملف: <b id="gN">—</b></label><div class="btns"><button class="btn main" data-k="ok">إدراج ▾</button><button class="btn" data-k="no">إلغاء الأمر</button></div>');let g=-1;
+   d.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{d.querySelectorAll('[data-g]').forEach(y=>y.classList.remove('on'));b.classList.add('on');g=+b.dataset.g;d.querySelector('#gN').textContent='0'+(g+1)});
+   d.querySelector('[data-k=no]').onclick=()=>d.remove();d.querySelector('[data-k=ok]').onclick=()=>{if(g<0){shake(d.firstChild);return}d.remove();mk({k:'img',img:g,f:{}});emit('img',{g})};return}
+  if(kind==='video'){const d=dlg('<div class="dh">🎬 إدراج فيديو · 📁 ملفات الفيديو</div><div class="gal"><button data-v="1"><div class="vid sm"><div class="vs">🏺</div></div><small>آثار شحات في ليبيا</small></button><button data-v="0"><div style="font-size:2.4rem">📁</div><small>اللقطات</small></button></div><div class="btns"><button class="btn main" data-k="ok">إدراج ▾</button><button class="btn" data-k="no">إلغاء الأمر</button></div>');let v=0;
+   d.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{if(b.dataset.v==='0'){msg('المجلد فارغ 📂');return}b.classList.add('on');v=1});d.querySelector('[data-k=no]').onclick=()=>d.remove();
+   d.querySelector('[data-k=ok]').onclick=()=>{if(!v){shake(d.firstChild);return}d.remove();mk({k:'video',f:{}});emit('video')};return}
+  if(kind==='smart'){const d=dlg('<div class="dh">🧩 اختيار رسم SmartArt</div><div class="lays">'+[['hier','🏢','هيكلي (مخطط هيكلي)'],['cycle','🔄','دورة (دائري)'],['list','📃','قائمة']].map(([k,i,t])=>'<button data-s="'+k+'"><pre>'+i+'</pre>'+t+'</button>').join('')+'</div><div class="btns"><button class="btn" data-k="no">إلغاء الأمر</button></div>');
+   d.querySelector('[data-k=no]').onclick=()=>d.remove();d.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{d.remove();const lay=b.dataset.s;mk({k:'smart',f:{},sm:{lay,sel:'',root:{t:'',k:lay==='hier'?[{t:'',k:[{t:''},{t:''},{t:''}]}]:[{t:''},{t:''},{t:''}]}}});S.tab='smart';render();emit('smart',{lay})});return}
+  if(kind==='tbl'){const d=dlg('<div class="dh">▦ إدراج جدول</div><label class="rl">عدد الأعمدة <input type="number" id="tC" value="3" min="1" max="6"></label><label class="rl">عدد الصفوف <input type="number" id="tR" value="3" min="1" max="8"></label><div class="btns"><button class="btn main" data-k="ok">موافق</button><button class="btn" data-k="no">إلغاء الأمر</button></div>');
+   d.querySelector('[data-k=no]').onclick=()=>d.remove();d.querySelector('[data-k=ok]').onclick=()=>{const c=Math.min(6,+d.querySelector('#tC').value||3),r=Math.min(8,+d.querySelector('#tR').value||3);d.remove();mk({k:'tbl',f:{sz:16},tb:Array.from({length:r},()=>Array(c).fill(''))});emit('tbl',{r,c})};return}
+  if(kind==='tx'){addItem(TI('tx',30,40,40,14,20,'center'));emit('tx')}}
+ /* ----- تنفيذ الأوامر ----- */
+ function fmt(fn,p,v){const x=it();if(!x||!x.f||!['title','sub','body','tx','tbl'].includes(x.k)){msg('حدّد مربع نص أولًا 👆 (اضغط عليه)');shake(W.querySelector('.pwa')||W);return}snap();fn(x.f);render();emit('fmt',{p,v,f:x.f,k:x.k})}
+ function act(a,el){
+  if(a==='newsl'){layMenu(l=>{snap();S.slides.splice(S.cur+1,0,newSlide(l));S.cur++;S.sel=-1;render();emit('newsl',{lay:l})},'شريحة جديدة ▾ نُسق Office');return}
+  if(a==='lay'){layMenu(l=>{snap();const s=sl();const old=s.items.filter(x=>x.t||!['title','sub','body'].includes(x.k));const nw=layItems(l);
+   old.forEach(o2=>{const j=nw.findIndex(n=>n.k===o2.k&&!n.used);if(j>=0&&['title','sub','body'].includes(o2.k)){nw[j].t=o2.t;nw[j].f=o2.f;nw[j].used=1}else nw.push(o2)});nw.forEach(n=>delete n.used);s.items=nw;s.lay=l;S.sel=-1;render();emit('lay',{lay:l})},'تخطيط');return}
+  if(a==='font')return fmt(f=>f.font=el.value,'font',el.value);
+  if(a==='size')return fmt(f=>f.sz=+el.value,'size',+el.value);
+  if(a==='grow')return fmt(f=>f.sz=Math.min(96,f.sz+4),'size');if(a==='shrink')return fmt(f=>f.sz=Math.max(8,f.sz-4),'size');
+  if(['b','i','u','s','sh'].includes(a))return fmt(f=>f[a]=!f[a],a);
+  if(a==='col')return fmt(f=>f.c=el.dataset.v,'col',el.dataset.v);
+  if(a.startsWith('al-'))return fmt(f=>f.al=a.slice(3),'al',a.slice(3));
+  if(a==='fontdlg')return fontDlg();
+  if(['img','video','smart','tbl','tx'].includes(a))return insert(a);
+  if(a==='theme'){snap();S.theme=+el.dataset.v;S.slides.forEach(s=>{if(s.bg)s.bg=null});render();emit('theme',{t:S.theme});return}
+  if(a==='bgpane')return bgPane();
+  if(a.startsWith('tr:')){snap();sl().tr.t=a.slice(3);render();previewTr();emit('tr',{t:a.slice(3)});return}
+  if(a==='trall'){snap();const t=clone(sl().tr);S.slides.forEach(s=>s.tr=clone(t));render();msg('🗂️ طُبّق «'+t.t+'» على كل الشرائح');emit('trall',{t:t.t});return}
+  if(a==='trprev')return previewTr();
+  if(a.startsWith('an:')){if(S.sel<0)return;snap();it().an=a.slice(3)||null;render();previewAnim();emit('an',{a:a.slice(3),k:it().k});return}
+  if(a==='anprev')return previewAnim();
+  if(a==='anpane'){const L=[];S.slides.forEach((s,k)=>s.items.forEach(x=>{if(x.an)L.push('شريحة '+(k+1)+': '+({title:'العنوان',sub:'العنوان الفرعي',body:'المحتوى',img:'صورة',video:'فيديو',smart:'SmartArt',tbl:'جدول',tx:'مربع نص'}[x.k])+' ← '+x.an+(x.as&&x.as!=='[بلا صوت]'?' 🔊'+x.as:''))}));dlg('<div class="dh">📋 جزء الحركة</div>'+(L.length?'<ol>'+L.map(x=>'<li>'+x+'</li>').join('')+'</ol>':'<div class="hint">لا توجد حركات بعد</div>')+'<div class="hint">كل حركة تبدأ «عند النقر بالماوس»</div>');return}
+  if(a==='show0')return slideshow(0);if(a==='showc')return slideshow(S.cur);
+  if(a.startsWith('sa:')||a.startsWith('sl:'))return smartAct(a);
+  if(a==='save')return doSave('qa');if(a==='close')return doClose();if(a==='undo'){if(!S.hist.length){msg('لا يوجد ما يمكن التراجع عنه');return}const [s,t]=JSON.parse(S.hist.pop());S.slides=s;S.theme=t;S.cur=Math.min(S.cur,s.length-1);S.sel=-1;render();emit('undo');return}
+  if(a==='min'||a==='max'){msg(a==='min'?'تصغير النافذة (في المحاكي تبقى ظاهرة 😉)':'تكبير النافذة');return}
+  if(a.startsWith('view:')){const v=a.slice(5);if(v==='showv'){slideshow(S.cur);emit('view',{v});return}S.view=v;S.sel=-1;render();emit('view',{v});return}
+  if(a==='rprev'||a==='rnext'){S.cur=Math.max(0,Math.min(S.slides.length-1,S.cur+(a==='rnext'?1:-1)));render();return}
+  if(a==='ctx')return ctx();
+  if(a==='copy'||a==='cut'){S.clip=clone(sl());if(a==='cut'){if(S.slides.length<2){msg('لا يمكن قص الشريحة الوحيدة');return}snap();S.slides.splice(S.cur,1);S.cur=Math.max(0,S.cur-1)}render();msg(a==='copy'?'📄 نُسخت الشريحة '+(S.cur+1):'✂️ قُصّت الشريحة');emit(a);return}
+  if(a==='paste'){if(!S.clip){msg('الحافظة فارغة — انسخ شريحة أولًا');return}snap();S.slides.splice(S.cur+1,0,clone(S.clip));S.cur++;S.sel=-1;render();emit('paste',{n:S.slides.length});return}
+  if(a==='dup'){snap();S.slides.splice(S.cur+1,0,clone(sl()));S.cur++;render();emit('dup');return}
+  if(a==='del'){if(S.slides.length<2){msg('لا يمكن حذف الشريحة الوحيدة');return}snap();S.slides.splice(S.cur,1);S.cur=Math.min(S.cur,S.slides.length-1);S.sel=-1;render();emit('del',{n:S.slides.length});return}
+  if(a==='up'||a==='down'){const j=S.cur+(a==='up'?-1:1);if(j<0||j>=S.slides.length)return;snap();[S.slides[S.cur],S.slides[j]]=[S.slides[j],S.slides[S.cur]];S.cur=j;render();emit('move-slide');return}}
+ function smartAct(a){const x=it();if(!x||x.k!=='smart')return;const sm=x.sm;
+  if(a.startsWith('sl:')){snap();sm.lay=a.slice(3);render();emit('smartlay',{lay:sm.lay});return}
+  if(!sm.sel){msg('اضغط على شكل داخل الرسم أولًا 👆');return}const p=sm.sel,n=nodeAt(sm,p),par=parentOf(sm,p);const op=a.slice(3);snap();
+  if(op==='after'||op==='before'){if(!par){msg('لا يمكن إضافة شكل بجانب الشكل الأعلى');S.hist.pop();return}const i=+p.split('.').pop();par.k.splice(op==='after'?i+1:i,0,{t:''})}
+  else if(op==='below'){n.k=n.k||[];n.k.push({t:''})}
+  else if(op==='above'){if(!par){sm.root={t:'',k:[sm.root]};sm.sel='0'}else{const i=+p.split('.').pop();par.k[i]={t:'',k:[n]}}}
+  else if(op==='del'){if(!par){msg('لا يمكن حذف الشكل الأعلى');S.hist.pop();return}par.k.splice(+p.split('.').pop(),1);sm.sel=''}
+  render();emit('smartop',{op})}
+ /* ----- الأحداث ----- */
+ W.addEventListener('click',e=>{PP_ACTIVE=api;const t=e.target.closest('[data-tab],[data-a],[data-ins],.it,.sn');if(!t){if(e.target.closest('.pwa')&&!e.target.closest('.it')&&S.sel>=0){S.sel=-1;render()}return}
+  if(t.dataset.tab){const k=t.dataset.tab;if(k==='file'){backstage(S.open?'new':'new');emit('filemenu');return}S.tab=k;render();emit('tab',{t:k});return}
+  if(t.dataset.ins){const j=+t.closest('.it').dataset.i;insert(t.dataset.ins,j);return}
+  if(t.dataset.a){if(t.tagName==='SELECT'||t.tagName==='INPUT')return;act(t.dataset.a,t);return}
+  if(t.classList.contains('sn')){const j=+t.closest('.it').dataset.i;const sm=sl().items[j].sm;if(S.sel!==j||sm.sel!==t.dataset.p){S.sel=j;sm.sel=t.dataset.p;S.tab='smart';render();const f=W.querySelector('.sld.live .sn[data-p="'+t.dataset.p+'"] .st');if(f){f.focus();placeEnd(f)}emit('smartsel')}return}
+  if(t.classList.contains('it')&&t.closest('.live')){const j=+t.dataset.i;if(S.sel!==j){S.sel=j;const was=e.target.closest('[contenteditable]');render();emit('select',{k:sl().items[j].k});if(was){const nx=W.querySelector('.sld.live').children[j].querySelector('[contenteditable]');if(nx){nx.focus();placeEnd(nx)}}}}});
+ W.addEventListener('change',e=>{const t=e.target;if(!t.dataset.a)return;if(t.dataset.a==='font'||t.dataset.a==='size')act(t.dataset.a,t);
+  if(t.dataset.a==='trd'){sl().tr.d=+t.value||1;emit('trd',{d:+t.value})}if(t.dataset.a==='trs'){sl().tr.s=t.value;const f=SND[t.value];f&&f();emit('trs',{s:t.value})}
+  if(t.dataset.a==='ans'&&it()){it().as=t.value;const f=SND[t.value];f&&f();emit('ans',{s:t.value})}});
+ W.addEventListener('focusin',e=>{if(e.target.closest('.it'))snapOnce()});let snapped=false;const snapOnce=()=>{if(!snapped){snap();snapped=true;setTimeout(()=>snapped=false,1500)}};
+ W.addEventListener('input',e=>{const t=e.target;S.dirty=true;S.saved=false;const ie=t.closest('.it');
+  if(t.classList.contains('nt')){sl().note=t.innerText;emit('note',{t:t.innerText});return}if(!ie)return;const x=sl().items[+ie.dataset.i];
+  if(t.classList.contains('tx')){x.t=t.innerText.replace(/\n+$/,'').trim();emit('type',{k:x.k,t:x.t});updThumb()}
+  else if(t.classList.contains('st')){nodeAt(x.sm,t.closest('.sn').dataset.p).t=t.innerText.trim();emit('smarttext',{sm:x.sm});updThumb()}
+  else if(t.dataset.r!=null){x.tb[+t.dataset.r][+t.dataset.c]=t.innerText.trim();emit('tbltext',{tb:x.tb});updThumb()}});
+ function updThumb(){const th=W.querySelectorAll('.pol .th1')[S.cur];if(th)renderSlide(th.querySelector('.sld'),sl(),S.theme,false);const pn=W.querySelector('.pn');if(pn&&S.file)pn.textContent=S.name+' • - PowerPoint'}
+ function placeEnd(el){try{const r=document.createRange();r.selectNodeContents(el);r.collapse(false);const s=getSelection();s.removeAllRanges();s.addRange(r)}catch(e){}}
+ /* سحب وتغيير الحجم */
+ W.addEventListener('pointerdown',e=>{const h=e.target.closest('.hm,.hr');if(!h)return;e.preventDefault();const ie=h.closest('.it'),L=ie.parentElement,R=L.getBoundingClientRect(),x=sl().items[+ie.dataset.i];snap();
+  const sx=e.clientX,sy=e.clientY,o0={x:x.x,y:x.y,w:x.w,h:x.h},mv=h.classList.contains('hm');
+  const m=ev=>{const dx=(ev.clientX-sx)/R.width*100,dy=(ev.clientY-sy)/R.height*100;if(mv){x.x=Math.max(-5,Math.min(95,o0.x+dx));x.y=Math.max(-5,Math.min(95,o0.y+dy))}else{x.w=Math.max(8,o0.w-dx);x.x=o0.x+dx;if(x.w===8)x.x=o0.x+o0.w-8;x.h=Math.max(6,o0.h+dy)}ie.style.left=x.x+'%';ie.style.top=x.y+'%';ie.style.width=x.w+'%';ie.style.height=x.h+'%'};
+  const u=()=>{removeEventListener('pointermove',m);removeEventListener('pointerup',u);render();const d=Math.abs(x.x-o0.x)+Math.abs(x.y-o0.y)+Math.abs(x.w-o0.w)+Math.abs(x.h-o0.h);if(d>2)emit(mv?'move':'resize',{k:x.k,dw:x.w-o0.w,dh:x.h-o0.h})};addEventListener('pointermove',m);addEventListener('pointerup',u)});
+ api.save=doSave;api.render=render;api.msg=msg;render();return api}
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&(e.key==='s'||e.key==='S'||e.key==='س')&&PP_ACTIVE&&document.body.contains(PP_ACTIVE.W)&&PP_ACTIVE.W.closest('.page.on')){e.preventDefault();PP_ACTIVE.save('ctrl')}});
+
+/* ---------- لوحة المهام ---------- */
+function Missions(host,list,done){host.innerHTML='<div class="mh">🎯 المهام <b>0/'+list.length+'</b></div><ol class="mis">'+list.map(m=>'<li>'+m[0]+'</li>').join('')+'</ol><div class="fb mfb"></div>';
+ const D=list.map(()=>false),L=[...host.querySelectorAll('li')];let first=list.findIndex(()=>true);const mark=()=>{const n=D.filter(Boolean).length;host.querySelector('.mh b').textContent=n+'/'+list.length;L.forEach((l,i)=>l.classList.toggle('next',!D[i]&&i===D.indexOf(false)))};mark();
+ return {check(t,d,S,api){list.forEach((m,i)=>{if(!D[i]&&m[1](t,d,S,api)){D[i]=true;L[i].classList.add('ok');tone(660,.15);setTimeout(()=>tone(990,.2),100);host.querySelector('.mfb').innerHTML='✅ '+(m[2]||'أحسنت!');mark();if(D.every(Boolean)){host.querySelector('.mfb').innerHTML='🏆 أنجزت كل المهام! أنت محترف عروض تقديمية.';cheer();done&&done()}}})},reset(){D.fill(false);L.forEach(l=>l.classList.remove('ok'));mark();host.querySelector('.mfb').textContent=''}}}
+const allItems=S=>S.slides.flatMap(s=>s.items);
+/* ================= دروس كتاب الحاسوب ================= */
+(function(){const st=document.createElement('style');st.textContent='@keyframes walk{from{right:-15%}to{right:105%}}@keyframes eq{50%{height:6px}}@keyframes drift{from{transform:translateX(0)}to{transform:translateX(-40px)}}@keyframes pop{from{transform:scale(0)}}';document.head.appendChild(st)})();
+const TF=(s,t)=>[s,t?['✔️ صح','❌ خطأ']:['❌ خطأ','✔️ صح']];
+function flipCards(id,arr){const C=$(id);C.innerHTML=arr.map(([ic,t,b])=>'<div class="card"><div class="fr"><span class="big">'+ic+'</span>'+t+'</div><div class="bk"><b>'+t+':</b> '+b+'</div></div>').join('');C.querySelectorAll('.card').forEach(c=>c.onclick=()=>{c.classList.toggle('flip');tone(520,.08)})}
+
+/* ---------- الدرس 1 ---------- */
+(function(){const M=[['📝','نص'],['🖼️','صورة'],['🎞️','رسوم متحركة'],['🔊','صوت'],['🎬','فيديو']];const on=new Set();let mel=null;
+ const B=$('mxB');B.innerHTML=M.map(([i,n],k)=>'<button data-k="'+k+'">'+i+' '+n+'</button>').join('');
+ function draw(){const S=$('mxS');const n=on.size;
+  S.style.background=on.has(1)?'linear-gradient(#fbd786,#f7797d)':'#0f172a';
+  S.innerHTML=(on.has(1)?'<div style="position:absolute;bottom:0;left:10%;font-size:5rem;line-height:1">🏛️</div><div style="position:absolute;bottom:0;right:8%;font-size:3.5rem">🌴</div>':'')+
+   (on.has(0)?'<div style="position:relative;z-index:2;font-weight:800;font-size:1.3rem;text-align:center;text-shadow:0 2px 4px #000">مرحبًا بكم في لبدة الكبرى 🇱🇾</div><div style="position:relative;z-index:2;text-align:center;font-size:.85rem;text-shadow:0 1px 3px #000">أعظم المدن الرومانية على ساحل ليبيا</div>':'')+
+   (on.has(2)?'<div style="position:absolute;bottom:4px;font-size:2.4rem;animation:walk 6s linear infinite">🐪</div><div style="position:absolute;top:30px;font-size:1.6rem;animation:walk 9s linear infinite">☁️</div>':'')+
+   (on.has(3)?'<div style="position:absolute;top:8px;left:8px;display:flex;gap:2px;align-items:flex-end;height:24px">'+[1,2,3,4,5].map(i=>'<i style="width:4px;height:22px;background:#22c55e;animation:eq '+(.3+i*.1)+'s infinite"></i>').join('')+'</div>':'')+
+   (on.has(4)?'<div style="position:absolute;bottom:8px;left:8px;background:#000;border-radius:6px;padding:3px 6px;font-size:.75rem">🎬 فيديو · ⏸ 0:0'+(n)+'</div>':'')+
+   (n?'':'<div style="text-align:center;padding-top:60px;color:#64748b">شاشة فارغة… مملة 😴</div>');
+  $('mxM').style.width=(n*20)+'%';$('mxOut').innerHTML=['','وسيط واحد فقط 🙂','وسيطان… بدأ الاهتمام 👀','ثلاثة وسائط! أصبح العرض ممتعًا 😃','أربعة! المعلومة تصل بسرعة ⚡','🎉 خمسة وسائط معًا = وسائط متعددة تستثير معظم الحواس!'][n];if(n===5)cheer();
+  clearInterval(mel);if(on.has(3)){const N=[523,587,659,698,784,698,659,587];let i=0;mel=setInterval(()=>{if(!$('m1').classList.contains('on')){clearInterval(mel);return}tone(N[i++%8],.25,'triangle',.06)},330)}}
+ B.querySelectorAll('button').forEach(b=>b.onclick=()=>{const k=+b.dataset.k;on.has(k)?on.delete(k):on.add(k);b.classList.toggle('on',on.has(k));draw()});draw();
+ flipCards('chC',[['🧩','التنوع','يمكن استخدام أكثر من وسيط في مشروع واحد بشكل تكاملي وليس مستقلًا، لتحقيق الهدف المنشود.'],['🤝','التفاعل','الفعل ورد الفعل بين المستخدم وما يعرضه الحاسوب؛ كلما زاد التفاعل زادت كفاءة البرنامج ورغبة المستخدم.'],['🎯','التناسب','تُصمَّم لتناسب شخصيات المتلقين وقدراتهم واستعداداتهم وخبراتهم السابقة.'],['🌐','التوافر','إتاحة تخزينها والرجوع إليها عند الحاجة، والاتصال بالإنترنت للحصول على المعلومات.']]);
+ const A=[['🐄','بقرة',[180,.5,'sawtooth']],['🐑','خروف',[420,.4,'square']],['🐱','قطة',[880,.3,'triangle']],['🐶','كلب',[300,.15,'square']],['🐓','ديك',[1000,.5,'sawtooth']]];const seen=new Set();
+ $('itB').innerHTML=A.map(([e,n],i)=>'<button class="btn" style="font-size:1.8rem" data-i="'+i+'">'+e+'</button>').join('');
+ $('itB').querySelectorAll('button').forEach(b=>b.onclick=()=>{const [e,n,s]=A[+b.dataset.i];tone(...s);if(n==='كلب')setTimeout(()=>tone(300,.15,'square'),200);b.style.transform='scale(1.3)';setTimeout(()=>b.style.transform='',300);seen.add(n);$('itOut').innerHTML='فعل: ضغطتَ على '+e+' ← رد فعل: صوت ال'+n+' 🔊'+(seen.size===A.length?' — 🎉 هذا هو التفاعل!':'');if(seen.size===A.length)cheer()});
+ MCQP($('q1'),bank([TF('الوسائط المتعددة هي دمج عدة وسائط مختلفة مثل النص والصور والصوت وغيرها، لتقديم المحتوى بطريقة تفاعلية.',1),TF('تساعد الوسائط المتعددة على سرعة وصول المعلومات لما تحويه من مؤثرات سمعية وبصرية.',1),TF('لا يمكن استخدام أكثر من وسيط واحد في نفس المشروع.',0),TF('تضفي الوسائط المتعددة على المحتوى المعروض المتعة والتشويق.',1),TF('تساعد الوسائط المتعددة على بناء عالم افتراضي شبيه بالواقع لتجريب ما يصعب تجريبه في الواقع.',1),
+  ['خاصية «التفاعل» تعني:',['الفعل ورد الفعل بين المستخدم والحاسوب','استخدام وسيط واحد','تخزين الملفات فقط']],['خاصية تعني أن الوسائط تُصمَّم لتناسب قدرات المتلقين وخبراتهم:',['التناسب','التوافر','التنوع']],['خاصية تعني إتاحة تخزين العروض والرجوع إليها عند الحاجة:',['التوافر','التفاعل','التناسب']],['استخدام أكثر من وسيط في مشروع واحد بشكل تكاملي هو خاصية:',['التنوع','التوافر','التفاعل']]]))})();
+
+/* ---------- الدرس 2 : معمل العناصر ---------- */
+(function(){const E=[['📝','النص'],['🖼️','الصورة الثابتة'],['🎞️','الرسوم المتحركة'],['📊','الرسوم البيانية'],['🔊','الصوت'],['🎬','الفيديو']];let tm=null;
+ $('elT').innerHTML=E.map(([i,n],k)=>'<button data-k="'+k+'">'+i+' '+n+'</button>').join('');
+ const show=k=>{clearInterval(tm);$('elT').querySelectorAll('button').forEach((b,i)=>b.classList.toggle('on',i===k));const H=$('elB');
+  if(k===0){H.innerHTML='<div class="hint">النص: حروف أو أرقام أو رموز، مكوّن رئيسي يدخل بلوحة المفاتيح أو الفأرة أو أي أداة إدخال. يجب أن يكون <b>موجزًا وواضحًا وسهل القراءة</b>.</div><textarea id="txI" rows="3" style="width:100%;box-sizing:border-box;border-radius:10px;border:2px solid var(--line);font-family:inherit;padding:6px">ليبيا بلد جميل</textarea><div class="sl" style="display:flex;gap:8px;justify-content:center;align-items:center;font-weight:800">حجم الخط <input type="range" id="txZ" min="10" max="48" value="24"> <select id="txF"><option>Cairo</option><option>Tahoma</option><option>Times New Roman</option><option>Courier New</option></select></div><div id="txP" style="border:2px dashed var(--line);border-radius:12px;padding:10px;text-align:center;min-height:60px"></div><div class="fb" id="txO"></div>';
+   const u=()=>{const t=$('txI').value,w=t.trim().split(/\s+/).filter(Boolean).length,z=+$('txZ').value;$('txP').style.cssText+='font-size:'+z+'px;font-family:'+$('txF').value;$('txP').textContent=t;$('txO').innerHTML=w>25?'⚠️ النص طويل ('+w+' كلمة)… اجعله موجزًا':z<14?'⚠️ الخط صغير جدًا، يصعب قراءته':'✅ نص موجز وواضح ('+w+' كلمة)'};['txI','txZ','txF'].forEach(i=>$(i).oninput=u);u()}
+  if(k===1){H.innerHTML='<div class="hint">الصور الثابتة: لقطات ساكنة نُدخلها إلى الحاسوب عبر <b>الماسح الضوئي</b> أو <b>الكاميرا</b>.</div><div class="stage" id="ciS" style="background:linear-gradient(#7dd3fc,#fde68a);color:#000;min-height:120px"><div style="font-size:3rem;position:absolute;bottom:0;right:10%">🏰</div><div style="font-size:2rem;position:absolute;top:10px;animation:walk 7s linear infinite">🕊️</div><div style="font-size:2rem;position:absolute;bottom:4px;animation:walk 5s linear infinite">🚗</div></div><div class="btns"><button class="btn main" id="ciC">📷 التقط بالكاميرا</button><button class="btn" id="ciX">🖨️ الماسح الضوئي</button></div><div style="font-weight:800">💻 داخل الحاسوب:</div><div id="ciG" style="display:flex;gap:6px;flex-wrap:wrap;min-height:60px"></div>';
+   $('ciC').onclick=()=>{noise(.08);const s=$('ciS');s.style.filter='brightness(2)';setTimeout(()=>s.style.filter='',120);const pos=[...s.children].map(c=>c.getBoundingClientRect().left-s.getBoundingClientRect().left);const d=document.createElement('div');d.style.cssText='width:110px;height:66px;border-radius:8px;position:relative;overflow:hidden;background:linear-gradient(#7dd3fc,#fde68a);border:3px solid #fff;box-shadow:0 1px 4px #999;animation:pop .3s';d.innerHTML='<span style="position:absolute;bottom:0;right:10%;font-size:1.5rem">🏰</span><span style="position:absolute;top:2px;left:'+(pos[1]/s.offsetWidth*100)+'%;font-size:1rem">🕊️</span><span style="position:absolute;bottom:0;left:'+(pos[2]/s.offsetWidth*100)+'%;font-size:1rem">🚗</span>';$('ciG').appendChild(d)};
+   $('ciX').onclick=()=>{const d=document.createElement('div');d.style.cssText='width:66px;height:66px;border-radius:8px;background:#fff;border:1px solid #ccc;display:grid;place-items:center;font-size:2rem;clip-path:inset(0 0 100% 0);transition:clip-path 1.2s linear';d.textContent='🖼️';$('ciG').appendChild(d);tone(200,1.2,'sawtooth',.03);requestAnimationFrame(()=>requestAnimationFrame(()=>d.style.clipPath='inset(0 0 0 0)'))}}
+  if(k===2){H.innerHTML='<div class="hint">الرسوم المتحركة: رسوم تُعرض <b>بسرعة وتسلسل محددين</b>، ويمكن إسراعها أو إبطاؤها أو إيقافها أو إرجاعها.</div><div class="flip" id="fbF"></div><div style="text-align:center;font-weight:800" id="fbI"></div><div class="btns"><button class="btn" data-f="rev">⏪ إرجاع</button><button class="btn" data-f="slow">🐢 إبطاء</button><button class="btn main" data-f="play">▶️ تشغيل</button><button class="btn" data-f="stop">⏸ إيقاف</button><button class="btn" data-f="fast">🐇 إسراع</button></div>';
+   const F=[0,10,24,40,58,72,80,72,58,40,24,10];let i=0,dir=1,fps=4,run=false;const dr=()=>{$('fbF').innerHTML='<div style="position:relative;width:100%;height:90px"><span style="position:absolute;left:'+(10+i*6)+'%;bottom:'+F[i]+'px">⚽</span><span style="position:absolute;bottom:0;left:0;right:0;border-top:3px solid #64748b"></span></div>';$('fbI').textContent='اللقطة '+(i+1)+' من 12 · السرعة '+fps+' لقطة/ثانية'+(run?'':' (متوقف)')};
+   const loop=()=>{clearInterval(tm);if(run)tm=setInterval(()=>{i=(i+dir+12)%12;dr()},1000/fps)};dr();
+   H.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{const f=b.dataset.f;if(f==='play'){run=true;dir=1}if(f==='stop')run=false;if(f==='rev'){run=true;dir=-1}if(f==='slow')fps=Math.max(1,fps-2);if(f==='fast')fps=Math.min(24,fps+4);loop();dr()})}
+  if(k===3){H.innerHTML='<div class="hint">الرسوم البيانية: خطوط وأشكال لتوضيح النقاط المهمة، وتأتي على شكل رسوم توضيحية Illustration أو لوحات مسارية تدفقية Flow charts.</div><div class="btns">'+['العلوم','الحاسوب','الرياضيات'].map((n,i)=>'<label class="rl">'+n+' <input type="number" min="0" max="30" value="'+[12,20,8][i]+'" data-v="'+i+'" style="width:52px;padding:4px;border-radius:6px;border:1px solid #ccc"></label>').join('')+'</div><div class="mtab"><button data-g="bar" class="on">📊 أعمدة</button><button data-g="pie">🥧 دائري</button><button data-g="flow">🔀 مخطط مساري</button></div><canvas id="grC" width="600" height="230" style="width:100%"></canvas><div class="hint" style="text-align:center">عدد التلاميذ الذين يفضّلون كل مادة</div>';
+   let g='bar';const C=$('grC'),x=C.getContext('2d'),col=['#22c55e','#7048e8','#f59e0b'],nm=['العلوم','الحاسوب','الرياضيات'];
+   const dr=()=>{const v=[...H.querySelectorAll('[data-v]')].map(e=>Math.max(0,+e.value||0));x.clearRect(0,0,600,230);x.font='bold 16px Cairo';x.textAlign='center';
+    if(g==='bar'){const m=Math.max(...v,1);v.forEach((a,i)=>{const h=a/m*170;x.fillStyle=col[i];x.fillRect(110+i*150,195-h,90,h);x.fillStyle='#222';x.fillText(a,155+i*150,188-h);x.fillText(nm[i],155+i*150,220)});x.fillRect(80,195,460,2)}
+    if(g==='pie'){const s=v.reduce((a,b)=>a+b,0)||1;let a0=-Math.PI/2;v.forEach((a,i)=>{const a1=a0+a/s*2*Math.PI;x.beginPath();x.moveTo(300,115);x.arc(300,115,100,a0,a1);x.fillStyle=col[i];x.fill();const m=(a0+a1)/2;x.fillStyle='#fff';if(a)x.fillText(Math.round(a/s*100)+'%',300+65*Math.cos(m),120+65*Math.sin(m));x.fillStyle=col[i];x.fillText(nm[i],520,60+i*30);a0=a1})}
+    if(g==='flow'){const bx=(t,X,Y,c,sh)=>{x.fillStyle=c;x.beginPath();if(sh==='d'){x.moveTo(X,Y-30);x.lineTo(X+80,Y);x.lineTo(X,Y+30);x.lineTo(X-80,Y)}else x.roundRect(X-75,Y-22,150,44,sh==='o'?22:6);x.fill();x.fillStyle='#fff';x.fillText(t,X,Y+6)};
+     const ar=(a,b,c,d)=>{x.strokeStyle='#333';x.lineWidth=2;x.beginPath();x.moveTo(a,b);x.lineTo(c,d);x.stroke()};const best=nm[v.indexOf(Math.max(...v))];
+     ar(510,115,400,115);ar(220,115,120,115);bx('ابدأ',520,115,'#16a34a','o');bx('أي مادة أكثر؟',300,115,'#7048e8','d');bx(best,95,115,'#f59e0b')}};
+   H.querySelectorAll('[data-v]').forEach(e=>e.oninput=dr);H.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{g=b.dataset.g;H.querySelectorAll('[data-g]').forEach(y=>y.classList.toggle('on',y===b));dr()});dr()}
+  if(k===4){const N=[['دو',262],['ري',294],['مي',330],['فا',349],['صول',392],['لا',440],['سي',494],['دو',523]];H.innerHTML='<div class="hint">الصوت: أصوات تصاحب الرسائل التعليمية (لفظية وبصرية)، نسجّلها ببرامج تسجيل الصوت، أو مؤثرات صوتية جاهزة. اعزف!</div><div class="piano">'+N.map(([n,f])=>'<button data-f="'+f+'">'+n+'</button>').join('')+'</div><div class="btns">'+Object.keys(SND).slice(1).map(k=>'<button class="btn" data-s="'+k+'">🔊 '+k+'</button>').join('')+'</div>';
+   H.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>tone(+b.dataset.f,.6,'triangle',.2));H.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>SND[b.dataset.s]())}
+  if(k===5){H.innerHTML='<div class="hint">الفيديو: تسجيل متحرك للصور والأصوات لإنتاج مشهد متحرك يُعرض على الشاشة محاكيًا للحركة الواقعية. سجّل مشهدًا ثم شغّله!</div><div class="stage" id="vdS" style="min-height:110px;background:linear-gradient(#0ea5e9,#0369a1)"><div id="vdB" style="position:absolute;font-size:2.4rem;bottom:10px">🐬</div></div><div class="btns"><button class="btn main" id="vdR">🔴 تسجيل</button><button class="btn" id="vdP" disabled>▶️ تشغيل التسجيل</button></div><div id="vdF" style="display:flex;gap:2px;overflow-x:auto;background:#111;padding:4px;border-radius:6px;min-height:34px"></div>';
+   let t=0,rec=[];const B2=$('vdB');tm=setInterval(()=>{t++;const p=(t%40)/40;B2.style.left=(p*85)+'%';B2.style.bottom=(10+Math.abs(Math.sin(p*Math.PI*2))*50)+'px'},60);
+   $('vdR').onclick=()=>{rec=[];$('vdF').innerHTML='';$('vdR').disabled=true;let n=0;const r=setInterval(()=>{rec.push([B2.style.left,B2.style.bottom]);$('vdF').insertAdjacentHTML('beforeend','<div style="width:30px;height:30px;background:#0369a1;position:relative;flex:none;border:1px solid #fff"><span style="position:absolute;font-size:10px;left:'+B2.style.left+';bottom:'+(parseFloat(B2.style.bottom)/4)+'px">🐬</span></div>');tone(1200,.03);if(++n>=16){clearInterval(r);$('vdR').disabled=false;$('vdP').disabled=false}},150)};
+   $('vdP').onclick=()=>{clearInterval(tm);let i=0;$('vdS').insertAdjacentHTML('beforeend','<div id="vdT" style="position:absolute;top:4px;right:6px;font-size:.8rem;background:#000;padding:2px 6px;border-radius:5px">▶️ فيديو</div>');tm=setInterval(()=>{const [l,b]=rec[i++%rec.length];B2.style.left=l;B2.style.bottom=b;[...$('vdF').children].forEach((c,j)=>c.style.outline=j===(i-1)%rec.length?'2px solid #facc15':'')},150)}}};
+ $('elT').querySelectorAll('button').forEach(b=>b.onclick=()=>show(+b.dataset.k));show(0);
+ sortGame('ftP','ftC','ftOut',[['📝 النص','Text','#7048e8'],['🖼️ الصورة','Image','#0ea5e9'],['🎬 الفيديو','Video','#ef4444'],['🎞️ الرسوم المتحركة','Animation','#ec4899'],['📊 الرسوم البيانية','Graphics','#f59e0b'],['🔊 الصوت','Audio','#16a34a']],
+  [['📄 قصة.txt',0,'ملف نص'],['📄 رسالة.docx',0,'مستند نصي'],['🖼️ لبدة.jpg',1,'صورة ثابتة'],['🖼️ شعار.png',1,'صورة ثابتة'],['🎬 رحلة.mp4',2,'مقطع فيديو'],['🎞️ كرتون.gif',3,'رسوم متحركة'],['🎞️ شخصية تمشي',3,'رسوم متتابعة بسرعة'],['📊 أعمدة النتائج',4,'رسم بياني'],['🔀 مخطط مساري',4,'لوحة مسارية تدفقية'],['🎵 نشيد.mp3',5,'ملف صوت'],['👏 تصفيق.wav',5,'مؤثر صوتي']]);
+ MCQP($('q2'),bank([['عند كتابة النصوص يجب أن يتم اختيارها بحيث تكون:',['موجزة وواضحة وسهلة القراءة','طويلة ومفصلة','بخط صغير جدًا']],['يتم إدخال الصور الثابتة باستخدام:',['الماسح الضوئي والكاميرا','السماعات','الطابعة']],['رسوم ثابتة تُعرض بسرعة وتسلسل محددين تسمى:',['الرسوم المتحركة','الصور الثابتة','الرسوم البيانية']],['الرسوم البيانية هي تكوينات تظهر على شكل:',['خطوط وأشكال لتوضيح النقاط المهمة','أصوات ومؤثرات','حروف فقط']],['تأتي الرسوم البيانية على شكل:',['رسوم توضيحية أو لوحات مسارية تدفقية','أفلام كرتون','مقاطع صوتية']],['تسجيل متحرك للصور والأصوات لإنتاج مشهد متحرك يسمى:',['الفيديو','الصوت','النص']],['الكلمة الإنجليزية Audio تعني:',['الصوت','الصورة','الفيديو']],['الكلمة الإنجليزية Animation تعني:',['الرسوم المتحركة','الرسوم البيانية','النص الكتابي']],['يمكن إدخال النصوص من خلال:',['لوحة المفاتيح أو الفأرة','الماسح الضوئي فقط','السماعات']],['أيٌّ مما يلي يُعد مكوّنًا رئيسيًا وفعالًا في الوسائط المتعددة؟',['النص','الطابعة','الشاشة']]]))})();
+
+/* ---------- الدرس 3 ---------- */
+flipCards('fdC',[['🏫','التعليم','وسيلة مساعدة للمعلم في الصف، أو أداة للتعلم الذاتي، أو للتعلم في واقع افتراضي؛ تزيد دافعية التعلم وتوضح المفاهيم.'],['👷','التدريب','تدريب العاملين في بيئة افتراضية على أعمال تتسم بالخطورة أو ارتفاع التكلفة، فتوفر الجهد والوقت والمال.'],['🎮','التسلية','الركيزة الأساسية لإنتاج برامج التسلية والترفيه: الأفلام والرسوم المتحركة وألعاب الفيديو والكرتون.'],['🛒','التجارة','مهمة في الإعلانات التجارية لجذب انتباه الجمهور وتسويق الخدمات والمنتجات.'],['📰','الصحافة والإعلام','تقارير صحفية غير تقليدية تضم مقاطع ووسائط متعددة توصل الصوت إلى العالم بلغة مشتركة.']]);
+sortGame('mfP','mfC','mfOut',[['🏫 التعليم','','#7048e8'],['🎮 التسلية','','#ec4899'],['👷 التدريب','','#0ea5e9'],['📰 الإعلام','','#64748b'],['🛒 التجارة','','#f59e0b']],
+ [['تقديم بيئة تعلم تفاعلية',0,''],['الألعاب الكرتونية التفاعلية',1,''],['أداء بعض المهام في بيئة افتراضية',2,''],['تقديم تقارير صحفية جذابة',3,''],['للتسويق والدعاية لمنتج ما',4,'']]);
+sortGame('wsP','wsC','wsOut',[['🏫 التعليم','','#7048e8'],['🎮 التسلية','','#ec4899'],['👷 التدريب','','#0ea5e9'],['📰 الإعلام','','#64748b'],['🛒 التجارة','','#f59e0b']],
+ [['🌋 درس علوم بفيديو لبركان',0,'التعليم'],['🧑‍🎓 منصة تعلم ذاتي بالحاسوب',0,'التعليم'],['✈️ محاكي قيادة للطيارين',2,'التدريب بلا خطورة'],['🧯 تدريب رجال الإطفاء افتراضيًا',2,'التدريب'],['🕹️ لعبة فيديو',1,'التسلية'],['📺 فيلم رسوم متحركة',1,'التسلية'],['🗺️ نشرة أخبار بخرائط متحركة',3,'الإعلام'],['🧃 إعلان عصير بأغنية ورسوم',4,'التجارة'],['🛍️ متجر إلكتروني يعرض المنتج من كل الجهات',4,'التجارة']]);
+MCQP($('q3'),bank([['تدريب العاملين على أعمال خطيرة في بيئة افتراضية من مجالات:',['التدريب','التسلية','التجارة']],['الأفلام والرسوم المتحركة وألعاب الفيديو من تطبيقات الوسائط في مجال:',['التسلية','الصحافة','التدريب']],['تُستخدم الوسائط المتعددة في الإعلانات لجذب انتباه الجمهور في مجال:',['التجارة','التعليم','التدريب']],['تقارير صحفية غير تقليدية تضم مقاطع ووسائط متعددة في مجال:',['الصحافة والإعلام','التسلية','التجارة']],['من فوائد الوسائط في التعليم:',['زيادة دافعية التعلم ووضوح المفاهيم','زيادة تكلفة التعلم','إلغاء دور المعلم']],['يقلّل استخدام الوسائط في التدريب من:',['التكلفة المادية والبشرية','عدد المتدربين','فهم المهارات']]]));
+chapterTest('rv1',[['دمج عدة وسائط (نص، صوت، صور…) لتقديم المحتوى بطريقة تفاعلية هو:',['الوسائط المتعددة','العروض الورقية','البرمجة']],['خاصية «التنوع» تعني:',['استخدام أكثر من وسيط في مشروع واحد بشكل تكاملي','الفعل ورد الفعل','تخزين العروض']],['خاصية «التوافر» تعني:',['إتاحة تخزين العروض والرجوع إليها عند الحاجة','مناسبة المتلقين','دمج الصوت والصورة']],['خاصية «التناسب» تعني:',['تصميم العرض ليناسب قدرات المتلقين وخبراتهم','سرعة الحاسوب','كثرة الألوان']],['يتم إدخال الصور الثابتة باستخدام:',['الماسح الضوئي والكاميرا','الميكروفون','السماعات']],['رسوم تُعرض بسرعة وتسلسل محددين:',['الرسوم المتحركة','الرسوم البيانية','الصور الثابتة']],['Flow charts هي:',['لوحات مسارية تدفقية','مقاطع فيديو','ملفات صوت']],['يجب أن تكون النصوص:',['موجزة وواضحة وسهلة القراءة','طويلة جدًا','بخطوط كثيرة مختلفة']],['من أهمية الوسائط المتعددة أنها:',['تستثير معظم الحواس','تبطئ وصول المعلومة','تقلل التفاعل']],['محاكي قيادة السيارات للمتدربين يمثل مجال:',['التدريب','التسلية','الإعلام']],['ألعاب الفيديو والكرتون من مجال:',['التسلية','التجارة','التعليم']],['الإعلان عن منتج بمقطع جذاب من مجال:',['التجارة','التدريب','الصحافة']],TF('لا يمكن استخدام أكثر من وسيط واحد في نفس المشروع.',0),TF('كلما زاد التفاعل في البرنامج زادت كفاءته.',1)]);
+
+/* ---------- الدرسان 4-5 ---------- */
+flipCards('elC',[['📚','المحتوى','وطريقة سرده وعرضه'],['👥','الجمهور','واهتماماته'],['🎤','المتحدث','وأهدافه']]);
+flipCards('imC',[['⚡','فعالية العروض','صور ورسوم ومخططات ومؤثرات تزيد سعة ذاكرة العقل، وتعزز ذكاء التلاميذ.'],['👆','سهولة الاستخدام','برامجها بسيطة: خطوط وتنسيقات ورسوم متحركة بنقرة زر واحدة.'],['🌐','تسهيل التعلم الإلكتروني','دروس ودورات عبر الإنترنت على شكل عروض تجذب المتعلمين وترسخ المعلومة.'],['💬','تحفيز المناقشات','طريقة تفاعلية يكثر معها طرح الأسئلة من التلاميذ.'],['⏳','زيادة فترة الانتباه','تحافظ على تركيز التلاميذ لفترة أطول، والدماغ يستوعب المعلومات المتنوعة أسرع.'],['🧠','دعم الدراسة التفاعلية','كل شريحة إبداعية تجذب الأذهان وتساعد على خلق مناقشة حية.']]);
+(function(){const P=[['long','📜 اختصر النص في نقاط','نص طويل جدًا يصعب قراءته'],['tiny','🔍 كبّر حجم الخط','خط صغير لا يُرى من آخر الصف'],['colors','🎨 استخدم ألوانًا متناسقة','ألوان صارخة تتعب العين'],['fonts','🔤 وحّد نوع الخط','خطوط كثيرة مختلفة'],['noimg','🖼️ أضف صورة معبّرة','لا توجد صورة توضيحية'],['crowd','📐 رتّب العناصر بمسافات','عناصر متراكمة فوق بعضها']];
+ const W=[['🔊 أضف عشرة أصوات مختلفة','كثرة المؤثرات تشتت الانتباه!'],['📝 اكتب كل ما ستقوله في الشريحة','الشريحة ليست ورقة قراءة؛ ضع النقاط المهمة فقط'],['🌈 أضف ألوانًا أكثر','الألوان الكثيرة تزيد المشكلة']];const fixed=new Set();
+ const draw=()=>{const f=k=>fixed.has(k);const S=$('drS');S.style.background=f('colors')?'linear-gradient(135deg,#e0f2fe,#fff)':'linear-gradient(45deg,#ff00cc,#33ff00 50%,#ffff00)';
+  const fz=f('tiny')?1:.45,ff=i=>f('fonts')?'Cairo':['Courier New','Times New Roman','Impact','Comic Sans MS'][i%4];const col=f('colors')?'#0c4a6e':'#ff0000';
+  const body=f('long')?'<ul style="margin:0;padding-right:5cqw;font-size:'+(4.2*fz)+'cqw;line-height:1.5"><li>نشربه ليعيش جسمنا</li><li>نسقي به الزرع</li><li>نحافظ عليه ولا نسرف</li></ul>':'<div style="font-size:'+(3*fz)+'cqw;font-family:'+ff(1)+';color:'+(f('colors')?'#1e293b':'#0000ff')+'">الماء مهم جدًا في حياتنا لأننا نشربه كل يوم ونحتاجه في الطبخ والتنظيف والاستحمام وسقي الزرع وتربية الحيوانات والصناعة والزراعة وكذلك يجب علينا أن نحافظ عليه ولا نسرف فيه لأن بلادنا ليبيا من البلاد التي تعاني قلة المياه والأمطار قليلة فيها في معظم المناطق…</div>';
+  const crowd=!f('crowd');S.innerHTML='<div style="position:absolute;top:'+(crowd?'14%':'5%')+';right:5%;left:5%;font-weight:800;text-align:center;font-size:'+(7*fz)+'cqw;font-family:'+ff(2)+';color:'+col+'">الماء في حياتنا 💧</div><div style="position:absolute;top:'+(crowd?'20%':'26%')+';right:5%;width:'+(f('noimg')?'58%':'90%')+'">'+body+'</div>'+(f('noimg')?'<div style="position:absolute;left:6%;top:30%;width:28%;height:58%;border-radius:10px;background:linear-gradient(#60a5fa,#1d4ed8);display:grid;place-items:center;font-size:14cqw">🚰</div>':'')+(crowd?'<div style="position:absolute;top:10%;left:10%;font-size:6cqw;font-family:'+ff(3)+';color:#ff6600;transform:rotate(-8deg)">!!! مهم !!!</div>':'');
+  $('drM').style.width=(fixed.size/P.length*100)+'%'};
+ const btns=shuf(P.map(p=>['f',p]).concat(W.map(w=>['w',w])));$('drB').innerHTML=btns.map((b,i)=>'<button class="btn" data-i="'+i+'">'+b[1][b[0]==='f'?1:0]+'</button>').join('');
+ $('drB').querySelectorAll('button').forEach(b=>b.onclick=()=>{const [t,v]=btns[+b.dataset.i];if(t==='w'){shake(b);b.classList.add('no');$('drOut').innerHTML='❌ '+v[1];return}if(fixed.has(v[0]))return;fixed.add(v[0]);b.classList.add('ok');$('drOut').innerHTML='✅ عالجت: '+v[2];draw();tone(700,.15);if(fixed.size===P.length){$('drOut').innerHTML='🎉 شُفيت الشريحة! واضحة، موجزة، متناسقة، وفيها صورة.';cheer()}});draw()})();
+MCQP($('q4'),bank([['العروض التقديمية هي:',['أسلوب منظم ومصمم جيدًا لعرض وتقديم المعلومات','برنامج لمعالجة الصور فقط','جهاز إدخال']],['من عناصر العرض التقديمي الناجح:',['المحتوى والجمهور والمتحدث','الطابعة والماسح والكاميرا','الفأرة ولوحة المفاتيح']],['من أسباب فشل العروض التقديمية:',['تعقيد المحتوى والرتابة','وضوح الشرائح','الاهتمام بالجمهور']],['أشهر برامج تصميم العروض التقديمية:',['MS PowerPoint','MS Paint','Notepad']],['تساعد العروض التقديمية المتحدث في:',['الحفاظ على تسلسل أفكاره وانتباه المتلقي','إطالة مدة الحصة','الاستغناء عن التحضير']],['يجب أن يعمل مقدّم العرض على اكتساب مهارات:',['الإلقاء والثقة بالنفس والتخطيط الجيد','الرسم فقط','الطباعة السريعة']],['من أهمية العروض في التعليم:',['زيادة فترة انتباه التلاميذ','تقليل التفاعل','زيادة الملل']]]));
+addSecs('p4',[],[{t:'السؤال 1:',q:'العناصر المهمة للعرض التقديمي:',h:'ثلاثة عناصر',s:['المحتوى وطريقة سرده وعرضه','الجمهور واهتماماته','المتحدث وأهدافه'],a:''},{t:'السؤال 2:',q:'أسباب فشل العروض التقديمية منها:',h:'المحتوى والرتابة والتركيز',s:['تعقيد المحتوى أكثر من اللازم','الرتابة','التركيز على ما يريد قوله المتحدث وليس ما يثير اهتمام الجمهور'],a:''},{t:'السؤال 3:',q:'العروض التقديمية تساعد المتحدث في:',h:'الأفكار والانتباه',s:['الحفاظ على تسلسل أفكاره وتقديم العرض بشكل لائق','الحفاظ على انتباه المتلقي طوال فترة التقديم'],a:''},{t:'السؤال 4:',q:'يجب أن يعمل مقدّم العرض على اكتساب بعض المهارات منها:',h:'ثلاث مهارات',s:['مهارات الإلقاء','الثقة بالنفس','التخطيط الجيد للعرض'],a:''},{t:'السؤال 5:',q:'اذكر ثلاثة من النقاط التي تبين أهمية العروض التقديمية في التعليم:',h:'من ستة نقاط',s:['فعالية العروض التقديمية','سهولة الاستخدام للتلاميذ والمعلمين','تسهيل التعلم الإلكتروني','(وأيضًا: تحفيز المناقشات، زيادة فترة الانتباه، دعم الدراسة التفاعلية)'],a:''}]);
+
+/* ---------- الدرس 6 ---------- */
+(function(){const D=$('dk');let st=0;const tiles=[['WhatsApp','💬','#25d366'],['Microsoft 365','🅾️','#3b82f6'],['Word','W','#2b579a'],['Excel','X','#217346'],['PowerPoint','P','#c43e1c'],['Skype','S','#00aff0'],['Paint','🎨','#8b5cf6'],['الآلة الحاسبة','🧮','#475569']];
+ const wrong={WhatsApp:'هذا WhatsApp للمحادثة 💬','Microsoft 365':'هذه مجموعة Microsoft 365','Word':'هذا Word لمعالجة النصوص 📝','Excel':'هذا Excel للجداول الحسابية 📊','Skype':'هذا Skype للمكالمات 📞','Paint':'هذا الرسام 🎨','الآلة الحاسبة':'هذه الآلة الحاسبة 🧮'};
+ D.innerHTML='<div style="padding:10px;display:flex;gap:14px;flex-wrap:wrap"><div style="text-align:center;font-size:.75rem">🗑️<br>سلة المحذوفات</div><div style="text-align:center;font-size:.75rem">📁<br>المستندات</div></div><div class="smenu" id="dkM"><input id="dkI" placeholder="🔍 اكتب للبحث… مثل PowerPoint"><div style="font-size:.75rem;margin-bottom:4px">Productivity</div><div class="tiles" id="dkT"></div></div><div class="splash" id="dkP"><div style="font-size:.8rem;text-align:left">Office ⬜</div><b>PowerPoint</b><small>بدء تشغيل...</small></div><div id="dkN" style="display:none;position:absolute;inset:6% 4% 40px;background:#fff;color:#222;border-radius:6px;padding:8px;overflow:auto"></div><div class="task"><button id="dkS" title="ابدأ">⊞</button><span style="font-size:.8rem">🔍 🌐 📁</span><span style="margin-right:auto;font-size:.75rem">طرابلس ☀️ 19°</span></div>';
+ const TT=$('dkT');const draw=q=>{TT.innerHTML=tiles.filter(t=>!q||t[0].toLowerCase().includes(q.toLowerCase())||(q.match(/بور|عرض/)&&t[0]==='PowerPoint')).map(t=>'<button data-t="'+t[0]+'" style="background:'+t[2]+'"><b>'+t[1]+'</b>'+t[0]+'</button>').join('')};draw();
+ $('dkI').oninput=e=>draw(e.target.value);
+ $('dkS').onclick=()=>{$('dkM').classList.toggle('on');if(st===0){st=1;$('dkOut').innerHTML='✅ فُتحت قائمة ابدأ. ابحث عن أيقونة P الحمراء'}};
+ TT.onclick=e=>{const b=e.target.closest('[data-t]');if(!b)return;const n=b.dataset.t;if(n!=='PowerPoint'){shake(b);$('dkOut').innerHTML='🤔 '+wrong[n]+' — ابحث عن برنامج العروض التقديمية';return}
+  $('dkM').classList.remove('on');$('dkP').classList.add('on');$('dkOut').innerHTML='⏳ بدء تشغيل...';setTimeout(()=>{$('dkP').classList.remove('on');const N=$('dkN');N.style.display='block';
+   N.innerHTML='<div style="font-weight:800;margin-bottom:6px">مرحبًا · جديد</div><div class="tpl" style="grid-template-columns:repeat(3,1fr)">'+THEMES.slice(0,6).map((t,i)=>'<button data-n="'+i+'"><div class="sld mini" style="background:'+(t.deco?t.deco+',':'')+t.bg+'"></div>'+(i?t.n:'عرض تقديمي فارغ')+'</button>').join('')+'</div>';
+   $('dkOut').innerHTML='3️⃣ اضغط على «عرض تقديمي فارغ»';N.onclick=e2=>{const x=e2.target.closest('[data-n]');if(!x)return;if(x.dataset.n!=='0'){$('dkOut').innerHTML='هذا قالب جاهز 🙂 المطلوب: عرض تقديمي فارغ';return}
+    N.innerHTML='<div class="pw" style="margin:0"><div class="ptb"><span>💾 ↶</span><span class="pn">عرض تقديمي1 - PowerPoint</span><span>— ▢ ✕</span></div><div class="pmain"><div class="pwa"><div class="sld live"><div class="it" style="left:10%;top:26%;width:80%;height:24%;outline:1px dashed #aaa;display:grid;place-items:center;font-size:6cqw;color:#888">انقر لإضافة عنوان</div><div class="it" style="left:15%;top:54%;width:70%;height:14%;outline:1px dashed #aaa;display:grid;place-items:center;font-size:3cqw;color:#888">انقر لإضافة عنوان فرعي</div></div></div></div></div>';
+    $('dkOut').innerHTML='🎉 ظهرت النافذة الرئيسية! تعرّف على أجزائها في المختبر التالي 👇';cheer()}},1600)};
+ /* أجزاء الشاشة */
+ const PARTS={title:['شريط العنوان Title bar','يظهر دائمًا أعلى النافذة ويتكون من: أزرار التحكم بالنافذة، اسم المستند، شريط أدوات الوصول السريع.'],qa:['شريط أدوات الوصول السريع','يحتوي على الأدوات الأكثر استخدامًا (حفظ، تراجع…) وتبقى ظاهرة باستمرار.'],menu:['شريط القوائم Menu Bar','مجموعة من التبويبات (ملف، الشريط الرئيسي، إدراج، تصميم…) كل تبويب له شريط أدوات خاص به.'],tool:['شريط الأدوات Tool Bar','مجموعة الأيقونات (الأزرار) الأكثر استخدامًا، تنفذ مهمة بمجرد النقر عليها.'],outline:['حيز المخطط التفصيلي Outline Pane','تظهر فيه الشرائح مدرجة، وبالنقر على أي شريحة تظهر محتوياتها في حيز العمل.'],work:['حيز العمل Work Area','المكان المخصص لإدراج وتصميم الشرائح بإدخال البيانات والصور والأصوات والفيديو.'],notes:['حيز الملاحظات Notes Area','من خلاله نضيف ملاحظات إلى الشريحة الظاهرة.'],status:['شريط الحالة Status Bar','يظهر أسفل الشاشة ويعرض رقم الشريحة ومعلومات العرض.'],views:['شريط العرض والمعاينة Display & Preview Bar','أيقونات: عرض عادي، فارز الشرائح، القراءة، عرض الشرائح.']};
+ const pp=PPT($('ptW'),{slides:[Object.assign(newSlide('title'),{items:[Object.assign(TI('title',10,26,80,24,40,'center'),{t:'حوسبة التعليم في ليبيا'}),Object.assign(TI('sub',15,54,70,14,20,'center'),{t:'استخدام الحاسوب في الرياضيات'})]}),newSlide('tc')]});
+ let mode=0,target=null,sc=0,tot=0;const host=$('ptW');
+ const clr=()=>host.querySelectorAll('.part-hi').forEach(e=>e.classList.remove('part-hi'));
+ const ask=()=>{const ks=Object.keys(PARTS);target=pick(ks.filter(k=>k!==target));$('ptOut').innerHTML='🎯 اضغط على: <b style="color:var(--tl)">'+PARTS[target][0]+'</b>'};
+ host.addEventListener('click',e=>{if(!mode)return;const p=e.target.closest('[data-part]');if(!p)return;e.stopPropagation();e.preventDefault();clr();const k=p.dataset.part;p.classList.add('part-hi');
+  if(mode===1){$('ptOut').innerHTML='📌 <b>'+PARTS[k][0]+'</b>: '+PARTS[k][1];tone(600,.1)}
+  else{tot++;if(k===target||(target==='title'&&k==='qa')){sc++;$('ptOut').innerHTML='✅ صحيح! '+PARTS[target][0];tone(800,.15);setTimeout(ask,1100)}else{$('ptOut').innerHTML='❌ هذا '+PARTS[k][0]+' — حاول مرة أخرى: <b>'+PARTS[target][0]+'</b>'}$('ptSc').textContent='✔️ '+sc+' من '+tot;if(sc===8){cheer();$('ptSc').textContent+=' 🏆 تعرف كل الأجزاء!'}}},true);
+ $('ptE').onclick=()=>{mode=mode===1?0:1;$('ptE').textContent=mode===1?'✋ إيقاف الاستكشاف':'🔎 وضع الاستكشاف';clr();$('ptOut').innerHTML=mode===1?'اضغط على أي جزء من النافذة لتعرف اسمه ووظيفته 👇':'الآن يمكنك استخدام البرنامج بشكل عادي'};
+ $('ptQ').onclick=()=>{mode=2;sc=0;tot=0;$('ptE').textContent='🔎 وضع الاستكشاف';$('ptSc').textContent='';ask()}})();
+sortGame('enP','enC','enOut',[['شريط العنوان','','#b7472a'],['شريط الأدوات','','#7048e8'],['شريط القوائم','','#0ea5e9'],['حيز العمل','','#16a34a'],['حيز الملاحظات','','#f59e0b'],['حيز المخطط التفصيلي','','#ec4899'],['شريط الحالة','','#64748b'],['شريط العرض والمعاينة','','#0f766e']],
+ [['Title Bar',0],['Tool bar',1],['Menu Bar',2],['Work Area',3],['Notes Area',4],['Outline Pane',5],['Status Bar',6],['Display & Preview Bar',7]].map(x=>[x[0],x[1],'']));
+addSecs('p6',[],[{t:'السؤال الأول:',q:'عدّد مميزات برنامج العروض التقديمية:',h:'ست مزايا',s:['سهولة إضافة وحذف الشرائح','توفر العديد من الرسوم التي يمكن إضافتها إلى الشرائح','سهولة حفظ واسترجاع شرائح العرض','إمكانية إضافة مؤثرات صوتية وحركية على الشرائح','إمكانية إضافة مقاطع فيديو إلى الشرائح','إمكانية تحويل شاشة العرض إلى ما يشبه (الشاشة)'],a:''},{t:'السؤال الثاني:',q:'اذكر مكونات شريط العرض والمعاينة:',h:'أربع أيقونات',s:['عرض الشرائح بدءًا من الشريحة الحالية Slide Show','عرض جميع الشرائح (فارز الشرائح) Slide Sorter View','عرض شريحة عادي Normal View','عرض القراءة Reading View'],a:''}]);
+MCQP($('q6'),bank([['لتشغيل برنامج العروض التقديمية نبحث عن أيقونته في:',['شاشة البدء أو الشاشات الجانبية','سلة المحذوفات','الطابعة']],['بعد تشغيل البرنامج نضغط على ____ فتظهر النافذة الرئيسية:',['عرض تقديمي فارغ','حفظ باسم','إغلاق']],['يظهر دائمًا أعلى النافذة ويحتوي على اسم المستند:',['شريط العنوان','شريط الحالة','حيز الملاحظات']],['المكان المخصص لإدراج وتصميم الشرائح:',['حيز العمل','شريط القوائم','شريط الحالة']],['تظهر فيه الشرائح مدرجة ويمكن النقر على أيٍّ منها:',['حيز المخطط التفصيلي','حيز الملاحظات','شريط الأدوات']],['يظهر أسفل الشاشة ويعرض رقم الشريحة:',['شريط الحالة','شريط العنوان','شريط القوائم']],['يحتوي على تبويبات كل منها له شريط أدوات خاص:',['شريط القوائم','حيز العمل','شريط العرض']],['أيقونة ▦ في شريط العرض تعني:',['فارز الشرائح (عرض جميع الشرائح)','عرض القراءة','عرض عادي']],['يمكن تحديد الأدوات الظاهرة في شريط أدوات الوصول السريع من:',['السهم المنسدل بجانبه','شريط الحالة','حيز الملاحظات']],['يستطيع التلميذ استخدام برنامج العروض التقديمية في:',['عمل بحث أو مشروع معيّن','طباعة الصور فقط','تشغيل الألعاب']]]));
+
+/* ---------- الدرسان 7-8 ---------- */
+(function(){const M=Missions($('ms7'),[
+ ['اضغط على «انقر لإضافة عنوان» واكتب: حوسبة التعليم في ليبيا',(t,d)=>t==='type'&&d.k==='title'&&/حوسبة/.test(d.t)&&/ليبيا/.test(d.t),'كتبت العنوان الرئيسي'],
+ ['اكتب العنوان الفرعي: استخدام الحاسوب في الرياضيات',(t,d)=>t==='type'&&d.k==='sub'&&/الحاسوب/.test(d.t),'كتبت العنوان الفرعي'],
+ ['اجعل العنوان غامقًا B',(t,d)=>t==='fmt'&&d.k==='title'&&d.f.b,'العنوان صار غامقًا'],
+ ['كبّر خط العنوان إلى 54 أو أكثر',(t,d)=>t==='fmt'&&d.k==='title'&&d.f.sz>=54,'خط كبير وواضح'],
+ ['غيّر لون خط العنوان',(t,d)=>t==='fmt'&&d.k==='title'&&d.f.c&&d.f.c!=='#000000','لون جميل!'],
+ ['غيّر نوع خط العنوان الفرعي إلى Times New Roman',(t,d)=>t==='fmt'&&d.k==='sub'&&d.f.font==='Times New Roman','تغيّر نوع الخط'],
+ ['اجعل العنوان الفرعي مائلًا I ومسطّرًا U',(t,d)=>t==='fmt'&&d.k==='sub'&&d.f.i&&d.f.u,'مائل ومسطّر'],
+ ['حاذِ العنوان الفرعي إلى اليمين ⫸',(t,d)=>t==='fmt'&&d.k==='sub'&&d.f.al==='right','محاذاة لليمين'],
+ ['افتح شاشة «خط…» وطبّق تأثيرًا (ظل أو يتوسطه خط…) ثم موافق',(t,d)=>t==='fontdlg'&&(d.s||d.s2||d.sh||d.sc||d.sup||d.sub2),'استخدمت شاشة الخط']]);
+ PPT($('pp7'),{tabs:['home','show'],on:M.check})})();
+MCQP($('q7a'),bank([['الجزء رقم 1 في أعلى النافذة (فيه اسم الملف):',['شريط العنوان','شريط الحالة','حيز العمل']],['الجزء رقم 2 أسفل شريط العنوان (ملف، الشريط الرئيسي، إدراج…):',['شريط القوائم','شريط الأدوات','حيز الملاحظات']],['الجزء رقم 3 على جانب النافذة (صور مصغرة للشرائح):',['حيز المخطط التفصيلي','حيز العمل','شريط العرض']],['الجزء رقم 4 في الوسط (انقر لإضافة عنوان):',['حيز العمل','حيز المخطط التفصيلي','شريط القوائم']],['الجزء رقم 5 في أسفل يسار النافذة (شريحة 1 من 1):',['شريط الحالة','شريط العنوان','شريط الأدوات']]]));
+MCQP($('q7'),bank([['أيقونة «Arial ▾» في الشريط الرئيسي تُستخدم لـ:',['تغيير نوع الخط','تغيير لون الخط','محاذاة النص']],['أيقونة «11 ▾» تُستخدم لـ:',['تغيير حجم الخط','تغيير نوع الخط','إدراج جدول']],['الأيقونتان A⁺ و A⁻ تُستخدمان لـ:',['تكبير وتصغير حجم الخط','تغيير اللون','نسخ النص']],['أيقونة B تجعل النص:',['غامقًا (عريضًا)','مائلًا','مسطّرًا']],['أيقونة I تجعل النص:',['مائلًا','غامقًا','يتوسطه خط']],['أيقونة U تجعل النص:',['مسطّرًا (تحته خط)','مائلًا','كبيرًا']],['أيقونة S (المظللة) تُضيف للنص:',['ظلًا','تعدادًا نقطيًا','لونًا أحمر']],['أيقونة ⫸ (المحاذاة لليمين) تجعل النص:',['محاذيًا إلى اليمين','في الوسط','محاذيًا إلى اليسار']],['أيقونة ☰ (توسيط) تجعل النص:',['في وسط المستطيل','على اليمين','على اليسار']],['أيقونة ≣ (ضبط) تجعل النص:',['مضبوطًا بين الهامشين','مائلًا','غامقًا']],['أيقونة التعداد (• ▾) تُستخدم لـ:',['إضافة تعداد نقطي','تغيير الخط','حذف النص']],['أيقونة ¶◂ تُستخدم لـ:',['تغيير اتجاه النص من اليمين لليسار','طباعة الشريحة','حفظ الملف']],['في شاشة الخط «Superscript» تعني:',['مرتفع','منخفض','يتوسطه خط']],['في شاشة الخط «Strikethrough» تعني:',['يتوسطه خط','مرتفع','منخفض']],['لتنسيق نص يجب أولًا:',['تحديد النص','حفظ الملف','إغلاق البرنامج']]]));
+
+/* ---------- الدرس 9 ---------- */
+(function(){const txt=sm=>{const a=[];(function w(n){a.push(n.t);(n.k||[]).forEach(w)})(sm.root);return a.join('|')};const sms=S=>allItems(S).filter(x=>x.k==='smart');
+ const M=Missions($('ms9'),[
+ ['حدّد مستطيل العنوان واسحب ✥ لتغيير موضعه',t=>t==='move','غيّرت الموضع'],
+ ['اسحب المربع الصغير ◽ لتغيير حجم مستطيل',t=>t==='resize','غيّرت الحجم'],
+ ['أضف شريحة جديدة من نوع «عنوان ومحتوى» (الشريط الرئيسي ← شريحة جديدة)',(t,d)=>t==='newsl'&&d.lay==='tc','شريحة جديدة!'],
+ ['اضغط أيقونة 🧩 داخل المحتوى واختر «هيكلي»',(t,d)=>t==='smart'&&d.lay==='hier','أدرجت مخططًا هيكليًا'],
+ ['اكتب في المخطط: المواد الدراسية، الحاسوب، الرياضيات، الصف السادس',(t,d,S)=>sms(S).some(x=>{const s=txt(x.sm);return /المواد/.test(s)&&/الحاسوب/.test(s)&&/الرياضيات/.test(s)&&/السادس/.test(s)}),'المخطط مكتمل'],
+ ['اضغط على شكل ثم «تصميم SmartArt» ← إضافة شكل (بعد أو أسفل…)',(t,d)=>t==='smartop'&&d.op!=='del','أضفت شكلًا فرعيًا'],
+ ['احذف شكلًا زائدًا من المخطط 🗑️',(t,d)=>t==='smartop'&&d.op==='del','حذفت الشكل'],
+ ['حوّل المخطط إلى «دائري» 🔄',(t,d)=>t==='smartlay'&&d.lay==='cycle','مخطط دائري!'],
+ ['أدرج صورة من «الصور» داخل شريحة (إدراج ← صور)',t=>t==='img','أدرجت صورة'],
+ ['أدرج فيديو «آثار شحات في ليبيا» (إدراج ← فيديو)',t=>t==='video','أدرجت قصاصة فيديو']]);
+ const s1=newSlide('title');s1.items[0].t='حوسبة التعليم في ليبيا';s1.items[0].f.b=true;s1.items[1].t='استخدام الحاسوب في الرياضيات';
+ PPT($('pp9'),{tabs:['home','ins','show'],slides:[s1],on:M.check})})();
+MCQP($('q9a'),bank([['«إضافة شكل بعد» تضيف شكلًا:',['في نفس المستوى بعد الشكل المحدد','فوق الشكل المحدد','تحت الشكل المحدد']],['«إضافة شكل أسفل» تضيف شكلًا:',['فرعيًا تحت الشكل المحدد','في نفس المستوى','فوق الشكل المحدد']],['«إضافة شكل أعلى» تضيف شكلًا:',['فوق الشكل المحدد','بعد الشكل المحدد','قبل الشكل المحدد']],['نجد أيقونة «إضافة شكل» في تبويب:',['تصميم SmartArt','ملف','عرض الشرائح']]]));
+MCQP($('q9'),bank([['لتغيير موضع المستطيل: اضغط داخله ثم ضع المؤشر على الإطار فيتغير إلى:',['✥ (أربعة أسهم)','⌛','✋']],['لتغيير حجم المستطيل نسحب:',['أحد المربعات الصغيرة على الإطار','منتصف النص','شريط الحالة']],['لإضافة شريحة جديدة نضغط على أيقونة «شريحة جديدة» من تبويب:',['الشريط الرئيسي (أو إدراج)','تصميم','انتقالات']],['شريحة تحتوي «انقر لإضافة عنوان» و«انقر لإضافة نص» نوعها:',['عنوان ومحتوى','فارغ','عنوان فقط']],['لإدراج مخطط هيكلي نضغط على:',['إدراج رسم SmartArt','إدراج صورة','إدراج فيديو']],['لحذف مستطيل من المخطط نحدده ونضغط مفتاح:',['Delete','Enter','Shift']],['لإدراج صورة من الحاسوب نضغط أيقونة إدراج صورة ثم نختار الصورة ثم:',['إدراج','حذف','طباعة']],['المخطط الدائري من رسوم SmartArt من نوع:',['دورة','قائمة','مصفوفة']],['من أنواع الشرائح التي لم ترد في الدرس:',['عنوان المقطع / مقارنة / صورة مع تسمية توضيحية','الطباعة','الحفظ']]]));
+
+/* ---------- الدرس 10 ---------- */
+(function(){const M=Missions($('ms10'),[
+ ['احفظ العرض لأول مرة: ملف ← حفظ باسم ← المستندات ← الاسم: حوسبة التعليم في ليبيا',(t,d)=>t==='saveas'&&/حوسبة/.test(d.name)&&d.folder==='المستندات','حُفظ الملف لأول مرة'],
+ ['عدّل أي نص ثم احفظ بـ Ctrl + S (أو 💾 في شريط الوصول السريع)',(t,d)=>t==='save'&&(d.how==='ctrl'||d.how==='qa'),'حفظ سريع!'],
+ ['عدّل شيئًا ثم أغلق الملف (✕ أو ملف ← إغلاق) واختر «حفظ» في الرسالة',(t,d)=>t==='closeask'&&d.c==='save','أغلقت مع حفظ التغييرات'],
+ ['أنشئ ملفًا جديدًا: ملف ← جديد ← عرض تقديمي فارغ',t=>t==='new','ملف جديد'],
+ ['افتح ملفك المحفوظ: ملف ← فتح',(t,d)=>t==='open'&&/حوسبة/.test(d.name),'فتحت الملف'],
+ ['اطبع الشريحة الحالية فقط',(t,d)=>t==='print'&&d.rng==='cur','طباعة الشريحة الحالية'],
+ ['اطبع كافة الشرائح بتخطيط «3 شرائح» في الصفحة',(t,d)=>t==='print'&&d.rng==='all'&&d.per===3,'3 شرائح في كل صفحة'],
+ ['اطبع نسختين «بدون ترتيب»',(t,d)=>t==='print'&&d.copies>=2&&!d.col,'لاحظ ترتيب الأوراق 1,1 2,2 …']]);
+ const s1=newSlide('title');s1.items[0].t='حوسبة التعليم في ليبيا';s1.items[1].t='استخدام الحاسوب في الرياضيات';const s2=newSlide('tc');s2.items[0].t='فوائد الحاسوب';s2.items[1].t='يسرّع الحساب\nيرسم الأشكال\nيعرض الدروس';const s3=newSlide('pic');s3.items[0].t='بلدي ليبيا';s3.items[1]=Object.assign(s3.items[1],{k:'img',img:3});s3.items[2].t='السرايا الحمراء في طرابلس';
+ const api=PPT($('pp10'),{tabs:['home','show'],slides:[s1,s2,s3],on:M.check});
+ let ctrl=false;$('kC').onclick=()=>{ctrl=!ctrl;$('kC').classList.toggle('dn',ctrl);tone(300,.05)};
+ $('kS').onclick=()=>{tone(300,.05);if(!ctrl){api.msg('اضغط Ctrl أولًا ثم S');return}ctrl=false;$('kC').classList.remove('dn');api.save('ctrl')}})();
+MCQP($('q10a'),bank([['3 نسخ من عرض فيه 3 صفحات «بترتيب الصفحات» تخرج هكذا:',['1,2,3 1,2,3 1,2,3','1,1,1 2,2,2 3,3,3','3,2,1']],['نسختان «بدون ترتيب» من صفحتين تخرجان هكذا:',['1,1 2,2','1,2 1,2','2,1 2,1']],['لطباعة الشريحتين 2 و 4 فقط نختار:',['نطاق مخصص ونكتب 2,4','طباعة كافة الشرائح','طباعة الشريحة الحالية']]]));
+MCQP($('q10'),bank([['لحفظ الملف لأول مرة نختار:',['ملف ← حفظ باسم','ملف ← طباعة','ملف ← إغلاق']],['اختصار لوحة المفاتيح لحفظ ملف محفوظ مسبقًا:',['Ctrl + S','Ctrl + P','Ctrl + N']],['أيقونة 💾 في شريط أدوات الوصول السريع تُستخدم لـ:',['الحفظ','الطباعة','الفتح']],['في رسالة الإغلاق، زر «عدم الحفظ» يعني:',['إغلاق الملف دون حفظ التغييرات الأخيرة','الرجوع إلى الملف','حفظ التغييرات']],['في رسالة الإغلاق، زر «إلغاء الأمر» يعني:',['الرجوع إلى الملف دون إنهاء','حذف الملف','حفظ الملف']],['لإنشاء ملف جديد:',['ملف ← جديد','ملف ← فتح','إدراج ← صورة']],['لفتح ملف محفوظ مسبقًا:',['ملف ← فتح ثم نختار الملف ثم زر فتح','ملف ← جديد','تصميم ← سمة']],['لإنهاء البرنامج نضغط على × الموجودة على:',['يسار شريط العنوان','شريط الحالة','حيز العمل']],['أيقونة «معاينة ما قبل الطباعة» نجدها في:',['شريط أدوات الوصول السريع','شريط الحالة','حيز الملاحظات']],['من خصائص الطباعة:',['اختيار الطابعة وعدد النسخ والشرائح','تغيير الخلفية','إضافة حركات']]]));
+
+/* ---------- الدرس 11 ---------- */
+(function(){const M=Missions($('ms11'),[
+ ['انسخ الشريحة 1 ثم الصقها (⋮ ← نسخ ثم ⋮ ← لصق)',t=>t==='paste','نسخت شريحة'],
+ ['احذف إحدى الشرائح (⋮ ← حذف شريحة)',t=>t==='del','حذفت شريحة'],
+ ['غيّر تخطيط شريحة (الشريط الرئيسي ← تخطيط)',t=>t==='lay','تغيّر نوع الشريحة'],
+ ['لوّن خلفية شريحة (تصميم ← تنسيق الخلفية)',t=>t==='bg','خلفية جديدة'],
+ ['طبّق لون الخلفية على جميع الشرائح «تطبيق على الكل»',t=>t==='bgall','كل الشرائح بنفس اللون'],
+ ['اختر تصميمًا (سمة) من تبويب تصميم',t=>t==='theme','تصميم احترافي'],
+ ['حدّد عنصرًا وأضف له حركة مخصصة (تبويب حركات)',(t,d)=>t==='an'&&d.a,'تتحرك العناصر'],
+ ['أضف صوتًا للحركة 🔊',(t,d)=>t==='ans'&&d.s!=='[بلا صوت]','حركة بصوت'],
+ ['اختر مرحلة انتقالية ثم «تطبيق على الكل» (تبويب انتقالات)',(t,d)=>t==='trall'&&d.t!=='بلا','انتقالات بين كل الشرائح'],
+ ['اعرض الشرائح ▶️ (عرض الشرائح ← من البداية) وشاهد عملك',t=>t==='show','عرض رائع!']]);
+ const a=newSlide('title');a.items[0].t='رحلة إلى ليبيا';a.items[1].t='إعداد: تلاميذ الصف السابع';
+ const b=newSlide('tc');b.items[0].t='مدن ليبية';b.items[1].t='طرابلس\nبنغازي\nسبها\nغدامس';
+ const c=newSlide('pic');c.items[0].t='لبدة الكبرى';c.items[1]=Object.assign(c.items[1],{k:'img',img:0});c.items[2].t='مدينة رومانية قرب الخمس';
+ const d=newSlide('to');d.items[0].t='شكرًا لكم 🌟';d.items[0].f.al='center';d.items[0].y=40;
+ PPT($('pp11'),{slides:[a,b,c,d],on:M.check});
+ const M2=Missions($('ms11b'),[
+ ['الشريحة 1 (عنوان): «مدرستي الجميلة» والفرعي «إعداد التلميذة أنسام عبد الغني»',(t,d,S)=>{const x=S.slides[0].items;return x.some(i=>i.k==='title'&&/مدرستي/.test(i.t))&&x.some(i=>i.k==='sub'&&/أنسام/.test(i.t))},'الشريحة الأولى جاهزة'],
+ ['الشريحة 2 (عنوان فقط): اكتب «الحاسوب»',(t,d,S)=>S.slides.some(s=>s.lay==='to'&&s.items.some(i=>i.k==='title'&&/الحاسوب/.test(i.t))),'الشريحة الثانية جاهزة'],
+ ['الشريحة 3 (صورة مع تسمية توضيحية): صورة وعنوان «بلدي الحبيب»',(t,d,S)=>S.slides.some(s=>s.lay==='pic'&&s.items.some(i=>i.k==='img')&&s.items.some(i=>/بلدي/.test(i.t||''))),'الشريحة الثالثة جاهزة'],
+ ['الشريحة 4 (عنوان ومحتوى): جدول الدرجات (اضغط ▦ داخل المحتوى)',(t,d,S)=>allItems(S).some(i=>i.k==='tbl'&&i.tb.flat().join('|').includes('أنسام')&&i.tb.flat().includes('95')),'الجدول جاهز'],
+ ['الشريحة 5: مخطط SmartArt هيكلي «أشهر السنة» ← يناير، فبراير، مارس',(t,d,S)=>allItems(S).some(i=>{if(i.k!=='smart')return false;const a=[];(function w(n){a.push(n.t);(n.k||[]).forEach(w)})(i.sm.root);const s=a.join('|');return /أشهر/.test(s)&&/يناير/.test(s)&&/فبراير/.test(s)&&/مارس/.test(s)}),'المخطط جاهز'],
+ ['احفظ العرض باسم «مدرستي الجميلة»',(t,d)=>(t==='saveas'||t==='save')&&/مدرستي/.test(d.name||''),'🏫 المشروع محفوظ!']]);
+ PPT($('pp11b'),{on:M2.check})})();
+MCQP($('q11a'),bank([['لإضافة مراحل انتقالية بين الشرائح نضغط على تبويب:',['انتقالات','حركات','تصميم']],['لتطبيق الانتقال على جميع الشرائح نضغط:',['تطبيق على الكل','معاينة','حفظ']],['لمعاينة الحركات الانتقالية نضغط زر:',['معاينة','إغلاق','لصق']],['تظهر الشريحة تلقائيًا بعد زمن محدد عند تحديد خيار:',['«بعد» مع زمن','«عند النقر بالماوس» فقط','بلا']]]));
+addSecs('p11',[],[{t:'السؤال الأول (ص 73):',q:'عدّد ثلاث تنسيقات يمكن استخدامها على شرائح العرض التقديمي:',h:'من دروس التنسيق',s:['تغيير نوع الشريحة (التخطيط)','تغيير لون خلفية الشريحة','تصميم الشريحة (القوالب الجاهزة)','(وأيضًا: الحركات المخصصة والمراحل الانتقالية)'],a:''},{t:'السؤال الثاني:',q:'اذكر خطوات حذف شريحة:',h:'خطوتان',s:['اضغط بزر الفأرة الأيمن على الشريحة المراد حذفها','اضغط على أمر «حذف شريحة» فيتم حذفها'],a:''},{t:'السؤال الثالث:',q:'عدّد أربع تأثيرات ضمن مجموعة «إضافة حركة» تستخدم في الحركات المخصصة للنصوص والصور:',h:'من تبويب حركات',s:['ظهور','تلاشي','طيران للداخل','تكبير (وأيضًا: ارتداد، دوران…)'],a:''},{t:'السؤال الأول (ص 74):',q:'اذكر خمسة أنواع شرائح يمكن إدراجها:',h:'من قائمة شريحة جديدة',s:['شريحة عنوان','عنوان ومحتوى','عنوان المقطع','محتويان / مقارنة','عنوان فقط / فارغ / صورة مع تسمية توضيحية'],a:''},{t:'السؤال الثالث (ص 74):',q:'اكتب خطوات: (أ) حذف شريحة (ب) تغيير تخطيط شريحة:',h:'زر الفأرة الأيمن',s:['(أ) زر الفأرة الأيمن على الشريحة ← حذف شريحة','(ب) زر الفأرة الأيمن على الشريحة ← تخطيط ← نختار نوع الواجهة'],a:''},{t:'السؤال الرابع (ص 74):',q:'اذكر ثلاث فوائد للعرض التقديمي:',h:'تذكّر الدرس الرابع',s:['جذب انتباه المتلقين وتشويقهم','تسهيل إيصال المعلومة وترسيخها','تنظيم أفكار المتحدث وتسلسلها'],a:''}]);
+MCQP($('q11'),bank([['لنسخ شريحة: زر الفأرة الأيمن على الشريحة ثم:',['نسخ، ثم على مكان آخر لصق','حذف شريحة','تخطيط']],['لتغيير لون خلفية جميع الشرائح بنفس اللون نضغط:',['تطبيق على الكل','إعادة تعيين','إلغاء']],['القوالب الجاهزة لتصميم الشرائح نجدها في تبويب:',['تصميم','إدراج','ملف']],['لإعطاء نص أو صورة حركة عند العرض نستخدم تبويب:',['حركات','انتقالات','الشريط الرئيسي']],['لإضافة صوت للحركة نفتح:',['خيارات التأثير ونختار الصوت','شريط الحالة','حفظ باسم']],['«جزء الحركة» يعرض:',['قائمة الحركات المضافة وترتيبها','الطابعات','الملفات المحفوظة']],['تأثيرات الانتقال بين الشرائح مثل (تلاشي، دفع، مسح) في تبويب:',['انتقالات','حركات','تصميم']],['لعرض الشرائح بملء الشاشة نختار:',['عرض الشرائح ← من البداية','ملف ← حفظ','إدراج ← جدول']]]));
+
+/* ---------- الدرس 12 ---------- */
+(function(){const TL=[['canva','✨ Canva AI'],['visme','🧠 Visme'],['gs','👥 Google Slides']];let tool='canva',deck=null,var0=0;
+ $('aiT').innerHTML=TL.map(([k,n])=>'<button data-k="'+k+'" class="'+(k===tool?'on':'')+'">'+n+'</button>').join('');
+ $('aiT').querySelectorAll('button').forEach(b=>b.onclick=()=>{tool=b.dataset.k;$('aiT').querySelectorAll('button').forEach(y=>y.classList.toggle('on',y===b));$('aiOut').innerHTML='';$('aiS').innerHTML='';$('aiI').placeholder=tool==='gs'?'اكتب عنوان عرض جماعي… مثلًا: مشروع النظافة':'اكتب فكرتك… مثلًا: الفضاء الخارجي'});
+ const TOP=[[/فضاء|كوكب|نجوم|قمر|شمس/,['🚀','🪐','🌌','👨‍🚀'],['#0b1026','#3b2a80','#facc15'],['ما هو الفضاء؟','كواكب المجموعة الشمسية','حقائق مدهشة']],[/حيوان|أسد|قط|طيور|جمل/,['🦁','🐘','🐪','🦅'],['#14532d','#65a30d','#fde047'],['عالم الحيوان','أين تعيش؟','حقائق طريفة']],[/ليبيا|طرابلس|بنغازي|آثار|مدين/,['🏛️','🌴','🐪','🏖️'],['#7c2d12','#ea580c','#fde68a'],['تعرّف على بلادي','معالم وآثار','لماذا نحبها؟']],[/بحر|ماء|مطر|نهر/,['🌊','🐬','💧','🐠'],['#0c4a6e','#0ea5e9','#e0f2fe'],['سر الماء','أين نجد الماء؟','كيف نحافظ عليه؟']],[/رياض|كرة|صحة|غذاء/,['⚽','🏃','🥗','🏅'],['#065f46','#10b981','#fef3c7'],['الرياضة والصحة','فوائد الرياضة','نصائح ذهبية']],[/حاسوب|تقنية|ذكاء|روبوت/,['💻','🤖','🧠','🛰️'],['#1e1b4b','#7048e8','#a5f3fc'],['عالم التقنية','كيف تعمل؟','مستقبلنا']],[/./,['💡','📚','🌟','🎯'],['#312e81','#6366f1','#fef9c3'],['مقدمة','أفكار رئيسية','الخلاصة']]];
+ const slideH=(t,sub,ic,c,v)=>'<div class="slideD" style="background:'+(v===1?'linear-gradient(135deg,'+c[0]+','+c[1]+')':v===2?c[2]:'radial-gradient(circle at 80% 20%,'+c[1]+','+c[0]+')')+';color:'+(v===2?c[0]:'#fff')+';animation:pop .5s"><div contenteditable="true" class="aiE" style="position:absolute;top:16%;right:6%;left:40%;font-weight:800;font-size:7cqw;outline:none">'+esc(t)+'</div><div style="position:absolute;top:52%;right:6%;left:40%;font-size:3.6cqw;opacity:.9;white-space:pre-line">'+esc(sub)+'</div><div style="position:absolute;left:6%;top:18%;font-size:22cqw">'+ic+'</div></div>';
+ const gen=()=>{const idea=$('aiI').value.trim()||'الفضاء الخارجي';const T=TOP.find(t=>t[0].test(idea));deck={idea,T};$('aiOut').innerHTML='<div class="hint" style="text-align:center">'+(tool==='canva'?'🪄 Magic Design يجهّز التصميم…':tool==='visme'?'🧠 المحرر الذكي يرتّب العناصر وينسّقها…':'☁️ إنشاء عرض في Google Drive…')+'</div><div class="meter"><i id="aiM"></i></div>';
+  setTimeout(()=>$('aiM').style.width='100%',50);setTimeout(()=>{if(tool==='canva'){$('aiS').innerHTML=[0,1,2].map(v=>'<button class="btn'+(v===0?' main':'')+'" data-v="'+v+'">🎨 التصميم '+(v+1)+'</button>').join('');$('aiS').querySelectorAll('button').forEach(b=>b.onclick=()=>{var0=+b.dataset.v;$('aiS').querySelectorAll('button').forEach(y=>y.classList.toggle('main',y===b));show()})}else $('aiS').innerHTML='';var0=tool==='visme'?1:0;show()},1300)};
+ const show=()=>{const {idea,T}=deck;const [_,ic,c,ts]=T;let h='<div class="gen">'+slideH(idea,'عرض تقديمي مدهش',ic[0],c,var0)+slideH(ts[1],'• '+ts[0]+'\n• '+ts[2],ic[1],c,var0)+slideH('شكرًا لكم','أسئلتكم؟',ic[2],c,var0)+'</div>';
+  if(tool==='gs')h+='<div id="gsC" class="hint" style="text-align:center">👥 سارة (زميلتك) تكتب الآن في الشريحة 2… <span id="gsT"></span></div>';
+  h+='<div class="fb" id="aiF">✍️ الآن أضف بصمتك: اضغط على عنوان أي شريحة وعدّله بكلماتك</div>';$('aiOut').innerHTML=h;
+  $('aiOut').querySelectorAll('.aiE').forEach(e=>e.oninput=()=>{$('aiF').innerHTML='🌟 رائع! هذه هي الأصالة: الأداة تسرّع العمل، وعقلك يُبدع.';cheer();$('aiOut').querySelectorAll('.aiE').forEach(x=>x.oninput=null)});
+  if(tool==='gs'){const w='أضفتُ صورة لفريقنا 📸';let i=0;const tt=setInterval(()=>{const g=$('gsT');if(!g){clearInterval(tt);return}g.textContent='«'+w.slice(0,++i)+'»';if(i>=w.length)clearInterval(tt)},120)}};
+ $('aiGo').onclick=gen;$('aiI').onkeydown=e=>{if(e.key==='Enter')gen()}})();
+sortGame('tlP','tlC','tlOut',[['✨ Canva AI','','#7048e8'],['🧠 Visme','','#0ea5e9'],['👥 Google Slides','','#f59e0b']],
+ [['Magic Design: اكتب فكرة فتظهر شرائح جاهزة',0,'التصميم السحري'],['عروض جميلة وجاهزة في دقائق قليلة',0,'خلاصة Canva AI'],['المحرر الذكي يرتّب العناصر وينسّق النصوص تلقائيًا',1,'Visme'],['تصميم ذكي وجذاب بدون تعقيد وبشكل مجاني',1,'خلاصة Visme'],['تحتاج فقط حسابًا على Google',2,'Google Slides'],['تعمل مع زملائك على نفس العرض في نفس الوقت',2,'العمل الجماعي'],['تجدها في Google Drive',2,'Google Slides']]);
+sortGame('vlP','vlC','vlOut',[['✅ استخدام مسؤول','','#16a34a'],['❌ استخدام غير مسؤول','','#dc2626']],
+ [['أستخدم الأداة لاقتراح الألوان ثم أعدّل بلمستي',0,'التوازن بين الكفاءة والفهم'],['أتحقق من صحة المعلومات المقترحة قبل عرضها',0,'التفكير النقدي'],['أذكر أنني استعنت بأداة ذكية',0,'الأمانة الفكرية'],['أتعلم أساسيات التصميم في PowerPoint أولًا',0,'الفهم العميق'],['أنسب عرضًا كاملًا صنعته الأداة لنفسي وحدي',1,'ليست أمانة'],['أقبل كل ما تقترحه الأداة دون مراجعة',1,'يجب أن تراجع وتعدّل'],['أترك الأداة تفكر بدلًا عني في كل شيء',1,'استخدمها بذكاء لا باتّكال']]);
+MCQP($('q12'),bank([['الذكاء الاصطناعي هو:',['قدرة البرامج على التفكير والتعلم مثلنا لمساعدتنا','برنامج لتنسيق الخطوط فقط','نوع من الطابعات']],['ميزة «Magic Design» (التصميم السحري) موجودة في:',['Canva','Google Slides','Paint']],['من مزايا Google Slides:',['العمل مع الزملاء على نفس العرض في نفس الوقت','لا يحتاج إنترنت أبدًا','يطبع تلقائيًا']],['أداة يعتمد فيها المحرر الذكي على ترتيب العناصر وتنسيق النصوص تلقائيًا:',['Visme','Notepad','Excel']],['للبدء في Google Slides تحتاج فقط إلى:',['حساب Google','طابعة','ماسح ضوئي']],['هل كل الأدوات الذكية مجانية بالكامل؟',['لا، بعضها مجاني وبعضها يتطلب اشتراكًا مدفوعًا','نعم كلها مجانية','كلها مدفوعة']],['الاستخدام الأمين للذكاء الاصطناعي يعني:',['ألا أنسب عمل الآلة لنفسي بالكامل','أن أنسخ كل شيء دون تعديل','ألا أتعلم البرنامج']],['«وراء كل تصميم ذكي عين ناقدة وفكر واعٍ» تعني:',['راجع وعدّل وأضف بصمتك','اقبل كل ما تقترحه الأداة','لا تستخدم التقنية']]]));
+chapterTest('rv2',[['أشهر برنامج لتصميم العروض التقديمية:',['MS PowerPoint','MS Word','MS Excel']],['من عناصر العرض الناجح:',['المحتوى والجمهور والمتحدث','الألوان الكثيرة','الأصوات الكثيرة']],['الجزء الذي يظهر أعلى النافذة وفيه اسم المستند:',['شريط العنوان','شريط الحالة','حيز الملاحظات']],['تظهر فيه الشرائح مدرجة على جانب النافذة:',['حيز المخطط التفصيلي','حيز العمل','شريط الأدوات']],['أيقونة B تجعل النص:',['غامقًا','مائلًا','مسطّرًا']],['لفتح شاشة «خط» نضغط على:',['السهم أسفل مجموعة خط','زر الحفظ','تبويب تصميم']],['المخطط الهيكلي يُدرج من:',['رسم SmartArt','إدراج صورة','تنسيق الخلفية']],['«إضافة شكل أسفل» تضيف:',['شكلًا فرعيًا تحت المحدد','شكلًا في نفس المستوى','شكلًا فوق المحدد']],['اختصار الحفظ:',['Ctrl + S','Ctrl + C','Ctrl + V']],['لحفظ الملف لأول مرة:',['حفظ باسم','طباعة','فتح']],['«بدون ترتيب» في الطباعة تخرج الصفحات هكذا:',['1,1 2,2 3,3','1,2,3 1,2,3','3,2,1']],['لتغيير خلفية كل الشرائح بنفس اللون:',['تطبيق على الكل','إعادة تعيين الخلفية','لصق']],['الحركات المخصصة للنصوص والصور في تبويب:',['حركات','انتقالات','ملف']],['تأثيرات الانتقال بين الشرائح في تبويب:',['انتقالات','حركات','إدراج']],['من الأدوات الذكية في تصميم العروض:',['Canva AI و Visme و Google Slides','Paint و Notepad','الآلة الحاسبة']],['الاستخدام المسؤول للذكاء الاصطناعي:',['أراجع وأعدّل وأضيف بصمتي','أنسخ دون تفكير','أنسب العمل لنفسي']]]);
+
+</script>
+<script>window.NARR=["m1", "m2", "m3", "rv1", "p4", "p6", "p7", "p9", "p10", "p11", "p12", "rv2"];window.AUDIO_BASE="audio-c7/";</script>
+<style>
+.fxbar{position:fixed;left:10px;bottom:10px;z-index:90;display:flex;gap:6px}
+.fxbar button{width:46px;height:46px;border-radius:50%;border:none;background:#1f2a44;color:#fff;font-size:1.3rem;box-shadow:0 4px 12px #0004;cursor:pointer}
+.say{border:2px solid #f08c2e;background:#fff7e8;color:#b35b00;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.9rem;margin:0 6px;vertical-align:middle;font-family:inherit}
+.say.on{background:#f08c2e;color:#fff;animation:pul 1s infinite}
+@keyframes pul{50%{transform:scale(1.06)}}
+.cfx{position:fixed;pointer-events:none;z-index:95;font-size:20px;animation:cf 1.1s ease-out forwards}
+@keyframes cf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+.pop{animation:popk .35s}
+@keyframes popk{50%{transform:scale(1.08)}}
+.shk{animation:shk .4s}
+@keyframes shk{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.stars{position:fixed;bottom:16px;left:66px;background:#1f2a44;color:#fff;border-radius:20px;padding:3px 14px;font-weight:900;z-index:91;font-family:inherit;transition:.3s}
+</style>
+<div class="fxbar"><button id="fxMute" title="الأصوات">🔊</button></div>
+<div class="stars" id="fxStars">⭐ 0</div>
+<script>
+(function(){let AC=null,mute=false,stars=0;try{mute=localStorage.getItem('lb_mute')==='1';stars=+localStorage.getItem('lb_stars_'+location.pathname)||0}catch(e){}
+ const mb=document.getElementById('fxMute');const sb=document.getElementById('fxStars');const upd=()=>{mb.textContent=mute?'🔇':'🔊';sb.textContent='⭐ '+stars};upd();
+ mb.onclick=()=>{mute=!mute;try{localStorage.setItem('lb_mute',mute?'1':'0')}catch(e){}upd();if(mute&&cur){cur.pause();cur=null;document.querySelectorAll('.say.on').forEach(b=>b.classList.remove('on'))}};
+ function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC}
+ function tone(f,t0,d,type,v){const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,a.currentTime+t0);g.gain.setValueAtTime(0,a.currentTime+t0);g.gain.linearRampToValueAtTime(v||.18,a.currentTime+t0+.015);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+t0+d);o.connect(g);g.connect(a.destination);o.start(a.currentTime+t0);o.stop(a.currentTime+t0+d+.05)}
+ const S={ok:()=>{tone(523,0,.15,'triangle');tone(659,.09,.15,'triangle');tone(784,.18,.3,'triangle')},no:()=>{tone(220,0,.18,'sawtooth',.08);tone(185,.12,.25,'sawtooth',.08)},tick:()=>tone(900,0,.04,'square',.03),win:()=>{[523,659,784,1046,784,1046].forEach((f,i)=>tone(f,i*.1,.22,'triangle'))},whoosh:()=>{const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.frequency.setValueAtTime(300,a.currentTime);o.frequency.exponentialRampToValueAtTime(1200,a.currentTime+.25);g.gain.setValueAtTime(.06,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.3);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.32)}};
+ window.FX=S;
+ function confetti(el,big){const r=el&&el.getBoundingClientRect?el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};const E=['⭐','✨','🎉','💚','🌟','🎊'];const n=big?26:9;
+  for(let i=0;i<n;i++){const s=document.createElement('div');s.className='cfx';s.textContent=E[i%E.length];s.style.left=(r.left+r.width/2)+'px';s.style.top=(r.top+r.height/2)+'px';const a=Math.random()*6.28,d=(big?160:70)+Math.random()*80;s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',(Math.sin(a)*d-40)+'px');s.style.setProperty('--r',(Math.random()*720-360)+'deg');document.body.appendChild(s);setTimeout(()=>s.remove(),1200)}}
+ let last=0,lastNo=0;function hit(el,good){const now=Date.now();if(good){if(now-lastNo<400||now-last<250)return;last=now;S.ok();confetti(el);stars++;try{localStorage.setItem('lb_stars_'+location.pathname,stars)}catch(e){}upd();sb.classList.add('pop');setTimeout(()=>sb.classList.remove('pop'),400);el.classList&&el.classList.add('pop');setTimeout(()=>el.classList&&el.classList.remove('pop'),400);
+   if(stars%10===0){S.win();confetti(sb,true)}}else{lastNo=now;S.no();el.classList&&el.classList.add('shk');setTimeout(()=>el.classList&&el.classList.remove('shk'),450)}}
+ new MutationObserver(ms=>{ms.forEach(m=>{const t=m.target;if(!(t instanceof Element))return;if(m.type==='attributes'){const was=(m.oldValue||'').split(/\s+/);const c=t.classList;if(c.contains('ok')&&!was.includes('ok')&&(t.matches('button,input,.fb,.opt')))hit(t,true);else if(c.contains('no')&&!was.includes('no')&&t.matches('button,input,.opt'))hit(t,false)}})}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class'],attributeOldValue:true});
+ document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&!b.classList.contains('say')&&b.id!=='fxMute')S.tick()},true);
+ document.addEventListener('input',e=>{if(e.target.type==='range'){const n=Date.now();if(!window._lt||n-window._lt>90){window._lt=n;tone(400+(+e.target.value-+e.target.min)/(+e.target.max-+e.target.min+.001)*600,0,.03,'sine',.03)}}},true);
+ /* narration */
+ let cur=null;const base=window.AUDIO_BASE||'audio/';
+ function addSay(){document.querySelectorAll('.page').forEach(p=>{if(!(window.NARR||[]).includes(p.id))return;const h=p.querySelector('h2');if(!h||h.querySelector('.say'))return;const b=document.createElement('button');b.className='say';b.textContent='🔊 اسمع';
+  b.onclick=()=>{if(cur){cur.pause();const was=b.classList.contains('on');document.querySelectorAll('.say.on').forEach(x=>x.classList.remove('on'));cur=null;if(was)return}if(mute){mute=false;upd()}const a=new Audio(base+p.id+'.mp3');cur=a;b.classList.add('on');b.textContent='⏸️ إيقاف';a.onended=a.onerror=()=>{b.classList.remove('on');b.textContent='🔊 اسمع';cur=null};a.play().catch(()=>{b.classList.remove('on');b.textContent='🔊 اسمع'})};h.appendChild(b)})}
+ addSay();document.querySelectorAll('#bar button,[data-go]').forEach(b=>b.addEventListener('click',()=>{S.whoosh();if(cur){cur.pause();cur=null;document.querySelectorAll('.say').forEach(x=>{x.classList.remove('on');x.textContent='🔊 اسمع'})}}));
+})();
+</script>
+
+<script>(function(){function s(t,q){try{parent.postMessage(q?{lbt:t,qq:q}:{lbt:t},'*')}catch(e){}}
+var seen=new WeakSet();
+function qinfo(b,cb){setTimeout(function(){try{var G=b.parentElement,opts=[].slice.call(G.children).filter(function(x){return x.classList.contains('opt')});if(opts.length<2)return cb(null);
+ var p=G,qEl=null;for(var i=0;i<4&&p&&!qEl;i++){qEl=[].slice.call(p.children).filter(function(c){return !c.classList.contains('opt')&&!c.querySelector('.opt')&&!c.classList.contains('fb')&&!c.classList.contains('sc')&&c.textContent.trim().length>2})[0];if(!qEl)p=p.parentElement}
+ if(!qEl||qEl.querySelector('canvas,svg,img,input,table'))return cb(null);
+ var o=opts.map(function(x){return x.textContent.trim()}),r=-1,w=opts.indexOf(b);opts.forEach(function(x,i){if(x.classList.contains('ok'))r=i});
+ cb({q:qEl.textContent.replace(/\s+/g,' ').trim().replace(/^\d+\)\s*/,'').slice(0,300),o:o,r:r,w:w})}catch(e){cb(null)}},60)}
+new MutationObserver(function(ms){ms.forEach(function(m){
+ if(m.type==='attributes'){var t=m.target,c=t.classList,o=' '+(m.oldValue||'')+' ';
+  if((c.contains('ok')||c.contains('good'))&&!/ (ok|good) /.test(o)){if(c.contains('opt')&&!t.parentElement.querySelector('.opt.no'))qinfo(t,function(q){s('ok',q)});else s('ok')}
+  if((c.contains('no')||c.contains('bad'))&&!/ (no|bad) /.test(o)){if(c.contains('opt'))qinfo(t,function(q){s('no',q)});else s('no')}}
+ else m.addedNodes.forEach(function(n){if(n.nodeType===1&&n.tagName==='SPAN'&&!seen.has(n)){seen.add(n);if(n.classList.contains('ok'))s('ok');if(n.classList.contains('no'))s('no')}});
+})}).observe(document.documentElement,{attributes:true,subtree:true,attributeOldValue:true,attributeFilter:['class'],childList:true});
+document.addEventListener('click',function(){s('act')},true);})();</script>
+
+</body>
+</html>

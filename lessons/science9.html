@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>علوم الصف التاسع – الكتاب الحي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+html{color-scheme:light}
+button,input,select{font-family:inherit;color:#1f2a44}
+:root{--ink:#1f2a44;--gn:#2e9e5b;--gn2:#e6f6ec;--or:#f08c2e;--rd:#d64545;--bl:#3b6fd8;--line:#e2e8ee;--soft:#6b7690}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Cairo',Tahoma,sans-serif;background:#eaf3ee;color:var(--ink);line-height:1.85}
+.book{max-width:780px;margin:12px auto;background:#fff;border-radius:16px;box-shadow:0 10px 30px #0002;overflow:hidden}
+header{background:linear-gradient(135deg,#1d6e43,#2e9e5b);color:#fff;padding:16px;text-align:center}
+header h1{margin:0;font-size:1.35rem;font-weight:900}header div{opacity:.9;font-size:.88rem}
+.bar{display:flex;gap:6px;padding:8px 10px;background:var(--gn2);border-bottom:2px solid #c6e8d3;position:sticky;top:0;z-index:5;overflow-x:auto}
+.bar button{flex:0 0 auto;border:2px solid var(--gn);background:#fff;color:#1d6e43;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.88rem}
+.bar button.on{background:var(--gn);color:#fff}
+.page{display:none;padding:14px 16px 30px;animation:in .35s}.page.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h2{color:#1d6e43;margin:4px 0 6px;font-size:1.35rem;line-height:1.5}
+.num{display:inline-block;background:var(--gn);color:#fff;border-radius:10px;padding:0 10px;margin-left:6px;font-size:1rem}
+.box{border:2px solid var(--line);border-radius:16px;padding:14px;margin:14px 0;background:#fff}
+.box h3{margin:0 0 6px;font-size:1.05rem;color:#1d6e43}
+.lab{border-style:dashed;border-color:#9fd3b4;background:#fbfefc}
+.law{background:#fff7e8;border:2px solid #f5c27a;border-radius:14px;padding:10px 14px;margin:10px 0;font-weight:800;text-align:center}
+.know{background:#fff0f6;border-right:5px solid #d6458e;border-radius:10px;padding:8px 12px;margin:10px 0}
+.know b:first-child{color:#b0306f}
+.btn{border:2px solid var(--ink);background:#fff;border-radius:10px;padding:6px 14px;font-weight:800;cursor:pointer;font-size:.95rem}
+.btn.main{background:var(--gn);border-color:var(--gn);color:#fff}.btn.or{background:var(--or);border-color:var(--or);color:#2a1600}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;justify-content:center}
+.fb{font-weight:800;min-height:1.4em;text-align:center;margin-top:6px}.fb.ok{color:var(--gn)}.fb.no{color:var(--rd)}
+.prob{background:#f5fbf7;border-radius:14px;padding:10px;text-align:center;font-weight:700}
+.sl{display:flex;align-items:center;gap:8px;margin:4px 0}.sl label{min-width:110px;font-weight:800}.sl input{flex:1;accent-color:var(--gn)}
+.opt{display:block;width:100%;text-align:right;margin:5px 0}
+.opt.ok{background:#dff5e7;border-color:var(--gn)}.opt.no{background:#fde4e4;border-color:var(--rd)}
+.sc{text-align:center;font-weight:900;background:var(--gn2);border-radius:12px;padding:8px}
+table.t{border-collapse:collapse;width:100%;font-size:.92rem;margin:6px 0}table.t td,table.t th{border:1px solid #cfe5d8;padding:5px 8px}table.t th{background:var(--gn2)}
+.chap{border:2px solid var(--line);border-radius:14px;margin:8px 0;overflow:hidden}
+.chap>div:first-child{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;font-weight:800;background:#f8fbf9}
+.chap .cn{background:var(--gn);color:#fff;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;flex:0 0 auto}
+.chap .ls{display:none;padding:4px 12px 10px}.chap.open .ls{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px dashed var(--line);font-size:.95rem}
+.li .pg{margin-right:auto;color:var(--soft);font-size:.8rem}.li.ready{cursor:pointer;font-weight:800;color:#1d6e43}
+.tg{font-size:.72rem;border-radius:8px;padding:0 8px;font-weight:800}.tg.r{background:#e6f6ec;color:#1d7a3f}.tg.s{background:#f1f1f1;color:#999}
+.part{font-weight:900;color:#fff;background:#1d6e43;border-radius:10px;padding:4px 12px;margin:14px 0 4px}
+svg{direction:ltr}svg text{font-family:Cairo,sans-serif}
+.chip{display:inline-block;border-radius:10px;padding:2px 10px;margin:2px;font-weight:800;cursor:pointer;border:2px solid transparent}
+footer{text-align:center;color:#999;font-size:.8rem;padding:10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+<style>/*darkfix*/input,select,textarea,.cf,.M input.c{background-color:#fff !important;color:#1f2a44 !important;-webkit-text-fill-color:#1f2a44 !important;caret-color:#1f2a44}input.cf.ok{background-color:#eefaf2 !important}input.cf.no{background-color:#fdeeee !important}svg text{font-family:Cairo,Tahoma,Arial,sans-serif}</style>
+</head>
+<body>
+<div class="book">
+<header><h1>🔬 علوم الصف التاسع – الكتاب الحي</h1><div>مرحلة التعليم الأساسي · الجزآن الأول والثاني · 2025–2026</div></header>
+<div class="bar" id="bar">
+  <button data-p="home" class="on">📚 الفهرس</button>
+  <button data-p="c1">1-1 ما الضوء؟</button>
+  <button data-p="c2">1-3 سرعة الضوء</button>
+  <button data-p="c3">1-4 الانعكاس والمرآة المستوية</button>
+  <button data-p="c4">1-6 المرايا الكرية</button>
+  <button data-p="c5">1-8 الانكسار</button>
+  <button data-p="c6">1-10 التشتت</button>
+  <button data-p="c7">1-11 إبصار الألوان</button>
+  <button data-p="rev">🏁 مراجعة الضوء</button>
+  <button data-p="e1" style="border-color:var(--or)">2-1 تأثيرات الكهرباء</button>
+  <button data-p="e2">2-3 الدائرة الكهربائية</button>
+  <button data-p="e3">2-5 القدرة والفاتورة</button>
+  <button data-p="e4">2-8 الأمان والتوفير</button>
+  <button data-p="rev2">🏁 مراجعة الكهرباء</button>
+  <button data-p="h1" style="border-color:var(--or)">3-1 الوراثة</button>
+  <button data-p="h2">3-3 تكوّن الجنين</button>
+  <button data-p="h3">3-6 الدورة والبلوغ</button>
+  <button data-p="h4">3-8 الإخصاب</button>
+  <button data-p="h5">3-11 الوقاية</button>
+  <button data-p="rev3">🏁 مراجعة التكاثر</button>
+  <button data-p="k1" style="border-color:#6b4fd8">ج2: 1-1 الحرارة</button>
+  <button data-p="k2">1-3 الضوء والخلط والكهرباء</button>
+  <button data-p="k3">1-6 فيزيائي أم كيميائي</button>
+  <button data-p="k4">1-7 أصدقاء أم أعداء</button>
+  <button data-p="krev">🏁 مراجعة التغيرات</button>
+  <button data-p="v1" style="border-color:#6b4fd8">ج2: 2-1 إصدار الصوت</button>
+  <button data-p="v2">2-4 سرعة الصوت</button>
+  <button data-p="v3">2-5 التردد</button>
+  <button data-p="v4">2-6 الأذن</button>
+  <button data-p="v5">2-8 الضوضاء</button>
+  <button data-p="v6">2-9 فوق الصوتية</button>
+  <button data-p="vrev">🏁 مراجعة الصوت</button>
+  <button data-p="b1" style="border-color:#6b4fd8">ج2: 3-1 البيئة</button>
+  <button data-p="b2">3-4 سلاسل الغذاء</button>
+  <button data-p="b3">3-6 هرم الطاقة</button>
+  <button data-p="b4">3-7 الحفاظ على البيئة</button>
+  <button data-p="brev">🏁 مراجعة البيئة</button>
+  <button data-p="d1" style="border-color:#6b4fd8">4-1 دورة الكربون</button>
+  <button data-p="d2">4-3 دورة النيتروجين</button>
+  <button data-p="d3">4-4 المحللات</button>
+  <button data-p="drev">🏁 مراجعة الدورات</button>
+</div>
+
+<section class="page on" id="home">
+  <h2>فهرس الكتاب</h2>
+  <p style="margin:0">الدروس الجاهزة باللون الأخضر، والباقي قيد الإعداد ✨</p>
+  <div id="toc"></div>
+</section>
+
+<!-- 1-1 / 1-2 -->
+<section class="page" id="c1">
+  <div style="color:var(--soft);font-size:.85rem">الفصل 1 · ص 12–15</div>
+  <h2><span class="num">1-1</span>ما الضوء؟ والموجات الضوئية</h2>
+  <p>الضوء شكل من أشكال <b>الطاقة</b>، والشمس أكبر مصدر لها على الأرض. تنتقل طاقة الضوء كـ<b>موجات كهرومغناطيسية</b>، ولا تحتاج إلى وسط مادي، فتنتقل حتى في الفراغ.</p>
+  <div class="box lab"><h3>🌈 الطيف الكهرومغناطيسي: حرّك الطول الموجي</h3>
+    <div class="sl"><label>الطول الموجي</label><input type="range" id="wvS" min="0" max="100" value="55"></div>
+    <svg id="wv" viewBox="0 0 320 120" style="width:100%;display:block"></svg>
+    <div id="spec" style="display:flex;height:34px;border-radius:10px;overflow:hidden;direction:ltr;font-size:.7rem;font-weight:800;color:#fff;text-align:center"></div>
+    <div class="prob" id="wvT"></div></div>
+  <div class="know"><b>هل تعلم؟</b> الضوء المرئي جزء صغير جدًا من الطيف الكهرومغناطيسي. موجات الراديو والميكروويف التي تسخّن بها الطعام من نفس العائلة!</div>
+  <div class="box"><h3>✏️ اختبر نفسك</h3><div id="q1"></div></div>
+</section>
+
+<!-- 1-3 -->
+<section class="page" id="c2">
+  <div style="color:var(--soft);font-size:.85rem">الفصل 1 · ص 13</div>
+  <h2><span class="num">1-3</span>سرعة الضوء</h2>
+  <div class="law">سرعة الضوء = 3 × 10<sup>8</sup> م/ث (300 مليون متر في الثانية!)</div>
+  <div class="box lab"><h3>🏁 السباق الكبير (جدول 1-1 من كتابك)</h3>
+    <div class="btns"><button class="btn or" id="raceB">▶️ ابدأ السباق (ثانية واحدة)</button></div>
+    <div id="race"></div>
+    <div class="muted" style="font-size:.82rem;text-align:center;color:var(--soft)">المسافة المقطوعة في ثانية واحدة · المقياس لوغاريتمي حتى تظهر الحلزونة بجانب الضوء</div></div>
+  <div class="box lab"><h3>⛈️ لماذا نرى البرق قبل أن نسمع الرعد؟</h3>
+    <p style="margin:0;font-size:.92rem">الضوء يصلنا تقريبًا في نفس اللحظة، أما الصوت فسرعته 340 م/ث فقط. عُدّ الثواني بين البرق والرعد لتعرف بُعد العاصفة!</p>
+    <div class="sl"><label>الثواني = <b id="thV">3</b></label><input type="range" id="thS" min="1" max="15" value="3"></div>
+    <div class="prob" id="thT"></div>
+    <div class="btns"><button class="btn main" id="thB">⚡ أطلق البرق</button></div>
+    <div id="sky" style="height:70px;border-radius:12px;background:#24304d;position:relative;overflow:hidden;transition:background .1s"></div></div>
+  <div class="box"><h3>🏃 جرّب هذا (من كتابك)</h3><p style="margin:0">متى يجب على المتسابق في سباق 100 م أن يبدأ الجري: عند <b>رؤية</b> دخان مسدس البداية أم عند <b>سماع</b> صوته؟</p>
+    <div class="btns" id="runQ"><button class="btn" data-a="1">عند رؤية الدخان</button><button class="btn" data-a="0">عند سماع الصوت</button></div><div class="fb" id="runF"></div></div>
+</section>
+
+<!-- 1-4 / 1-5 -->
+<section class="page" id="c3">
+  <div style="color:var(--soft);font-size:.85rem">الفصل 1 · ص 14–19</div>
+  <h2><span class="num">1-4</span>انعكاس الضوء والمرايا المستوية</h2>
+  <div class="box lab"><h3>🔦 قانونا الانعكاس: حرّك المصباح</h3>
+    <div class="sl"><label>زاوية السقوط = <b id="rfV">40</b>°</label><input type="range" id="rfS" min="5" max="80" value="40"></div>
+    <svg id="rf" viewBox="0 0 320 220" style="width:100%;max-width:380px;display:block;margin:auto"></svg>
+    <div class="law" style="font-size:.95rem">1) زاوية الانعكاس = زاوية السقوط &nbsp;·&nbsp; 2) الشعاع الساقط والعمودي والمنعكس في مستوى واحد</div></div>
+  <div class="box lab"><h3>🪞 انعكاس منتظم أم انتشاري؟</h3>
+    <div class="btns"><button class="btn main" data-sf="0">سطح أملس (مرآة)</button><button class="btn" data-sf="1">سطح خشن (ورق)</button></div>
+    <svg id="sf" viewBox="0 0 320 160" style="width:100%;max-width:380px;display:block;margin:auto"></svg><div class="prob" id="sfT"></div></div>
+  <div class="box lab"><h3>🚑 لماذا تُكتب «إسعاف» مقلوبة؟ اكتب كلمة وانظر إليها في المرآة</h3>
+    <input id="mrIn" value="إسعاف" style="width:100%;padding:10px;border:2px solid var(--line);border-radius:12px;font-size:1.2rem;text-align:center">
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:8px;align-items:center;flex-wrap:wrap">
+      <div style="text-align:center"><div class="muted" style="font-size:.8rem">على السيارة</div><div id="mrA" style="font-size:1.6rem;font-weight:900;color:#d64545;transform:scaleX(-1);background:#fff;border:2px solid #eee;border-radius:10px;padding:4px 14px"></div></div>
+      <div style="font-size:1.6rem">➡️🪞</div>
+      <div style="text-align:center"><div class="muted" style="font-size:.8rem">في مرآة السائق الذي أمامها</div><div id="mrB" style="font-size:1.6rem;font-weight:900;color:#d64545;background:#e8f4ff;border:2px solid #bcd;border-radius:10px;padding:4px 14px"></div></div></div>
+    <div class="prob" style="margin-top:8px">المرآة المستوية تكوّن صورة <b>مقلوبة جانبيًا</b>، فتُكتب الكلمة مقلوبة لتظهر صحيحة في المرآة!</div></div>
+  <div class="box"><h3>📋 خواص الصورة في المرآة المستوية</h3><p style="margin:0">✔️ تقديرية (خلف المرآة، لا تتكون على حائل) · ✔️ معتدلة · ✔️ نفس حجم الجسم · ✔️ مقلوبة جانبيًا · ✔️ بُعدها عن المرآة = بُعد الجسم</p></div>
+  <div class="box"><h3>✏️ اختبر نفسك</h3><div id="q3"></div></div>
+</section>
+
+<!-- 1-6 / 1-7 -->
+<section class="page" id="c4">
+  <div style="color:var(--soft);font-size:.85rem">الفصل 1 · ص 19–22</div>
+  <h2><span class="num">1-6</span>المرايا المحدبة والمقعرة</h2>
+  <div class="btns"><button class="btn main" data-mm="cc">المرآة المقعرة</button><button class="btn" data-mm="cv">المرآة المحدبة</button></div>
+  <div class="box lab"><h3>🔭 حرّك الجسم وشاهد الصورة</h3>
+    <div class="sl"><label>بُعد الجسم</label><input type="range" id="mmS" min="20" max="140" value="110"></div>
+    <svg id="mm" viewBox="0 0 320 200" style="width:100%;display:block"></svg>
+    <div class="prob" id="mmT"></div></div>
+  <table class="t"><tr><th>وصف الصورة</th><th>المستوية</th><th>المحدبة</th><th>المقعرة</th></tr>
+   <tr><td>خلف المرآة (تقديرية)</td><td>✔️</td><td>✔️</td><td>عندما يكون الجسم قريبًا</td></tr>
+   <tr><td>أصغر من الجسم</td><td>—</td><td>✔️</td><td>عندما يكون الجسم بعيدًا</td></tr>
+   <tr><td>حقيقية ومقلوبة (على شاشة)</td><td>—</td><td>—</td><td>✔️ الجسم بعيد</td></tr>
+   <tr><td>معتدلة ومكبّرة</td><td>—</td><td>—</td><td>✔️ الجسم قريب</td></tr></table>
+  <div class="box"><h3>🚗 أين نستخدمها؟ اختر المرآة المناسبة</h3><div id="q4"></div></div>
+</section>
+
+<!-- 1-8 / 1-9 -->
+<section class="page" id="c5">
+  <div style="color:var(--soft);font-size:.85rem">الفصل 1 · ص 23–25</div>
+  <h2><span class="num">1-8</span>انكسار الضوء</h2>
+  <p><b>الانكسار</b> هو انحراف الضوء عن مساره عند انتقاله من وسط شفاف إلى آخر مختلف في الكثافة الضوئية، بسبب تغير سرعته.</p>
+  <div class="box lab"><h3>💧 أطلق شعاعًا من الهواء إلى الماء</h3>
+    <div class="btns"><button class="btn main" data-md="1.33">ماء</button><button class="btn" data-md="1.5">زجاج</button><button class="btn" data-md="2.42">ماس 💎</button></div>
+    <div class="sl"><label>زاوية السقوط = <b id="snV">45</b>°</label><input type="range" id="snS" min="0" max="85" value="45"></div>
+    <svg id="sn" viewBox="0 0 320 240" style="width:100%;max-width:380px;display:block;margin:auto"></svg>
+    <div class="prob" id="snT"></div></div>
+  <div class="box lab"><h3>🐟 صيد السمك بالرمح (من كتابك)</h3>
+    <p style="margin:0;font-size:.92rem">يرى الصياد السمكة في مكان أعلى من مكانها الحقيقي. اضغط حيث تريد أن تصوّب الرمح!</p>
+    <svg id="fish" viewBox="0 0 320 220" style="width:100%;max-width:380px;display:block;margin:auto;touch-action:manipulation;cursor:crosshair"></svg>
+    <div class="fb" id="fishF"></div><div class="btns"><button class="btn or" id="fishN">سمكة جديدة 🐟</button></div></div>
+  <table class="t"><tr><th>الانعكاس</th><th>الانكسار</th></tr><tr><td>زاوية السقوط = زاوية الانعكاس</td><td>زاوية السقوط ≠ زاوية الانكسار</td></tr><tr><td>الشعاعان في نفس الوسط</td><td>الشعاع المنكسر في وسط مختلف</td></tr><tr><td>السرعة لا تتغير</td><td>السرعة تتغير</td></tr></table>
+  <div class="box"><h3>✏️ اختبر نفسك</h3><div id="q5"></div></div>
+</section>
+
+<!-- 1-10 -->
+<section class="page" id="c6">
+  <div style="color:var(--soft);font-size:.85rem">الفصل 1 · ص 26 و30</div>
+  <h2><span class="num">1-10</span>تشتت الضوء خلال المنشور الزجاجي</h2>
+  <p>الضوء الأبيض يتكوّن من <b>سبعة ألوان</b>: الأحمر، البرتقالي، الأصفر، الأخضر، الأزرق، النيلي، البنفسجي. لكل لون طول موجي مختلف، فينكسر بزاوية مختلفة.</p>
+  <div class="box lab"><h3>🔺 أدخل الضوء الأبيض في المنشور</h3>
+    <div class="sl"><label>زاوية الشعاع</label><input type="range" id="prS" min="-12" max="12" value="0"></div>
+    <svg id="pr" viewBox="0 0 320 200" style="width:100%;max-width:400px;display:block;margin:auto;background:#141a2b;border-radius:14px"></svg>
+    <div class="prob" style="font-size:.95rem">البنفسجي ينكسر <b>أكثر</b> من الأحمر لأن سرعته في الزجاج أقل. هكذا يتكوّن <b>قوس قزح</b> في قطرات المطر 🌈</div></div>
+  <div class="box lab"><h3>🎡 تجربة قرص نيوتن</h3>
+    <div style="display:flex;justify-content:center"><div id="nw" style="width:170px;height:170px;border-radius:50%;background:conic-gradient(#e53935 0 14.3%,#fb8c00 0 28.6%,#fdd835 0 42.9%,#43a047 0 57.2%,#1e88e5 0 71.5%,#3949ab 0 85.8%,#8e24aa 0);border:4px solid #333;filter:blur(0)"></div></div>
+    <div class="sl"><label>السرعة</label><input type="range" id="nwS" min="0" max="100" value="0"></div>
+    <div class="prob" id="nwT">أدِر القرص بسرعة وراقب الألوان</div></div>
+</section>
+
+<!-- 1-11 -->
+<section class="page" id="c7">
+  <div style="color:var(--soft);font-size:.85rem">الفصل 1 · ص 27–30</div>
+  <h2><span class="num">1-11</span>إبصار الألوان</h2>
+  <div class="box lab"><h3>👁️ أجزاء العين: اضغط على أي جزء</h3>
+    <svg id="eye" viewBox="0 0 320 200" style="width:100%;max-width:380px;display:block;margin:auto"></svg>
+    <div class="prob" id="eyeT">اضغط على جزء من العين لتعرف وظيفته</div></div>
+  <div class="box lab"><h3>🎨 اخلط الألوان الأولية للضوء</h3>
+    <div class="btns"><button class="btn" data-c="r" style="border-color:#e53935">🔴 أحمر</button><button class="btn" data-c="g" style="border-color:#43a047">🟢 أخضر</button><button class="btn" data-c="b" style="border-color:#1e88e5">🔵 أزرق</button></div>
+    <svg id="mix" viewBox="0 0 300 220" style="width:100%;max-width:320px;display:block;margin:auto;background:#000;border-radius:14px"></svg>
+    <div class="prob" id="mixT"></div></div>
+  <div class="box lab"><h3>🌹 بأي لون يبدو الجسم؟</h3>
+    <div class="sl"><label>لون الجسم</label><select id="obC" style="flex:1;padding:6px;border-radius:10px"><option value="r">زهرة حمراء</option><option value="g">ورقة نبات خضراء</option><option value="b">قميص أزرق</option><option value="w">ورقة بيضاء</option><option value="y">موزة صفراء</option></select></div>
+    <div class="sl"><label>لون الضوء</label><select id="lgC" style="flex:1;padding:6px;border-radius:10px"><option value="w">أبيض</option><option value="r">أحمر</option><option value="g">أخضر</option><option value="b">أزرق</option></select></div>
+    <div style="display:flex;justify-content:center"><div id="obBox" style="width:200px;height:120px;border-radius:14px;display:grid;place-items:center;font-size:3rem;transition:.4s"></div></div>
+    <div class="prob" id="obT"></div></div>
+  <div class="know"><b>هل تعلم؟</b> شاشة التلفاز والجوال تصنع ملايين الألوان من ثلاثة ألوان فقط: الأحمر والأخضر والأزرق (RGB)!</div>
+  <div class="box"><h3>✏️ اختبر نفسك</h3><div id="q7"></div></div>
+</section>
+
+<section class="page" id="rev">
+  <h2>🏁 أسئلة المراجعة: الفصل الأول</h2>
+  <div id="revQ"></div><div class="sc" id="revSc"></div>
+  <div class="btns"><button class="btn main" id="revNew">🔄 اختبار جديد</button></div>
+  <div class="box" style="background:#fff7e8"><h3>💭 ركن التفكير</h3><p style="margin:0">1) عند انتقال ضوء من الهواء إلى الماء يحدث انعكاس وانكسار. ماذا تقول عن مجموع طاقتي الضوء المنعكس والمنكسر؟ (قانون حفظ الطاقة)<br>2) لماذا لا نرى الأشياء بوضوح عند الغوص دون نظارة؟<br>3) لماذا تعطي المرايا المحدبة مجال رؤية أوسع؟</p></div>
+</section>
+<!-- ===== SCIENCE CH2 ===== -->
+<section class="page" id="e1">
+  <div style="color:var(--soft);font-size:.85rem">الفصل 2 · ص 38–43</div>
+  <h2><span class="num">2-1</span>الطاقة الكهربائية وتأثيراتها</h2>
+  <p>الكهرباء هي <b>سريان الإلكترونات</b>. ولسريان التيار الكهربائي ثلاثة تأثيرات:</p>
+  <div class="btns" id="efT"><button class="btn main" data-ef="0">🔥 حراري</button><button class="btn" data-ef="1">🧪 كيميائي</button><button class="btn" data-ef="2">🧲 مغناطيسي</button></div>
+  <div class="box lab" id="efBox"></div>
+  <div class="box lab"><h3>🧲 المغناطيس الكهربائي: أغلق المفتاح</h3>
+    <div class="btns"><button class="btn or" id="emB">🔌 أغلق المفتاح</button></div>
+    <svg id="em" viewBox="0 0 320 170" style="width:100%;max-width:380px;display:block;margin:auto"></svg>
+    <div class="prob" id="emT"></div></div>
+  <div class="box"><h3>🎯 ما التأثير الناتج عن الكهرباء؟ (جدول كتابك ص 43)</h3><div id="qe1"></div></div>
+</section>
+
+<section class="page" id="e2">
+  <div style="color:var(--soft);font-size:.85rem">الفصل 2 · ص 43–51</div>
+  <h2><span class="num">2-3</span>التيار وفرق الجهد والمقاومة</h2>
+  <div class="box" style="background:#eef6ff"><h3>📏 الكميات ووحداتها</h3><table class="t"><tr><th>الكمية</th><th>الرمز</th><th>الوحدة</th><th>جهاز القياس</th></tr><tr><td>شدة التيار</td><td>ت</td><td>الأمبير (A)</td><td>الأميتر – يوصل على <b>التوالي</b></td></tr><tr><td>فرق الجهد</td><td>ج</td><td>الفولت (V)</td><td>الفولتميتر – يوصل على <b>التوازي</b></td></tr><tr><td>المقاومة</td><td>م</td><td>الأوم (Ω)</td><td>الأوميتر</td></tr></table></div>
+  <div class="box lab"><h3>🔋 مختبر الدائرة الكهربائية</h3>
+    <div class="sl"><label>الأعمدة = <b id="ccV">1</b> (1.5 فولت لكل عمود)</label><input type="range" id="ccS" min="1" max="4" value="2"></div>
+    <div class="sl"><label>المقاومة = <b id="crV">3</b> Ω</label><input type="range" id="crS" min="1" max="10" value="3"></div>
+    <div class="btns"><button class="btn main" data-cn="s">مقاومتان على التوالي</button><button class="btn" data-cn="p">مقاومتان على التوازي</button><button class="btn" data-cn="1">مقاومة واحدة</button><button class="btn or" id="swB">🔘 المفتاح: مغلق</button></div>
+    <svg id="ck" viewBox="0 0 320 210" style="width:100%;max-width:400px;display:block;margin:auto"></svg>
+    <div class="prob" id="ckT"></div></div>
+  <div class="law">المقاومة = <span style="display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.3"><span style="border-bottom:2px solid">فرق الجهد</span><span>شدة التيار</span></span> &nbsp; ← &nbsp; م = ج ÷ ت</div>
+  <div class="box"><h3>🔣 طابق المكوّن مع رمزه</h3><div id="sym"></div></div>
+  <div class="box"><h3>✏️ أكمل الجدول (ص 51)</h3><div id="pe2"></div></div>
+</section>
+
+<section class="page" id="e3">
+  <div style="color:var(--soft);font-size:.85rem">الفصل 2 · ص 52–56</div>
+  <h2><span class="num">2-5</span>القدرة الكهربائية وتكلفة الاستهلاك</h2>
+  <div class="law">القدرة = الطاقة ÷ الزمن &nbsp;·&nbsp; 1 واط = 1 جول/ثانية &nbsp;·&nbsp; 1 كيلوواط.ساعة = 1000 واط × 1 ساعة</div>
+  <div class="box lab"><h3>🏠 فاتورة بيتك: احسب استهلاك الأجهزة (سعر الكيلوواط.ساعة 25 درهمًا)</h3>
+    <div id="bill"></div>
+    <div class="prob" id="billT"></div></div>
+  <div class="box"><h3>🔢 مثال كتابك: جهاز التكييف</h3><p style="margin:0">يُشغّل جهاز تكييف قدرته 3 كيلوواط لمدة 6 ساعات كل ليلة:<br>اليوم = 3 × 6 = 18 ك.و.س · الشهر = 18 × 30 = 540 ك.و.س<br>التكلفة = 540 × 25 = 13500 درهم = <b>13.5 دينار</b></p></div>
+  <div class="box"><h3>✏️ تمرين: احسب</h3><div id="pe3"></div></div>
+</section>
+
+<section class="page" id="e4">
+  <div style="color:var(--soft);font-size:.85rem">الفصل 2 · ص 56–61</div>
+  <h2><span class="num">2-8</span>أخطار الكهرباء والأمان وحفظ الطاقة</h2>
+  <div class="box lab"><h3>⚠️ آمن أم خطر؟ اختر لكل موقف</h3>
+    <div class="prob" id="hzQ" style="font-size:1.1rem;min-height:70px"></div>
+    <div class="btns"><button class="btn main" id="hzS">✅ آمن</button><button class="btn" id="hzD" style="border-color:var(--rd);color:var(--rd)">⚠️ خطر</button></div>
+    <div class="fb" id="hzF"></div><div class="sc" id="hzSc"></div></div>
+  <div class="box"><h3>🔌 المنصهر (الفيوز)</h3><p style="margin:0">قطعة سلك قصيرة رفيعة تسخن وتنصهر عندما يكون التيار أعلى من تقديرها، فتقطع الدائرة وتحمي الجهاز من التلف وتمنع الحرائق.</p>
+    <div class="sl"><label>التيار = <b id="fuV">5</b> A</label><input type="range" id="fuS" min="1" max="20" value="5"></div>
+    <svg id="fu" viewBox="0 0 320 80" style="width:100%;max-width:380px;display:block;margin:auto"></svg><div class="prob" id="fuT"></div></div>
+  <div class="box lab"><h3>💡 وفّر الكهرباء: استبدل المصابيح</h3>
+    <div class="sl"><label>عدد المصابيح = <b id="svN">10</b></label><input type="range" id="svS" min="1" max="30" value="10"></div>
+    <div class="prob" id="svT"></div></div>
+</section>
+
+<section class="page" id="rev2">
+  <h2>🏁 أسئلة المراجعة: الكهرباء</h2>
+  <div id="rev2Q"></div><div class="sc" id="rev2Sc"></div>
+  <div class="btns"><button class="btn main" id="rev2New">🔄 اختبار جديد</button></div>
+</section>
+
+<!-- ===== SCIENCE CH3 ===== -->
+<section class="page" id="h1">
+  <div style="color:var(--soft);font-size:.85rem">الفصل 3 · ص 70–73</div>
+  <h2><span class="num">3-1</span>الغرض من التكاثر والوراثة</h2>
+  <p>التكاثر عملية ضرورية لاستمرار الحياة. ونرث من آبائنا صفات مثل لون العينين والشعر وشكل الأنف، وتسمى دراسة انتقال هذه الصفات <b>علم الوراثة</b>.</p>
+  <div class="box lab"><h3>🔬 من الخلية إلى الجين: اضغط للتكبير</h3>
+    <div class="btns" id="zmB"></div>
+    <svg id="zm" viewBox="0 0 320 200" style="width:100%;max-width:380px;display:block;margin:auto"></svg>
+    <div class="prob" id="zmT"></div></div>
+  <div class="box lab"><h3>👨‍👩‍👧 لعبة الصفات الوراثية: كوّن طفلًا</h3>
+    <p style="margin:0;font-size:.9rem">يأخذ الطفل نصف جيناته من الأب ونصفها من الأم. اضغط «طفل جديد» لترى تنوّع الصفات بين الإخوة.</p>
+    <div id="kid"></div><div class="btns"><button class="btn or" id="kidB">👶 طفل جديد</button></div></div>
+  <div class="know"><b>هل تعلم؟</b> تحتوي نواة كل خلية في جسم الإنسان على <b>46 كروموسومًا</b> (23 زوجًا)، وعليها نحو <b>38000 جين</b>. أما الحيوان المنوي والبويضة فيحتوي كل منهما على <b>23</b> فقط، وعند اتحادهما يصير المجموع 46 من جديد.</div>
+  <div class="box"><h3>✏️ اختبر نفسك</h3><div id="qh1"></div></div>
+</section>
+
+<section class="page" id="h2">
+  <div style="color:var(--soft);font-size:.85rem">الفصل 3 · ص 74–77</div>
+  <h2><span class="num">3-3</span>تكوّن الجنين والجهاز التناسلي</h2>
+  <div class="box lab"><h3>🧬 من خلية واحدة إلى إنسان</h3>
+    <div class="sl"><label>المرحلة</label><input type="range" id="emS" min="0" max="4" value="0"></div>
+    <svg id="emb" viewBox="0 0 320 170" style="width:100%;max-width:380px;display:block;margin:auto"></svg>
+    <div class="prob" id="embT"></div></div>
+  <div class="box"><h3>🧩 طابق العضو بوظيفته</h3>
+    <div class="btns"><button class="btn main" data-sx="m">الجهاز الذكري</button><button class="btn" data-sx="f">الجهاز الأنثوي</button></div>
+    <div id="org"></div></div>
+  <div class="know"><b>للمقارنة:</b> البويضة كروية، قطرها حوالي <b>0.12 مم</b>، ولا تتحرك. الحيوان المنوي طوله حوالي <b>0.06 مم</b>، وله رأس فيه النواة وذيل طويل يسبح به.</div>
+</section>
+
+<section class="page" id="h3">
+  <div style="color:var(--soft);font-size:.85rem">الفصل 3 · ص 78–81</div>
+  <h2><span class="num">3-6</span>دورة الحيض والبلوغ</h2>
+  <div class="box lab"><h3>🗓️ الدورة الشهرية (28 يومًا تقريبًا): حرّك اليوم</h3>
+    <div class="sl"><label>اليوم = <b id="cyV">1</b></label><input type="range" id="cyS" min="1" max="28" value="1"></div>
+    <svg id="cy" viewBox="0 0 320 240" style="width:100%;max-width:340px;display:block;margin:auto"></svg>
+    <div class="prob" id="cyT"></div></div>
+  <div class="box"><h3>🌱 البلوغ: فترة الانتقال من الطفولة إلى الرشد</h3>
+    <p style="margin:0">ترجع هذه التغيرات إلى <b>هرمونات</b> يفرزها الجسم. تبدأ عادة عند البنات بين 10 و12 سنة، وعند الأولاد بعدهن بعامين تقريبًا. وتشمل تغيرات جسمية ونفسية واجتماعية، والمراهق يقارن نفسه بالآخرين، وهو أمر طبيعي جدًا.</p>
+    <table class="t"><tr><th>الأولاد</th><th>البنات</th></tr><tr><td>تبدأ اللحية في النمو</td><td>يزداد حجم الأرداف</td></tr><tr><td>تتضخم الحنجرة ويصبح الصوت أعمق</td><td>يبدأ الحيض والتبويض</td></tr><tr><td>تزداد العضلات والطول بسرعة</td><td>يزداد الطول بسرعة</td></tr><tr><td colspan="2" style="text-align:center">عند الجميع: تزداد الغدد العرقية، فالنظافة الشخصية مهمة جدًا 🚿</td></tr></table></div>
+  <div class="know"><b>هل تعلم؟</b> قد تتأثر دورة الحيض بعوامل مثل الإجهاد والمرض وسوء التغذية والتغيرات الوجدانية.</div>
+  <div class="box"><h3>✏️ اختبر نفسك</h3><div id="qh3"></div></div>
+</section>
+
+<section class="page" id="h4">
+  <div style="color:var(--soft);font-size:.85rem">الفصل 3 · ص 81–84</div>
+  <h2><span class="num">3-8</span>الإخصاب ونمو الجنين</h2>
+  <div class="box lab"><h3>🗺️ رحلة البويضة المخصبة: رتّب الأحداث</h3>
+    <div id="ord"></div><div class="fb" id="ordF"></div><div class="btns"><button class="btn or" id="ordR">🔀 من جديد</button></div></div>
+  <div class="box lab"><h3>🤰 تسعة أشهر: حرّك الشهر</h3>
+    <div class="sl"><label>الشهر = <b id="pgV">1</b></label><input type="range" id="pgS" min="1" max="9" value="1"></div>
+    <div style="display:flex;justify-content:center"><div id="pgC" style="border-radius:50%;background:radial-gradient(circle,#ffe0e6,#f8bbd0);display:grid;place-items:center;transition:.5s;font-size:1rem"></div></div>
+    <div class="prob" id="pgT"></div></div>
+  <div class="box" style="background:#eef6ff"><h3>💡 التكاثر المُيسر</h3><p style="margin:0">أحيانًا لا يستطيع زوجان إنجاب أطفال. وطوّر العلماء تقنيات تساعدهم، مثل <b>الإخصاب المعملي</b> (أطفال الأنابيب)، حيث يتم الإخصاب في وسط مناسب خارج الجسم ثم تُعاد البويضة المخصبة إلى الرحم.</p></div>
+</section>
+
+<section class="page" id="h5">
+  <div style="color:var(--soft);font-size:.85rem">الفصل 3 · ص 84–90</div>
+  <h2><span class="num">3-11</span>أمراض تنتقل جنسيًا والوقاية منها</h2>
+  <p>تُعتبر هذه الأمراض خطيرة لأن علاماتها لا تظهر عادة في المراحل الأولى، فقد ينقلها المصاب لغيره دون أن يعلم. وقد نبّهنا ديننا الحنيف إلى عواقب العلاقات غير الشرعية، وحثّ على العفة والطهارة.</p>
+  <div class="box"><h3>📋 قارن بين الأمراض الثلاثة</h3>
+    <div class="btns"><button class="btn main" data-ds="0">السيلان</button><button class="btn" data-ds="1">الزهري</button><button class="btn" data-ds="2">الإيدز</button></div><div id="dsB"></div></div>
+  <div class="box lab"><h3>🛡️ كيف يهاجم فيروس HIV جهاز المناعة؟</h3>
+    <div class="btns"><button class="btn or" id="hvB">▶️ شاهد</button></div>
+    <svg id="hv" viewBox="0 0 320 160" style="width:100%;max-width:380px;display:block;margin:auto;background:#fff5f5;border-radius:12px"></svg>
+    <div class="prob" id="hvT">خلايا الدم البيضاء (الأزرق) تحمي الجسم من الجراثيم.</div></div>
+  <div class="box lab"><h3>❓ هل ينتقل فيروس HIV بهذه الطريقة؟</h3>
+    <div class="prob" id="trQ" style="min-height:60px;font-size:1.05rem"></div>
+    <div class="btns"><button class="btn" id="trY" style="border-color:var(--rd);color:var(--rd)">نعم، ينتقل</button><button class="btn main" id="trN">لا، لا ينتقل</button></div>
+    <div class="fb" id="trF"></div><div class="sc" id="trSc"></div></div>
+  <div class="box" style="background:#eefaf2"><h3>✅ الوقاية خير من العلاج</h3><p style="margin:0">• تجنّب العلاقات غير الشرعية، والالتزام بالعفة والزواج الشرعي.<br>• عدم مشاركة الأدوات الحادة الملوثة بالدم مثل شفرات الحلاقة وفرش الأسنان.<br>• التأكد من استخدام الإبر المعقمة لمرة واحدة فقط.<br>• الامتناع عن المخدرات.<br>• فحص الدم المتبرَّع به قبل نقله.</p></div>
+  <div class="know"><b>للنقاش:</b> إذا كان عندك سؤال عن هذا الفصل، اسأل والديك أو معلمك أو الطبيب، فهم المصدر الموثوق.</div>
+</section>
+
+<section class="page" id="rev3">
+  <h2>🏁 أسئلة المراجعة: التكاثر</h2>
+  <div id="rev3Q"></div><div class="sc" id="rev3Sc"></div>
+  <div class="btns"><button class="btn main" id="rev3New">🔄 اختبار جديد</button></div>
+</section>
+
+<!-- ===== PART 2 CH1: CHEMICAL CHANGES ===== -->
+<section class="page" id="k1">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 1 · ص 12–17</div>
+  <h2><span class="num">1-1</span>رصد التغيرات وتأثير الحرارة</h2>
+  <p>تحدث التغيرات حولنا طوال الوقت: بعضها <b>سريع</b> مثل الانفجار، وبعضها <b>بطيء</b> مثل نمو الشجرة. ومن عوامل التغيير: <b>الحرارة، والضوء، وخلط المواد، والكهرباء</b>.</p>
+  <div class="box lab"><h3>🌡️ سخّن الماء أو برّده: حالات المادة</h3>
+    <div class="sl"><label>درجة الحرارة = <b id="tV">25</b>°س</label><input type="range" id="tS" min="-20" max="120" value="25"></div>
+    <svg id="tst" viewBox="0 0 320 180" style="width:100%;max-width:380px;display:block;margin:auto"></svg>
+    <div class="prob" id="tT"></div></div>
+  <div class="box"><h3>🔥 ماذا تفعل الحرارة؟</h3>
+    <div class="btns" id="htB"></div><div class="box lab" id="htBox" style="margin:6px 0"></div></div>
+  <div class="know"><b>هل تعلم؟</b> الكثافة هي الكتلة لكل وحدة حجم. عندما يتمدد الجسم بالتسخين يزيد حجمه، فتقل كثافته. لهذا يرتفع الهواء الساخن إلى الأعلى ويطير المنطاد! 🎈</div>
+  <div class="box"><h3>✏️ اختبر نفسك</h3><div id="qk1"></div></div>
+</section>
+
+<section class="page" id="k2">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 1 · ص 17–23</div>
+  <h2><span class="num">1-3</span>تأثير الضوء والخلط والكهرباء</h2>
+  <div class="box lab"><h3>🌿 البناء الضوئي: مصنع الغذاء في الورقة</h3>
+    <div class="sl"><label>شدة الضوء</label><input type="range" id="psS" min="0" max="100" value="60"></div>
+    <svg id="ps" viewBox="0 0 320 190" style="width:100%;max-width:380px;display:block;margin:auto"></svg>
+    <div class="law" style="font-size:.95rem">ثاني أكسيد الكربون + ماء ← (ضوء الشمس + كلوروفيل) ← جلوكوز + أكسجين</div>
+    <div class="prob" id="psT"></div></div>
+  <div class="box lab"><h3>🧪 مختبر الخلط: اخلط محلولين</h3>
+    <div class="btns" id="mxB"></div>
+    <svg id="mxs" viewBox="0 0 320 170" style="width:100%;max-width:380px;display:block;margin:auto"></svg>
+    <div class="prob" id="mxT">اختر تجربة</div></div>
+  <div class="box lab"><h3>⚡ التحلل الكهربائي للماء</h3>
+    <div class="btns"><button class="btn or" id="elB">🔌 مرّر التيار</button></div>
+    <svg id="el" viewBox="0 0 320 190" style="width:100%;max-width:380px;display:block;margin:auto"></svg>
+    <div class="prob" id="elT">ماء مع قليل من الحمض. اضغط لتمرير الكهرباء.</div></div>
+  <div class="know"><b>هل تعلم؟</b> العالم «مايكل فاراداي» (1791–1867) هو رائد التحلل الكهربائي، ويُستخدم اليوم في استخلاص الألومنيوم وفي الطلاء الكهربائي للحلي والدراجات.</div>
+</section>
+
+<section class="page" id="k3">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 1 · ص 24–25</div>
+  <h2><span class="num">1-6</span>فيزيائي أم كيميائي؟</h2>
+  <table class="t"><tr><th>التغير الفيزيائي</th><th>التغير الكيميائي</th></tr><tr><td>لا تتكوّن مواد جديدة</td><td>تتكوّن مواد جديدة (نواتج)</td></tr><tr><td>يمكن عكسه غالبًا</td><td>لا يمكن عكسه غالبًا</td></tr><tr><td>طاقة قليلة أو لا طاقة</td><td>ينبعث أو يُمتص ضوء أو حرارة غالبًا</td></tr></table>
+  <div class="box lab"><h3>🗂️ صنّف التغير بسرعة!</h3>
+    <div class="prob" id="pcQ" style="font-size:1.3rem;min-height:70px"></div>
+    <div class="btns"><button class="btn main" id="pcP" style="font-size:1.05rem">💧 فيزيائي</button><button class="btn or" id="pcC" style="font-size:1.05rem">🔥 كيميائي</button></div>
+    <div class="fb" id="pcF"></div><div class="sc" id="pcSc"></div></div>
+  <div class="box lab"><h3>🔤 لعبة الكلمات (جرّب هذا من كتابك)</h3>
+    <p style="margin:0;font-size:.9rem">ابحث عن 8 كلمات من أنواع التغيرات: اضغط على أول حرف ثم آخر حرف في الكلمة.</p>
+    <div id="ws"></div><div class="fb" id="wsF"></div></div>
+</section>
+
+<section class="page" id="k4">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 1 · ص 26–30</div>
+  <h2><span class="num">1-7</span>أهمية التفاعلات: أصدقاء أم أعداء؟</h2>
+  <div class="box lab"><h3>🏭 من المادة الخام إلى المنتج</h3><div id="raw"></div></div>
+  <div class="box lab"><h3>⚡ رحلة الطاقة في محطة الكهرباء</h3>
+    <div class="btns"><button class="btn or" id="pwB">▶️ شغّل المحطة</button></div>
+    <div id="pw" style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center"></div></div>
+  <div class="box"><h3>😷 ملوثات الهواء (جدول 1-3)</h3><div class="btns" id="poB"></div><div id="poT"></div></div>
+  <div class="box lab"><h3>🦸 صديق أم 🦹 عدو؟</h3>
+    <div class="prob" id="feQ" style="min-height:60px;font-size:1.1rem"></div>
+    <div class="btns"><button class="btn main" id="feF">🦸 مفيد</button><button class="btn" id="feE" style="border-color:var(--rd);color:var(--rd)">🦹 ضار</button></div>
+    <div class="fb" id="feT"></div></div>
+</section>
+
+<section class="page" id="krev">
+  <h2>🏁 أسئلة المراجعة: التغيرات الكيميائية</h2>
+  <div id="krevQ"></div><div class="sc" id="krevSc"></div>
+  <div class="btns"><button class="btn main" id="krevNew">🔄 اختبار جديد</button></div>
+  <div class="box" style="background:#fff7e8"><h3>💭 فسّر (سؤال 7 من كتابك)</h3><p style="margin:0">أ) اختفاء كريات العتة (النفتالين) في خزانة الملابس بعد فترة.<br>ب) موت النباتات التي تبقى في الظلام فترة طويلة.<br>جـ) يصبح ملمس مصباح الإضاءة ساخنًا جدًا عند تشغيله.</p></div>
+</section>
+
+<!-- ===== PART2 CH2: SOUND ===== -->
+<section class="page" id="v1">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 2 · ص 40–43</div>
+  <h2><span class="num">2-1</span>إصدار الصوت وكيفية انتقاله</h2>
+  <p>يصدر الصوت عن طريق <b>ذبذبات</b> (اهتزازات). عندما تتحدث تهتز أحبالك الصوتية، وعندما تطرق الشوكة الرنانة يهتز فرعاها.</p>
+  <div class="box lab"><h3>🔔 اطرق الشوكة الرنانة واسمع!</h3>
+    <svg id="tf" viewBox="0 0 320 200" style="width:100%;max-width:380px;display:block;margin:auto;cursor:pointer"></svg>
+    <div class="btns"><button class="btn or" id="tfB">🔨 اطرق الشوكة</button><button class="btn" id="tfW">💧 ضعها في الماء</button></div>
+    <div class="prob" id="tfT">اضغط لتطرق الشوكة الرنانة 🔔</div></div>
+  <div class="box lab"><h3>🔈 كيف ينتقل الصوت في الهواء؟ (تضاغط وتخلخل)</h3>
+    <svg id="cmp" viewBox="0 0 320 110" style="width:100%;display:block"></svg>
+    <div class="sl"><label>شدة المكبر</label><input type="range" id="cmS" min="0" max="100" value="60"></div>
+    <div class="prob" style="font-size:.95rem">جزيئات الهواء لا تسافر معنا! بل <b>تتذبذب</b> في مكانها للأمام والخلف، وتنقل <b>الطاقة</b> إلى الجزيئات المجاورة حتى تصل إلى أذنك.</div></div>
+  <div class="box lab"><h3>🚀 هل يُسمع الصوت في الفضاء؟</h3>
+    <div class="btns"><button class="btn main" data-vac="0">🌍 على الأرض (هواء)</button><button class="btn" data-vac="1">🌌 في الفضاء (فراغ)</button></div>
+    <div class="prob" id="vacT"></div><div class="btns"><button class="btn or" id="vacB">📣 اصرخ!</button></div></div>
+  <div class="box"><h3>✏️ اختبر نفسك</h3><div id="qv1"></div></div>
+</section>
+
+<section class="page" id="v2">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 2 · ص 43–44</div>
+  <h2><span class="num">2-4</span>سرعة الصوت</h2>
+  <p>تعتمد سرعة الصوت على <b>كثافة</b> المادة و<b>مرونتها</b>. ينتقل الصوت أسرع في الجوامد، ثم السوائل، ثم الغازات.</p>
+  <div class="box lab"><h3>🏁 سباق الصوت عبر 1 كيلومتر (جدول 2-1)</h3>
+    <div class="btns"><button class="btn or" id="srB">▶️ أطلق الصوت</button></div><div id="sr"></div></div>
+  <div class="box lab"><h3>🏔️ الصدى: كم يبعد الجبل؟</h3>
+    <div class="sl"><label>زمن عودة الصدى = <b id="ecV">2</b> ث</label><input type="range" id="ecS" min="0.5" max="6" step="0.5" value="2"></div>
+    <svg id="ec" viewBox="0 0 320 120" style="width:100%;display:block"></svg>
+    <div class="btns"><button class="btn main" id="ecB">📢 اصرخ «مرحبا»</button></div>
+    <div class="prob" id="ecT"></div></div>
+  <div class="box"><h3>✏️ احسب</h3><div id="pv2"></div></div>
+</section>
+
+<section class="page" id="v3">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 2 · ص 45–46</div>
+  <h2><span class="num">2-5</span>درجة الصوت وتردده</h2>
+  <div class="law">التردد = عدد الذبذبات في الثانية، ووحدته الهرتز (Hz). كلما زاد التردد ارتفعت درجة الصوت (أكثر حدة)</div>
+  <div class="box lab"><h3>🎛️ مولّد الترددات: حرّك واسمع</h3>
+    <div class="sl"><label>التردد = <b id="fqV">440</b> Hz</label><input type="range" id="fqS" min="0" max="100" value="45"></div>
+    <div class="sl"><label>الشدة (ارتفاع الصوت)</label><input type="range" id="amS" min="5" max="100" value="50"></div>
+    <svg id="fq" viewBox="0 0 320 110" style="width:100%;display:block;background:#0f1b2d;border-radius:12px"></svg>
+    <div class="btns"><button class="btn or" id="fqB">▶️ شغّل</button></div>
+    <div class="prob" id="fqT"></div></div>
+  <div class="box lab"><h3>🎹 البيانو: السلم الموسيقي (جدول 2-2)</h3>
+    <div id="pno" style="display:flex;justify-content:center;gap:3px;direction:ltr"></div>
+    <div class="prob" id="pnT">اضغط على المفاتيح لتعزف</div>
+    <div class="btns"><button class="btn main" id="pnSong">🎵 اعزف لي لحنًا</button></div></div>
+  <div class="box"><h3>👂 أي الصوتين أعلى درجة؟</h3><div id="pv3"></div></div>
+</section>
+
+<section class="page" id="v4">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 2 · ص 47–49</div>
+  <h2><span class="num">2-6</span>أذن الإنسان وحاسة السمع</h2>
+  <div class="box lab"><h3>👂 رحلة الصوت داخل الأذن</h3>
+    <svg id="ear" viewBox="0 0 320 180" style="width:100%;max-width:380px;display:block;margin:auto"></svg>
+    <div class="btns"><button class="btn or" id="earB">▶️ أرسل صوتًا</button></div>
+    <div class="prob" id="earT">اضغط لترى كيف يصل الصوت إلى المخ</div></div>
+  <div class="box lab"><h3>🧓 اختبار السمع: إلى أي تردد تسمع؟</h3>
+    <p style="margin:0;font-size:.9rem">مدى السمع عند الإنسان من 20 إلى 20000 هرتز، وتقل حساسيته للأصوات العالية مع التقدم في السن.</p>
+    <div class="sl"><label><b id="hrV">1000</b> Hz</label><input type="range" id="hrS" min="250" max="20000" step="250" value="1000"></div>
+    <div class="btns"><button class="btn main" id="hrB">🔊 أسمعني</button></div>
+    <div class="prob" id="hrT">اضغط «أسمعني» ثم حرّك المؤشر ببطء إلى اليمين والصوت يعمل. توقّف عندما يختفي الصوت.</div>
+    <div class="warn">⚠️ ارفع صوت الجوال، وتأكد أن الجوال ليس على الوضع الصامت. السماعة أفضل.</div></div>
+  <div class="box"><h3>🐬 مدى السمع عند الكائنات (شكل 2-12)</h3><div id="rng"></div></div>
+</section>
+
+<section class="page" id="v5">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 2 · ص 50–54</div>
+  <h2><span class="num">2-8</span>الصوت والمجتمع والتلوث الضوضائي</h2>
+  <div class="box lab"><h3>📊 مقياس الضوضاء بالديسيبل (جدول 2-3)</h3>
+    <div class="sl"><label>المصدر</label><input type="range" id="dbS" min="0" max="9" value="3"></div>
+    <div id="db"></div></div>
+  <div class="box lab"><h3>🚨 أصوات التحذير: ماذا يعني هذا الصوت؟</h3>
+    <div class="btns" id="alB"></div><div class="fb" id="alF"></div></div>
+  <div class="box" style="background:#eefaf2"><h3>🛡️ كيف نقلل الضوضاء؟</h3><p style="margin:0">• تقليل الضوضاء عند المصدر (إطارات مطاطية للقطارات، كواتم صوت للسيارات).<br>• جدران عاكسة للصوت قرب الطرق السريعة.<br>• تحديد أوقات أعمال البناء بعيدًا عن أوقات الراحة.<br>• إبعاد المصانع والمطارات عن المدارس والمستشفيات.<br>• استخدام سدادات الأذن في الأماكن الصاخبة، والستائر الكثيفة في البيوت.</p></div>
+</section>
+
+<section class="page" id="v6">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 2 · ص 55–57</div>
+  <h2><span class="num">2-9</span>الموجات فوق الصوتية والسونار</h2>
+  <div class="law">الموجات فوق الصوتية: ترددها أعلى من 20000 هرتز، فلا تسمعها الأذن البشرية، لكن تسمعها الخفافيش والدلافين والكلاب</div>
+  <div class="box lab"><h3>🚢 السونار: اكتشف عمق البحر وأسراب السمك</h3>
+    <p style="margin:0;font-size:.9rem">اضغط على أي مكان في البحر لترسل نبضة من السفينة.</p>
+    <svg id="snr" viewBox="0 0 320 220" style="width:100%;max-width:400px;display:block;margin:auto;cursor:crosshair;touch-action:manipulation"></svg>
+    <div class="prob" id="snrT"></div></div>
+  <div class="box lab"><h3>🦇 الخفاش الصياد</h3>
+    <svg id="bat" viewBox="0 0 320 150" style="width:100%;max-width:400px;display:block;margin:auto;background:#1a2238;border-radius:12px"></svg>
+    <div class="btns"><button class="btn or" id="batB">🦇 أطلق نبضة</button></div>
+    <div class="prob" id="batT">الخفاش يرسل نبضات عالية التردد، ويستقبل صداها ليعرف مكان الحشرة حتى في الظلام.</div></div>
+  <div class="box"><h3>🏥 في الطب</h3><p style="margin:0">يُستخدم <b>المسح فوق الصوتي (الإيكو)</b> لمتابعة نمو الجنين في بطن أمه، وفحص القلب والمخ. وهو أكثر أمانًا من أشعة X، وليس له أعراض جانبية ضارة.</p></div>
+</section>
+
+<section class="page" id="vrev">
+  <h2>🏁 أسئلة المراجعة: الصوت</h2>
+  <div id="vrevQ"></div><div class="sc" id="vrevSc"></div>
+  <div class="btns"><button class="btn main" id="vrevNew">🔄 اختبار جديد</button></div>
+</section>
+
+<!-- ===== PART 2 CH3: ECOLOGY ===== -->
+<section class="page" id="b1">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 3 · ص 64–69</div>
+  <h2><span class="num">3-1</span>المخلوقات الحية وبيئتها</h2>
+  <p><b>علم البيئة</b> هو دراسة العلاقات بين المخلوقات الحية وبيئتها. وتتكوّن البيئة من جزأين: <b>بيئة غير حيوية</b> (الماء، الضوء، الحرارة، الأكسجين، الأملاح، الأس الهيدروجيني) و<b>بيئة حيوية</b> (كل المخلوقات الحية الأخرى).</p>
+  <div class="box lab"><h3>🗂️ صنّف: حيوي أم غير حيوي؟</h3>
+    <div class="prob" id="bgQ" style="font-size:1.6rem;min-height:70px"></div>
+    <div class="btns"><button class="btn main" id="bgB">🌿 حيوي</button><button class="btn or" id="bgA">🪨 غير حيوي</button></div>
+    <div class="fb" id="bgF"></div><div class="sc" id="bgSc"></div></div>
+  <div class="box lab"><h3>🐫 كيف يتكيّف المخلوق مع بيئته؟</h3>
+    <div class="btns" id="adB"></div><div class="prob" id="adT"></div></div>
+  <div class="box lab"><h3>🧪 مقياس الأس الهيدروجيني pH</h3>
+    <div class="sl"><label>pH = <b id="phV">7</b></label><input type="range" id="phS" min="1" max="14" value="7"></div>
+    <div id="phBar" style="height:26px;border-radius:13px;background:linear-gradient(90deg,#d32f2f,#f57c00,#fbc02d,#7cb342,#43a047,#00897b,#1e88e5,#3949ab,#6a1b9a);position:relative;direction:ltr"><div id="phK" style="position:absolute;top:-6px;width:6px;height:38px;background:#1f2a44;border-radius:3px;transition:.2s"></div></div>
+    <div class="prob" id="phT"></div></div>
+  <div class="box"><h3>📚 مصطلحات</h3><table class="t"><tr><th>الموطن</th><td>المكان الذي يعيش فيه المخلوق</td></tr><tr><th>المجموعة السكانية</th><td>مخلوقات من نفس النوع في موطن واحد</td></tr><tr><th>المجتمع البيئي</th><td>عدة مجموعات سكانية تعيش معًا في نفس الموطن</td></tr><tr><th>المنظومة البيئية</th><td>المجتمع البيئي + البيئة غير الحيوية</td></tr></table></div>
+</section>
+
+<section class="page" id="b2">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 3 · ص 70–74</div>
+  <h2><span class="num">3-4</span>المنظومة البيئية وسلاسل الغذاء</h2>
+  <p>في كل منظومة بيئية: <b>منتجون</b> (النباتات الخضراء تصنع غذاءها بالبناء الضوئي)، و<b>مستهلكون</b> (أوليون يأكلون النبات، وثانويون يأكلون الحيوانات)، و<b>محللات</b> (البكتيريا والفطريات تحلل الأجسام الميتة).</p>
+  <div class="box lab"><h3>🔗 ابنِ سلسلة الغذاء: اضغط بالترتيب من المنتج إلى آخر مستهلك</h3>
+    <div class="btns" id="fcL"></div>
+    <div id="fcS" style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center;align-items:center;min-height:60px;font-size:1.8rem"></div>
+    <div class="fb" id="fcF"></div><div class="btns"><button class="btn or" id="fcN">سلسلة جديدة 🔄</button></div></div>
+  <div class="box lab"><h3>🐺 ماذا يحدث لو أزلنا مخلوقًا؟ (أعشاب ← جراد ← ضفادع)</h3>
+    <div class="btns"><button class="btn" data-rm="0">🔄 طبيعي</button><button class="btn" data-rm="1">❌ أزل الضفادع</button><button class="btn" data-rm="2">❌ أزل الجراد</button></div>
+    <canvas id="pop" width="600" height="230" style="width:100%;max-width:420px;display:block;margin:auto;background:#f9fdf9;border-radius:12px"></canvas>
+    <div class="prob" id="popT"></div></div>
+  <div class="know"><b>هل تعلم؟</b> في أستراليا أُطلقت الأرانب أول مرة في القرن التاسع عشر دون أعداء طبيعيين، فتكاثرت بسرعة كبيرة وأكلت حشائش المراعي، حتى اضطر الإنسان إلى استخدام مرض فيروسي لتقليل أعدادها!</div>
+</section>
+
+<section class="page" id="b3">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 3 · ص 75–76</div>
+  <h2><span class="num">3-6</span>هرم الطاقة</h2>
+  <div class="law">يُفقد نحو 90% من الطاقة عند انتقالها من مستوى غذائي إلى آخر، ولا ينتقل إلا 10% تقريبًا</div>
+  <div class="box lab"><h3>🔺 اضغط على كل مستوى لترى كم يبقى من الطاقة</h3>
+    <div class="sl"><label>طاقة المنتجين = <b id="pyV">10000</b> كيلوجول</label><input type="range" id="pyS" min="1000" max="20000" step="1000" value="10000"></div>
+    <svg id="pyr" viewBox="0 0 320 240" style="width:100%;max-width:360px;display:block;margin:auto"></svg>
+    <div class="prob" id="pyrT">أين تذهب الطاقة المفقودة؟ في حرارة التنفس 🔥، وفي أجزاء لا تُؤكل (العظم والريش)، وفي الإخراج.</div></div>
+  <div class="box"><h3>✏️ احسب (من ركن التفكير)</h3><div id="pb3"></div></div>
+</section>
+
+<section class="page" id="b4">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 3 · ص 77–81</div>
+  <h2><span class="num">3-7</span>الحفاظ على البيئة</h2>
+  <div class="box lab"><h3>🌍 كوكب الأرض في خطر: ما أثر هذا النشاط؟</h3>
+    <div class="btns" id="hmB"></div><div class="prob" id="hmT">اختر نشاطًا</div></div>
+  <div class="box lab"><h3>♻️ مدينتي الخضراء: اختر قراراتك</h3><div id="city"></div>
+    <div id="cityBar" style="height:24px;border-radius:12px;background:#eee;overflow:hidden;direction:ltr;margin:8px 0"><div id="cityK" style="height:100%;width:50%;background:linear-gradient(90deg,#d32f2f,#fbc02d,#43a047);transition:.4s"></div></div>
+    <div class="prob" id="cityT"></div></div>
+  <div class="box" style="background:#eefaf2"><h3>🌍 لماذا نحافظ على البيئة؟</h3><p style="margin:0">• حماية الحيوانات والنباتات من خطر الانقراض.<br>• منع تصدع دورات المواد الطبيعية (الكربون والنيتروجين) ومنع الاحترار الكوني.<br>• الحفاظ على النباتات البرية التي قد نحتاجها في تحسين المحاصيل.<br>• الغابات مصدر للعقاقير الطبية والأخشاب، والبحار مصدر مهم للغذاء.</p></div>
+</section>
+
+<section class="page" id="brev">
+  <h2>🏁 أسئلة المراجعة: علم البيئة</h2>
+  <div id="brevQ"></div><div class="sc" id="brevSc"></div>
+  <div class="btns"><button class="btn main" id="brevNew">🔄 اختبار جديد</button></div>
+</section>
+
+<!-- ===== PART 2 CH4: CYCLES ===== -->
+<section class="page" id="d1">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 4 · ص 90–92</div>
+  <h2><span class="num">4-1</span>إعادة تدوير المواد ودورة الكربون</h2>
+  <p>لا تُفقد المواد في المنظومة البيئية، بل <b>يُعاد تدويرها</b> باستمرار بين المخلوقات الحية والبيئة غير الحيوية. أما الطاقة فتأتي باستمرار من الشمس.</p>
+  <div class="box lab"><h3>🔄 تتبّع ذرة كربون في رحلتها</h3>
+    <svg id="cc" viewBox="0 0 320 240" style="width:100%;max-width:400px;display:block;margin:auto"></svg>
+    <div class="btns" id="ccB"></div>
+    <div class="prob" id="ccT">اضغط على عملية لترى ذرة الكربون تنتقل</div></div>
+  <div class="box lab"><h3>🌡️ الاحتباس الحراري: وازن الدورة</h3>
+    <div class="sl"><label>🏭 حرق الوقود</label><input type="range" id="gwF" min="0" max="100" value="60"></div>
+    <div class="sl"><label>🌳 الغابات</label><input type="range" id="gwT" min="0" max="100" value="40"></div>
+    <div class="prob" id="gwX"></div></div>
+</section>
+
+<section class="page" id="d2">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 4 · ص 93–95</div>
+  <h2><span class="num">4-3</span>دورة النيتروجين</h2>
+  <p>النيتروجين ضروري لتكوين <b>البروتينات</b>. الهواء فيه 78% نيتروجين، لكن النباتات لا تستطيع امتصاصه مباشرة، بل تمتصه من التربة في صورة <b>نترات</b>.</p>
+  <div class="box lab"><h3>🌱 رحلة النيتروجين خطوة بخطوة</h3>
+    <svg id="nc" viewBox="0 0 320 220" style="width:100%;max-width:400px;display:block;margin:auto"></svg>
+    <div class="btns"><button class="btn main" id="ncN">⬅ الخطوة التالية</button><button class="btn" id="ncR">↺ من البداية</button></div>
+    <div class="prob" id="ncT"></div></div>
+  <div class="box"><h3>🦠 أي بكتيريا تفعل ماذا؟</h3><div id="qd2"></div></div>
+</section>
+
+<section class="page" id="d3">
+  <div style="color:var(--soft);font-size:.85rem">الجزء الثاني · الفصل 4 · ص 95–96</div>
+  <h2><span class="num">4-4</span>دور المخلوقات المحللة</h2>
+  <p>المحللات (البكتيريا والفطريات) تحلل الأجسام الميتة والإفرازات، فتعيد المواد البسيطة مثل ثاني أكسيد الكربون والنترات إلى البيئة. ولولاها لتراكمت الأجسام الميتة وتوقفت الحياة!</p>
+  <div class="box lab"><h3>🍂 شاهد التحلل: سرّع الزمن</h3>
+    <div class="sl"><label>الأسابيع = <b id="dcV">0</b></label><input type="range" id="dcS" min="0" max="12" value="0"></div>
+    <div class="btns"><button class="btn" data-dc="1">🌡️ دافئ ورطب</button><button class="btn" data-dc="0">❄️ بارد وجاف</button></div>
+    <div id="dcBox" style="display:flex;justify-content:center;align-items:flex-end;gap:10px;height:140px;font-size:3rem"></div>
+    <div class="prob" id="dcT"></div></div>
+  <div class="know"><b>هل تعلم؟</b> لهذا نحفظ الطعام في الثلاجة! البرودة تبطئ نشاط البكتيريا والفطريات، فيبقى الطعام طازجًا مدة أطول.</div>
+</section>
+
+<section class="page" id="drev">
+  <h2>🏁 أسئلة المراجعة: الدورات</h2>
+  <div id="drevQ"></div><div class="sc" id="drevSc"></div>
+  <div class="btns"><button class="btn main" id="drevNew">🔄 اختبار جديد</button></div>
+</section>
+
+<footer>نسخة تجريبية – مبنية على كتاب العلوم للصف التاسع (مركز المناهج التعليمية والبحوث التربوية)</footer>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const pages=[...document.querySelectorAll('.page')],nb=[...document.querySelectorAll('#bar button')];
+function go(id){pages.forEach(p=>p.classList.toggle('on',p.id===id));nb.forEach(b=>b.classList.toggle('on',b.dataset.p===id));window.scrollTo({top:0,behavior:'smooth'})}
+nb.forEach(b=>b.onclick=()=>go(b.dataset.p));
+(function(){const h=location.hash.slice(1);if(h&&$(h))go(h);addEventListener('hashchange',()=>{const x=location.hash.slice(1);if($(x))go(x)})})();
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+function mcq(host,q,opts,right,onAns){const d=document.createElement('div');d.className='box';d.style.margin='8px 0';d.innerHTML='<div style="font-weight:800">'+q+'</div>';let dn=false;
+ const order=opts.map((o,i)=>i).sort(()=>Math.random()-.5);
+ order.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=opts[i];b.onclick=()=>{if(dn)return;dn=true;b.classList.add(i===right?'ok':'no');if(i!==right)[...d.querySelectorAll('.opt')][order.indexOf(right)].classList.add('ok');onAns&&onAns(i===right)};d.appendChild(b)});host.appendChild(d)}
+function quiz(hostId,Q){const h=$(hostId);Q.forEach(([q,o])=>mcq(h,q,o,0))}
+
+/* TOC */
+const TOC=[['الجزء الأول: الطاقة',[
+ ['الضوء',10,[['1-1','ما الضوء؟',12,'c1'],['1-2','الموجات الضوئية',12,'c1'],['1-3','سرعة الضوء',13,'c2'],['1-4','انعكاس الضوء',14,'c3'],['1-5','المرايا المستوية وتكوين الصورة',16,'c3'],['1-6','المرايا المحدبة وتكوين الصورة',19,'c4'],['1-7','المرايا المقعرة وتكوين الصورة',21,'c4'],['1-8','انكسار الضوء',23,'c5'],['1-9','مقارنة الانعكاس والانكسار',25,'c5'],['1-10','تشتت الضوء خلال المنشور الزجاجي',26,'c6'],['1-11','إبصار الألوان',27,'c7'],['','ملخص + خريطة مفاهيم + أسئلة المراجعة + ركن التفكير',31,'rev']]],
+ ['الكهرباء',36,[['2-1','الطاقة الكهربائية',38,'e1'],['2-2','تأثيرات الكهرباء',38,'e1'],['2-3','شدة التيار الكهربائي وفرق الجهد والمقاومة الكهربائية',43,'e2'],['2-4','سريان التيار والمقاومة',50,'e2'],['2-5','القدرة الكهربائية ووحدة قياسها',52,'e3'],['2-6','استهلاك الكهرباء في المنزل',53,'e3'],['2-7','تكلفة استهلاك الطاقة الكهربائية',54,'e3'],['2-8','أخطار الكهرباء',56,'e4'],['2-9','احتياطات الأمان عند استخدام الكهرباء',58,'e4'],['2-10','حفظ الطاقة',60,'e4'],['','ملخص + خريطة مفاهيم + أسئلة المراجعة',62,'rev2']]]]],
+ ['الجزء الثاني: النماذج والأجهزة',[
+ ['التكاثر في الإنسان والأمراض التي تنتقل جنسيًا',68,[['3-1','الغرض من التكاثر',70,'h1'],['3-2','ما الوراثة؟',71,'h1'],['3-3','كيفية تكوّن الجنين',74,'h2'],['3-4','الجهاز التناسلي الذكري',75,'h2'],['3-5','الجهاز التناسلي الأنثوي',76,'h2'],['3-6','الحيض (الطمث)',78,'h3'],['3-7','البلوغ',80,'h3'],['3-8','الإخصاب',82,'h4'],['3-9','نمو الجنين',82,'h4'],['3-10','التكاثر الميسّر',84,'h4'],['3-11','أمراض تنتقل جنسيًا',84,'h5'],['','ملخص + خريطة مفاهيم + أسئلة المراجعة + مسرد',91,'rev3']]]]],
+ ['الجزء الثالث: التفاعلات (كتاب الفصل الثاني)',[
+ ['التغيرات الكيميائية',10,[['1-1','رصد التغيرات',12,'k1'],['1-2','تأثير الحرارة',12,'k1'],['1-3','تأثير الضوء',17,'k2'],['1-4','تأثير خلط المواد',19,'k2'],['1-5','تأثيرات الكهرباء',21,'k2'],['1-6','أنواع التغير: فيزيائي أم كيميائي',24,'k3'],['1-7','أهمية التفاعلات الكيميائية',26,'k4'],['1-8','استخدام التفاعلات الكيميائية: أصدقاء أم أعداء؟',27,'k4'],['','ملخص + خريطة مفاهيم + أسئلة المراجعة + ركن التفكير',31,'krev']]],
+ ['الصوت',38,[['2-1','إصدار الصوت',40,'v1'],['2-2','كيفية انتقال الصوت',41,'v1'],['2-3','الموجات الصوتية وانتقال الطاقة',42,'v1'],['2-4','سرعة الصوت',43,'v2'],['2-5','درجة (طبقة) الصوت وتردده',45,'v3'],['2-6','أذن الإنسان وحاسة السمع',47,'v4'],['2-7','الصوت والمجتمع',50,'v5'],['2-8','التلوث الضوضائي والبيئة',51,'v5'],['2-9','الموجات فوق الصوتية وتطبيقاتها',55,'v6'],['','ملخص + أسئلة المراجعة',58,'vrev']]]]],
+ ['الجزء الثالث: علم البيئة',[
+ ['علم البيئة: وانتقال الطاقة داخل المنظومة البيئية',62,[['3-1','المخلوقات الحية وبيئتها',64,'b1'],['3-2','البيئة غير الحيوية',65,'b1'],['3-3','البيئة الحيوية',65,'b1'],['3-4','المنظومة البيئية',70,'b2'],['3-5','سلسلة الغذاء وشبكة الغذاء',72,'b2'],['3-6','هرم الطاقة',75,'b3'],['3-7','الحفاظ على البيئة',77,'b4'],['','ملخص + أسئلة المراجعة',81,'brev']]]]],
+ ['الجزء الرابع: الدورات',[
+ ['دورات المواد المغذية في المنظومة البيئية',88,[['4-1','إعادة تدوير المواد',90,'d1'],['4-2','دورة الكربون',91,'d1'],['4-3','دورة النيتروجين',93,'d2'],['4-4','دور المخلوقات المحللة',95,'d3'],['','ملخص + أسئلة المراجعة',97,'drev']]]]]];
+(function(){const t=$('toc');let n=0;TOC.forEach(([pn,chs])=>{const p=document.createElement('div');p.className='part';p.textContent=pn;t.appendChild(p);chs.forEach(([cn,pg,ls])=>{n++;const r=ls.filter(l=>l[3]).length;const d=document.createElement('div');d.className='chap'+(n===1?' open':'');
+ d.innerHTML='<div><span class="cn">'+n+'</span><span style="flex:1">'+cn+'</span><span class="tg '+(r?'r':'s')+'">'+(r?'جاهز ✅':'قريبًا')+'</span></div><div class="ls">'+ls.map(l=>'<div class="li'+(l[3]?' ready" data-go="'+l[3]:'')+'"><span>'+(l[3]?'✅':'⏳')+'</span><span>'+(l[0]?'<b>'+l[0]+'</b> ':'')+l[1]+'</span><span class="pg">ص '+l[2]+'</span></div>').join('')+'</div>';
+ d.firstChild.onclick=()=>d.classList.toggle('open');t.appendChild(d)})});t.querySelectorAll('[data-go]').forEach(x=>x.onclick=()=>go(x.dataset.go))})();
+
+/* 1-1 spectrum */
+(function(){const B=[['راديو',0,'#6d4c41','موجات الراديو: أطول الموجات، تنقل البث الإذاعي والتلفزيوني والاتصالات.'],['ميكروويف',22,'#8d6e63','الميكروويف: يُستخدم في أفران الطهي والهواتف المحمولة والرادار.'],['تحت الحمراء',40,'#c62828','الأشعة تحت الحمراء: نشعر بها كحرارة، وتستخدمها أجهزة التحكم عن بعد.'],['الضوء المرئي',55,'linear-gradient(90deg,#e53935,#fb8c00,#fdd835,#43a047,#1e88e5,#3949ab,#8e24aa)','الضوء المرئي: الجزء الوحيد الذي تراه أعيننا، من الأحمر إلى البنفسجي.'],['فوق البنفسجية',64,'#7b1fa2','الأشعة فوق البنفسجية: تسبب حروق الشمس، لذلك نستخدم واقي الشمس.'],['أشعة x',78,'#455a64','أشعة X: تخترق الجسم وتُستخدم في تصوير العظام بالمستشفيات.'],['أشعة جاما',90,'#212121','أشعة جاما: أقصر الموجات وأخطرها، تصدر عن المواد المشعة ☢️.']];
+ $('spec').innerHTML=B.map((b,i)=>'<div style="flex:'+((B[i+1]?B[i+1][1]:100)-b[1])+';background:'+b[2]+';display:grid;place-items:center;line-height:1.1;padding:0 2px">'+b[0]+'</div>').join('');
+ function upd(){const v=+$('wvS').value;const lam=110*Math.pow(0.06,v/100)+3;let d='M0,60';for(let x=0;x<=320;x+=2)d+=' L'+x+','+(60+40*Math.sin(x/lam*2*Math.PI));const band=[...B].reverse().find(b=>v>=b[1]);const col=band[0]==='الضوء المرئي'?['#e53935','#fb8c00','#fdd835','#43a047','#1e88e5','#3949ab','#8e24aa'][Math.min(6,Math.floor((v-55)/9*7))]:band[2];
+  $('wv').innerHTML='<path d="'+d+'" fill="none" stroke="'+col+'" stroke-width="3"/><line x1="0" y1="60" x2="320" y2="60" stroke="#ccc" stroke-dasharray="4 4"/><text x="4" y="14" font-size="12" font-weight="800">'+(v<50?'طول موجي طويل ← طاقة أقل':'طول موجي قصير ← طاقة أكبر')+'</text>';$('wvT').innerHTML='<b>'+band[0]+'</b><br>'+band[3]}
+ $('wvS').oninput=upd;upd()})();
+quiz('q1',[['الضوء شكل من أشكال',['الطاقة','المادة','الصوت']],['الضوء يحتاج إلى وسط مادي لينتقل',['خطأ، ينتقل حتى في الفراغ','صحيح، مثل الصوت','ينتقل فقط في الماء']],['أي هذه الموجات طولها الموجي أقصر؟',['أشعة جاما','موجات الراديو','الضوء المرئي']],['أكبر مصدر لطاقة الضوء على الأرض',['الشمس','المصابيح','النار']],['يسمى المسار الذي يسلكه الضوء',['شعاعًا','حزمة','موجة صوتية']]]);
+
+/* 1-3 race */
+(function(){const R=[['🐌','حلزون',0.0005],['🚶','شخص يمشي',2.5],['🏃','شخص يعدو',10],['🚆','قطار',12.5],['🚗','سيارة',16.7],['✈️','طائرة',69],['🔊','الصوت',340],['💡','الضوء',3e8]];
+ const lg=v=>Math.log10(v*1e4)/Math.log10(3e12);
+ function draw(k){$('race').innerHTML=R.map(([e,n,v])=>'<div style="display:flex;align-items:center;gap:6px;margin:4px 0"><span style="width:84px;font-size:.85rem;font-weight:800">'+n+'</span><div style="flex:1;height:28px;background:#f1f6f3;border-radius:8px;position:relative;direction:ltr"><div style="position:absolute;left:0;top:0;bottom:0;width:'+(lg(v)*100*k)+'%;background:'+(n==='الضوء'?'#fdd835':'#c8e6c9')+';border-radius:8px"></div><span style="position:absolute;left:calc('+(lg(v)*100*k)+'% - 14px);top:0;font-size:1.2rem">'+e+'</span></div><span style="width:96px;font-size:.75rem;text-align:left;direction:ltr">'+(k>=1?(v>=1e6?'300,000,000':v)+' m':'')+'</span></div>').join('')}
+ $('raceB').onclick=()=>{const t0=performance.now();(function st(t){const k=Math.max(0,Math.min(1,(t-t0)/2500));draw(k);if(k<1)requestAnimationFrame(st)})(t0)};draw(0)})();
+(function(){function upd(){const s=+$('thS').value;$('thV').textContent=s;$('thT').innerHTML='بُعد العاصفة ≈ 340 × '+s+' = <b style="color:var(--or)">'+(340*s).toLocaleString('en')+' م</b> (حوالي '+(340*s/1000).toFixed(1)+' كم)'}$('thS').oninput=upd;upd();
+ $('thB').onclick=()=>{const sky=$('sky');sky.style.background='#fffde7';sky.innerHTML='<div style="position:absolute;left:45%;top:0;font-size:3rem">⚡</div>';setTimeout(()=>{sky.style.background='#24304d'},150);
+  const s=+$('thS').value;let c=0;const iv=setInterval(()=>{c++;sky.innerHTML='<div style="color:#fff;text-align:center;padding-top:18px;font-weight:900;font-size:1.3rem">'+c+' …</div>';if(c>=s){clearInterval(iv);sky.innerHTML='<div style="color:#fff;text-align:center;padding-top:14px;font-weight:900;font-size:1.6rem">💥 بووووم! (الرعد)</div>'}},Math.min(700,4000/s))}})();
+document.querySelectorAll('#runQ [data-a]').forEach(b=>b.onclick=()=>{const ok=b.dataset.a==='1';b.classList.add(ok?'ok':'no');b.style.background=ok?'#dff5e7':'#fde4e4';$('runF').className='fb '+(ok?'ok':'no');$('runF').textContent=(ok?'✅ صحيح! ':'❌ ')+'الضوء أسرع بكثير من الصوت، فالصوت يتأخر حوالي 0.3 ثانية لقطع 100 م. لذلك يُعتمد على رؤية الدخان أو الإشارة الضوئية في توقيت السباق.'});
+
+/* 1-4 reflection */
+(function(){function upd(){const a=+$('rfS').value;$('rfV').textContent=a;const cx=160,cy=180,L=150,r=a*Math.PI/180;const sx=cx-L*Math.sin(r),sy=cy-L*Math.cos(r),ex=cx+L*Math.sin(r),ey=sy;
+ const arc=(dir)=>{const R=40;const x1=cx,y1=cy-R,x2=cx+dir*R*Math.sin(r),y2=cy-R*Math.cos(r);return'M'+x1+','+y1+' A'+R+','+R+' 0 0 '+(dir>0?1:0)+' '+x2+','+y2};
+ $('rf').innerHTML='<rect x="20" y="180" width="280" height="14" fill="#b3d9ff" stroke="#5b8fc7"/><line x1="20" y1="194" x2="300" y2="194" stroke="#5b8fc7" stroke-width="3"/>'+
+ '<line x1="'+cx+'" y1="20" x2="'+cx+'" y2="'+cy+'" stroke="#888" stroke-dasharray="5 4"/><text x="'+(cx+4)+'" y="30" font-size="11" font-weight="800" fill="#666">العمودي</text>'+
+ '<line x1="'+sx+'" y1="'+sy+'" x2="'+cx+'" y2="'+cy+'" stroke="#f0b400" stroke-width="4" marker-end="url(#ar)"/><line x1="'+cx+'" y1="'+cy+'" x2="'+ex+'" y2="'+ey+'" stroke="#f0b400" stroke-width="4" marker-end="url(#ar)"/>'+
+ '<defs><marker id="ar" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#d68a00"/></marker></defs>'+
+ '<path d="'+arc(-1)+'" fill="none" stroke="#d64545" stroke-width="3"/><path d="'+arc(1)+'" fill="none" stroke="#2e9e5b" stroke-width="3"/>'+
+ '<text x="'+(cx-60)+'" y="'+(cy-50)+'" font-size="13" font-weight="900" fill="#d64545">س = '+a+'°</text><text x="'+(cx+18)+'" y="'+(cy-50)+'" font-size="13" font-weight="900" fill="#2e9e5b">ص = '+a+'°</text><text x="'+(sx-8)+'" y="'+(sy-6)+'" font-size="20">🔦</text>'}$('rfS').oninput=upd;upd()})();
+(function(){function draw(rough){let s='';const base=120;if(!rough){s+='<rect x="20" y="'+base+'" width="280" height="10" fill="#b3d9ff"/>';for(let i=0;i<5;i++){const x=80+i*35;s+='<line x1="'+(x-40)+'" y1="20" x2="'+x+'" y2="'+base+'" stroke="#f0b400" stroke-width="2.5"/><line x1="'+x+'" y1="'+base+'" x2="'+(x+40)+'" y2="20" stroke="#f0b400" stroke-width="2.5"/>'}}
+ else{let p='M20,'+base;for(let x=20;x<=300;x+=10)p+=' L'+x+','+(base+(x%20?-6:4));s+='<path d="'+p+' L300,140 L20,140 Z" fill="#d7c4a3"/>';const ang=[-60,25,-10,50,-35];for(let i=0;i<5;i++){const x=80+i*35,t=(ang[i])*Math.PI/180;s+='<line x1="'+(x-40)+'" y1="20" x2="'+x+'" y2="'+base+'" stroke="#f0b400" stroke-width="2.5"/><line x1="'+x+'" y1="'+base+'" x2="'+(x+90*Math.sin(t))+'" y2="'+(base-90*Math.cos(t))+'" stroke="#f0b400" stroke-width="2.5"/>'}}
+ $('sf').innerHTML=s;$('sfT').innerHTML=rough?'<b>انعكاس انتشاري:</b> الأشعة تنعكس في اتجاهات مختلفة، فلا تتكون صورة. مثل الورق والقماش والحوائط.':'<b>انعكاس منتظم:</b> الأشعة المتوازية تنعكس متوازية، فتتكون صورة واضحة. مثل المرايا وسطح الماء الساكن.'}
+ document.querySelectorAll('[data-sf]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-sf]').forEach(x=>x.classList.toggle('main',x===b));draw(b.dataset.sf==='1')});draw(false)})();
+(function(){const f=()=>{$('mrA').textContent=$('mrIn').value;$('mrB').textContent=$('mrIn').value};$('mrIn').oninput=f;f()})();
+quiz('q3',[['زاوية الانعكاس تساوي',['زاوية السقوط','ضعف زاوية السقوط','90° دائمًا']],['الصورة في المرآة المستوية',['تقديرية ومعتدلة ومقلوبة جانبيًا','حقيقية ومقلوبة','أصغر من الجسم']],['أي هذه يعطي انعكاسًا منتظمًا؟',['سطح معدني مصقول','ورق الكرتون','قطعة قماش']],['إذا وقفت على بعد 2 م من مرآة مستوية، فبُعد صورتك عنك',['4 م','2 م','1 م']],['تُطلى جدران دور السينما بلون غامق خشن حتى',['لا ينعكس الضوء انعكاسًا منتظمًا يشوّش الصورة','تبدو أجمل','تكون أرخص']]]);
+
+/* 1-6 mirrors */
+(function(){let mode='cc';function upd(){const u=+$('mmS').value;const W=320,mx=250,ay=110,f=50;let s='<line x1="10" y1="'+ay+'" x2="310" y2="'+ay+'" stroke="#aaa" stroke-dasharray="4 4"/>';
+ const cur=mode==='cc'?'M'+(mx-14)+',30 Q'+(mx+14)+','+ay+' '+(mx-14)+',190':'M'+(mx+14)+',30 Q'+(mx-14)+','+ay+' '+(mx+14)+',190';s+='<path d="'+cur+'" fill="none" stroke="#5b8fc7" stroke-width="5"/>';
+ if(mode==='cc')s+='<circle cx="'+(mx-f)+'" cy="'+ay+'" r="3" fill="#d64545"/><text x="'+(mx-f-6)+'" y="'+(ay+16)+'" font-size="11" font-weight="800" fill="#d64545">البؤرة</text>';
+ const h=34,ox=mx-u;s+='<line x1="'+ox+'" y1="'+ay+'" x2="'+ox+'" y2="'+(ay-h)+'" stroke="#2e9e5b" stroke-width="5"/><text x="'+(ox-8)+'" y="'+(ay-h-6)+'" font-size="16">🕯️</text>';
+ const F=mode==='cc'?f:-f;const v=1/(1/F-1/u);const m=-v/u;let txt;
+ if(Math.abs(u-F)<3){txt='الجسم عند البؤرة: الأشعة تنعكس متوازية ولا تتكون صورة.'}else{const ix=mx-v,ih=h*m;
+  if(ix>-40&&ix<360){s+='<line x1="'+ix+'" y1="'+ay+'" x2="'+ix+'" y2="'+(ay-ih)+'" stroke="'+(v>0?'#f08c2e':'#f08c2e88')+'" stroke-width="5" '+(v>0?'':'stroke-dasharray="5 3"')+'/>'}
+  s+='<line x1="'+ox+'" y1="'+(ay-h)+'" x2="'+mx+'" y2="'+(ay-h)+'" stroke="#f0b400" stroke-width="1.5"/><line x1="'+mx+'" y1="'+(ay-h)+'" x2="'+(ix)+'" y2="'+(ay-ih)+'" stroke="#f0b400" stroke-width="1.5" '+(v>0?'':'stroke-dasharray="3 3"')+'/>';
+  const real=v>0,inv=m<0,big=Math.abs(m)>1.02;txt='الصورة: <b>'+(real?'حقيقية (أمام المرآة، تتكون على شاشة)':'تقديرية (خلف المرآة)')+'</b> · <b>'+(inv?'مقلوبة':'معتدلة')+'</b> · <b>'+(big?'مكبّرة':Math.abs(m)<.98?'مصغّرة':'بنفس الحجم')+'</b> (التكبير × '+Math.abs(m).toFixed(1)+')'}
+ $('mm').innerHTML=s;$('mmT').innerHTML=txt+(mode==='cv'?'<br>المرآة المحدبة تعطي دائمًا صورة تقديرية معتدلة مصغّرة، ومجال رؤية أوسع.':'')}
+ document.querySelectorAll('[data-mm]').forEach(b=>b.onclick=()=>{mode=b.dataset.mm;document.querySelectorAll('[data-mm]').forEach(x=>x.classList.toggle('main',x===b));upd()});$('mmS').oninput=upd;upd()})();
+quiz('q4',[['مرآة السيارة الجانبية لرؤية مجال أوسع',['محدبة','مقعرة','مستوية']],['مرآة الحلاقة أو التجميل التي تكبّر الوجه',['مقعرة','محدبة','مستوية']],['مرآة طبيب الأسنان',['مقعرة','محدبة','مستوية']],['المرايا في تقاطعات الطرق والأسواق التجارية',['محدبة','مقعرة','مستوية']],['مرآة غرفة النوم لرؤية الصورة بحجمها الحقيقي',['مستوية','محدبة','مقعرة']],['المرآة التي تعطي صورة حقيقية مقلوبة على شاشة',['مقعرة','محدبة','مستوية']]]);
+
+/* 1-8 refraction */
+(function(){let n2=1.33;const nm={'1.33':'الماء','1.5':'الزجاج','2.42':'الماس'};function upd(){const a=+$('snS').value;$('snV').textContent=a;const r=a*Math.PI/180;const b=Math.asin(Math.sin(r)/n2);const cx=160,cy=120,L=110;
+ const sx=cx-L*Math.sin(r),sy=cy-L*Math.cos(r),ex=cx+L*Math.sin(b),ey=cy+L*Math.cos(b),rx=cx+L*Math.sin(r),ry=sy;
+ $('sn').innerHTML='<rect x="0" y="120" width="320" height="120" fill="'+(n2>2?'#e3f2fd':n2>1.4?'#d6efe9':'#bfe3ff')+'"/><text x="8" y="20" font-size="13" font-weight="800">هواء</text><text x="8" y="140" font-size="13" font-weight="800">'+nm[n2]+'</text>'+
+ '<line x1="'+cx+'" y1="5" x2="'+cx+'" y2="235" stroke="#777" stroke-dasharray="5 4"/>'+
+ '<line x1="'+sx+'" y1="'+sy+'" x2="'+cx+'" y2="'+cy+'" stroke="#f0b400" stroke-width="4"/><line x1="'+cx+'" y1="'+cy+'" x2="'+ex+'" y2="'+ey+'" stroke="#e65100" stroke-width="4"/><line x1="'+cx+'" y1="'+cy+'" x2="'+rx+'" y2="'+ry+'" stroke="#f0b40055" stroke-width="2"/>'+
+ '<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+L*Math.sin(r))+'" y2="'+(cy+L*Math.cos(r))+'" stroke="#999" stroke-dasharray="3 4"/>'+
+ '<text x="'+(cx-58)+'" y="'+(cy-30)+'" font-size="13" font-weight="900" fill="#d68a00">س = '+a+'°</text><text x="'+(cx+8)+'" y="'+(cy+52)+'" font-size="13" font-weight="900" fill="#e65100">ر = '+(b*180/Math.PI).toFixed(0)+'°</text><text x="'+(sx-8)+'" y="'+(sy-4)+'" font-size="18">🔦</text>';
+ $('snT').innerHTML='الضوء انتقل إلى وسط <b>أكبر كثافة ضوئية</b>، فقلّت سرعته وانكسر <b>مقتربًا من العمود</b> (ر < س).<br>سرعة الضوء في '+nm[n2]+' ≈ '+(300/n2).toFixed(0)+' ألف كم/ث'+(a===0?'<br>عند السقوط العمودي (س = 0) لا ينحرف الشعاع!':'')}
+ document.querySelectorAll('[data-md]').forEach(b=>b.onclick=()=>{n2=+b.dataset.md;document.querySelectorAll('[data-md]').forEach(x=>x.classList.toggle('main',x===b));upd()});$('snS').oninput=upd;upd()})();
+(function(){let fx,fy,lock=false;const wy=90,ey=30,exx=40;function nw(){fx=rnd(170,290);fy=rnd(140,200);lock=false;$('fishF').textContent='';draw()}
+ function app(){return[fx,wy+(fy-wy)/1.33]}
+ function draw(hit){const [ax,ay]=app();let s='<rect x="0" y="'+wy+'" width="320" height="130" fill="#bfe3ff"/><rect x="0" y="'+wy+'" width="320" height="3" fill="#7fb8e8"/><rect x="0" y="40" width="60" height="'+(wy-40)+'" fill="#a1887f"/><text x="'+(exx-14)+'" y="'+(ey+14)+'" font-size="26">🧍</text>';
+  s+='<text x="'+(ax-14)+'" y="'+(ay+8)+'" font-size="24" opacity=".55">🐟</text>';if(hit!==undefined){s+='<text x="'+(fx-14)+'" y="'+(fy+8)+'" font-size="24">🐠</text><line x1="'+exx+'" y1="'+(ey+10)+'" x2="'+hit[0]+'" y2="'+hit[1]+'" stroke="#5d4037" stroke-width="3"/><circle cx="'+hit[0]+'" cy="'+hit[1]+'" r="6" fill="none" stroke="#d64545" stroke-width="3"/><text x="'+(fx+14)+'" y="'+(fy+4)+'" font-size="11" font-weight="800">الحقيقية</text><text x="'+(ax+14)+'" y="'+(ay)+'" font-size="11" font-weight="800">الظاهرية</text>'}
+  $('fish').innerHTML=s}
+ $('fish').addEventListener('click',e=>{if(lock)return;const r=$('fish').getBoundingClientRect(),x=(e.clientX-r.left)*320/r.width,y=(e.clientY-r.top)*220/r.height;if(y<wy)return;lock=true;const [ax,ay]=app();
+  const dReal=Math.hypot(x-fx,y-fy),dApp=Math.hypot(x-ax,y-ay);draw([x,y]);const f=$('fishF');
+  if(dReal<22){f.className='fb ok';f.textContent='🎉 أصبت السمكة! صوّبت أسفل المكان الذي تراه فيه، لأن الضوء ينكسر عند خروجه من الماء.'}else if(dApp<22){f.className='fb no';f.textContent='❌ صوّبت على المكان الذي تراه فيه! السمكة الحقيقية أعمق (أسفل).'}else{f.className='fb no';f.textContent='❌ أخطأت. السمكة الحقيقية تحت صورتها الظاهرية.'}});
+ $('fishN').onclick=nw;nw()})();
+quiz('q5',[['سبب انكسار الضوء',['تغيّر سرعته عند انتقاله من وسط إلى آخر','انعكاسه عن السطح','تغيّر لونه']],['تبدو حمامات السباحة',['أقل عمقًا من الحقيقة','أعمق من الحقيقة','بعمقها الحقيقي']],['عند انتقال الضوء من الهواء إلى الماء ينكسر',['مقتربًا من العمود','مبتعدًا عن العمود','ولا يتغير']],['من تطبيقات الانكسار',['عدسات النظارات الطبية','مرآة السيارة','مرآة الحمام']],['إذا سقط الضوء عموديًا على سطح الماء',['لا ينحرف','ينحرف كثيرًا','ينعكس كله']]]);
+
+/* 1-10 prism */
+(function(){const C=['#e53935','#fb8c00','#fdd835','#43a047','#1e88e5','#3949ab','#8e24aa'],N=['أحمر','برتقالي','أصفر','أخضر','أزرق','نيلي','بنفسجي'];
+ function upd(){const t=+$('prS').value;const P=[[160,30],[90,170],[230,170]];let s='<polygon points="'+P.map(p=>p.join(',')).join(' ')+'" fill="#ffffff22" stroke="#cfe" stroke-width="2"/>';
+  const hy=95+t;s+='<line x1="0" y1="'+(hy+20)+'" x2="125" y2="'+hy+'" stroke="#fff" stroke-width="5"/>';
+  C.forEach((c,i)=>{const dy=i*5;s+='<line x1="125" y1="'+hy+'" x2="196" y2="'+(hy+4+dy*.6)+'" stroke="'+c+'" stroke-width="2" opacity=".8"/><line x1="196" y1="'+(hy+4+dy*.6)+'" x2="320" y2="'+(hy+40+dy*4+t*.5)+'" stroke="'+c+'" stroke-width="5"/>';
+   if(i%2===0||i===6)s+='<text x="305" y="'+(hy+44+dy*4+t*.5)+'" font-size="9" fill="'+c+'" font-weight="800" text-anchor="end">'+N[i]+'</text>'});
+  s+='<text x="10" y="'+(hy+12)+'" font-size="12" fill="#fff" font-weight="800">ضوء أبيض</text>';$('pr').innerHTML=s}$('prS').oninput=upd;upd()})();
+(function(){let ang=0,last=performance.now();const el=$('nw');(function loop(t){const sp=+$('nwS').value;ang+=sp*0.25*(t-last);last=t;el.style.transform='rotate('+ang+'deg)';el.style.filter='blur('+(sp/9)+'px) saturate('+(1-sp/130)+') brightness('+(1+sp/140)+')';
+ $('nwT').textContent=sp<20?'أدِر القرص بسرعة وراقب الألوان':sp<70?'الألوان تختلط…':'🤍 يبدو القرص أبيض تقريبًا! لأن الألوان السبعة معًا تكوّن الضوء الأبيض';requestAnimationFrame(loop)})(last)})();
+
+/* 1-11 eye */
+(function(){const P=[['القرنية','تكسر الضوء الذي يدخل إلى العين',[78,100],'#4fc3f7'],['العدسة','تكوّن صورة الجسم على الشبكية',[110,100],'#81d4fa'],['العضلة الهدبية','تعدّل سمك العدسة لتركيز الصورة على الشبكية بوضوح',[116,62],'#ef9a9a'],['الشبكية','عليها العصي والمخاريط التي تستقبل الضوء',[250,100],'#ffcc80'],['العصي','تمكننا من رؤية الأشياء في الضوء الخافت',[262,70],'#ffe082'],['المخاريط','توفر رؤية الألوان',[262,130],'#a5d6a7'],['العصب البصري','يحمل الإشارات الكهربائية إلى المخ لتفسير المرئي',[296,112],'#ce93d8']];
+ let s='<ellipse cx="170" cy="100" rx="105" ry="85" fill="#fff8f0" stroke="#e0a87a" stroke-width="4"/><path d="M260,70 A105,85 0 0 1 260,130" fill="none" stroke="#ffcc80" stroke-width="10"/><path d="M80,62 Q60,100 80,138" fill="#e1f5fe" stroke="#4fc3f7" stroke-width="4"/><ellipse cx="110" cy="100" rx="16" ry="34" fill="#b3e5fc" stroke="#0288d1" stroke-width="2"/><line x1="272" y1="108" x2="315" y2="118" stroke="#ce93d8" stroke-width="10"/><circle cx="92" cy="100" r="9" fill="#5d4037"/>';
+ P.forEach((p,i)=>s+='<g data-i="'+i+'" style="cursor:pointer"><circle cx="'+p[2][0]+'" cy="'+p[2][1]+'" r="13" fill="'+p[3]+'" stroke="#1f2a44" stroke-width="2"/><text x="'+p[2][0]+'" y="'+(p[2][1]+5)+'" text-anchor="middle" font-size="13" font-weight="900">'+(i+1)+'</text></g>');
+ $('eye').innerHTML=s;$('eye').querySelectorAll('[data-i]').forEach(g=>g.onclick=()=>{const p=P[+g.dataset.i];$('eyeT').innerHTML='<b style="font-size:1.1rem">'+p[0]+'</b><br>'+p[1]})})();
+(function(){const on={r:1,g:1,b:1};function draw(){const c=[['r','#ff0000',150,85],['g','#00ff00',115,145],['b','#0000ff',185,145]];
+ $('mix').innerHTML='<g style="mix-blend-mode:screen;isolation:isolate">'+c.filter(x=>on[x[0]]).map(x=>'<circle cx="'+x[2]+'" cy="'+x[3]+'" r="62" fill="'+x[1]+'" style="mix-blend-mode:screen"/>').join('')+'</g>';
+ const k=Object.keys(on).filter(x=>on[x]).sort().join('');const R={'bgr':'أبيض 🤍 = أحمر + أخضر + أزرق','gr':'أصفر 💛 = أحمر + أخضر','br':'بنفسجي (أرجواني) 💜 = أحمر + أزرق','bg':'نيلي (سماوي) 🩵 = أخضر + أزرق','r':'أحمر','g':'أخضر','b':'أزرق','':'لا ضوء = أسود ⚫'};
+ $('mixT').innerHTML='<b>'+R[k]+'</b><br><span style="font-size:.85rem">في المنطقة المشتركة بين الدوائر</span>';document.querySelectorAll('[data-c]').forEach(b=>b.classList.toggle('main',!!on[b.dataset.c]))}
+ document.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{on[b.dataset.c]^=1;draw()});draw()})();
+(function(){const OB={r:['🌹','r'],g:['🍃','g'],b:['👕','b'],w:['📄','rgb'],y:['🍌','rg']},LT={w:'rgb',r:'r',g:'g',b:'b'};const hex={r:'#e53935',g:'#43a047',b:'#1e88e5',rg:'#fdd835',rgb:'#ffffff','':'#111111',rb:'#8e24aa',gb:'#00bcd4'};
+ const nm={r:'أحمر',g:'أخضر',b:'أزرق',rg:'أصفر',rgb:'أبيض','':'أسود',rb:'بنفسجي',gb:'نيلي'};const lbg={w:'#fffde7',r:'#ffcdd2',g:'#c8e6c9',b:'#bbdefb'};
+ function upd(){const o=OB[$('obC').value],l=LT[$('lgC').value];const ref=[...'rgb'].filter(c=>o[1].includes(c)&&l.includes(c)).join('');
+  const bx=$('obBox');bx.style.background=lbg[$('lgC').value];bx.innerHTML='<div style="width:90px;height:90px;border-radius:50%;background:'+hex[ref]+';display:grid;place-items:center;box-shadow:0 4px 12px #0003">'+o[0]+'</div>';
+  $('obT').innerHTML='يبدو الجسم <b>'+nm[ref]+'</b>.<br>'+(ref===''?'الجسم يمتص كل ألوان الضوء الساقط عليه، فلا ينعكس شيء.':'لأنه يعكس فقط '+nm[ref]+' من الضوء الساقط ويمتص الباقي.')}$('obC').onchange=$('lgC').onchange=upd;upd()})();
+quiz('q7',[['الألوان الأولية للضوء هي',['الأحمر والأخضر والأزرق','الأحمر والأصفر والأزرق','الأبيض والأسود']],['أحمر + أخضر = ',['أصفر','بني','بنفسجي']],['تبدو أوراق النبات خضراء لأنها',['تعكس الضوء الأخضر وتمتص الباقي','تمتص الضوء الأخضر','تصدر ضوءًا أخضر']],['ورقة بيضاء تحت ضوء أحمر تبدو',['حمراء','بيضاء','سوداء']],['الجزء المسؤول عن رؤية الألوان في العين',['المخاريط','العصي','القرنية']],['العدسة المستخدمة لتصحيح قِصر النظر',['مقعرة','محدبة','مستوية']]]);
+
+/* review */
+(function(){const host=$('revQ');let ok=0,dn=0;
+ const G=[['يعتبر كل مما يلي تطبيقًا لانعكاس الطاقة الضوئية ما عدا',['العدسة العينية اللاصقة','مرايا الأمان في الأسواق التجارية','المشكال (منظار النماذج المتغيرة)','منظار الأفق']],
+  ['placeholder',['x']],
+  ['كل مما يلي من خواص الصورة في المرآة المستوية ما عدا',['مقلوبة كليًا','تقديرية','على نفس البعد العمودي من المرآة مثل الجسم','معتدلة']],
+  ['الفرق الرئيس بين المرآة المستوية والمرآة المحدبة هو',['المرآة المحدبة لها زاوية رؤية أكثر اتساعًا','المرآة المحدبة تعطي صورة مقلوبة','المرآة المحدبة تعطي صورة حقيقية','المرآة المحدبة تعطي صورة أمامها']],
+  ['عند وضع جسم قريب جدًا من مرآة مقعرة فإن الصورة تكون',['معتدلة ومكبّرة','تقديرية مصغّرة','حقيقية مكبّرة','مقلوبة كليًا']],
+  ['لماذا ينشطر الضوء الأبيض إلى ألوان مختلفة عند مروره خلال منشور زجاجي؟',['تقل سرعة مكونات الضوء الأبيض بكميات مختلفة عند دخوله الزجاج','تزداد سرعة كل الألوان بنفس المقدار','تنعكس الألوان داخل المنشور','يعمل المنشور كمرشح للضوء']],
+  ['مرشح اللون الأحمر',['ينفذ مكون الضوء الأحمر فقط','يمتص الضوء الأحمر فقط','يزيد سطوع الضوء الأحمر','يقلل سطوع الضوء الأحمر']],
+  ['أي من الألوان التالية لا يعتبر لونًا أوليًا للضوء؟',['أزرق نيلي','أحمر','أخضر','أزرق']],
+  ['أي من الألوان التالية يتكون عند خلط اللونين الأزرق والأحمر؟',['أحمر بنفسجي (أرجواني)','أصفر','برتقالي','أزرق نيلي']],
+  ['أي من الألوان التالية يتكون عند خلط اللونين الأحمر والأخضر؟',['الأصفر','البرتقالي','الأزرق النيلي','البني']],
+  ['يبدو الجسم الأصفر عند سقوط ضوء أحمر عليه',['أحمر','أصفر','أسود','أخضر']],
+  ['جسم يعكس جميع ألوان الضوء، يبدو تحت الضوء الأبيض',['أبيض','أسود','أحمر','شفافًا']]];
+ G[1]=['أي مما يلي يعطي أفضل انعكاس منتظم لتكوين صورة؟',['لوح زجاجي مطلي بالفضة من الخلف (مرآة)','أرضية رخامية مصقولة','غلاية شاي لامعة من الفولاذ','قطعة ورق لامعة']];
+ function upd(){$('revSc').textContent=dn<G.length?'أجبت عن '+dn+' من '+G.length+' · صحيح: '+ok:(ok>=G.length-1?'🌟 ممتاز! ':ok>=G.length*.7?'👍 جيد جدًا! ':'💪 راجع الدروس وحاول مرة أخرى. ')+'النتيجة: '+ok+' من '+G.length}
+ function make(){host.innerHTML='';ok=0;dn=0;upd();G.slice().sort(()=>Math.random()-.5).forEach(([q,o],i)=>mcq(host,'<b>'+(i+1)+')</b> '+q,o,0,r=>{dn++;if(r)ok++;upd()}))}
+ $('revNew').onclick=make;make()})();
+
+/* ===== SCIENCE CH2 ===== */
+(function(){const E=[['🔥 التأثير الحراري','عند سريان الإلكترونات في سلك، تفقد جزءًا من طاقتها إلى ذرات السلك، فتزداد حرارته.','<b>أمثلة:</b> الغلاية الكهربائية، المكواة، الفرن، الكتل، مصباح الفتيل (تسخن الفتيلة حتى تتوهج).','<svg viewBox="0 0 300 110" style="width:100%;max-width:320px;display:block;margin:auto"><path id="coil" d="M30,60 '+Array.from({length:12},(_,i)=>'q10,-30 20,0 q10,30 20,0').join(' ')+'" fill="none" stroke="#e65100" stroke-width="6"><animate attributeName="stroke" values="#795548;#e65100;#ffeb3b;#e65100" dur="2s" repeatCount="indefinite"/></path><text x="150" y="104" text-anchor="middle" font-size="13" font-weight="800">سلك التسخين يتوهج 🔥</text></svg>'],
+ ['🧪 التأثير الكيميائي','عند مرور التيار في سائل موصل (إلكتروليت) يحدث تفاعل كيميائي يسمى <b>التحليل الكهربائي</b>. السلكان اللذان يمر بهما التيار يسميان <b>القطبين (الإلكترودين)</b>.','<b>أمثلة:</b> شحن بطارية السيارة والجوال، <b>الطلاء الكهربائي</b> (طلاء مصادم السيارة بالكروم، والغلاية بالنحاس).','<svg viewBox="0 0 300 120" style="width:100%;max-width:320px;display:block;margin:auto"><rect x="70" y="30" width="160" height="80" rx="8" fill="#e3f2fd" stroke="#1f2a44" stroke-width="2"/><rect x="100" y="15" width="12" height="80" fill="#9e9e9e"/><rect x="188" y="15" width="12" height="80" fill="#bdbdbd"/>'+Array.from({length:8},(_,i)=>'<circle cx="'+(106+(i%2)*88)+'" cy="95" r="3" fill="#fff" stroke="#90caf9"><animate attributeName="cy" values="95;35" dur="'+(1.2+i*.2)+'s" begin="'+(i*.3)+'s" repeatCount="indefinite"/></circle>').join('')+'<text x="150" y="12" text-anchor="middle" font-size="12" font-weight="800">فقاعات غاز عند القطبين</text></svg>'],
+ ['🧲 التأثير المغناطيسي','اكتشف «أورستيد» أن مرور التيار في سلك يولّد حوله <b>مجالًا مغناطيسيًا</b>، فتنحرف إبرة البوصلة الموضوعة بقربه.','<b>أمثلة:</b> الجرس الكهربائي، سماعة الهاتف، مكبر الصوت، المحركات الكهربائية، المغناطيس الضخم في ساحة الخردة.','<svg viewBox="0 0 300 110" style="width:100%;max-width:320px;display:block;margin:auto"><line x1="20" y1="55" x2="280" y2="55" stroke="#b87333" stroke-width="6"/>'+[60,150,240].map(x=>'<g transform="translate('+x+',55)"><circle r="18" fill="#fff" stroke="#333" stroke-width="2"/><g><polygon points="0,-14 4,0 -4,0" fill="#d64545"/><polygon points="0,14 4,0 -4,0" fill="#3b6fd8"/><animateTransform attributeName="transform" type="rotate" values="0;80;80;0" dur="3s" repeatCount="indefinite"/></g></g>').join('')+'<text x="150" y="104" text-anchor="middle" font-size="12" font-weight="800">إبر البوصلة تنحرف عند مرور التيار</text></svg>']];
+ function load(i){$('efBox').innerHTML='<h3>'+E[i][0]+'</h3>'+E[i][3]+'<p style="margin:6px 0">'+E[i][1]+'</p><p style="margin:0">'+E[i][2]+'</p>';document.querySelectorAll('[data-ef]').forEach(b=>b.classList.toggle('main',+b.dataset.ef===i))}
+ document.querySelectorAll('[data-ef]').forEach(b=>b.onclick=()=>load(+b.dataset.ef));load(0)})();
+(function(){let on=false;function draw(){let s='<rect x="40" y="60" width="90" height="34" rx="6" fill="#9e9e9e"/>';for(let i=0;i<9;i++)s+='<ellipse cx="'+(48+i*10)+'" cy="77" rx="5" ry="20" fill="none" stroke="#b87333" stroke-width="3"/>';
+  s+='<path d="M48,97 V140 H160 M130,97 V120" fill="none" stroke="#333" stroke-width="2"/><rect x="160" y="128" width="30" height="24" fill="#fdd835" stroke="#333"/><text x="175" y="145" text-anchor="middle" font-size="12" font-weight="900">+ −</text><path d="M190,140 H230 L'+(on?'250,140':'248,126')+' M252,140 H270 V97 H130" fill="none" stroke="#333" stroke-width="2"/><circle cx="230" cy="140" r="3"/><circle cx="252" cy="140" r="3"/>';
+  for(let i=0;i<6;i++){const tx=on?140+i*4:200+i*16,ty=on?72+((i%3)*6):40+(i%2)*10;s+='<g style="transition:all .6s" transform="translate('+tx+','+ty+') rotate('+(on?0:(i*30))+')"><rect x="0" y="-2" width="22" height="4" fill="#607d8b"/><rect x="-2" y="-4" width="4" height="8" fill="#455a64"/></g>'}
+  $('em').innerHTML=s;$('emT').innerHTML=on?'⚡ يمر التيار في الملف، فيصير الحديد <b>مغناطيسًا</b> ويجذب المسامير!':'لا يمر تيار، فالحديد ليس مغناطيسًا والمسامير متناثرة.';$('emB').textContent=on?'🔌 افتح المفتاح':'🔌 أغلق المفتاح'}
+ $('emB').onclick=()=>{on=!on;draw()};draw()})();
+quiz('qe1',[['تشغيل مصباح جيب',['حراري (الفتيلة تسخن وتضيء)','كيميائي','مغناطيسي']],['استخدام آلة حلاقة كهربائية',['مغناطيسي (المحرك)','حراري','كيميائي']],['استخدام موقد كهربائي لطهي الأرز',['حراري','مغناطيسي','كيميائي']],['شحن نضيدة (بطارية) آلة التصوير',['كيميائي','حراري','مغناطيسي']],['تشغيل محرك السيارة بالنضيدة',['مغناطيسي','حراري','كيميائي']],['طلاء مصادم السيارة بالكروم',['كيميائي (الطلاء الكهربائي)','مغناطيسي','حراري']]]);
+
+/* circuit lab */
+(function(){let mode='s',sw=true;function draw(){const n=+$('ccS').value,R=+$('crS').value;$('ccV').textContent=n;$('crV').textContent=R;const V=1.5*n;const Rt=mode==='s'?2*R:mode==='p'?R/2:R;const I=sw?V/Rt:0;
+ const glow=Math.min(1,I/3);let s='<path d="M40,40 H140 M180,40 H280 V170 H40 V40" fill="none" stroke="#333" stroke-width="3"/>';
+ for(let i=0;i<n;i++)s+='<line x1="'+(140+i*10)+'" y1="28" x2="'+(140+i*10)+'" y2="52" stroke="#333" stroke-width="3"/><line x1="'+(145+i*10)+'" y1="33" x2="'+(145+i*10)+'" y2="47" stroke="#333" stroke-width="6"/>';
+ s+='<text x="160" y="22" text-anchor="middle" font-size="11" font-weight="800">'+V+' فولت</text>';
+ s+='<rect x="40" y="90" width="0" height="0"/><circle cx="40" cy="105" r="14" fill="#fff" stroke="#333" stroke-width="2"/><text x="40" y="110" text-anchor="middle" font-size="14" font-weight="900">A</text><text x="62" y="110" font-size="11" font-weight="800" fill="#d64545">'+I.toFixed(2)+' A</text>';
+ s+='<rect x="30" y="140" width="0"/><path d="M280,90 L280,90" /><line x1="265" y1="105" x2="'+(sw?'265':'252')+'" y2="'+(sw?'125':'118')+'" stroke="#333" stroke-width="3"/><rect x="262" y="88" width="36" height="50" fill="#fff"/><circle cx="280" cy="92" r="3"/><circle cx="280" cy="134" r="3"/><line x1="280" y1="92" x2="'+(sw?280:296)+'" y2="'+(sw?134:124)+'" stroke="#333" stroke-width="3"/>';
+ s+='<circle cx="160" cy="170" r="15" fill="rgba(255,235,59,'+glow+')" stroke="#333" stroke-width="2"/><path d="M150,160 L170,180 M170,160 L150,180" stroke="#333" stroke-width="2"/>'+(glow>.05?'<circle cx="160" cy="170" r="'+(18+glow*16)+'" fill="rgba(255,235,59,'+(glow*.35)+')"/>':'');
+ const rb=(x,y)=>'<rect x="'+x+'" y="'+(y-8)+'" width="40" height="16" fill="#fff" stroke="#333" stroke-width="2"/><text x="'+(x+20)+'" y="'+(y+4)+'" text-anchor="middle" font-size="10" font-weight="800">'+R+'Ω</text>';
+ if(mode==='1')s+='<rect x="70" y="160" width="60" height="20" fill="#fff"/>'+rb(80,170);
+ if(mode==='s')s+='<rect x="190" y="160" width="80" height="20" fill="#fff"/><rect x="60" y="160" width="80" height="20" fill="#fff"/>'+rb(80,170)+rb(200,170);
+ if(mode==='p')s+='<rect x="70" y="160" width="70" height="20" fill="#fff"/><path d="M70,170 V150 H80 M120,150 H130 V190 H120 M80,190 H70 V170 M130,170 H140" fill="none" stroke="#333" stroke-width="3"/>'+rb(80,150)+rb(80,190);
+ s+='<path d="M95,40 V70 H225 V40" fill="none" stroke="#333" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="160" cy="70" r="14" fill="#fff" stroke="#333" stroke-width="2"/><text x="160" y="75" text-anchor="middle" font-size="14" font-weight="900">V</text><text x="180" y="84" font-size="11" font-weight="800" fill="#3b6fd8">'+(sw?V:0)+' V</text>';
+ $('ck').innerHTML=s;$('ckT').innerHTML=!sw?'المفتاح مفتوح: الدائرة غير مغلقة فلا يمر تيار ولا يضيء المصباح.':'المقاومة الكلية = <b>'+(mode==='s'?R+' + '+R+' = ':mode==='p'?R+' ÷ 2 = ':'')+(Math.round(Rt*100)/100)+' Ω</b>'+(mode==='s'?' (تزيد على التوالي)':mode==='p'?' (تقل على التوازي)':'')+'<br>شدة التيار = ج ÷ م = '+V+' ÷ '+(Math.round(Rt*100)/100)+' = <b style="color:var(--rd)">'+I.toFixed(2)+' أمبير</b><br>'+(glow>.7?'💡 المصباح يتوهج بقوة':glow>.25?'💡 المصباح يضيء':'🕯️ المصباح خافت')}
+ document.querySelectorAll('[data-cn]').forEach(b=>b.onclick=()=>{mode=b.dataset.cn;document.querySelectorAll('[data-cn]').forEach(x=>x.classList.toggle('main',x===b));draw()});$('swB').onclick=()=>{sw=!sw;$('swB').textContent='🔘 المفتاح: '+(sw?'مغلق':'مفتوح');draw()};$('ccS').oninput=$('crS').oninput=draw;draw()})();
+(function(){const S=[['عمود كهربائي','<svg viewBox="0 0 60 30" width="60"><line x1="0" y1="15" x2="25" y2="15" stroke="#333" stroke-width="2"/><line x1="25" y1="3" x2="25" y2="27" stroke="#333" stroke-width="2"/><line x1="32" y1="9" x2="32" y2="21" stroke="#333" stroke-width="5"/><line x1="32" y1="15" x2="60" y2="15" stroke="#333" stroke-width="2"/></svg>'],
+ ['مقاومة ثابتة','<svg viewBox="0 0 60 30" width="60"><line x1="0" y1="15" x2="15" y2="15" stroke="#333" stroke-width="2"/><rect x="15" y="8" width="30" height="14" fill="none" stroke="#333" stroke-width="2"/><line x1="45" y1="15" x2="60" y2="15" stroke="#333" stroke-width="2"/></svg>'],
+ ['مقاومة متغيرة (ريوستات)','<svg viewBox="0 0 60 30" width="60"><line x1="0" y1="15" x2="15" y2="15" stroke="#333" stroke-width="2"/><rect x="15" y="8" width="30" height="14" fill="none" stroke="#333" stroke-width="2"/><line x1="45" y1="15" x2="60" y2="15" stroke="#333" stroke-width="2"/><line x1="12" y1="27" x2="48" y2="3" stroke="#333" stroke-width="2"/></svg>'],
+ ['مفتاح','<svg viewBox="0 0 60 30" width="60"><line x1="0" y1="20" x2="18" y2="20" stroke="#333" stroke-width="2"/><circle cx="20" cy="20" r="2.5"/><line x1="20" y1="20" x2="40" y2="6" stroke="#333" stroke-width="2"/><circle cx="42" cy="20" r="2.5"/><line x1="42" y1="20" x2="60" y2="20" stroke="#333" stroke-width="2"/></svg>'],
+ ['مصباح','<svg viewBox="0 0 60 30" width="60"><line x1="0" y1="15" x2="18" y2="15" stroke="#333" stroke-width="2"/><circle cx="30" cy="15" r="12" fill="none" stroke="#333" stroke-width="2"/><path d="M22,7 L38,23 M38,7 L22,23" stroke="#333" stroke-width="2"/><line x1="42" y1="15" x2="60" y2="15" stroke="#333" stroke-width="2"/></svg>'],
+ ['أميتر','<svg viewBox="0 0 60 30" width="60"><line x1="0" y1="15" x2="18" y2="15" stroke="#333" stroke-width="2"/><circle cx="30" cy="15" r="12" fill="none" stroke="#333" stroke-width="2"/><text x="30" y="20" text-anchor="middle" font-size="13" font-weight="900">A</text><line x1="42" y1="15" x2="60" y2="15" stroke="#333" stroke-width="2"/></svg>'],
+ ['فولتميتر','<svg viewBox="0 0 60 30" width="60"><line x1="0" y1="15" x2="18" y2="15" stroke="#333" stroke-width="2"/><circle cx="30" cy="15" r="12" fill="none" stroke="#333" stroke-width="2"/><text x="30" y="20" text-anchor="middle" font-size="13" font-weight="900">V</text><line x1="42" y1="15" x2="60" y2="15" stroke="#333" stroke-width="2"/></svg>']];
+ const host=$('sym');let ok=0,dn=0;function nq(){const k=rnd(0,S.length-1);const opts=[k];while(opts.length<4){const r=rnd(0,S.length-1);if(!opts.includes(r))opts.push(r)}opts.sort(()=>Math.random()-.5);let done=false;
+  host.innerHTML='<div class="prob">ما رمز: <b>'+S[k][0]+'</b>؟</div><div class="btns">'+opts.map(o=>'<button class="btn" data-o="'+o+'" style="padding:6px">'+S[o][1]+'</button>').join('')+'</div><div class="fb"></div><div class="sc">✔️ '+ok+' من '+dn+'</div>';
+  host.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{if(done)return;done=true;dn++;const g=+b.dataset.o===k;if(g)ok++;b.classList.add(g?'ok':'no');b.style.background=g?'#dff5e7':'#fde4e4';if(!g)host.querySelector('[data-o="'+k+'"]').style.background='#dff5e7';host.querySelector('.fb').className='fb '+(g?'ok':'no');host.querySelector('.fb').textContent=g?'🎉 صحيح':'❌ هذا رمز: '+S[+b.dataset.o][0];setTimeout(nq,1500)})}nq()})();
+(function(){const host=$('pe2');function nq(){const t=rnd(0,2),R=[1,1.5,2,2.5,3,4,5,6,8,10][rnd(0,9)],I=[0.25,0.5,0.6,1,1.5,2][rnd(0,5)],V=Math.round(R*I*100)/100;const ask=['ج','ت','م'][t],ans=[V,I,R][t];
+ const cell=(k,v,u)=>k===ask?'<input class="cf" style="width:70px;height:38px;border:3px solid #c9dfe2;border-radius:10px;text-align:center;font-weight:900;font-size:1.05rem">':v+' '+u;
+ host.innerHTML='<table class="t" style="text-align:center"><tr><th>فرق الجهد ج (فولت)</th><th>التيار ت (أمبير)</th><th>المقاومة م (Ω)</th></tr><tr><td>'+cell('ج',V,'V')+'</td><td>'+cell('ت',I,'A')+'</td><td>'+cell('م',R,'Ω')+'</td></tr></table><div class="btns"><button class="btn main" data-k="c">✔️ تحقّق</button><button class="btn or" data-k="n">سؤال جديد ⬅</button></div><div class="fb"></div>';
+ const inp=host.querySelector('input'),fb=host.querySelector('.fb');host.querySelector('[data-k=n]').onclick=nq;
+ host.querySelector('[data-k=c]').onclick=()=>{const v=parseFloat(inp.value.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)));const g=Math.abs(v-ans)<.011;inp.classList.remove('ok','no');inp.classList.add(g?'ok':'no');inp.style.borderColor=g?'#2e9e5b':'#d64545';fb.className='fb '+(g?'ok':'no');
+  fb.innerHTML=g?'🎉 صحيح!':'❌ '+(ask==='م'?'م = ج ÷ ت = '+V+' ÷ '+I+' = '+R:ask==='ت'?'ت = ج ÷ م = '+V+' ÷ '+R+' = '+I:'ج = ت × م = '+I+' × '+R+' = '+V);if(g)setTimeout(nq,1600)}}nq()})();
+
+/* bill */
+(function(){const A=[['💡','مصباح مائدة',30,3],['🫖','غلاية كهربائية',2000,0.5],['🧊','ثلاجة',200,24],['🧺','غسالة',1500,1],['🍲','فرن ميكروويف',750,0.33],['🚿','سخان ماء',2000,1.33],['❄️','مكيف هواء',3000,6],['📺','تلفاز',220,4]];
+ $('bill').innerHTML='<table class="t"><tr><th>الجهاز</th><th>القدرة</th><th>ساعات/يوم</th><th>ك.و.س/شهر</th></tr>'+A.map((a,i)=>'<tr><td>'+a[0]+' '+a[1]+'</td><td>'+(a[2]>=1000?a[2]/1000+' كيلوواط':a[2]+' واط')+'</td><td><input type="range" min="0" max="24" step="0.5" value="'+a[3]+'" data-bi="'+i+'" style="width:90px;accent-color:#2e9e5b"><b data-bh="'+i+'"></b></td><td data-bk="'+i+'"></td></tr>').join('')+'</table>';
+ function upd(){let tot=0,mx=0,mi=0;A.forEach((a,i)=>{const h=+document.querySelector('[data-bi="'+i+'"]').value;const k=a[2]/1000*h*30;tot+=k;if(k>mx){mx=k;mi=i}document.querySelector('[data-bh="'+i+'"]').textContent=' '+h;document.querySelector('[data-bk="'+i+'"]').textContent=(Math.round(k*10)/10)});
+  $('billT').innerHTML='الاستهلاك الشهري = <b>'+Math.round(tot)+' ك.و.س</b><br>التكلفة = '+Math.round(tot)+' × 25 = '+Math.round(tot*25).toLocaleString('en')+' درهم = <b style="color:var(--or);font-size:1.2rem">'+(Math.round(tot*25)/1000).toFixed(2)+' دينار</b><br>أكثر جهاز استهلاكًا: '+A[mi][0]+' '+A[mi][1]}
+ document.querySelectorAll('#bill input').forEach(x=>x.oninput=upd);upd()})();
+(function(){const host=$('pe3');function nq(){const t=rnd(0,2);let q,a,ex;
+ if(t===0){const P=[40,60,100,200,1000,1500][rnd(0,5)],h=rnd(2,8),d=30;a=Math.round(P/1000*h*d*100)/100;q='جهاز قدرته '+P+' واط يعمل '+h+' ساعات يوميًا. كم كيلوواط.ساعة يستهلك في 30 يومًا؟';ex=P+' ÷ 1000 = '+P/1000+' كيلوواط × '+h+' ساعات × 30 = '+a}
+ else if(t===1){const P=rnd(1,3),h=rnd(2,8);const k=P*h*30;a=k*25/1000;q='مكيف قدرته '+P+' كيلوواط يعمل '+h+' ساعات يوميًا. ما تكلفة الشهر بالدينار (25 درهمًا لكل ك.و.س)؟';ex=P+' × '+h+' × 30 = '+k+' ك.و.س × 25 = '+k*25+' درهم = '+a+' دينار'}
+ else{const P=[100,200,500,1000,2000][rnd(0,4)],s=rnd(1,10)*60;a=P*s;q='جهاز قدرته '+P+' واط يعمل لمدة '+s/60+' دقائق. كم جولًا يستهلك؟';ex='الطاقة = القدرة × الزمن = '+P+' × '+s+' ثانية = '+a+' جول'}
+ host.innerHTML='<div class="prob">'+q+'</div><div class="btns"><input style="width:120px;height:42px;border:3px solid #c9dfe2;border-radius:10px;text-align:center;font-weight:900;font-size:1.1rem;direction:ltr"><button class="btn main" data-k="c">✔️ تحقّق</button><button class="btn or" data-k="n">سؤال جديد ⬅</button></div><div class="fb"></div>';
+ const inp=host.querySelector('input'),fb=host.querySelector('.fb');host.querySelector('[data-k=n]').onclick=nq;host.querySelector('[data-k=c]').onclick=()=>{const v=parseFloat(inp.value.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)));const g=Math.abs(v-a)<.011;inp.style.borderColor=g?'#2e9e5b':'#d64545';inp.className=g?'ok':'no';fb.className='fb '+(g?'ok':'no');fb.innerHTML=(g?'🎉 صحيح! ':'❌ ')+'<br>'+ex;if(g)setTimeout(nq,2400)}}nq()})();
+
+/* hazards */
+(function(){const H=[['توصيل أجهزة كثيرة بمقبس واحد',0,'التحميل الزائد يسخّن الأسلاك وقد يسبب حريقًا.'],['لمس المفاتيح بيد مبتلة',0,'الماء موصل للكهرباء، فقد تصاب بصعقة.'],['فحص التوصيلات دوريًا بواسطة فني كهرباء مؤهل',1,'هذا يمنع الحوادث قبل وقوعها.'],['إدخال مفك أو مسمار في المقبس',0,'خطر صعقة كهربائية قاتلة!'],['ارتداء حذاء عازل عند التعامل مع الكهرباء',1,'العازل يمنع مرور التيار عبر جسمك إلى الأرض.'],['استخدام منصهر بتقدير تيار صحيح لكل جهاز',1,'المنصهر يقطع الدائرة عند زيادة التيار.'],['جهاز بإطار معدني بدون سلك أرضي',0,'إذا لمس سلك مكهرب الإطار، يمر التيار عبر جسمك.'],['ترك أسلاك ممزقة العازل',0,'ملامسة سلكين مكشوفين تسبب دائرة قصيرة (تماس) وحريقًا.'],['نسيان إيقاف الغلاية أو المكواة',0,'قد يسبب التسخين الزائد حريقًا.'],['تثبيت الأسلاك على الحوائط بدلًا من تركها متشابكة',1,'التنظيم يمنع التلف والتعثر والتماس.']];let k,ord,ok=0,dn=0;
+ function nq(){if(!ord||!ord.length)ord=H.map((_,i)=>i).sort(()=>Math.random()-.5);k=ord.pop();$('hzQ').textContent=H[k][0];$('hzF').textContent=''}
+ const ans=v=>{dn++;const g=H[k][1]===v;if(g)ok++;$('hzF').className='fb '+(g?'ok':'no');$('hzF').innerHTML=(g?'✅ ':'❌ ')+(H[k][1]?'آمن: ':'خطر: ')+H[k][2];$('hzSc').textContent='✔️ '+ok+' من '+dn;setTimeout(nq,2200)};$('hzS').onclick=()=>ans(1);$('hzD').onclick=()=>ans(0);nq()})();
+(function(){function upd(){const I=+$('fuS').value;$('fuV').textContent=I;const br=I>13;$('fu').innerHTML='<line x1="10" y1="40" x2="90" y2="40" stroke="#b87333" stroke-width="5"/><rect x="90" y="25" width="140" height="30" rx="14" fill="#e3f2fd" stroke="#333" stroke-width="2"/>'+(br?'<path d="M100,40 H150 M170,40 H220" stroke="#795548" stroke-width="3"/><text x="160" y="46" text-anchor="middle" font-size="16">💥</text>':'<line x1="100" y1="40" x2="220" y2="40" stroke="'+(I>9?'#ff7043':'#795548')+'" stroke-width="3"/>')+'<line x1="230" y1="40" x2="310" y2="40" stroke="#b87333" stroke-width="5"/><text x="160" y="72" text-anchor="middle" font-size="12" font-weight="800">منصهر 13 أمبير</text>';
+ $('fuT').innerHTML=br?'💥 <b>انصهر المنصهر!</b> التيار '+I+' A أعلى من 13 A، فانقطعت الدائرة وحمى الجهاز من التلف.':I>9?'🔥 السلك يسخن… التيار يقترب من الحد':'✅ التيار طبيعي، والدائرة تعمل'}$('fuS').oninput=upd;upd()})();
+(function(){function upd(){const n=+$('svS').value;$('svN').textContent=n;const old=n*75*5*30/1000,nw=n*11*5*30/1000;$('svT').innerHTML='استبدال '+n+' مصباح عادي (75 واط) بمصابيح موفرة (11 واط)، تعمل 5 ساعات يوميًا:<br>قبل: '+old.toFixed(1)+' ك.و.س/شهر · بعد: '+nw.toFixed(1)+' ك.و.س/شهر<br>التوفير = <b style="color:var(--gn)">'+(old-nw).toFixed(1)+' ك.و.س</b> = <b style="color:var(--or)">'+((old-nw)*25/1000).toFixed(2)+' دينار شهريًا</b> 💰<br><span style="font-size:.85rem">المصباح الموفر 11 واط يعطي إضاءة تعادل مصباحًا عاديًا 75 واط!</span>'}$('svS').oninput=upd;upd()})();
+
+/* review 2 */
+(function(){const host=$('rev2Q');let ok=0,dn=0;
+ const G=[['أي تأثير للطاقة الكهربائية يُستفاد منه في مصباح التنجستن؟',['حراري','كيميائي','مغناطيسي','كيميائي وحراري']],
+  ['أي تأثير للطاقة الكهربائية يُلاحظ عند شحن نضيدة هاتف محمول؟',['كيميائي وحراري','حراري فقط','مغناطيسي وكيميائي','حراري ومغناطيسي']],
+  ['أي الأشياء التالية لا يوضح التأثير المغناطيسي للطاقة الكهربائية؟',['شاشة LCD لجهاز حاسوب محمول','سماعة هاتف','مكبر صوت','جرس كهربائي']],
+  ['ما وحدة التيار الكهربائي؟',['الأمبير','الواط','الفولت','الأوم']],
+  ['أي العبارات التالية لا تنطبق على فرق الجهد؟',['يحسب بنسبة التيار الساري إلى مقاومة الموصل','يقاس بوحدات الفولت','ضروري لسريان التيار في دائرة مغلقة','قياس للطاقة المتولدة لكل وحدة شحنة سارية']],
+  ['أي العبارات التالية تنطبق على مقاومة مكون من مكونات الدائرة؟',['خاصية تحد من فرق الجهد المسلط عبر المكون','إذا كانت المقاومة كبيرة يكون التيار كبيرًا','تزداد مع زيادة فرق الجهد','حاصل ضرب التيار في الجهد']],
+  ['عند تسليط فرق جهد 3 فولت عبر موصل تكون شدة التيار 1.5 أمبير. ما مقاومة الموصل؟',['2.0 Ω','4.5 Ω','1.5 Ω','0.5 Ω']],
+  ['القدرة الكهربائية قياس',['للطاقة المبددة كل وحدة زمن','لكمية الشحنة كل وحدة زمن','لإجمالي الطاقة المبددة','للطاقة لكل وحدة شحنة']],
+  ['أي مما يلي ليس وحدة طاقة؟',['واط/دقيقة','جول','كيلوواط.ساعة','واط.ثانية']],
+  ['يوصل الأميتر في الدائرة على',['التوالي','التوازي','أي طريقة','لا يوصل']],
+  ['عند زيادة المقاومة في دائرة',['يقل التيار','يزداد التيار','لا يتغير التيار','ينعدم الجهد']],
+  ['عداد منزل سجّل 520 ك.و.س في شهر. التكلفة بسعر 22 درهمًا للوحدة',['11440 درهم','520 درهم','2364 درهم','22000 درهم']]];
+ function upd(){$('rev2Sc').textContent=dn<G.length?'أجبت عن '+dn+' من '+G.length+' · صحيح: '+ok:(ok>=G.length-1?'🌟 ممتاز! ':ok>=G.length*.7?'👍 جيد جدًا! ':'💪 راجع الدروس وحاول مرة أخرى. ')+'النتيجة: '+ok+' من '+G.length}
+ function make(){host.innerHTML='';ok=0;dn=0;upd();G.slice().sort(()=>Math.random()-.5).forEach(([q,o],i)=>mcq(host,'<b>'+(i+1)+')</b> '+q,o,0,r=>{dn++;if(r)ok++;upd()}))}
+ $('rev2New').onclick=make;make()})();
+
+/* ===== SCIENCE CH3 ===== */
+(function(){const L=[['🧍 الجسم','جسم الإنسان مكوّن من ملايين الخلايا.'],['🔵 الخلية','كل خلية تحتوي على نواة في وسطها.'],['🟣 النواة','داخل النواة 46 كروموسومًا (23 زوجًا).'],['🧵 الكروموسوم','الكروموسوم مكوّن من جزيء طويل ملفوف اسمه DNA.'],['🧬 الجين','الجين قطعة من DNA تحمل معلومة وراثية، مثل لون العينين.']];let k=0;
+ const bx=$('zmB');L.forEach((l,i)=>{const b=document.createElement('button');b.className='btn'+(i?'':' main');b.textContent=l[0];b.onclick=()=>{k=i;draw()};bx.appendChild(b)});
+ function draw(){bx.querySelectorAll('.btn').forEach((b,i)=>b.classList.toggle('main',i===k));let s='';
+  if(k===0)s='<text x="160" y="140" text-anchor="middle" font-size="110">🧍</text>';
+  if(k===1)s='<circle cx="160" cy="100" r="85" fill="#fff3e0" stroke="#e0a87a" stroke-width="4"/><circle cx="160" cy="100" r="30" fill="#ce93d8" stroke="#7b1fa2" stroke-width="3"/>';
+  if(k===2){s='<circle cx="160" cy="100" r="90" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="4"/>';for(let i=0;i<23;i++){const a=i/23*6.28,r=40+(i%3)*18;s+='<path d="M'+(160+r*Math.cos(a)-6)+','+(100+r*Math.sin(a)-8)+' l12,16 M'+(160+r*Math.cos(a)+6)+','+(100+r*Math.sin(a)-8)+' l-12,16" stroke="'+['#e53935','#1e88e5','#43a047','#fb8c00'][i%4]+'" stroke-width="4" stroke-linecap="round"/>'}}
+  if(k===3){s='<path d="M150,20 l20,160 M170,20 l-20,160" stroke="#1e88e5" stroke-width="18" stroke-linecap="round"/><circle cx="160" cy="100" r="8" fill="#0d47a1"/>'}
+  if(k===4){for(let i=0;i<14;i++){const y=15+i*12,x1=160+40*Math.sin(i*.6),x2=160-40*Math.sin(i*.6);s+='<line x1="'+x1+'" y1="'+y+'" x2="'+x2+'" y2="'+y+'" stroke="'+(i>=5&&i<=8?'#fb8c00':'#bbb')+'" stroke-width="4"/><circle cx="'+x1+'" cy="'+y+'" r="5" fill="#e53935"/><circle cx="'+x2+'" cy="'+y+'" r="5" fill="#1e88e5"/>'}s+='<rect x="90" y="70" width="140" height="50" fill="none" stroke="#fb8c00" stroke-width="3" stroke-dasharray="6 4" rx="8"/><text x="240" y="100" font-size="13" font-weight="900" fill="#e65100">جين</text>'}
+  $('zm').innerHTML=s;$('zmT').innerHTML='<b>'+L[k][0]+'</b><br>'+L[k][1]}draw()})();
+(function(){const T=[['لون العينين',['👁️ بني','👁️ عسلي','👁️ أخضر']],['نوع الشعر',['〰️ مجعد','➖ ناعم','🌀 مموج']],['شكل الأذن',['منفصلة الشحمة','متصلة الشحمة']],['اللسان',['يمكن لفّه','لا يمكن لفّه']],['الذقن',['بها غمازة','بدون غمازة']]];
+ const dad=T.map(t=>[rnd(0,t[1].length-1),rnd(0,t[1].length-1)]),mom=T.map(t=>[rnd(0,t[1].length-1),rnd(0,t[1].length-1)]);
+ function kid(){const k=T.map((t,i)=>{const a=dad[i][rnd(0,1)],b=mom[i][rnd(0,1)];return[a,b,Math.random()<.5?a:b]});
+  $('kid').innerHTML='<table class="t"><tr><th>الصفة</th><th>👨 من الأب</th><th>👩 من الأم</th><th>👶 تظهر في الطفل</th></tr>'+T.map((t,i)=>'<tr><td>'+t[0]+'</td><td>'+t[1][k[i][0]]+'</td><td>'+t[1][k[i][1]]+'</td><td><b>'+t[1][k[i][2]]+'</b></td></tr>').join('')+'</table>'}$('kidB').onclick=kid;kid()})();
+quiz('qh1',[['يسمى انتقال الصفات من الآباء إلى الأبناء',['الوراثة','التكاثر','البلوغ']],['عدد الكروموسومات في نواة خلية الإنسان',['46','23','38000']],['عدد الكروموسومات في البويضة أو الحيوان المنوي',['23','46','92']],['الجين قطعة من',['DNA','البروتين','الدم']],['يتشابه الإخوة ويختلفون لأن كل واحد',['يأخذ مجموعة مختلفة من جينات الأب والأم','يأخذ جينات الأب فقط','لا يرث شيئًا']]]);
+(function(){const ST=[['الحيوان المنوي + البويضة','الحيوان المنوي يحمل جينات الأب، والبويضة تحمل جينات الأم.'],['الزيجوت (البويضة المخصبة)','عند اتحادهما تصبح البويضة مخصبة، وتسمى الزيجوت. تحتوي على جينات من الوالدين.'],['انقسام الخلايا','تنقسم الخلية مرارًا وتكرارًا: 1 ← 2 ← 4 ← 8 ← …'],['جنين باكر','تتكوّن كرة من الخلايا، ثم تبدأ الأعضاء في التكوّن.'],['إنسان','بعد 9 أشهر يولد طفل يحتوي جسمه على ملايين الخلايا، وكلها نسخ من الخلية الأولى!']];
+ function upd(){const k=+$('emS').value;let s='';if(k===0)s='<circle cx="210" cy="85" r="48" fill="#fff9c4" stroke="#f9a825" stroke-width="3"/><circle cx="210" cy="85" r="14" fill="#ce93d8"/><ellipse cx="80" cy="85" rx="12" ry="8" fill="#90caf9" stroke="#1565c0" stroke-width="2"/><path d="M68,85 q-20,-10 -40,0 t-20,0" fill="none" stroke="#1565c0" stroke-width="2"/><text x="210" y="160" text-anchor="middle" font-size="12" font-weight="800">بويضة</text><text x="70" y="160" text-anchor="middle" font-size="12" font-weight="800">حيوان منوي</text>';
+  if(k===1)s='<circle cx="160" cy="85" r="50" fill="#fff9c4" stroke="#f9a825" stroke-width="3"/><circle cx="160" cy="85" r="16" fill="#ab47bc"/>';
+  if(k===2)[[130,65],[190,65],[130,105],[190,105]].forEach(p=>s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="28" fill="#fff9c4" stroke="#f9a825" stroke-width="2"/><circle cx="'+p[0]+'" cy="'+p[1]+'" r="8" fill="#ab47bc"/>');
+  if(k===3){for(let i=0;i<19;i++){const a=i*2.4,r=Math.sqrt(i)*13;s+='<circle cx="'+(160+r*Math.cos(a))+'" cy="'+(85+r*Math.sin(a))+'" r="11" fill="#ffe0b2" stroke="#f9a825"/>'}}
+  if(k===4)s='<text x="160" y="125" text-anchor="middle" font-size="90">👶</text>';
+  $('emb').innerHTML=s;$('embT').innerHTML='<b>'+ST[k][0]+'</b><br>'+ST[k][1]}$('emS').oninput=upd;upd()})();
+(function(){const O={m:[['الخصيتان','تنتجان الحيوانات المنوية والهرمونات الذكرية'],['كيس الصفن','يحمي الخصيتين ويحافظ على حرارة أقل قليلًا من حرارة الجسم'],['قناة المني (الوعاء الناقل)','تنقل الحيوانات المنوية من الخصية'],['الغدد التناسلية','تفرز سائلًا يحتوي على مواد مغذية وإنزيمات'],['مجرى البول','أنبوبة تؤدي إلى خارج الجسم']],f:[['المبيضان','ينتجان البويضات والهرمونات الأنثوية'],['قناة المبيض','تنقل البويضة إلى الرحم، وفيها يحدث الإخصاب'],['الرحم','المكان الذي ينمو فيه الجنين'],['عنق الرحم','حلقة عضلية عند الطرف السفلي للرحم'],['المهبل','قناة عضلية تصل عنق الرحم بخارج الجسم']]};
+ let set='m';function nq(){const A=O[set];const k=rnd(0,A.length-1);const ord=A.map((_,i)=>i).sort(()=>Math.random()-.5).slice(0,4);if(!ord.includes(k))ord[0]=k;ord.sort(()=>Math.random()-.5);let dn=false;
+  $('org').innerHTML='<div class="prob">ما وظيفة: <b>'+A[k][0]+'</b>؟</div>'+ord.map(o=>'<button class="btn opt" data-o="'+o+'">'+A[o][1]+'</button>').join('')+'<div class="fb"></div>';
+  $('org').querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{if(dn)return;dn=true;const g=+b.dataset.o===k;b.classList.add(g?'ok':'no');if(!g)$('org').querySelector('[data-o="'+k+'"]').classList.add('ok');$('org').querySelector('.fb').className='fb '+(g?'ok':'no');$('org').querySelector('.fb').textContent=g?'✅ صحيح':'❌';setTimeout(nq,1500)})}
+ document.querySelectorAll('[data-sx]').forEach(b=>b.onclick=()=>{set=b.dataset.sx;document.querySelectorAll('[data-sx]').forEach(x=>x.classList.toggle('main',x===b));nq()});nq()})();
+(function(){function upd(){const d=+$('cyS').value;$('cyV').textContent=d;const ph=d<=5?0:d<14?1:d===14?2:3;const P=[['الحيض (الطمث)','#e57373','إذا لم تُخصب البويضة، تتمزق بطانة الرحم وتخرج مع بعض الدم. يستمر نحو 5 أيام.'],['إصلاح ونمو بطانة الرحم','#ffb74d','بعد توقف الحيض تبدأ بطانة الرحم في الترميم وزيادة سمكها، ويستمر ذلك نحو 9 أيام.'],['التبويض','#ba68c8','يطلق المبيض بويضة ناضجة إلى قناة المبيض، ويحدث عادة في اليوم الرابع عشر.'],['زيادة سمك بطانة الرحم','#81c784','يفرز المبيض هرمون البروجيسترون، فتصبح البطانة غنية بالأوعية الدموية، مستعدة لاستقبال الجنين.']];
+ const cx=160,cy=115,R=95;let s='';const seg=(a,b,c)=>{const t1=(a-1)/28*6.283-1.571,t2=b/28*6.283-1.571;return'<path d="M'+cx+','+cy+' L'+(cx+R*Math.cos(t1))+','+(cy+R*Math.sin(t1))+' A'+R+','+R+' 0 '+((b-a+1)>14?1:0)+' 1 '+(cx+R*Math.cos(t2))+','+(cy+R*Math.sin(t2))+' Z" fill="'+c+'" opacity=".85"/>'};
+ s+=seg(1,5,P[0][1])+seg(6,13,P[1][1])+seg(14,14,P[2][1])+seg(15,28,P[3][1]);for(let i=1;i<=28;i++){const t=(i-.5)/28*6.283-1.571;s+='<text x="'+(cx+(R+10)*Math.cos(t))+'" y="'+(cy+(R+10)*Math.sin(t)+4)+'" font-size="9" text-anchor="middle">'+i+'</text>'}
+ const t=(d-.5)/28*6.283-1.571;s+='<line x1="'+cx+'" y1="'+cy+'" x2="'+(cx+R*.9*Math.cos(t))+'" y2="'+(cy+R*.9*Math.sin(t))+'" stroke="#1f2a44" stroke-width="4" stroke-linecap="round"/><circle cx="'+cx+'" cy="'+cy+'" r="26" fill="#fff" stroke="#1f2a44" stroke-width="2"/><text x="'+cx+'" y="'+(cy+6)+'" text-anchor="middle" font-size="16" font-weight="900">'+d+'</text>';
+ $('cy').innerHTML=s;$('cyT').innerHTML='<b style="color:'+P[ph][1]+'">'+P[ph][0]+'</b><br>'+P[ph][2]}$('cyS').oninput=upd;upd()})();
+quiz('qh3',[['تستغرق دورة الحيض تقريبًا',['28 يومًا','7 أيام','9 أشهر']],['يحدث التبويض عادة في اليوم',['الرابع عشر','الأول','الثامن والعشرين']],['سبب التغيرات في البلوغ',['الهرمونات','الطعام','الرياضة']],['يصبح الصوت أعمق عند الأولاد بسبب',['تضخم الحنجرة','نمو العضلات','نمو اللحية']],['تبدأ عادة تغيرات البلوغ عند البنات',['بين 10 و12 سنة','بعد 20 سنة','عند الولادة']]]);
+(function(){const E=['يطلق المبيض بويضة ناضجة (التبويض)','تنتقل البويضة في قناة المبيض','يحدث الإخصاب في قناة المبيض','تنقسم البويضة المخصبة إلى كرة من الخلايا','تنغرس العلقة في بطانة الرحم','ينمو الجنين في الرحم 9 أشهر'];let cur;
+ function draw(){$('ord').innerHTML=cur.map((i,k)=>'<div style="display:flex;align-items:center;gap:6px;margin:4px 0"><b style="width:26px">'+(k+1)+'</b><div style="flex:1;background:#f5fbf7;border:2px solid #cfe5d8;border-radius:10px;padding:6px 10px;font-weight:700">'+E[i]+'</div><button class="btn" data-u="'+k+'" style="padding:2px 10px">⬆️</button></div>').join('');
+  $('ord').querySelectorAll('[data-u]').forEach(b=>b.onclick=()=>{const k=+b.dataset.u;if(k>0){[cur[k-1],cur[k]]=[cur[k],cur[k-1]];draw()}});const ok=cur.every((v,i)=>v===i);$('ordF').className='fb '+(ok?'ok':'');$('ordF').textContent=ok?'🎉 الترتيب صحيح!':'استخدم ⬆️ لترتيب الأحداث'}
+ $('ordR').onclick=()=>{cur=E.map((_,i)=>i).sort(()=>Math.random()-.5);draw()};$('ordR').onclick()})();
+(function(){const M=['خلايا صغيرة جدًا تنغرس في بطانة الرحم','يبدأ القلب في النبض ❤️','تتكوّن الأطراف والأصابع','يمكن تمييز ملامح الوجه','يبدأ الجنين في الحركة','ينمو الشعر والحواجب','تنضج الرئتان تدريجيًا','يكتسب الجنين وزنًا','الجنين مستعد للولادة 👶'];
+ function upd(){const m=+$('pgS').value;$('pgV').textContent=m;const c=$('pgC');const sz=60+m*14;c.style.width=c.style.height=sz+'px';c.innerHTML='<span style="font-size:'+(14+m*5)+'px">'+(m<2?'🫘':m<4?'🦐':'👶')+'</span>';
+ $('pgT').innerHTML='الشهر '+m+': '+M[m-1]+'<br><span style="font-size:.85rem">يحصل الجنين على الغذاء والأكسجين من دم الأم، ويتخلص من فضلاته، ولا يختلط دم الأم بدم الجنين (يتم التبادل بالانتشار).</span>'}$('pgS').oninput=upd;upd()})();
+(function(){const D=[['السيلان','بكتيريا كروية الشكل','• خروج صديد من مجرى البول<br>• الإحساس بحرقان عند التبول<br>• قد يؤدي إلى العقم','✅ يمكن علاجه بالمضادات الحيوية','قد ينتقل من الأم المصابة إلى الطفل أثناء الولادة، فيصاب بالعمى إذا دخلت البكتيريا عينيه.'],
+ ['الزهري','بكتيريا حلزونية (لولبية)','يمر بثلاث مراحل:<br>1) التهاب لا يصاحبه ألم<br>2) طفح جلدي لا يسبب حكة بعد عدة أشهر<br>3) أخطر المراحل: قد يصاب المريض بالعمى أو الشلل','✅ يمكن علاجه بالمضادات الحيوية في جميع مراحله، لكن التلف الذي حدث للأعصاب لا يمكن إصلاحه','قد يتنقل من الأم إلى الطفل أثناء الحمل.'],
+ ['الإيدز (متلازمة العوز المناعي المكتسب)','فيروس نقص المناعة HIV','• فقدان كبير للوزن<br>• إسهال مزمن وحمى<br>• التهاب الرئتين<br>• سرطان الأوعية الدموية','❌ لا يوجد له علاج حتى الآن، والوقاية هي الحل','قد لا تظهر الأعراض لعدة شهور أو سنوات، لكن المصاب يمكنه نقل الفيروس.']];
+ function load(i){const d=D[i];document.querySelectorAll('[data-ds]').forEach(b=>b.classList.toggle('main',+b.dataset.ds===i));$('dsB').innerHTML='<table class="t"><tr><th style="width:30%">المرض</th><td><b>'+d[0]+'</b></td></tr><tr><th>المسبب</th><td>'+d[1]+'</td></tr><tr><th>العلامات والأعراض</th><td>'+d[2]+'</td></tr><tr><th>العلاج</th><td>'+d[3]+'</td></tr><tr><th>ملاحظة</th><td>'+d[4]+'</td></tr></table>'}
+ document.querySelectorAll('[data-ds]').forEach(b=>b.onclick=()=>load(+b.dataset.ds));load(0)})();
+(function(){let anim;function draw(t){let s='';const n=8;for(let i=0;i<n;i++){const x=30+i*37,y=80+Math.sin(i)*25;const dead=t>(0.15+i*0.1);s+='<circle cx="'+x+'" cy="'+y+'" r="15" fill="'+(dead?'#e0e0e0':'#90caf9')+'" stroke="'+(dead?'#bbb':'#1565c0')+'" stroke-width="2"/>'+(dead?'':'<circle cx="'+x+'" cy="'+y+'" r="5" fill="#1565c0"/>');
+  const vx=t*360-20-i*12;if(t>0&&vx>-10&&vx<330)s+='<circle cx="'+vx+'" cy="'+(y-22+Math.sin(vx/9)*5)+'" r="6" fill="#d64545"/><text x="'+vx+'" y="'+(y-19+Math.sin(vx/9)*5)+'" font-size="7" text-anchor="middle" fill="#fff">✱</text>'}
+  if(t>0.95)for(let i=0;i<5;i++)s+='<text x="'+(40+i*60)+'" y="140" font-size="18">🦠</text>';$('hv').innerHTML=s;
+  $('hvT').innerHTML=t===0?'خلايا الدم البيضاء (الأزرق) تحمي الجسم من الجراثيم.':t<0.95?'فيروس HIV (الأحمر) يهاجم خلايا الدم البيضاء ويدمرها…':'أصبح الجسم غير قادر على الدفاع عن نفسه، فتهاجمه البكتيريا والفيروسات بسهولة، وهذه مرحلة <b>الإيدز</b>.'}
+ $('hvB').onclick=()=>{cancelAnimationFrame(anim);const t0=performance.now();(function st(n){const t=Math.max(0,Math.min(1,(n-t0)/5000));draw(t);if(t<1)anim=requestAnimationFrame(st)})(t0)};draw(0)})();
+(function(){const Q=[['المصافحة والسلام باليد',0],['نقل دم ملوث بالفيروس',1],['استخدام إبرة حقن ملوثة',1],['السباحة في نفس المسبح',0],['مشاركة الطعام والأكواب',0],['من الأم المصابة إلى الجنين أثناء الحمل والولادة',1],['لدغة البعوض',0],['مشاركة شفرة حلاقة ملوثة بالدم',1],['العطس والسعال',0],['استخدام دورة المياه',0]];let o=[],k,ok=0,dn=0;
+ function nq(){if(!o.length)o=Q.map((_,i)=>i).sort(()=>Math.random()-.5);k=o.pop();$('trQ').textContent=Q[k][0];$('trF').textContent=''}
+ const a=v=>{dn++;const g=Q[k][1]===v;if(g)ok++;$('trF').className='fb '+(g?'ok':'no');$('trF').textContent=(g?'✅ صحيح: ':'❌ ')+(Q[k][1]?'نعم، ينتقل بهذه الطريقة.':'لا، الفيروس لا ينتقل باللمس أو الطعام أو الهواء.');$('trSc').textContent='✔️ '+ok+' من '+dn;setTimeout(nq,2000)};$('trY').onclick=()=>a(1);$('trN').onclick=()=>a(0);nq()})();
+(function(){const host=$('rev3Q');let ok=0,dn=0;
+ const G=[['أين تُخصب البويضة؟',['في قناة المبيض','في الرحم','في المبيض','في المهبل']],['الخلية التناسلية الذكرية هي',['الحيوان المنوي','البويضة','الزيجوت','العلقة']],['يسمى اتحاد الحيوان المنوي مع البويضة',['الإخصاب','التبويض','الحيض','البلوغ']],['المكان الذي ينمو فيه الجنين',['الرحم','قناة المبيض','المبيض','عنق الرحم']],['ما المقصود بالحيض؟',['خروج دم الطمث بعد تمزق بطانة الرحم إذا لم تُخصب البويضة','إطلاق البويضة من المبيض','نمو الجنين','اتحاد الخلايا التناسلية']],['من العوامل التي قد تؤثر على دورة الحيض',['الإجهاد وسوء التغذية','لون الشعر','الطول','نوع الملابس']],['ماذا تعني الاختصارات HIV و AIDS؟',['فيروس نقص المناعة، ومتلازمة العوز المناعي المكتسب','نوعان من البكتيريا','اسمان لدواء','مرضان وراثيان']],['أي هذه الأمراض لا علاج له حتى الآن؟',['الإيدز','السيلان','الزهري','جميعها لها علاج']],['يُعالج السيلان والزهري',['بالمضادات الحيوية','لا يوجد علاج','بالجراحة فقط','بالتطعيم']],['الفرق بين العلامة والعرض',['العلامة يرصدها الطبيب، والعرض يحس به المريض','لا فرق بينهما','العرض يظهر في الدم فقط','العلامة لا يمكن رصدها']],['يتكوّن الجهاز التناسلي الأنثوي من',['مبيضين وقناتي مبيض ورحم وعنق رحم ومهبل','خصيتين وقناتي مني','رحم فقط','مبيض واحد']],['البويضة',['كروية الشكل وكبيرة نسبيًا ولها نواة','لها ذيل طويل','تتحرك بسرعة','عددها ملايين']]];
+ function upd(){$('rev3Sc').textContent=dn<G.length?'أجبت عن '+dn+' من '+G.length+' · صحيح: '+ok:(ok>=G.length-1?'🌟 ممتاز! ':ok>=G.length*.7?'👍 جيد جدًا! ':'💪 راجع الدروس وحاول مرة أخرى. ')+'النتيجة: '+ok+' من '+G.length}
+ function make(){host.innerHTML='';ok=0;dn=0;upd();G.slice().sort(()=>Math.random()-.5).forEach(([q,o],i)=>mcq(host,'<b>'+(i+1)+')</b> '+q,o,0,r=>{dn++;if(r)ok++;upd()}))}
+ $('rev3New').onclick=make;make()})();
+
+/* ===== PART2 CH1 ===== */
+(function(){function upd(){const t=+$('tS').value;$('tV').textContent=t;const st=t<=0?0:t<100?1:2;const n=26;let s='<rect x="90" y="20" width="140" height="130" rx="10" fill="#f5f9ff" stroke="#1f2a44" stroke-width="3"/>';
+ const seed=i=>[(i*37)%11/11,(i*53)%13/13];for(let i=0;i<n;i++){let x,y;const [a,b]=seed(i);if(st===0){x=110+(i%6)*20;y=130-Math.floor(i/6)*20}else if(st===1){x=105+a*110;y=95+b*48}else{x=100+((a*7+t/9+i)%1)*120;y=30+((b*5+i*.37+t/30)%1)*115}
+  s+='<circle cx="'+x+'" cy="'+y+'" r="7" fill="'+['#90caf9','#42a5f5','#e3f2fd'][st]+'" stroke="#1565c0"/>'}
+ if(st===1)s+='<rect x="93" y="85" width="134" height="62" fill="#42a5f533"/>';
+ s+='<rect x="250" y="20" width="14" height="130" rx="7" fill="#fff" stroke="#333"/><rect x="253" y="'+(150-(t+20)/140*125)+'" width="8" height="'+((t+20)/140*125)+'" fill="#e53935"/>';
+ $('tst').innerHTML=s;$('tT').innerHTML=['<b>صلب (جليد) 🧊</b><br>الجزيئات متراصة ومتماسكة، تهتز في مكانها فقط. يتجمد الماء عند 0°س.','<b>سائل (ماء) 💧</b><br>الجزيئات متقاربة لكنها تتحرك. ينصهر الجليد عند 0°س.','<b>غاز (بخار) ♨️</b><br>الجزيئات متباعدة وسريعة جدًا. يغلي الماء ويتبخر عند 100°س.'][st]}$('tS').oninput=upd;upd()})();
+(function(){const H=[['📏 التمدد والانكماش','تتمدد الأجسام عادة عند تسخينها (يزيد حجمها)، وتنكمش عند تبريدها. والغاز يتمدد أكثر من السائل، والسائل أكثر من الصلب.','تغير فيزيائي','#3b6fd8'],
+ ['🔗 الاتحاد','اتحاد مادتين أو أكثر لتكوين مادة جديدة. مثال: حديد + كبريت ← (حرارة) ← كبريتيد الحديد (Fe + S → FeS). الناتج غير مغناطيسي، مع أن الحديد مغناطيسي!','تغير كيميائي','#f08c2e'],
+ ['🔥 الاحتراق','اتحاد المادة مع الأكسجين عند تسخينها، وينتج حرارة وضوء. مثال: احتراق الماغنيسيوم بضوء أبيض مبهر: 2Mg + O₂ → 2MgO. وكذلك احتراق الشمع والفحم والوقود.','تغير كيميائي','#d64545'],
+ ['💔 التحلل الحراري','تفكك مادة إلى مادتين أو أكثر بالحرارة. مثال: سكر ← (حرارة) ← كربون + بخار ماء. وكربونات الكالسيوم ← أكسيد الكالسيوم + ثاني أكسيد الكربون.','تغير كيميائي','#6b4fd8']];
+ const bx=$('htB');H.forEach((h,i)=>{const b=document.createElement('button');b.className='btn'+(i?'':' main');b.textContent=h[0];b.onclick=()=>load(i);bx.appendChild(b)});
+ function load(i){bx.querySelectorAll('.btn').forEach((b,k)=>b.classList.toggle('main',k===i));const h=H[i];$('htBox').innerHTML='<h3>'+h[0]+'</h3><p style="margin:0">'+h[1]+'</p><div style="margin-top:6px"><span class="tg" style="background:'+h[3]+'22;color:'+h[3]+';font-size:.9rem">'+h[2]+'</span></div>'+(i===2?'<div style="text-align:center;font-size:2.5rem;animation:pulse 1s infinite">✨🔥</div>':'')}load(0)})();
+quiz('qk1',[['تحوّل الماء إلى بخار عند تسخينه',['تغير في حالة المادة','اتحاد','احتراق']],['عند تسخين الحديد مع الكبريت يتكوّن',['كبريتيد الحديد','أكسيد الحديد','ماء']],['الاحتراق هو اتحاد المادة مع',['الأكسجين','النيتروجين','الماء']],['عند تسخين السكر يتحول إلى',['كربون وبخار ماء','ملح','زيت']],['الأجسام عند تبريدها عادة',['تنكمش','تتمدد','لا تتغير']],['يحترق الماغنيسيوم بـ',['ضوء أبيض مبهر','لهب أزرق خافت','دون ضوء']]]);
+(function(){function upd(){const L=+$('psS').value;let s='<circle cx="40" cy="35" r="'+(10+L/6)+'" fill="#fdd835" opacity="'+(0.3+L/140)+'"/>';for(let i=0;i<5;i++)s+='<line x1="'+(55+i*8)+'" y1="'+(45+i*4)+'" x2="'+(120+i*14)+'" y2="'+(85+i*6)+'" stroke="#fdd835" stroke-width="3" opacity="'+(L/100)+'"/>';
+ s+='<path d="M120,150 Q160,40 260,70 Q240,160 120,150 Z" fill="#43a047" stroke="#1b5e20" stroke-width="3"/><path d="M125,147 Q190,110 255,73" stroke="#1b5e20" stroke-width="2" fill="none"/>';
+ const r=L/100;s+='<text x="10" y="120" font-size="12" font-weight="800" fill="#555">CO₂ ←</text><text x="10" y="175" font-size="12" font-weight="800" fill="#1565c0">💧 ماء ←</text><text x="250" y="140" font-size="12" font-weight="800" fill="#1e88e5">← O₂ '+(r>0?'🫧'.repeat(Math.ceil(r*3)):'')+'</text><text x="210" y="175" font-size="12" font-weight="800" fill="#e65100">🍬 جلوكوز ×'+Math.round(r*10)+'</text>';
+ $('ps').innerHTML=s;$('psT').innerHTML=L<5?'🌑 بدون ضوء لا يحدث البناء الضوئي، ولهذا تموت النباتات التي تبقى في الظلام طويلًا.':'كلما زاد الضوء زاد إنتاج الغذاء والأكسجين. الغذاء المخزّن في النباتات هو مصدر غذاء جميع المخلوقات الحية!'}$('psS').oninput=upd;upd()})();
+(function(){const X=[['كبريتات النحاس + هيدروكسيد الصوديوم','#1e88e5','#fff','#90caf9','يتكوّن راسب أزرق (هيدروكسيد النحاس)<br>2NaOH + CuSO₄ → Na₂SO₄ + Cu(OH)₂','ppt'],['كربونات الصوديوم + حمض الكبريتيك','#fff','#fff','#fff','فوران! تخرج فقاعات غاز ثاني أكسيد الكربون<br>Na₂CO₃ + H₂SO₄ → Na₂SO₄ + CO₂ + H₂O','bub'],['حمض الكبريتيك المركز + السكر','#fff','#f5f5f5','#3e2723','يتحول السكر إلى كتلة سوداء من الكربون وينتج بخار ماء (يسحب الحمض الماء من السكر)','blk'],['سكر + ماء','#fff','#fff','#e3f2fd','يذوب السكر في الماء ويتكوّن محلول سكري. هذا ذوبان: تغير فيزيائي، ولا تتكوّن مادة جديدة.','dis']];
+ const bx=$('mxB');let an;X.forEach((x,i)=>{const b=document.createElement('button');b.className='btn';b.style.fontSize='.85rem';b.textContent=x[0];b.onclick=()=>{bx.querySelectorAll('.btn').forEach(y=>y.classList.toggle('main',y===b));run(i)};bx.appendChild(b)});
+ function run(i){cancelAnimationFrame(an);const x=X[i];const t0=performance.now();(function st(n){const k=Math.max(0,Math.min(1,(n-t0)/2200));let s='<rect x="40" y="60" width="80" height="90" rx="6" fill="'+x[1]+'" stroke="#333" stroke-width="2"/><rect x="200" y="60" width="80" height="90" rx="6" fill="'+(k<1?x[2]:'#fff')+'" stroke="#333" stroke-width="2"/>';
+  s+='<path d="M120,'+(70-k*30)+' L200,70" stroke="#aaa" stroke-width="2" stroke-dasharray="4 3"/>';const lvl=150-60-k*20;s+='<rect x="202" y="'+lvl+'" width="76" height="'+(148-lvl)+'" fill="'+x[3]+'" opacity="'+(0.4+k*0.6)+'"/>';
+  if(x[5]==='ppt'&&k>.3)for(let j=0;j<14;j++)s+='<circle cx="'+(210+(j*23)%60)+'" cy="'+(lvl+10+((j*17+n/20)%(140-lvl-10))*k)+'" r="3" fill="#0d47a1"/>';
+  if(x[5]==='bub')for(let j=0;j<12;j++)s+='<circle cx="'+(210+(j*29)%60)+'" cy="'+(148-((n/6+j*20)%(148-lvl)))+'" r="4" fill="none" stroke="#90a4ae"/>';
+  if(x[5]==='blk'&&k>.5)s+='<rect x="210" y="'+(lvl-40*k)+'" width="56" height="'+(40*k+20)+'" fill="#212121"/><text x="238" y="'+(lvl-45*k)+'" font-size="14" text-anchor="middle">♨️</text>';
+  $('mxs').innerHTML=s;if(k<1||x[5]==='bub')an=requestAnimationFrame(st);$('mxT').innerHTML=k>.5?x[4]:'…'})(t0)}})();
+(function(){let on=false,an;$('elB').onclick=()=>{on=!on;$('elB').textContent=on?'⏹️ أوقف التيار':'🔌 مرّر التيار';if(on){const t0=performance.now();(function st(n){const k=Math.min(1,(n-t0)/6000);draw(k,n);if(on)an=requestAnimationFrame(st)})(t0)}else{cancelAnimationFrame(an)}};
+ function draw(k,n){let s='<rect x="40" y="110" width="240" height="70" rx="8" fill="#bbdefb" stroke="#333" stroke-width="2"/>';const hH=2*k*80,oH=k*80;
+  s+='<rect x="90" y="20" width="36" height="130" rx="6" fill="#bbdefb" stroke="#333" stroke-width="2"/><rect x="92" y="22" width="32" height="'+hH+'" fill="#fff"/><rect x="194" y="20" width="36" height="130" rx="6" fill="#bbdefb" stroke="#333" stroke-width="2"/><rect x="196" y="22" width="32" height="'+oH+'" fill="#fff"/>';
+  for(let j=0;j<6;j++){s+='<circle cx="'+(100+(j*7)%18)+'" cy="'+(150-((n||0)/5+j*25)%100)+'" r="3" fill="none" stroke="#666"/><circle cx="'+(204+(j*7)%18)+'" cy="'+(150-((n||0)/7+j*30)%100)+'" r="3" fill="none" stroke="#666"/>'}
+  s+='<text x="108" y="14" text-anchor="middle" font-size="11" font-weight="800">هيدروجين</text><text x="212" y="14" text-anchor="middle" font-size="11" font-weight="800">أكسجين</text><text x="108" y="172" text-anchor="middle" font-size="14" font-weight="900">−</text><text x="212" y="172" text-anchor="middle" font-size="14" font-weight="900">+</text>';
+  $('el').innerHTML=s;$('elT').innerHTML=k<0.05?'…':'يتحلل الماء إلى غازين. حجم الهيدروجين <b>ضعف</b> حجم الأكسجين (H₂O).<br>🔎 الكشف: الهيدروجين يشتعل بـ«فرقعة» 💥، والأكسجين يُشعل شظية متوهجة 🔥'}draw(0,0)})();
+(function(){const C=[['انصهار مكعبات الثلج',0],['قلي بيضة',1],['تشغيل مصباح إضاءة',0],['النباتات الخضراء تصنع الغذاء',1],['ذوبان السكر في الماء',0],['إضافة ملح الفاكهة إلى الماء (فوران)',1],['رافعة تلتقط الحديد بمغناطيس كهربائي',0],['تعفن تفاحة',1],['قطع ورقة إلى قطع صغيرة',0],['حرق غابة',1],['صدأ الحديد',1],['تبخر الماء',0],['إشعال عود ثقاب',1],['تكسير الزجاج',0],['هضم الطعام',1],['تمدد سكة الحديد في الصيف',0],['خبز الكعكة',1],['تحلل السكر بالحرارة',1]];let o=[],k,ok=0,dn=0;
+ function nq(){if(!o.length)o=C.map((_,i)=>i).sort(()=>Math.random()-.5);k=o.pop();$('pcQ').textContent=C[k][0];$('pcF').textContent=''}
+ const a=v=>{dn++;const g=C[k][1]===v;if(g)ok++;$('pcF').className='fb '+(g?'ok':'no');$('pcF').textContent=(g?'✅ ':'❌ ')+(C[k][1]?'كيميائي: تتكوّن مادة جديدة':'فيزيائي: لا تتكوّن مادة جديدة');$('pcSc').textContent='✔️ '+ok+' من '+dn;setTimeout(nq,1400)};$('pcP').onclick=()=>a(0);$('pcC').onclick=()=>a(1);nq()})();
+(function(){const W=['تسامي','انصهار','اشتعال','اتحاد','تحلل','ذوبان','تمدد','تبخر'];const N=10;const G=Array.from({length:N},()=>Array(N).fill(''));const P=[];
+ const dirs=[[0,1],[1,0],[1,1]];
+ W.forEach(w=>{const L=[...w];for(let tr=0;tr<300;tr++){const d=dirs[rnd(0,dirs.length-1)],r=rnd(0,N-1),c=rnd(0,N-1);const cells=L.map((_,i)=>[r+d[0]*i,c+d[1]*i]);if(cells.every(([y,x],i)=>y>=0&&y<N&&x>=0&&x<N&&(G[y][x]===''||G[y][x]===L[i]))){cells.forEach(([y,x],i)=>G[y][x]=L[i]);P.push({w,cells});break}}});
+ const AL='ابتثجحخدذرزسشصضطعغفقكلمنهوي';for(let y=0;y<N;y++)for(let x=0;x<N;x++)if(!G[y][x])G[y][x]=AL[rnd(0,AL.length-1)];
+ let first=null;const found=new Set();function draw(){$('ws').innerHTML='<div style="display:grid;grid-template-columns:repeat('+N+',1fr);gap:2px;max-width:340px;margin:8px auto;direction:rtl">'+G.map((row,y)=>row.map((ch,x)=>{const inF=P.some(p=>found.has(p.w)&&p.cells.some(([a,b])=>a===y&&b===x));const sel=first&&first[0]===y&&first[1]===x;return'<div data-y="'+y+'" data-x="'+x+'" style="aspect-ratio:1;display:grid;place-items:center;font-weight:900;font-size:1rem;border-radius:6px;cursor:pointer;background:'+(inF?'#a5d6a7':sel?'#ffe082':'#f1f6f3')+'">'+ch+'</div>'}).join('')).join('')+'</div><div style="text-align:center">'+W.map(w=>'<span class="chip" style="background:'+(found.has(w)?'#a5d6a7':'#eee')+'">'+w+'</span>').join('')+'</div>';
+  $('ws').querySelectorAll('[data-y]').forEach(e=>e.onclick=()=>{const y=+e.dataset.y,x=+e.dataset.x;if(!first){first=[y,x];draw();return}const p=P.find(p=>!found.has(p.w)&&((p.cells[0][0]===first[0]&&p.cells[0][1]===first[1]&&p.cells.at(-1)[0]===y&&p.cells.at(-1)[1]===x)||(p.cells.at(-1)[0]===first[0]&&p.cells.at(-1)[1]===first[1]&&p.cells[0][0]===y&&p.cells[0][1]===x)));first=null;if(p)found.add(p.w);draw();$('wsF').className='fb ok';$('wsF').textContent=found.size===W.length?'🎉 وجدت كل الكلمات!':found.size?'وجدت '+found.size+' من '+W.length:''})}draw()})();
+(function(){const R=[['💧','الماء','الصابون، والدواء'],['🪨','الصخور (الرمل، الحجر الجيري)','الزجاج، والسيليكون، والإسمنت'],['🛢️','الوقود الأحفوري (نفط، غاز، فحم)','البنزين، واللدائن (البلاستيك مثل PVC)، والبوليستيرين'],['⛏️','الخامات المعدنية','الحديد (من الهيماتيت)، والألومنيوم (من البوكسيت)']];
+ $('raw').innerHTML=R.map(r=>'<div style="display:flex;align-items:center;gap:8px;margin:6px 0"><div style="flex:1;background:#fff3e0;border-radius:10px;padding:6px;text-align:center;font-weight:800">'+r[0]+' '+r[1]+'</div><div style="font-size:1.3rem">⬅️🏭⬅️</div><div style="flex:1;background:#e8f5e9;border-radius:10px;padding:6px;text-align:center;font-weight:700">'+r[2]+'</div></div>').join('').replace(/⬅️🏭⬅️/g,'➡️🏭➡️')+'<div class="muted" style="text-align:center;font-size:.85rem;color:var(--soft)">ليبيا غنية بالنفط والغاز، وهما مادة خام لصناعات كثيرة 🇱🇾</div>'})();
+(function(){const S=[['🛢️','طاقة كيميائية في النفط الخام'],['🔥','يحترق النفط فتنتج حرارة'],['♨️','تغلي الماء وينتج بخار'],['⚙️','يدفع البخار التوربينات (طاقة ميكانيكية)'],['🔌','يحوّل المولد الحركة إلى طاقة كهربائية'],['🏠','تُوزّع على المنازل والمصانع']];
+ function draw(k){$('pw').innerHTML=S.map((x,i)=>'<div style="text-align:center;width:84px;opacity:'+(i<=k?1:.25)+';transition:.4s"><div style="font-size:2rem">'+x[0]+'</div><div style="font-size:.72rem;font-weight:700">'+x[1]+'</div></div>'+(i<S.length-1?'<div style="opacity:'+(i<k?1:.2)+'">⬅️</div>':'')).join('')}draw(-1);
+ $('pwB').onclick=()=>{let k=-1;const iv=setInterval(()=>{k++;draw(k);if(k>=S.length-1)clearInterval(iv)},700)}})();
+(function(){const P=[['أول أكسيد الكربون','الاحتراق غير الكامل للوقود في محركات المركبات','غاز شديد السمية، عديم اللون والرائحة','يسبب تلف المخ والوفاة'],['أكاسيد النيتروجين','اتحاد النيتروجين مع الأكسجين في محركات السيارات عند درجات حرارة عالية','غازات سامة، عديمة اللون','مشكلات في التنفس، وسرطان الرئة، والمطر الحمضي'],['مركبات الرصاص','تضاف إلى البنزين، وتخرج من عادم المركبات','جسيمات صلبة سامة','تلف المخ خصوصًا في الأطفال الصغار'],['السناج (الكربون)','احتراق الوقود مثل الفحم','جسيمات صلبة سوداء','يلوّث المباني ومشكلات في التنفس'],['ثاني أكسيد الكربون','احتراق الوقود','غاز عديم اللون والرائحة','يسبب الاحتباس الحراري العالمي'],['ثاني أكسيد الكبريت','احتراق الوقود (الفحم والنفط) في محطات القدرة والمصانع','غاز سام، خانق، عديم اللون','مشكلات التنفس، تهيج العينين، يذوب في المطر فيكوّن المطر الحمضي']];
+ const bx=$('poB');P.forEach((p,i)=>{const b=document.createElement('button');b.className='btn'+(i?'':' main');b.style.fontSize='.82rem';b.textContent=p[0];b.onclick=()=>{bx.querySelectorAll('.btn').forEach(y=>y.classList.toggle('main',y===b));sh(i)};bx.appendChild(b)});
+ function sh(i){const p=P[i];$('poT').innerHTML='<table class="t"><tr><th style="width:28%">المصادر</th><td>'+p[1]+'</td></tr><tr><th>الخواص</th><td>'+p[2]+'</td></tr><tr><th>التأثيرات</th><td>'+p[3]+'</td></tr></table>'}sh(0)})();
+(function(){const Q=[['الطهي',1],['صدأ الحديد في الجسور',0],['احتراق الوقود لتحريك السيارة',1],['المطر الحمضي على الآثار (مثل مسرح لبدة)',0],['البناء الضوئي',1],['تعفن الطعام',0],['صناعة الدواء والصابون',1],['ملوثات عادم السيارات',0],['التنفس في الخلايا',1],['التحلل الكهربائي لاستخلاص الألومنيوم',1]];let o=[],k;
+ function nq(){if(!o.length)o=Q.map((_,i)=>i).sort(()=>Math.random()-.5);k=o.pop();$('feQ').textContent=Q[k][0];$('feT').textContent=''}
+ const a=v=>{const g=Q[k][1]===v;$('feT').className='fb '+(g?'ok':'no');$('feT').textContent=(g?'✅ ':'❌ ')+(Q[k][1]?'تفاعل مفيد 🦸':'تفاعل ضار 🦹. يمكن التحكم فيه، مثل طلاء الحديد بالزنك أو الدهان لمنع الصدأ.');setTimeout(nq,1800)};$('feF').onclick=()=>a(1);$('feE').onclick=()=>a(0);nq()})();
+(function(){const host=$('krevQ');let ok=0,dn=0;
+ const G=[['أي من المواد التالية لا يتعرض للتسامي عند تسخينه؟',['حبيبات أرز','بلورات يود','كلوريد الأمونيوم','النفتالين']],['كل من العمليات التالية لا تحدث إلا في وجود ضوء ما عدا',['التنفس','البناء الضوئي','التقاط صور بالكاميرا','استخدام الألواح الشمسية لتسخين الماء']],['ما التغير الذي يتعرض له الفحم النباتي عند استخدامه كوقود؟',['الاحتراق','التحلل المائي','التحلل','التمدد']],['لا يمكن استخدام الكهرباء في',['حماية الحديد من الصدأ مباشرة','صنع مغناطيس دائم','تحليل عنصر','إضاءة منزلنا']],['أي مما يلي ليس تغيرًا كيميائيًا؟',['قطع ورقة إلى قطع صغيرة','تعفن تفاحة','إشعال عود ثقاب','حرق غابة']],['احتراق شريط الماغنيسيوم في الهواء ينتج',['أكسيد الماغنيسيوم','ماغنيسيوم وماء','كربونات الماغنيسيوم','لا شيء']],['عند تسخين كربونات النحاس ينتج',['أكسيد النحاس وثاني أكسيد الكربون','نحاس فقط','ماء وأكسجين','كبريتيد النحاس']],['عند التحلل الكهربائي للماء يكون حجم الهيدروجين',['ضعف حجم الأكسجين','نصف حجم الأكسجين','مساويًا لحجم الأكسجين','صفرًا']],['يُكشف عن غاز الهيدروجين بـ',['فرقعة عند تقريب شظية مشتعلة','إطفاء الشظية','تعكير ماء الجير','لون أزرق']],['أي هذه الغازات يسبب المطر الحمضي؟',['ثاني أكسيد الكبريت','الأكسجين','الهيدروجين','النيتروجين']],['تختفي كريات العتة (النفتالين) في الخزانة بسبب',['التسامي','الانصهار','الاحتراق','الاتحاد']],['يصبح المصباح ساخنًا عند تشغيله بسبب',['التأثير الحراري للكهرباء','التحلل الكهربائي','الاحتراق','التسامي']]];
+ function upd(){$('krevSc').textContent=dn<G.length?'أجبت عن '+dn+' من '+G.length+' · صحيح: '+ok:(ok>=G.length-1?'🌟 ممتاز! ':ok>=G.length*.7?'👍 جيد جدًا! ':'💪 راجع الدروس وحاول مرة أخرى. ')+'النتيجة: '+ok+' من '+G.length}
+ function make(){host.innerHTML='';ok=0;dn=0;upd();G.slice().sort(()=>Math.random()-.5).forEach(([q,o],i)=>mcq(host,'<b>'+(i+1)+')</b> '+q,o,0,r=>{dn++;if(r)ok++;upd()}))}
+ $('krevNew').onclick=make;make()})();
+
+/* ===== SOUND ===== */
+let SAC=null;function sac(){if(!SAC){try{SAC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(SAC&&SAC.state==='suspended')SAC.resume();return SAC}
+function beep(f,d,v,type,t0){const a=sac();if(!a)return null;const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.value=f;const s=a.currentTime+(t0||0);g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(v==null?.2:v,s+.02);g.gain.exponentialRampToValueAtTime(.0008,s+d);o.connect(g);g.connect(a.destination);o.start(s);o.stop(s+d+.05);return o}
+/* tuning fork */
+(function(){let an,water=false;function draw(k){const amp=k>0?6*k*Math.sin(performance.now()/18):0;let s='<rect x="150" y="150" width="20" height="40" rx="4" fill="#90a4ae"/><path d="M160,150 V130 M160,130 Q125,130 '+(125-amp)+',20 M160,130 Q195,130 '+(195+amp)+',20" fill="none" stroke="#78909c" stroke-width="12" stroke-linecap="round"/>';
+ if(k>0)for(let i=1;i<=3;i++)s+='<path d="M'+(105-i*14)+',40 q-10,30 0,60" fill="none" stroke="#1a9aa5" stroke-width="2" opacity="'+k*(1-i*.25)+'"/><path d="M'+(215+i*14)+',40 q10,30 0,60" fill="none" stroke="#1a9aa5" stroke-width="2" opacity="'+k*(1-i*.25)+'"/>';
+ if(water){s+='<rect x="90" y="5" width="140" height="50" rx="8" fill="#bbdefb" opacity=".7" stroke="#1565c0"/>';if(k>0)for(let i=0;i<10;i++)s+='<circle cx="'+(110+i*11)+'" cy="'+(8+Math.random()*10)+'" r="3" fill="#1565c0"/>'}
+ $('tf').innerHTML=s}
+ function strike(){beep(440,2.5,.25,'sine');beep(880,1,.05,'sine');cancelAnimationFrame(an);const t0=performance.now();(function st(n){const k=Math.max(0,1-(n-t0)/2500);draw(k);if(k>0)an=requestAnimationFrame(st)})(t0);
+  $('tfT').innerHTML=water?'💦 الماء يتطاير! هذا دليل على أن فرعي الشوكة <b>يتذبذبان</b> عند إصدار الصوت.':'🔔 تسمع صوتًا! الشوكة تصدر الصوت <b>فقط عند تذبذبها</b>، وعندما يتوقف التذبذب يختفي الصوت.'}
+ $('tfB').onclick=strike;$('tf').onclick=strike;$('tfW').onclick=()=>{water=!water;$('tfW').textContent=water?'↩️ أخرجها من الماء':'💧 ضعها في الماء';draw(0)};draw(0)})();
+(function(){const N=28;(function loop(t){const A=+$('cmS').value/100;let s='<path d="M8,30 L30,40 L30,70 L8,80 Z" fill="#555"/><rect x="'+(30+A*5*Math.sin(t/80))+'" y="38" width="6" height="34" fill="#f08c2e"/>';
+ for(let c=0;c<N;c++)for(let r=0;r<7;r++){const x0=45+c*9.5,x=x0+A*7*Math.sin(t/80-c*0.55);s+='<circle cx="'+x+'" cy="'+(18+r*12+(c%2)*5)+'" r="2.4" fill="#1a9aa5"/>'}
+ s+='<text x="310" y="105" font-size="22" text-anchor="end">👂</text>';$('cmp').innerHTML=s;requestAnimationFrame(loop)})(0)})();
+(function(){let vac=0;const upd=()=>{document.querySelectorAll('[data-vac]').forEach(b=>b.classList.toggle('main',+b.dataset.vac===vac));$('vacT').innerHTML=vac?'🌌 في الفضاء لا يوجد هواء (فراغ)، فلا توجد جزيئات تنقل الذبذبات.':'🌍 حولك هواء، وجزيئاته تنقل الصوت إلى الأذن.'};
+ document.querySelectorAll('[data-vac]').forEach(b=>b.onclick=()=>{vac=+b.dataset.vac;upd()});$('vacB').onclick=()=>{if(!vac){beep(300,.5,.25,'sawtooth');beep(450,.5,.15,'square',.05);$('vacT').innerHTML='🗣️ سمعناك! «آآآه!»'}else{$('vacT').innerHTML='🤐 … لا شيء! «لا يستطيع أحد سماع صراخك في الفضاء الخارجي» لأن الصوت <b>يحتاج إلى وسط</b> لينتقل.'}};upd()})();
+quiz('qv1',[['يصدر الصوت عن طريق',['الذبذبات','الضوء','الحرارة']],['لا ينتقل الصوت في',['الفراغ','الماء','الحديد']],['عند انتقال الصوت في الهواء تتحرك الجزيئات',['ذهابًا وإيابًا في مكانها','معنا حتى الأذن','لا تتحرك']],['المناطق التي تتقارب فيها جزيئات الهواء تسمى',['تضاغطات','تخلخلات','ذبذبات']],['يصدر صوت آلة العود عند',['تذبذب أوتارها','ثبات أوتارها','لمس الخشب فقط']]]);
+(function(){const M=[['🌬️ الهواء',340],['💧 الماء',1500],['🟤 النحاس',3400],['⚙️ الفولاذ',4577]];let an;
+ function draw(t){$('sr').innerHTML=M.map(([n,v])=>{const time=1000/v,p=Math.min(1,t/(time*1000*1.0));return'<div style="display:flex;align-items:center;gap:6px;margin:5px 0"><span style="width:80px;font-weight:800">'+n+'</span><div style="flex:1;height:26px;background:#f1f6f3;border-radius:8px;position:relative;direction:ltr"><div style="position:absolute;left:0;top:0;bottom:0;width:'+p*100+'%;background:#c8e6c9;border-radius:8px"></div><span style="position:absolute;left:calc('+p*100+'% - 12px);font-size:1.1rem">🔊</span></div><span style="width:110px;font-size:.78rem;direction:ltr;text-align:left">'+v+' m/s'+(p>=1?' · '+time.toFixed(2)+'s':'')+'</span></div>'}).join('')}
+ $('srB').onclick=()=>{cancelAnimationFrame(an);const t0=performance.now();(function st(n){const t=(n-t0)/1;draw(t);if(t<3000)an=requestAnimationFrame(st)})(t0);beep(600,.12,.15,'square')};draw(0)})();
+(function(){let an;function upd(){const t=+$('ecS').value;$('ecV').textContent=t;const d=340*t/2;$('ecT').innerHTML='الصوت ذهب وعاد، فقطع المسافة مرتين.<br>المسافة = (السرعة × الزمن) ÷ 2 = (340 × '+t+') ÷ 2 = <b style="color:var(--or)">'+d+' م</b>';draw(-1)}
+ function draw(p){let s='<rect x="0" y="100" width="320" height="20" fill="#c5e1a5"/><text x="18" y="98" font-size="30">🧍</text><path d="M260,100 L285,35 L320,100 Z" fill="#8d6e63"/><path d="M285,35 L275,60 L295,60 Z" fill="#fff"/>';
+  if(p>=0){const x=p<.5?40+p*2*220:260-(p-.5)*2*220;s+='<text x="'+x+'" y="70" font-size="16">'+(p<.5?'➡️':'⬅️')+'</text><path d="M'+x+',50 q8,20 0,40" fill="none" stroke="#1a9aa5" stroke-width="3"/>'}$('ec').innerHTML=s}
+ $('ecS').oninput=upd;$('ecB').onclick=()=>{const T=+$('ecS').value;beep(520,.25,.25,'triangle');beep(660,.25,.2,'triangle',.15);setTimeout(()=>{beep(520,.25,.08,'triangle');beep(660,.25,.06,'triangle',.15)},T*1000);cancelAnimationFrame(an);const t0=performance.now();(function st(n){const p=Math.min(1,(n-t0)/(T*1000));draw(p);if(p<1)an=requestAnimationFrame(st)})(t0)};upd()})();
+(function(){const host=$('pv2');function nq(){const t=rnd(0,1);let q,a,ex;if(t===0){const T=[1,2,3,4,5][rnd(0,4)];a=340*T/2;q='سمعت صدى صوتك بعد '+T+' ثانية. كم تبعد عن الحائط؟ (سرعة الصوت 340 م/ث)';ex='(340 × '+T+') ÷ 2 = '+a+' م'}else{const T=rnd(2,8);a=340*T;q='رأيت البرق ثم سمعت الرعد بعد '+T+' ثوانٍ. كم تبعد العاصفة بالمتر؟';ex='340 × '+T+' = '+a+' م (الضوء يصل فورًا تقريبًا)'}
+ host.innerHTML='<div class="prob">'+q+'</div><div class="btns"><input style="width:120px;height:42px;border:3px solid #c9dfe2;border-radius:10px;text-align:center;font-weight:900;font-size:1.1rem;direction:ltr"><button class="btn main" data-k="c">✔️ تحقّق</button><button class="btn or" data-k="n">سؤال جديد ⬅</button></div><div class="fb"></div>';
+ const inp=host.querySelector('input'),fb=host.querySelector('.fb');host.querySelector('[data-k=n]').onclick=nq;host.querySelector('[data-k=c]').onclick=()=>{const v=parseFloat(inp.value.replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)));const g=Math.abs(v-a)<.5;inp.className=g?'ok':'no';inp.style.borderColor=g?'#2e9e5b':'#d64545';fb.className='fb '+(g?'ok':'no');fb.innerHTML=(g?'🎉 صحيح! ':'❌ ')+ex;if(g)setTimeout(nq,2200)}}nq()})();
+/* frequency generator */
+(function(){let osc=null,gn=null;const f=()=>Math.round(20*Math.pow(1000,+$('fqS').value/100));const A=()=>+$('amS').value/100;
+ function lab(F){return F<60?'🥁 طبلة (منخفضة جدًا)':F<300?'🧔 صوت رجل (منخفضة)':F<1100?'👩 نغمة امرأة تغني':F<4000?'🎶 نغمة مرتفعة':F<12000?'😗 صفارة (مرتفعة جدًا)':'👂 قرب حد السمع البشري'}
+ (function loop(t){const F=f(),a=A();$('fqV').textContent=F;const cyc=Math.max(1,Math.min(40,Math.log(F/20)*6));let d='M0,55';for(let x=0;x<=320;x+=1.5)d+=' L'+x+','+(55-a*45*Math.sin(x/320*cyc*6.283-t/120));$('fq').innerHTML='<path d="'+d+'" fill="none" stroke="#4fc3f7" stroke-width="2.5"/>';
+  $('fqT').innerHTML=lab(F)+'<br><span style="font-size:.85rem">تردد أعلى ← موجات أكثر تقاربًا ← درجة أعلى · شدة أكبر ← موجة أطول (سعة) ← صوت أعلى</span>';if(osc){osc.frequency.setTargetAtTime(F,SAC.currentTime,.03);gn.gain.setTargetAtTime(a*.25,SAC.currentTime,.05)}requestAnimationFrame(loop)})(0);
+ $('fqB').onclick=()=>{const a=sac();if(!a)return;if(osc){gn.gain.setTargetAtTime(0,a.currentTime,.05);const o=osc;setTimeout(()=>o.stop(),200);osc=null;$('fqB').textContent='▶️ شغّل';return}osc=a.createOscillator();gn=a.createGain();osc.frequency.value=f();gn.gain.value=0;osc.connect(gn);gn.connect(a.destination);osc.start();gn.gain.setTargetAtTime(A()*.25,a.currentTime,.05);$('fqB').textContent='⏹️ أوقف'};
+ document.querySelectorAll('#bar button').forEach(b=>b.addEventListener('click',()=>{if(osc){osc.stop();osc=null;$('fqB').textContent='▶️ شغّل'}}))})();
+(function(){const K=[['C','دو',256],['D','ري',288],['E','مي',320],['F','فا',341],['G','صول',384],['A','لا',427],['B','سي',480],['C','دو',512]];const col=['#e57373','#ffb74d','#fff176','#81c784','#4fc3f7','#7986cb','#ba68c8','#e57373'];
+ $('pno').innerHTML=K.map((k,i)=>'<button data-k="'+i+'" style="width:36px;height:120px;border:2px solid #333;border-radius:0 0 8px 8px;background:#fff;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding-bottom:6px;font-weight:900;font-size:.75rem;cursor:pointer;font-family:inherit"><span style="width:22px;height:22px;border-radius:50%;background:'+col[i]+'"></span>'+k[1]+'</button>').join('');
+ const play=i=>{beep(K[i][2]*1.03,.7,.25,'triangle');const b=$('pno').querySelector('[data-k="'+i+'"]');b.style.background=col[i];setTimeout(()=>b.style.background='#fff',250);$('pnT').innerHTML='<b>'+K[i][1]+' ('+K[i][0]+')</b> = '+K[i][2]+' هرتز'+(i===7?'<br>«دو» العالية ترددها ضعف «دو» المنخفضة!':'')};
+ $('pno').querySelectorAll('[data-k]').forEach(b=>b.onclick=e=>{e.stopPropagation();play(+b.dataset.k)});
+ $('pnSong').onclick=()=>{[0,0,4,4,5,5,4,-1,3,3,2,2,1,1,0].forEach((n,i)=>{if(n>=0)setTimeout(()=>play(n),i*330)})}})();
+(function(){const host=$('pv3');let ok=0,dn=0;function nq(){let a=rnd(150,1500),b;do{b=rnd(150,1500)}while(Math.abs(a-b)<a*.15);const hi=a>b?0:1;
+ host.innerHTML='<div class="btns"><button class="btn" data-p="0">🔊 الصوت 1</button><button class="btn" data-p="1">🔊 الصوت 2</button></div><div class="prob">أيهما درجته أعلى (أكثر حدة)؟</div><div class="btns"><button class="btn main" data-a="0">الصوت 1</button><button class="btn main" data-a="1">الصوت 2</button></div><div class="fb"></div><div class="sc">✔️ '+ok+' من '+dn+'</div>';
+ host.querySelector('[data-p="0"]').onclick=()=>beep(a,.6,.22);host.querySelector('[data-p="1"]').onclick=()=>beep(b,.6,.22);let d=false;
+ host.querySelectorAll('[data-a]').forEach(x=>x.onclick=()=>{if(d)return;d=true;dn++;const g=+x.dataset.a===hi;if(g)ok++;x.classList.add(g?'ok':'no');const f=host.querySelector('.fb');f.className='fb '+(g?'ok':'no');f.textContent=(g?'🎉 أذن موسيقية! ':'❌ ')+'الصوت 1 = '+a+' Hz ، الصوت 2 = '+b+' Hz';setTimeout(nq,2200)})}nq()})();
+/* ear */
+(function(){const P=[['صيوان الأذن',40,90,'يجمع الموجات الصوتية'],['قناة الأذن',95,90,'تحمل الموجات إلى طبلة الأذن'],['طبلة الأذن',140,90,'غشاء رقيق يتذبذب'],['عظام الأذن',175,70,'ثلاث عظمات صغيرة تكبّر الذبذبات (30 مرة!)'],['الكوة البيضاوية',205,88,'تنقل الذبذبات إلى القوقعة'],['القوقعة',240,100,'مملوءة بسائل وشعيرات دقيقة تحوّل الذبذبات إلى إشارات كهربائية'],['العصب السمعي',290,70,'يحمل الإشارات إلى المخ، فنسمع! 🧠']];let an;
+ function draw(k){let s='<path d="M20,40 Q5,90 25,150 Q50,140 55,100 Q60,60 40,40 Z" fill="#ffccbc" stroke="#bf8a6e" stroke-width="2"/><rect x="55" y="80" width="85" height="20" fill="#ffe0d6" stroke="#bf8a6e"/><ellipse cx="142" cy="90" rx="4" ry="18" fill="#ef9a9a"/><path d="M150,85 L170,65 L190,72 L205,88" fill="none" stroke="#fff8e1" stroke-width="6" stroke-linecap="round"/><path d="M150,85 L170,65 L190,72 L205,88" fill="none" stroke="#a1887f" stroke-width="2"/><path d="M240,100 m-22,0 a22,22 0 1,1 44,0 a16,16 0 1,1 -32,0 a10,10 0 1,1 20,0" fill="none" stroke="#ce93d8" stroke-width="6"/><path d="M262,92 Q280,70 315,60" stroke="#fdd835" stroke-width="5" fill="none"/>';
+  P.forEach((p,i)=>{const on=k>=0&&i<=k;s+='<circle cx="'+p[1]+'" cy="'+(p[2]+40)+'" r="9" fill="'+(on?'#f08c2e':'#ddd')+'"/><text x="'+p[1]+'" y="'+(p[2]+44)+'" font-size="10" text-anchor="middle" font-weight="900" fill="#fff">'+(i+1)+'</text>'});$('ear').innerHTML=s;if(k>=0)$('earT').innerHTML='<b>'+(k+1)+') '+P[k][0]+'</b>: '+P[k][3]}
+ $('earB').onclick=()=>{let k=-1;clearInterval(an);beep(500,.3,.15);an=setInterval(()=>{k++;draw(k);beep(400+k*80,.12,.08);if(k>=P.length-1)clearInterval(an)},900)};draw(-1)})();
+(function(){let o=null,g=null,tm=null;const B=$('hrB'),S=$('hrS');
+ function stop(){if(o){try{g.gain.setTargetAtTime(0,o.context.currentTime,.03);o.stop(o.context.currentTime+.15)}catch(e){}o=null}clearTimeout(tm);B.textContent='🔊 أسمعني';B.classList.remove('or');B.classList.add('main')}
+ function msg(F){$('hrT').innerHTML=F<=4000?'🔊 هذا تردد '+F+' هرتز، يسمعه الجميع بوضوح. ارفع المؤشر ببطء…':F<12000?'هل ما زلت تسمع '+F+' هرتز؟ ارفع أكثر…':F<17000?'🎧 '+F+' هرتز: كثير من الكبار يتوقفون عن السماع هنا.':'🧒 '+F+' هرتز! إذا سمعته فأذنك حساسة جدًا. ملاحظة: بعض سماعات الجوال لا تستطيع إخراج هذه الترددات العالية أصلًا.'}
+ S.oninput=()=>{const F=+S.value;$('hrV').textContent=F;if(o)o.frequency.setTargetAtTime(F,o.context.currentTime,.02);msg(F)};
+ B.onclick=()=>{if(o){stop();return}const a=sac();if(!a){$('hrT').textContent='⚠️ المتصفح لا يدعم الصوت';return}
+  o=a.createOscillator();g=a.createGain();o.type='sine';o.frequency.value=+S.value;g.gain.setValueAtTime(0,a.currentTime);g.gain.linearRampToValueAtTime(.35,a.currentTime+.05);o.connect(g);g.connect(a.destination);o.start();
+  B.textContent='⏹️ إيقاف';B.classList.remove('main');B.classList.add('or');msg(+S.value);tm=setTimeout(stop,15000)};
+ document.querySelectorAll('#bar button').forEach(b=>b.addEventListener('click',stop))})();
+(function(){const R=[['🧍 الإنسان',20,20000],['🦗 الجراد',100,50000],['🐬 الدولفين',150,150000],['🐕 الكلب',15,50000],['🐈 القطة',60,65000],['🦇 الخفاش',1000,120000]];const lg=v=>Math.log10(v)/Math.log10(200000)*100;
+ $('rng').innerHTML=R.map(r=>'<div style="display:flex;align-items:center;gap:6px;margin:4px 0"><span style="width:84px;font-weight:800">'+r[0]+'</span><div style="flex:1;height:20px;background:#f5f5f5;border-radius:8px;position:relative;direction:ltr"><div style="position:absolute;left:'+lg(r[1])+'%;width:'+(lg(r[2])-lg(r[1]))+'%;top:0;bottom:0;background:'+(r[0].includes('الإنسان')?'#f08c2e':'#81c784')+';border-radius:8px"></div><div style="position:absolute;left:'+lg(20000)+'%;top:-3px;bottom:-3px;border-left:2px dashed #d64545"></div></div></div>').join('')+'<div class="muted" style="text-align:center;font-size:.8rem;color:var(--soft)">الخط الأحمر = 20000 هرتز (حد السمع البشري). ما فوقه = موجات فوق صوتية</div>'})();
+/* dB */
+(function(){const D=[['📚 المكتبة',20,'هادئ'],['🏠 المنزل العادي',30,'هادئ'],['🎻 الخلفية الموسيقية',40,'هادئ'],['🗣️ الحديث العادي',70,'هادئ إلى مرتفع'],['🚗 المرور',80,'مرتفع'],['⛏️ مثقاب هوائي',90,'مرتفع'],['🏭 مصنع',110,'مرتفع إلى مزعج'],['✈️ طائرة نفاثة في السماء',100,'مزعج'],['⛈️ الرعد في السماء',110,'مزعج'],['💥 عتبة الألم',120,'مزعج إلى مؤلم']];
+ function upd(){const d=D[+$('dbS').value];const c=d[1]<50?'#43a047':d[1]<85?'#fdd835':d[1]<105?'#fb8c00':'#e53935';
+  $('db').innerHTML='<div style="text-align:center;font-size:2.5rem">'+d[0].split(' ')[0]+'</div><div style="text-align:center;font-weight:900;font-size:1.1rem">'+d[0].slice(3)+'</div><div style="height:28px;background:#eee;border-radius:14px;overflow:hidden;margin:8px 0;direction:ltr"><div style="height:100%;width:'+d[1]/130*100+'%;background:'+c+';transition:.4s"></div></div><div class="prob"><b>'+d[1]+' ديسيبل</b> · '+d[2]+(d[1]>=85?'<br>⚠️ التعرض الطويل لأكثر من 85 ديسيبل قد يتلف الأذن!':'')+'</div>';beep(150+d[1]*4,.25,Math.min(.3,d[1]/400),'sawtooth')}$('dbS').oninput=upd;upd()})();
+(function(){const A=[['🚑','سيارة إسعاف','إسعاف',()=>{for(let i=0;i<4;i++){beep(900,.3,.15,'square',i*.6);beep(650,.3,.15,'square',i*.6+.3)}}],['🚒','إنذار حريق','حريق',()=>{for(let i=0;i<8;i++)beep(1200,.12,.12,'square',i*.2)}],['🔔','جرس المدرسة','مدرسة',()=>{for(let i=0;i<10;i++)beep(1500,.08,.1,'square',i*.09)}],['🚗','بوق سيارة','سيارة',()=>{beep(400,.6,.2,'sawtooth');beep(500,.6,.15,'sawtooth')}]];let ans;
+ function nq(){ans=rnd(0,A.length-1);$('alB').innerHTML='<button class="btn or" id="alP">🔊 اسمع الصوت</button><br>'+A.map((a,i)=>'<button class="btn" data-i="'+i+'">'+a[0]+' '+a[1]+'</button>').join('');$('alF').textContent='';$('alP').onclick=()=>A[ans][3]();
+  $('alB').querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>{const g=+b.dataset.i===ans;b.classList.add(g?'ok':'no');$('alF').className='fb '+(g?'ok':'no');$('alF').textContent=g?'✅ صحيح! الأصوات تحذّرنا من الخطر وتنبّهنا':'❌ اسمع مرة أخرى';if(g)setTimeout(nq,1800)})}nq()})();
+/* sonar */
+(function(){const svg=$('snr');const floor=x=>170+18*Math.sin(x/40)+10*Math.cos(x/17);const fish={x:rnd(120,260),y:rnd(90,130)};let an;
+ function base(){let s='<rect x="0" y="40" width="320" height="180" fill="#0d47a1"/><rect x="0" y="0" width="320" height="40" fill="#bbdefb"/>';let p='M0,220';for(let x=0;x<=320;x+=8)p+=' L'+x+','+floor(x);s+='<path d="'+p+' L320,220 Z" fill="#8d6e63"/><text x="'+(fish.x-14)+'" y="'+fish.y+'" font-size="18">🐟🐟</text>';return s}
+ function shoot(x){cancelAnimationFrame(an);const target=fish.x-14<x&&x<fish.x+24?fish.y-6:floor(x);const d=target-40;const t0=performance.now();beep(1800,.06,.1,'sine');
+  (function st(n){const p=(n-t0)/1400;let s=base()+'<text x="'+(x-16)+'" y="38" font-size="24">🚢</text>';if(p<1){const y=p<.5?40+p*2*d:40+(1-p)*2*d;s+='<path d="M'+(x-12)+','+y+' q12,'+(p<.5?8:-8)+' 24,0" fill="none" stroke="#4fc3f7" stroke-width="3"/>';an=requestAnimationFrame(st)}else{beep(1800,.06,.05,'sine');
+   const meters=Math.round(d*2.5),t=(2*meters/1500).toFixed(2);const isF=target!==floor(x);$('snrT').innerHTML=(isF?'🐟 وجدت سربًا من السمك!':'🪨 وصلت النبضة إلى القاع.')+'<br>زمن الصدى = '+t+' ث ← العمق = (1500 × '+t+') ÷ 2 ≈ <b style="color:var(--or)">'+meters+' م</b>'}svg.innerHTML=s})(t0)}
+ svg.addEventListener('click',e=>{const r=svg.getBoundingClientRect();shoot(Math.max(20,Math.min(300,(e.clientX-r.left)*320/r.width)))});svg.innerHTML=base()+'<text x="144" y="38" font-size="24">🚢</text>';$('snrT').textContent='سرعة الصوت في الماء 1500 م/ث. اضغط لترسل نبضة.'})();
+(function(){let an;function draw(p,bx,by){let s='<text x="20" y="80" font-size="34">🦇</text><text x="'+bx+'" y="'+by+'" font-size="20">🦟</text>';if(p>=0){const r=p<.5?p*2*(bx-40):(1-p)*2*(bx-40);s+='<circle cx="45" cy="70" r="'+Math.max(1,r)+'" fill="none" stroke="#ffeb3b" stroke-width="2" opacity="'+(p<.5?1:.5)+'"/>'}$('bat').innerHTML=s}
+ let bx=rnd(150,290),by=rnd(30,140);draw(-1,bx,by);$('batB').onclick=()=>{cancelAnimationFrame(an);const t0=performance.now();for(let i=0;i<3;i++)beep(3000,.03,.04,'sine',i*.06);(function st(n){const p=Math.min(1,(n-t0)/1200);draw(p,bx,by);if(p<1)an=requestAnimationFrame(st);else{$('batT').innerHTML='🎯 عاد الصدى! الخفاش عرف أن الحشرة تبعد '+Math.round((bx-40)/10)+' م تقريبًا، فانقض عليها. (هذا يشبه السونار!)';bx=rnd(150,290);by=rnd(30,140);setTimeout(()=>draw(-1,bx,by),1500)}})(t0)}})();
+(function(){const host=$('vrevQ');let ok=0,dn=0;
+ const G=[['لا ينتقل الصوت في',['الفراغ','الجسم الصلب','السائل','الغاز']],['في أي من الأوساط التالية ينتقل الصوت أسرع؟',['الألومنيوم','الهواء','ماء البحر','خلايا الجسم']],['أي من خصائص الصوت التالية تناظر اللون في الضوء؟',['الدرجة','الشدة','السرعة','الطاقة']],['أي من الآتي يناظر المدى السمعي للأذن البشرية؟',['20 هرتز إلى 20000 هرتز','200 هرتز إلى 2000 هرتز','20 هرتز إلى 2000 هرتز','20 هرتز إلى 300000 هرتز']],['أي من الآتي ليس صحيحًا عن الموجات فوق الصوتية؟',['يستخدمها الأطباء لسماع دقات قلب المريض','ترددها أعلى من 20000 هرتز','تقع فوق مدى سمع الأذن البشرية','تُستخدم للكشف عن أورام المخ']],['سرعة الصوت في الهواء تقريبًا',['340 م/ث','3 × 10⁸ م/ث','1500 م/ث','34 م/ث']],['وحدة قياس التردد',['الهرتز','الديسيبل','المتر','الثانية']],['وحدة قياس شدة الصوت',['الديسيبل','الهرتز','الواط','الأمبير']],['الجزء الذي يحوّل الذبذبات إلى إشارات كهربائية في الأذن',['القوقعة','صيوان الأذن','طبلة الأذن','قناة الأذن']],['يعمل السونار على مبدأ',['انعكاس الموجات الصوتية (الصدى)','انكسار الضوء','التأثير المغناطيسي','التحلل الكهربائي']],['سمعت صدى صوتك بعد نصف ثانية. المسافة إلى الحائط',['85 م','170 م','340 م','680 م']],['الضوضاء هي صوت',['غير منتظم وغير مرغوب فيه','منتظم التردد','موسيقي','فوق صوتي']]];
+ function upd(){$('vrevSc').textContent=dn<G.length?'أجبت عن '+dn+' من '+G.length+' · صحيح: '+ok:(ok>=G.length-1?'🌟 ممتاز! ':ok>=G.length*.7?'👍 جيد جدًا! ':'💪 راجع الدروس وحاول مرة أخرى. ')+'النتيجة: '+ok+' من '+G.length}
+ function make(){host.innerHTML='';ok=0;dn=0;upd();G.slice().sort(()=>Math.random()-.5).forEach(([q,o],i)=>mcq(host,'<b>'+(i+1)+')</b> '+q,o,0,r=>{dn++;if(r)ok++;upd()}))}
+ $('vrevNew').onclick=make;make()})();
+const V='س';const parse=s=>{s=(s||'').trim().replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[−–—]/g,'-').replace(/\s/g,'');if(s===''||s==='+'||s==='-')return NaN;return Number(s)};
+function FillProblem(host,gen,opts){opts=opts||{};let cur,tries,ans;const box=document.createElement('div');host.appendChild(box);let score=0,done=0;
+ const sc=document.createElement('div');sc.className='sc';
+ function render(){cur=gen();tries=0;ans=(cur.ans||cur.terms.map(t=>t[0])).map(x=>Math.round(x*100)/100);
+  let body;if(cur.tpl){let k=0;body='<div style="display:flex;direction:rtl;justify-content:center;align-items:center;flex-wrap:wrap;gap:4px">'+cur.tpl.split(/(\[\]|\(|\))/).filter(t=>t.trim()).map(t=>t==='[]'?'<input class="cf" inputmode="text" data-i="'+(k++)+'">':t==='('?'<span dir="ltr" style="unicode-bidi:isolate">)</span>':t===')'?'<span dir="ltr" style="unicode-bidi:isolate">(</span>':'<span>'+t.trim()+'</span>').join('')+'</div>'}
+  else{body='';cur.terms.forEach(([c,p],i)=>{body+=(i?' + ':'')+'<input class="cf" inputmode="text" data-i="'+i+'">'+(p===0?'':(p===1?(cur.v||V):(cur.v||V)+'<sup>'+p+'</sup>'))})}
+  let h='<div class="prob"><div class="mx">'+cur.q+(cur.noEq?'':' =')+'</div><div class="mx" dir="rtl" style="margin-top:6px">'+body+'</div></div><div class="btns"><button class="btn main" data-k="chk">✔️ تحقّق</button><button class="btn" data-k="help">💡 أرني الحل</button><button class="btn or" data-k="new">سؤال جديد ⬅</button></div><div class="fb"></div><div class="steps"></div>';
+  box.innerHTML=h;const ins=[...box.querySelectorAll('input.cf')];
+  ins.forEach((inp,i)=>inp.addEventListener('keydown',e=>{if(e.key==='Enter'){if(i<ins.length-1)ins[i+1].focus();else check()}}));
+  box.querySelector('[data-k=chk]').onclick=check;box.querySelector('[data-k=help]').onclick=()=>showSteps(true);box.querySelector('[data-k=new]').onclick=render}
+ function showSteps(reveal){const st=box.querySelector('.steps');st.style.display='block';st.innerHTML='<b>خطوات الحل:</b>'+cur.steps.map(s=>'<div class="mx" dir="rtl" style="font-size:1.1rem">'+s+'</div>').join('');
+  if(reveal)box.querySelectorAll('input.cf').forEach((inp,i)=>{inp.value=String(ans[i]).replace('-','−');inp.className='cf ok'})}
+ function judge(vals){const ok=vals.map((v,i)=>Math.abs(v-ans[i])<0.006);(cur.groups||[]).forEach(g=>{const a=g.map(i=>ans[i]).sort((x,y)=>x-y),b=g.map(i=>vals[i]).sort((x,y)=>x-y);if(a.every((x,j)=>x===b[j]))g.forEach(i=>ok[i]=true);else{const pool=g.map(i=>ans[i]);g.forEach(i=>{const k=pool.indexOf(vals[i]);ok[i]=k>=0;if(k>=0)pool.splice(k,1)})}});return ok}
+ function check(){const ins=[...box.querySelectorAll('input.cf')];tries++;const vals=ins.map(x=>parse(x.value));const fb=box.querySelector('.fb');
+  if(vals.some(isNaN)){fb.className='fb';fb.textContent='اكتب عددًا في كل خانة (اكتب 1 إذا كان المعامل واحدًا).';tries--;return}
+  const ok=judge(vals);ins.forEach((x,i)=>x.className='cf '+(ok[i]?'ok':'no'));const all=ok.every(Boolean);
+  if(all){fb.className='fb ok';fb.textContent=tries===1?'🎉 ممتاز! صحيح من المحاولة الأولى':'✅ صحيح!';if(tries===1)score++;done++;sc.textContent='✔️ صحيح من أول محاولة: '+score+' من '+done;showSteps(false);setTimeout(()=>{if(!opts.noAuto)render()},2400)}
+  else{fb.className='fb no';const wrong=ok.filter(x=>!x).length;fb.innerHTML='🤔 '+wrong+' خانة غير صحيحة (باللون الأحمر). '+(cur.hint||'');if(tries===1){done++;sc.textContent='✔️ صحيح من أول محاولة: '+score+' من '+done}if(tries>=2)showSteps(false)}}
+ render();host.appendChild(sc);sc.textContent='ابدأ الحل ✍️';return{render,set:g=>{gen=g;render()}}}
+
+/* ===== ECOLOGY + CYCLES ===== */
+function sortGame(qId,aId,bId,fId,scId,L,labels){let o=[],k,ok=0,dn=0;function nq(){if(!o.length)o=L.map((_,i)=>i).sort(()=>Math.random()-.5);k=o.pop();$(qId).innerHTML=L[k][0];$(fId).textContent=''}
+ const a=v=>{dn++;const g=L[k][1]===v;if(g)ok++;$(fId).className='fb '+(g?'ok':'no');$(fId).innerHTML=(g?'✅ ':'❌ ')+labels[L[k][1]]+(L[k][2]?' · '+L[k][2]:'');$(scId).textContent='✔️ '+ok+' من '+dn;setTimeout(nq,1500)};$(aId).onclick=()=>a(1);$(bId).onclick=()=>a(0);nq()}
+sortGame('bgQ','bgB','bgA','bgF','bgSc',[['🌳 شجرة',1],['☀️ ضوء الشمس',0],['🐛 دودة',1],['💧 الماء',0],['🍄 فطر',1],['🌡️ درجة الحرارة',0],['🦠 بكتيريا',1],['🧂 أملاح التربة',0],['🐟 سمكة',1],['💨 الأكسجين',0],['🌾 عشب',1],['🧪 الأس الهيدروجيني pH',0]],['غير حيوي','حيوي']);
+(function(){const A=[['🐫 الجمل','يتحمل فقدان كمية مياه أكبر من معظم الحيوانات، فيعيش في الصحراء الحارة الجافة.'],['🐻‍❄️ الدب القطبي','غطاء سميك من الفراء يبقيه دافئًا، وطبقة دهن تحت الجلد تعزله عن البرد القارس.'],['🌵 الصبار','يخزن الماء في سيقانه السمينة، وأوراقه أشواك تقلل فقدان الماء.'],['🐘 الفيل','أذنان كبيرتان تساعدانه على التخلص من الحرارة في المناخ الحار.'],['🪴 نبات الإبريق','يعيش في تربة فقيرة بالنيتروجين، فيصطاد الحشرات ويهضمها ليحصل على النيتروجين!'],['🌿 صائد الذباب','نبات يغلق أوراقه على الذباب ليحصل على النيتروجين الذي ينقصه في التربة.']];
+ const bx=$('adB');A.forEach((a,i)=>{const b=document.createElement('button');b.className='btn'+(i?'':' main');b.textContent=a[0];b.onclick=()=>{bx.querySelectorAll('.btn').forEach(x=>x.classList.toggle('main',x===b));$('adT').innerHTML='<span style="font-size:2.5rem">'+a[0].split(' ')[0]+'</span><br>'+a[1]};bx.appendChild(b)});bx.firstChild.click()})();
+(function(){const S=$('phS');function upd(){const v=+S.value;$('phV').textContent=v;$('phK').style.left='calc('+((v-1)/13*100)+'% - 3px)';$('phT').innerHTML=v<7?'🍋 <b>حمضي</b>. مثل الليمون والمطر الحمضي. الأسماك لا تعيش إذا انخفض pH كثيرًا.':v===7?'💧 <b>متعادل</b>. مثل الماء النقي.':'🧼 <b>قلوي</b>. مثل الصابون وماء البحر. معظم المخلوقات المائية تعيش بين pH 6 و 8.'}S.oninput=upd;upd()})();
+(function(){const C=[[['🌾','عشب'],['🐇','أرنب'],['🐍','ثعبان'],['🦅','صقر']],[['🌿','نبات مائي'],['🐸','يرقة ضفدعة'],['🕷️','عنكبوت مائي'],['🐸','ضفدع']],[['🌱','نبات أخضر'],['🦗','جرادة'],['🕷️','عنكبوت'],['🐦','طائر']],[['🥬','كرنب'],['🐇','أرنب'],['🧍','إنسان']],[['🌿','نبات مائي'],['🐟','سمكة صغيرة'],['🐟','سمكة كبيرة'],['🧍','إنسان']]];let cur,got,ord;
+ function load(){const c=C[rnd(0,C.length-1)];cur=c;got=[];ord=c.map((_,i)=>i).sort(()=>Math.random()-.5);draw()}
+ function draw(){$('fcL').innerHTML=ord.map(i=>'<button class="btn" data-i="'+i+'" style="font-size:1.1rem'+(got.includes(i)?';opacity:.3':'')+'">'+cur[i][0]+' '+cur[i][1]+'</button>').join('');
+  $('fcS').innerHTML=got.length?got.map(i=>'<span title="'+cur[i][1]+'">'+cur[i][0]+'</span>').join('<span style="color:#d64545;font-size:1.3rem">⬅</span>'):'<span style="font-size:1rem;color:#888">ابدأ بالمنتج 🌱</span>';
+  $('fcL').querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(got.includes(i))return;if(i===got.length){got.push(i);b.classList.add('ok');setTimeout(draw,200);if(got.length===cur.length){$('fcF').className='fb ok';$('fcF').innerHTML='🎉 سلسلة صحيحة! '+cur[0][1]+' (منتج) ← '+cur[1][1]+' (مستهلك أولي) ← '+cur.slice(2).map(x=>x[1]).join(' ← ')}else{$('fcF').className='fb';$('fcF').textContent=''}}else{b.classList.add('no');$('fcF').className='fb no';$('fcF').textContent=got.length===0?'ابدأ بالمنتج (النبات الأخضر)':'❌ من يأكل '+cur[got.length-1][1]+'؟';setTimeout(()=>b.classList.remove('no'),500)}})}
+ $('fcN').onclick=()=>{$('fcF').textContent='';load()};load()})();
+(function(){const c=$('pop'),x=c.getContext('2d');function sim(rm){let g=100,l=40,f=15;const H=[];for(let t=0;t<60;t++){H.push([g,l,f]);const g2=g+0.12*g*(1-g/200)-0.004*g*l;const l2=rm===2?0:l+0.0025*g*l-0.25*l-0.01*l*f*(rm===1?0:1)+0.05*l;const f2=rm===1?0:f+0.0016*l*f-0.08*f;g=Math.max(0,g2);l=Math.max(0,l2);f=Math.max(0,f2)}return H}
+ function draw(rm){const H=sim(rm);x.clearRect(0,0,600,230);const C=['#43a047','#fb8c00','#1e88e5'],N=['🌾 أعشاب','🦗 جراد','🐸 ضفادع'];const mx=Math.max(...H.flat(),1);
+  for(let s=0;s<3;s++){x.strokeStyle=C[s];x.lineWidth=4;x.beginPath();H.forEach((h,t)=>{const X=20+t/59*560,Y=210-h[s]/mx*190;t?x.lineTo(X,Y):x.moveTo(X,Y)});x.stroke();x.fillStyle=C[s];x.font='bold 18px Cairo';x.fillText(N[s],440,30+s*24)}
+  document.querySelectorAll('[data-rm]').forEach(b=>b.classList.toggle('main',+b.dataset.rm===rm));
+  $('popT').innerHTML=['التوازن الطبيعي: الأعداد تتذبذب لكنها تبقى متوازنة.','بدون الضفادع: يتكاثر الجراد بسرعة فيأكل الأعشاب، ثم يقل الجراد نفسه بسبب نقص الغذاء. يختل التوازن!','بدون الجراد: تزداد الأعشاب، وتموت الضفادع جوعًا لأنها فقدت غذاءها.'][rm]}
+ document.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>draw(+b.dataset.rm));draw(0)})();
+(function(){const L=[['🌾','منتجون','#a5d6a7'],['🐇','مستهلك أولي','#fff59d'],['🐍','مستهلك ثانوي','#ffcc80'],['🦅','مستهلك من الدرجة الثالثة','#ef9a9a']];let shown=1;
+ function draw(){const E=+$('pyS').value;$('pyV').textContent=E;let s='';L.forEach((l,i)=>{const y=200-i*48,w=280-i*62;const vis=i<shown;s+='<g data-l="'+i+'" style="cursor:pointer"><polygon points="'+(160-w/2)+','+(y+40)+' '+(160+w/2)+','+(y+40)+' '+(160+(w-62)/2)+','+y+' '+(160-(w-62)/2)+','+y+'" fill="'+(vis?l[2]:'#eee')+'" stroke="#333" stroke-width="2"/><text x="160" y="'+(y+26)+'" text-anchor="middle" font-size="13" font-weight="800">'+l[0]+' '+(vis?Math.round(E/Math.pow(10,i))+' كج':'؟')+'</text></g>';
+  if(i>0&&i<shown)s+='<text x="'+(160+w/2+4)+'" y="'+(y+30)+'" font-size="11" fill="#d64545" font-weight="800">🔥 −90%</text>'});$('pyr').innerHTML=s;
+  $('pyr').querySelectorAll('[data-l]').forEach(g=>g.onclick=()=>{shown=Math.max(shown,+g.dataset.l+1);draw()})}
+ $('pyS').oninput=draw;draw()})();
+FillProblem($('pb3'),function(){const t=rnd(0,1);if(t===0){const E=rnd(2,9)*1000,lv=rnd(1,3);return{q:'إذا كانت طاقة المنتجين '+E+' كيلوجول، فكم يصل من الطاقة إلى '+['','المستهلك الأولي','المستهلك الثانوي','المستهلك من الدرجة الثالثة'][lv]+'؟',noEq:true,tpl:'[] كيلوجول',ans:[E/Math.pow(10,lv)],steps:['كل مستوى يحصل على 10% فقط من المستوى الذي قبله','= '+E+' × '+(lv===1?'0.1':lv===2?'0.1 × 0.1':'0.1 × 0.1 × 0.1')+' = '+E/Math.pow(10,lv)],hint:'اقسم على 10 عند كل مستوى.'}}
+ return{q:'أكل أرنب كرنبًا فيه 1000 كيلوجول. فقد منها 550 كيلوجول في البراز و400 كيلوجول حرارة. كم كيلوجول بقيت في جسم الأرنب؟',noEq:true,tpl:'[] كيلوجول',ans:[50],steps:['1000 − 550 − 400 = 50 كيلوجول','أي 5% فقط من الطاقة!'],hint:'اطرح الطاقة المفقودة من الطاقة الكلية.'}});
+(function(){const H=[['🌳 اجتثاث الغابات','تقل الأكسجين ويزيد ثاني أكسيد الكربون، وتفقد الحيوانات موطنها، وتتعرى التربة وتنجرف.'],['⛏️ التعدين','نقب الأرض يدمر المواطن الطبيعية ويلوث المياه.'],['🎣 الصيد الجائر','يقلل أعداد الأسماك حتى قد تنقرض، فيختل التوازن في البحر.'],['🧪 المبيدات','تقتل الحشرات النافعة أيضًا، وتنتقل إلى الطيور والإنسان عبر سلسلة الغذاء.'],['🛢️ تسرب النفط','ناقلة نفط تسرّب آلاف الأطنان، فتموت الطيور والأسماك وتتلوث الشواطئ.'],['🏭 دخان المصانع','يسبب المطر الحمضي وتلوث الهواء والاحترار الكوني.']];
+ const bx=$('hmB');H.forEach(h=>{const b=document.createElement('button');b.className='btn';b.textContent=h[0];b.onclick=()=>{bx.querySelectorAll('.btn').forEach(x=>x.classList.toggle('main',x===b));$('hmT').innerHTML='<b>'+h[0]+'</b><br>'+h[1]};bx.appendChild(b)})})();
+(function(){const Q=[['النفايات',['♻️ فرز وإعادة تدوير',1],['🔥 حرقها في الشارع',0]],['المواصلات',['🚌 الحافلة والمشي',1],['🚗 سيارة لكل شخص',0]],['الأرض الفارغة',['🌳 حديقة وأشجار',1],['🏢 مصنع قرب البيوت',0]],['الكهرباء',['☀️ ألواح شمسية',1],['🛢️ حرق مزيد من النفط',0]],['الشاطئ',['🧹 حملة تنظيف',1],['🗑️ رمي القمامة',0]]];let sc={};
+ $('city').innerHTML=Q.map((q,i)=>'<div style="display:flex;align-items:center;gap:6px;margin:4px 0;flex-wrap:wrap"><b style="width:90px">'+q[0]+'</b><button class="btn" data-q="'+i+'" data-v="1">'+q[1][0]+'</button><button class="btn" data-q="'+i+'" data-v="0">'+q[2][0]+'</button></div>').join('');
+ function upd(){const n=Object.keys(sc).length,g=Object.values(sc).filter(v=>v===1).length;const p=n?Math.round((g+ (5-n)*0.5)/5*100):50;$('cityK').style.width=p+'%';$('cityT').innerHTML=n<5?'اختر لكل مجال':g===5?'🌍💚 مدينة خضراء رائعة! الهواء نقي والمخلوقات الحية بأمان.':g>=3?'👍 مدينة جيدة، لكن يمكنك أن تكون أفضل.':'⚠️ مدينتك ملوثة! جرّب قرارات أخرى.'}
+ $('city').querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const q=b.dataset.q,v=+b.dataset.v;sc[q]=v;$('city').querySelectorAll('[data-q="'+q+'"]').forEach(x=>{x.style.background=x===b?(v?'#dff5e7':'#fde4e4'):'#fff'});upd()});upd()})();
+(function(){const host=$('brevQ');let ok=0,dn=0;
+ const G=[['أي من الآتي مخلوق منتج؟',['كرنب','قطر (فطر)','فراشة','قوقع']],['عندما يتناول الإنسان وجبة من الأسماك آكلة اللحوم يعتبر في هذه الحالة',['مستهلكًا من الدرجة الثالثة','مخلوقًا محللًا','مستهلكًا أوليًا','منتجًا']],['المخلوقات الحية عند بداية سلسلة الغذاء',['تصنع السكر من المواد الخام','تتغذى على المادة النباتية','تتغذى على المخلوقات المحللة','تتغذى على مخلوق آخر']],['يُفقد عند انتقال الطاقة من مستوى غذائي إلى آخر نحو',['90%','10%','50%','لا شيء']],['المجموعة السكانية هي',['مخلوقات من نفس النوع في موطن واحد','كل المخلوقات في الغابة','الماء والهواء','نوع واحد في العالم كله']],['من البيئة غير الحيوية',['درجة الحرارة','الفطريات','الأعشاب','الطيور']],['المخلوقات التي تحلل الأجسام الميتة هي',['البكتيريا والفطريات','النباتات الخضراء','الصقور','الأرانب']],['ماذا يحدث غالبًا عند إزالة الضفادع من سلسلة (أعشاب ← جراد ← ضفادع)؟',['يتكاثر الجراد وتقل الأعشاب','تزداد الأعشاب كثيرًا','لا يتغير شيء','يموت الجراد فورًا']],['شبكة الغذاء هي',['عدة سلاسل غذاء متداخلة','سلسلة واحدة','نوع من النباتات','مكان يعيش فيه الحيوان']],['يتكيف الجمل مع الصحراء بقدرته على',['تحمل فقدان كمية كبيرة من الماء','العيش تحت الماء','الطيران','البيات الشتوي']]];
+ function upd(){$('brevSc').textContent=dn<G.length?'أجبت عن '+dn+' من '+G.length+' · صحيح: '+ok:(ok>=G.length-1?'🌟 ممتاز! ':ok>=G.length*.7?'👍 جيد جدًا! ':'💪 راجع الدروس وحاول مرة أخرى. ')+'النتيجة: '+ok+' من '+G.length}
+ function make(){host.innerHTML='';ok=0;dn=0;upd();G.slice().sort(()=>Math.random()-.5).forEach(([q,o],i)=>mcq(host,'<b>'+(i+1)+')</b> '+q,o,0,r=>{dn++;if(r)ok++;upd()}))}
+ $('brevNew').onclick=make;make()})();
+(function(){const N={air:[160,30,'☁️ CO₂ في الهواء'],pl:[50,120,'🌳 النباتات'],an:[160,160,'🐄 الحيوانات'],de:[270,120,'🍄 المحللات'],fu:[270,215,'🛢️ الوقود الأحفوري']};
+ const P=[['pl','air','an','🌿 البناء الضوئي','air','pl','النبات يمتص ثاني أكسيد الكربون ويصنع منه الجلوكوز بمساعدة ضوء الشمس.'],['💨 التنفس','pl','air','النباتات والحيوانات تتنفس فتطلق ثاني أكسيد الكربون إلى الهواء.'],['🍽️ التغذية','pl','an','الحيوان يأكل النبات، فينتقل الكربون إلى جسمه.'],['💀 الموت والتحلل','an','de','المحللات تحلل الأجسام الميتة فينطلق ثاني أكسيد الكربون.'],['🍄 تحلل المحللات','de','air','تتنفس البكتيريا والفطريات فتعيد الكربون إلى الهواء.'],['🔥 الاحتراق','fu','air','حرق الفحم والنفط والغاز يطلق ثاني أكسيد الكربون المخزّن منذ ملايين السنين.']].map(p=>p.length===7?p.slice(3):p);
+ let dot=null;function draw(){let s='<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10z" fill="#90a4ae"/></marker></defs>';
+  P.forEach(p=>{const a=N[p[1]],b=N[p[2]];s+='<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="#cfd8dc" stroke-width="3" marker-end="url(#ah)"/>'});
+  Object.values(N).forEach(n=>s+='<rect x="'+(n[0]-46)+'" y="'+(n[1]-15)+'" width="92" height="30" rx="15" fill="#fff" stroke="#2e9e5b" stroke-width="2"/><text x="'+n[0]+'" y="'+(n[1]+5)+'" text-anchor="middle" font-size="11" font-weight="800">'+n[2]+'</text>');
+  if(dot)s+='<circle cx="'+dot[0]+'" cy="'+dot[1]+'" r="9" fill="#212121" stroke="#fdd835" stroke-width="3"/><text x="'+dot[0]+'" y="'+(dot[1]+4)+'" text-anchor="middle" font-size="9" fill="#fff" font-weight="900">C</text>';$('cc').innerHTML=s}
+ const bx=$('ccB');P.forEach(p=>{const b=document.createElement('button');b.className='btn';b.style.fontSize='.85rem';b.textContent=p[0];b.onclick=()=>{bx.querySelectorAll('.btn').forEach(x=>x.classList.toggle('main',x===b));$('ccT').innerHTML='<b>'+p[0]+'</b><br>'+p[3];const a=N[p[1]],c=N[p[2]],t0=performance.now();(function st(n){const k=Math.min(1,(n-t0)/1200);dot=[a[0]+(c[0]-a[0])*k,a[1]+(c[1]-a[1])*k];draw();if(k<1)requestAnimationFrame(st)})(t0)};bx.appendChild(b)});draw()})();
+(function(){function upd(){const f=+$('gwF').value,t=+$('gwT').value,b=f-t;$('gwX').innerHTML=(b>25?'🌡️🔥 <b>كمية CO₂ في الهواء تزداد!</b> يحبس الحرارة مثل زجاج الصوبة، فترتفع حرارة الأرض (الاحترار الكوني).':b>-10?'⚖️ الدورة شبه متوازنة.':'🌳💚 الغابات تمتص CO₂ أكثر مما يُطلق. الهواء أنظف!')+'<br><span style="font-size:.85rem">نسبة CO₂ الطبيعية في الهواء حوالي 0.03% فقط.</span>'}$('gwF').oninput=$('gwT').oninput=upd;upd()})();
+(function(){const S=[['💨 النيتروجين في الهواء','الهواء فيه 78% نيتروجين (N₂)، لكن النباتات والحيوانات لا تستطيع استخدامه مباشرة.',[160,25]],['⚡ تثبيت النيتروجين بالبرق','طاقة البرق تجعل النيتروجين يتحد مع الأكسجين، فتتكوّن أكاسيد تذوب في المطر وتصير نترات في التربة.',[80,25]],['🫘 بكتيريا العقد الجذرية','في جذور النباتات البقولية (الفول واللوبيا) بكتيريا تثبّت النيتروجين الجوي وتحوله إلى نترات. علاقة تكافلية: الطرفان يستفيدان.',[80,170]],['🌱 امتصاص النترات','تمتص النباتات النترات من التربة بجذورها، وتصنع منها البروتينات.',[160,120]],['🐄 التغذية','الحيوانات تأكل النباتات، فيصير البروتين النباتي بروتينًا حيوانيًا.',[250,110]],['🍄 التحلل والنترتة','المحللات تحلل الأجسام الميتة إلى أمونيا، ثم بكتيريا النترتة تحول الأمونيا إلى نترات.',[250,180]],['🌬️ نزع النترتة','بكتيريا في التربة الفقيرة بالأكسجين تحول النترات إلى غاز نيتروجين يعود إلى الهواء، فتكتمل الدورة!',[160,190]]];let k=0;
+ function draw(){let s='<rect x="0" y="140" width="320" height="80" fill="#a1887f"/><rect x="0" y="0" width="320" height="140" fill="#e3f2fd"/><text x="160" y="125" font-size="44" text-anchor="middle">🌱</text><text x="250" y="125" font-size="36" text-anchor="middle">🐄</text><text x="80" y="40" font-size="26" text-anchor="middle">⛈️</text><text x="60" y="130" font-size="30" text-anchor="middle">🫘</text>';
+  S.forEach((p,i)=>s+='<circle cx="'+p[2][0]+'" cy="'+p[2][1]+'" r="'+(i===k?13:8)+'" fill="'+(i<=k?'#2e9e5b':'#bbb')+'" stroke="#fff" stroke-width="2"/><text x="'+p[2][0]+'" y="'+(p[2][1]+4)+'" text-anchor="middle" font-size="10" fill="#fff" font-weight="900">'+(i+1)+'</text>');
+  $('nc').innerHTML=s;$('ncT').innerHTML='<b>'+(k+1)+') '+S[k][0]+'</b><br>'+S[k][1]}$('ncN').onclick=()=>{k=Math.min(S.length-1,k+1);draw()};$('ncR').onclick=()=>{k=0;draw()};draw()})();
+quiz('qd2',[['أي بكتيريا تحول النترات إلى غاز نيتروجين يعود إلى الهواء؟',['بكتيريا نزع النترتة','بكتيريا النترتة','بكتيريا العقد الجذرية']],['أي بكتيريا تحول الأمونيا إلى نترات؟',['بكتيريا النترتة','بكتيريا نزع النترتة','الفطريات']],['أين توجد البكتيريا المثبتة للنيتروجين؟',['في العقد الجذرية للنباتات البقولية','في أوراق النبات','في الهواء']],['تمتص النباتات النيتروجين في صورة',['نترات','غاز نيتروجين','بروتين']],['لماذا يزرع المزارع الفول لتحسين التربة؟',['لأن بكتيريا العقد الجذرية تزيد النترات في التربة','لأن الفول يمتص النترات','لأن الفول لا يحتاج ماء']]]);
+(function(){let warm=1;function upd(){const w=+$('dcS').value;$('dcV').textContent=w;const r=warm?Math.min(1,w/8):Math.min(1,w/30);const items=['🍎','🍂','🐟'];
+ $('dcBox').innerHTML=items.map(e=>'<div style="text-align:center"><div style="font-size:'+(3-r*2.3)+'rem;opacity:'+(1-r*.85)+';filter:sepia('+r+') brightness('+(1-r*.4)+');transition:.3s">'+e+'</div><div style="font-size:'+(0.6+r*1.4)+'rem">'+(r>.2?'🍄🦠':'')+'</div></div>').join('')+'<div style="font-size:'+(1+r*1.5)+'rem">🌱</div>';
+ $('dcT').innerHTML=r<.1?'أجسام ميتة جديدة.':r<1?'المحللات تعمل… الأجسام تتحلل '+(warm?'بسرعة لأن الجو دافئ ورطب':'ببطء لأن الجو بارد وجاف')+'.':'✅ تحلّلت تمامًا! عادت المواد إلى التربة على شكل نترات وأملاح معدنية، وانطلق CO₂ إلى الهواء، فتستفيد منها النباتات الجديدة 🌱'}
+ document.querySelectorAll('[data-dc]').forEach(b=>b.onclick=()=>{warm=+b.dataset.dc;document.querySelectorAll('[data-dc]').forEach(x=>x.classList.toggle('main',x===b));upd()});$('dcS').oninput=upd;document.querySelector('[data-dc="1"]').classList.add('main');upd()})();
+(function(){const host=$('drevQ');let ok=0,dn=0;
+ const G=[['أي العمليات التالية تُطلق ثاني أكسيد الكربون إلى الغلاف الجوي؟',['تحلل المادة الميتة','البناء الضوئي','البرق والرعد','النترتة']],['أي العمليات التالية لا تعيد ثاني أكسيد الكربون إلى الغلاف الجوي؟',['البناء الضوئي','احتراق الوقود الأحفوري','التنفس','تحلل المادة الميتة']],['أي مما يلي يغير مركبات الأمونيوم إلى نترات؟',['بكتيريا النترتة','المخلوقات المستهلكة','المخلوقات المنتجة','بكتيريا نزع النترتة']],['أي مما يلي يحتوي على بكتيريا مثبتة للنيتروجين؟',['النباتات البقولية','الفطريات','نباتات البيئة الحمضية','الصبار']],['أي بكتيريا لا تشترك في تكوين النترات في التربة؟',['بكتيريا نزع النترتة','بكتيريا النترتة','بكتيريا العقد الجذرية','بكتيريا التثبيت']],['تحصل النباتات على النيتروجين من التربة في شكل',['نترات','غاز','بروتين','سكر']],['يزيد الاحتراق الكثيف للوقود من',['ثاني أكسيد الكربون في الهواء','الأكسجين في الهواء','النترات في التربة','عدد الغابات']],['المواد في المنظومة البيئية',['يُعاد تدويرها باستمرار','تُفقد بعد استخدامها','تأتي من الشمس','لا تتغير أبدًا']],['تحفظ الأطعمة في الثلاجة لأن البرودة',['تبطئ نشاط المحللات','تقتل كل البكتيريا','تزيد التحلل','تحول الطعام إلى نترات']],['نسبة النيتروجين في الهواء تقريبًا',['78%','21%','0.03%','50%']]];
+ function upd(){$('drevSc').textContent=dn<G.length?'أجبت عن '+dn+' من '+G.length+' · صحيح: '+ok:(ok>=G.length-1?'🌟 ممتاز! ':ok>=G.length*.7?'👍 جيد جدًا! ':'💪 راجع الدروس وحاول مرة أخرى. ')+'النتيجة: '+ok+' من '+G.length}
+ function make(){host.innerHTML='';ok=0;dn=0;upd();G.slice().sort(()=>Math.random()-.5).forEach(([q,o],i)=>mcq(host,'<b>'+(i+1)+')</b> '+q,o,0,r=>{dn++;if(r)ok++;upd()}))}
+ $('drevNew').onclick=make;make()})();
+</script>
+<script>window.NARR=["b4", "c1", "h3", "b3", "v2", "d2", "k1", "b1", "vrev", "k2", "c5", "v3", "e1", "v6", "b2", "e2", "v4", "rev", "drev", "h2", "h5", "h1", "e3", "v5", "c4", "krev", "d1", "k4", "c7", "c6", "c3", "h4", "k3", "brev", "v1", "rev2", "e4", "rev3", "d3", "c2"];window.AUDIO_BASE="audio-s/";</script>
+<style>
+.fxbar{position:fixed;left:10px;bottom:10px;z-index:90;display:flex;gap:6px}
+.fxbar button{width:46px;height:46px;border-radius:50%;border:none;background:#1f2a44;color:#fff;font-size:1.3rem;box-shadow:0 4px 12px #0004;cursor:pointer}
+.say{border:2px solid #f08c2e;background:#fff7e8;color:#b35b00;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.9rem;margin:0 6px;vertical-align:middle;font-family:inherit}
+.say.on{background:#f08c2e;color:#fff;animation:pul 1s infinite}
+@keyframes pul{50%{transform:scale(1.06)}}
+.cfx{position:fixed;pointer-events:none;z-index:95;font-size:20px;animation:cf 1.1s ease-out forwards}
+@keyframes cf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+.pop{animation:popk .35s}
+@keyframes popk{50%{transform:scale(1.08)}}
+.shk{animation:shk .4s}
+@keyframes shk{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.stars{position:fixed;bottom:16px;left:62px;background:#1f2a44;color:#fff;border-radius:20px;padding:3px 14px;font-weight:900;z-index:91;font-family:inherit;transition:.3s}
+</style>
+<div class="fxbar"><button id="fxMute" title="الأصوات">🔊</button></div>
+<div class="stars" id="fxStars">⭐ 0</div>
+<script>
+(function(){let AC=null,mute=false,stars=0;try{mute=localStorage.getItem('lb_mute')==='1';stars=+localStorage.getItem('lb_stars_'+location.pathname)||0}catch(e){}
+ const mb=document.getElementById('fxMute');const sb=document.getElementById('fxStars');const upd=()=>{mb.textContent=mute?'🔇':'🔊';sb.textContent='⭐ '+stars};upd();
+ mb.onclick=()=>{mute=!mute;try{localStorage.setItem('lb_mute',mute?'1':'0')}catch(e){}upd();if(mute&&cur){cur.pause();cur=null;document.querySelectorAll('.say.on').forEach(b=>b.classList.remove('on'))}};
+ function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC}
+ function tone(f,t0,d,type,v){const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,a.currentTime+t0);g.gain.setValueAtTime(0,a.currentTime+t0);g.gain.linearRampToValueAtTime(v||.18,a.currentTime+t0+.015);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+t0+d);o.connect(g);g.connect(a.destination);o.start(a.currentTime+t0);o.stop(a.currentTime+t0+d+.05)}
+ const S={ok:()=>{tone(523,0,.15,'triangle');tone(659,.09,.15,'triangle');tone(784,.18,.3,'triangle')},no:()=>{tone(220,0,.18,'sawtooth',.08);tone(185,.12,.25,'sawtooth',.08)},tick:()=>tone(900,0,.04,'square',.03),win:()=>{[523,659,784,1046,784,1046].forEach((f,i)=>tone(f,i*.1,.22,'triangle'))},whoosh:()=>{const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.frequency.setValueAtTime(300,a.currentTime);o.frequency.exponentialRampToValueAtTime(1200,a.currentTime+.25);g.gain.setValueAtTime(.06,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.3);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.32)}};
+ window.FX=S;
+ function confetti(el,big){const r=el&&el.getBoundingClientRect?el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};const E=['⭐','✨','🎉','💚','🌟','🎊'];const n=big?26:9;
+  for(let i=0;i<n;i++){const s=document.createElement('div');s.className='cfx';s.textContent=E[i%E.length];s.style.left=(r.left+r.width/2)+'px';s.style.top=(r.top+r.height/2)+'px';const a=Math.random()*6.28,d=(big?160:70)+Math.random()*80;s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',(Math.sin(a)*d-40)+'px');s.style.setProperty('--r',(Math.random()*720-360)+'deg');document.body.appendChild(s);setTimeout(()=>s.remove(),1200)}}
+ let last=0,lastNo=0;function hit(el,good){const now=Date.now();if(good){if(now-lastNo<400||now-last<250)return;last=now;S.ok();confetti(el);stars++;try{localStorage.setItem('lb_stars_'+location.pathname,stars)}catch(e){}upd();sb.classList.add('pop');setTimeout(()=>sb.classList.remove('pop'),400);el.classList&&el.classList.add('pop');setTimeout(()=>el.classList&&el.classList.remove('pop'),400);
+   if(stars%10===0){S.win();confetti(sb,true)}}else{lastNo=now;S.no();el.classList&&el.classList.add('shk');setTimeout(()=>el.classList&&el.classList.remove('shk'),450)}}
+ new MutationObserver(ms=>{ms.forEach(m=>{const t=m.target;if(!(t instanceof Element))return;if(m.type==='attributes'){const was=(m.oldValue||'').split(/\s+/);const c=t.classList;if(c.contains('ok')&&!was.includes('ok')&&(t.matches('button,input,.fb,.opt')))hit(t,true);else if(c.contains('no')&&!was.includes('no')&&t.matches('button,input,.opt'))hit(t,false)}})}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class'],attributeOldValue:true});
+ document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&!b.classList.contains('say')&&b.id!=='fxMute')S.tick()},true);
+ document.addEventListener('input',e=>{if(e.target.type==='range'){const n=Date.now();if(!window._lt||n-window._lt>90){window._lt=n;tone(400+(+e.target.value-+e.target.min)/(+e.target.max-+e.target.min+.001)*600,0,.03,'sine',.03)}}},true);
+ /* narration */
+ let cur=null;const base=window.AUDIO_BASE||'audio/';
+ function addSay(){document.querySelectorAll('.page').forEach(p=>{if(!(window.NARR||[]).includes(p.id))return;const h=p.querySelector('h2');if(!h||h.querySelector('.say'))return;const b=document.createElement('button');b.className='say';b.textContent='🔊 اسمع';
+  b.onclick=()=>{if(cur){cur.pause();const was=b.classList.contains('on');document.querySelectorAll('.say.on').forEach(x=>x.classList.remove('on'));cur=null;if(was)return}if(mute){mute=false;upd()}const a=new Audio(base+p.id+'.mp3');cur=a;b.classList.add('on');b.textContent='⏸️ إيقاف';a.onended=a.onerror=()=>{b.classList.remove('on');b.textContent='🔊 اسمع';cur=null};a.play().catch(()=>{b.classList.remove('on');b.textContent='🔊 اسمع'})};h.appendChild(b)})}
+ addSay();document.querySelectorAll('#bar button,[data-go]').forEach(b=>b.addEventListener('click',()=>{S.whoosh();if(cur){cur.pause();cur=null;document.querySelectorAll('.say').forEach(x=>{x.classList.remove('on');x.textContent='🔊 اسمع'})}}));
+})();
+</script>
+
+<script>(function(){function s(t,q){try{parent.postMessage(q?{lbt:t,qq:q}:{lbt:t},'*')}catch(e){}}
+var seen=new WeakSet();
+function qinfo(b,cb){setTimeout(function(){try{var G=b.parentElement,opts=[].slice.call(G.children).filter(function(x){return x.classList.contains('opt')});if(opts.length<2)return cb(null);
+ var p=G,qEl=null;for(var i=0;i<4&&p&&!qEl;i++){qEl=[].slice.call(p.children).filter(function(c){return !c.classList.contains('opt')&&!c.querySelector('.opt')&&!c.classList.contains('fb')&&!c.classList.contains('sc')&&c.textContent.trim().length>2})[0];if(!qEl)p=p.parentElement}
+ if(!qEl||qEl.querySelector('canvas,svg,img,input,table'))return cb(null);
+ var o=opts.map(function(x){return x.textContent.trim()}),r=-1,w=opts.indexOf(b);opts.forEach(function(x,i){if(x.classList.contains('ok'))r=i});
+ cb({q:qEl.textContent.replace(/\s+/g,' ').trim().replace(/^\d+\)\s*/,'').slice(0,300),o:o,r:r,w:w})}catch(e){cb(null)}},60)}
+new MutationObserver(function(ms){ms.forEach(function(m){
+ if(m.type==='attributes'){var t=m.target,c=t.classList,o=' '+(m.oldValue||'')+' ';
+  if((c.contains('ok')||c.contains('good'))&&!/ (ok|good) /.test(o)){if(c.contains('opt')&&!t.parentElement.querySelector('.opt.no'))qinfo(t,function(q){s('ok',q)});else s('ok')}
+  if((c.contains('no')||c.contains('bad'))&&!/ (no|bad) /.test(o)){if(c.contains('opt'))qinfo(t,function(q){s('no',q)});else s('no')}}
+ else m.addedNodes.forEach(function(n){if(n.nodeType===1&&n.tagName==='SPAN'&&!seen.has(n)){seen.add(n);if(n.classList.contains('ok'))s('ok');if(n.classList.contains('no'))s('no')}});
+})}).observe(document.documentElement,{attributes:true,subtree:true,attributeOldValue:true,attributeFilter:['class'],childList:true});
+document.addEventListener('click',function(){s('act')},true);})();</script>
+
+</body>
+</html>

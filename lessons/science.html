@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>كتاب العلوم الحي – الصف الثامن</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<meta name="color-scheme" content="light">
+<style>
+html{color-scheme:light}
+button,input,select{color:#2b2a33}
+
+:root{--paper:#fbf7ee;--ink:#2b2a33;--blue:#3b4fd8;--soft:#eef0fc;--yellow:#f6e58d;--green:#2e9e5b;--red:#d64545;--line:#d9d2c0}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Cairo',sans-serif;background:#7a5c3e url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M0 20h40' stroke='%23704f33' stroke-width='2'/%3E%3C/svg%3E");color:var(--ink);line-height:1.8}
+.book{max-width:820px;margin:16px auto;background:var(--paper);border-radius:10px;box-shadow:0 10px 40px #0007,inset 12px 0 20px -12px #0003;min-height:90vh;overflow:hidden}
+header{background:linear-gradient(135deg,#3b4fd8,#6c3bd8);color:#fff;padding:18px 20px;text-align:center}
+header h1{margin:0;font-size:1.5rem}
+header p{margin:4px 0 0;opacity:.9;font-size:.9rem}
+nav{display:flex;gap:6px;overflow-x:auto;padding:10px;background:#f1ead8;border-bottom:2px solid var(--line);position:sticky;top:0;z-index:5}
+nav button{flex:0 0 auto;border:2px solid var(--blue);background:#fff;color:var(--blue);border-radius:20px;padding:4px 14px;font-family:inherit;font-weight:700;cursor:pointer}
+nav button.on{background:var(--blue);color:#fff}
+.page{display:none;padding:18px 20px 30px;animation:turn .45s ease}
+.page.on{display:block}
+@keyframes turn{from{opacity:0;transform:perspective(900px) rotateY(-12deg)}to{opacity:1;transform:none}}
+.unit{color:#888;font-size:.8rem}
+h2{color:var(--blue);margin:2px 0 8px;display:flex;align-items:center;gap:8px}
+h2 .n{background:var(--blue);color:#fff;width:32px;height:32px;border-radius:50%;display:inline-grid;place-items:center;font-size:1rem}
+.box{border:2px solid var(--ink);border-radius:12px;padding:12px;margin:14px 0;background:#fff}
+.lab{background:#fffdf6;border:2px dashed #8a7a55}
+.lab h3,.box h3{margin:0 0 8px;font-size:1rem}
+.note{background:var(--yellow);padding:8px 12px;border-radius:8px;transform:rotate(-1deg);display:inline-block;font-size:.9rem;box-shadow:2px 3px 0 #0002}
+.big{font-size:1.5rem;font-weight:800;color:var(--blue);text-align:center;border:2px solid var(--blue);border-radius:10px;padding:6px;background:var(--soft)}
+input[type=range]{width:100%;accent-color:var(--blue)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.btn{border:2px solid var(--ink);background:#fff;border-radius:8px;padding:4px 12px;font-family:inherit;font-weight:600;cursor:pointer}
+.btn:active{transform:scale(.96)}
+.btn.main{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn.warn{border-color:var(--red);color:var(--red)}
+.opt{display:block;width:100%;text-align:right;margin:5px 0}
+.opt.ok{background:#dff5e7;border-color:var(--green)}
+.opt.no{background:#fde4e4;border-color:var(--red)}
+.fb{margin-top:6px;font-weight:600;min-height:1em}
+.reveal{display:none;background:var(--soft);border-radius:8px;padding:8px;margin-top:8px}
+.score{text-align:center;font-weight:800;background:#f1ead8;padding:8px;border-radius:10px}
+/* density */
+.beaker{position:relative;height:220px;width:200px;margin:10px auto;border:4px solid #555;border-top:none;border-radius:0 0 18px 18px;overflow:hidden;background:#fff}
+.water{position:absolute;bottom:0;left:0;right:0;height:70%;background:linear-gradient(#8fd3ff,#3a9bdc);opacity:.75}
+.obj{position:absolute;left:50%;width:60px;height:60px;margin-left:-30px;border-radius:6px;transition:bottom 1s cubic-bezier(.3,1.4,.5,1),background .3s;display:grid;place-items:center;font-size:.75rem;color:#fff;font-weight:700;z-index:2}
+/* motion */
+.track{position:relative;height:110px;background:repeating-linear-gradient(90deg,#666 0 18px,#777 18px 36px);border-radius:8px;margin:8px 0;direction:ltr}
+.lane{position:absolute;left:0;right:0;height:50%;border-bottom:2px dashed #fff8}
+.lane:nth-child(2){top:50%;border:none}
+.car{position:absolute;left:0;font-size:34px;transform:scaleX(-1);top:4px}
+.car.b{top:58px}
+.finish{position:absolute;right:6px;top:0;bottom:0;width:10px;background:repeating-linear-gradient(#000 0 10px,#fff 10px 20px)}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+td,th{border:1px solid var(--line);padding:4px;text-align:center}
+/* cell */
+svg .part{cursor:pointer;transition:filter .2s}
+svg .part:hover,svg .part.sel{filter:drop-shadow(0 0 4px #3b4fd8)}
+.cover{text-align:center;padding:30px 10px}
+.cover .ico{font-size:4rem}
+.toc a{display:block;padding:10px;margin:6px 0;border:2px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);font-weight:700;background:#fff}
+.toc a span{color:#888;font-weight:400;font-size:.85rem}
+footer{text-align:center;font-size:.8rem;color:#888;padding:10px}
+</style>
+<style>/*darkfix*/input,select,textarea,.cf,.M input.c{background-color:#fff !important;color:#1f2a44 !important;-webkit-text-fill-color:#1f2a44 !important;caret-color:#1f2a44}input.cf.ok{background-color:#eefaf2 !important}input.cf.no{background-color:#fdeeee !important}svg text{font-family:Cairo,Tahoma,Arial,sans-serif}</style>
+</head>
+<body>
+<div class="book">
+<header><h1>📗 كتاب العلوم الحي</h1><p>الصف الثامن – نسخة تجريبية تفاعلية</p></header>
+<nav id="nav">
+  <button data-p="p0" class="on">الفهرس</button>
+  <button data-p="cl">خلايا جسمي</button>
+  <button data-p="rv">مراجعة الخلية</button>
+  <button data-p="ln">قياس الطول</button>
+  <button data-p="bd">الروابط الكيميائية</button>
+  <button data-p="ar">الكتل الذرية</button>
+  <button data-p="os">الأسموزية</button>
+  <button data-p="os2">الأسموزية في الخلايا</button>
+  <button data-p="sy">الأجهزة</button>
+  <button data-p="p1">الصوت</button>
+  <button data-p="p2">الكثافة</button>
+  <button data-p="p3">السرعة</button>
+  <button data-p="p4">الخلية</button>
+  <button data-p="p5">مراجعة</button>
+</nav>
+
+<!-- COVER -->
+<section class="page on" id="p0">
+  <div class="cover"><div class="ico">🔬</div>
+  <h2 style="justify-content:center">تعلّم العلوم بالتجربة</h2>
+  <p>في كل درس: <b>شرح مختصر</b> + <b>مختبر تفاعلي</b> + <b>توقّع ثم اكتشف</b> + <b>سؤال تحقّق</b>.</p></div>
+  <div class="toc">
+    <a href="#" data-go="cl" style="border-color:#d64545;background:#fdeeee">🧬 خلايا جسمي <span>– مختلفة في الشكل والحجم والوظيفة (ص 30–31)</span></a>
+    <a href="#" data-go="rv" style="border-color:#d14d8f;background:#fdeef6">🎯 مراجعة: الخلية <span>– المصطلحات العلمية + صح أو خطأ (40 سؤالًا)</span></a>
+    <a href="#" data-go="ln" style="border-color:#1f78d1;background:#eef5fd">📏 1-3 قياس الطول <span>– القدمة ذات الورنية (ص 10–11 من كتابك)</span></a>
+    <a href="#" data-go="bd" style="border-color:#8e3b6b;background:#fbeff6">⚛️ الروابط الكيميائية <span>– أسئلة الفصل وركن التفكير (من كتابك)</span></a>
+    <a href="#" data-go="ar" style="border-color:#3b4fd8;background:#eef0fc">🧮 الكتل الذرية النسبية <span>– جدول بحث + حاسبة الكتلة الجزيئية</span></a>
+    <a href="#" data-go="os" style="border-color:#2e9e5b;background:#eefaf2">💧 الفصل الرابع: الأسموزية <span>– من صفحة كتابك (شكل 4-4)</span></a>
+    <a href="#" data-go="os2" style="border-color:#2e9e5b;background:#eefaf2">🧫 الفصل الرابع: الأسموزية في الخلايا الحية <span>– ص 76–77 من كتابك</span></a>
+    <a href="#" data-go="sy" style="border-color:#e0864a;background:#fff3ea">⚙️ الموضوع 3: الأجهزة <span>– من صفحة كتابك</span></a>
+    <a href="#" data-go="p1">🔊 الدرس 1: مدى السمع <span>– مولّد صوت حقيقي</span></a>
+    <a href="#" data-go="p2">🧊 الدرس 2: الكثافة والطفو <span>– هل يطفو الجسم أم يغوص؟</span></a>
+    <a href="#" data-go="p3">🚗 الدرس 3: السرعة والمسافة والزمن <span>– سباق سيارات</span></a>
+    <a href="#" data-go="p4">🦠 الدرس 4: الخلية النباتية والحيوانية <span>– استكشف أجزاء الخلية</span></a>
+    <a href="#" data-go="p5">📝 مراجعة الوحدة <span>– اختبر نفسك</span></a>
+  </div>
+</section>
+
+<!-- CELL TYPES -->
+<section class="page" id="cl">
+  <div class="unit">الدورات – ص 30–31</div>
+  <h2><span class="n" style="background:#d64545">🧬</span> خلايا جسمي: مختلفة في الشكل والحجم والوظيفة</h2>
+  <p>تتكوّن أجسامنا من أنواع مختلفة من الخلايا، ولكل نوع وظيفة. تعمل الخلايا في مجموعات، مثل تلك الموجودة في القلب والدماغ، فهي تُشكّل أعضاء الجسم. وتتحرك خلايا أخرى، مثل كريات الدم الحمراء والبيضاء، داخل الجسم لتقوم بوظيفتها.</p>
+
+  <div class="box lab">
+    <h3>🔍 مختبر: اضغط على أي نقطة في الجسم لترى خلاياها</h3>
+    <div style="display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;justify-content:center">
+      <svg viewBox="0 0 200 380" style="width:150px;flex:0 0 auto;direction:ltr">
+        <circle cx="100" cy="48" r="34" fill="#f1c9a5"/><path d="M68 40 Q100 0 132 40 Q120 22 100 22 Q80 22 68 40Z" fill="#3a2a20"/>
+        <rect x="88" y="78" width="24" height="16" fill="#f1c9a5"/>
+        <path d="M58 96 Q100 86 142 96 L150 210 L50 210 Z" fill="#f5b041"/>
+        <rect x="34" y="98" width="20" height="100" rx="10" fill="#e8eef7"/><rect x="146" y="98" width="20" height="100" rx="10" fill="#e8eef7"/>
+        <rect x="58" y="206" width="38" height="140" rx="12" fill="#2b2a33"/><rect x="104" y="206" width="38" height="140" rx="12" fill="#2b2a33"/>
+        <ellipse cx="74" cy="352" rx="24" ry="10" fill="#111"/><ellipse cx="126" cy="352" rx="24" ry="10" fill="#111"/>
+        <g class="hot" data-c="neuron"><circle cx="100" cy="40" r="11" fill="#e53935"/><circle cx="100" cy="40" r="11" fill="none" stroke="#e53935" stroke-width="3"><animate attributeName="r" values="11;22;11" dur="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;1" dur="1.6s" repeatCount="indefinite"/></circle></g>
+        <g class="hot" data-c="gland"><circle cx="120" cy="58" r="9" fill="#2a8fd6"/><circle cx="120" cy="58" r="9" fill="none" stroke="#2a8fd6" stroke-width="3"><animate attributeName="r" values="9;19;9" dur="1.6s" begin=".4s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;1" dur="1.6s" begin=".4s" repeatCount="indefinite"/></circle></g>
+        <g class="hot" data-c="heart"><circle cx="112" cy="130" r="10" fill="#c2185b"/><circle cx="112" cy="130" r="10" fill="none" stroke="#c2185b" stroke-width="3"><animate attributeName="r" values="10;21;10" dur="1.6s" begin=".8s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;1" dur="1.6s" begin=".8s" repeatCount="indefinite"/></circle></g>
+        <g class="hot" data-c="blood"><circle cx="123" cy="270" r="10" fill="#6b4fd8"/><circle cx="123" cy="270" r="10" fill="none" stroke="#6b4fd8" stroke-width="3"><animate attributeName="r" values="10;21;10" dur="1.6s" begin="1.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;1" dur="1.6s" begin="1.2s" repeatCount="indefinite"/></circle></g>
+      </svg>
+      <div style="flex:1;min-width:200px">
+        <div id="clPic" style="width:100%;max-width:240px;aspect-ratio:1;margin:auto;border-radius:50%;border:5px solid #ccc;overflow:hidden;background:#f5f5f5;display:grid;place-items:center;color:#999">👈 اختر نقطة</div>
+        <div id="clInfo" class="box" style="background:var(--soft);border-color:var(--blue);margin-top:8px">اضغط على النقاط الملوّنة في جسم الطالب.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box lab">
+    <h3>🎯 نشاط: كل خلية ووظيفتها</h3>
+    <div id="clMatch"></div>
+    <button class="btn main" id="clCheck" style="width:100%;margin-top:6px">✔️ تحقّق</button>
+    <div class="fb" id="clMsg" style="text-align:center"></div>
+  </div>
+
+  <div class="box" data-predict style="background:#eef7ff">
+    <h3>🐋🐜 من هنا وهناك: الحوت والنملة</h3>
+    <p>لا يمكنك أن ترى أي خلية بعينك المجردة. الحوت ضخم والنملة صغيرة جدًا… هل خلايا الحوت أكبر من خلايا النملة؟</p>
+    <div class="btns"><button class="btn">نعم، خلاياه أكبر</button><button class="btn">لا، لكن خلاياه أكثر عددًا</button></div>
+    <button class="btn main" style="width:100%">اكشف الإجابة</button>
+    <div class="reveal">✅ <b>لا يتكوّن الحوت من خلايا أكبر من خلايا النملة، لكنه يتكوّن من خلايا أكثر.</b>
+      <div style="display:flex;gap:12px;align-items:flex-end;justify-content:center;margin-top:8px;direction:ltr">
+        <div style="text-align:center"><div style="display:grid;grid-template-columns:repeat(3,12px);gap:2px"><i style="width:12px;height:12px;background:#c0392b;border-radius:3px"></i><i style="width:12px;height:12px;background:#c0392b;border-radius:3px"></i><i style="width:12px;height:12px;background:#c0392b;border-radius:3px"></i><i style="width:12px;height:12px;background:#c0392b;border-radius:3px"></i><i style="width:12px;height:12px;background:#c0392b;border-radius:3px"></i><i style="width:12px;height:12px;background:#c0392b;border-radius:3px"></i></div><small>🐜 خلايا قليلة</small></div>
+        <div style="text-align:center"><div id="whale" style="display:grid;grid-template-columns:repeat(18,12px);gap:2px"></div><small>🐋 نفس حجم الخلية… لكن عدد أكبر بكثير</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box lab">
+    <h3>🤝 عمل جماعي ومشاركة: أعضاء جسمك</h3>
+    <p style="margin:0">بالإضافة إلى القلب والدماغ، اضغط على كل ما هو <b>عضو حقيقي</b> في جسمك:</p>
+    <div class="btns" id="orgs"></div>
+    <div class="fb" id="orgMsg" style="text-align:center"></div>
+  </div>
+
+  <div class="quiz" data-q='[{"q":"ما وظيفة خلايا الدماغ (الخلايا العصبية)؟","o":["نقل الرسائل بين الدماغ وأجزاء الجسم","ضخ الدم","نقل الأكسجين"],"a":0,"e":"الخلايا العصبية لها فروع طويلة تنقل الرسائل بسرعة."},{"q":"أي الخلايا تتحرك داخل الجسم لتقوم بوظيفتها؟","o":["خلايا عضلة القلب","كريات الدم الحمراء والبيضاء","خلايا الدماغ"],"a":1,"e":"كريات الدم تسير مع الدم إلى كل أجزاء الجسم."},{"q":"لماذا يكون الحوت أكبر من النملة؟","o":["لأن خلاياه أكبر","لأن عدد خلاياه أكثر","لأن خلاياه مختلفة الشكل"],"a":1,"e":"حجم الخلايا متقارب، والفرق في عددها."}]'></div>
+</section>
+
+<!-- CELL REVIEW -->
+<section class="page" id="rv">
+  <div class="unit">أوراق المراجعة – الخلية</div>
+  <h2><span class="n" style="background:#d14d8f">🎯</span> مراجعة الخلية</h2>
+  <div class="btns"><button class="btn main" id="rvT1">📝 س4: المصطلح العلمي</button><button class="btn" id="rvT2">✔️✖️ س3: صح أو خطأ</button></div>
+
+  <div id="rvA" class="box lab">
+    <h3>📝 اختر المصطلح العلمي المناسب</h3>
+    <div style="height:10px;background:#eee;border-radius:6px;overflow:hidden"><div id="tBar" style="height:100%;width:0;background:linear-gradient(90deg,#3b4fd8,#d14d8f);transition:width .3s"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:.85rem;color:#888"><span id="tNum"></span><span id="tSc"></span></div>
+    <div class="big" id="tDef" style="font-size:1.1rem;font-weight:700;min-height:90px;display:grid;place-items:center;line-height:1.7"></div>
+    <div id="tOpts"></div>
+    <div class="fb" id="tFb" style="text-align:center"></div>
+    <div class="btns"><button class="btn main" id="tNext" style="display:none;width:100%">التالي ←</button></div>
+  </div>
+
+  <div id="rvB" class="box lab" style="display:none">
+    <h3>✔️✖️ ضع علامة صح أو خطأ – وصحّح الخطأ</h3>
+    <div class="score" id="tfSc">0 من 0</div>
+    <div id="tfList"></div>
+  </div>
+</section>
+
+<!-- LENGTH -->
+<section class="page" id="ln">
+  <div class="unit">1-3 Measurement of Length</div>
+  <h2><span class="n">📏</span> قياس الطول</h2>
+  <div class="big" style="font-size:1.1rem">وحدة الطول في النظام الدولي هي المتر (m)</div>
+  <p>عند قياس الطول يجب اختيار أداة مناسبة للطول المراد قياسه:</p>
+  <table>
+    <tr><th>الطول المراد قياسه</th><th>الأداة المناسبة</th><th>دقة القياس</th></tr>
+    <tr><td>عدة أمتار</td><td>شريط القياس</td><td>0.1 cm</td></tr>
+    <tr><td>من 10 cm إلى 1 m</td><td>المسطرة المترية أو نصف متر</td><td>0.1 cm</td></tr>
+    <tr><td>من 1 cm إلى 10 cm</td><td>القدمة ذات الورنية</td><td>0.01 cm</td></tr>
+    <tr><td>أقل من 2 cm</td><td>الميكرومتر</td><td>0.001 cm (0.01 mm)</td></tr>
+  </table>
+
+  <div class="box">
+    <h3>🎯 نشاط: اختر الأداة المناسبة</h3>
+    <div id="toolBox"></div>
+    <div class="fb" id="toolScore" style="text-align:center"></div>
+  </div>
+
+  <h3 style="color:var(--blue)">👁️ المسطرة المترية وخطأ النظر</h3>
+  <p>عند القراءة يجب أن تكون العين <b>فوق علامة القياس مباشرة</b> (عمودية على المسطرة)، وإلا ظهرت القراءة أكبر أو أصغر من الحقيقة (شكل 1-3 و1-4). وإذا كانت بداية المسطرة متآكلة، نبدأ القياس من علامة 1 cm ثم نطرحها من القراءة.</p>
+  <div class="box lab">
+    <h3>🧪 مختبر: حرّك عينك</h3>
+    <svg viewBox="0 0 300 170" style="width:100%;max-width:380px;display:block;margin:auto;direction:ltr">
+      <text id="eye" x="150" y="28" text-anchor="middle" font-size="26">👁️</text>
+      <line id="sight" x1="150" y1="34" x2="150" y2="120" stroke="#1f78d1" stroke-width="2" stroke-dasharray="4 3"/>
+      <rect x="40" y="80" width="114" height="22" fill="#e57b4c" opacity=".85"/>
+      <text x="97" y="96" text-anchor="middle" font-size="10" fill="#fff" font-family="Cairo">الجسم</text>
+      <rect x="20" y="104" width="260" height="34" fill="#f8c9a6" stroke="#b5683c"/>
+      <g id="rulerTicks"></g>
+    </svg>
+    <input type="range" id="eyeS" min="-60" max="60" value="35">
+    <div class="big" id="eyeRead"></div>
+    <div class="fb" id="eyeMsg" style="text-align:center"></div>
+  </div>
+
+  <h3 style="color:var(--blue)">🔧 القدمة ذات الورنية</h3>
+  <p>تقيس القدمة ذات الورنية بدقة <b>0.01 cm</b> (0.1 mm). لها <b>فكّان خارجيان</b> لقياس الأقطار الخارجية، و<b>فكّان داخليان</b> لقياس الأقطار الداخلية للأنابيب، و<b>ذراع</b> لقياس الأعماق.</p>
+  <div class="box" style="background:#fdf6c9;border-color:#b9a640">
+    <h3>📒 خطوات القراءة (شكل 1-6)</h3>
+    <ol style="margin:0;padding-right:20px">
+      <li>أغلق الفكين الخارجيين على الجسم (مثل كرة صغيرة).</li>
+      <li>اقرأ <b>التدريج الثابت</b> قبل صفر الورنية مباشرة، مثلًا <b>31 mm</b>.</li>
+      <li>ابحث عن خط <b>الورنية</b> الذي ينطبق تمامًا على خط من التدريج الثابت، مثلًا الخط <b>4</b> فتكون القيمة <b>0.4 mm</b>.</li>
+      <li>القراءة = التدريج الثابت + الورنية = 31 + 0.4 = <b>31.4 mm = 3.14 cm</b></li>
+    </ol>
+  </div>
+
+  <div class="box lab">
+    <h3>🧪 مختبر: اقرأ القدمة ذات الورنية</h3>
+    <p style="font-size:.9rem">الصورة مكبّرة: فوق التدريج الثابت (mm)، وتحته الورنية (10 أقسام).</p>
+    <div style="overflow-x:auto"><svg id="vern" viewBox="0 0 300 120" style="width:100%;min-width:300px;display:block;direction:ltr;background:#fff;border:2px solid #ccc;border-radius:8px"></svg></div>
+    <div class="btns" style="align-items:center">
+      <label>التدريج الثابت: <input id="vMain" type="number" inputmode="numeric" style="width:60px;font-family:inherit" placeholder="mm"></label>
+      <label>خط الورنية المنطبق: <input id="vVer" type="number" inputmode="numeric" min="0" max="9" style="width:50px;font-family:inherit" placeholder="0-9"></label>
+    </div>
+    <div class="btns">
+      <button class="btn main" id="vCheck">✔️ تحقّق</button>
+      <button class="btn" id="vHint">💡 تلميح</button>
+      <button class="btn" id="vNew">🔄 جسم جديد</button>
+    </div>
+    <div class="fb" id="vMsg"></div>
+    <div class="score" id="vScore">قراءات صحيحة: 0</div>
+  </div>
+
+  <div class="box">
+    <h3>🔩 الميكرومتر (القياس ذو اللولب)</h3>
+    <p>يقيس أطوالًا حتى <b>25 mm</b> بدقة <b>0.01 mm</b> (0.001 cm)، ويُستخدم لقياس الأطوال الصغيرة جدًا مثل قطر سلك رفيع أو سُمك ورقة (شكل 1-7 و1-8).</p>
+  </div>
+
+  <div class="quiz" data-q='[{"q":"وحدة الطول في النظام الدولي:","o":["السنتيمتر","المتر","الكيلومتر"],"a":1,"e":"المتر (m) هو وحدة الطول في النظام الدولي."},{"q":"أنسب أداة لقياس قطر سلك كهربائي رفيع:","o":["شريط القياس","المسطرة المترية","الميكرومتر"],"a":2,"e":"الميكرومتر يقيس حتى 0.01 mm وهو مناسب للأطوال الصغيرة جدًا."},{"q":"التدريج الثابت 24 mm وخط الورنية المنطبق هو 7. القراءة:","o":["24.7 mm","31 mm","2.47 mm"],"a":0,"e":"24 + 0.7 = 24.7 mm = 2.47 cm."},{"q":"لتجنب خطأ النظر عند استخدام المسطرة يجب أن تكون العين:","o":["فوق علامة القياس مباشرة","على يمين العلامة","بعيدة عن المسطرة"],"a":0,"e":"النظر المائل يُظهر قراءة أكبر أو أصغر من الحقيقة."}]'></div>
+</section>
+
+<!-- BONDING -->
+<section class="page" id="bd">
+  <div class="unit">الروابط الكيميائية – تمارين الفصل</div>
+  <h2><span class="n" style="background:#8e3b6b">⚛️</span> الروابط الكيميائية: تدرّب وفكّر</h2>
+
+  <div class="box lab">
+    <h3>🔬 سؤال 13: ارسم التركيب الإلكتروني (طريقة النقط والعلامات ×)</h3>
+    <p style="font-size:.9rem">الأعداد الذرية: C=6، Cl=17، N=7، F=9، H=1. اختر الجزيء، وفكّر أولًا كم إلكترونًا في المدار الخارجي لكل ذرة، ثم اعرض الرسم.</p>
+    <div class="btns" id="molBtns">
+      <button class="btn" data-m="HF">(أ) فلوريد الهيدروجين HF</button>
+      <button class="btn" data-m="F2">(ب) الفلور F₂</button>
+      <button class="btn" data-m="CCl4">(ج) رابع كلوريد الكربون CCl₄</button>
+      <button class="btn" data-m="HCl">(د) كلوريد الهيدروجين HCl</button>
+      <button class="btn" data-m="CO2">(هـ) ثاني أكسيد الكربون CO₂</button>
+    </div>
+    <div id="molConf" class="note" style="display:block;transform:none;margin:6px 0"></div>
+    <button class="btn main" id="molShow" style="width:100%">👁️ اعرض الرسم</button>
+    <svg id="molSvg" viewBox="0 0 300 220" style="width:100%;max-width:380px;display:block;margin:8px auto;direction:ltr;background:#fff;border-radius:10px"></svg>
+    <div class="fb" id="molMsg" style="text-align:center"></div>
+  </div>
+
+  <div class="box lab">
+    <h3>🧠 ركن التفكير – المهارة: الاستنتاج</h3>
+    <p>الشبكة الأيونية في الشكل تتكون من أيونات <b style="color:#5f8fa8">b</b> وأيونات <b style="color:#e08a1e">a</b> متبادلة <b>بنسبة 1 : 1</b> (مثل كلوريد الصوديوم NaCl).</p>
+    <svg id="latSvg" viewBox="0 0 300 150" style="width:100%;max-width:340px;display:block;margin:auto;direction:ltr"></svg>
+    <p><b>استنتج أي المركبات الأيونية التالية لها شبكة كالمبينة؟</b> <small>(تلميح: اكتب شحنة كل أيون، ثم انظر هل يتحد أيون واحد مع أيون واحد)</small></p>
+    <div id="latBox"></div>
+    <div class="fb" id="latScore" style="text-align:center"></div>
+  </div>
+
+  <div class="box">
+    <h3>🟣 سؤال 15: السيزيوم (Cs) عنصر في المجموعة الأولى من الجدول الدوري</h3>
+    <div data-predict><p>(أ) كم عدد الإلكترونات في المدار الخارجي لذرّته؟</p><div class="btns"><button class="btn">1</button><button class="btn">2</button><button class="btn">7</button></div><button class="btn main" style="width:100%">اكشف</button><div class="reveal">✅ <b>إلكترون واحد</b>، مثل كل عناصر المجموعة الأولى (Li، Na، K).</div></div>
+    <div data-predict style="margin-top:10px"><p>(ب) اكتب رمز أيونه.</p><div class="btns"><button class="btn">Cs⁺</button><button class="btn">Cs⁻</button><button class="btn">Cs²⁺</button></div><button class="btn main" style="width:100%">اكشف</button><div class="reveal">✅ <b>Cs⁺</b> يفقد إلكترونه الخارجي فيصبح أيونًا موجبًا.</div></div>
+    <div data-predict style="margin-top:10px"><p>(ج) اكتب صيغة كلوريده.</p><div class="btns"><button class="btn">CsCl</button><button class="btn">CsCl₂</button><button class="btn">Cs₂Cl</button></div><button class="btn main" style="width:100%">اكشف</button><div class="reveal">✅ <b>CsCl</b>: الشحنة +1 مع −1.</div></div>
+    <div data-predict style="margin-top:10px"><p>(د) اكتب صيغة أكسيده.</p><div class="btns"><button class="btn">CsO</button><button class="btn">Cs₂O</button><button class="btn">CsO₂</button></div><button class="btn main" style="width:100%">اكشف</button><div class="reveal">✅ <b>Cs₂O</b>: أيون الأكسيد O²⁻ يحتاج أيونين Cs⁺ لتتعادل الشحنات.</div></div>
+  </div>
+
+  <div class="box lab">
+    <h3>📋 سؤال 17 (أ): أكمل الجدول</h3>
+    <div style="overflow-x:auto"><table id="t17"></table></div>
+    <button class="btn main" id="t17Check" style="width:100%;margin-top:8px">✔️ صحّح الجدول</button>
+    <div class="fb" id="t17Msg" style="text-align:center"></div>
+  </div>
+
+  <div class="box" data-predict>
+    <h3>🤔 سؤال 17 (ب)</h3>
+    <p>الكتلة الجزيئية النسبية لكلوريد الصوديوم <b>NaCl = 23 + 35.5 = 58.5</b>، وللبيوتان <b>C₄H₁₀ = (4×12) + (10×1) = 58</b>، أي متساوية تقريبًا. ومع ذلك درجة غليان كلوريد الصوديوم أعلى بكثير جدًا. كيف تفسّر ذلك؟</p>
+    <div class="btns"><button class="btn">لأن NaCl أثقل</button><button class="btn">لأن نوع الشبكة والقوى بين الجسيمات مختلف</button></div>
+    <button class="btn main" style="width:100%">اكشف الإجابة</button>
+    <div class="reveal">✅ <b>كلوريد الصوديوم</b> له شبكة أيونية عملاقة، ترتبط فيها الأيونات بقوى تجاذب كهربائية قوية جدًا تحتاج طاقة كبيرة لكسرها.<br><b>البيوتان</b> مركب جزيئي بسيط، والقوى بين جزيئاته ضعيفة جدًا يسهل التغلب عليها، فيغلي في درجة حرارة منخفضة.</div>
+  </div>
+
+  <div class="quiz" data-q='[{"q":"(سؤال 14) أي عنصرين يتحدان لتكوين مركب أيوني؟","o":["الصوديوم والكلور","الكربون والأكسجين","الكلور والأكسجين"],"a":0,"e":"فلز (Na) مع لافلز (Cl): ينتقل إلكترون فتتكون أيونات Na⁺ و Cl⁻."},{"q":"(سؤال 14) أي عنصرين يكوّنان مركبًا تساهميًا فيه روابط ثنائية؟","o":["المغنيسيوم والأكسجين","الكربون والأكسجين","الصوديوم والكلور"],"a":1,"e":"CO₂: يشارك الكربون كل ذرة أكسجين بزوجين من الإلكترونات."},{"q":"لماذا توصل الفلزات الكهرباء وهي صلبة؟","o":["لاحتوائها على إلكترونات حرة الحركة","لاحتوائها على جزيئات","لأن درجة انصهارها عالية"],"a":0,"e":"الشبكة الفلزية أيونات موجبة في بحر من الإلكترونات الحرة."}]'></div>
+</section>
+
+<!-- ATOMIC MASSES -->
+<section class="page" id="ar">
+  <div class="unit">ملحق: الكتل الذرية النسبية</div>
+  <h2><span class="n">🧮</span> الكتل الذرية النسبية <bdi dir="ltr">(A<sub>r</sub>)</bdi></h2>
+  <p>يبين الجدول الكتل الذرية النسبية ورموز العناصر، مقرّبة إلى رقم عشري واحد. وقيم الكتل الذرية النسبية للعناصر المشعة غير موضّحة (—).</p>
+
+  <div class="box lab">
+    <h3>🔎 ابحث عن عنصر</h3>
+    <input id="elSearch" placeholder="اكتب اسم العنصر أو رمزه… مثل: صوديوم أو Na" style="width:100%;padding:8px;font-family:inherit;border:2px solid var(--blue);border-radius:10px;font-size:1rem">
+    <div class="btns" style="margin-top:6px"><button class="btn main" data-sort="ar">ترتيب حسب الكتلة</button><button class="btn" data-sort="name">ترتيب أبجدي</button></div>
+    <div id="elGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:6px;max-height:340px;overflow-y:auto;padding:4px"></div>
+    <div class="fb" id="elInfo" style="text-align:center"></div>
+  </div>
+
+  <div class="box lab">
+    <h3>⚖️ حاسبة الكتلة الجزيئية (الصيغية) النسبية M<sub>r</sub></h3>
+    <p style="font-size:.9rem">اكتب الصيغة بالحروف الإنجليزية مع مراعاة الحروف الكبيرة والصغيرة، مثل: <b dir="ltr">NaCl</b> ، <b dir="ltr">C4H10</b> ، <b dir="ltr">H2SO4</b> ، <b dir="ltr">Ca(OH)2</b></p>
+    <input id="mrIn" dir="ltr" value="C4H10" style="width:100%;padding:8px;font-size:1.2rem;border:2px solid var(--blue);border-radius:10px;text-align:center">
+    <div class="btns" id="mrEx"></div>
+    <div class="big" id="mrOut" style="direction:ltr"></div>
+    <div id="mrWork" style="direction:ltr;text-align:center;font-size:.95rem;margin-top:6px"></div>
+  </div>
+
+  <div class="box">
+    <h3>✏️ تدرّب: احسب M<sub>r</sub> بنفسك</h3>
+    <p style="font-size:.9rem">استخدم الجدول أعلاه، واحسب الكتلة الجزيئية النسبية للمركب:</p>
+    <div class="big" id="prQ" style="direction:ltr"></div>
+    <div class="btns" style="justify-content:center"><input id="prIn" type="number" step="0.1" inputmode="decimal" style="width:110px;font-size:1.1rem;padding:4px;text-align:center"><button class="btn main" id="prCheck">✔️ تحقّق</button><button class="btn" id="prNext">التالي ⬅</button></div>
+    <div class="fb" id="prMsg" style="text-align:center"></div>
+    <div class="score" id="prScore">0 / 0</div>
+  </div>
+</section>
+
+<!-- OSMOSIS -->
+<section class="page" id="os">
+  <div class="unit">الفصل الرابع – الجزء الثالث: النماذج والأجهزة</div>
+  <h2><span class="n">💧</span> ماذا يحدث عند فصل محلولين مختلفي التركيز بغشاء شبه منفذ؟</h2>
+  <p>في الأنبوب محلولان <b>أ</b> و<b>ب</b> يفصل بينهما <b>غشاء شبه منفذ</b>. يحتوي المحلول أ على <b>10%</b> محلول سكروز، والمحلول ب على <b>5%</b>. يسمح الغشاء بمرور جزيئات الماء الصغيرة، ولا يسمح بمرور جزيئات السكروز الأكبر حجمًا.</p>
+  <div class="big" style="font-size:1.1rem">الأسموزية = صافي حركة جزيئات الماء من المحلول <u>الأقل</u> تركيزًا إلى المحلول <u>الأكثر</u> تركيزًا عبر غشاء شبه منفذ</div>
+
+  <div class="box" data-predict>
+    <h3>🔮 توقّع قبل التجربة</h3>
+    <p>عند ترك الأنبوب بعض الوقت، ماذا يحدث لمستوى المحلول أ (10%)؟</p>
+    <div class="btns"><button class="btn">يرتفع</button><button class="btn">ينخفض</button><button class="btn">يبقى كما هو</button></div>
+    <button class="btn main" style="width:100%">اكشف الإجابة</button>
+    <div class="reveal">✅ <b>يرتفع.</b> المحلول ب فيه جزيئات ماء أكثر، فيتدفق الماء منه إلى أ. شغّل المختبر وشاهد بنفسك.</div>
+  </div>
+
+  <div class="box lab">
+    <h3>🧪 مختبر: الأنبوب على شكل U (شكل 4-4)</h3>
+    <label>تركيز السكروز في <b>أ</b>: <b id="cAOut">10</b>%</label>
+    <input type="range" id="cA" min="0" max="20" value="10">
+    <label>تركيز السكروز في <b>ب</b>: <b id="cBOut">5</b>%</label>
+    <input type="range" id="cB" min="0" max="20" value="5">
+    <svg viewBox="0 0 300 250" style="width:100%;max-width:360px;display:block;margin:6px auto">
+      <defs><clipPath id="tubeClip"><path d="M40 20 V170 A110 70 0 0 0 260 170 V20 H200 V170 A50 30 0 0 1 100 170 V20 Z"/></clipPath></defs>
+      <g clip-path="url(#tubeClip)">
+        <rect id="liqB" x="0" y="120" width="150" height="200" fill="#f3e3a6"/>
+        <rect id="liqA" x="150" y="120" width="150" height="200" fill="#d7a088"/>
+      </g>
+      <path d="M40 20 V170 A110 70 0 0 0 260 170 V20 H200 V170 A50 30 0 0 1 100 170 V20 Z" fill="none" stroke="#444" stroke-width="3"/>
+      <line x1="150" y1="198" x2="150" y2="242" stroke="#7a2c2c" stroke-width="3" stroke-dasharray="5 3"/>
+      <text x="70" y="14" text-anchor="middle" font-weight="700" font-size="14">ب</text>
+      <text x="230" y="14" text-anchor="middle" font-weight="700" font-size="14">أ</text>
+      <text x="150" y="190" text-anchor="middle" font-size="9" fill="#7a2c2c">غشاء شبه منفذ</text>
+      <text id="arrow" x="150" y="248" text-anchor="middle" font-size="11" fill="#3b4fd8" font-weight="700"></text>
+    </svg>
+    <div class="btns"><button class="btn main" id="osRun">⏩ مرور الوقت</button><button class="btn" id="osReset">↺ إعادة</button></div>
+    <table>
+      <tr><th></th><th>المحلول أ</th><th>المحلول ب</th></tr>
+      <tr><td>تركيز السكروز</td><td id="tcA"></td><td id="tcB"></td></tr>
+      <tr><td>جزيئات السكروز</td><td id="tsA"></td><td id="tsB"></td></tr>
+      <tr><td>جزيئات الماء</td><td id="twA"></td><td id="twB"></td></tr>
+    </table>
+    <div class="fb" id="osMsg" style="text-align:center"></div>
+
+    <h3 style="margin-top:14px">🔍 منظر مكبّر عند الغشاء</h3>
+    <canvas id="osCan" width="300" height="190" style="width:100%;max-width:360px;display:block;margin:auto;border-radius:50%;border:3px solid #7a2c2c;background:#fff;direction:ltr"></canvas>
+    <p style="font-size:.85rem;text-align:center">⚪ صغيرة = جزيء ماء (يعبر الثقوب) &nbsp;|&nbsp; ⭕ كبيرة = جزيء سكروز (يرتد عن الغشاء)<br>عبر الغشاء: من ب إلى أ <b id="xBA">0</b> – من أ إلى ب <b id="xAB">0</b></p>
+  </div>
+
+  <div class="box" style="background:#fdf6c9;border-color:#b9a640">
+    <h3>📒 التفسير (من كتابك)</h3>
+    <p>تتوافر جزيئات ماء أكثر في المحلول ب، فتتدفق من ب (الأقل تركيزًا) إلى أ (الأكثر تركيزًا). يرتفع حجم أ وينخفض حجم ب إلى أن يتساوى التركيز فيتوقف التدفق.</p>
+    <div data-predict>
+      <p><b>(أ)</b> ماذا تستنتج عن عدد جزيئات <b>السكروز</b> في المحلولين عند بدء النشاط ونهايته؟</p>
+      <div class="btns"><button class="btn">زاد في أ</button><button class="btn">لم يتغير</button><button class="btn">نقص في ب</button></div>
+      <button class="btn main" style="width:100%">اكشف الإجابة</button>
+      <div class="reveal">✅ <b>لم يتغير</b> في أي من المحلولين، لأن السكروز لا يعبر الغشاء. لاحظ صف "جزيئات السكروز" في الجدول.</div>
+    </div>
+    <div data-predict style="margin-top:10px">
+      <p><b>(ب)</b> وماذا عن عدد جزيئات <b>الماء</b>؟</p>
+      <div class="btns"><button class="btn">زاد في أ ونقص في ب</button><button class="btn">زاد في ب ونقص في أ</button><button class="btn">لم يتغير</button></div>
+      <button class="btn main" style="width:100%">اكشف الإجابة</button>
+      <div class="reveal">✅ <b>زاد في أ ونقص في ب.</b><br><b>كيف تساوى التركيز؟</b> كمية السكروز ثابتة، لكن الماء زاد في أ فقلّ تركيزه، ونقص الماء في ب فزاد تركيزه، حتى أصبحا متساويين.</div>
+    </div>
+  </div>
+
+  <div class="quiz" data-q='[{"q":"لماذا لا تعبر جزيئات السكروز الغشاء شبه المنفذ؟","o":["لأنها كبيرة الحجم ولا تمر من ثقوبه","لأنها أثقل من الماء","لأنها تذوب في الماء"],"a":0,"e":"ثقوب الغشاء تسمح بمرور جزيئات الماء الصغيرة فقط."},{"q":"متى تتوقف الأسموزية بين المحلولين؟","o":["عندما يمتلئ الأنبوب","عندما يتساوى تركيز المحلولين","عندما يختفي السكروز"],"a":1,"e":"عند تساوي التركيز لا يوجد صافي حركة للماء في أي اتجاه."},{"q":"وضعنا ماءً نقيًا في ب ومحلول سكروز في أ. اتجاه صافي حركة الماء:","o":["من أ إلى ب","من ب إلى أ","لا يتحرك"],"a":1,"e":"الماء النقي هو الأقل تركيزًا، فيتحرك الماء منه إلى المحلول. جرّب ذلك بوضع ب = 0%."}]'></div>
+</section>
+
+<!-- OSMOSIS IN CELLS -->
+<section class="page" id="os2">
+  <div class="unit">الفصل الرابع – ص 76–77</div>
+  <h2><span class="n">🧫</span> الأسموزية في الخلايا الحية</h2>
+  <p>غشاء الخلية <b>غشاء شبه منفذ</b>، لذلك يدخل الماء إلى الخلية أو يخرج منها بالأسموزية حسب تركيز المحلول المحيط بها.</p>
+  <ul style="font-size:.95rem">
+    <li>الخلية <b>الحيوانية</b> في ماء مقطر: يدخل الماء، فتنتفخ إلى أن <b>تنفجر</b> في نهاية الأمر، لأنه لا يوجد جدار يحميها.</li>
+    <li>الخلية <b>النباتية</b> في ماء مقطر: يدخل الماء إلى عصارة الخلية فتصبح <b>مكتنزة</b> (ثابتة)، ويمنعها <b>الجدار السليلوزي</b> الصلب من الانفجار.</li>
+  </ul>
+
+  <div class="box" data-predict>
+    <h3>🔮 توقّع ثم اكتشف</h3>
+    <p>وضعنا خلية دم حمراء (حيوانية) في ماء مقطر. ماذا يحدث لها؟</p>
+    <div class="btns"><button class="btn">تنكمش</button><button class="btn">تنتفخ ثم تنفجر</button><button class="btn">لا يحدث شيء</button></div>
+    <button class="btn main" style="width:100%">اكشف الإجابة</button>
+    <div class="reveal">✅ <b>تنتفخ ثم تنفجر.</b> تركيز الماء خارج الخلية أعلى منه في السيتوبلازم، فيدخل الماء بالأسموزية ولا يوجد جدار يوقفها. جرّبها في المختبر.</div>
+  </div>
+
+  <div class="box lab">
+    <h3>🧪 مختبر: ضع الخلية في محلول (شكل 4-5)</h3>
+    <b>1) اختر الخلية:</b>
+    <div class="btns" id="cellType"><button class="btn main" data-t="a">🔴 خلية حيوانية</button><button class="btn" data-t="p">🟩 خلية نباتية</button></div>
+    <b>2) اختر المحلول:</b>
+    <div class="btns" id="medium"><button class="btn" data-m="w">💧 ماء مقطر (أقل تركيزًا)</button><button class="btn" data-m="i">⚖️ محلول مساوٍ</button><button class="btn" data-m="s">🧂 محلول مركّز (ملحي)</button></div>
+    <svg viewBox="0 0 300 200" style="width:100%;max-width:380px;display:block;margin:6px auto;direction:ltr">
+      <rect id="medBg" x="0" y="0" width="300" height="200" rx="14" fill="#e6f4ff"/>
+      <g id="animalG">
+        <circle id="aCell" cx="150" cy="100" r="50" fill="#e57373" stroke="#a83232" stroke-width="3"/>
+        <circle id="aNuc" cx="150" cy="100" r="16" fill="#a83232" opacity=".7"/>
+        <g id="burst" style="display:none"><text x="150" y="112" text-anchor="middle" font-size="44">💥</text></g>
+      </g>
+      <g id="plantG" style="display:none">
+        <rect x="70" y="40" width="160" height="120" rx="10" fill="none" stroke="#2e7d32" stroke-width="7"/>
+        <rect id="pMem" x="78" y="48" width="144" height="104" rx="8" fill="#c8e6c9" stroke="#e08a3c" stroke-width="2"/>
+        <rect id="pVac" x="105" y="68" width="90" height="64" rx="16" fill="#bfe3ff" stroke="#6aa9d8" stroke-width="2"/>
+        <circle id="pNuc" cx="95" cy="70" r="9" fill="#6b3fb0"/>
+      </g>
+      <text id="wArrow" x="150" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#1f6fb2" font-family="Cairo"></text>
+      <text id="cellLbl" x="150" y="192" text-anchor="middle" font-size="12" font-weight="700" fill="#333" font-family="Cairo"></text>
+    </svg>
+    <div class="fb" id="cellMsg" style="text-align:center">اختر محلولًا لتبدأ التجربة.</div>
+  </div>
+
+  <div class="box" style="background:#fdf6c9;border-color:#b9a640">
+    <h3>📒 الضغط الاكتنازي</h3>
+    <p>تضغط محتويات الخلية النباتية على الجدار، ويُعرف ضغط الماء داخل الفجوة العصارية بـ<b>الضغط الاكتنازي</b>. يحافظ هذا الضغط على ثبات الأنسجة الرقيقة في النبات ودعمها، ويجعل الأوراق منبسطة لتحصل على الضوء. وإذا فقدت الخلايا كميات كبيرة من الماء <b>يذبل</b> النبات.</p>
+  </div>
+
+  <div class="box lab">
+    <h3>🌿 مختبر: لماذا يذبل النبات؟ (شكل 4-6)</h3>
+    <label>💧 كمية الماء في التربة: <b id="soilOut">100</b>%</label>
+    <input type="range" id="soil" min="0" max="100" value="100">
+    <svg viewBox="0 0 300 220" style="width:100%;max-width:320px;display:block;margin:auto;direction:ltr">
+      <path d="M110 180 L190 180 L180 215 L120 215 Z" fill="#a0522d"/>
+      <rect x="105" y="172" width="90" height="10" rx="3" fill="#8b4513"/>
+      <path id="stem" d="M150 175 Q150 110 150 40" stroke="#5a8f2e" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <g id="leaves"></g>
+    </svg>
+    <div class="fb" id="soilMsg" style="text-align:center"></div>
+  </div>
+
+  <div class="box" style="background:#fdeef6;border-color:#d14d8f">
+    <h3>💡 هل تعلم؟ الأميبا والفجوة المنقبضة</h3>
+    <p>الأميبا مخلوق وحيد الخلية يعيش في الماء العذب، فيدخل الماء إليها باستمرار بالأسموزية. لديها <b>فجوة منقبضة</b> تتجمع فيها كميات الماء الزائدة، ثم تنقبض وتطردها إلى الخارج، وتتكرر العملية باستمرار. ويتم تبادل الغازات عبر غشاء سطح الخلية: يدخل الأكسجين وينتشر ثاني أكسيد الكربون إلى الخارج.</p>
+    <canvas id="amoeba" width="300" height="210" style="width:100%;max-width:360px;display:block;margin:auto;background:#f4fbff;border-radius:12px;direction:ltr"></canvas>
+    <div class="btns" style="justify-content:center"><button class="btn warn" id="cvBtn">⛔ عطّل الفجوة المنقبضة</button><button class="btn" id="amReset">↺ إعادة</button></div>
+    <div class="fb" id="amMsg" style="text-align:center"></div>
+  </div>
+
+  <div class="box" style="background:#fdeef6;border-color:#d14d8f">
+    <h3>💡 هل تعلم؟</h3>
+    <p>إذا أصبح شخص دائم الفقدان للماء، مثل مريض الكوليرا، فإنه يصاب بالجفاف وتتعرض حياته للخطر.</p>
+  </div>
+
+  <div class="quiz" data-q='[{"q":"لماذا لا تنفجر الخلية النباتية عند وضعها في ماء مقطر؟","o":["لأنها لا تمتص الماء","لأن الجدار السليلوزي الصلب يمنع تمددها","لأن فجوتها صغيرة"],"a":1,"e":"تصبح الخلية مكتنزة لكن الجدار الخلوي يحميها من الانفجار."},{"q":"ماذا يحدث لخلية نباتية في محلول ملحي مركّز؟","o":["تنتفخ","تفقد الماء وتنكمش محتوياتها بعيدًا عن الجدار","تنفجر"],"a":1,"e":"يخرج الماء منها بالأسموزية إلى المحلول الأكثر تركيزًا، فتنكمش الفجوة والسيتوبلازم."},{"q":"وظيفة الفجوة المنقبضة في الأميبا:","o":["هضم الغذاء","طرد الماء الزائد إلى الخارج","تبادل الغازات"],"a":1,"e":"بدونها يتجمع الماء الداخل بالأسموزية حتى تنفجر الخلية."},{"q":"يذبل النبات عندما:","o":["تفقد خلاياه كميات كبيرة من الماء","يحصل على ضوء كثير","تمتلئ فجواته بالماء"],"a":0,"e":"بفقدان الماء يقل الضغط الاكتنازي فلا تبقى الأنسجة ثابتة."}]'></div>
+</section>
+
+<!-- SYSTEMS -->
+<section class="page" id="sy">
+  <div class="unit">الموضوع 3</div>
+  <h2><span class="n" style="background:#e0864a">⚙️</span> الأجهزة</h2>
+  <p>يتكوّن الجسم البشري من <b>أجهزة</b> عديدة تعمل معًا لتمكّن الجسم من أداء وظائفه بشكل سليم. ويتكوّن كل جهاز من <b>أجزاء أو مكوّنات</b> مختلفة، ولكل جزء دور يقوم به في الجهاز.</p>
+
+  <div class="box lab">
+    <h3>💪 مختبر 1: العضلات تساعد أجزاء الجسم على الحركة</h3>
+    <p style="font-size:.9rem">حرّك المؤشر لثني الذراع، وراقب العضلة.</p>
+    <svg viewBox="0 0 300 190" style="width:100%;max-width:380px;display:block;margin:auto;direction:ltr">
+      <circle cx="40" cy="95" r="22" fill="#e9b99a"/>
+      <rect x="35" y="80" width="130" height="30" rx="15" fill="#f3cdb2"/>
+      <line x1="45" y1="100" x2="160" y2="100" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+      <ellipse id="bicep" cx="100" cy="80" rx="42" ry="11" fill="#c0392b" opacity=".85"/>
+      <g id="fore"><rect x="150" y="82" width="115" height="26" rx="13" fill="#f3cdb2"/><line x1="160" y1="96" x2="258" y2="96" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="270" cy="95" r="15" fill="#e9b99a"/></g>
+      <circle cx="160" cy="96" r="6" fill="#999"/>
+      <text x="100" y="180" text-anchor="middle" font-size="11" fill="#555" font-family="Cairo">عظم + عضلة + مفصل = جهاز الحركة</text>
+    </svg>
+    <input type="range" id="armS" min="0" max="120" value="0">
+    <div class="fb" id="armMsg" style="text-align:center">الذراع ممدودة – العضلة منبسطة</div>
+  </div>
+
+  <p>لدى <b>النباتات</b> أيضًا أجهزة مختلفة تساعدها على الحياة.</p>
+  <div class="box lab">
+    <h3>🌱 مختبر 2: جهاز النقل في النبات</h3>
+    <div class="btns"><button class="btn main" id="xyBtn">💧 الخشب</button><button class="btn" id="phBtn">🍃 اللحاء</button></div>
+    <canvas id="plantCan" width="300" height="260" style="width:100%;max-width:340px;display:block;margin:auto;background:#f4fbff;border-radius:10px"></canvas>
+    <div class="box" id="plantInfo" style="background:var(--soft);border-color:var(--blue)"></div>
+  </div>
+
+  <p>توجد كذلك في <b>الأشياء غير الحية</b> أجهزة تعمل أجزاؤها معًا لكي يؤدي الجهاز وظيفة معيّنة. عند وصل أجزاء لعبة الرافعة ببعضها تشكّل <b>جهازًا آليًا</b>. وعند اتصال أجزاء الهاتف ببعضها وتوصيلها بمأخذ الكهرباء يعمل <b>الجهاز الكهربائي</b>.</p>
+  <div class="box lab">
+    <h3>📱 مختبر 3: ركّب الهاتف النقال</h3>
+    <p style="font-size:.9rem">اضغط على الأجزاء لتركيبها أو فكّها. هل يعمل الهاتف بدون بطارية؟</p>
+    <div class="btns" id="phParts">
+      <button class="btn" data-k="cover">🛡️ الغطاء</button>
+      <button class="btn" data-k="screen">🖥️ الشاشة</button>
+      <button class="btn" data-k="keys">🔢 لوحة المفاتيح</button>
+      <button class="btn" data-k="board">🔌 اللوحة الإلكترونية</button>
+      <button class="btn" data-k="bat">🔋 البطارية</button>
+    </div>
+    <div style="display:flex;justify-content:center"><div id="phone" style="width:130px;height:230px;border:4px dashed #bbb;border-radius:18px;padding:10px;display:flex;flex-direction:column;gap:6px;transition:.3s">
+      <div id="ph-screen" style="height:70px;border-radius:6px;display:grid;place-items:center;font-size:.8rem"></div>
+      <div id="ph-keys" style="flex:1;border-radius:6px;display:grid;place-items:center;font-size:.8rem"></div>
+      <div id="ph-inner" style="font-size:.7rem;text-align:center"></div>
+    </div></div>
+    <div class="fb" id="phMsg" style="text-align:center"></div>
+  </div>
+
+  <div class="box">
+    <h3>🗂️ نشاط: صنّف الجهاز</h3>
+    <div id="sortBox"></div>
+    <div class="fb" id="sortScore" style="text-align:center"></div>
+  </div>
+
+  <div class="quiz" data-q='[{"q":"ما وظيفة أوعية الخشب في النبات؟","o":["نقل الغذاء من الأوراق","نقل الماء والأملاح المعدنية","صنع الغذاء"],"a":1,"e":"الخشب ينقل الماء والأملاح المعدنية، أما اللحاء فينقل الغذاء."},{"q":"ما الذي يحتاجه الهاتف النقال حتى يعمل بعد تركيب أجزائه؟","o":["الماء","الكهرباء","الضوء فقط"],"a":1,"e":"الهاتف جهاز كهربائي، لا يعمل إلا إذا اتصلت أجزاؤه ووصلت إليها الكهرباء."},{"q":"لعبة الرافعة المكوّنة من أجزاء متصلة هي مثال على:","o":["جهاز آلي","جهاز في كائن حي","جهاز كهربائي"],"a":0,"e":"عند وصل أجزاء اللعبة ببعضها تشكّل جهازًا آليًا."}]'></div>
+</section>
+
+<!-- SOUND -->
+<section class="page" id="p1">
+  <div class="unit">وحدة: الموجات والصوت</div>
+  <h2><span class="n">1</span> مدى السمع</h2>
+  <p>الصوت اهتزازات تنتقل في الهواء. يُقاس عدد الاهتزازات في الثانية بوحدة <b>الهيرتز (Hz)</b>، ويسمى <b>التردد</b>. يسمع الإنسان عادةً الأصوات من <b>20 Hz إلى 20 000 Hz</b> تقريبًا، ويقلّ الحد الأعلى مع التقدم في العمر.</p>
+  <div class="big">20 Hz ← 20 000 Hz<br><small style="font-size:.8rem;font-weight:400">مدى سمع الإنسان</small></div>
+  <p class="note">⚠️ اجعل مستوى الصوت منخفضًا ومريحًا</p>
+
+  <div class="box lab">
+    <h3>🧪 مختبر: مولّد الإشارة</h3>
+    <div class="big" id="freqOut">440 Hz</div>
+    <input type="range" id="freq" min="0" max="1000" value="447">
+    <div class="btns">
+      <button class="btn main" id="play">▶ تشغيل</button>
+      <button class="btn" data-f="100">100 Hz</button>
+      <button class="btn" data-f="2000">2000 Hz</button>
+      <button class="btn" data-f="10000">10 kHz</button>
+      <button class="btn" data-f="17000">17 kHz</button>
+    </div>
+    <p style="font-size:.9rem">اضغط تشغيل، ثم حرّك المؤشر ببطء لأعلى حتى يختفي الصوت.</p>
+    <div class="btns">
+      <button class="btn warn" id="hiBtn">لم أعد أسمع ↑ (حدّي الأعلى)</button>
+      <button class="btn warn" id="loBtn">لم أعد أسمع ↓ (حدّي الأدنى)</button>
+    </div>
+    <div id="myRange" class="fb"></div>
+    <p style="font-size:.8rem;color:#888">ملاحظة: سماعات الهاتف الصغيرة قد لا تُصدر الترددات المنخفضة جدًا، فقد يتوقف الصوت قبل حدّ أذنك الحقيقي.</p>
+  </div>
+
+  <div class="box" data-predict>
+    <h3>🔮 توقّع ثم اكتشف</h3>
+    <p>مدى أصوات البيانو (30–3500 Hz). هل هو أوسع من مدى سمع الإنسان أم أضيق؟</p>
+    <div class="btns"><button class="btn">أوسع</button><button class="btn">أضيق</button><button class="btn">مساوٍ له</button></div>
+    <button class="btn main" style="width:100%">اكشف الإجابة</button>
+    <div class="reveal">✅ <b>أضيق.</b> البيانو يغطي جزءًا صغيرًا فقط من المدى الذي تسمعه أذنك (20–20 000 Hz).</div>
+  </div>
+  <div class="quiz" data-q='[{"q":"ما المدى التقريبي لسمع الإنسان؟","o":["2 Hz – 2000 Hz","20 Hz – 20 000 Hz","200 Hz – 2 000 000 Hz"],"a":1,"e":"الأذن البشرية تسمع تقريبًا من 20 إلى 20 000 هيرتز."},{"q":"الأصوات التي يزيد ترددها عن 20 000 Hz تُسمى:","o":["أصواتًا تحت سمعية","أصواتًا فوق سمعية (فوق صوتية)","أصواتًا مرتفعة"],"a":1,"e":"فوق السمعية لا يسمعها الإنسان، لكن يسمعها الخفاش والدولفين، وتستخدم في التصوير الطبي."}]'></div>
+</section>
+
+<!-- DENSITY -->
+<section class="page" id="p2">
+  <div class="unit">وحدة: المادة وخصائصها</div>
+  <h2><span class="n">2</span> الكثافة والطفو</h2>
+  <p><b>الكثافة</b> هي كتلة وحدة الحجوم من المادة:</p>
+  <div class="big">الكثافة = الكتلة ÷ الحجم<br><small style="font-size:.8rem;font-weight:400">ρ = m ÷ V &nbsp; (g/cm³)</small></div>
+  <p>كثافة الماء <b>1 g/cm³</b>. الجسم الأقل كثافة من الماء <b>يطفو</b>، والأكثر كثافة <b>يغوص</b>.</p>
+
+  <div class="box lab">
+    <h3>🧪 مختبر: حوض الماء</h3>
+    <div class="btns" id="mats">
+      <button class="btn" data-m="60" data-v="100">🪵 خشب</button>
+      <button class="btn" data-m="92" data-v="100">🧊 ثلج</button>
+      <button class="btn" data-m="270" data-v="100">🔩 ألمنيوم</button>
+      <button class="btn" data-m="20" data-v="100">🧽 فلّين</button>
+    </div>
+    <label>الكتلة: <b id="mOut">60</b> g</label>
+    <input type="range" id="mass" min="5" max="400" value="60">
+    <label>الحجم: <b id="vOut">100</b> cm³</label>
+    <input type="range" id="vol" min="20" max="200" value="100">
+    <div class="big" id="dOut">0.60 g/cm³</div>
+    <div class="beaker"><div class="water"></div><div class="obj" id="obj"></div></div>
+    <div class="fb" id="dMsg" style="text-align:center"></div>
+  </div>
+
+  <div class="box" data-predict>
+    <h3>🔮 توقّع ثم اكتشف</h3>
+    <p>قطعنا قطعة خشب إلى نصفين. ماذا يحدث لكثافة كل نصف؟</p>
+    <div class="btns"><button class="btn">تقل للنصف</button><button class="btn">تبقى كما هي</button><button class="btn">تتضاعف</button></div>
+    <button class="btn main" style="width:100%">اكشف الإجابة</button>
+    <div class="reveal">✅ <b>تبقى كما هي.</b> الكتلة والحجم نقصا معًا للنصف، فالنسبة بينهما لا تتغير. جرّبها في المختبر: اجعل الكتلة 30 والحجم 50.</div>
+  </div>
+  <div class="quiz" data-q='[{"q":"جسم كتلته 200 g وحجمه 100 cm³. كثافته:","o":["0.5 g/cm³","2 g/cm³","20 000 g/cm³"],"a":1,"e":"200 ÷ 100 = 2 g/cm³ وهو أكبر من كثافة الماء، لذلك يغوص."},{"q":"لماذا يطفو الثلج على سطح الماء؟","o":["لأنه أخف وزنًا دائمًا","لأن كثافته أقل من كثافة الماء","لأنه بارد"],"a":1,"e":"كثافة الثلج نحو 0.92 g/cm³ أي أقل من 1."}]'></div>
+</section>
+
+<!-- MOTION -->
+<section class="page" id="p3">
+  <div class="unit">وحدة: الحركة والقوى</div>
+  <h2><span class="n">3</span> السرعة والمسافة والزمن</h2>
+  <p><b>السرعة</b> هي المسافة التي يقطعها الجسم في وحدة الزمن.</p>
+  <div class="big">السرعة = المسافة ÷ الزمن<br><small style="font-size:.8rem;font-weight:400">v = d ÷ t &nbsp; (m/s)</small></div>
+
+  <div class="box lab">
+    <h3>🧪 مختبر: سباق 100 متر</h3>
+    <label>🔴 سرعة السيارة الحمراء: <b id="aOut">10</b> m/s</label>
+    <input type="range" id="spA" min="2" max="25" value="10">
+    <label>🔵 سرعة السيارة الزرقاء: <b id="bOut">5</b> m/s</label>
+    <input type="range" id="spB" min="2" max="25" value="5">
+    <div class="track"><div class="lane"></div><div class="lane"></div><div class="finish"></div>
+      <div class="car" id="carA">🚗</div><div class="car b" id="carB">🚙</div></div>
+    <div class="btns"><button class="btn main" id="race">🏁 ابدأ السباق</button><span id="clock" style="font-weight:800;align-self:center">0.0 s</span></div>
+    <table><tr><th>السيارة</th><th>السرعة</th><th>زمن الوصول = 100 ÷ السرعة</th></tr>
+      <tr><td>🔴</td><td id="tA1">-</td><td id="tA2">-</td></tr>
+      <tr><td>🔵</td><td id="tB1">-</td><td id="tB2">-</td></tr></table>
+    <p style="font-size:.8rem;color:#888">السباق يجري بتسريع ×2 حتى لا تنتظر طويلًا.</p>
+  </div>
+
+  <div class="box" data-predict>
+    <h3>🔮 توقّع ثم اكتشف</h3>
+    <p>إذا ضاعفنا سرعة السيارة، ماذا يحدث لزمن وصولها إلى خط النهاية؟</p>
+    <div class="btns"><button class="btn">يتضاعف</button><button class="btn">ينقص للنصف</button><button class="btn">لا يتغير</button></div>
+    <button class="btn main" style="width:100%">اكشف الإجابة</button>
+    <div class="reveal">✅ <b>ينقص للنصف.</b> الزمن = المسافة ÷ السرعة، فكلما زادت السرعة قلّ الزمن. جرّب 5 ثم 10 m/s.</div>
+  </div>
+  <div class="quiz" data-q='[{"q":"قطع عدّاء 400 m في 80 s. سرعته المتوسطة:","o":["5 m/s","320 m/s","0.2 m/s"],"a":0,"e":"400 ÷ 80 = 5 m/s."},{"q":"سيارة تسير بسرعة 20 m/s لمدة 10 s. المسافة المقطوعة:","o":["2 m","30 m","200 m"],"a":2,"e":"المسافة = السرعة × الزمن = 20 × 10 = 200 m."}]'></div>
+</section>
+
+<!-- CELL -->
+<section class="page" id="p4">
+  <div class="unit">وحدة: الخلية وحدة بناء الكائن الحي</div>
+  <h2><span class="n">4</span> الخلية النباتية والحيوانية</h2>
+  <p>جميع الكائنات الحية تتكون من <b>خلايا</b>. تشترك الخلايا في أجزاء، لكن الخلية النباتية تتميز بأجزاء إضافية.</p>
+  <div class="box lab">
+    <h3>🧪 المجهر: اضغط على أي جزء</h3>
+    <div class="btns"><button class="btn main" id="plantBtn">🌿 خلية نباتية</button><button class="btn" id="animBtn">🐾 خلية حيوانية</button></div>
+    <svg viewBox="0 0 300 220" style="width:100%;max-width:420px;display:block;margin:auto">
+      <rect id="wall" class="part" data-k="wall" x="10" y="10" width="280" height="200" rx="18" fill="#9bd27a" stroke="#4d8a2c" stroke-width="6"/>
+      <rect id="memR" class="part" data-k="mem" x="22" y="22" width="256" height="176" rx="14" fill="#e8f7d9" stroke="#e08a3c" stroke-width="3"/>
+      <ellipse id="memE" class="part" data-k="mem" cx="150" cy="110" rx="138" ry="98" fill="#fde9e4" stroke="#e08a3c" stroke-width="3" style="display:none"/>
+      <rect id="vac" class="part" data-k="vac" x="150" y="45" width="110" height="130" rx="30" fill="#bfe3ff" stroke="#6aa9d8" stroke-width="2"/>
+      <circle class="part" data-k="nuc" cx="85" cy="85" r="34" fill="#b48ae8" stroke="#6b3fb0" stroke-width="3"/>
+      <circle cx="85" cy="85" r="10" fill="#6b3fb0" pointer-events="none"/>
+      <g class="part" data-k="mito"><ellipse cx="80" cy="165" rx="26" ry="12" fill="#f39a6b" stroke="#b55b2e" stroke-width="2"/><path d="M60 165q6-8 10 0t10 0t10 0t10 0" fill="none" stroke="#b55b2e" stroke-width="2"/></g>
+      <g id="chl" class="part" data-k="chl"><ellipse cx="135" cy="150" rx="14" ry="9" fill="#2e9e5b"/><ellipse cx="128" cy="45" rx="14" ry="9" fill="#2e9e5b"/><ellipse cx="45" cy="135" rx="9" ry="14" fill="#2e9e5b"/></g>
+      <text x="150" y="215" text-anchor="middle" font-size="10" fill="#888" id="cyto" class="part" data-k="cyto">↑ السيتوبلازم: المادة الهلامية بين الأجزاء</text>
+    </svg>
+    <div class="box" id="cellInfo" style="background:var(--soft);border-color:var(--blue)">👆 اضغط على جزء من الخلية لتعرف وظيفته.</div>
+  </div>
+  <div class="box" data-predict>
+    <h3>🔮 توقّع ثم اكتشف</h3>
+    <p>لماذا لا تحتوي خلايا جسم الإنسان على بلاستيدات خضراء؟</p>
+    <div class="btns"><button class="btn">لأن الإنسان لا يصنع غذاءه بنفسه</button><button class="btn">لأن خلاياه صغيرة</button></div>
+    <button class="btn main" style="width:100%">اكشف الإجابة</button>
+    <div class="reveal">✅ <b>لأن الإنسان لا يصنع غذاءه بنفسه.</b> البلاستيدات الخضراء تقوم بالبناء الضوئي لصنع الغذاء، وهذا خاص بالنبات.</div>
+  </div>
+  <div class="quiz" data-q='[{"q":"أي جزء يوجد في الخلية النباتية فقط؟","o":["النواة","الجدار الخلوي","الغشاء الخلوي"],"a":1,"e":"الجدار الخلوي والبلاستيدات الخضراء من مميزات الخلية النباتية."},{"q":"الجزء المسؤول عن إنتاج الطاقة في الخلية:","o":["الميتوكوندريا","الفجوة العصارية","الجدار الخلوي"],"a":0,"e":"الميتوكوندريا تُطلق الطاقة من الغذاء (التنفس الخلوي)."}]'></div>
+</section>
+
+<!-- REVIEW -->
+<section class="page" id="p5">
+  <h2><span class="n">📝</span> مراجعة الوحدة</h2>
+  <p>أجب عن جميع الأسئلة، ثم شاهد نتيجتك.</p>
+  <div class="quiz" id="final" data-q='[{"q":"الخفاش يسمع أصواتًا بتردد 50 000 Hz. هل يسمعها الإنسان؟","o":["نعم","لا"],"a":1,"e":"لأنها أعلى من 20 000 Hz."},{"q":"سائل كثافته 0.8 g/cm³ وُضع فيه جسم كثافته 0.9 g/cm³. الجسم:","o":["يطفو","يغوص"],"a":1,"e":"كثافة الجسم أكبر من كثافة السائل، فيغوص."},{"q":"دراجة قطعت 300 m في 60 s. سرعتها:","o":["5 m/s","18 000 m/s","0.2 m/s"],"a":0,"e":"300 ÷ 60 = 5 m/s."},{"q":"المكان الذي يحتوي على المادة الوراثية في الخلية:","o":["الفجوة","النواة","السيتوبلازم"],"a":1,"e":"النواة مركز التحكم وتحتوي على المادة الوراثية."}]'></div>
+  <div class="score" id="scoreBox">نتيجتك: 0 / 0</div>
+</section>
+<footer>نسخة تجريبية – يمكن مطابقتها مع دروس وصفحات كتاب المنهج الليبي</footer>
+</div>
+
+<script>
+// navigation
+const pages=[...document.querySelectorAll('.page')],navBtns=[...document.querySelectorAll('#nav button')];
+function go(id){pages.forEach(p=>p.classList.toggle('on',p.id===id));navBtns.forEach(b=>b.classList.toggle('on',b.dataset.p===id));window.scrollTo({top:0,behavior:'smooth'});stopTone();}
+navBtns.forEach(b=>b.onclick=()=>go(b.dataset.p));
+document.querySelectorAll('[data-go]').forEach(a=>a.onclick=e=>{e.preventDefault();go(a.dataset.go)});
+
+// predict boxes
+document.querySelectorAll('[data-predict]').forEach(box=>{
+  const choices=box.querySelectorAll('.btns .btn');
+  choices.forEach(c=>c.onclick=()=>{choices.forEach(x=>x.style.background='');c.style.background='#f6e58d'});
+  box.querySelector('.btn.main').onclick=()=>box.querySelector('.reveal').style.display='block';
+});
+
+// quizzes
+let total=0,right=0;
+document.querySelectorAll('.quiz').forEach(qz=>{
+  const isFinal=qz.id==='final';
+  JSON.parse(qz.dataset.q).forEach(item=>{
+    const b=document.createElement('div');b.className='box';
+    b.innerHTML='<h3>✔️ سؤال تحقّق</h3><p>'+item.q+'</p>';
+    const fb=document.createElement('div');fb.className='fb';
+    let done=false;
+    item.o.forEach((o,i)=>{const btn=document.createElement('button');btn.className='btn opt';btn.textContent=o;
+      btn.onclick=()=>{if(done)return;done=true;
+        const ok=i===item.a;btn.classList.add(ok?'ok':'no');
+        if(!ok)b.querySelectorAll('.opt')[item.a].classList.add('ok');
+        fb.innerHTML=(ok?'🎉 إجابة صحيحة! ':'🤔 ليست هي. ')+item.e;
+        if(isFinal){total++;if(ok)right++;document.getElementById('scoreBox').textContent='نتيجتك: '+right+' / '+total+(total===4?(right===4?' – ممتاز! 🌟':' – راجع الدروس وحاول مجددًا'):'');}
+      };b.appendChild(btn);});
+    b.appendChild(fb);qz.appendChild(b);
+  });
+});
+
+// cell types
+(function(){
+ const C={
+  neuron:['خلايا الدماغ (الخلايا العصبية)','#e53935','<svg viewBox="0 0 200 200" width="100%" height="100%"><rect width="200" height="200" fill="#120808"/><g stroke="#ff5a3c" stroke-linecap="round" fill="none"><path d="M100 100 L40 40 M70 70 L55 85 M100 100 L170 50 M140 72 L150 95 M100 100 L180 150 M100 100 L30 160 M60 132 L40 120 M100 100 L100 195" stroke-width="5"/><path d="M40 40 L20 30 M40 40 L35 15 M170 50 L190 40 M180 150 L195 170 M30 160 L10 170 M30 160 L25 190" stroke-width="3"/></g><circle cx="100" cy="100" r="18" fill="#ff8a3c"/><circle cx="100" cy="100" r="8" fill="#ffd54f"/></svg>','شكلها مثل النجمة، لها فروع كثيرة وذيل طويل.','تنقل <b>الرسائل</b> بسرعة بين الدماغ وأجزاء الجسم، فبها نفكر ونحس ونتحرك.'],
+  gland:['خلايا الخد','#2a8fd6','<svg viewBox="0 0 200 200" width="100%" height="100%"><rect width="200" height="200" fill="#123a3a"/><g fill="#39b29a" fill-opacity=".85" stroke="#0e5c50" stroke-width="3"><path d="M5 20 L70 5 L95 50 L60 95 L10 80Z"/><path d="M95 50 L150 10 L198 45 L180 100 L120 105Z"/><path d="M10 80 L60 95 L75 150 L30 198 L2 150Z"/><path d="M60 95 L120 105 L140 160 L90 198 L75 150Z"/><path d="M120 105 L180 100 L198 160 L150 198 L140 160Z"/></g><g fill="#0e3d36"><circle cx="50" cy="48" r="7"/><circle cx="150" cy="60" r="7"/><circle cx="38" cy="140" r="7"/><circle cx="103" cy="140" r="7"/><circle cx="165" cy="148" r="7"/></g></svg>','رقيقة ومسطّحة، شكلها غير منتظم، وفي وسط كل خلية نواة.','تبطّن الفم من الداخل وتحميه. ويمكن رؤيتها تحت المجهر بأخذ عيّنة من باطن الخد بعود قطني.'],
+  heart:['خلايا عضلة القلب','#c2185b','<svg viewBox="0 0 200 200" width="100%" height="100%"><rect width="200" height="200" fill="#f8c8d4"/><g stroke="#e38aa3" stroke-width="2">'+Array.from({length:40},(_,i)=>'<line x1="0" y1="'+(i*5)+'" x2="200" y2="'+(i*5-30)+'"/>').join('')+'</g><g fill="#7b1f4a"><ellipse cx="60" cy="70" rx="10" ry="5" transform="rotate(-9 60 70)"/><ellipse cx="140" cy="60" rx="10" ry="5" transform="rotate(-9 140 60)"/><ellipse cx="90" cy="140" rx="10" ry="5" transform="rotate(-9 90 140)"/><ellipse cx="160" cy="150" rx="10" ry="5" transform="rotate(-9 160 150)"/></g></svg>','طويلة ومخطّطة، ومتصلة ببعضها.','<b>تنقبض وتنبسط</b> باستمرار دون أن تتعب، فتضخ الدم إلى كل الجسم.'],
+  blood:['خلية دم بيضاء وسط كريات دم حمراء','#6b4fd8','<svg viewBox="0 0 200 200" width="100%" height="100%"><rect width="200" height="200" fill="#4a0d0d"/><g>'+[[40,40],[160,30],[30,150],[150,165],[100,185],[175,100]].map(([x,y])=>'<ellipse cx="'+x+'" cy="'+y+'" rx="34" ry="30" fill="#d32f2f"/><ellipse cx="'+x+'" cy="'+y+'" rx="16" ry="13" fill="#a51f1f"/>').join('')+'</g><circle cx="100" cy="95" r="48" fill="#dfe8f5"/>'+Array.from({length:60},(_,i)=>{const a=i*2.4,r=8+(i%6)*7;return'<circle cx="'+(100+Math.cos(a)*r)+'" cy="'+(95+Math.sin(a)*r)+'" r="4" fill="#b9c8de"/>'}).join('')+'</svg>','الحمراء: أقراص مستديرة. البيضاء: أكبر وسطحها خشن.','<b>الحمراء</b> تنقل الأكسجين إلى خلايا الجسم، و<b>البيضاء</b> تحارب الجراثيم وتحمينا من الأمراض. وتتحرك كلها داخل الجسم مع الدم.']};
+ document.querySelectorAll('#cl .hot').forEach(g=>{g.style.cursor='pointer';g.onclick=()=>{const c=C[g.dataset.c],p=document.getElementById('clPic');p.innerHTML=c[2];p.style.borderColor=c[1];
+  document.getElementById('clInfo').innerHTML='<b style="color:'+c[1]+'">'+c[0]+'</b><br>🔷 <b>الشكل:</b> '+c[3]+'<br>⚙️ <b>الوظيفة:</b> '+c[4]}});
+ const M=[['🧠 خلايا الدماغ','نقل الرسائل'],['🫀 خلايا عضلة القلب','الانقباض لضخ الدم'],['🔴 كريات الدم الحمراء','نقل الأكسجين'],['⚪ كريات الدم البيضاء','محاربة الجراثيم'],['😊 خلايا الخد','تبطين الفم من الداخل وحمايته']];
+ const opts=M.map(m=>m[1]).sort(()=>Math.random()-.5),box=document.getElementById('clMatch');
+ M.forEach(([k,v])=>{const r=document.createElement('div');r.style.cssText='display:flex;align-items:center;gap:8px;border:2px solid var(--line);border-radius:10px;padding:6px;margin:5px 0';r.dataset.ans=v;r.innerHTML='<b style="min-width:150px">'+k+'</b><select style="flex:1;font-family:inherit;padding:4px"><option value="">اختر الوظيفة…</option>'+opts.map(o=>'<option>'+o+'</option>').join('')+'</select>';box.appendChild(r)});
+ document.getElementById('clCheck').onclick=()=>{let ok=0;box.querySelectorAll('div').forEach(r=>{const g=r.querySelector('select').value===r.dataset.ans;r.style.borderColor=g?'var(--green)':'var(--red)';r.style.background=g?'#eefaf2':'#fdeeee';if(g)ok++});
+  const m=document.getElementById('clMsg');m.textContent=ok===5?'🌟 ممتاز! كل خلية في مكانها.':'صحيح '+ok+' من 5، راجع المختبر أعلاه.';m.className='fb '+(ok===5?'ok':'no')};
+ document.getElementById('whale').innerHTML='<i style="width:12px;height:12px;background:#2a6fb0;border-radius:3px"></i>'.repeat(72);
+ const O=[['المعدة',1],['الرئتان',1],['الكليتان',1],['الكبد',1],['الجلد',1],['العينان',1],['الحقيبة',0],['القلم',0],['الكرسي',0]].sort(()=>Math.random()-.5);let n=0;
+ O.forEach(([t,r])=>{const b=document.createElement('button');b.className='btn';b.textContent=t;b.onclick=()=>{if(b.dataset.d)return;b.dataset.d=1;if(r){n++;b.classList.add('ok');b.style.background='#dff5e7'}else{b.classList.add('no');b.style.background='#fde4e4'}
+  document.getElementById('orgMsg').textContent=n===6?'🎉 أحسنت! وجدت كل الأعضاء الستة.':'وجدت '+n+' من 6 أعضاء'};document.getElementById('orgs').appendChild(b)});
+})();
+
+// cell review
+(function(){
+ const T=[['هي وحدة الحياة، وتتكون من كتلة حية يطلق عليها البروتوبلازم','الخلية'],['مادة معقدة تشبه الجيلاتين، ويحدث بداخلها عدد لا نهائي من الأنشطة الكيميائية','البروتوبلازم'],['تنقل الماء والأملاح المعدنية من الجذور إلى الأوراق','الأوعية الخشبية'],['يفصل المحتوى النووي عن السيتوبلازم','الغلاف النووي'],['مجموعة من الأنسجة المتنوعة تعمل معًا لأداء وظيفة معينة','العضو'],['مجموعة من الخلايا ذات أصل مشترك ومتشابهة، يمكنها القيام بوظيفة معينة','النسيج'],['المرحلة التي تصبح فيها الخلية متخصصة لأداء وظيفة معينة','التمايز'],['مادة صلبة تترسب على جدران الأوعية الخشبية في النباتات','التجنين'],['عضيات عصوية أو كروية صغيرة تعمل على إطلاق الطاقة من المواد الغذائية (التنفس)','الميتوكوندريا'],['تركيب محكم التنظيم يوجد داخل الخلية وله وظيفة محددة','العضي'],['مسؤولة عن تكاثر الخلية ولازمة لاستمرار حياتها','النواة'],['الأماكن التي تصنع فيها النباتات غذاءها','الكلوروبلاستيدات'],['تراكيب على شكل خيوط طويلة توجد داخل النواة','الكروماتين'],['تراكيب كروية داخل النواة تلعب دورًا مهمًا في بناء البروتينات','النوية'],['فراغ ممتلئ بسوائل محاط بغشاء يسمى التونوبلاست','الفجوات'],['زوج من التراكيب الصغيرة قريب من النواة، يلعب دورًا في انقسام الخلية','الجسيمات المركزية (السنتريول)'],['غشاء شبه منفذ يتحكم في المواد التي تدخل الخلية وتخرج منها','غشاء سطح الخلية'],['مجموعة من الأعضاء المختلفة تعمل معًا لأداء وظيفة معينة في الجسم','الجهاز العضوي'],['هو جوهر الخلية','البروتوبلازم']];
+ const F=[['تتكون الخلية من مادة البروتوبلازم',1],['أول من استخدم لفظ الخلية هو العالم ألكسندر فليمنج',0,'روبرت هوك'],['تتكون النواة في الخلية من غلاف نووي فقط',0,'من الغلاف النووي وشبكة الكروماتين والنوية'],['الميتوكوندريا تفصل المحتوى النووي عن السيتوبلازم',0,'الغلاف النووي'],['النواة غير لازمة لاستمرار حياة الخلية',0,'النواة لازمة لاستمرار حياة الخلية'],['الجدار الخلوي شبه منفذ يحيط بالسيتوبلازم',0,'غشاء سطح الخلية'],['الميتوكوندريا أماكن إطلاق الطاقة في الخلية',1],['تتكون المعدة من أنسجة غدية تفرز عصارات لهضم الطعام',1],['تحتوي كريات الدم الحمراء على صبغة حمراء يطلق عليها اسم هيموجلوبين',1],['تحتوي الخلية النباتية على الكلوروبلاستيدات',1],['تُخزَّن الطاقة التي تنطلق أثناء التنفس الخلوي في ATP (أدينوسين ثلاثي الفوسفات)',1],['تحتوي الخلايا الحيوانية على فجوة كبيرة مركزية تحتوي سائلًا',0,'تحتوي على فجوات صغيرة'],['طول وصغر قطر الشعيرة الجذرية يقلل من نسبة مساحة السطح إلى الحجم',0,'يزيد نسبة مساحة السطح إلى الحجم'],['تكوّن الأعضاء التي تعمل مع بعضها البعض لغرض معين جهازًا عضويًا',1],['من أمثلة أعضاء النبات: الجذور، والأوراق، والسيقان، والأزهار، والثمار',1],['تنقل الأوعية الخشبية الماء والأملاح المعدنية من الجذور إلى الأوراق',1],['غشاء البلازما هو غشاء شبه منفذ يتحكم في المواد التي تدخل أو تخرج من الخلية',1],['الأوعية الخشبية حية لوجود البروتوبلازم',0,'ميتة لغياب البروتوبلازم'],['يتكون الكروماتين من DNA',1],['تتحكم النواة في أنشطة الخلية',1]];
+ const tab=(a)=>{document.getElementById('rvA').style.display=a?'':'none';document.getElementById('rvB').style.display=a?'none':'';document.getElementById('rvT1').classList.toggle('main',a);document.getElementById('rvT2').classList.toggle('main',!a)};
+ document.getElementById('rvT1').onclick=()=>tab(true);document.getElementById('rvT2').onclick=()=>tab(false);
+ const sh=a=>[...a].sort(()=>Math.random()-.5);
+ let order=sh(T.map((_,i)=>i)),k=0,ok=0,wrong=[];
+ function show(){const tDef=document.getElementById('tDef'),o=document.getElementById('tOpts'),fb=document.getElementById('tFb'),nx=document.getElementById('tNext');
+  document.getElementById('tBar').style.width=(k/order.length*100)+'%';
+  if(k>=order.length){tDef.innerHTML='🏁 انتهيت! نتيجتك: '+ok+' من '+order.length+(ok===order.length?' 🌟':'');o.innerHTML='';fb.innerHTML=wrong.length?'راجع: '+wrong.join('، '):'ممتاز، كل الإجابات صحيحة!';
+   nx.style.display='block';nx.textContent=wrong.length?'🔁 أعد الأسئلة الخاطئة فقط':'🔁 ابدأ من جديد';nx.onclick=()=>{order=wrong.length?sh(order.filter(i=>wrong.includes(T[i][1]))):sh(T.map((_,i)=>i));k=0;ok=0;wrong=[];show()};return}
+  const [d,a]=T[order[k]];document.getElementById('tNum').textContent='السؤال '+(k+1)+' من '+order.length;document.getElementById('tSc').textContent='صحيح: '+ok;
+  tDef.textContent=d;fb.textContent='';nx.style.display='none';o.innerHTML='';
+  const opts=sh([a,...sh(T.map(t=>t[1]).filter(x=>x!==a&&!(a.includes('البروتوبلازم')&&x.includes('البروتوبلازم')))).slice(0,3)]);
+  opts.forEach(t=>{const b=document.createElement('button');b.className='btn opt';b.textContent=t;b.onclick=()=>{if(o.dataset.done==='1')return;o.dataset.done='1';
+    if(t===a){b.classList.add('ok');ok++;fb.innerHTML='🎉 صحيح!'}else{b.classList.add('no');[...o.children].find(x=>x.textContent===a).classList.add('ok');fb.innerHTML='🤔 الإجابة: <b>'+a+'</b>';wrong.push(a)}
+    document.getElementById('tSc').textContent='صحيح: '+ok;nx.style.display='block';nx.textContent=k+1<order.length?'التالي ←':'النتيجة 🏁';nx.onclick=()=>{k++;show()}};o.appendChild(b)});o.dataset.done='0'}
+ show();
+ let fr=0,fd=0;const L=document.getElementById('tfList');
+ F.forEach(([q,v,c],i)=>{const d=document.createElement('div');d.style.cssText='border-bottom:1px solid var(--line);padding:8px 0';d.innerHTML='<b>'+(i+1)+'.</b> '+q;
+  const bs=document.createElement('div');bs.className='btns';const fb=document.createElement('div');fb.style.fontSize='.95rem';let done=false;
+  [['✔️ صح',1],['✖️ خطأ',0]].forEach(([t,val])=>{const b=document.createElement('button');b.className='btn';b.textContent=t;b.onclick=()=>{if(done)return;done=true;fd++;const good=val===v;if(good)fr++;
+    b.style.background=good?'#dff5e7':'#fde4e4';b.style.borderColor=good?'var(--green)':'var(--red)';b.classList.add(good?'ok':'no');
+    fb.innerHTML=(good?'🎉 ':'🤔 ')+(v?'العبارة <b>صحيحة</b>.':'العبارة <b>خاطئة</b>، والتصحيح: <b style="color:var(--blue)">'+c+'</b>');
+    document.getElementById('tfSc').textContent=fr+' من '+fd+(fd===F.length?(fr===F.length?' 🌟 ممتاز!':' – أعد المحاولة لاحقًا'):'')};bs.appendChild(b)});
+  d.appendChild(bs);d.appendChild(fb);L.appendChild(d)});
+})();
+
+// atomic masses
+(function(){
+ const E=[['H','هيدروجين',1.0],['He','هيليوم',4.0],['Li','ليثيوم',6.9],['Be','بريليوم',9.0],['B','بورون',10.8],['C','كربون',12.0],['N','نيتروجين',14.0],['O','أكسجين',16.0],['F','فلور',19.0],['Ne','نيون',20.2],['Na','صوديوم',23.0],['Mg','ماغنسيوم',24.3],['Al','ألومنيوم',27.0],['Si','سيليكون',28.1],['P','فوسفور',31.0],['S','كبريت',32.1],['Cl','كلور',35.5],['Ar','أرجون',39.9],['K','بوتاسيوم',39.1],['Ca','كالسيوم',40.1],['Sc','سكانديوم',45.0],['Ti','تيتانيوم',47.9],['V','فاناديوم',50.9],['Cr','كروم',52.0],['Mn','منجنيز',54.9],['Fe','حديد',55.8],['Co','كوبالت',58.9],['Ni','نيكل',58.7],['Cu','نحاس',63.5],['Zn','خارصين',65.4],['Ga','جاليوم',69.7],['Ge','جرمانيوم',72.6],['As','زرنيخ',74.9],['Se','سيلينيوم',79.0],['Br','بروم',79.9],['Kr','كربتون',83.8],['Rb','روبيديوم',85.5],['Sr','سترونشيوم',87.6],['Y','إتريوم',88.9],['Zr','زركونيوم',91.2],['Nb','نيوبيوم',92.9],['Mo','موليبدنيوم',95.9],['Ru','روثينيوم',101.1],['Rh','روديوم',102.9],['Pd','بالاديوم',106.4],['Ag','فضة',107.9],['Cd','كادميوم',112.4],['In','إنديوم',114.8],['Sn','قصدير',118.7],['Sb','أنتيمون',121.8],['I','يود',126.9],['Te','تلوريوم',127.6],['Xe','زينون',131.3],['Cs','سيزيوم',132.9],['Ba','باريوم',137.3],['La','لانثانوم',138.9],['Ce','سيريوم',140.1],['Pr','براسيوديميوم',140.9],['Nd','نيوديميوم',144.2],['Sm','ساماريوم',150.4],['Eu','يوروبيوم',152.0],['Gd','جادولينيوم',157.3],['Tb','تربيوم',158.9],['Dy','ديسبروسيوم',162.5],['Ho','هولميوم',164.9],['Er','إربيوم',167.3],['Tm','ثليوم',168.9],['Yb','إتربيوم',173.0],['Lu','لوتيشيوم',175.0],['Hf','هافنيوم',178.5],['Ta','تنتالوم',180.9],['W','تنجستن',183.9],['Re','رينيوم',186.2],['Os','أوزميوم',190.2],['Ir','إيريديوم',192.2],['Pt','بلاتين',195.1],['Au','ذهب',197.0],['Hg','زئبق',200.6],['Tl','ثاليوم',204.4],['Pb','رصاص',207.2],['Bi','بزموت',209.0],['Th','ثوريوم',232.0],['U','يورانيوم',238.0],
+  ['Tc','تكنيتيوم',null],['Pm','بروميثيوم',null],['Po','بولونيوم',null],['At','أستاتين',null],['Rn','رادون',null],['Fr','فرانسيوم',null],['Ra','راديوم',null],['Ac','أكتينيوم',null],['Pa','بروتاكتينيوم',null],['Np','نبتونيوم',null],['Pu','بلوتونيوم',null],['Am','أمريسيوم',null]];
+ const A={};E.forEach(e=>A[e[0]]=e);let sortBy='ar';
+ const grid=document.getElementById('elGrid'),q=document.getElementById('elSearch');
+ function render(){const t=q.value.trim().toLowerCase();let L=E.filter(e=>!t||e[0].toLowerCase().startsWith(t)||e[1].includes(q.value.trim()));
+  L=[...L].sort(sortBy==='ar'?(a,b)=>(a[2]??999)-(b[2]??999):(a,b)=>a[1].localeCompare(b[1],'ar'));
+  grid.innerHTML='';L.forEach(e=>{const d=document.createElement('div');d.style.cssText='border:2px solid '+(e[2]?'#3b4fd8':'#bbb')+';border-radius:8px;text-align:center;padding:4px;cursor:pointer;background:'+(e[2]?'#fff':'#f3f3f3');
+   d.innerHTML='<div style="font-size:1.3rem;font-weight:800;font-family:sans-serif">'+e[0]+'</div><div style="font-size:.7rem">'+e[1]+'</div><div style="font-weight:700;color:var(--blue)">'+(e[2]?e[2].toFixed(1):'— مشع')+'</div>';
+   d.onclick=()=>{document.getElementById('elInfo').innerHTML=e[2]?'<b>'+e[1]+' ('+e[0]+')</b>: الكتلة الذرية النسبية = '+e[2].toFixed(1)+'<br><small>أي أن ذرته أثقل من ذرة الهيدروجين بنحو '+Math.round(e[2])+' مرة</small>':'<b>'+e[1]+' ('+e[0]+')</b> عنصر مشع، لذلك قيمته غير موضّحة في الجدول.';
+    const m=document.getElementById('mrIn');m.value=e[0];calc()};grid.appendChild(d)})}
+ q.oninput=render;document.querySelectorAll('[data-sort]').forEach(b=>b.onclick=()=>{sortBy=b.dataset.sort;document.querySelectorAll('[data-sort]').forEach(x=>x.classList.toggle('main',x===b));render()});render();
+ function parse(f){let i=0;function grp(){const c={};while(i<f.length&&f[i]!==')'){let sub;
+   if(f[i]==='('){i++;sub=grp();if(f[i]!==')')throw 0;i++}
+   else{const m=f.slice(i).match(/^[A-Z][a-z]?/);if(!m)throw 0;i+=m[0].length;if(!A[m[0]])throw m[0];sub={[m[0]]:1}}
+   const n=f.slice(i).match(/^\d+/);let k=1;if(n){k=+n[0];i+=n[0].length}
+   for(const s in sub)c[s]=(c[s]||0)+sub[s]*k}return c}
+  const r=grp();if(i!==f.length)throw 0;return r}
+ function mr(f){const c=parse(f);let tot=0,parts=[];for(const s in c){const e=A[s];if(e[2]===null)throw 'r'+s;tot+=c[s]*e[2];parts.push((c[s]>1?c[s]+'×':'')+e[2].toFixed(1)+' ('+s+')')}return [tot,parts,c]}
+ function calc(){const f=document.getElementById('mrIn').value.replace(/\s/g,'');const o=document.getElementById('mrOut'),w=document.getElementById('mrWork');
+  if(!f){o.textContent='';w.textContent='';return}
+  try{const [t,p]=mr(f);o.textContent='Mr ('+f+') = '+t.toFixed(1);w.textContent=p.join(' + ')+' = '+t.toFixed(1)}
+  catch(e){o.textContent='—';w.innerHTML='<span dir="rtl">'+(typeof e==='string'&&e[0]==='r'?'العنصر '+e.slice(1)+' مشع وليس له قيمة في الجدول.':typeof e==='string'?'لا يوجد عنصر رمزه '+e+' – انتبه للحروف الكبيرة والصغيرة.':'اكتب الصيغة بشكل صحيح، مثل H2O')+'</span>'}}
+ document.getElementById('mrIn').oninput=calc;
+ ['NaCl','C4H10','H2O','CO2','MgO','CaCO3','H2SO4','Ca(OH)2','CsCl','Cs2O'].forEach(f=>{const b=document.createElement('button');b.className='btn';b.style.direction='ltr';b.textContent=f;b.onclick=()=>{document.getElementById('mrIn').value=f;calc()};document.getElementById('mrEx').appendChild(b)});
+ calc();
+ const P=['H2O','CO2','NaCl','MgO','HCl','CH4','NH3','KCl','CaO','NaOH','CaCl2','Na2O','CCl4','HF','MgCl2','C4H10','CaCO3','H2SO4','Al2O3','CuSO4'];let pq,pr=0,pd=0,answered=false;
+ function next(){pq=P[Math.floor(Math.random()*P.length)];answered=false;document.getElementById('prQ').textContent=pq;document.getElementById('prIn').value='';document.getElementById('prMsg').textContent=''}
+ document.getElementById('prNext').onclick=next;
+ document.getElementById('prCheck').onclick=()=>{const v=parseFloat(document.getElementById('prIn').value);if(isNaN(v))return;const [t,p]=mr(pq),m=document.getElementById('prMsg');
+  const ok=Math.abs(v-t)<0.15;if(!answered){answered=true;pd++;if(ok)pr++}document.getElementById('prScore').textContent=pr+' / '+pd;
+  m.innerHTML=(ok?'🎉 صحيح! ':'🤔 ليست صحيحة. ')+'<bdi dir="ltr">'+p.join(' + ')+' = '+t.toFixed(1)+'</bdi>';m.style.color=ok?'var(--green)':'var(--red)'};
+ next();
+})();
+
+// bonding: dot-cross molecules
+(function(){
+ const conf={H:['1',1],C:['2,4',4],N:['2,5',3],O:['2,6',2],F:['2,7',1],Cl:['2,8,7',1]};
+ const M={
+  HF:{atoms:[['H',115,110,'•',[]],['F',185,110,'×',[0,90,270]]],bonds:[[0,1,1]],msg:'رابطة تساهمية <b>أحادية</b> (زوج مشترك واحد). الفلور حوله 8 إلكترونات، والهيدروجين 2.'},
+  F2:{atoms:[['F',115,110,'•',[180,90,270]],['F',185,110,'×',[0,90,270]]],bonds:[[0,1,1]],msg:'رابطة تساهمية <b>أحادية</b> بين ذرتي فلور، وكل ذرة حولها 8 إلكترونات.'},
+  HCl:{atoms:[['H',115,110,'•',[]],['Cl',185,110,'×',[0,90,270]]],bonds:[[0,1,1]],msg:'رابطة تساهمية <b>أحادية</b>. الكلور حوله 8 إلكترونات، والهيدروجين 2.'},
+  CCl4:{atoms:[['C',150,110,'×',[]],['Cl',150,42,'•',[270,180,0]],['Cl',218,110,'•',[0,90,270]],['Cl',150,178,'•',[90,180,0]],['Cl',82,110,'•',[180,90,270]]],bonds:[[0,1,1],[0,2,1],[0,3,1],[0,4,1]],msg:'أربع روابط تساهمية <b>أحادية</b>. الكربون يشارك بإلكتروناته الأربعة، فيصبح حوله 8، وكذلك كل ذرة كلور.'},
+  CO2:{atoms:[['O',82,110,'•',[130,230]],['C',150,110,'×',[]],['O',218,110,'•',[310,50]]],bonds:[[0,1,2],[1,2,2]],msg:'رابطتان تساهميتان <b>ثنائيتان</b> (O=C=O): كل أكسجين يشارك الكربون بزوجين من الإلكترونات. (العدد الذري للأكسجين 8: 2,6)'}};
+ let cur=null;const svg=document.getElementById('molSvg');
+ function e(x,y,m){return m==='•'?'<circle cx="'+x+'" cy="'+y+'" r="3.2" fill="#1a3d8f"/>':'<text x="'+x+'" y="'+(y+4)+'" text-anchor="middle" font-size="12" font-weight="700" fill="#c0392b">×</text>'}
+ function draw(full){const d=M[cur];let h='';
+  d.atoms.forEach(a=>{h+='<circle cx="'+a[1]+'" cy="'+a[2]+'" r="'+(a[0]==='H'?26:36)+'" fill="'+(a[3]==='•'?'#e8eefc':'#fdecea')+'" fill-opacity=".7" stroke="#999"/>'});
+  d.atoms.forEach(a=>{h+='<text x="'+a[1]+'" y="'+(a[2]+6)+'" text-anchor="middle" font-size="17" font-weight="800">'+a[0]+'</text>'});
+  if(full){d.bonds.forEach(([i,j,n])=>{const A=d.atoms[i],B=d.atoms[j],mx=(A[1]+B[1])/2,my=(A[2]+B[2])/2,L=Math.hypot(B[1]-A[1],B[2]-A[2]),ux=(B[1]-A[1])/L,uy=(B[2]-A[2])/L,px=-uy,py=ux;
+    for(let k=0;k<n;k++){const off=n===1?0:(k?7:-7);h+=e(mx-ux*5+px*off,my-uy*5+py*off,A[3])+e(mx+ux*5+px*off,my+uy*5+py*off,B[3])}});
+   d.atoms.forEach(a=>a[4].forEach(t=>{const r=t*Math.PI/180,cx=a[1]+28*Math.cos(r),cy=a[2]+28*Math.sin(r),px=-Math.sin(r),py=Math.cos(r);h+=e(cx+px*5,cy+py*5,a[3])+e(cx-px*5,cy-py*5,a[3])}));
+   h+='<text x="8" y="214" font-size="10" fill="#1a3d8f">• إلكترونات ذرة</text><text x="292" y="214" text-anchor="end" font-size="10" fill="#c0392b">× إلكترونات الذرة الأخرى</text>'}
+  svg.innerHTML=h}
+ document.querySelectorAll('#molBtns .btn').forEach(b=>b.onclick=()=>{cur=b.dataset.m;document.querySelectorAll('#molBtns .btn').forEach(x=>x.classList.toggle('main',x===b));
+  const els=[...new Set(M[cur].atoms.map(a=>a[0]))];document.getElementById('molConf').innerHTML='🤔 فكّر أولًا: '+els.map(s=>'<b>'+s+'</b>: <bdi dir="ltr">'+conf[s][0]+'</bdi> ← يحتاج '+conf[s][1]+' إلكترون').join(' &nbsp;|&nbsp; ');
+  document.getElementById('molMsg').innerHTML='';draw(false)});
+ document.getElementById('molShow').onclick=()=>{if(!cur){document.getElementById('molMsg').textContent='اختر جزيئًا أولًا.';return}draw(true);document.getElementById('molMsg').innerHTML=M[cur].msg};
+ document.querySelector('#molBtns .btn').click();
+})();
+// bonding: lattice
+(function(){let h='';for(let r=0;r<4;r++)for(let c=0;c<7;c++){const isA=(r+c)%2===0,x=40+c*36+r*6,y=30+r*30;h+='<circle cx="'+x+'" cy="'+y+'" r="'+(isA?10:16)+'" fill="'+(isA?'#f0a541':'#9fbfcc')+'" stroke="#555"/><text x="'+x+'" y="'+(y+4)+'" text-anchor="middle" font-size="11">'+(isA?'a':'b')+'</text>'}
+ document.getElementById('latSvg').innerHTML=h;
+ const items=[['أكسيد المغنيسيوم','Mg²⁺ و O²⁻','MgO',1],['كلوريد البوتاسيوم','K⁺ و Cl⁻','KCl',1],['فلوريد الصوديوم','Na⁺ و F⁻','NaF',1],['كلوريد الكالسيوم','Ca²⁺ و Cl⁻','CaCl₂',0],['بروميد الصوديوم','Na⁺ و Br⁻','NaBr',1],['كلوريد الألومنيوم','Al³⁺ و Cl⁻','AlCl₃',0],['أكسيد الصوديوم','Na⁺ و O²⁻','Na₂O',0],['كلوريد المغنيسيوم','Mg²⁺ و Cl⁻','MgCl₂',0],['بروميد الليثيوم','Li⁺ و Br⁻','LiBr',1],['أكسيد الكالسيوم','Ca²⁺ و O²⁻','CaO',1]];
+ let r=0,d=0;const box=document.getElementById('latBox');
+ items.forEach(([n,ions,f,ok])=>{const row=document.createElement('div');row.style.cssText='display:flex;flex-wrap:wrap;align-items:center;gap:6px;border-bottom:1px solid var(--line);padding:5px 0';
+  row.innerHTML='<b style="flex:1;min-width:130px">'+n+'</b>';const fb=document.createElement('div');fb.style.cssText='width:100%;font-size:.85rem';let done=false;
+  [['✅ نعم',1],['❌ لا',0]].forEach(([t,v])=>{const b=document.createElement('button');b.className='btn';b.textContent=t;b.onclick=()=>{if(done)return;done=true;d++;const good=v===ok;if(good)r++;
+    b.style.background=good?'#dff5e7':'#fde4e4';b.classList.add(good?'ok':'no');fb.innerHTML=(good?'🎉 ':'🤔 ')+'الأيونات '+ions+' ← الصيغة <b>'+f+'</b> '+(ok?'(نسبة 1 : 1، نفس الشبكة)':'(النسبة ليست 1 : 1)');
+    document.getElementById('latScore').textContent='صحيح: '+r+' من '+d};row.appendChild(b)});
+  row.appendChild(fb);box.appendChild(row)});})();
+// bonding: table 17
+(function(){const opts={t:['جزيئية بسيطة','تساهمية عملاقة','أيونية','فلزية'],p:['جزيئات','ذرات','أيونات','أيونات موجبة في بحر من الإلكترونات'],m:['منخفضة','عالية','عالية جدًا'],c:['جيد','رديء']};
+ const rows=[[['t','جزيئية بسيطة'],['p','جزيئات'],['m','منخفضة'],['c','رديء']],[['t','تساهمية عملاقة'],['=','ذرات'],['m','عالية جدًا|عالية'],['c','رديء']],[['t','أيونية'],['=','أيونات'],['=','عالية'],['=','رديء']],[['t','فلزية'],['=','أيونات موجبة في بحر من الإلكترونات'],['m','عالية|عالية جدًا'],['=','جيد']]];
+ const T=document.getElementById('t17');T.innerHTML='<tr><th>نوع الشبكة</th><th>الجسيمات الموجودة</th><th>درجة الانصهار</th><th>التوصيل الكهربائي (صلب)</th></tr>';
+ rows.forEach(r=>{const tr=document.createElement('tr');r.forEach(([k,v])=>{const td=document.createElement('td');
+   if(k==='=')td.textContent=v;else{const s=document.createElement('select');s.style.cssText='font-family:inherit;max-width:88px;font-size:.75rem';s.dataset.ans=v;s.innerHTML='<option value="">…</option>'+opts[k].map(o=>'<option>'+o+'</option>').join('');td.appendChild(s)}tr.appendChild(td)});T.appendChild(tr)});
+ document.getElementById('t17Check').onclick=()=>{let ok=0,all=0;T.querySelectorAll('select').forEach(s=>{all++;const good=s.dataset.ans.split('|').includes(s.value);if(good)ok++;s.style.background=s.value?(good?'#dff5e7':'#fde4e4'):'#fff7d1'});
+  document.getElementById('t17Msg').innerHTML=ok===all?'🌟 ممتاز! الجدول كله صحيح.':'صحيح '+ok+' من '+all+'. الخانات الحمراء خاطئة، والصفراء فارغة.'}})();
+
+// length: tool chooser
+(function(){const tools=['شريط القياس','المسطرة','القدمة ذات الورنية','الميكرومتر'];
+ const items=[['🏟️ طول ملعب المدرسة',0],['📕 طول كتاب العلوم',1],['🔴 قطر كرة صغيرة',2],['🧵 قطر سلك كهربائي رفيع',3],['🥛 القطر الداخلي لأنبوب',2],['📄 سُمك ورقة',3]];
+ let r=0,d=0;const box=document.getElementById('toolBox');
+ items.forEach(([n,a])=>{const row=document.createElement('div');row.style.cssText='border-bottom:1px solid var(--line);padding:6px 0';row.innerHTML='<b>'+n+'</b>';
+  const bs=document.createElement('div');bs.className='btns';let done=false;
+  tools.forEach((t,i)=>{const b=document.createElement('button');b.className='btn';b.style.fontSize='.85rem';b.textContent=t;
+   b.onclick=()=>{if(done)return;done=true;d++;if(i===a){b.classList.add('ok');b.style.background='#dff5e7';r++}else{b.style.background='#fde4e4';b.classList.add('no');bs.children[a].style.background='#dff5e7'}
+    document.getElementById('toolScore').textContent='صحيح: '+r+' من '+d};bs.appendChild(b)});
+  row.appendChild(bs);box.appendChild(row)});})();
+// length: parallax
+(function(){let h='';for(let mm=0;mm<=40;mm++){const x=40+mm*6,L=mm%10===0?16:mm%5===0?11:7;h+='<line x1="'+x+'" y1="104" x2="'+x+'" y2="'+(104+L)+'" stroke="#5a3214" stroke-width="'+(mm%10===0?1.6:.8)+'"/>';if(mm%10===0)h+='<text x="'+x+'" y="134" text-anchor="middle" font-size="10">'+(mm/10)+'</text>'}
+ h+='<text x="268" y="134" font-size="9">cm</text>';document.getElementById('rulerTicks').innerHTML=h;
+ const s=document.getElementById('eyeS');function upd(){const v=+s.value,ex=154+v*0.6,edgeY=80,markY=106;
+  const xh=154+(154-ex)*(markY-edgeY)/(edgeY-34);
+  document.getElementById('eye').setAttribute('x',ex);const l=document.getElementById('sight');l.setAttribute('x1',ex);l.setAttribute('x2',xh);l.setAttribute('y2',markY);
+  const rd=(xh-40)/60;document.getElementById('eyeRead').innerHTML='القراءة = <bdi dir="ltr">'+rd.toFixed(1)+' cm</bdi>';
+  const m=document.getElementById('eyeMsg');if(Math.abs(v)<5){m.innerHTML='🟢 <b>قياس دقيق</b>: العين فوق العلامة مباشرة، الطول الحقيقي 1.9 cm';m.style.color='var(--green)'}
+  else{m.innerHTML='🔴 <b>قياس غير دقيق</b>: العين مائلة فظهرت القراءة '+(rd>1.9?'أكبر':'أصغر')+' من الحقيقة. حرّك العين لتصبح فوق العلامة.';m.style.color='var(--red)'}}
+ s.oninput=upd;upd();})();
+// length: vernier
+(function(){let X,hint=false,score=0;
+ function draw(){const fl=Math.floor(X),s=fl-8,px=mm=>10+(mm-s)*10;let h='';
+  h+='<rect x="0" y="0" width="300" height="52" fill="#eceff3"/><rect x="'+(px(X)-6)+'" y="54" width="110" height="50" fill="#dfe9f7" stroke="#8aa"/>';
+  for(let m=s;m<=s+29;m++){const x=px(m),L=m%10===0?26:m%5===0?18:11;h+='<line x1="'+x+'" y1="52" x2="'+x+'" y2="'+(52-L)+'" stroke="#222" stroke-width="'+(m%10===0?1.8:1)+'"/>';if(m%10===0)h+='<text x="'+x+'" y="18" text-anchor="middle" font-size="11" font-weight="700">'+m+'</text>'}
+  h+='<text x="292" y="12" text-anchor="end" font-size="9" fill="#666">mm</text>';
+  const f=Math.round((X-fl)*10);
+  for(let k=0;k<=10;k++){const x=px(X+0.9*k),on=hint&&k===f;h+='<line x1="'+x+'" y1="54" x2="'+x+'" y2="'+(54+(k%5===0?22:14))+'" stroke="'+(on?'#d64545':'#1a3d8f')+'" stroke-width="'+(on?2.5:1.2)+'"/>';if(k%5===0)h+='<text x="'+x+'" y="92" text-anchor="middle" font-size="10" fill="#1a3d8f">'+k+'</text>'}
+  h+='<text x="'+(px(X))+'" y="116" text-anchor="middle" font-size="9" fill="#555">↑ صفر الورنية</text>';
+  if(hint)h+='<line x1="'+px(X)+'" y1="20" x2="'+px(X)+'" y2="54" stroke="#e08a1e" stroke-dasharray="3 2"/>';
+  document.getElementById('vern').innerHTML=h}
+ function nw(){X=(100+Math.floor(Math.random()*500))/10;hint=false;['vMain','vVer'].forEach(i=>document.getElementById(i).value='');document.getElementById('vMsg').textContent='';draw()}
+ document.getElementById('vNew').onclick=nw;
+ document.getElementById('vHint').onclick=()=>{hint=true;draw();document.getElementById('vMsg').innerHTML='💡 الخط البرتقالي يوضح موضع صفر الورنية على التدريج الثابت، والخط الأحمر هو خط الورنية المنطبق.'};
+ document.getElementById('vCheck').onclick=()=>{const fl=Math.floor(X),f=Math.round((X-fl)*10),a=+document.getElementById('vMain').value,b=+document.getElementById('vVer').value,m=document.getElementById('vMsg');
+  if(document.getElementById('vMain').value===''||document.getElementById('vVer').value===''){m.textContent='اكتب القيمتين أولًا.';return}
+  if(a===fl&&b===f){score++;m.className='fb ok';m.innerHTML='🎉 <b>صحيح!</b> القراءة = <bdi dir="ltr">'+fl+' + 0.'+f+' = <b>'+X.toFixed(1)+' mm = '+(X/10).toFixed(2)+' cm</b></bdi>';m.style.color='var(--green)';document.getElementById('vScore').textContent='قراءات صحيحة: '+score}
+  else{m.className='fb no';m.innerHTML='🤔 ليست صحيحة. '+(a!==fl?'راجع التدريج الثابت: اقرأ الخط الذي قبل صفر الورنية مباشرة. ':'')+(b!==f?'راجع خط الورنية: ابحث عن الخط الذي ينطبق تمامًا على خط من الأعلى.':'');m.style.color='var(--red)'}};
+ X=31.4;draw();})();
+
+// osmosis lab
+const os={};
+const cAS=document.getElementById('cA'),cBS=document.getElementById('cB');
+function osInit(){os.run=false;cancelAnimationFrame(os.raf);
+  const a=+cAS.value,b=+cBS.value;document.getElementById('cAOut').textContent=a;document.getElementById('cBOut').textContent=b;
+  os.sA=100*a/(100-a);os.sB=100*b/(100-b);os.wA=100;os.wB=100;os.w0A=100;os.w0B=100;
+  document.getElementById('osRun').textContent='⏩ مرور الوقت';document.getElementById('osMsg').textContent='';
+  osDraw();makeParticles();}
+const conc=(s,w)=>s/(s+w);
+function mix(c){const t=Math.min(c/0.2,1);const a=[243,227,166],b=[190,110,80];return 'rgb('+a.map((x,i)=>Math.round(x+(b[i]-x)*t)).join(',')+')'}
+function osDraw(){const cA=conc(os.sA,os.wA),cB=conc(os.sB,os.wB);
+  const y=v=>Math.max(22,Math.min(168,170-(v-60)*1.0));
+  const lA=document.getElementById('liqA'),lB=document.getElementById('liqB');
+  lA.setAttribute('y',y(os.wA+os.sA));lB.setAttribute('y',y(os.wB+os.sB));
+  lA.setAttribute('fill',mix(cA));lB.setAttribute('fill',mix(cB));
+  const f=x=>(x*100).toFixed(1)+'%',n=x=>Math.round(x);
+  document.getElementById('tcA').textContent=f(cA);document.getElementById('tcB').textContent=f(cB);
+  document.getElementById('tsA').textContent=n(os.sA);document.getElementById('tsB').textContent=n(os.sB);
+  document.getElementById('twA').textContent=n(os.wA)+(os.wA-os.w0A>0.5?' ⬆':os.wA-os.w0A<-0.5?' ⬇':'');
+  document.getElementById('twB').textContent=n(os.wB)+(os.wB-os.w0B>0.5?' ⬆':os.wB-os.w0B<-0.5?' ⬇':'');
+  const d=cA-cB;document.getElementById('arrow').textContent=os.run?(Math.abs(d)<0.002?'⇄ لا يوجد صافي حركة':d>0?'صافي حركة الماء: من ب ← إلى أ':'صافي حركة الماء: من أ ← إلى ب'):'';
+  os.bias=Math.max(-0.4,Math.min(0.4,d*8));}
+function osStep(){const d=conc(os.sA,os.wA)-conc(os.sB,os.wB);
+  if(Math.abs(d)<0.0008){os.run=false;os.bias=0;osDraw();document.getElementById('arrow').textContent='⇄ نفس التركيز – توقفت الأسموزية';
+    document.getElementById('osMsg').innerHTML='🟢 تساوى التركيز في أ و ب، فتوقف صافي حركة الماء.';document.getElementById('osRun').textContent='⏩ مرور الوقت';return}
+  const dw=Math.max(-1.2,Math.min(1.2,40*d));os.wA+=dw;os.wB-=dw;osDraw();os.raf=requestAnimationFrame(osStep)}
+document.getElementById('osRun').onclick=()=>{if(os.run){os.run=false;cancelAnimationFrame(os.raf);document.getElementById('osRun').textContent='⏩ مرور الوقت';return}
+  os.run=true;document.getElementById('osRun').textContent='⏸ إيقاف';osStep()};
+document.getElementById('osReset').onclick=osInit;cAS.oninput=cBS.oninput=osInit;
+// particles (left = ب, right = أ)
+const can=document.getElementById('osCan'),g=can.getContext('2d');let parts=[],xBA=0,xAB=0;
+function makeParticles(){parts=[];xBA=xAB=0;const a=+cAS.value,b=+cBS.value;
+  const add=(n,big,side)=>{for(let i=0;i<n;i++)parts.push({x:side?160+Math.random()*130:10+Math.random()*130,y:10+Math.random()*170,vx:(Math.random()-.5)*1.6,vy:(Math.random()-.5)*1.6,big})};
+  add(40,false,0);add(40,false,1);add(Math.round(b/1.5),true,0);add(Math.round(a/1.5),true,1);}
+function tick(){g.clearRect(0,0,300,190);
+  g.fillStyle=mix(conc(os.sB,os.wB));g.globalAlpha=.35;g.fillRect(0,0,150,190);g.fillStyle=mix(conc(os.sA,os.wA));g.fillRect(150,0,150,190);g.globalAlpha=1;
+  g.strokeStyle='#7a2c2c';g.lineWidth=3;g.setLineDash([10,6]);g.beginPath();g.moveTo(150,0);g.lineTo(150,190);g.stroke();g.setLineDash([]);
+  g.fillStyle='#333';g.font='bold 14px Cairo';g.fillText('ب',20,20);g.fillText('أ',275,20);
+  const bias=os.run?os.bias||0:0;
+  parts.forEach(p=>{const ox=p.x;p.x+=p.vx;p.y+=p.vy;
+    if(p.y<5||p.y>185)p.vy*=-1;if(p.x<5||p.x>295)p.vx*=-1;
+    if((ox<150)!==(p.x<150)){
+      if(p.big){p.x=ox;p.vx*=-1}
+      else{const fromB=ox<150,pass=Math.random()<(fromB?0.5+bias:0.5-bias);
+        if(!pass){p.x=ox;p.vx*=-1}else{fromB?xBA++:xAB++}}}
+    g.beginPath();g.arc(p.x,p.y,p.big?7:3,0,7);if(p.big){g.strokeStyle='#333';g.lineWidth=2;g.stroke()}else{g.fillStyle='#1f6fb2';g.fill()}});
+  document.getElementById('xBA').textContent=xBA;document.getElementById('xAB').textContent=xAB;
+  requestAnimationFrame(tick)}
+osInit();tick();
+
+// osmosis in cells
+const cl={t:'a',m:null,r:50,inset:8,vac:1,raf:null};
+const tgt={a:{w:{r:82},i:{r:50},s:{r:36}},p:{w:{inset:2,vac:1.45},i:{inset:8,vac:1},s:{inset:30,vac:.35}}};
+const msgs={a:{w:['💧 الماء يدخل إلى الخلية ⬇','🔴 تركيز الماء خارج الخلية أعلى، فيدخل الماء بالأسموزية. تنتفخ الخلية… ثم <b>تنفجر</b> لعدم وجود جدار.'],i:['⇄ لا يوجد صافي حركة للماء','⚪ التركيز متساوٍ داخل الخلية وخارجها، فتبقى الخلية كما هي.'],s:['💧 الماء يخرج من الخلية ⬆','🟠 المحلول الخارجي أكثر تركيزًا، فيخرج الماء من الخلية <b>فتنكمش</b>.']},
+ p:{w:['💧 الماء يدخل إلى الخلية ⬇','🟢 يدخل الماء إلى عصارة الخلية فتصبح <b>مكتنزة</b>، والجدار السليلوزي يمنعها من الانفجار.'],i:['⇄ لا يوجد صافي حركة للماء','⚪ التركيز متساوٍ، فتبقى الخلية النباتية على حالها.'],s:['💧 الماء يخرج من الخلية ⬆','🟠 يخرج الماء، فتنكمش الفجوة وتبتعد محتويات الخلية عن الجدار، ويذبل النبات.']}};
+const medCol={w:'#dff1ff',i:'#eef3e0',s:'#f6e2c4'};
+function clRender(){
+  const a=document.getElementById('aCell');a.setAttribute('r',cl.r);a.setAttribute('stroke-dasharray',cl.r<42?'6 3':'');
+  const mi=cl.inset,pm=document.getElementById('pMem');pm.setAttribute('x',70+mi);pm.setAttribute('y',40+mi);pm.setAttribute('width',160-2*mi);pm.setAttribute('height',120-2*mi);
+  const vw=90*cl.vac,vh=64*Math.min(cl.vac,1.45)*(cl.vac>1?0.95:1),pv=document.getElementById('pVac');
+  pv.setAttribute('width',Math.min(vw,160-2*mi-20));pv.setAttribute('height',Math.min(vh,120-2*mi-16));pv.setAttribute('x',150-Math.min(vw,160-2*mi-20)/2);pv.setAttribute('y',100-Math.min(vh,120-2*mi-16)/2);
+  document.getElementById('pNuc').setAttribute('cx',70+mi+14);document.getElementById('pNuc').setAttribute('cy',40+mi+14);}
+function clStart(){cancelAnimationFrame(cl.raf);document.getElementById('burst').style.display='none';document.getElementById('aCell').style.display='';document.getElementById('aNuc').style.display='';
+  cl.r=50;cl.inset=8;cl.vac=1;clRender();
+  document.getElementById('animalG').style.display=cl.t==='a'?'':'none';document.getElementById('plantG').style.display=cl.t==='p'?'':'none';
+  document.getElementById('cellLbl').textContent=cl.t==='a'?'خلية حيوانية':'خلية نباتية';
+  if(!cl.m){document.getElementById('wArrow').textContent='';return}
+  document.getElementById('medBg').setAttribute('fill',medCol[cl.m]);
+  const T=tgt[cl.t][cl.m],ms=msgs[cl.t][cl.m];document.getElementById('wArrow').textContent=ms[0];document.getElementById('cellMsg').innerHTML='⏳ راقب الخلية…';
+  const s0={r:cl.r,inset:cl.inset,vac:cl.vac};let t0=null;
+  function step(ts){if(!t0)t0=ts;const k=Math.min((ts-t0)/2500,1),e=1-Math.pow(1-k,2);
+    if(T.r!==undefined)cl.r=s0.r+(T.r-s0.r)*e;if(T.inset!==undefined){cl.inset=s0.inset+(T.inset-s0.inset)*e;cl.vac=s0.vac+(T.vac-s0.vac)*e}
+    clRender();if(k<1)cl.raf=requestAnimationFrame(step);else{document.getElementById('cellMsg').innerHTML=ms[1];
+      if(cl.t==='a'&&cl.m==='w'){document.getElementById('aCell').style.display='none';document.getElementById('aNuc').style.display='none';document.getElementById('burst').style.display=''}}}
+  cl.raf=requestAnimationFrame(step)}
+document.querySelectorAll('#cellType .btn').forEach(b=>b.onclick=()=>{cl.t=b.dataset.t;document.querySelectorAll('#cellType .btn').forEach(x=>x.classList.toggle('main',x===b));clStart()});
+document.querySelectorAll('#medium .btn').forEach(b=>b.onclick=()=>{cl.m=b.dataset.m;document.querySelectorAll('#medium .btn').forEach(x=>x.classList.toggle('main',x===b));clStart()});
+clStart();
+// wilting plant
+const soil=document.getElementById('soil');
+function wilt(){const v=+soil.value,d=(100-v)/100;document.getElementById('soilOut').textContent=v;
+  const tipX=150+d*70,tipY=40+d*70;document.getElementById('stem').setAttribute('d','M150 175 Q150 110 '+tipX+' '+tipY);
+  let h='';[[0.35,1],[0.5,-1],[0.65,1],[0.8,-1],[1,1]].forEach(([t,s])=>{
+    const x=(1-t)*(1-t)*150+2*(1-t)*t*150+t*t*tipX,y=(1-t)*(1-t)*175+2*(1-t)*t*110+t*t*tipY;
+    const ang=s>0?(-25+d*95):(205-d*95);
+    h+='<ellipse cx="'+x+'" cy="'+y+'" rx="26" ry="8" fill="'+(d>.6?'#9bab4a':'#3e9b4f')+'" transform="rotate('+ang+' '+x+' '+y+') translate('+(s>0?22:22)+' 0)"/>'});
+  document.getElementById('leaves').innerHTML=h;
+  const m=document.getElementById('soilMsg');
+  m.innerHTML=v>65?'🟢 الخلايا <b>مكتنزة</b> – الضغط الاكتنازي يُبقي الساق والأوراق منتصبة.':v>30?'🟡 الخلايا بدأت تفقد الماء… الأوراق تتدلّى.':'🔴 <b>ذبول</b> – فقدت الخلايا كميات كبيرة من الماء فقلّ الضغط الاكتنازي.';}
+soil.oninput=wilt;wilt();
+// amoeba
+const am=document.getElementById('amoeba'),ag=am.getContext('2d');let A;
+function amReset(){A={R:55,vr:3,cv:true,phase:'fill',dots:[],out:[],burst:false,t:0};document.getElementById('cvBtn').textContent='⛔ عطّل الفجوة المنقبضة';document.getElementById('amMsg').textContent='الفجوة المنقبضة تعمل: تجمع الماء ثم تطرده.'}
+amReset();
+document.getElementById('cvBtn').onclick=()=>{A.cv=!A.cv;document.getElementById('cvBtn').textContent=A.cv?'⛔ عطّل الفجوة المنقبضة':'✅ شغّل الفجوة المنقبضة';
+  document.getElementById('amMsg').textContent=A.cv?'الفجوة المنقبضة تعمل من جديد.':'⚠️ الفجوة لا تعمل… الماء يدخل ولا يخرج!'};
+document.getElementById('amReset').onclick=amReset;
+function amTick(){A.t++;ag.clearRect(0,0,300,210);const cx=150,cy=105;
+  ag.font='12px Cairo';ag.fillStyle='#c0392b';ag.textAlign='left';ag.fillText('O₂ ⟶',8,30);ag.fillStyle='#666';ag.textAlign='right';ag.fillText('⟵ CO₂',292,30);
+  if(A.burst){ag.font='50px serif';ag.textAlign='center';ag.fillText('💥',cx,cy+18);ag.font='13px Cairo';ag.fillStyle='#c0392b';ag.fillText('انفجرت الخلية!',cx,cy+60);requestAnimationFrame(amTick);return}
+  if(Math.random()<.35){const a=Math.random()*6.28;A.dots.push({a,d:A.R+40})}
+  A.dots.forEach(d=>d.d-=1.2);A.dots=A.dots.filter(d=>{if(d.d<A.R-4){A.cv?A.vr=Math.min(A.vr+.18,20):A.R+=.12;return false}return true});
+  if(A.cv){if(A.vr>=20&&A.phase==='fill')A.phase='pump';if(A.phase==='pump'){A.vr-=1.5;if(A.t%2===0)A.out.push({x:cx+40,y:cy-25,vx:1.5+Math.random(),vy:(Math.random()-.5)*1.5});if(A.vr<=3){A.vr=3;A.phase='fill'}}
+    if(A.R>55)A.R-=.05}
+  else if(A.R>92){A.burst=true;document.getElementById('amMsg').textContent='💥 بدون الفجوة المنقبضة تجمّع الماء حتى انفجرت الأميبا.'}
+  ag.beginPath();for(let i=0;i<=40;i++){const th=i/40*6.283,rr=A.R+6*Math.sin(th*3+A.t*.03)+4*Math.sin(th*5-A.t*.02);const x=cx+rr*Math.cos(th),y=cy+rr*.8*Math.sin(th);i?ag.lineTo(x,y):ag.moveTo(x,y)}
+  ag.closePath();ag.fillStyle='#cfe8f5';ag.fill();ag.strokeStyle='#5a8fb0';ag.lineWidth=2;ag.stroke();
+  ag.fillStyle='#4a2c6b';ag.beginPath();ag.ellipse(cx-12,cy+8,14,10,0.4,0,7);ag.fill();
+  ag.fillStyle='rgba(120,190,255,.8)';ag.strokeStyle='#2e7bc4';ag.beginPath();ag.arc(cx+25,cy-18,A.vr,0,7);ag.fill();ag.stroke();
+  ag.fillStyle='#1f6fb2';A.dots.forEach(d=>{ag.beginPath();ag.arc(cx+d.d*Math.cos(d.a),cy+d.d*.8*Math.sin(d.a),2.5,0,7);ag.fill()});
+  A.out.forEach(o=>{o.x+=o.vx;o.y+=o.vy;ag.beginPath();ag.arc(o.x,o.y,2.5,0,7);ag.fill()});A.out=A.out.filter(o=>o.x<300);
+  ag.fillStyle='#333';ag.font='11px Cairo';ag.textAlign='center';ag.fillText('فجوة منقبضة',cx+25,cy-18-A.vr-4);ag.fillText('نواة',cx-12,cy+32);
+  requestAnimationFrame(amTick)}
+amTick();
+
+// systems: arm
+const armS=document.getElementById('armS');
+armS.oninput=()=>{const a=+armS.value;document.getElementById('fore').setAttribute('transform','rotate('+(-a)+' 160 96)');
+  const bc=document.getElementById('bicep');bc.setAttribute('rx',42-a*.12);bc.setAttribute('ry',11+a*.13);bc.setAttribute('cy',80-a*.08);
+  document.getElementById('armMsg').textContent=a<10?'الذراع ممدودة – العضلة منبسطة':a<70?'العضلة تنقبض فتقصر وتسحب العظم…':'💪 العضلة منقبضة – انثنت الذراع عند المفصل'};
+// systems: plant transport
+const pc=document.getElementById('plantCan'),pg=pc.getContext('2d');let pMode='x',pDots=[];
+const pInfo={x:'💧 <b>أوعية الخشب:</b> تنقل الماء والأملاح المعدنية من الجذور إلى أعلى، إلى الساق والأوراق.',p:'🍃 <b>أوعية اللحاء:</b> تنقل الغذاء الذي تصنعه الأوراق إلى بقية أجزاء النبات.'};
+function setPMode(m){pMode=m;pDots=[];document.getElementById('xyBtn').classList.toggle('main',m==='x');document.getElementById('phBtn').classList.toggle('main',m==='p');document.getElementById('plantInfo').innerHTML=pInfo[m]+'<br><small>أوعية الخشب واللحاء جزء من <b>جهاز النقل</b> في النبات.</small>'}
+document.getElementById('xyBtn').onclick=()=>setPMode('x');document.getElementById('phBtn').onclick=()=>setPMode('p');setPMode('x');
+const leaves=[[150,40,-1],[150,70,1],[150,100,-1],[150,130,1]];
+function plantTick(){pg.clearRect(0,0,300,260);
+  pg.fillStyle='#c9a77a';pg.fillRect(0,215,300,45);
+  pg.strokeStyle='#7a4a24';pg.lineWidth=3;[[-40,40],[-15,45],[15,45],[40,38]].forEach(([dx,dy])=>{pg.beginPath();pg.moveTo(150,215);pg.quadraticCurveTo(150+dx/2,225,150+dx,215+dy);pg.stroke()});
+  pg.fillStyle='#8bbf5a';pg.fillRect(143,30,14,185);
+  leaves.forEach(([x,y,s])=>{pg.save();pg.translate(x,y);pg.scale(s,1);pg.fillStyle='#3e9b4f';pg.beginPath();pg.ellipse(40,0,36,13,-.3,0,7);pg.fill();pg.restore()});
+  pg.fillStyle='#d23b3b';pg.beginPath();pg.arc(150,26,9,0,7);pg.fill();
+  if(Math.random()<.25)pDots.push(pMode==='x'?{x:146+Math.random()*8,y:250,vy:-1.3}:{x:150+(Math.random()<.5?-60:60),y:40+Math.floor(Math.random()*4)*30,vx:0,vy:0,leaf:true});
+  pDots.forEach(d=>{if(pMode==='p'&&d.leaf){d.x+=(150-d.x)*.06;if(Math.abs(d.x-150)<2){d.leaf=false;d.vy=1.1}}else d.y+=d.vy;
+    pg.fillStyle=pMode==='x'?'#1f78d1':'#e08a1e';pg.beginPath();pg.arc(d.x,d.y,3.5,0,7);pg.fill()});
+  pDots=pDots.filter(d=>d.y>-5&&d.y<255&&!(pMode==='p'&&d.y>250));
+  pg.fillStyle='#333';pg.font='12px Cairo';pg.textAlign='center';pg.fillText(pMode==='x'?'⬆ ماء وأملاح من الجذور':'⬇ غذاء من الأوراق',230,200);
+  requestAnimationFrame(plantTick)}
+plantTick();
+// systems: phone
+const ph=new Set();
+function phDraw(){document.querySelectorAll('#phParts .btn').forEach(b=>b.classList.toggle('main',ph.has(b.dataset.k)));
+  const all=['cover','screen','keys','board','bat'].every(k=>ph.has(k)),works=all;
+  const box=document.getElementById('phone');box.style.border=ph.has('cover')?'4px solid #333':'4px dashed #bbb';box.style.background=ph.has('cover')?'#3a4a6b':'transparent';
+  const sc=document.getElementById('ph-screen');sc.style.background=ph.has('screen')?(works?'#9fe8a8':'#55606e'):'transparent';sc.style.border=ph.has('screen')?'2px solid #222':'2px dashed #ccc';sc.textContent=ph.has('screen')?(works?'📶 مرحبًا!':''):'شاشة؟';
+  const ky=document.getElementById('ph-keys');ky.style.background=ph.has('keys')?'#cfd6e3':'transparent';ky.style.border=ph.has('keys')?'2px solid #222':'2px dashed #ccc';ky.textContent=ph.has('keys')?'1 2 3\n4 5 6\n7 8 9':'مفاتيح؟';ky.style.whiteSpace='pre';ky.style.direction='ltr';
+  document.getElementById('ph-inner').innerHTML=(ph.has('board')?'🔌':'')+(ph.has('bat')?'🔋':'');document.getElementById('ph-inner').style.color=ph.has('cover')?'#fff':'#333';
+  const m=document.getElementById('phMsg');
+  if(works){m.innerHTML='🟢 <b>الهاتف يعمل!</b> اتصلت جميع الأجزاء ووصلتها الكهرباء.';m.style.color='var(--green)'}
+  else if(ph.size===4&&!ph.has('bat')){m.innerHTML='🔴 كل الأجزاء موجودة لكن <b>بدون كهرباء</b> لا يعمل الجهاز الكهربائي.';m.style.color='var(--red)'}
+  else{m.innerHTML='ركّبت '+ph.size+' من 5 أجزاء. كل جزء له دور في الجهاز.';m.style.color='#555'}}
+document.querySelectorAll('#phParts .btn').forEach(b=>b.onclick=()=>{ph.has(b.dataset.k)?ph.delete(b.dataset.k):ph.add(b.dataset.k);phDraw()});phDraw();
+// systems: sort
+const sortItems=[['❤️ القلب والأوعية الدموية',0],['📱 الهاتف النقال',2],['🏗️ لعبة الرافعة',1],['🌿 أوعية الخشب واللحاء',0],['🚲 الدراجة الهوائية',1],['🧊 الثلاجة',2]];
+const kinds=['🧬 كائن حي','⚙️ آلي','🔌 كهربائي'];let sortRight=0,sortDone=0;
+sortItems.forEach(([name,ans])=>{const row=document.createElement('div');row.style.cssText='border-bottom:1px solid var(--line);padding:6px 0';
+  row.innerHTML='<b>'+name+'</b>';const bs=document.createElement('div');bs.className='btns';let done=false;
+  kinds.forEach((k,i)=>{const b=document.createElement('button');b.className='btn';b.textContent=k;b.onclick=()=>{if(done)return;done=true;sortDone++;
+    if(i===ans){b.classList.add('opt','ok');sortRight++}else{b.classList.add('opt','no');bs.children[ans].classList.add('opt','ok')}
+    [...bs.children].forEach(x=>{x.style.width='auto';x.style.display='inline-block'});
+    document.getElementById('sortScore').textContent='صحيح: '+sortRight+' من '+sortDone};bs.appendChild(b)});
+  row.appendChild(bs);document.getElementById('sortBox').appendChild(row)});
+
+// sound lab
+let ctx,osc,gain,playing=false;
+const fSlider=document.getElementById('freq'),fOut=document.getElementById('freqOut');
+const toF=v=>Math.round(20*Math.pow(1000,v/1000));
+const toV=f=>Math.round(1000*Math.log(f/20)/Math.log(1000));
+function curF(){return toF(+fSlider.value)}
+function showF(){const f=curF();fOut.textContent=f>=1000?(f/1000).toFixed(1)+' kHz':f+' Hz';if(osc)osc.frequency.setTargetAtTime(f,ctx.currentTime,.02)}
+fSlider.oninput=showF;showF();
+function startTone(){try{ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();ctx.resume();
+  osc=ctx.createOscillator();gain=ctx.createGain();osc.type='sine';osc.frequency.value=curF();
+  gain.gain.value=0;gain.gain.setTargetAtTime(.08,ctx.currentTime,.05);osc.connect(gain).connect(ctx.destination);osc.start();
+  playing=true;document.getElementById('play').textContent='⏸ إيقاف';}catch(e){document.getElementById('myRange').textContent='تعذّر تشغيل الصوت على هذا الجهاز.'}}
+function stopTone(){if(osc){try{gain.gain.setTargetAtTime(0,ctx.currentTime,.03);const o=osc;setTimeout(()=>o.stop(),150)}catch(e){}osc=null}playing=false;const p=document.getElementById('play');if(p)p.textContent='▶ تشغيل'}
+document.getElementById('play').onclick=()=>playing?stopTone():startTone();
+document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{fSlider.value=toV(+b.dataset.f);showF();if(!playing)startTone()});
+let hi=null,lo=null;
+function rangeMsg(){const r=document.getElementById('myRange');r.innerHTML='مدى سمعك على هذا الجهاز: '+(lo?lo+' Hz':'؟')+' ← '+(hi?hi+' Hz':'؟')+(hi?(hi>=15000?' 👂 سمع ممتاز للترددات العالية':' (قد تكون السماعة هي المحدودة)'):'')}
+document.getElementById('hiBtn').onclick=()=>{hi=curF();rangeMsg()};
+document.getElementById('loBtn').onclick=()=>{lo=curF();rangeMsg()};
+
+// density lab
+const mS=document.getElementById('mass'),vS=document.getElementById('vol'),obj=document.getElementById('obj');
+function dens(){const m=+mS.value,v=+vS.value,d=m/v;
+  document.getElementById('mOut').textContent=m;document.getElementById('vOut').textContent=v;
+  document.getElementById('dOut').textContent=d.toFixed(2)+' g/cm³';
+  const H=220-4,water=H*0.7,size=40+v/5;obj.style.width=obj.style.height=size+'px';obj.style.marginLeft=(-size/2)+'px';
+  obj.textContent=d.toFixed(2);
+  const msg=document.getElementById('dMsg');
+  if(d<1){const sub=size*d;obj.style.bottom=(water-sub)+'px';obj.style.background='#c58a4a';msg.innerHTML='🟢 <b>يطفو</b> – كثافته أقل من الماء (يغمر منه '+Math.round(d*100)+'%)';msg.style.color='var(--green)'}
+  else if(d===1){obj.style.bottom=(water-size)/2+'px';obj.style.background='#888';msg.innerHTML='⚪ <b>يبقى معلّقًا</b> – كثافته تساوي كثافة الماء';msg.style.color='#555'}
+  else{obj.style.bottom='0px';obj.style.background='#5b6b7a';msg.innerHTML='🔴 <b>يغوص</b> – كثافته أكبر من الماء';msg.style.color='var(--red)'}}
+mS.oninput=vS.oninput=dens;
+document.querySelectorAll('#mats .btn').forEach(b=>b.onclick=()=>{mS.value=b.dataset.m;vS.value=b.dataset.v;dens()});
+dens();
+
+// motion lab
+const sA=document.getElementById('spA'),sB=document.getElementById('spB'),cA=document.getElementById('carA'),cB=document.getElementById('carB');
+sA.oninput=()=>document.getElementById('aOut').textContent=sA.value;
+sB.oninput=()=>document.getElementById('bOut').textContent=sB.value;
+let raf=null;
+document.getElementById('race').onclick=()=>{cancelAnimationFrame(raf);
+  const va=+sA.value,vb=+sB.value,track=document.querySelector('.track'),W=track.clientWidth-50;
+  const tA=100/va,tB=100/vb,end=Math.max(tA,tB);let t0=null;
+  ['tA1','tA2','tB1','tB2'].forEach(id=>document.getElementById(id).textContent='...');
+  function step(ts){if(!t0)t0=ts;const t=Math.min((ts-t0)/1000*2,end);
+    cA.style.left=Math.min(va*t,100)/100*W+'px';cB.style.left=Math.min(vb*t,100)/100*W+'px';
+    document.getElementById('clock').textContent=t.toFixed(1)+' s';
+    if(t>=tA){document.getElementById('tA1').textContent=va+' m/s';document.getElementById('tA2').textContent='100 ÷ '+va+' = '+tA.toFixed(1)+' s'}
+    if(t>=tB){document.getElementById('tB1').textContent=vb+' m/s';document.getElementById('tB2').textContent='100 ÷ '+vb+' = '+tB.toFixed(1)+' s'}
+    if(t<end)raf=requestAnimationFrame(step)}
+  raf=requestAnimationFrame(step)};
+
+// cell lab
+const info={
+ wall:['🧱 الجدار الخلوي','غلاف صلب خارجي يدعم الخلية النباتية ويحميها ويعطيها شكلًا ثابتًا. <b>(نباتية فقط)</b>'],
+ mem:['🛡️ الغشاء الخلوي','غشاء رقيق مرن يحيط بالخلية ويتحكم في دخول المواد وخروجها. <b>(في الخليتين)</b>'],
+ nuc:['🧠 النواة','مركز التحكم في الخلية، وتحتوي على المادة الوراثية التي تحمل الصفات. <b>(في الخليتين)</b>'],
+ vac:['💧 الفجوة العصارية','تخزن الماء والغذاء والفضلات. كبيرة جدًا في الخلية النباتية وصغيرة أو غير موجودة في الحيوانية.'],
+ mito:['⚡ الميتوكوندريا','مصنع الطاقة في الخلية: تُطلق الطاقة من الغذاء في عملية التنفس الخلوي. <b>(في الخليتين)</b>'],
+ chl:['🌿 البلاستيدات الخضراء','تحتوي على الكلوروفيل وتقوم بالبناء الضوئي لصنع الغذاء من ضوء الشمس. <b>(نباتية فقط)</b>'],
+ cyto:['🫧 السيتوبلازم','مادة هلامية تملأ الخلية وتسبح فيها العضيات، وتحدث فيها كثير من التفاعلات.']};
+document.querySelectorAll('svg .part').forEach(p=>p.onclick=()=>{
+  document.querySelectorAll('svg .part').forEach(x=>x.classList.remove('sel'));p.classList.add('sel');
+  const i=info[p.dataset.k];document.getElementById('cellInfo').innerHTML='<b>'+i[0]+'</b><br>'+i[1]});
+function setCell(plant){
+  ['wall','chl','memR'].forEach(id=>document.getElementById(id).style.display=plant?'':'none');
+  document.getElementById('memE').style.display=plant?'none':'';
+  const v=document.getElementById('vac');plant?(v.setAttribute('x',150),v.setAttribute('y',45),v.setAttribute('width',110),v.setAttribute('height',130)):(v.setAttribute('x',200),v.setAttribute('y',70),v.setAttribute('width',30),v.setAttribute('height',30));
+  document.getElementById('plantBtn').classList.toggle('main',plant);document.getElementById('animBtn').classList.toggle('main',!plant);
+  document.getElementById('cellInfo').innerHTML=plant?'🌿 الخلية النباتية: لها جدار خلوي وبلاستيدات خضراء وفجوة كبيرة.':'🐾 الخلية الحيوانية: شكلها غير منتظم، بلا جدار خلوي ولا بلاستيدات، وفجواتها صغيرة.'}
+document.getElementById('plantBtn').onclick=()=>setCell(true);
+document.getElementById('animBtn').onclick=()=>setCell(false);
+</script>
+<script>(function(){function h(){var id=location.hash.slice(1);if(id&&document.getElementById(id)&&document.getElementById(id).classList.contains("page"))go(id)}h();addEventListener("hashchange",h)})();</script>
+<script>(function(){function s(t,q){try{parent.postMessage(q?{lbt:t,qq:q}:{lbt:t},'*')}catch(e){}}
+var seen=new WeakSet();
+function qinfo(b,cb){setTimeout(function(){try{var G=b.parentElement,opts=[].slice.call(G.children).filter(function(x){return x.classList.contains('opt')});if(opts.length<2)return cb(null);
+ var p=G,qEl=null;for(var i=0;i<4&&p&&!qEl;i++){qEl=[].slice.call(p.children).filter(function(c){return !c.classList.contains('opt')&&!c.querySelector('.opt')&&!c.classList.contains('fb')&&!c.classList.contains('sc')&&c.textContent.trim().length>2})[0];if(!qEl)p=p.parentElement}
+ if(!qEl||qEl.querySelector('canvas,svg,img,input,table'))return cb(null);
+ var o=opts.map(function(x){return x.textContent.trim()}),r=-1,w=opts.indexOf(b);opts.forEach(function(x,i){if(x.classList.contains('ok'))r=i});
+ cb({q:qEl.textContent.replace(/\s+/g,' ').trim().replace(/^\d+\)\s*/,'').slice(0,300),o:o,r:r,w:w})}catch(e){cb(null)}},60)}
+new MutationObserver(function(ms){ms.forEach(function(m){
+ if(m.type==='attributes'){var t=m.target,c=t.classList,o=' '+(m.oldValue||'')+' ';
+  if((c.contains('ok')||c.contains('good'))&&!/ (ok|good) /.test(o)){if(c.contains('opt')&&!t.parentElement.querySelector('.opt.no'))qinfo(t,function(q){s('ok',q)});else s('ok')}
+  if((c.contains('no')||c.contains('bad'))&&!/ (no|bad) /.test(o)){if(c.contains('opt'))qinfo(t,function(q){s('no',q)});else s('no')}}
+ else m.addedNodes.forEach(function(n){if(n.nodeType===1&&n.tagName==='SPAN'&&!seen.has(n)){seen.add(n);if(n.classList.contains('ok'))s('ok');if(n.classList.contains('no'))s('no')}});
+})}).observe(document.documentElement,{attributes:true,subtree:true,attributeOldValue:true,attributeFilter:['class'],childList:true});
+document.addEventListener('click',function(){s('act')},true);})();</script>
+
+</body>
+</html>

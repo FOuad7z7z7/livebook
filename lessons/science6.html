@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>علوم الصف السادس – الكتاب الحي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+html{color-scheme:light}button,input,select{font-family:inherit;color:#1f2a44}
+:root{--ink:#1f2a44;--tl:#2f9e44;--tl2:#ebfbee;--or:#f08c2e;--gr:#2e9e5b;--rd:#d64545;--pu:#6b4fd8;--line:#e2e8ee;--soft:#6b7690}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Cairo',Tahoma,sans-serif;background:#e9eef6;color:var(--ink);line-height:1.85}
+.book{max-width:800px;margin:12px auto;background:#fff;border-radius:16px;box-shadow:0 10px 30px #0002;overflow:hidden}
+header{background:linear-gradient(135deg,#1b5e20,#2f9e44);color:#fff;padding:16px;text-align:center}
+header h1{margin:0;font-size:1.3rem;font-weight:900}header div{opacity:.9;font-size:.85rem}
+.bar{display:flex;gap:6px;padding:8px 10px;background:var(--tl2);border-bottom:2px solid #c9d8f0;position:sticky;top:0;z-index:5;overflow-x:auto}
+.bar button{flex:0 0 auto;border:2px solid var(--tl);background:#fff;color:#1b3f73;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.86rem}
+.bar button.on{background:var(--tl);color:#fff}
+.page{display:none;padding:14px 16px 40px;animation:in .35s}.page.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h2{color:#1b3f73;margin:4px 0 6px;font-size:1.35rem;line-height:1.5}
+.num{display:inline-block;background:var(--tl);color:#fff;border-radius:10px;padding:0 10px;margin-left:6px;font-size:1rem}
+.box{border:2px solid var(--line);border-radius:16px;padding:14px;margin:14px 0;background:#fff}
+.box h3{margin:0 0 6px;font-size:1.05rem;color:#1b3f73}
+.lab{border-style:dashed;border-color:#a9c3ea;background:#fbfcff}
+.idea{background:linear-gradient(135deg,#1b5e20,#2f9e44);color:#fff;border-radius:16px;padding:12px 16px;margin:10px 0;font-weight:800}
+.idea small{display:block;opacity:.85;font-weight:600}
+.life{background:#fff7e8;border-right:5px solid var(--or);border-radius:10px;padding:8px 12px;margin:10px 0}
+.law{background:#fff7e8;border:2px solid #f5c27a;border-radius:14px;padding:10px 14px;margin:10px 0;font-weight:800;text-align:center;font-size:1.05rem}
+.warn{background:#fdeeee;border-right:5px solid var(--rd);border-radius:10px;padding:8px 12px;margin:10px 0}
+.btn{border:2px solid var(--ink);background:#fff;border-radius:10px;padding:6px 14px;font-weight:800;cursor:pointer;font-size:.95rem}
+.btn.main{background:var(--tl);border-color:var(--tl);color:#fff}.btn.or{background:var(--or);border-color:var(--or);color:#2a1600}
+.btn.ok{background:#dff5e7;border-color:var(--gr)}.btn.no{background:#fde4e4;border-color:var(--rd)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;justify-content:center}
+.fb{font-weight:800;min-height:1.4em;text-align:center;margin-top:6px}.fb.ok{color:var(--gr)}.fb.no{color:var(--rd)}
+.prob{background:#f5f8fd;border-radius:14px;padding:10px;text-align:center;font-weight:700}
+.mx{font-size:1.2rem;font-weight:800;line-height:2.1}
+.sc{text-align:center;font-weight:900;background:var(--tl2);border-radius:12px;padding:8px}
+.steps{background:#f8f9fc;border-radius:12px;padding:8px 12px;margin-top:8px;display:none}
+.opt{display:block;width:100%;text-align:right;margin:5px 0}.opt.ok{background:#dff5e7;border-color:var(--gr)}.opt.no{background:#fde4e4;border-color:var(--rd)}
+input.cf{width:60px;height:42px;font-size:1.15rem;font-weight:900;text-align:center;border:3px solid #c9d8f0;border-radius:10px;direction:ltr;vertical-align:middle;margin:0 2px}
+input.cf.ok{border-color:var(--gr);background:#eefaf2}input.cf.no{border-color:var(--rd);background:#fdeeee}
+/* matrix */
+.M{display:inline-flex;align-items:stretch;vertical-align:middle;margin:2px 4px}
+.M .br{width:8px;border:3px solid var(--ink)}.M .br.r{border-left:none;border-radius:0 6px 6px 0}.M .br.l{border-right:none;border-radius:6px 0 0 6px}
+.M.det .br{width:0;border-width:0 0 0 3px;border-radius:0}.M.det .br.l{border-width:0 3px 0 0}
+.M .g{display:grid;direction:rtl;gap:2px 4px;padding:2px 4px}
+.M .c{min-width:36px;text-align:center;font-weight:900;font-size:1.1rem;padding:2px 4px;border-radius:8px;direction:ltr;transition:.25s}
+.M .c.h1{background:#ffe08a}.M .c.h2{background:#b9e4ff}.M .c.x{opacity:.18;text-decoration:line-through}.M .c.h3{background:#c8f0d2}
+.M input.c{width:48px;height:36px;border:2px solid #c9d8f0;border-radius:8px;background:#fff;font-family:inherit}
+.chap{border:2px solid var(--line);border-radius:14px;margin:8px 0;overflow:hidden}
+.chap>div:first-child{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;font-weight:800;background:#f8faff}
+.chap .cn{background:var(--tl);color:#fff;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;flex:0 0 auto}
+.chap .ls{display:none;padding:4px 12px 10px}.chap.open .ls{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px dashed var(--line);font-size:.95rem}
+.li .pg{margin-right:auto;color:var(--soft);font-size:.8rem}.li.ready{cursor:pointer;font-weight:800;color:#1b3f73}
+.tg{font-size:.72rem;border-radius:8px;padding:0 8px;font-weight:800}.tg.r{background:#e6f6ec;color:#1d7a3f}.tg.s{background:#f1f1f1;color:#999}
+table.t{border-collapse:collapse;width:100%;font-size:.92rem;margin:6px 0}table.t td,table.t th{border:1px solid #d6e1f2;padding:5px 8px}table.t th{background:var(--tl2)}
+.sl{display:flex;align-items:center;gap:8px;margin:4px 0}.sl label{min-width:90px;font-weight:800}.sl input{flex:1;accent-color:var(--tl)}
+footer{text-align:center;color:#999;font-size:.8rem;padding:10px 10px 70px}
+.rt{direction:ltr;unicode-bidi:isolate;display:inline-block}.wx,.bx{border:1px solid #dbe5f5;border-radius:12px;padding:8px 10px;margin:8px 0;background:#fbfcff}.wxq{font-weight:700;line-height:2}.wst{background:#fff;border-right:4px solid var(--tl);border-radius:8px;padding:4px 10px;margin:5px 0;animation:in .3s;line-height:2}.wst.fin{border-color:var(--gr);background:#eefaf2}.sn{display:inline-block;background:var(--tl);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:.8rem;margin-left:6px}.bh{background:#fff7e8;border-radius:8px;padding:6px 10px;margin:4px 0}.ans{font-weight:900;color:var(--gr);margin-top:4px}.exb{border-color:#a9c3ea}.M.det .br.r,.M.det .br.l{border:none;border-radius:0;width:0}.M.det .br.r{border-right:3px solid var(--ink)}.M.det .br.l{border-left:3px solid var(--ink)}.bkb{border-color:#f5c27a;background:#fffdf8}/*darkfix*/input,select,textarea,.cf,.M input.c{background-color:#fff !important;color:#1f2a44 !important;-webkit-text-fill-color:#1f2a44 !important;caret-color:#1f2a44}input.cf.ok{background-color:#eefaf2 !important}input.cf.no{background-color:#fdeeee !important}svg text{font-family:Cairo,Tahoma,Arial,sans-serif}
+canvas{touch-action:manipulation;max-width:100%;height:auto}
+.shk{animation:shk .4s}@keyframes shk{25%{transform:translateX(6px)}75%{transform:translateX(-6px)}}
+</style>
+</head>
+<body>
+<div class="book">
+<header><h1>🔬 علوم الصف السادس</h1><div>الكتاب الحي · الفصل الدراسي الأول · التنوع والطاقة</div></header>
+<div class="bar" id="bar">
+  <button data-p="home" class="on">📚 الفهرس</button>
+  <button data-p="c1">1 لماذا نصنّف؟</button>
+  <button data-p="c2">1 تصنيف المخلوقات</button>
+  <button data-p="c3">1 الجداول والخرائط</button>
+  <button data-p="rv1">🏁 مراجعة 1</button>
+  <button data-p="m1">2 خواص المواد</button>
+  <button data-p="m2">2 المواد واستخداماتها</button>
+  <button data-p="rv2">🏁 مراجعة 2</button>
+  <button data-p="n1">3 أشكال الطاقة</button>
+  <button data-p="n2">3 الطاقة الكامنة</button>
+  <button data-p="n3">3 تحولات الطاقة</button>
+  <button data-p="rv3">🏁 مراجعة 3</button>
+  <button data-p="o1">4 الشمس والمياه</button>
+  <button data-p="o2">4 الرياح والوقود</button>
+  <button data-p="rv4">🏁 مراجعة 4</button>
+</div>
+<style>
+.sl{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px 0;font-weight:800}
+.sl input[type=range]{width:200px;accent-color:var(--tl)}
+.pool{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.pool button{border:2px solid var(--line);border-radius:12px;background:#fff;padding:7px 11px;font-family:inherit;font-weight:800;cursor:pointer;font-size:.92rem}
+.pool button.sel{border-color:var(--tl);background:var(--tl2)}
+.pool button.ok{border-color:#2fb24c;background:#e6f7ea}.pool button.no{border-color:#e5484d;background:#fde8e8}
+.cat{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}
+.cat>div{border:2px dashed var(--line);border-radius:14px;padding:8px;min-height:70px;text-align:center;cursor:pointer}
+.cat>div b{display:block;margin-bottom:4px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.steps li{background:#fff;border:2px solid var(--line);border-radius:12px;padding:8px 12px;margin:6px 0;font-weight:800;cursor:pointer;display:flex;gap:8px;align-items:center}
+.steps li.ok{border-color:#2fb24c;background:#e6f7ea}.steps li b{min-width:26px;height:26px;border-radius:50%;background:var(--tl);color:#fff;display:grid;place-items:center;font-size:.85rem}
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0}
+.tools button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px 2px;font-family:inherit;font-weight:800;font-size:.72rem;cursor:pointer}
+.tools button svg{width:100%;height:58px;display:block}.tools button.sel{border-color:var(--tl);background:var(--tl2)}
+.hz{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.hz button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px;cursor:pointer;font-family:inherit;font-weight:800;font-size:.75rem}
+.hz button.sel{border-color:var(--tl);background:var(--tl2)}.hz button.ok{border-color:#2fb24c;background:#e6f7ea}
+.hz svg{width:64px;height:64px;display:block;margin:auto}
+.big2{font-size:1.5rem;font-weight:900;text-align:center;margin:6px 0}
+.matr{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:8px 0}
+.matr button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 2px;font-family:inherit;font-weight:800;font-size:.8rem;cursor:pointer}
+.matr button span{font-size:1.6rem;display:block}.matr button.sel{border-color:var(--tl);background:var(--tl2)}
+.ptab{display:grid;grid-template-columns:repeat(18,1fr);gap:2px;direction:ltr;margin:8px 0}
+.ptab div{aspect-ratio:1;border-radius:4px;font-size:.55rem;font-weight:900;display:grid;place-items:center;cursor:pointer;line-height:1}
+.ptab div.m{background:#ffd8a8}.ptab div.n{background:#b2f2bb}.ptab div.g{background:#a5d8ff}.ptab div.sel{outline:3px solid #e5484d}
+</style>
+<style>
+.cv{width:100%;height:auto;display:block;background:#fff;border-radius:14px;border:2px solid var(--line);touch-action:none}
+.kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.kpi div{background:var(--tl2);border-radius:12px;padding:8px;text-align:center;font-weight:800}.kpi b{display:block;font-size:1.3rem;color:var(--tl)}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}
+.card{border:2px solid var(--line);border-radius:14px;padding:10px;text-align:center;cursor:pointer;background:#fff;font-weight:800;min-height:80px}
+.card .big{font-size:1.8rem;display:block}.card .bk{display:none;font-weight:600;font-size:.88rem;color:#333}.card.flip{background:var(--tl2);border-color:var(--tl)}.card.flip .bk{display:block}.card.flip .fr{display:none}
+.scn{background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px;margin:8px 0;font-weight:800;line-height:1.8}
+.opts2 button{display:block;width:100%;text-align:right;margin:6px 0;background:#fff;border:2px solid var(--line);border-radius:12px;padding:10px;font-family:inherit;font-weight:700;cursor:pointer}
+.opts2 button.ok{border-color:#2fb24c;background:#e6f7ea}.opts2 button.no{border-color:#e5484d;background:#fde8e8}
+.safe{background:#e7f5ff;border-right:4px solid #1c7ed6;border-radius:10px;padding:8px 12px;font-weight:700;margin:8px 0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.chips button{border:2px solid var(--line);border-radius:20px;background:#fff;padding:6px 12px;font-family:inherit;font-weight:800;cursor:pointer}
+.chips button.on{border-color:var(--tl);background:var(--tl2)}.chips button.ok{border-color:#2fb24c;background:#e6f7ea}.chips button.no{border-color:#e5484d;background:#fde8e8}
+.grp{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:8px 0}
+.grp>div{border:2px solid var(--line);border-radius:14px;padding:8px;text-align:center;background:#fff;transition:.3s}
+.grp>div b{display:block;color:var(--tl);margin-bottom:4px}.grp span{display:inline-block;margin:3px;font-size:1.05rem;background:var(--tl2);border-radius:10px;padding:3px 7px;font-weight:800;animation:pop .35s}
+@keyframes pop{from{transform:scale(.3);opacity:0}to{transform:none;opacity:1}}
+.race{display:grid;grid-template-columns:1fr 1fr;gap:8px}.race>div{border:2px solid var(--line);border-radius:14px;padding:6px;background:#fff}
+.race button{border:0;background:none;font-family:inherit;font-weight:700;padding:3px 6px;margin:2px;border-radius:8px;cursor:pointer;font-size:.85rem}
+.race button.hit{background:#e6f7ea;color:#2b8a3e}.race h4{margin:4px 0;color:var(--tl);font-size:.85rem}
+.tree{text-align:center;font-weight:800}.tree .nd{display:inline-block;border:2px solid var(--tl);border-radius:12px;padding:6px 10px;background:var(--tl2);margin:4px}
+.tree .row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:6px 0}.tree .lf{border:2px dashed var(--line);border-radius:12px;padding:6px;min-width:110px;min-height:60px;background:#fff}
+.tree .lf span{display:inline-block;margin:2px;background:#e6f7ea;border-radius:8px;padding:2px 6px;animation:pop .35s}
+.tree .ln{color:var(--soft);font-size:.8rem}
+.qbtn{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+.res{width:100%;border-collapse:collapse;font-size:.8rem;margin:8px 0}.res td,.res th{border:1px solid var(--line);padding:4px;text-align:center}.res th{background:var(--tl2)}
+.house{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.house button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 2px;font-family:inherit;font-weight:800;cursor:pointer;font-size:.8rem}
+.house button span{font-size:1.7rem;display:block}.house button.ok{border-color:#2fb24c;background:#e6f7ea}.house button.sel{border-color:var(--tl);background:var(--tl2)}
+.app{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin:8px 0}.app label{display:flex;gap:6px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:12px;padding:6px 8px;font-weight:800;cursor:pointer;font-size:.88rem}
+.meter{height:14px;border-radius:8px;background:#eee;overflow:hidden;margin:6px 0}.meter i{display:block;height:100%;background:linear-gradient(90deg,#ef4444,#f59e0b,#22c55e);width:0;transition:.5s}
+ol.steps{display:block;background:none}
+.app label.on{border-color:var(--tl);background:var(--tl2)}
+</style>
+
+<section class="page on" id="home">
+  <h2>فهرس الكتاب</h2>
+  <div class="idea">🔬 أهلًا بك في علوم السادس الحي!<small>رتّب معرض هند، وابنِ شجرة تصنيف، وافحص المواد بالمغناطيس والمصباح والماء، واركب قطار الملاهي مع عبقري نو لتشاهد الطاقة تتحوّل، وشغّل سدًا ومزرعة رياح… ومعها أسئلة الكتاب بالحل وشرح صوتي.</small></div>
+  <div id="toc"></div>
+</section>
+
+<!-- ================= الموضوع 1: التصنيف ================= -->
+<section class="page" id="c1">
+  <div class="muted">الموضوع 1 · الفصل 1 · 1.1 – 2.1 · ص 9–16</div>
+  <h2><span class="num">1</span>لماذا نصنّف الأشياء؟ وكيف؟</h2>
+  <div class="idea">💡 <b>التصنيف</b> هو تقسيم الأشياء إلى مجموعات وفقًا لخواصها.<small>يساعدنا على تنظيم الأشياء وإيجادها بسهولة، ويبيّن لنا أوجه الشبه والاختلاف بينها. والغرض من التصنيف هو الذي يحدد الصفة التي نصنّف على أساسها.</small></div>
+  <div class="box lab"><h3>🗂️ المختبر: رتّبي معرض هند</h3><div class="hint" style="text-align:center">انظروا إلى هذه الفوضى! اختر شيئًا ثم ضعه في الركن المناسب</div>
+    <div class="pool" id="exP"></div><div class="cat" id="exC"></div><div class="fb" id="exOut"></div></div>
+  <div class="box lab"><h3>⏱️ المختبر: سباق «عيش الغراب»</h3><div class="hint" style="text-align:center">ابحث عن كلمة «عيش الغراب» في القائمتين واضغط عليها. أيهما وجدتها فيها أسرع؟</div>
+    <div class="race"><div><h4>📋 قائمة غير مصنّفة</h4><div id="rcA"></div></div><div><h4>🗂️ قائمة مصنّفة</h4><div id="rcB"></div></div></div>
+    <div class="btns"><button class="btn" id="rcNew">🔄 جولة جديدة</button></div><div class="fb" id="rcOut"></div></div>
+  <div class="box lab"><h3>🍎 المختبر: صنّف الثمار بطرق مختلفة</h3><div class="hint" style="text-align:center">نفس الثمار… لكن غيّر الخاصية وشاهد المجموعات تتغيّر!</div>
+    <div class="chips" id="frB"></div><div class="grp" id="frG"></div><div class="fb" id="frOut"></div></div>
+  <div class="box"><h3>🔁 ما رأيك؟ (ص 14)</h3><div class="hint">في الجدول الثاني صُنّفت <b>الطماطم والتين الشوكي</b> معًا لأنها <b>متعددة البذور</b>، و<b>البلح</b> و<b>المشمش</b> معًا لأنها <b>وحيدة البذرة</b>. الخاصية المستخدمة هي <b>عدد البذور</b> في الثمرة.</div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="q1"></div></div>
+</section>
+
+<section class="page" id="c2">
+  <div class="muted">الموضوع 1 · الفصل 1 · 3.1 · ص 17–19</div>
+  <h2><span class="num">1</span>كيف نصنّف المخلوقات الحية؟</h2>
+  <div class="idea">💡 نصنّف المخلوقات الحية وفقًا لـ <b>شكل الجسم</b> و<b>التغذية</b> و<b>الحركة</b>.<small>شكل الجسم: عدد الأرجل، غطاء الجسم، عمود فقاري أم لا، وحيد الخلية أم عديد الخلايا. التغذية: ماذا يأكل وكيف يحصل على غذائه. الحركة: يمشي، يسبح، يقفز، يطير.</small></div>
+  <div class="box lab"><h3>🦵 المختبر: عدّاد الأرجل (جدول 4-1)</h3><div class="pool" id="lgP"></div><div class="cat" id="lgC"></div><div class="fb" id="lgOut"></div></div>
+  <div class="box lab"><h3>🍽️ المختبر: ماذا يأكل؟ (جدول 5-1)</h3><div class="pool" id="dtP"></div><div class="cat" id="dtC"></div><div class="fb" id="dtOut"></div></div>
+  <div class="box lab"><h3>🏃 المختبر: كيف يتحرك؟ (جدول 6-1)</h3><div class="hint" style="text-align:center">اختر حيوانًا وشاهد طريقته في الحركة، ثم صنّفه</div>
+    <canvas id="mvC" class="cv" width="640" height="200"></canvas><div class="pool" id="mvP"></div><div class="cat" id="mvC2"></div><div class="fb" id="mvOut"></div></div>
+  <div class="box"><h3>🗃️ المجموعات الرئيسية للمخلوقات الحية (جدول 7-1)</h3><div class="hint" style="text-align:center">اضغط على البطاقة لتقلبها</div><div class="cards" id="gpCards"></div></div>
+  <div class="box lab"><h3>🕵️ من أنا؟ خمّن المجموعة</h3><div id="whoQ"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="q2"></div></div>
+</section>
+
+<section class="page" id="c3">
+  <div class="muted">الموضوع 1 · الفصل 1 · 4.1 · ص 20–23</div>
+  <h2><span class="num">1</span>كيف نعرض التصنيف؟ الجداول والخرائط</h2>
+  <div class="idea">💡 نعرض التصنيف في <b>جدول</b> أو <b>خريطة</b>.<small>في خريطة التصنيف نقسم المجموعة خطوة بخطوة إلى مجموعتين أو أكثر، ونستخدم في كل خطوة خاصية واحدة.</small></div>
+  <div class="box lab"><h3>🌳 المختبر: ابنِ خريطة التصنيف (ص 22)</h3><div class="hint" style="text-align:center">اختر مخلوقًا، ثم أجب عن أسئلة الخريطة لتوصله إلى مكانه</div>
+    <div class="pool" id="trP"></div><div id="trQ" class="scn" style="text-align:center">اختر مخلوقًا من الأعلى 👆</div>
+    <div class="tree" id="trT"></div><div class="fb" id="trOut"></div></div>
+  <div class="box lab"><h3>🫁 المختبر: كيف يتنفّس؟ (جدول 8-1)</h3><div class="pool" id="brP"></div><div class="cat" id="brC"></div><div class="fb" id="brOut"></div></div>
+  <div class="box lab"><h3>🌱 المختبر: كيف يتكاثر النبات؟ (جدول 9-1)</h3><div class="pool" id="rpP"></div><div class="cat" id="rpC"></div><div class="fb" id="rpOut"></div></div>
+  <div class="box lab"><h3>🥚 المختبر: خريطة التكاثر (ص 21)</h3><div class="pool" id="egP"></div><div class="cat" id="egC"></div><div class="fb" id="egOut"></div></div>
+  <div class="box lab"><h3>🪜 رتّب خطوات التصنيف (ص 23)</h3><ol class="steps" id="stL"></ol><div class="btns"><button class="btn" id="stNew">🔄 من جديد</button></div><div class="fb" id="stOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="q3"></div></div>
+</section>
+
+<section class="page" id="rv1">
+  <div class="muted">الموضوع 1 · الفصل 1 · مراجعة · ص 23–25</div>
+  <h2>🏁 مراجعة: التصنيف</h2>
+  <div class="box"><h3>🗺️ الفصل في سطور</h3><div class="idea" style="margin:0">التصنيف = تقسيم الأشياء إلى مجموعات وفقًا لخواصها · يساعد على التنظيم وإيجاد الأشياء وبيان الشبه والاختلاف · توجد أكثر من طريقة للتصنيف · نصنّف المخلوقات حسب شكل الجسم والتغذية والحركة · المجموعات الرئيسية: الحيوانات، النباتات، الفطريات، المخلوقات الدقيقة · نعرض التصنيف بالجداول والخرائط.</div></div>
+  <div class="box"><h3>📘 أسئلة الكتاب (ص 24–25)</h3><div id="bk1"></div></div>
+  <div class="sc" id="rv1Sc"></div><div id="rv1Q"></div><div class="btns"><button class="btn or" id="rv1New">🔄 اختبار جديد</button></div>
+</section>
+
+<!-- ================= الفصل 2: تصنيف المواد ================= -->
+<section class="page" id="m1">
+  <div class="muted">الموضوع 1 · الفصل 2 · 1.2 · ص 26–30</div>
+  <h2><span class="num">2</span>خواص المواد</h2>
+  <div class="idea">💡 نسمي صفات المواد <b>خواص المواد</b>، ونصنّف الأشياء وفقًا لخواص موادها.<small>من الخواص: درجة الشفافية للضوء، المغناطيسية، التوصيل الحراري، التوصيل الكهربائي، اللون، المرونة، الصلابة، امتصاص الماء.</small></div>
+  <div class="box lab"><h3>🧪 المختبر: افحص المادة بنفسك</h3><div class="hint" style="text-align:center">① اختر مادة ② اختر أداة الفحص ③ شاهد النتيجة… واملأ جدولك!</div>
+    <div class="matr" id="mtM"></div><div class="chips" id="mtT"></div>
+    <canvas id="mtC" class="cv" width="640" height="260"></canvas><div class="fb" id="mtOut"></div>
+    <div style="overflow-x:auto"><table class="res" id="mtR"></table></div></div>
+  <div class="box lab"><h3>🧲 صنّف: مغناطيسية أم لا؟</h3><div class="pool" id="mgP"></div><div class="cat" id="mgC"></div><div class="fb" id="mgOut"></div></div>
+  <div class="box lab"><h3>⚡ صنّف: موصل أم عازل كهربائي؟</h3><div class="pool" id="elP"></div><div class="cat" id="elC"></div><div class="fb" id="elOut"></div></div>
+  <div class="box"><h3>🩻 من هنا وهناك (ص 28)</h3><div class="hint">تُستخدم <b>الأشعة السينية</b> لرؤية العظام داخل أجسامنا، لأنها تستطيع المرور خلال معظم المواد اللينة كالجلد والعضلات، لكنها لا تمر خلال العظام الصلبة فيظهر ظلّها في الصورة.</div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="q4"></div></div>
+</section>
+
+<section class="page" id="m2">
+  <div class="muted">الموضوع 1 · الفصل 2 · 2.2 · ص 31–41</div>
+  <h2><span class="num">2</span>ربط الخواص باستخدامات المواد</h2>
+  <div class="idea">💡 نختار المادة المناسبة لصنع الشيء حسب <b>خواصها</b>.<small>القدر من معدن جيد التوصيل للحرارة، ومقبضه من لدائن أو خشب رديء التوصيل، والسلك من نحاس موصل، وغلافه من لدائن عازلة.</small></div>
+  <div class="box lab"><h3>🧲 المختبر: المغناطيس السحري</h3><div class="hint" style="text-align:center">اسحب المغناطيس فوق الأشياء… ماذا يلتصق به؟</div>
+    <canvas id="mgnC" class="cv" width="640" height="260"></canvas><div class="btns"><button class="btn" id="mgnR">🔄 أعد الأشياء</button></div><div class="fb" id="mgnOut"></div></div>
+  <div class="box lab"><h3>🏠 المختبر: مهندس البيت</h3><div class="hint" style="text-align:center">اضغط على كل شيء في البيت واختر المادة الأنسب لصنعه</div>
+    <div class="house" id="hsB"></div><div id="hsQ"></div><div class="fb" id="hsOut"></div></div>
+  <div class="box"><h3>🗃️ المواد الشائعة: خواصها واستخداماتها (ص 38–39)</h3><div class="cards" id="mtCards"></div></div>
+  <div class="box lab"><h3>🏷️ نشاط ممتع: اقرأ البطاقة (ص 40)</h3><div id="lbQ"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="q5"></div></div>
+</section>
+
+<section class="page" id="rv2">
+  <div class="muted">الموضوع 1 · الفصل 2 · مراجعة · ص 40–43</div>
+  <h2>🏁 مراجعة: تصنيف المواد</h2>
+  <div class="box"><h3>🗺️ الفصل في سطور</h3><div class="idea" style="margin:0">الأشياء مصنوعة من مواد متنوعة: خزف، زجاج، معدن، لدائن، خشب، مطاط · نصنّف المواد حسب خواصها: الشفافية للضوء (شفافة، شبه شفافة، معتمة) · المغناطيسية · التوصيل الحراري · التوصيل الكهربائي (موصلات وعوازل) · نختار المادة حسب خاصيتها لاستخدام معيّن.</div></div>
+  <div class="box"><h3>📘 أسئلة الكتاب (ص 42–43)</h3><div id="bk2"></div></div>
+  <div class="sc" id="rv2Sc"></div><div id="rv2Q"></div><div class="btns"><button class="btn or" id="rv2New">🔄 اختبار جديد</button></div>
+</section>
+
+<!-- ================= الموضوع 2: الطاقة ================= -->
+<section class="page" id="n1">
+  <div class="muted">الموضوع 2 · الفصل 3 · 1.3 – 2.3 · ص 44–57</div>
+  <h2><span class="num">3</span>كل شيء يحتاج طاقة: أشكال الطاقة</h2>
+  <div class="idea">💡 تحتاج المخلوقات الحية طاقة لتبقى على قيد الحياة، وتحتاج الأشياء غير الحية طاقة لتعمل.<small>من أشكال الطاقة: الحركية، الضوئية، الحرارية، الصوتية، الكهربائية، والكامنة (التجاذبية، والمرونية في الزنبركات، والكيميائية في الغذاء والوقود والنضائد).</small></div>
+  <div class="box lab"><h3>🔎 المختبر: عدسة الطاقة</h3><div class="hint" style="text-align:center">ما أشكال الطاقة في هذا المشهد؟ اختر كل الإجابات الصحيحة ثم اضغط «تحقق»</div>
+    <div class="scn" id="lnS" style="text-align:center;font-size:1.1rem"></div><div class="chips" id="lnF"></div>
+    <div class="btns"><button class="btn main" id="lnK">✔️ تحقق</button><button class="btn" id="lnN">➡️ مشهد آخر</button></div><div class="fb" id="lnOut"></div></div>
+  <div class="box lab"><h3>⚽ المختبر: الطاقة الحركية</h3><div class="sl">🚀 السرعة <input type="range" id="keV" min="0" max="10" value="4"><b id="keVv"></b></div>
+    <div class="sl">⚖️ الكتلة <input type="range" id="keM" min="1" max="3" value="1"><b id="keMv"></b></div>
+    <canvas id="keC" class="cv" width="640" height="200"></canvas><div class="fb" id="keOut"></div></div>
+  <div class="box lab"><h3>🥁 المختبر: الطاقة الصوتية</h3><div class="hint" style="text-align:center">الصوت ينتج عن الاهتزاز. غيّر قوة الضرب وسرعة الاهتزاز واسمع! 🔊</div>
+    <div class="sl">💪 قوة الصوت <input type="range" id="sdA" min="1" max="10" value="5"><b id="sdAv"></b></div>
+    <div class="sl">🎵 حدّة الصوت <input type="range" id="sdF" min="1" max="10" value="4"><b id="sdFv"></b></div>
+    <canvas id="sdC" class="cv" width="640" height="200"></canvas><div class="btns"><button class="btn main" id="sdP">🔊 اضرب الطبل</button></div><div class="fb" id="sdOut"></div></div>
+  <div class="box lab"><h3>🔌 نشاط: كم جهازًا كهربائيًا في بيتك؟ (ص 57)</h3><div class="hint" style="text-align:center">اختر الأجهزة الموجودة في بيتك</div><div class="app" id="apL"></div><div class="fb" id="apOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="q6"></div></div>
+</section>
+
+<section class="page" id="n2">
+  <div class="muted">الموضوع 2 · الفصل 3 · الطاقة الكامنة · ص 58–62</div>
+  <h2><span class="num">3</span>الطاقة الكامنة (المختزنة)</h2>
+  <div class="idea">💡 <b>الطاقة الكامنة</b> طاقة مخزّنة في الأجسام لتُستخدم لاحقًا.<small>التجاذبية: في الأجسام المرفوعة فوق الأرض. المرونية: في الزنبركات والأشرطة المطاطية المشدودة. الكيميائية: في الطعام والنضائد والوقود.</small></div>
+  <div class="box lab"><h3>🔨 المختبر: مدقّ الأوتاد (ص 59)</h3><div class="hint" style="text-align:center">ارفع المطرقة ثم أسقطها على الوتد. كلما ارتفعت أكثر…؟</div>
+    <div class="sl">📏 الارتفاع <input type="range" id="pdH" min="1" max="10" value="4"><b id="pdHv"></b></div>
+    <canvas id="pdC" class="cv" width="640" height="280"></canvas><div class="btns"><button class="btn main" id="pdGo">⬇️ أسقط المطرقة</button><button class="btn" id="pdR">🔄 وتد جديد</button></div><div class="fb" id="pdOut"></div></div>
+  <div class="box lab"><h3>🚗 المختبر: سيارة الزنبرك (ص 61)</h3><div class="sl">🔄 عدد لفات المفتاح <input type="range" id="spW" min="1" max="6" value="2"><b id="spWv"></b></div>
+    <canvas id="spC" class="cv" width="640" height="180"></canvas><div class="btns"><button class="btn main" id="spGo">🏁 اتركها تنطلق</button></div><div class="fb" id="spOut"></div></div>
+  <div class="box"><h3>🔋 أين تختبئ الطاقة الكامنة؟</h3><div class="cards" id="peCards"></div></div>
+  <div class="box lab"><h3>♾️ صنّف نوع الطاقة الكامنة</h3><div class="pool" id="ptP"></div><div class="cat" id="ptC"></div><div class="fb" id="ptOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="q7"></div></div>
+</section>
+
+<section class="page" id="n3">
+  <div class="muted">الموضوع 2 · الفصل 3 · 3.3 · ص 63–69</div>
+  <h2><span class="num">3</span>تحوّلات الطاقة</h2>
+  <div class="idea">💡 تتحوّل الطاقة من شكل إلى آخر.<small>النبات: ضوئية ← كيميائية. أجسامنا: كيميائية ← حركية. التلفاز: كهربائية ← ضوئية + صوتية + حرارية. القطار الأفعواني: كامنة تجاذبية ⇄ حركية.</small></div>
+  <div class="box lab"><h3>🎢 المختبر: قطار عبقري نو الأفعواني</h3><div class="hint" style="text-align:center">شاهد العربة: في القمة طاقة كامنة كبيرة، وفي القاع طاقة حركية كبيرة</div>
+    <canvas id="rkC" class="cv" width="640" height="300"></canvas><div class="btns"><button class="btn main" id="rkGo">▶️ انطلق</button><button class="btn" id="rkSt">⏸️ أوقف</button></div><div class="fb" id="rkOut"></div></div>
+  <div class="box lab"><h3>🔁 المختبر: آلة التحويل</h3><div class="hint" style="text-align:center">ماذا يدخل؟ وماذا يخرج؟ اختر أشكال الطاقة الناتجة</div>
+    <div class="scn" id="cvS" style="text-align:center"></div><div class="chips" id="cvF"></div>
+    <div class="btns"><button class="btn main" id="cvK">✔️ تحقق</button><button class="btn" id="cvN">➡️ جهاز آخر</button></div><div class="fb" id="cvOut"></div></div>
+  <div class="box"><h3>🛝 ما رأيك؟ (ص 67)</h3><div class="hint">عندما ينزلق عمر إلى أسفل المنزلق تتحول <b>الطاقة الكامنة التجاذبية</b> إلى <b>طاقة حركية</b>، وجزء منها إلى <b>حرارية</b> (بالاحتكاك) و<b>صوتية</b>، وعند هبوطه على الأرض تتحول الحركية إلى صوتية وحرارية.</div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="q8"></div></div>
+</section>
+
+<section class="page" id="rv3">
+  <div class="muted">الموضوع 2 · الفصل 3 · مراجعة · ص 68–71</div>
+  <h2>🏁 مراجعة: أشكال الطاقة</h2>
+  <div class="box"><h3>🗺️ الفصل في سطور</h3><div class="idea" style="margin:0">كل شيء يحتاج طاقة · الحركية للأجسام المتحركة · الضوئية تمكننا من الرؤية · الحرارية تجعلنا نشعر بالدفء · الصوتية من الاهتزاز · الكهربائية للأجهزة · الكامنة: تجاذبية، مرونية، كيميائية · الطاقة تتحوّل من شكل إلى آخر.</div></div>
+  <div class="box"><h3>📘 أسئلة الكتاب (ص 70–71)</h3><div id="bk3"></div></div>
+  <div class="sc" id="rv3Sc"></div><div id="rv3Q"></div><div class="btns"><button class="btn or" id="rv3New">🔄 اختبار جديد</button></div>
+</section>
+
+<!-- ================= الفصل 4: مصادر الطاقة ================= -->
+<section class="page" id="o1">
+  <div class="muted">الموضوع 2 · الفصل 4 · 1.4 – 2.4 · ص 72–77</div>
+  <h2><span class="num">4</span>الطاقة من الشمس والمياه الجارية</h2>
+  <div class="idea">💡 <b>الشمس</b> هي المصدر الرئيسي لمعظم الطاقة التي نستخدمها، بطريقة مباشرة أو غير مباشرة.<small>النباتات تحول ضوء الشمس إلى غذاء (طاقة كيميائية)، والخلايا الشمسية تحوله إلى كهرباء. وطاقة المياه الجارية تُحوَّل إلى كهرباء في السدود: كامنة ← حركية ← كهربائية.</small></div>
+  <div class="box lab"><h3>☀️ المختبر: عمود الإنارة الشمسي (ص 75)</h3><div class="sl">🕐 الوقت <input type="range" id="slT" min="0" max="23" value="12"><b id="slTv"></b></div>
+    <canvas id="slC" class="cv" width="640" height="260"></canvas><div class="fb" id="slOut"></div></div>
+  <div class="box lab"><h3>💧 المختبر: محطة السد الكهرومائية (ص 77)</h3><div class="sl">🚪 فتحة البوابة <input type="range" id="hyG" min="0" max="10" value="4"><b id="hyGv"></b></div>
+    <div class="sl">🌊 ارتفاع الماء <input type="range" id="hyH" min="1" max="10" value="7"><b id="hyHv"></b></div>
+    <canvas id="hyC" class="cv" width="640" height="280"></canvas><div class="fb" id="hyOut"></div></div>
+  <div class="box lab"><h3>🌿 رتّب رحلة طاقة الشمس إلى عضلاتك</h3><ol class="steps" id="snL"></ol><div class="btns"><button class="btn" id="snNew">🔄 من جديد</button></div><div class="fb" id="snOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="q9"></div></div>
+</section>
+
+<section class="page" id="o2">
+  <div class="muted">الموضوع 2 · الفصل 4 · 3.4 – 4.4 · ص 78–85</div>
+  <h2><span class="num">4</span>الطاقة من الرياح والمحروقات ومصادر أخرى</h2>
+  <div class="idea">💡 <b>الرياح</b> هواء متحرك له طاقة حركية تدير التوربينات لتوليد الكهرباء، لكنها لا تتوفر طوال الوقت.<small>المحروقات (الفحم والنفط والغاز الطبيعي) تخزّن طاقة كيميائية تتحول عند حرقها إلى حرارية وضوئية، لكنها تلوّث الهواء وقد تنفد. ومن المصادر الأخرى: الحرارة الجوفية والمد والجزر.</small></div>
+  <div class="box lab"><h3>💨 المختبر: مزرعة الرياح</h3><div class="sl">💨 سرعة الرياح <input type="range" id="wdS" min="0" max="10" value="5"><b id="wdSv"></b></div>
+    <canvas id="wdC" class="cv" width="640" height="240"></canvas><div class="fb" id="wdOut"></div></div>
+  <div class="box lab"><h3>🔥 المختبر: احرق الوقود</h3><div class="chips" id="fuB"></div><canvas id="fuC" class="cv" width="640" height="240"></canvas><div class="fb" id="fuOut"></div></div>
+  <div class="box"><h3>🌋 مصادر أخرى للطاقة (ص 81)</h3><div class="cards" id="osCards"></div></div>
+  <div class="box lab"><h3>♻️ متجددة أم تنفد؟</h3><div class="pool" id="rnP"></div><div class="cat" id="rnC"></div><div class="fb" id="rnOut"></div></div>
+  <div class="box lab"><h3>💡 ما رأيك؟ خطة حفظ الطاقة في بيتي (ص 80)</h3><div class="app" id="svL"></div><div class="meter"><i id="svM"></i></div><div class="fb" id="svOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="q10"></div></div>
+</section>
+
+<section class="page" id="rv4">
+  <div class="muted">الموضوع 2 · الفصل 4 · مراجعة · ص 84–87</div>
+  <h2>🏁 مراجعة: مصادر الطاقة</h2>
+  <div class="box"><h3>🗺️ الفصل في سطور</h3><div class="idea" style="margin:0">معظم طاقتنا مصدرها الشمس مباشرة أو غير مباشرة · الشمس: ضوئية وحرارية (البناء الضوئي والخلايا الشمسية) · المياه الجارية والرياح: طاقة حركية تولد الكهرباء · المحروقات: طاقة كيميائية تتحول إلى حرارية وضوئية · بعض المصادر قد تنفد، فلنحفظ الطاقة ونبحث عن البدائل.</div></div>
+  <div class="box"><h3>📘 أسئلة الكتاب (ص 86–87)</h3><div id="bk4"></div></div>
+  <div class="sc" id="rv4Sc"></div><div id="rv4Q"></div><div class="btns"><button class="btn or" id="rv4New">🔄 اختبار جديد</button></div>
+</section>
+<footer>الكتاب الحي · مبني على كتاب العلوم للصف السادس – الفصل الدراسي الأول 2025–2026 (مركز المناهج التعليمية والبحوث التربوية – ليبيا)</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const pages=[...document.querySelectorAll('.page')],nb=[...document.querySelectorAll('#bar button')];
+function go(id){pages.forEach(p=>p.classList.toggle('on',p.id===id));nb.forEach(b=>b.classList.toggle('on',b.dataset.p===id));window.scrollTo({top:0,behavior:'smooth'})}
+nb.forEach(b=>b.onclick=()=>go(b.dataset.p));
+(function(){const h=location.hash.slice(1);if(h&&$(h))go(h);addEventListener('hashchange',()=>{const x=location.hash.slice(1);if($(x))go(x)})})();
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),nz=(a,b)=>{let x;do{x=rnd(a,b)}while(!x);return x},pick=a=>a[rnd(0,a.length-1)];
+const ms=n=>n<0?'−'+(-n):String(n);const pr=n=>n<0?'('+ms(n)+')':String(n);
+const V='س';
+const parse=s=>{s=(s||'').trim().replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[−–—]/g,'-').replace(/\s/g,'');if(s===''||s==='+'||s==='-')return NaN;if(/^-?\d+\/\d+$/.test(s)){const[a,b]=s.split('/');return a/b}return Number(s)};
+function term(c,p,first,v){v=v||V;if(c===0)return'';const a=Math.abs(c);const cs=(a===1&&p>0)?'':String(a);const vs=p===0?'':(p===1?v:v+'<sup>'+p+'</sup>');const s=c<0?(first?'−':' − '):(first?'':' + ');return s+cs+vs}
+function poly(cs,v){let out='',f=true;cs.forEach(([c,p])=>{if(c){out+=term(c,p,f,v);f=false}});return out||'0'}
+/* matrix renderer: A 2D array, o:{det, cls(i,j)->class, inp:prefix} */
+function M(A,o){o=o||{};const r=A.length,c=A[0].length;let g='<div class="g" style="grid-template-columns:repeat('+c+',auto)">';
+ A.forEach((row,i)=>row.forEach((v,j)=>{const cl=o.cls?o.cls(i,j)||'':'';g+=o.inp?'<input class="c '+cl+'" data-i="'+i+'" data-j="'+j+'" data-m="'+o.inp+'" value="'+(v===''?'':ms(v))+'" inputmode="text">':'<div class="c '+cl+'" data-i="'+i+'" data-j="'+j+'">'+(typeof v==='number'?ms(Math.round(v*1000)/1000):v)+'</div>'}));
+ return '<span class="M'+(o.det?' det':'')+'"'+(o.id?' id="'+o.id+'"':'')+'><span class="br r"></span>'+g+'</div><span class="br l"></span></span>'}
+function readM(host,name,r,c){const A=Array.from({length:r},()=>Array(c).fill(0));host.querySelectorAll('input[data-m="'+name+'"]').forEach(x=>{const v=parse(x.value);A[+x.dataset.i][+x.dataset.j]=isNaN(v)?0:v});return A}
+const det2=a=>a[0][0]*a[1][1]-a[0][1]*a[1][0];
+const minor=(a,i,j)=>a.filter((_,r)=>r!==i).map(row=>row.filter((_,c)=>c!==j));
+const det3=a=>a[0][0]*det2(minor(a,0,0))-a[0][1]*det2(minor(a,0,1))+a[0][2]*det2(minor(a,0,2));
+const det=a=>a.length===2?det2(a):det3(a);
+const rM=(r,c,lo,hi)=>Array.from({length:r},()=>Array.from({length:c},()=>rnd(lo==null?-5:lo,hi==null?9:hi)));
+const mul=(A,B)=>A.map(row=>B[0].map((_,j)=>row.reduce((s,v,k)=>s+v*B[k][j],0)));
+const T=A=>A[0].map((_,j)=>A.map(r=>r[j]));
+const sub='₀₁₂₃₄₅₆₇₈₉';const ij=(i,j)=>''+sub[i]+sub[j];
+function mcq(host,q,opts,right,onAns){const d=document.createElement('div');d.className='box';d.style.margin='8px 0';d.innerHTML='<div style="font-weight:800">'+q+'</div>';let dn=false;const order=opts.map((o,i)=>i).sort(()=>Math.random()-.5);
+ order.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=opts[i];b.onclick=()=>{if(dn)return;dn=true;b.classList.add(i===right?'ok':'no');if(i!==right)[...d.querySelectorAll('.opt')][order.indexOf(right)].classList.add('ok');onAns&&onAns(i===right)};d.appendChild(b)});host.appendChild(d)}
+function MCQP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();g.o=g.o.filter((x,i)=>g.o.indexOf(x)===i);const ord=g.o.map((x,i)=>i).sort(()=>Math.random()-.5);let done=false;
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div>';const opts=document.createElement('div');box.appendChild(opts);const fb=document.createElement('div');fb.className='fb';const nx=document.createElement('div');nx.className='btns';box.appendChild(fb);box.appendChild(nx);
+  ord.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=g.o[i];b.onclick=()=>{if(done)return;done=true;const r=i===0;b.classList.add(r?'ok':'no');if(!r)[...opts.children][ord.indexOf(0)].classList.add('ok');dn++;if(r)ok++;sc.textContent='✔️ صحيح: '+ok+' من '+dn;fb.className='fb '+(r?'ok':'no');fb.innerHTML=(r?'🎉 صحيح! ':'❌ ليس صحيحًا. ')+(g.ex?'<div style="font-size:.95rem;color:var(--ink);font-weight:700">'+g.ex+'</div>':'');nx.innerHTML='<button class="btn or">سؤال جديد ⬅</button>';nx.firstChild.onclick=render};opts.appendChild(b)})}render()}
+/* matrix-answer practice: gen -> {q, ans(2D), steps[]} */
+function MatP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();let tries=0;const E=g.ans.map(r=>r.map(()=>''));
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div><div style="text-align:center;margin:8px 0">= '+M(E,{inp:'z'})+'</div><div class="btns"><button class="btn main" data-k="chk">✔️ تحقّق</button><button class="btn" data-k="help">💡 أرني الحل</button><button class="btn or" data-k="new">سؤال جديد ⬅</button></div><div class="fb"></div><div class="steps"></div>';
+  const ins=[...box.querySelectorAll('input.c')],fb=box.querySelector('.fb'),st=box.querySelector('.steps');const steps=()=>{st.style.display='block';st.innerHTML='<b>الحل:</b>'+g.steps.map(s=>'<div class="mx" style="font-size:1rem">'+s+'</div>').join('')};
+  box.querySelector('[data-k=chk]').onclick=()=>{let all=true,emp=false;ins.forEach(x=>{const v=parse(x.value);if(isNaN(v)){emp=true;all=false;return}const g2=Math.abs(v-g.ans[+x.dataset.i][+x.dataset.j])<.001;x.classList.remove('ok','no');x.classList.add(g2?'ok':'no');if(!g2)all=false});
+   if(emp&&!all){fb.className='fb';fb.textContent='املأ كل الخانات';return}tries++;if(tries===1){dn++;if(all)ok++;sc.textContent='✔️ صحيح من أول محاولة: '+ok+' من '+dn}fb.className='fb '+(all?'ok':'no');fb.textContent=all?'🎉 ممتاز!':'🤔 الخانات الحمراء غير صحيحة';if(all||tries>=2)steps();if(all)setTimeout(render,2400)};
+  box.querySelector('[data-k=help]').onclick=()=>{ins.forEach(x=>{x.value=ms(g.ans[+x.dataset.i][+x.dataset.j]);x.classList.add('ok')});steps()};box.querySelector('[data-k=new]').onclick=render}render()}
+
+
+const TOC=[['الموضوع 1 · الفصل 1: التصنيف',10,[['1.1–2.1','لماذا نصنّف؟ وكيف؟',10,'c1'],['3.1','تصنيف المخلوقات الحية',17,'c2'],['4.1','الجداول وخرائط التصنيف',20,'c3'],['','مراجعة الفصل الأول',23,'rv1']]],
+ ['الموضوع 1 · الفصل 2: تصنيف المواد',26,[['1.2','خواص المواد',27,'m1'],['2.2','المواد واستخداماتها',31,'m2'],['','مراجعة الفصل الثاني',40,'rv2']]],
+ ['الموضوع 2 · الفصل 3: أشكال الطاقة',46,[['1.3–2.3','كل شيء يحتاج طاقة: أشكالها',47,'n1'],['','الطاقة الكامنة',58,'n2'],['3.3','تحولات الطاقة',63,'n3'],['','مراجعة الفصل الثالث',68,'rv3']]],
+ ['الموضوع 2 · الفصل 4: مصادر الطاقة',72,[['1.4–2.4','الطاقة من الشمس والمياه الجارية',74,'o1'],['3.4–4.4','الرياح والمحروقات ومصادر أخرى',78,'o2'],['','مراجعة الفصل الرابع',84,'rv4']]]];
+(function(){const t=$('toc');TOC.forEach(([n,pg,ls],i)=>{const r=ls.filter(l=>l[3]).length;const d=document.createElement('div');d.className='chap'+(i===0?' open':'');
+ d.innerHTML='<div><span class="cn">'+(i+1)+'</span><span style="flex:1">'+n+'</span><span class="tg '+(r?'r':'s')+'">'+(r?'جاهز ✅':'قريبًا')+'</span></div><div class="ls">'+ls.map(l=>'<div class="li'+(l[3]?' ready" data-go="'+l[3]:'')+'"><span>'+(l[3]?'✅':'⏳')+'</span><span>'+(l[0]?'<b>'+l[0]+'</b> ':'')+l[1]+'</span><span class="pg">ص '+l[2]+'</span></div>').join('')+'</div>';
+ d.firstChild.onclick=()=>d.classList.toggle('open');t.appendChild(d)});t.querySelectorAll('[data-go]').forEach(x=>x.onclick=()=>go(x.dataset.go))})();
+
+/* ================= أمثلة الكتاب وتمارينه (عام) ================= */
+const QB=s=>s.replace(/ (?=(?:أ|ب|ج|د|هـ|و)\) )/g,'<br>').replace(/ (?=\((?:i|ii|iii|iv|1|2|3)\) )/g,'<br>');
+const FX=s=>s.replace(/(−?\d+(?:\.\d+)?)\/(\d+)/g,'<span class="rt">$1/$2</span>');
+function addSecs(pid,exs,bks){const pg=$(pid);if(!pg)return;const first=[...pg.querySelectorAll('.box')].find(b=>(b.querySelector('h3')||{}).textContent&&b.querySelector('h3').textContent.trim().startsWith('✏️'));
+ if(exs&&exs.length){const b=document.createElement('div');b.className='box exb';b.innerHTML='<h3>📖 أمثلة الكتاب محلولة خطوة بخطوة</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">اضغط «الخطوة التالية» وحاول أن تتوقع الخطوة قبل أن تظهر 🤔</p>';exs.forEach(e=>b.appendChild(wex(e)));first?pg.insertBefore(b,first):pg.appendChild(b)}
+ if(bks&&bks.length){const b=document.createElement('div');b.className='box bkb';b.innerHTML='<h3>📝 تمارين الكتاب مع الحلول</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">✍️ حلّ في دفترك أولًا، ثم اضغط «تلميح» إذا احتجت، و«الحل» لتتأكد.</p>';bks.forEach(e=>b.appendChild(bkx(e)));pg.appendChild(b)}}
+function wex(e){const d=document.createElement('div');d.className='wx';let k=0;
+ d.innerHTML='<div class="wxq"><b style="color:var(--tl)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="wxs"></div><div class="btns"><button class="btn main" data-a="n">▶️ الخطوة التالية</button><button class="btn" data-a="all">📜 الحل كاملًا</button><button class="btn" data-a="r">↺ من جديد</button></div>';
+ const S=d.querySelector('.wxs'),nb=d.querySelector('[data-a=n]');const add=()=>{if(k>=e.s.length)return;const x=document.createElement('div');x.className='wst';x.innerHTML='<span class="sn">'+(k+1)+'</span>'+FX(e.s[k]);S.appendChild(x);k++;if(k>=e.s.length){nb.textContent='✅ انتهى الحل';nb.disabled=true;try{S.lastChild.classList.add('fin')}catch(_){}}};
+ nb.onclick=add;d.querySelector('[data-a=all]').onclick=()=>{while(k<e.s.length)add()};d.querySelector('[data-a=r]').onclick=()=>{k=0;S.innerHTML='';nb.disabled=false;nb.textContent='▶️ الخطوة التالية'};return d}
+function bkx(e){const d=document.createElement('div');d.className='bx';
+ d.innerHTML='<div class="wxq"><b style="color:var(--or)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="btns" style="justify-content:flex-start"><button class="btn" data-a="h">💡 تلميح</button><button class="btn ok" data-a="s">✅ الحل</button></div><div class="bh" style="display:none"></div><div class="bs" style="display:none"></div>';
+ const H=d.querySelector('.bh'),S=d.querySelector('.bs');H.innerHTML='💡 '+FX(e.h);S.innerHTML=e.s.map(x=>'<div class="wst">'+FX(x)+'</div>').join('')+(e.a?'<div class="ans">🎯 الجواب: '+FX(e.a)+'</div>':'');
+ d.querySelector('[data-a=h]').onclick=()=>{H.style.display=H.style.display==='none'?'block':'none'};d.querySelector('[data-a=s]').onclick=()=>{S.style.display=S.style.display==='none'?'block':'none'};return d}
+
+
+const nf=(v,d)=>{d=d==null?3:d;const r=Math.round(v*10**d)/10**d;return ms(r)};
+/* ================= فيزياء: الوحدة 1 ================= */
+const sci=(v,d)=>{d=d==null?2:d;if(v===0)return'0';const e=Math.floor(Math.log10(Math.abs(v)));if(e>=-2&&e<=4)return nf(v,Math.max(0,d+1-Math.max(0,e)));const m=v/10**e;return '<span dir="ltr" style="unicode-bidi:isolate">'+(+m.toFixed(d))+' × 10<sup>'+e+'</sup></span>'};
+function cv(id){const c=$(id),x=c.getContext('2d');return{c,x,W:c.width,H:c.height}}
+const loops={};function loop(id,fn){if(loops[id])return;let last=performance.now();const st=()=>{const now=performance.now(),dt=Math.min(0.05,(now-last)/1000);last=now;const pg=$(id).closest('.page');if(pg.classList.contains('on'))fn(dt);loops[id]=requestAnimationFrame(st)};loops[id]=requestAnimationFrame(st)}
+function glow(x,X,Y,r,col){const g=x.createRadialGradient(X,Y,0,X,Y,r);g.addColorStop(0,col);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.beginPath();x.arc(X,Y,r,0,7);x.fill()}
+function chg(x,X,Y,q,r){r=r||10;x.fillStyle=q>0?'#ff6b6b':'#5ab0ff';x.beginPath();x.arc(X,Y,r,0,7);x.fill();x.fillStyle='#fff';x.font='bold '+(r*1.6)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(q>0?'+':'−',X,Y+1)}
+function label(x,t,X,Y,col,sz){x.fillStyle=col||'#fff';x.font='bold '+(sz||16)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(t,X,Y)}
+
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){this.rect(x,y,w,h)};
+/* ================= علوم الصف السابع – الجزء الأول والثاني ================= */
+const C2=id=>{const c=$(id);return [c,c.getContext('2d')]};
+const FONT=(s,w)=>(w||800)+' '+s+'px Cairo, Tahoma, Arial';
+const shake=el=>{el.classList.remove('shk');void el.offsetWidth;el.classList.add('shk')};
+const cheer=()=>{try{window.FX&&FX.ok()}catch(e){}};
+const N=s=>'<bdi'+(/[\u0600-\u06FF]/.test(s)?'':' dir="ltr"')+' style="font-weight:800">'+s+'</bdi>';
+const fx=(x,k)=>String(+(+x).toFixed(k==null?2:k));
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){r=Math.min(r||0,Math.abs(w)/2,Math.abs(h)/2);this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();return this};
+/* لعبة التصنيف العامة: اختر عنصرًا ثم بيتًا */
+function sortGame(poolId,catId,outId,cats,items,done){const P=$(poolId),Cc=$(catId);let sel=null,left=items.length;P.innerHTML='';Cc.innerHTML='';
+ shuf(items).forEach(([lab,k,why])=>{const b=document.createElement('button');b.innerHTML=lab;b.dataset.k=k;b.dataset.why=why||'';b.onclick=()=>{P.querySelectorAll('button').forEach(y=>y.classList.remove('sel'));b.classList.add('sel');sel=b};P.appendChild(b)});
+ cats.forEach(([n,s,c],i)=>{const d=document.createElement('div');d.style.borderColor=c;d.innerHTML='<b style="color:'+c+'">'+n+'</b>'+(s?'<small>'+s+'</small>':'')+'<div class="pool" style="margin:4px 0"></div>';
+  d.onclick=()=>{if(!sel)return;if(+sel.dataset.k===i){sel.classList.remove('sel');sel.classList.add('ok');sel.onclick=null;d.querySelector('.pool').appendChild(sel);$(outId).innerHTML='✅ صحيح! '+sel.dataset.why;sel=null;left--;if(!left){$(outId).innerHTML='🎉 أحسنت! رتّبت كل شيء.';cheer();done&&done()}}else{shake(d);$(outId).innerHTML='🤔 حاول مرة أخرى'}};Cc.appendChild(d)});$(outId).textContent=''}
+/* اختبار فصل من 12 سؤالًا */
+function chapterTest(pfx,G){let ok=0,dn=0;const host=$(pfx+'Q');function upd(){$(pfx+'Sc').textContent=dn<G.length?'أجبت عن '+dn+' من '+G.length+' · صحيح: '+ok:(ok>=G.length-1?'🌟 ممتاز! ':ok>=G.length-3?'👍 جيد جدًا! ':'💪 راجع الدروس. ')+'النتيجة: '+ok+' من '+G.length}
+ function make(){host.innerHTML='';ok=0;dn=0;shuf(G).forEach((g,i)=>{const [q,o]=typeof g==='function'?g():g;mcq(host,(i+1)+') '+q,o,0,r=>{dn++;if(r)ok++;upd();if(dn===G.length&&ok>=G.length-3)cheer()})});upd()}
+ $(pfx+'New').onclick=make;make()}
+const bank=(arr)=>()=>{const [q,o,ex]=pick(arr);return{q,o,ex:ex||''}};
+const vis=el=>{const p=el.closest('.page');return p&&p.classList.contains('on')};
+function anim(id,fn){const [c,x]=C2(id);let t0=performance.now();(function f(t){if(vis(c))fn(x,c,(t-t0)/1000);requestAnimationFrame(f)})(t0);return[c,x]}
+const flipCards=(id,arr)=>{const C=$(id);C.innerHTML=arr.map(([ic,t,b])=>'<div class="card"><div class="fr"><span class="big">'+ic+'</span>'+t+'</div><div class="bk"><b>'+t+':</b> '+b+'</div></div>').join('');C.querySelectorAll('.card').forEach(c=>c.onclick=()=>c.classList.toggle('flip'))};
+const TF=(s,t)=>[s,t?['✔️ صح','❌ خطأ']:['❌ خطأ','✔️ صح']];
+function txt(x,s,X,Y,sz,col,al){x.font=FONT(sz||16);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='rtl';x.fillText(s,X,Y)}
+function steps(id,outId,newId,S){let k=0;function mk(){k=0;const L=$(id);L.innerHTML='';shuf(S.map((s,i)=>[s,i])).forEach(([[a,b],i])=>{const li=document.createElement('li');li.innerHTML='<b>?</b><span>'+a+'<br><small style="color:var(--soft)">'+b+'</small></span>';li.onclick=()=>{if(li.classList.contains('ok'))return;if(i===k){li.classList.add('ok');li.querySelector('b').textContent=k+1;k++;$(outId).innerHTML='✅ صحيح!';if(k===S.length){$(outId).innerHTML='🎉 رتّبت الرحلة كاملة!';cheer()}}else{shake(li);$(outId).innerHTML='🤔 ليس هذا… ما الذي جاء قبله؟'}};L.appendChild(li)});$(outId).textContent=''}$(newId).onclick=mk;mk()}
+function choiceQs(host,Q,scId){const H=$(host);let i=0,ok=0;function show(){if(i>=Q.length){H.innerHTML='<div class="big2">🎉 '+ok+' من '+Q.length+'</div><div class="btns"><button class="btn" id="'+host+'R">🔄 من جديد</button></div>';$(host+'R').onclick=()=>{i=0;ok=0;show()};if(ok>=Q.length-1)cheer();return}
+ const [s,o,why]=Q[i];const ord=shuf(o.map((t,j)=>j));H.innerHTML='<div class="scn">'+s+'</div><div class="opts2">'+ord.map(j=>'<button data-j="'+j+'">'+o[j]+'</button>').join('')+'</div><div class="fb" id="'+host+'F"></div>';
+ let dn=0;H.querySelectorAll('[data-j]').forEach(b=>b.onclick=()=>{if(dn)return;dn=1;const j=+b.dataset.j;b.classList.add(j===0?'ok':'no');if(j)H.querySelector('[data-j="0"]').classList.add('ok');else ok++;$(host+'F').innerHTML=(j?'💡 ':'✅ ')+why+'<br><button class="btn main" style="margin-top:6px" id="'+host+'N">التالي ⬅️</button>';$(host+'N').onclick=()=>{i++;show()};if(scId)$(scId).textContent='✔️ '+ok+' / '+Q.length})}show()}
+/* ================= علوم الصف السادس – الموضوع 1: التنوع ================= */
+const EM=(x,e,X,Y,sz)=>{x.font=(sz||40)+'px "Segoe UI Emoji","Noto Color Emoji",sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(e,X,Y);x.textBaseline='alphabetic'};
+function multiPick(cfg){/* cfg:{sId,fId,kId,nId,oId,forms,items:[[html,req,opt,why]]} */
+ let it=null,sel=new Set(),done=0;const F=$(cfg.fId);
+ function show(){it=pick(cfg.items.filter(z=>z!==it));sel=new Set();done=0;$(cfg.sId).innerHTML=it[0];
+  F.innerHTML=cfg.forms.map((f,i)=>'<button data-i="'+i+'">'+f+'</button>').join('');
+  F.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(done)return;const i=+b.dataset.i;sel.has(i)?sel.delete(i):sel.add(i);b.classList.toggle('on')});$(cfg.oId).textContent=''}
+ $(cfg.kId).onclick=()=>{if(done||!it)return;if(!sel.size){$(cfg.oId).textContent='☝️ اختر شكلًا واحدًا على الأقل';return}
+  const req=it[1],opt=it[2]||[];let ok=req.every(r=>sel.has(r))&&[...sel].every(s=>req.includes(s)||opt.includes(s));done=1;
+  F.querySelectorAll('button').forEach(b=>{const i=+b.dataset.i;b.classList.remove('on');if(req.includes(i))b.classList.add('ok');else if(sel.has(i)&&!opt.includes(i))b.classList.add('no');else if(sel.has(i))b.classList.add('ok')});
+  $(cfg.oId).innerHTML=(ok?'✅ أحسنت! ':'💡 ')+it[3];if(ok)cheer();else shake($(cfg.sId))};
+ $(cfg.nId).onclick=show;show()}
+
+/* ---------- c1: معرض هند ---------- */
+sortGame('exP','exC','exOut',[['📚 ركن الكتب','','#1c7ed6'],['🌸 ركن الأزهار','','#d6336c'],['🐚 ركن مخلوقات البحر','','#0c8599'],['🧸 ركن الألعاب','','#e8590c']],
+ [['📕 قصة',0,'القصة كتاب.'],['📘 قاموس',0,'القاموس كتاب.'],['📗 أطلس',0,'الأطلس كتاب خرائط.'],['🌹 وردة',1,''],['🌻 عباد الشمس',1,''],['🌷 توليب',1,''],['🐚 صدفة',2,''],['🦀 سرطان البحر',2,''],['⭐ نجم البحر',2,''],['🧸 دبدوب',3,''],['🪀 يويو',3,''],['🪁 طائرة ورقية',3,'']],
+ ()=>{$('exOut').innerHTML+='<br>✨ الآن يجد الزوار ما يريدون بسهولة — هذه فائدة التصنيف!'});
+
+/* ---------- c1: سباق عيش الغراب ---------- */
+(function(){const L={'🌿 نباتات':['جوز الهند','وردة','طماطم','عشب','موز','الصبار','عنب','نبات الفول','تفاح'],'🐾 حيوانات':['سمك القرش','الحوت','طائر البطريق','العصفور','جرادة','خفاش','طائر السمان','عجل البحر','طاووس','نحلة'],'🍄 فطريات':['عيش الغراب','عفن الخبز'],'🦠 مخلوقات دقيقة':['بكتيريا','براميسيوم']};
+ const T0={},R={};
+ function side(id,html){const H=$(id);H.innerHTML='<button class="btn main" style="width:100%">▶️ ابدأ البحث هنا</button>';H.firstChild.onclick=()=>{H.innerHTML=html;T0[id]=performance.now();
+  H.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(R[id])return;if(b.textContent!=='عيش الغراب'){shake(b);return}b.classList.add('hit');R[id]=(performance.now()-T0[id])/1000;res()})}}
+ function res(){const a=R.rcA,b=R.rcB;if(a&&b){$('rcOut').innerHTML='⏱️ غير المصنّفة: '+N(fx(a,1))+' ث · المصنّفة: '+N(fx(b,1))+' ث<br>'+(b<a?'🎉 وجدتها أسرع في القائمة المصنّفة! لأنك ذهبت مباشرة إلى مجموعة «الفطريات».':'🤔 هذه المرة كنت أسرع في غير المصنّفة… جرّب جولة أخرى: مع القوائم الطويلة يفوز التصنيف دائمًا!');if(b<a)cheer()}
+  else $('rcOut').textContent='✅ وجدتها! الآن ابحث في القائمة الأخرى.'}
+ function mk(){delete R.rcA;delete R.rcB;const all=shuf(Object.values(L).flat());
+  side('rcA',all.map(w=>'<button>'+w+'</button>').join(''));
+  side('rcB',Object.entries(L).map(([k,v])=>'<div style="font-size:.75rem;color:var(--tl);font-weight:900;margin-top:4px">'+k+'</div>'+shuf(v).map(w=>'<button>'+w+'</button>').join('')).join(''));$('rcOut').textContent=''}
+ $('rcNew').onclick=mk;mk()})();
+
+/* ---------- c1: الثمار بطرق مختلفة ---------- */
+(function(){const Fr=[['🌴','بلح',0,'بني',0],['🍑','مشمش',0,'برتقالي',0],['🥥','جوز الهند',0,'بني',1],['🍅','طماطم',1,'أحمر',0],['🌵','تين شوكي',1,'أخضر',1],['🌶️','فلفل أحمر',1,'أحمر',0],['🍎','تفاح',1,'أحمر',0],['🍐','كمثرى',1,'أخضر',0],['🍊','برتقال',1,'برتقالي',1]];
+ const P=[['🌰 عدد البذور',f=>f[2]?'متعددة البذور':'وحيدة البذرة','صنّفنا حسب عدد البذور: البلح والمشمش وجوز الهند لكل منها بذرة واحدة.'],['🎨 لون القشرة',f=>'لونها '+f[3],'صنّفنا حسب لون القشرة: تغيّرت المجموعات تمامًا!'],['✋ قوام القشرة',f=>f[4]?'قشرة خشنة':'قشرة ناعمة','صنّفنا حسب قوام القشرة: ناعمة أم خشنة.']];
+ const tried=new Set();$('frB').innerHTML=P.map((p,i)=>'<button data-i="'+i+'">'+p[0]+'</button>').join('');
+ $('frB').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('frB').querySelectorAll('button').forEach(y=>y.classList.remove('on'));b.classList.add('on');const p=P[+b.dataset.i];tried.add(+b.dataset.i);
+  const G={};Fr.forEach(f=>{const k=p[1](f);(G[k]=G[k]||[]).push(f)});
+  $('frG').innerHTML=Object.entries(G).map(([k,v])=>'<div><b>'+k+'</b>'+v.map(f=>'<span>'+f[0]+' '+f[1]+'</span>').join('')+'</div>').join('');
+  $('frOut').innerHTML='💡 '+p[2]+(tried.size===3?'<br>🎉 نفس الثمار صُنّفت بثلاث طرق! الغرض من التصنيف هو الذي يحدد الخاصية.':'');if(tried.size===3)cheer()});
+ $('frG').innerHTML=Fr.map(f=>'<span>'+f[0]+' '+f[1]+'</span>').join('');$('frG').style.display='block'
+ $('frB').addEventListener('click',()=>{$('frG').style.display=''})})();
+
+MCQP($('q1'),bank([['تقسيم الأشياء إلى مجموعات وفقًا لخواصها يسمى:',['التصنيف','القياس','التجربة']],['من فوائد التصنيف:',['إيجاد الأشياء بسهولة','زيادة عدد الأشياء','تغيير خواص الأشياء']],['الذي يحدد الصفة التي نصنّف على أساسها هو:',['الغرض من التصنيف','لون الأشياء دائمًا','حجم الأشياء دائمًا']],['يقدّر العلماء عدد أنواع المخلوقات الحية على الأرض بأكثر من:',['عشرة ملايين نوع','ألف نوع','مئة نوع']],['البلح والمشمش يوضعان في مجموعة واحدة حسب عدد البذور لأن كلًا منهما:',['وحيد البذرة','متعدد البذور','بلا بذور']],['الطماطم والتين الشوكي ثمار:',['متعددة البذور','وحيدة البذرة','بلا قشرة']],['عند تصنيف الثمار حسب قوام القشرة يوضع جوز الهند مع:',['التين الشوكي (قشرة خشنة)','الموز (قشرة ناعمة)','الفلفل الأحمر']],['يصنّف أمين المكتبة الكتب حسب الموضوع ليساعد القرّاء على:',['إيجاد الكتب بسهولة','شراء كتب أكثر','قراءة أسرع']],['يبيّن لنا التصنيف:',['أوجه الشبه والاختلاف بين الأشياء','أعمار الأشياء','أسعار الأشياء']],['هل توجد طريقة واحدة فقط لتصنيف مجموعة من الأشياء؟',['لا، توجد طرق كثيرة','نعم، طريقة واحدة فقط','لا يمكن تصنيف الأشياء']]]));
+
+/* ---------- c2: الأرجل والتغذية والحركة ---------- */
+sortGame('lgP','lgC','lgOut',[['🚫 بدون أرجل','','#868e96'],['2️⃣ ثنائي الأرجل','','#1c7ed6'],['4️⃣ رباعي الأرجل','','#2b8a3e'],['6️⃣ سداسي الأرجل','','#e8590c'],['8️⃣ ثماني الأرجل','','#ae3ec9']],
+ [['🐍 الكوبرا',0,'الثعبان يزحف بلا أرجل.'],['🐌 الحلزون',0,'يتحرك على قدم عضلية بلا أرجل.'],['🦤 النعامة',1,'الطيور لها رجلان.'],['🦚 الطاووس',1,''],['🐴 الحصان',2,''],['🦎 السحلية',2,''],['🪲 الخنفساء',3,'كل الحشرات لها ست أرجل.'],['🪳 الصرصور',3,'حشرة: ست أرجل.'],['🕷️ العنكبوت',4,'العنكبوت ليس حشرة؛ له ثماني أرجل.'],['🐙 الأخطبوط',4,'له ثمانية أذرع.']]);
+sortGame('dtP','dtC','dtOut',[['🌿 نباتات فقط','آكلة نبات','#2b8a3e'],['🥩 حيوانات فقط','آكلة لحوم','#c92a2a'],['🍽️ نباتات وحيوانات','آكلة الاثنين','#e8590c']],
+ [['🐘 الفيل',0,''],['🐴 الحصان',0,''],['🐇 الأرنب',0,''],['🦁 الأسد',1,''],['🦈 سمك القرش',1,''],['🐺 الذئب',1,''],['🧑 الإنسان',2,'يأكل الخضار والفواكه واللحوم.'],['🐻 الدب',2,'يأكل العسل والثمار والأسماك.'],['🐭 الفأر',2,'']]);
+(function(){let cur=null;const MV=['walk','swim','jump','fly'];
+ sortGame('mvP','mvC2','mvOut',[['🚶 تمشي','','#e8590c'],['🏊 تسبح','','#1c7ed6'],['🦘 تقفز','','#2b8a3e'],['🕊️ تطير','','#ae3ec9']],
+  [['🐈 القطة',0,''],['🐄 البقرة',0,''],['🐢 السلحفاة',0,''],['🐪 الجمل',0,''],['🐬 الدلفين',1,''],['🦑 الحبار',1,''],['🐠 سمكة المرجان',1,''],['🐇 الأرنب',2,''],['🐸 الضفدعة',2,''],['🦘 الكنغر',2,''],['🦇 الخفاش',3,'الخفاش ثديي يطير!'],['🐝 النحلة',3,''],['🦅 النسر',3,''],['🕊️ الحمامة',3,'']]);
+ $('mvP').addEventListener('click',e=>{const b=e.target.closest('button');if(b&&b.dataset.k!=null)cur=[b.textContent.split(' ')[0],MV[+b.dataset.k]]});
+ anim('mvC',(x,c,t)=>{const W=c.width,H=c.height;x.clearRect(0,0,W,H);
+  if(!cur){x.fillStyle='#f1f3f5';x.fillRect(0,0,W,H);txt(x,'👆 اختر حيوانًا من الأسفل لتشاهد حركته',W/2,H/2,18,'#555');return}
+  const [e,m]=cur;const px=(t*120)%(W+80)-40;
+  if(m==='swim'){x.fillStyle='#d0ebff';x.fillRect(0,0,W,H);x.strokeStyle='#74c0fc';x.lineWidth=2;for(let k=0;k<3;k++){x.beginPath();for(let X=0;X<=W;X+=10)x.lineTo(X,40+k*55+6*Math.sin(X/30+t*2));x.stroke()}EM(x,e,W-px,110+18*Math.sin(t*4),46);txt(x,'تسبح في الماء 🌊',W/2,24,16,'#1864ab')}
+  else{const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#e7f5ff');g.addColorStop(1,'#fff');x.fillStyle=g;x.fillRect(0,0,W,H);x.fillStyle='#8ce99a';x.fillRect(0,H-36,W,36);
+   let y=H-58;if(m==='walk')y+=Math.abs(Math.sin(t*8))*-5;if(m==='jump'){const ph=(t*1.6)%1;y=H-58-110*4*ph*(1-ph)}if(m==='fly')y=70+30*Math.sin(t*3);
+   EM(x,e,W-px,y,46);txt(x,{walk:'تمشي على الأرض 🚶',jump:'تقفز قفزات 🦘',fly:'تطير في الهواء 🕊️'}[m],W/2,24,16,'#333')}})})();
+flipCards('gpCards',[['🐾','الحيوانات','عديدة الخلايا · تتغذى على النباتات أو على حيوانات أخرى · تنتقل من مكان لآخر · مثل: الأسماك والبرمائيات والزواحف والطيور والثدييات والحشرات.'],['🌿','النباتات','عديدة الخلايا · تصنع غذاءها بنفسها · لا تنتقل من مكان لآخر · منها النباتات الزهرية وغير الزهرية.'],['🍄','الفطريات','معظمها عديد الخلايا وبعضها وحيد الخلية · تحصل على غذائها من المواد المتحللة · لا تنتقل · مثل: عيش الغراب وعفن الخبز.'],['🦠','المخلوقات الدقيقة','معظمها وحيدة الخلية · بعضها يصنع غذاءه وبعضها يحصل عليه من مخلوقات أخرى · بعضها يتحرك · مثل: البكتيريا والبراميسيوم.']]);
+choiceQs('whoQ',[['🌿 أنا عديد الخلايا، أصنع غذائي بنفسي، ولا أنتقل من مكاني. من أنا؟',['نبات','حيوان','فطر'],'النباتات تصنع غذاءها ولا تنتقل.'],['🍞 أنمو على الخبز القديم وأتغذى على المواد المتحللة. من أنا؟',['فطر (عفن الخبز)','نبات زهري','حيوان'],'عفن الخبز من الفطريات.'],['🔬 أنا وحيد الخلية، لا أُرى إلا بالمجهر، وأتحرك في الماء. من أنا؟',['مخلوق دقيق (البراميسيوم)','فطر','نبات'],'البراميسيوم مخلوق دقيق يتحرك بأهداب.'],['🪶 لي ريش ورجلان وأضع البيض وأطير. من أنا؟',['حيوان (طائر)','نبات','مخلوق دقيق'],'الطيور من الحيوانات.'],['🍄 أشبه النبات في شكلي لكني لا أصنع غذائي، وأنمو في الأماكن الرطبة. من أنا؟',['عيش الغراب (فطر)','العشب','الصبار'],'عيش الغراب فطر لا يصنع غذاءه.'],['🐟 أعيش في الماء، وأنتقل بحثًا عن غذائي، ولي عمود فقري. من أنا؟',['حيوان (سمكة)','فطر','نبات مائي'],'الحيوانات تتحرك بحثًا عن الغذاء.']]);
+MCQP($('q2'),bank([['من خواص تصنيف المخلوقات الحية:',['شكل الجسم والتغذية والحركة','السعر والوزن','الاسم فقط']],['العنكبوت حيوان:',['ثماني الأرجل','سداسي الأرجل','رباعي الأرجل']],['الخنفساء حيوان:',['سداسي الأرجل','ثنائي الأرجل','بدون أرجل']],['الحيوان الذي يتغذى على النباتات فقط:',['الأرنب','الأسد','الذئب']],['يتغذى الدب على:',['النباتات والحيوانات','النباتات فقط','الحيوانات فقط']],['أي هذه الحيوانات يطير؟',['الخفاش','الدلفين','الكنغر']],['المجموعة التي تصنع غذاءها بنفسها:',['النباتات','الحيوانات','الفطريات']],['تحصل الفطريات على غذائها من:',['المواد المتحللة','ضوء الشمس مباشرة','صيد الحيوانات']],['معظم المخلوقات الدقيقة:',['وحيدة الخلية','عديدة الخلايا','لها عمود فقري']],['عيش الغراب ينتمي إلى:',['الفطريات','النباتات','الحيوانات']],['البكتيريا تنتمي إلى:',['المخلوقات الدقيقة','الفطريات','النباتات الزهرية']],['الحيوان الذي يسبح:',['الحبار','الجمل','النسر']],['الثعبان حيوان:',['بدون أرجل','رباعي الأرجل','ثنائي الأرجل']]]));
+
+/* ---------- c3: خريطة التصنيف ---------- */
+(function(){const O=[['🎋','الخيزران',0],['🌸','الزنبق',0],['🌱','العشب',0],['🐸','الضفدعة',1],['🦎','السحلية',1],['🍄','عيش الغراب',2],['🍞','عفن الخبز',2]];
+ const LF=[['🌿 تصنع غذاءها','نباتات'],['🐾 تتغذى على مخلوقات حية','حيوانات'],['🍄 تتغذى على المادة المتحللة','فطريات']];let cur=null,done=0;
+ $('trT').innerHTML='<div class="nd">🌍 المخلوقات الحية</div><div class="ln">↙ يصنع غذاءه؟ ↘</div><div class="row"><div><div class="ln">✅ نعم</div><div class="lf" id="lf0"><b>'+LF[0][0]+'</b><br></div></div><div><div class="ln">❌ لا</div><div class="nd">لا تصنع غذاءها</div><div class="ln">↙ ماذا يأكل؟ ↘</div><div class="row"><div class="lf" id="lf1"><b>'+LF[1][0]+'</b><br></div><div class="lf" id="lf2"><b>'+LF[2][0]+'</b><br></div></div></div></div>';
+ $('trP').innerHTML=O.map((o,i)=>'<button data-i="'+i+'">'+o[0]+' '+o[1]+'</button>').join('');
+ function put(o,b){$('lf'+o[2]).insertAdjacentHTML('beforeend','<span>'+o[0]+' '+o[1]+'</span>');b.classList.add('ok');b.onclick=null;done++;cur=null;$('trQ').innerHTML=done===O.length?'🎉 اكتملت الخريطة!':'اختر مخلوقًا آخر 👆';
+  $('trOut').innerHTML='✅ '+o[1]+' في مجموعة «'+LF[o[2]][1]+'».'+(done===O.length?' لاحظ: في كل خطوة استخدمنا خاصية واحدة فقط.':'');if(done===O.length)cheer()}
+ function wrong(m){shake($('trQ'));$('trOut').innerHTML='🤔 '+m}
+ $('trP').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('trP').querySelectorAll('button').forEach(y=>y.classList.remove('sel'));b.classList.add('sel');const o=O[+b.dataset.i];cur=o;$('trOut').textContent='';
+  $('trQ').innerHTML=o[0]+' '+o[1]+': هل يصنع غذاءه بنفسه؟<div class="qbtn"><button class="btn" id="trY">✅ نعم</button><button class="btn" id="trN">❌ لا</button></div>';
+  $('trY').onclick=()=>o[2]===0?put(o,b):wrong(o[1]+' لا يصنع غذاءه؛ ليس نباتًا أخضر.');
+  $('trN').onclick=()=>{if(o[2]===0)return wrong('النبات الأخضر يصنع غذاءه بنفسه من ضوء الشمس!');
+   $('trQ').innerHTML=o[0]+' '+o[1]+': على ماذا يتغذى؟<div class="qbtn"><button class="btn" id="trL">🐛 مخلوقات حية</button><button class="btn" id="trD">🍂 مادة متحللة</button></div>';
+   $('trL').onclick=()=>o[2]===1?put(o,b):wrong('الفطريات تتغذى على المادة المتحللة.');$('trD').onclick=()=>o[2]===2?put(o,b):wrong(o[1]+' حيوان يأكل مخلوقات حية (حشرات).')}})})();
+sortGame('brP','brC','brOut',[['🫁 بالرئتين','','#1c7ed6'],['🐟 بالخياشيم','','#0c8599'],['🪱 خلال الجلد','','#e8590c']],
+ [['🐈 القطة',0,''],['🧑 الإنسان',0,''],['🕊️ الحمامة',0,''],['🐟 السمكة',1,''],['🐸 أبو ذنيبة (صغير الضفدع)',1,'يتنفس بالخياشيم، وعندما يكبر يتنفس بالرئتين.'],['🪱 دودة الأرض',2,'تتنفس خلال جلدها الرطب.'],['🩸 العلق الطبي (دودة الدم)',2,'يتنفس خلال الجلد.']]);
+sortGame('rpP','rpC','rpOut',[['🌰 بالبذور','','#2b8a3e'],['🧅 بالسيقان الأرضية','','#e8590c'],['🍃 بالأوراق','','#0c8599'],['🌴 بالفسائل (الخلفات)','','#ae3ec9']],
+ [['🌾 القمح',0,''],['🥥 جوز الهند',0,''],['🌽 الذرة',0,''],['🧅 البصل',1,''],['🫚 الزنجبيل',1,''],['🥔 البطاطس',1,''],['🪻 البنفسج الأفريقي',2,'تنمو من ورقة توضع في التربة.'],['🌴 النخيل',3,''],['🍌 الموز',3,''],['🍍 الأناناس',3,'']]);
+sortGame('egP','egC','egOut',[['🥚 تضع البيض','','#e8590c'],['🍼 تلد','','#1c7ed6'],['🫧 بالتبرعم','','#2b8a3e']],
+ [['🕊️ الحمامة',0,''],['🦎 السحلية',0,''],['🦆 البطة',0,''],['🦌 الغزال',1,''],['🐬 الدلفين',1,'الدلفين ثديي يلد صغاره.'],['🍞 الخميرة',2,'الخميرة فطر وحيد الخلية يتكاثر بالتبرعم.']]);
+steps('stL','stOut','stNew',[['❓ اطرح السؤال: ما الهدف من التصنيف؟','الخطوة الأولى دائمًا'],['🔎 تخيّر الصفات أو الخواص','التي ستصنّف على أساسها'],['📊 ارسم جداول أو خرائط','لبيان المجموعات بوضوح'],['✔️ انظر إلى كل شيء على حدة','وتأكد أنه في المجموعة الصحيحة']]);
+MCQP($('q3'),bank([['نعرض التصنيف باستخدام:',['الجداول والخرائط','الألوان فقط','الأرقام فقط']],['في خريطة التصنيف نستخدم في كل خطوة:',['خاصية واحدة','كل الخواص معًا','لا نستخدم خواص']],['يتنفس السمك بواسطة:',['الخياشيم','الرئتين','الجلد']],['تتنفس دودة الأرض:',['خلال الجلد','بالخياشيم','بالرئتين']],['يتكاثر البصل بواسطة:',['السيقان الأرضية','البذور','الفسائل']],['يتكاثر النخيل بواسطة:',['الفسائل','الأوراق','السيقان الأرضية']],['تتكاثر الخميرة بواسطة:',['التبرعم','وضع البيض','الولادة']],['الحيوان الذي يلد من بين هذه:',['الغزال','البطة','السحلية']],['المخلوق الذي لا يصنع غذاءه ويتغذى على المادة المتحللة:',['عفن الخبز','الخيزران','الضفدعة']],['الضفدعة تتغذى على:',['مخلوقات حية (حشرات)','المادة المتحللة','ضوء الشمس']],['أول خطوة في التصنيف:',['تحديد الهدف من التصنيف','رسم الجدول','وضع الأشياء في المجموعات']],['يتكاثر القمح بواسطة:',['البذور','الفسائل','الأوراق']]]));
+
+/* ---------- rv1 ---------- */
+MCQP($('bk1'),bank([['📘 (ص 24) صُنّفت المخلوقات: (أ) السرخس والصبار والعشب، (ب) التمساح والحمامة والنمر، (ج) عيش الغراب وعفن الخبز. على أي أساس؟',['(2) الطريقة التي تحصل بها على الغذاء','(1) المكان الذي تعيش فيه','(3) طريقة تكاثرها','(4) لون جسمها'],'(أ) نباتات تصنع غذاءها، (ب) حيوانات تتحرك بحثًا عن الغذاء، (ج) فطريات تتغذى على المادة المتحللة. النمر يلد والبقية تبيض فليست طريقة التكاثر.'],
+ ['📘 (ص 25) في المخطط: لماذا زينة وروفيعة متشابهتان؟',['كلاهما نباتات زهرية','كلاهما أزهارهما زرقاء','كلاهما تنتثر بالرياح'],'كلتاهما في مجموعة «النباتات الزهرية».'],
+ ['📘 (ص 25) ما وجها الشبه بين بهيجة وجميلة؟',['كلاهما نباتات زهرية وتنتثر عن طريق الماء','كلاهما أزهارهما حمراء','كلاهما تنتثر بالحيوانات'],'بهيجة زرقاء وجميلة حمراء، لكن كلتيهما تنتثر بالماء.'],
+ ['📘 (ص 25) ما أوجه الاختلاف بين زينة وروفيعة؟',['زينة زرقاء تنتثر بالرياح، وروفيعة حمراء تنتثر بالحيوانات','زينة حمراء وروفيعة زرقاء','لا يوجد اختلاف'],'من المخطط: زينة (أزهار زرقاء ← الرياح)، روفيعة (أزهار حمراء ← الحيوانات).'],
+ ['📘 (ص 25) حسناء أزهارها زرقاء وبذورها صغيرة بتراكيب تشبه الأجنحة. أين تُصنّف؟',['مع زينة (أزهار زرقاء تنتثر بالرياح)','مع بهيجة','مع روفيعة'],'التراكيب التي تشبه الأجنحة خاصية للبذور المنتثرة بالرياح.']]));
+chapterTest('rv1',[['التصنيف هو:',['تقسيم الأشياء إلى مجموعات وفقًا لخواصها','ترتيب الأشياء حسب الحجم فقط','عدّ الأشياء']],['من فوائد التصنيف:',['تنظيم الأشياء وإيجادها بسهولة','زيادة عددها','تغيير ألوانها']],['ثمرة وحيدة البذرة:',['البلح','الطماطم','التين الشوكي']],['حيوان سداسي الأرجل:',['الصرصور','العنكبوت','الحصان']],['حيوان يتغذى على النباتات والحيوانات:',['الإنسان','الحصان','الأسد']],['يطير:',['الخفاش','الحبار','الكنغر']],['تصنع غذاءها بنفسها:',['النباتات','الفطريات','الحيوانات']],['عفن الخبز من:',['الفطريات','النباتات','الحيوانات']],['معظم المخلوقات الدقيقة:',['وحيدة الخلية','عديدة الخلايا','ذات أرجل']],['يتنفس أبو ذنيبة بـ:',['الخياشيم','الرئتين','الجلد']],['يتكاثر الموز بـ:',['الفسائل','البذور','الأوراق']],['تتكاثر الخميرة بـ:',['التبرعم','البيض','الولادة']]]);
+
+/* ================= الفصل 2: تصنيف المواد ================= */
+(function(){const M=[['🪵','الخشب',0,0,2,0,1,1],['🔩','الحديد',1,1,2,1,0,0],['🟠','النحاس',0,1,2,1,0,0],['🥫','الألومنيوم',0,1,2,1,0,0],['🧴','اللدائن',0,0,1,0,0,1],['🪟','الزجاج',0,0,0,0,0,0],['🌫️','الزجاج المصنفر',0,0,1,0,0,0],['🛞','المطاط',0,0,2,0,0,0],['🏺','الخزف',0,0,2,0,0,0],['📄','الورق',0,0,1,0,1,1]];
+ const TS=[['🧲','المغناطيس'],['💡','الكهرباء'],['🔦','الضوء'],['🔥','الحرارة'],['💧','الامتصاص'],['🛁','الطفو']];
+ const RT=[m=>m[2]?'✅ ينجذب':'❌ لا ينجذب',m=>m[3]?'⚡ موصل':'🚫 عازل',m=>['شفافة','شبه شفافة','معتمة'][m[4]],m=>m[5]?'🔥 جيدة':'🧊 رديئة',m=>m[6]?'💧 تمتص':'لا تمتص',m=>m[7]?'⛵ تطفو':'⚓ تغوص'];
+ const EX=[m=>m[2]?m[1]+' ينجذب إلى المغناطيس، فهو مادة مغناطيسية.':m[1]+' لا ينجذب إلى المغناطيس، فهو مادة غير مغناطيسية.'+(m[3]?' لاحظ: ليس كل المعادن مغناطيسية!':''),
+  m=>m[3]?'أضاء المصباح! '+m[1]+' موصل كهربائي يسمح بسريان التيار.':'لم يضئ المصباح. '+m[1]+' عازل كهربائي لا يسمح بسريان التيار.',
+  m=>[m[1]+' مادة شفافة: تسمح بنفاذ معظم الضوء، فنرى خلالها بوضوح.',m[1]+' شبه شفاف: يسمح بنفاذ بعض الضوء، فنرى خلاله بشكل غير واضح.',m[1]+' مادة معتمة: لا تسمح بنفاذ الضوء.'][m[4]],
+  m=>m[5]?'سخنت الملعقة من '+m[1]+' بسرعة حتى طرفها: جيدة التوصيل للحرارة.':'بقي طرف الملعقة من '+m[1]+' باردًا: رديئة التوصيل للحرارة (عازلة).',
+  m=>m[6]?m[1]+' يمتص الماء.':m[1]+' لا يمتص الماء؛ تبقى القطرة على سطحه.',m=>m[7]?m[1]+' يطفو فوق الماء.':m[1]+' يغوص في الماء.'];
+ let mi=-1,ti=-1,t0=0;const R={};
+ $('mtM').innerHTML=M.map((m,i)=>'<button data-i="'+i+'"><span>'+m[0]+'</span>'+m[1]+'</button>').join('');
+ $('mtT').innerHTML=TS.map((t,i)=>'<button data-i="'+i+'">'+t[0]+' '+t[1]+'</button>').join('');
+ function table(){$('mtR').innerHTML='<tr><th>المادة</th>'+TS.map(t=>'<th>'+t[0]+'</th>').join('')+'</tr>'+M.map((m,i)=>R[i]?'<tr><td>'+m[0]+' '+m[1]+'</td>'+TS.map((t,j)=>'<td>'+(R[i][j]?RT[j](m):'')+'</td>').join('')+'</tr>':'').join('')}
+ function go(){if(mi<0||ti<0){$('mtOut').textContent=mi<0?'☝️ اختر مادة أولًا':'☝️ اختر أداة الفحص';return}t0=performance.now();(R[mi]=R[mi]||{})[ti]=1;table();
+  $('mtOut').innerHTML='🔬 '+EX[ti](M[mi]);const n=Object.values(R).reduce((s,r)=>s+Object.keys(r).length,0);if(n===12||n===30)cheer()}
+ $('mtM').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('mtM').querySelectorAll('button').forEach(y=>y.classList.remove('sel'));b.classList.add('sel');mi=+b.dataset.i;go()});
+ $('mtT').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('mtT').querySelectorAll('button').forEach(y=>y.classList.remove('on'));b.classList.add('on');ti=+b.dataset.i;go()});
+ table();
+ anim('mtC',(x,c)=>{const W=c.width,H=c.height,t=Math.min((performance.now()-t0)/1000,3);x.clearRect(0,0,W,H);x.fillStyle='#f8f9fa';x.fillRect(0,0,W,H);
+  if(mi<0||ti<0){txt(x,'① اختر مادة  ② اختر أداة فحص',W/2,H/2,20,'#555');return}const m=M[mi],e=m[0];
+  if(ti===0){const mx=80+Math.min(t,1)*180;x.fillStyle='#e03131';x.fillRect(mx-60,100,50,40);x.fillStyle='#1c7ed6';x.fillRect(mx-10,100,50,40);txt(x,'N',mx-35,128,18,'#fff');txt(x,'S',mx+15,128,18,'#fff');
+   let sx=430;if(m[2]&&t>1)sx=Math.max(mx+70,430-(t-1)*400);EM(x,e,sx,120,60);if(m[2]&&sx<=mx+70)txt(x,'✨ التصق!',mx+70,70,18,'#2b8a3e')}
+  else if(ti===1){x.strokeStyle='#333';x.lineWidth=4;x.beginPath();x.moveTo(120,200);x.lineTo(120,60);x.lineTo(320,60);x.moveTo(380,60);x.lineTo(520,60);x.lineTo(520,200);x.lineTo(120,200);x.stroke();
+   x.fillStyle='#495057';x.fillRect(260,185,90,30);txt(x,'نضيدة',305,206,14,'#fff');EM(x,e,350,62,46);const on=m[3]&&t>.4;
+   if(on){x.fillStyle='rgba(255,212,59,.45)';x.beginPath();x.arc(520,120,40+6*Math.sin(t*10),0,7);x.fill()}x.fillStyle=on?'#ffd43b':'#dee2e6';x.beginPath();x.arc(520,120,22,0,7);x.fill();x.strokeStyle='#333';x.stroke();txt(x,on?'💡 يضيء':'لا يضيء',520,240,16,on?'#2b8a3e':'#c92a2a')}
+  else if(ti===2){EM(x,'🔦',70,130,54);const a=[.9,.4,0][m[4]],k=Math.min(t*2,1);x.fillStyle='rgba(255,236,153,.8)';x.beginPath();x.moveTo(100,115);x.lineTo(280*k+100*(1-k),60);x.lineTo(280*k+100*(1-k),200);x.lineTo(100,145);x.fill();
+   x.fillStyle=['rgba(173,216,230,.35)','rgba(200,200,200,.75)','#8d6e63'][m[4]];x.fillRect(280,50,40,160);EM(x,e,300,30,30);
+   if(k>=1&&a>0){x.fillStyle='rgba(255,236,153,'+a+')';x.beginPath();x.moveTo(320,60);x.lineTo(560,30);x.lineTo(560,230);x.lineTo(320,200);x.fill()}x.fillStyle='#343a40';x.fillRect(560,20,14,220);txt(x,['يمر معظم الضوء','يمر بعض الضوء','لا يمر الضوء'][m[4]],450,250,15,'#333')}
+  else if(ti===3){x.fillStyle='#a5d8ff';x.fillRect(240,150,160,90);x.strokeStyle='#495057';x.lineWidth=3;x.strokeRect(240,120,160,120);for(let k=0;k<3;k++){x.strokeStyle='rgba(150,150,150,.5)';x.beginPath();x.moveTo(280+k*35,110);x.quadraticCurveTo(290+k*35+8*Math.sin(t*5+k),80,280+k*35,50);x.stroke()}
+   const hl=m[5]?Math.min(t/1.5,1):Math.min(t/1.5,1)*.2;const g=x.createLinearGradient(0,200,0,40);g.addColorStop(0,'#e03131');g.addColorStop(hl,'#e03131');g.addColorStop(Math.min(hl+.01,1),'#adb5bd');g.addColorStop(1,'#adb5bd');
+   x.save();x.translate(330,200);x.rotate(-.35);x.fillStyle=g;x.fillRect(-8,-170,16,170);x.restore();EM(x,e,120,90,50);EM(x,'✋',405,30,34);txt(x,m[5]&&t>1.4?'آه! ساخن 🔥':'الطرف بارد 🙂',520,40,16,m[5]&&t>1.4?'#c92a2a':'#2b8a3e')}
+  else if(ti===4){x.fillStyle=['#c4a484','#adb5bd','#ff922b','#ced4da','#e9ecef','#d0ebff','#e9ecef','#343a40','#f1f3f5','#fff'][mi];x.fillRect(180,160,280,50);x.strokeStyle='#868e96';x.strokeRect(180,160,280,50);EM(x,e,320,110,40);
+   const k=Math.min(t,1);if(k<1){x.fillStyle='#4dabf7';x.beginPath();x.arc(320,40+k*100,12,0,7);x.fill()}else if(m[6]){const s=Math.min((t-1)*60,70);x.fillStyle='rgba(77,171,247,.35)';x.beginPath();x.ellipse(320,180,s,12,0,0,7);x.fill();txt(x,'امتصّت الماء 💧',320,245,16,'#1864ab')}
+   else{x.fillStyle='#4dabf7';x.beginPath();x.ellipse(320,152,16,9,0,0,7);x.fill();txt(x,'بقيت القطرة على السطح',320,245,16,'#c92a2a')}}
+  else{x.fillStyle='#d0ebff';x.fillRect(170,90,300,160);x.strokeStyle='#495057';x.lineWidth=3;x.strokeRect(170,60,300,190);const k=Math.min(t/1.2,1);const y=m[7]?40+k*40+3*Math.sin(t*3):40+k*175;EM(x,e,320,y,46);txt(x,m[7]?'تطفو ⛵':'تغوص ⚓',320,30,16,'#333')}})})();
+sortGame('mgP','mgC','mgOut',[['🧲 مغناطيسية','تنجذب للمغناطيس','#e03131'],['🚫 غير مغناطيسية','لا تنجذب','#868e96']],
+ [['📎 مشبك ورق',0,''],['🔩 مسمار حديد',0,''],['🪡 دبوس',0,''],['🥄 ملعقة فولاذ',0,'الفولاذ معدن مغناطيسي.'],['🥫 علبة ألومنيوم',1,'الألومنيوم معدن لكنه غير مغناطيسي!'],['🟠 سلك نحاس',1,'النحاس معدن غير مغناطيسي.'],['🪵 قطعة خشب',1,''],['🧴 مسطرة لدائن',1,''],['🪟 كوب زجاج',1,'']]);
+sortGame('elP','elC','elOut',[['⚡ موصلات كهربائية','تسمح بسريان التيار','#f08c00'],['🚫 عوازل كهربائية','لا تسمح بسريان التيار','#1c7ed6']],
+ [['🟠 النحاس',0,''],['🔩 الحديد',0,''],['🥫 الألومنيوم',0,''],['✏️ جرافيت قلم الرصاص',0,'الجرافيت غير معدني لكنه موصل!'],['🧴 اللدائن',1,''],['🛞 المطاط',1,''],['🪵 الخشب الجاف',1,''],['🪟 الزجاج',1,''],['🏺 الخزف',1,'']]);
+MCQP($('q4'),bank([['تسمى صفات المواد:',['خواص المواد','أسماء المواد','أشكال المواد']],['المادة التي تنجذب إلى المغناطيس:',['الحديد','النحاس','الألومنيوم']],['الألومنيوم معدن:',['غير مغناطيسي','مغناطيسي','عازل للكهرباء']],['المادة التي تسمح بسريان التيار الكهربائي تسمى:',['موصلًا كهربائيًا','عازلًا كهربائيًا','مادة معتمة']],['من العوازل الكهربائية:',['المطاط','النحاس','الحديد']],['الزجاج العادي مادة:',['شفافة','معتمة','مغناطيسية']],['الزجاج المصنفر:',['شبه شفاف يسمح بنفاذ بعض الضوء','شفاف تمامًا','معتم تمامًا']],['الخشب مادة:',['معتمة','شفافة','شبه شفافة']],['من المواد جيدة التوصيل للحرارة:',['المعادن','الخشب','اللدائن']],['تمر الأشعة السينية خلال الجلد لكنها لا تمر خلال:',['العظام','الهواء','العضلات']],['الإسفنج والورق:',['يمتصان الماء','لا يمتصان الماء','يغوصان دائمًا']],['المادة التي تطفو على الماء:',['الخشب','الحديد','الزجاج']]]));
+
+/* ---------- m2: المغناطيس السحري ---------- */
+(function(){const I0=[['📎','مشبك ورق',1],['🔑','مفتاح حديد',1],['🪡','دبوس',1],['🥄','ملعقة فولاذ',1],['🥫','علبة ألومنيوم',0],['✏️','قلم رصاص',0],['🪵','خشبة',0],['🧴','علبة لدائن',0],['🟠','قطعة نحاس',0],['🧽','إسفنجة',0]];
+ let I,mg={x:320,y:60},drag=0,last='';const c=$('mgnC');
+ function reset(){I=shuf(I0).map((o,i)=>({o,x:50+i*60,y:200+(i%2)*30,st:0}));last='';$('mgnOut').textContent='🧲 اسحب المغناطيس فوق الأشياء'}
+ function pos(e){const r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}}
+ c.addEventListener('pointerdown',e=>{drag=1;mg=pos(e);c.setPointerCapture(e.pointerId)});c.addEventListener('pointermove',e=>{if(drag)mg=pos(e)});c.addEventListener('pointerup',()=>drag=0);
+ $('mgnR').onclick=reset;reset();
+ anim('mgnC',(x,cc)=>{const W=cc.width,H=cc.height;x.clearRect(0,0,W,H);x.fillStyle='#fff9db';x.fillRect(0,H-70,W,70);
+  I.forEach(it=>{const d=Math.hypot(it.x-mg.x,it.y-mg.y);if(!it.st&&d<70){if(it.o[2]){it.st=1;it.dx=(Math.random()-.5)*50;it.dy=40}else if(last!==it.o[1]){last=it.o[1];$('mgnOut').innerHTML='❌ '+it.o[1]+' لا ينجذب إلى المغناطيس.'}}
+   if(it.st){it.x+=(mg.x+it.dx-it.x)*.3;it.y+=(mg.y+it.dy-it.y)*.3}EM(x,it.o[0],it.x,it.y,34)});
+  const n=I.filter(i=>i.st).length;if(n&&$('mgnOut').dataset.n!=n){$('mgnOut').dataset.n=n;$('mgnOut').innerHTML='✅ التقط المغناطيس '+n+' من 4 أشياء مغناطيسية'+(n===4?' — كلها مصنوعة من الحديد أو الفولاذ! 🎉':'');if(n===4)cheer()}
+  x.save();x.translate(mg.x,mg.y);x.lineWidth=16;x.lineCap='butt';x.strokeStyle='#e03131';x.beginPath();x.arc(0,-10,22,Math.PI,2*Math.PI);x.stroke();
+  x.fillStyle='#e03131';x.fillRect(-30,-10,16,18);x.fillRect(14,-10,16,18);x.fillStyle='#ced4da';x.fillRect(-30,8,16,10);x.fillRect(14,8,16,10);x.restore();
+  if(!drag&&!n)txt(x,'👆 اسحبني',mg.x,mg.y-45,15,'#c92a2a')})})();
+
+/* ---------- m2: مهندس البيت ---------- */
+(function(){const H=[['🍲','جسم القدر',['المعدن','الزجاج العادي','الورق'],'المعدن جيد التوصيل للحرارة فيسخن الطعام بسرعة.'],['🍳','مقبض المقلاة',['اللدائن أو الخشب','الحديد','النحاس'],'رديئة التوصيل للحرارة فلا تحترق يدك.'],['🪟','نافذة الغرفة',['الزجاج الشفاف','الخشب','الزجاج المصنفر'],'الزجاج الشفاف يسمح بنفاذ معظم الضوء فنرى خلاله.'],['🚿','نافذة الحمام',['الزجاج المصنفر','الزجاج الشفاف','الحديد'],'يسمح بنفاذ بعض الضوء فقط فيحفظ الخصوصية.'],['🔌','سلك الكهرباء',['النحاس','المطاط','الخشب'],'النحاس موصل جيد للكهرباء.'],['🧵','غلاف السلك',['اللدائن','الألومنيوم','النحاس'],'اللدائن عازلة تمنع وصول الكهرباء إلى أجسامنا.'],['🚪','ماسك الباب',['مغناطيس وقطعة حديد','قطعة خشب','قطعة زجاج'],'الحديد ينجذب إلى المغناطيس فيبقى الباب مغلقًا.'],['🛞','إطار السيارة',['المطاط','الخزف','الزجاج'],'المطاط مرن ومتين.'],['🧱','بلاط الحمام',['الخزف','الورق','الإسفنج'],'الخزف صلب ولا يمتص الماء وسهل التنظيف.']];
+ let done=0;$('hsB').innerHTML=H.map((h,i)=>'<button data-i="'+i+'"><span>'+h[0]+'</span>'+h[1]+'</button>').join('');
+ $('hsB').querySelectorAll('button').forEach(b=>b.onclick=()=>{if(b.classList.contains('ok'))return;$('hsB').querySelectorAll('button').forEach(y=>y.classList.remove('sel'));b.classList.add('sel');const h=H[+b.dataset.i];$('hsOut').textContent='';
+  $('hsQ').innerHTML='<div class="scn">'+h[0]+' من أي مادة نصنع '+h[1]+'؟</div><div class="opts2">'+shuf(h[2].map((o,j)=>[o,j])).map(([o,j])=>'<button data-j="'+j+'">'+o+'</button>').join('')+'</div>';
+  $('hsQ').querySelectorAll('[data-j]').forEach(o=>o.onclick=()=>{if(+o.dataset.j===0){o.classList.add('ok');b.classList.remove('sel');b.classList.add('ok');done++;$('hsOut').innerHTML='✅ '+h[3]+(done===H.length?'<br>🎉 بنيت بيتًا كاملًا بمواد مناسبة!':'');setTimeout(()=>{$('hsQ').innerHTML=''},900);if(done===H.length)cheer()}else{o.classList.add('no');shake(o);$('hsOut').innerHTML='🤔 فكّر في الخاصية المطلوبة: الحرارة؟ الكهرباء؟ الضوء؟'}})})})();
+flipCards('mtCards',[['🏺','الخزف','صلب · لا يوصل الكهرباء · يتحمل الحرارة · ينكسر ← الفخار، البلاط، الأطباق.'],['🪟','الزجاج','صلب · ينكسر بسهولة · لا يوصل الكهرباء · شفاف ← النوافذ، الأكواب، المرايا، النظارات.'],['🔩','المعدن','صلب · لامع · موصل للحرارة والكهرباء ← القدور، الأسلاك، الأدوات، الأبواب.'],['🧴','اللدائن','صلبة أو مرنة · خفيفة · لا توصل الكهرباء ← أغلفة الأسلاك والمفاتيح، مقابض القدور، الكراسي، حقائب التسوق.'],['🪵','الخشب','صلب · لا يوصل الكهرباء · رديء التوصيل للحرارة ← الأثاث، الأبواب، مقابض الأدوات.'],['🛞','المطاط','رخو ومرن · لا يوصل الكهرباء ← الإطارات، القفازات، نعال الأحذية.']]);
+choiceQs('lbQ',[['🏷️ بطاقة على قميص: «قطن 100%». ما هذه المادة؟',['ألياف طبيعية من نبات القطن','معدن','لدائن'],'القطن ألياف نباتية طبيعية تمتص العرق.'],['🏷️ بطاقة على سترة رياضية: «بوليستر 100%». البوليستر نوع من:',['اللدائن (ألياف صناعية)','الخشب','الخزف'],'البوليستر ألياف صناعية تُصنع مثل اللدائن.'],['🏷️ «النعل: مطاط». لماذا اختير المطاط للنعل؟',['لأنه مرن ويمنع الانزلاق','لأنه شفاف','لأنه موصل للكهرباء'],'المطاط مرن ويمسك بالأرض.'],['🏷️ على ملعقة: «فولاذ لا يصدأ». الفولاذ:',['معدن','لدائن','خزف'],'الفولاذ سبيكة معدنية من الحديد.'],['🏷️ على كوب: «زجاج مقاوم للحرارة». لماذا نرى العصير داخله؟',['لأن الزجاج شفاف','لأنه معتم','لأنه مغناطيسي'],'الزجاج يسمح بنفاذ معظم الضوء.']]);
+MCQP($('q5'),bank([['يُصنع جسم القدر من المعدن لأنه:',['جيد التوصيل للحرارة','عازل للحرارة','شفاف']],['يُصنع مقبض القدر من اللدائن لأنها:',['رديئة التوصيل للحرارة','موصلة للحرارة','مغناطيسية']],['تُصنع أسلاك الكهرباء من النحاس لأنه:',['موصل جيد للكهرباء','عازل للكهرباء','شفاف']],['تُغلّف الأسلاك باللدائن لأنها:',['عازلة للكهرباء','موصلة للكهرباء','تمتص الماء']],['نافذة الحمام تُصنع من:',['الزجاج المصنفر','الزجاج الشفاف','الحديد']],['عدسات النظارات تُصنع من مادة:',['شفافة','معتمة','مغناطيسية']],['ماسك الباب المغناطيسي يحتاج قطعة من:',['الحديد','الألومنيوم','الخشب']],['تُصنع إطارات السيارات من:',['المطاط','الزجاج','الخزف']],['المادة الصلبة التي تنكسر بسهولة وتُصنع منها الأكواب:',['الزجاج','المطاط','الخشب']],['الخزف يُستخدم في صنع:',['البلاط والأطباق','أسلاك الكهرباء','إطارات السيارات']],['لماذا لا نصنع القدر من اللدائن؟',['لأنها تذوب ورديئة التوصيل للحرارة','لأنها ثقيلة','لأنها مغناطيسية']]]));
+
+/* ---------- rv2 ---------- */
+MCQP($('bk2'),bank([['📘 (ص 42) صنّف حسن أشياء منزله: ق شواية حديدية، ل بوابة من الألومنيوم (معدنية)، س حوض سمك زجاجي، ص صندوق لدائني (غير معدنية). ما الخواص المناسبة لـ ق، ل، س، ص؟',['(4) ق مغناطيسي · ل لا مغناطيسي · س يمكن الرؤية خلاله · ص لا يمكن الرؤية خلاله','(1) ق موصل · ل عازل كهربائي · س يمكن الرؤية خلاله · ص لا مغناطيسي','(2) ق موصل · ل عازل كهربائي · س لا يمكن الرؤية خلاله · ص يمكن الرؤية خلاله','(3) ق لا مغناطيسي · ل موصل · س عازل · ص عازل'],'الحديد مغناطيسي والألومنيوم غير مغناطيسي، ونرى خلال حوض الأسماك الزجاجي لا الصندوق. والبدائل 1 و2 خطأ لأن الحديد والألومنيوم كلاهما موصل.'],
+ ['📘 (ص 43) في المخطط: أي المواد معادن؟',['الحديد والفولاذ والنحاس والألومنيوم','الزجاج والخزف','الحديد والزجاج'],'كلها تحت «معدنية».'],
+ ['📘 (ص 43) ما الفرق بين النحاس والحديد؟',['الحديد مغناطيسي والنحاس غير مغناطيسي','النحاس مغناطيسي والحديد لا','لا فرق بينهما'],'كلاهما معدن، لكن الحديد تحت «مغناطيسي».'],
+ ['📘 (ص 43) ما الفرق بين الفولاذ والزجاج؟',['الفولاذ معدن والزجاج غير معدني','الزجاج معدن','كلاهما مغناطيسي'],'الفولاذ تحت «معدنية» والزجاج تحت «غير معدنية».'],
+ ['📘 (ص 43) ما الخاصية التي صُنّف بها الألومنيوم والخزف في مجموعتين مختلفتين؟',['معدني وغير معدني','مغناطيسي وغير مغناطيسي','شفاف ومعتم'],'الألومنيوم معدني، والخزف غير معدني.']]));
+chapterTest('rv2',[['صفات المواد تسمى:',['خواص المواد','أسماء المواد','أشكال المواد']],['مادة مغناطيسية:',['الحديد','النحاس','الألومنيوم']],['موصل كهربائي:',['النحاس','المطاط','الخشب']],['عازل كهربائي:',['اللدائن','الحديد','الألومنيوم']],['مادة شفافة:',['الزجاج العادي','الخشب','المعدن']],['مادة شبه شفافة:',['الزجاج المصنفر','الحديد','الحجر']],['جيد التوصيل للحرارة:',['المعدن','الخشب','اللدائن']],['يُصنع مقبض القدر من:',['الخشب أو اللدائن','النحاس','الألومنيوم']],['تُصنع الأسلاك الكهربائية من:',['النحاس','الزجاج','الخزف']],['المطاط مادة:',['مرنة وعازلة','صلبة وموصلة','شفافة']],['الخزف:',['صلب وغير موصل للكهرباء','مرن','مغناطيسي']],['ليست كل المعادن:',['مغناطيسية','صلبة','موصلة للكهرباء']]]);
+/* ================= الموضوع 2: الطاقة ================= */
+const EF=['حركية','ضوئية','حرارية','صوتية','كهربائية','كامنة تجاذبية','كامنة مرونية','كيميائية'];
+const bar=(x,X,Y,w,h,v,col,lab)=>{x.fillStyle='#e9ecef';x.fillRect(X,Y,w,h);x.fillStyle=col;x.fillRect(X,Y+h*(1-v),w,h*v);x.strokeStyle='#868e96';x.lineWidth=1;x.strokeRect(X,Y,w,h);txt(x,lab,X+w/2,Y+h+16,13,'#333')};
+multiPick({sId:'lnS',fId:'lnF',kId:'lnK',nId:'lnN',oId:'lnOut',forms:EF,items:[
+ ['☀️ الشمس مشرقة',[1,2],[],'الشمس مصدر الطاقة الضوئية والحرارية.'],['🏃 طفل يجري',[0],[2,7],'الجسم المتحرك له طاقة حركية.'],['🔔 جرس المدرسة يرنّ',[3],[4,0],'الجرس يصدر طاقة صوتية.'],
+ ['🍎🌳 تفاحة معلقة على الشجرة',[5],[7],'الجسم المرفوع فوق الأرض يختزن طاقة كامنة تجاذبية.'],['🏹 قوس مشدود',[6],[],'القوس المشدود يختزن طاقة كامنة مرونية.'],['🔋 نضيدة (بطارية)',[7],[],'النضيدة تختزن طاقة كيميائية.'],
+ ['🍌 موزة في طبقك',[7],[],'الطعام يختزن طاقة كيميائية.'],['🔥 نار المخيم',[1,2],[3],'النار تعطي ضوءًا وحرارة.'],['💨 رياح تحرك الأشجار',[0],[3],'الهواء المتحرك له طاقة حركية.'],
+ ['🔦 مصباح يدوي مضاء',[1],[2],'المصباح يعطي طاقة ضوئية.'],['🪨⛰️ صخرة على قمة جبل',[5],[],'الصخرة المرتفعة لها طاقة كامنة تجاذبية.'],['⛽ وقود في خزان السيارة',[7],[],'الوقود يختزن طاقة كيميائية.'],['🔌 تيار يسري في سلك',[4],[2],'هذه طاقة كهربائية.'],['🪀 زنبرك مضغوط',[6],[],'الزنبرك المضغوط يختزن طاقة كامنة مرونية.']]});
+(function(){let px=0;anim('keC',(x,c,t)=>{const W=c.width,H=c.height,v=+$('keV').value,m=+$('keM').value;$('keVv').textContent=v;$('keMv').textContent=['','خفيفة','متوسطة','ثقيلة'][m];
+  x.clearRect(0,0,W,H);x.fillStyle='#e7f5ff';x.fillRect(0,0,W,H);x.fillStyle='#868e96';x.fillRect(0,150,W-110,50);x.setLineDash([20,15]);x.strokeStyle='#fff';x.lineWidth=3;x.beginPath();x.moveTo(0,175);x.lineTo(W-110,175);x.stroke();x.setLineDash([]);
+  px=(px+v*1.6)%(W-110);EM(x,['','🛴','🚗','🚚'][m],W-130-px,125,30+m*12);const ke=.5*m*v*v,mx=150;bar(x,W-80,20,40,140,Math.min(ke/mx,1),'#f08c00','حركية');
+  $('keOut').innerHTML=v?'⚡ طاقة حركية = '+N(fx(ke,0))+' وحدة. كلما زادت السرعة أو الكتلة زادت الطاقة الحركية.':'🛑 الجسم الساكن ليس له طاقة حركية!'})})();
+(function(){let hit=0,ac=null;function play(){hit=performance.now();try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain(),A=+$('sdA').value,F=+$('sdF').value;o.type='triangle';o.frequency.value=80+F*55;g.gain.setValueAtTime(.04*A,ac.currentTime);g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+.9);o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+.9)}catch(e){}
+  const A=+$('sdA').value,F=+$('sdF').value;$('sdOut').innerHTML='🔊 '+(A>6?'صوت عالٍ (اهتزاز كبير)':A<4?'صوت منخفض كالهمس (اهتزاز صغير)':'صوت متوسط')+' · '+(F>6?'نغمة حادة (اهتزاز سريع)':F<4?'نغمة غليظة (اهتزاز بطيء)':'نغمة متوسطة')+'<br>💡 الصوت شكل من أشكال الطاقة ينتج عن الاهتزاز.';cheer()}
+ $('sdP').onclick=play;
+ anim('sdC',(x,c,t)=>{const W=c.width,H=c.height,A=+$('sdA').value,F=+$('sdF').value;$('sdAv').textContent=A;$('sdFv').textContent=F;x.clearRect(0,0,W,H);const e=(performance.now()-hit)/1000,amp=e<1.2?A*2.2*(1-e/1.2):0;
+  x.fillStyle='#c92a2a';x.fillRect(60,100,120,70);x.fillStyle='#ffe066';x.fillRect(60,100,120,8);x.fillStyle='#f8f0e3';x.beginPath();x.ellipse(120,100+amp*Math.sin(t*F*12),62,12,0,0,7);x.fill();x.strokeStyle='#333';x.stroke();
+  if(amp>0){for(let k=0;k<4;k++){const r=((e*220+k*60)%260);x.strokeStyle='rgba(28,126,214,'+Math.max(0,1-r/260)*(A/10)+')';x.lineWidth=3;x.beginPath();x.arc(180,110,r,-.6,.6);x.stroke()}}
+  x.strokeStyle='#1c7ed6';x.lineWidth=2;x.beginPath();for(let X=330;X<W-10;X+=2)x.lineTo(X,100+amp*3*Math.sin((X-330)/(40-F*3)-t*8));x.stroke();txt(x,'موجة الصوت',470,185,14,'#555')})})();
+(function(){const A=[['💡','المصابيح'],['📺','التلفاز'],['🧊','الثلاجة'],['❄️','المكيّف'],['🌀','المروحة'],['🧺','الغسالة'],['🍞','المحمصة'],['♨️','الفرن الكهربائي'],['📱','شاحن الهاتف'],['💻','الحاسوب'],['🚿','سخان الماء'],['🥤','الخلاط'],['💨','مجفف الشعر'],['🧹','المكنسة الكهربائية']];
+ $('apL').innerHTML=A.map((a,i)=>'<label><input type="checkbox" data-i="'+i+'"> '+a[0]+' '+a[1]+'</label>').join('');
+ $('apL').querySelectorAll('input').forEach(i=>i.onchange=()=>{i.parentNode.classList.toggle('on',i.checked);const n=$('apL').querySelectorAll('input:checked').length;$('apOut').innerHTML='🔌 في بيتك '+N(n)+' جهازًا يعمل بالطاقة الكهربائية.'+(n>=8?' تخيّل يومًا كاملًا بلا كهرباء! 😮':'');if(n===8)cheer()})})();
+MCQP($('q6'),bank([['الجسم المتحرك له طاقة:',['حركية','كامنة فقط','صوتية فقط']],['مصدر الطاقة الضوئية الرئيسي على الأرض:',['الشمس','القمر','المصباح']],['الطاقة التي تمكننا من الرؤية:',['الضوئية','الصوتية','الحركية']],['الطاقة التي تجعلنا نشعر بالدفء:',['الحرارية','الصوتية','الكهربائية']],['ينتج الصوت عن:',['الاهتزاز','الضوء','السكون']],['الصوت الذي طبقته أعلى من قدرة سمعنا يسمى:',['فوق السمعي','تحت السمعي','الصدى']],['الطاقة التي تشغّل التلفاز والثلاجة:',['الكهربائية','الصوتية','الضوئية']],['كلما زادت سرعة الجسم فإن طاقته الحركية:',['تزداد','تقل','لا تتغير']],['الجسم الساكن طاقته الحركية:',['صفر','كبيرة','متوسطة']],['من أمثلة الطاقة الحركية في الطبيعة:',['الرياح والأمواج والمياه الجارية','الصخور الساكنة','النضائد']],['يستخدم المنار (الفنار) الطاقة الضوئية من أجل:',['إرشاد السفن في الظلام','تدفئة البحارة','تشغيل السفن']]]));
+
+/* ---------- n2: الطاقة الكامنة ---------- */
+(function(){let depth=0,y=0,st=0,t0=0,v=0;function hy(){return 210-(+$('pdH').value)*17}
+ $('pdGo').onclick=()=>{if(st)return;if(depth>=110){$('pdOut').textContent='الوتد دخل كله! اضغط «وتد جديد».';return}st=1;y=hy();v=0;$('pdOut').textContent='⬇️ تسقط المطرقة…'};
+ $('pdR').onclick=()=>{depth=0;st=0;$('pdOut').textContent=''};
+ anim('pdC',(x,c)=>{const W=c.width,H=c.height,h=+$('pdH').value;$('pdHv').textContent=h+' م';x.clearRect(0,0,W,H);x.fillStyle='#e7f5ff';x.fillRect(0,0,W,H);
+  x.fillStyle='#a47148';x.fillRect(0,230,W,50);const top=230-60+depth;x.fillStyle='#ced4da';x.beginPath();x.moveTo(300,top);x.lineTo(340,top);x.lineTo(340,top+110);x.lineTo(320,top+140);x.lineTo(300,top+110);x.fill();x.strokeStyle='#495057';x.stroke();
+  x.strokeStyle='#868e96';x.lineWidth=6;x.beginPath();x.moveTo(250,250);x.lineTo(250,15);x.moveTo(390,250);x.lineTo(390,15);x.lineTo(250,15);x.stroke();
+  let hyNow=st?y:hy();if(st===1){v+=1.1;y+=v;if(y+40>=top){y=top-40;st=2;const d=Math.min(h*4,110-depth);depth+=d;$('pdOut').innerHTML='💥 دخل الوتد '+N(d)+' سم! الكامنة التجاذبية ← حركية ← تدفع الوتد. '+(h>=7?'المطرقة الأعلى = طاقة أكبر!':'جرّب ارتفاعًا أكبر 📏');cheer();setTimeout(()=>st=0,700)}hyNow=y}else if(st===2)hyNow=y;
+  x.fillStyle='#495057';x.fillRect(270,hyNow,100,40);x.fillStyle='#212529';x.fillRect(270,hyNow,100,8);
+  const pe=st?Math.max(0,(top-40-hyNow))/(top-40-hy())*h/10:h/10,ke=st===1?Math.max(0,h/10-pe):0;bar(x,470,40,36,150,Math.min(pe,1),'#7048e8','كامنة');bar(x,540,40,36,150,Math.min(ke,1),'#f08c00','حركية');
+  txt(x,'⬆️ '+h+' م',200,hy()+26,16,'#333')})})();
+(function(){let px=0,st=0,E=0,E0=1;$('spGo').onclick=()=>{px=0;E0=E=+$('spW').value;st=1;$('spOut').textContent='🏁 انطلقت!'};
+ anim('spC',(x,c)=>{const W=c.width,w=+$('spW').value;$('spWv').textContent=w;x.clearRect(0,0,W,c.height);x.fillStyle='#fff4e6';x.fillRect(0,0,W,c.height);x.fillStyle='#ced4da';x.fillRect(0,130,W,50);
+  for(let k=0;k<=6;k++){txt(x,k*1+' م',W-30-k*90,172,12,'#555')}
+  if(st===1){const sp=E*2.2;px+=sp;E=Math.max(0,E-.012);if(E<=0){st=2;$('spOut').innerHTML='🛑 قطعت السيارة '+N(fx(px/90,1))+' م. الطاقة الكامنة المرونية في الزنبرك ← حركية. لفات أكثر = طاقة مختزنة أكبر = مسافة أطول!';cheer()}}
+  EM(x,'🚙',W-40-px,112,46);bar(x,20,20,30,90,st?E/Math.max(E0,1)*E0/6:w/6,'#7048e8','زنبرك')})})();
+flipCards('peCards',[['🍎','الطعام','طاقة كيميائية مختزنة تمدّنا بالطاقة للشغل وتحفظ أجسامنا دافئة.'],['🔋','النضائد','تختزن طاقة كيميائية تتحول إلى كهربائية.'],['⛽','الوقود','طاقة كيميائية تتحول عند الحرق إلى حرارية وضوئية.'],['🏹','القوس المشدود','طاقة كامنة مرونية تتحول إلى حركية في السهم.'],['🪀','الزنبرك الملفوف','طاقة كامنة مرونية تحرك السيارة اللعبة.'],['🪨','صخرة فوق منحدر','طاقة كامنة تجاذبية لأنها مرتفعة عن الأرض.']]);
+sortGame('ptP','ptC','ptOut',[['⬆️ كامنة تجاذبية','أجسام مرتفعة','#7048e8'],['🪀 كامنة مرونية','مشدودة أو مضغوطة','#e8590c'],['🧪 كيميائية','غذاء ووقود ونضائد','#2b8a3e']],
+ [['🔨 مطرقة مرفوعة',0,''],['💧 ماء خلف السد',0,''],['🍎 تفاحة على الغصن',0,''],['🏹 قوس مشدود',1,''],['🎯 شريط مطاطي مشدود',1,''],['🛏️ نوابض سرير مضغوطة',1,''],['🍞 خبز',2,''],['🔋 نضيدة',2,''],['🪵 حطب',2,'']]);
+MCQP($('q7'),bank([['الطاقة المخزّنة في الأجسام لتُستخدم لاحقًا تسمى:',['الطاقة الكامنة','الطاقة الصوتية','الطاقة الضوئية']],['الجسم المرفوع فوق سطح الأرض يختزن طاقة:',['كامنة تجاذبية','صوتية','ضوئية']],['الطعام يختزن طاقة:',['كيميائية','حركية','صوتية']],['الزنبرك المضغوط يختزن طاقة:',['كامنة مرونية','كهربائية','ضوئية']],['عند سقوط المطرقة تتحول طاقتها الكامنة إلى:',['حركية','كيميائية','ضوئية']],['كلما رفعنا المطرقة أعلى فإن طاقتها الكامنة:',['تزداد','تقل','لا تتغير']],['النضائد تختزن طاقة:',['كيميائية','حركية','صوتية']],['عند ترك السيارة اللعبة الملفوفة تتحول طاقة الزنبرك إلى:',['حركية','كيميائية','ضوئية']],['من أنواع الطاقة الكامنة:',['التجاذبية والكيميائية والمرونية','الضوئية والصوتية','الكهربائية فقط']]]));
+
+/* ---------- n3: تحولات الطاقة ---------- */
+(function(){const W=640,yT=X=>230-(55+130*((Math.cos(X/600*3*Math.PI)+1)/2)*(1-X/600*.45));let s=20,dir=1,run=0;const Ht=230-yT(20);
+ $('rkGo').onclick=()=>{run=1;$('rkOut').textContent=''};$('rkSt').onclick=()=>run=0;
+ anim('rkC',(x,c)=>{x.clearRect(0,0,W,300);const g=x.createLinearGradient(0,0,0,300);g.addColorStop(0,'#d0ebff');g.addColorStop(1,'#fff');x.fillStyle=g;x.fillRect(0,0,W,300);
+  x.strokeStyle='#868e96';x.lineWidth=2;for(let X=20;X<=600;X+=30){x.beginPath();x.moveTo(X,yT(X));x.lineTo(X,260);x.stroke()}x.strokeStyle='#c92a2a';x.lineWidth=6;x.beginPath();for(let X=10;X<=610;X+=4)x.lineTo(X,yT(X));x.stroke();x.fillStyle='#8ce99a';x.fillRect(0,260,W,40);
+  const h=230-yT(s),v=Math.sqrt(Math.max(0,2*(Ht-h))+.5);if(run){const sl=(yT(s+1)-yT(s-1))/2;s+=dir*v*.9/Math.sqrt(1+sl*sl);if(s>600){s=600;dir=-1}if(s<20){s=20;dir=1}}
+  const pe=h/Ht,ke=1-pe;EM(x,'🚃',s,yT(s)-16,34);EM(x,'🧒',s,yT(s)-36,20);bar(x,20,20,26,90,pe,'#7048e8','كامنة');bar(x,60,20,26,90,ke,'#f08c00','حركية');
+  if(run)$('rkOut').innerHTML=pe>.75?'⬆️ قرب القمة: طاقة كامنة تجاذبية كبيرة، والحركية صغيرة (العربة بطيئة).':pe<.3?'⬇️ في القاع: تحولت الكامنة إلى طاقة حركية كبيرة (العربة سريعة!).':'↕️ الطاقة تتحول بين كامنة وحركية…'})})();
+multiPick({sId:'cvS',fId:'cvF',kId:'cvK',nId:'cvN',oId:'cvOut',forms:['حركية','ضوئية','حرارية','صوتية','كهربائية','كيميائية','كامنة تجاذبية'],items:[
+ ['📺 التلفاز<br><small>يدخل: كهربائية ← يخرج: ؟</small>',[1,3],[2],'التلفاز: كهربائية ← ضوئية + صوتية (وبعض الحرارية).'],['🌿 النبات في الشمس<br><small>يدخل: ضوئية ← يخرج: ؟</small>',[5],[],'البناء الضوئي: ضوئية ← كيميائية في الغذاء.'],
+ ['🏃 جسمك عند الجري<br><small>يدخل: كيميائية (الطعام) ← يخرج: ؟</small>',[0],[2,3],'أجسامنا تحول الكيميائية إلى حركية (وحرارية).'],['🍞 المحمصة<br><small>يدخل: كهربائية ← يخرج: ؟</small>',[2],[1],'المحمصة: كهربائية ← حرارية.'],
+ ['🌀 المروحة<br><small>يدخل: كهربائية ← يخرج: ؟</small>',[0],[3,2],'المروحة: كهربائية ← حركية (وصوت وحرارة قليلة).'],['🎆 الألعاب النارية<br><small>يدخل: كيميائية ← يخرج: ؟</small>',[0,1,2,3],[],'الألعاب النارية: كيميائية ← حرارية + صوتية + ضوئية + حركية (ص 70).'],
+ ['☀️🔲 الخلية الشمسية<br><small>يدخل: ضوئية ← يخرج: ؟</small>',[4],[],'الخلية الشمسية: ضوئية ← كهربائية.'],['🚗 محرك السيارة<br><small>يدخل: كيميائية (الوقود) ← يخرج: ؟</small>',[0],[2,3],'المحرك: كيميائية ← حركية (وحرارية وصوتية).'],
+ ['🔔 الجرس الكهربائي<br><small>يدخل: كهربائية ← يخرج: ؟</small>',[3],[0,2],'الجرس: كهربائية ← صوتية.'],['🛝 النزول على المنزلق<br><small>يدخل: كامنة تجاذبية ← يخرج: ؟</small>',[0],[2,3],'المنزلق: كامنة تجاذبية ← حركية (وحرارية بالاحتكاك).'],['💧 ماء يسقط من السد<br><small>يدخل: كامنة تجاذبية ← يخرج: ؟</small>',[0],[3],'الماء الساقط: كامنة ← حركية تدير التوربين.']]});
+MCQP($('q8'),bank([['في البناء الضوئي تتحول الطاقة الضوئية إلى:',['كيميائية','صوتية','كهربائية']],['عند الحركة تحول أجسامنا الطاقة الكيميائية إلى:',['حركية','ضوئية','كهربائية']],['التلفاز يحول الطاقة الكهربائية إلى:',['ضوئية وصوتية وحرارية','كيميائية فقط','كامنة']],['في القطار الأفعواني تكون الطاقة الحركية أكبر ما يمكن:',['في أسفل المسار','في القمة','عند التوقف']],['في قمة المسار تكون الطاقة الكامنة التجاذبية:',['أكبر ما يمكن','صفرًا','أقل ما يمكن']],['الألعاب النارية تنتج طاقة:',['حرارية وصوتية وضوئية وحركية','صوتية فقط','ضوئية فقط']],['الخلية الشمسية تحول الطاقة الضوئية إلى:',['كهربائية','كيميائية','صوتية']],['المذياع (الراديو) الذي يعمل بالنضائد يحول الكيميائية إلى:',['كهربائية ثم صوتية','ضوئية فقط','كامنة']],['المصباح الكهربائي يحول الكهربائية إلى:',['ضوئية وحرارية','صوتية','حركية']]]));
+
+/* ---------- rv3 ---------- */
+MCQP($('bk3'),bank([['📘 (ص 70) أي أشكال الطاقة تنتج عند إشعال الألعاب النارية؟ (أ) حرارية (ب) صوتية (ج) ضوئية (د) حركية',['(4) أ، ب، ج، د','(1) أ، د فقط','(2) ب، ج فقط','(3) ب، ج، د فقط'],'تنفجر عاليًا محدثة صوتًا وضوءًا وحرارة، وتتحرك في الهواء.'],
+ ['📘 (ص 71) من أين يحصل الرجل الذي يؤدي الوثبة العالية على الطاقة؟',['من الطعام الذي يتناوله','من الشمس مباشرة','من الوسادة'],'يختزن الطعام طاقة كيميائية تمدّه بالطاقة للشغل وتحفظ جسمه دافئًا.'],
+ ['📘 (ص 71) ما شكل الطاقة لدى الرجل أثناء جريه؟',['طاقة حركية','طاقة صوتية','طاقة ضوئية'],'لجميع الأجسام المتحركة طاقة حركية.'],
+ ['📘 (ص 71) ما شكلا الطاقة لدى الرجل أثناء الوثب؟',['حركية وكامنة تجاذبية','صوتية وضوئية','كهربائية وكيميائية'],'يتحرك (حركية) ويكون مرتفعًا عن الأرض (كامنة تجاذبية).'],
+ ['📘 (ص 71) ما شكلا الطاقة الناتجان عند هبوط الرجل على الوسادة بصوت ارتطام؟',['صوتية وحرارية','ضوئية وكهربائية','كيميائية وكامنة'],'الارتطام يحدث صوتًا، والاحتكاك بسطح الوسادة يعطي حرارة.']]));
+chapterTest('rv3',[['الجسم المتحرك له طاقة:',['حركية','كامنة فقط','كيميائية فقط']],['الشمس مصدر الطاقة:',['الضوئية والحرارية','الصوتية','المرونية']],['ينتج الصوت عن:',['الاهتزاز','الضوء','البرودة']],['الطعام يختزن طاقة:',['كيميائية','صوتية','ضوئية']],['القوس المشدود يختزن طاقة:',['كامنة مرونية','كهربائية','صوتية']],['الجسم المرفوع يختزن طاقة:',['كامنة تجاذبية','صوتية','ضوئية']],['البناء الضوئي: ضوئية ← ...',['كيميائية','صوتية','كهربائية']],['التلفاز: كهربائية ← ...',['ضوئية وصوتية وحرارية','كيميائية','كامنة']],['عند هبوط المطرقة: كامنة ← ...',['حركية','كيميائية','ضوئية']],['في قاع القطار الأفعواني تكون الطاقة الحركية:',['أكبر ما يمكن','صفرًا','أقل ما يمكن']],['الأجهزة الكهربائية تحتاج طاقة:',['كهربائية','صوتية','مرونية']],['الطاقة لا تفنى بل:',['تتحول من شكل إلى آخر','تختفي','تتضاعف']]]);
+addSecs('rv3',[],[{t:'تحدٍّ (ص 62)',q:'لكل شكل من أشكال الطاقة أعطِ أمثلة لأشياء تختزنه أو تنتجه:',h:'فكّر في بيتك ومدرستك',s:['حركية: طفل يجري، سيارة مسرعة، رياح','ضوئية: الشمس، المصباح، شاشة الهاتف','حرارية: الموقد، المدفأة، المحمصة','صوتية: الجرس، الطبل، المذياع','كهربائية: البرق، النضيدة في الدائرة، المقبس','كامنة: تفاحة على شجرة، زنبرك، طعام، وقود'],a:''}]);
+
+/* ================= الفصل 4: مصادر الطاقة ================= */
+(function(){anim('slC',(x,c,tt)=>{const W=c.width,H=c.height,t=+$('slT').value;$('slTv').textContent=t+':00';const day=t>=6&&t<18;
+  const bat=day?(t-6)/12*100:Math.max(5,100-((t-18+24)%24)*7.5);x.clearRect(0,0,W,H);x.fillStyle=day?'#a5d8ff':'#1b2a4a';x.fillRect(0,0,W,H);
+  if(day){const a=(t-6)/12*Math.PI,sx=W-60-(W-120)*(t-6)/12,sy=200-150*Math.sin(a);x.fillStyle='#ffd43b';x.beginPath();x.arc(sx,sy,24,0,7);x.fill();x.strokeStyle='rgba(255,212,59,.6)';x.lineWidth=2;x.setLineDash([6,8]);x.beginPath();x.moveTo(sx,sy);x.lineTo(320,62);x.stroke();x.setLineDash([])}
+  else{for(let k=0;k<25;k++){x.fillStyle='#fff';x.fillRect((k*97)%W,(k*53)%140,2,2)}x.fillStyle='#f8f9fa';x.beginPath();x.arc(90,50,16,0,7);x.fill()}
+  x.fillStyle='#495057';x.fillRect(250,230,W,30);x.fillRect(316,70,8,170);x.fillStyle='#1864ab';x.save();x.translate(320,62);x.rotate(-.3);x.fillRect(-45,-12,90,20);x.strokeStyle='#a5d8ff';x.lineWidth=1;for(let k=-30;k<=30;k+=15){x.beginPath();x.moveTo(k,-12);x.lineTo(k,8);x.stroke()}x.restore();
+  x.fillStyle='#343a40';x.fillRect(324,100,60,8);const on=!day;if(on){x.fillStyle='rgba(255,236,153,.35)';x.beginPath();x.moveTo(375,108);x.lineTo(320,230);x.lineTo(460,230);x.fill()}x.fillStyle=on?'#ffe066':'#adb5bd';x.beginPath();x.arc(378,110,9,0,7);x.fill();
+  x.fillStyle='#fff';x.fillRect(470,140,40,70);x.fillStyle=bat>30?'#40c057':'#fa5252';x.fillRect(474,206-62*bat/100,32,62*bat/100);x.fillStyle='#fff';x.fillRect(482,134,16,6);txt(x,Math.round(bat)+'%',490,226,14,day?'#212529':'#fff');
+  $('slOut').innerHTML=day?'☀️ نهارًا: الخلايا الشمسية تحجز الطاقة الشمسية (ضوئية ← كهربائية) وتخزنها في النضيدة (كيميائية).':'🌙 ليلًا: النضيدة تعطي الكهرباء فيضيء المصباح (كيميائية ← كهربائية ← ضوئية).'})})();
+(function(){let ang=0;anim('hyC',(x,c)=>{const W=c.width,H=c.height,G=+$('hyG').value,h=+$('hyH').value;$('hyGv').textContent=G*10+'%';$('hyHv').textContent=h*10+' م';
+  const flow=G*Math.sqrt(h)/10,P=Math.round(G*h*12);ang+=flow*.25;x.clearRect(0,0,W,H);x.fillStyle='#e7f5ff';x.fillRect(0,0,W,H);x.fillStyle='#a47148';x.fillRect(0,250,W,30);
+  const wy=240-h*19;x.fillStyle='#4dabf7';x.fillRect(0,wy,220,250-wy);x.fillStyle='#868e96';x.beginPath();x.moveTo(220,40);x.lineTo(260,40);x.lineTo(300,250);x.lineTo(220,250);x.fill();
+  if(G){x.fillStyle='#74c0fc';x.fillRect(220,226,140,14)}x.fillStyle='#4dabf7';x.fillRect(360,236,W-360,14);
+  x.save();x.translate(360,220);x.rotate(ang);x.strokeStyle='#343a40';x.lineWidth=5;for(let k=0;k<6;k++){x.rotate(Math.PI/3);x.beginPath();x.moveTo(0,0);x.lineTo(0,26);x.stroke()}x.restore();
+  x.strokeStyle='#495057';x.lineWidth=3;x.beginPath();x.moveTo(360,220);x.lineTo(450,140);x.stroke();x.fillStyle='#fab005';x.fillRect(440,110,60,40);txt(x,'مولّد',470,136,14,'#212529');
+  const nb=Math.min(8,Math.round(P/15));for(let k=0;k<8;k++){x.fillStyle=k<nb?'#ffe066':'#dee2e6';x.beginPath();x.arc(520+(k%4)*30,40+Math.floor(k/4)*34,10,0,7);x.fill()}
+  txt(x,'كامنة',110,wy-8,14,'#1864ab');txt(x,'حركية ⟵',300,212,13,'#1864ab');txt(x,'كهربائية',560,110,14,'#e67700');
+  $('hyOut').innerHTML=G?'⚡ القدرة ≈ '+N(P)+' كيلوواط · '+N(nb)+' مصابيح مضاءة<br>💡 الماء المرتفع خلف السد: كامنة تجاذبية ← يندفع: حركية ← يدير التوربين ← المولد: كهربائية. ارتفاع أكبر وفتحة أوسع = كهرباء أكثر.':'🚪 البوابة مغلقة: الماء يختزن طاقة كامنة فقط ولا تُنتج كهرباء.'})})();
+steps('snL','snOut','snNew',[['☀️ الشمس','تشع طاقة ضوئية'],['🌿 النبات','يحولها بالبناء الضوئي إلى طاقة كيميائية في الغذاء'],['🐄 الحيوان','يأكل النبات فتنتقل إليه الطاقة'],['🧑 الإنسان','يتناول الغذاء (الحليب واللحم والخضار)'],['💪 العضلات','تحول الطاقة الكيميائية إلى حركية']]);
+MCQP($('q9'),bank([['المصدر الرئيسي لمعظم الطاقة التي نستخدمها:',['الشمس','الرياح','النفط']],['تستخدم النباتات طاقة الشمس في:',['البناء الضوئي','التنفس فقط','الحركة']],['الخلايا الشمسية تحول الطاقة الشمسية إلى:',['كهربائية','كيميائية','صوتية']],['يستخدم الإنسان طاقة الشمس بصورة غير مباشرة عندما:',['يتناول الغذاء النباتي','يشغّل المصباح','ينام']],['أعمدة الإنارة الشمسية تخزن الطاقة نهارًا في:',['النضائد','الأسلاك','المصابيح']],['الكهرباء المولّدة من المياه الجارية تسمى:',['الطاقة الكهرومائية','الطاقة النووية','الطاقة الحرارية']],['في السد تتحول طاقة الماء المرتفع (الكامنة) إلى:',['حركية ثم كهربائية','كيميائية','صوتية']],['ما الذي يدير التوربين في محطة السد؟',['المياه الجارية','الرياح','البخار']],['تحدث دورة الماء بفضل طاقة:',['الشمس','القمر','الرياح']]]));
+
+/* ---------- o2 ---------- */
+(function(){let a=0;anim('wdC',(x,c)=>{const W=c.width,H=c.height,w=+$('wdS').value;$('wdSv').textContent=w;a+=w*.025;const P=w<2?0:Math.round(Math.min(w,8)**3/5);
+  x.clearRect(0,0,W,H);x.fillStyle='#e7f5ff';x.fillRect(0,0,W,H);x.fillStyle='#8ce99a';x.fillRect(0,200,W,40);
+  for(let k=0;k<6;k++){x.strokeStyle='rgba(134,142,150,.5)';x.lineWidth=2;const ox=((performance.now()/1000*w*40)+k*110)%(W+80)-40;x.beginPath();x.moveTo(W-ox,30+k*25);x.lineTo(W-ox-30,30+k*25);if(w)x.stroke()}
+  [120,280,440].forEach((X,i)=>{x.fillStyle='#f1f3f5';x.fillRect(X-4,80,8,120);x.save();x.translate(X,80);x.rotate(a+i);x.fillStyle='#fff';x.strokeStyle='#adb5bd';for(let k=0;k<3;k++){x.rotate(2*Math.PI/3);x.beginPath();x.ellipse(0,-32,7,32,0,0,7);x.fill();x.stroke()}x.restore();x.fillStyle='#495057';x.beginPath();x.arc(X,80,6,0,7);x.fill()});
+  const nh=Math.min(5,Math.round(P/20));for(let k=0;k<5;k++)EM(x,k<nh?'🏠':'🏚️',540+(k%2)*45,60+Math.floor(k/2)*50,30);
+  $('wdOut').innerHTML=w<2?'😴 الرياح ضعيفة جدًا: التوربينات لا تولد كهرباء. هذا من مساوئ طاقة الرياح: غير متاحة طوال الوقت.':'⚡ '+N(P)+' كيلوواط · تضيء '+N(nh)+' بيوت. الطاقة الحركية للرياح ← تدير التوربين ← المولد: كهربائية.'})})();
+(function(){const Fu=[['🪨','الفحم',1,.9],['🛢️','النفط',1,.6],['🔥','الغاز الطبيعي',1,.25],['🪵','الحطب',0,.7]];let f=-1,t0=0;
+ $('fuB').innerHTML=Fu.map((u,i)=>'<button data-i="'+i+'">'+u[0]+' '+u[1]+'</button>').join('');
+ $('fuB').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('fuB').querySelectorAll('button').forEach(y=>y.classList.remove('on'));b.classList.add('on');f=+b.dataset.i;t0=performance.now();const u=Fu[f];
+  $('fuOut').innerHTML='🔥 '+u[1]+' يختزن طاقة كيميائية تتحول عند الحرق إلى طاقة حرارية وضوئية.'+(u[2]?'<br>⚠️ من المحروقات (الوقود الأحفوري): قد ينفد، ودخانه يلوث الهواء'+(f===2?' — الغاز أنظفها نسبيًا.':'.')+(f>0?' 🇱🇾 ليبيا من الدول المنتجة للنفط والغاز.':''):'<br>🌳 الحطب يمكن تجديده بزراعة الأشجار، لكن دخانه يلوث الهواء أيضًا.')});
+ anim('fuC',(x,c,tt)=>{const W=c.width,H=c.height;x.clearRect(0,0,W,H);x.fillStyle='#fff9db';x.fillRect(0,0,W,H);if(f<0){txt(x,'👆 اختر وقودًا لتحرقه',W/2,H/2,20,'#555');return}const u=Fu[f],e=Math.min((performance.now()-t0)/1500,1);
+  for(let k=0;k<14;k++){const r=((tt*40+k*30)%200);x.fillStyle='rgba(73,80,87,'+(u[3]*.45*(1-r/200))+')';x.beginPath();x.arc(320+Math.sin(k+tt)*30*(r/200),150-r*.7,10+r/6,0,7);x.fill()}
+  for(let k=0;k<7;k++){const s=e*(30+12*Math.sin(tt*9+k));x.fillStyle=['#ff6b6b','#ffa94d','#ffd43b'][k%3];x.beginPath();x.ellipse(290+k*10,180-s/2,9,s,0,0,7);x.fill()}
+  EM(x,u[0],320,205,46);txt(x,'كيميائية',120,60,16,'#2b8a3e');txt(x,'→',190,60,20,'#333');txt(x,'حرارية 🌡️ + ضوئية 💡',520,60,16,'#e8590c');bar(x,580,100,30,110,u[3],'#495057','دخان')})})();
+flipCards('osCards',[['🌋','الحرارة الجوفية','مركز الأرض صخور ساخنة جدًا؛ في بعض الأماكن تسخّن الماء فيندفع بخارًا يدير التوربينات في محطة القدرة الحرارية الجوفية.'],['🌊','المد والجزر','حركة مياه البحر في المد والجزر تدير توربينات تولد الكهرباء.'],['🌳','الكتلة الحيوية','الخشب والمخلفات النباتية والحيوانية تُحرق أو تتحول إلى غاز حيوي للطهي والكهرباء.'],['🌊🏄','الأمواج','الطاقة الحركية للأمواج يمكن تحويلها إلى كهرباء.']]);
+sortGame('rnP','rnC','rnOut',[['♻️ لا تنفد','متجددة','#2b8a3e'],['⛽ قد تنفد','المحروقات','#c92a2a']],
+ [['☀️ الشمس',0,''],['💨 الرياح',0,''],['💧 المياه الجارية',0,''],['🌊 المد والجزر',0,''],['🌋 الحرارة الجوفية',0,''],['🪨 الفحم',1,''],['🛢️ النفط',1,''],['🔥 الغاز الطبيعي',1,'']]);
+(function(){const S=['💡 أطفئ المصابيح عند مغادرة الغرفة','📺 أطفئ التلفاز والحاسوب بدل تركهما في الانتظار','🧊 لا تترك باب الثلاجة مفتوحًا','❄️ اضبط المكيّف على درجة معتدلة وأغلق النوافذ','☀️ استفد من ضوء الشمس نهارًا','🚿 لا تطِل الاستحمام بالماء الساخن','🔌 افصل الشاحن بعد امتلاء البطارية','🚶 امشِ أو استخدم الحافلة للمسافات القصيرة'];
+ $('svL').innerHTML=S.map((s,i)=>'<label><input type="checkbox"> '+s+'</label>').join('');
+ $('svL').querySelectorAll('input').forEach(i=>i.onchange=()=>{i.parentNode.classList.toggle('on',i.checked);const n=$('svL').querySelectorAll('input:checked').length;$('svM').style.width=n/S.length*100+'%';
+  $('svOut').innerHTML=n>=6?'🌟 خطة ممتازة! أنت بطل حفظ الطاقة. شاركها مع أسرتك.':'✅ '+N(n)+' من '+S.length+' — كل خطوة توفّر طاقة ومالًا وتحافظ على الموارد.';if(n===6)cheer()})})();
+MCQP($('q10'),bank([['الرياح عبارة عن:',['هواء متحرك له طاقة حركية','ماء متحرك','ضوء']],['من مساوئ طاقة الرياح أنها:',['غير متاحة طوال الوقت','تلوث الهواء كثيرًا','تنفد بسرعة']],['من أمثلة المحروقات:',['الفحم والنفط والغاز الطبيعي','الرياح والشمس','الماء والهواء']],['تختزن المحروقات طاقة:',['كيميائية','حركية','صوتية']],['عند حرق المحروقات تتحول طاقتها إلى:',['حرارية وضوئية','صوتية فقط','مرونية']],['مصدر طاقة قد ينفد:',['النفط','الشمس','الرياح']],['الحرارة الجوفية مصدرها:',['الصخور الساخنة في باطن الأرض','الشمس مباشرة','الرياح']],['من طرق حفظ الطاقة في البيت:',['إطفاء المصابيح عند عدم الحاجة','ترك الثلاجة مفتوحة','تشغيل كل الأجهزة']],['أي المصادر التالية متجدد؟',['المد والجزر','الفحم','الغاز الطبيعي']],['محرك السيارة يحول الطاقة الكيميائية للوقود إلى:',['حركية وحرارية','ضوئية فقط','كيميائية']]]));
+
+/* ---------- rv4 ---------- */
+MCQP($('bk4'),bank([['📘 (ص 86) أي مما يلي مصادر للطاقة؟ (أ) الشمس (ب) الرياح (ج) النباتات (د) المد والجزر',['(4) أ، ب، ج، د','(1) أ، ب فقط','(2) أ، د فقط','(3) ب، د فقط'],'الشمس المصدر الرئيسي، وللرياح والمد والجزر طاقة حركية، والنباتات تختزن طاقة كيميائية في الغذاء والوقود.'],
+ ['📘 (ص 87) لماذا لا تحتاج السيارة والطائرة والهاتف الشمسي إلى محروقات لكي تعمل؟',['لأن لها ألواحًا أو خلايا شمسية تحول الطاقة الشمسية إلى كهربائية','لأنها تعمل بالرياح','لأنها لا تحتاج طاقة'],'تحجز الخلايا الشمسية طاقة الشمس وتحولها إلى طاقة كهربائية للتشغيل.'],
+ ['📘 (ص 87) أين تعمل هذه الاختراعات الشمسية على نحو جيد؟',['في أي مكان به ضوء شمس كافٍ','في الكهوف','تحت الأرض'],'تحتاج ضوء الشمس لتعمل.']]));
+chapterTest('rv4',[['معظم الطاقة التي نستخدمها مصدرها:',['الشمس','القمر','الرياح']],['البناء الضوئي يحول الضوئية إلى:',['كيميائية','كهربائية','صوتية']],['الخلايا الشمسية تحول الضوئية إلى:',['كهربائية','كيميائية','حركية']],['الكهرباء من المياه الجارية تسمى:',['كهرومائية','نووية','جوفية']],['الرياح لها طاقة:',['حركية','كيميائية','صوتية فقط']],['من مساوئ الرياح:',['غير متاحة طوال الوقت','تنفد','ثقيلة']],['المحروقات تختزن طاقة:',['كيميائية','حركية','مرونية']],['مصدر قد ينفد:',['الفحم','الشمس','المد والجزر']],['مصدر متجدد:',['الرياح','النفط','الغاز الطبيعي']],['الحرارة الجوفية من:',['باطن الأرض','الشمس','القمر']],['حرق الوقود يسبب:',['تلوث الهواء','تنقية الهواء','زيادة الماء']],['أفضل طريقة لحفظ الطاقة:',['إطفاء الأجهزة عند عدم استخدامها','ترك المصابيح مضاءة','فتح الثلاجة كثيرًا']]]);
+addSecs('rv4',[],[{t:'ما رأيك؟ (ص 80)',q:'ضع خطة لحفظ الطاقة في منزلك أو مدرستك:',h:'الكهرباء والماء والوقود',s:['إطفاء المصابيح والأجهزة عند عدم الحاجة','الاستفادة من ضوء الشمس نهارًا','ضبط المكيّف على درجة معتدلة وغلق النوافذ','عدم ترك باب الثلاجة مفتوحًا','استخدام الحافلة أو المشي للمسافات القصيرة'],a:''}]);
+
+</script>
+<script>window.NARR=["c1", "c2", "c3", "rv1", "m1", "m2", "rv2", "n1", "n2", "n3", "rv3", "o1", "o2", "rv4"];window.AUDIO_BASE="audio-x6/";</script>
+<style>
+.fxbar{position:fixed;left:10px;bottom:10px;z-index:90;display:flex;gap:6px}
+.fxbar button{width:46px;height:46px;border-radius:50%;border:none;background:#1f2a44;color:#fff;font-size:1.3rem;box-shadow:0 4px 12px #0004;cursor:pointer}
+.say{border:2px solid #f08c2e;background:#fff7e8;color:#b35b00;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.9rem;margin:0 6px;vertical-align:middle;font-family:inherit}
+.say.on{background:#f08c2e;color:#fff;animation:pul 1s infinite}
+@keyframes pul{50%{transform:scale(1.06)}}
+.cfx{position:fixed;pointer-events:none;z-index:95;font-size:20px;animation:cf 1.1s ease-out forwards}
+@keyframes cf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+.pop{animation:popk .35s}
+@keyframes popk{50%{transform:scale(1.08)}}
+.shk{animation:shk .4s}
+@keyframes shk{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.stars{position:fixed;bottom:16px;left:66px;background:#1f2a44;color:#fff;border-radius:20px;padding:3px 14px;font-weight:900;z-index:91;font-family:inherit;transition:.3s}
+</style>
+<div class="fxbar"><button id="fxMute" title="الأصوات">🔊</button></div>
+<div class="stars" id="fxStars">⭐ 0</div>
+<script>
+(function(){let AC=null,mute=false,stars=0;try{mute=localStorage.getItem('lb_mute')==='1';stars=+localStorage.getItem('lb_stars_'+location.pathname)||0}catch(e){}
+ const mb=document.getElementById('fxMute');const sb=document.getElementById('fxStars');const upd=()=>{mb.textContent=mute?'🔇':'🔊';sb.textContent='⭐ '+stars};upd();
+ mb.onclick=()=>{mute=!mute;try{localStorage.setItem('lb_mute',mute?'1':'0')}catch(e){}upd();if(mute&&cur){cur.pause();cur=null;document.querySelectorAll('.say.on').forEach(b=>b.classList.remove('on'))}};
+ function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC}
+ function tone(f,t0,d,type,v){const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,a.currentTime+t0);g.gain.setValueAtTime(0,a.currentTime+t0);g.gain.linearRampToValueAtTime(v||.18,a.currentTime+t0+.015);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+t0+d);o.connect(g);g.connect(a.destination);o.start(a.currentTime+t0);o.stop(a.currentTime+t0+d+.05)}
+ const S={ok:()=>{tone(523,0,.15,'triangle');tone(659,.09,.15,'triangle');tone(784,.18,.3,'triangle')},no:()=>{tone(220,0,.18,'sawtooth',.08);tone(185,.12,.25,'sawtooth',.08)},tick:()=>tone(900,0,.04,'square',.03),win:()=>{[523,659,784,1046,784,1046].forEach((f,i)=>tone(f,i*.1,.22,'triangle'))},whoosh:()=>{const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.frequency.setValueAtTime(300,a.currentTime);o.frequency.exponentialRampToValueAtTime(1200,a.currentTime+.25);g.gain.setValueAtTime(.06,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.3);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.32)}};
+ window.FX=S;
+ function confetti(el,big){const r=el&&el.getBoundingClientRect?el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};const E=['⭐','✨','🎉','💚','🌟','🎊'];const n=big?26:9;
+  for(let i=0;i<n;i++){const s=document.createElement('div');s.className='cfx';s.textContent=E[i%E.length];s.style.left=(r.left+r.width/2)+'px';s.style.top=(r.top+r.height/2)+'px';const a=Math.random()*6.28,d=(big?160:70)+Math.random()*80;s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',(Math.sin(a)*d-40)+'px');s.style.setProperty('--r',(Math.random()*720-360)+'deg');document.body.appendChild(s);setTimeout(()=>s.remove(),1200)}}
+ let last=0,lastNo=0;function hit(el,good){const now=Date.now();if(good){if(now-lastNo<400||now-last<250)return;last=now;S.ok();confetti(el);stars++;try{localStorage.setItem('lb_stars_'+location.pathname,stars)}catch(e){}upd();sb.classList.add('pop');setTimeout(()=>sb.classList.remove('pop'),400);el.classList&&el.classList.add('pop');setTimeout(()=>el.classList&&el.classList.remove('pop'),400);
+   if(stars%10===0){S.win();confetti(sb,true)}}else{lastNo=now;S.no();el.classList&&el.classList.add('shk');setTimeout(()=>el.classList&&el.classList.remove('shk'),450)}}
+ new MutationObserver(ms=>{ms.forEach(m=>{const t=m.target;if(!(t instanceof Element))return;if(m.type==='attributes'){const was=(m.oldValue||'').split(/\s+/);const c=t.classList;if(c.contains('ok')&&!was.includes('ok')&&(t.matches('button,input,.fb,.opt')))hit(t,true);else if(c.contains('no')&&!was.includes('no')&&t.matches('button,input,.opt'))hit(t,false)}})}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class'],attributeOldValue:true});
+ document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&!b.classList.contains('say')&&b.id!=='fxMute')S.tick()},true);
+ document.addEventListener('input',e=>{if(e.target.type==='range'){const n=Date.now();if(!window._lt||n-window._lt>90){window._lt=n;tone(400+(+e.target.value-+e.target.min)/(+e.target.max-+e.target.min+.001)*600,0,.03,'sine',.03)}}},true);
+ /* narration */
+ let cur=null;const base=window.AUDIO_BASE||'audio/';
+ function addSay(){document.querySelectorAll('.page').forEach(p=>{if(!(window.NARR||[]).includes(p.id))return;const h=p.querySelector('h2');if(!h||h.querySelector('.say'))return;const b=document.createElement('button');b.className='say';b.textContent='🔊 اسمع';
+  b.onclick=()=>{if(cur){cur.pause();const was=b.classList.contains('on');document.querySelectorAll('.say.on').forEach(x=>x.classList.remove('on'));cur=null;if(was)return}if(mute){mute=false;upd()}const a=new Audio(base+p.id+'.mp3');cur=a;b.classList.add('on');b.textContent='⏸️ إيقاف';a.onended=a.onerror=()=>{b.classList.remove('on');b.textContent='🔊 اسمع';cur=null};a.play().catch(()=>{b.classList.remove('on');b.textContent='🔊 اسمع'})};h.appendChild(b)})}
+ addSay();document.querySelectorAll('#bar button,[data-go]').forEach(b=>b.addEventListener('click',()=>{S.whoosh();if(cur){cur.pause();cur=null;document.querySelectorAll('.say').forEach(x=>{x.classList.remove('on');x.textContent='🔊 اسمع'})}}));
+})();
+</script>
+
+<script>(function(){function s(t,q){try{parent.postMessage(q?{lbt:t,qq:q}:{lbt:t},'*')}catch(e){}}
+var seen=new WeakSet();
+function qinfo(b,cb){setTimeout(function(){try{var G=b.parentElement,opts=[].slice.call(G.children).filter(function(x){return x.classList.contains('opt')});if(opts.length<2)return cb(null);
+ var p=G,qEl=null;for(var i=0;i<4&&p&&!qEl;i++){qEl=[].slice.call(p.children).filter(function(c){return !c.classList.contains('opt')&&!c.querySelector('.opt')&&!c.classList.contains('fb')&&!c.classList.contains('sc')&&c.textContent.trim().length>2})[0];if(!qEl)p=p.parentElement}
+ if(!qEl||qEl.querySelector('canvas,svg,img,input,table'))return cb(null);
+ var o=opts.map(function(x){return x.textContent.trim()}),r=-1,w=opts.indexOf(b);opts.forEach(function(x,i){if(x.classList.contains('ok'))r=i});
+ cb({q:qEl.textContent.replace(/\s+/g,' ').trim().replace(/^\d+\)\s*/,'').slice(0,300),o:o,r:r,w:w})}catch(e){cb(null)}},60)}
+new MutationObserver(function(ms){ms.forEach(function(m){
+ if(m.type==='attributes'){var t=m.target,c=t.classList,o=' '+(m.oldValue||'')+' ';
+  if((c.contains('ok')||c.contains('good'))&&!/ (ok|good) /.test(o)){if(c.contains('opt')&&!t.parentElement.querySelector('.opt.no'))qinfo(t,function(q){s('ok',q)});else s('ok')}
+  if((c.contains('no')||c.contains('bad'))&&!/ (no|bad) /.test(o)){if(c.contains('opt'))qinfo(t,function(q){s('no',q)});else s('no')}}
+ else m.addedNodes.forEach(function(n){if(n.nodeType===1&&n.tagName==='SPAN'&&!seen.has(n)){seen.add(n);if(n.classList.contains('ok'))s('ok');if(n.classList.contains('no'))s('no')}});
+})}).observe(document.documentElement,{attributes:true,subtree:true,attributeOldValue:true,attributeFilter:['class'],childList:true});
+document.addEventListener('click',function(){s('act')},true);})();</script>
+
+</body>
+</html>
