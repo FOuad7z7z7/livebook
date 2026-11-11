@@ -231,13 +231,62 @@ input:focus,select:focus{outline:none;border-color:var(--roy2)!important;box-sha
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
+<style>
+.logo i.lg{background:none;box-shadow:0 4px 14px rgba(0,0,0,.18);padding:0;overflow:hidden;border-radius:10px}.logo i.lg img{width:100%;height:100%;display:block}
+#splash{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 40%,#2c3e9e 0%,#141b46 70%);color:#fff;font-family:Cairo,Tahoma,sans-serif;overflow:hidden;transition:opacity .6s,transform .6s}
+#splash.out{opacity:0;transform:scale(1.08);pointer-events:none}
+#splash svg{width:min(62vw,300px);height:auto;overflow:visible}
+#splash .sp-glow{transform-origin:256px 212px;animation:spGlow 2.4s ease-in-out .9s infinite;opacity:0}
+#splash .sp-sun{transform-origin:256px 200px;animation:spSun .8s cubic-bezier(.2,1.6,.4,1) .55s both}
+#splash .sp-orb{transform-origin:256px 200px;animation:spOrb .7s ease-out 1s both,spSpin 6s linear 1.7s infinite}
+#splash .sp-orb ellipse{stroke-dasharray:600;stroke-dashoffset:600;animation:spDraw .9s ease-out 1s forwards}
+#splash .sp-el{animation:spPop .4s ease-out 1.5s both}
+#splash .sp-star{transform-box:fill-box;transform-origin:center;animation:spTw 1.2s ease-in-out 1.4s infinite both}
+#splash .sp-bookL{transform-origin:256px 400px;animation:spOpenL .7s cubic-bezier(.3,1.4,.5,1) .1s both}
+#splash .sp-bookR{transform-origin:256px 400px;animation:spOpenR .7s cubic-bezier(.3,1.4,.5,1) .1s both}
+#splash h1{color:#fff!important;margin:18px 0 4px;font-size:clamp(2rem,9vw,3.2rem);font-weight:900;letter-spacing:1px;text-shadow:0 6px 30px rgba(255,212,59,.35)}
+#splash h1 span{display:inline-block;animation:spUp .6s cubic-bezier(.2,1.4,.4,1) both}
+#splash p{margin:0;font-weight:700;opacity:0;animation:spFade .8s ease 2s forwards;color:#ffd43b;font-size:clamp(.95rem,4vw,1.2rem)}
+#splash .sp-dots i{position:absolute;bottom:-20px;width:6px;height:6px;border-radius:50%;background:#ffd43b;opacity:.7;animation:spRise linear infinite}
+@keyframes spOpenL{from{transform:scaleX(0) skewY(8deg)}to{transform:none}}@keyframes spOpenR{from{transform:scaleX(0) skewY(-8deg)}to{transform:none}}
+@keyframes spSun{from{transform:translateY(150px) scale(.2);opacity:0}to{transform:none;opacity:1}}
+@keyframes spGlow{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
+@keyframes spOrb{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}@keyframes spSpin{to{transform:rotate(360deg)}}
+@keyframes spDraw{to{stroke-dashoffset:0}}@keyframes spPop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:none}}
+@keyframes spTw{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.35) rotate(20deg)}}
+@keyframes spUp{from{opacity:0;transform:translateY(30px) scale(.6)}to{opacity:1;transform:none}}@keyframes spFade{to{opacity:1}}
+@keyframes spRise{from{transform:translateY(0);opacity:0}15%{opacity:.8}to{transform:translateY(-110vh);opacity:0}}
+@media (prefers-reduced-motion:reduce){#splash *{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}}
+</style>
 </head>
 <body>
+<div id="splash" aria-hidden="true"><div class="sp-dots"><i style="left:8%;animation-duration:4.2s;animation-delay:0.3s;width:5px;height:5px"></i><i style="left:18%;animation-duration:5.5s;animation-delay:1.1s;width:4px;height:4px"></i><i style="left:30%;animation-duration:3.8s;animation-delay:0.6s;width:6px;height:6px"></i><i style="left:44%;animation-duration:6.0s;animation-delay:1.6s;width:3px;height:3px"></i><i style="left:57%;animation-duration:4.6s;animation-delay:0.2s;width:5px;height:5px"></i><i style="left:68%;animation-duration:5.2s;animation-delay:1.3s;width:4px;height:4px"></i><i style="left:79%;animation-duration:3.6s;animation-delay:0.9s;width:6px;height:6px"></i><i style="left:90%;animation-duration:4.9s;animation-delay:0.5s;width:4px;height:4px"></i></div>
+<svg viewBox="40 60 432 400" xmlns="http://www.w3.org/2000/svg"><defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2c3e9e"/><stop offset="1" stop-color="#141b46"/></linearGradient>
+<radialGradient id="sun" cx=".5" cy=".45" r=".55"><stop offset="0" stop-color="#fff6d6"/><stop offset=".35" stop-color="#ffd43b"/><stop offset="1" stop-color="#f28c38"/></radialGradient>
+<radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffd43b" stop-opacity=".55"/><stop offset="1" stop-color="#ffd43b" stop-opacity="0"/></radialGradient>
+<linearGradient id="pgL" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e9ecf8"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+<linearGradient id="pgR" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#e9ecf8"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+</defs>
+<circle class="sp-glow" cx="256" cy="212" r="160" fill="url(#glow)"/>
+<g class="sp-orb"><g stroke="#ffffff" stroke-width="9" fill="none" opacity=".9"><ellipse cx="256" cy="200" rx="128" ry="46" transform="rotate(-28 256 200)"/><ellipse cx="256" cy="200" rx="128" ry="46" transform="rotate(28 256 200)"/></g>
+<circle class="sp-el" cx="146" cy="146" r="13" fill="#63e6be"/><circle class="sp-el" cx="370" cy="258" r="13" fill="#ff8787"/></g>
+<circle class="sp-sun" cx="256" cy="200" r="54" fill="url(#sun)"/>
+<path class="sp-star" d="M392 118 l7 18 18 7 -18 7 -7 18 -7 -18 -18 -7 18 -7z" fill="#ffd43b"/>
+<path class="sp-star" style="animation-delay:1.8s" d="M118 262 l5 12 12 5 -12 5 -5 12 -5 -12 -12 -5 12 -5z" fill="#fff"/>
+<g class="sp-bookL"><path d="M256 318 C214 292 160 286 104 300 L104 410 C160 396 214 402 256 428 Z" fill="url(#pgL)"/><path d="M256 438 C214 410 160 404 96 420 L96 306" fill="none" stroke="#f28c38" stroke-width="14" stroke-linejoin="round" stroke-linecap="round"/><g stroke="#c5cbe8" stroke-width="7" stroke-linecap="round" fill="none"><path d="M132 334 C170 326 206 330 232 344"/><path d="M132 362 C170 354 206 358 232 372"/></g></g>
+<g class="sp-bookR"><path d="M256 318 C298 292 352 286 408 300 L408 410 C352 396 298 402 256 428 Z" fill="url(#pgR)"/><path d="M256 438 C298 410 352 404 416 420 L416 306" fill="none" stroke="#f28c38" stroke-width="14" stroke-linejoin="round" stroke-linecap="round"/><g stroke="#c5cbe8" stroke-width="7" stroke-linecap="round" fill="none"><path d="M280 344 C306 330 342 326 380 334"/><path d="M280 372 C306 358 342 354 380 362"/></g></g>
+</svg>
+<h1><span style="animation-delay:1.30s">الكتاب</span><span style="animation-delay:1.38s">&nbsp;</span><span style="animation-delay:1.46s">الحي</span></h1>
+<p>كتابك المدرسي… لكنه حيّ ✨</p></div>
+<script>(function(){var s=document.getElementById('splash');var seen=false;try{seen=sessionStorage.getItem('lbSplash')}catch(e){}
+if(seen){s.remove();return}try{sessionStorage.setItem('lbSplash','1')}catch(e){}
+function bye(){if(!s.parentNode)return;s.classList.add('out');setTimeout(function(){s.remove()},650)}s.addEventListener('click',bye);setTimeout(bye,3300)})();</script>
 <div class="app">
 
 <!-- WELCOME -->
 <section class="scr on" id="s-login">
-  <div class="top"><div class="logo"><i>📗</i>الكتاب الحي</div><button class="ghost" id="install">📲 ثبّت التطبيق</button></div>
+  <div class="top"><div class="logo"><i class="lg"><img src="icon-192.png" alt=""></i>الكتاب الحي</div><button class="ghost" id="install">📲 ثبّت التطبيق</button></div>
   <div class="wrap">
     <div class="hero">
       <h1>تعلّم بالتجربة… لا بالحفظ</h1>
@@ -253,7 +302,7 @@ input:focus,select:focus{outline:none;border-color:var(--roy2)!important;box-sha
 
 <!-- AUTH -->
 <section class="scr" id="s-auth">
-  <div class="top"><div class="logo" id="auTitle"><i>📗</i>الدخول</div><button class="ghost" data-go="login">→ رجوع</button></div>
+  <div class="top"><div class="logo" id="auTitle"><i class="lg"><img src="icon-192.png" alt=""></i>الدخول</div><button class="ghost" data-go="login">→ رجوع</button></div>
   <div class="wrap">
     <div class="tabs" id="auTabs"><button data-t="login" class="on">لديّ حساب</button><button data-t="reg">حساب جديد</button></div>
     <div id="auIntro" class="muted" style="margin-top:8px"></div>
@@ -269,7 +318,7 @@ input:focus,select:focus{outline:none;border-color:var(--roy2)!important;box-sha
 
 <!-- CHANGE GRADE -->
 <section class="scr" id="s-setup">
-  <div class="top"><div class="logo"><i>📗</i>تغيير الصف</div><button class="ghost" data-go="home">→ رجوع</button></div>
+  <div class="top"><div class="logo"><i class="lg"><img src="icon-192.png" alt=""></i>تغيير الصف</div><button class="ghost" data-go="home">→ رجوع</button></div>
   <div class="wrap">
     <div id="gList"></div>
     <button class="btn or w" id="fGo">حفظ</button>
@@ -279,7 +328,7 @@ input:focus,select:focus{outline:none;border-color:var(--roy2)!important;box-sha
 
 <!-- STUDENT HOME -->
 <section class="scr" id="s-home">
-  <div class="top"><div class="logo"><i>📗</i>الكتاب الحي</div><button class="ghost" data-out>خروج</button></div>
+  <div class="top"><div class="logo"><i class="lg"><img src="icon-192.png" alt=""></i>الكتاب الحي</div><button class="ghost" data-out>خروج</button></div>
   <div class="wrap">
     <div class="hero">
       <div class="muted" id="hGreet"></div>
@@ -308,7 +357,7 @@ input:focus,select:focus{outline:none;border-color:var(--roy2)!important;box-sha
 
 <!-- PARENT -->
 <section class="scr" id="s-parent">
-  <div class="top"><div class="logo"><i>📗</i>لوحة ولي الأمر</div><button class="ghost" data-out>خروج</button></div>
+  <div class="top"><div class="logo"><i class="lg"><img src="icon-192.png" alt=""></i>لوحة ولي الأمر</div><button class="ghost" data-out>خروج</button></div>
   <div class="wrap">
     <div class="muted" id="pHello"></div>
     <div class="kids" id="pKids"></div>
@@ -334,7 +383,7 @@ input:focus,select:focus{outline:none;border-color:var(--roy2)!important;box-sha
 
 <!-- ADMIN -->
 <section class="scr" id="s-admin">
-  <div class="top"><div class="logo"><i>📗</i>إدارة الشركة</div><button class="ghost" data-out>خروج</button></div>
+  <div class="top"><div class="logo"><i class="lg"><img src="icon-192.png" alt=""></i>إدارة الشركة</div><button class="ghost" data-out>خروج</button></div>
   <div class="wrap">
     <div class="stat4" id="aStats"></div>
     <div class="tabs" id="aTabs"><button data-t="pays" class="on">💳 الطلبات <span id="aPend"></span></button><button data-t="gen">🎟️ أكواد</button><button data-t="codes">📋 الأكواد</button><button data-t="users">👥 المستخدمون</button></div>
