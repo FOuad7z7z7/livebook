@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>رياضيات الثاني الثانوي – الكتاب الحي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+html{color-scheme:light}button,input,select{font-family:inherit;color:#1f2a44}
+:root{--ink:#1f2a44;--tl:#7048e8;--tl2:#f3f0ff;--or:#f08c2e;--gr:#2e9e5b;--rd:#d64545;--pu:#6b4fd8;--line:#e2e8ee;--soft:#6b7690}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Cairo',Tahoma,sans-serif;background:#e9eef6;color:var(--ink);line-height:1.85}
+.book{max-width:800px;margin:12px auto;background:#fff;border-radius:16px;box-shadow:0 10px 30px #0002;overflow:hidden}
+header{background:linear-gradient(135deg,#4c2a9e,#845ef7);color:#fff;padding:16px;text-align:center}
+header h1{margin:0;font-size:1.3rem;font-weight:900}header div{opacity:.9;font-size:.85rem}
+.bar{display:flex;gap:6px;padding:8px 10px;background:var(--tl2);border-bottom:2px solid #c9d8f0;position:sticky;top:0;z-index:5;overflow-x:auto}
+.bar button{flex:0 0 auto;border:2px solid var(--tl);background:#fff;color:#1b3f73;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.86rem}
+.bar button.on{background:var(--tl);color:#fff}
+.page{display:none;padding:14px 16px 40px;animation:in .35s}.page.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h2{color:#1b3f73;margin:4px 0 6px;font-size:1.35rem;line-height:1.5}
+.num{display:inline-block;background:var(--tl);color:#fff;border-radius:10px;padding:0 10px;margin-left:6px;font-size:1rem}
+.box{border:2px solid var(--line);border-radius:16px;padding:14px;margin:14px 0;background:#fff}
+.box h3{margin:0 0 6px;font-size:1.05rem;color:#1b3f73}
+.lab{border-style:dashed;border-color:#a9c3ea;background:#fbfcff}
+.idea{background:linear-gradient(135deg,#4c2a9e,#845ef7);color:#fff;border-radius:16px;padding:12px 16px;margin:10px 0;font-weight:800}
+.idea small{display:block;opacity:.85;font-weight:600}
+.life{background:#fff7e8;border-right:5px solid var(--or);border-radius:10px;padding:8px 12px;margin:10px 0}
+.law{background:#fff7e8;border:2px solid #f5c27a;border-radius:14px;padding:10px 14px;margin:10px 0;font-weight:800;text-align:center;font-size:1.05rem}
+.warn{background:#fdeeee;border-right:5px solid var(--rd);border-radius:10px;padding:8px 12px;margin:10px 0}
+.btn{border:2px solid var(--ink);background:#fff;border-radius:10px;padding:6px 14px;font-weight:800;cursor:pointer;font-size:.95rem}
+.btn.main{background:var(--tl);border-color:var(--tl);color:#fff}.btn.or{background:var(--or);border-color:var(--or);color:#2a1600}
+.btn.ok{background:#dff5e7;border-color:var(--gr)}.btn.no{background:#fde4e4;border-color:var(--rd)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;justify-content:center}
+.fb{font-weight:800;min-height:1.4em;text-align:center;margin-top:6px}.fb.ok{color:var(--gr)}.fb.no{color:var(--rd)}
+.prob{background:#f5f8fd;border-radius:14px;padding:10px;text-align:center;font-weight:700}
+.mx{font-size:1.2rem;font-weight:800;line-height:2.1}
+.sc{text-align:center;font-weight:900;background:var(--tl2);border-radius:12px;padding:8px}
+.steps{background:#f8f9fc;border-radius:12px;padding:8px 12px;margin-top:8px;display:none}
+.opt{display:block;width:100%;text-align:right;margin:5px 0}.opt.ok{background:#dff5e7;border-color:var(--gr)}.opt.no{background:#fde4e4;border-color:var(--rd)}
+input.cf{width:60px;height:42px;font-size:1.15rem;font-weight:900;text-align:center;border:3px solid #c9d8f0;border-radius:10px;direction:ltr;vertical-align:middle;margin:0 2px}
+input.cf.ok{border-color:var(--gr);background:#eefaf2}input.cf.no{border-color:var(--rd);background:#fdeeee}
+/* matrix */
+.M{display:inline-flex;align-items:stretch;vertical-align:middle;margin:2px 4px}
+.M .br{width:8px;border:3px solid var(--ink)}.M .br.r{border-left:none;border-radius:0 6px 6px 0}.M .br.l{border-right:none;border-radius:6px 0 0 6px}
+.M.det .br{width:0;border-width:0 0 0 3px;border-radius:0}.M.det .br.l{border-width:0 3px 0 0}
+.M .g{display:grid;direction:rtl;gap:2px 4px;padding:2px 4px}
+.M .c{min-width:36px;text-align:center;font-weight:900;font-size:1.1rem;padding:2px 4px;border-radius:8px;direction:ltr;transition:.25s}
+.M .c.h1{background:#ffe08a}.M .c.h2{background:#b9e4ff}.M .c.x{opacity:.18;text-decoration:line-through}.M .c.h3{background:#c8f0d2}
+.M input.c{width:48px;height:36px;border:2px solid #c9d8f0;border-radius:8px;background:#fff;font-family:inherit}
+.chap{border:2px solid var(--line);border-radius:14px;margin:8px 0;overflow:hidden}
+.chap>div:first-child{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;font-weight:800;background:#f8faff}
+.chap .cn{background:var(--tl);color:#fff;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;flex:0 0 auto}
+.chap .ls{display:none;padding:4px 12px 10px}.chap.open .ls{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px dashed var(--line);font-size:.95rem}
+.li .pg{margin-right:auto;color:var(--soft);font-size:.8rem}.li.ready{cursor:pointer;font-weight:800;color:#1b3f73}
+.tg{font-size:.72rem;border-radius:8px;padding:0 8px;font-weight:800}.tg.r{background:#e6f6ec;color:#1d7a3f}.tg.s{background:#f1f1f1;color:#999}
+table.t{border-collapse:collapse;width:100%;font-size:.92rem;margin:6px 0}table.t td,table.t th{border:1px solid #d6e1f2;padding:5px 8px}table.t th{background:var(--tl2)}
+.sl{display:flex;align-items:center;gap:8px;margin:4px 0}.sl label{min-width:90px;font-weight:800}.sl input{flex:1;accent-color:var(--tl)}
+footer{text-align:center;color:#999;font-size:.8rem;padding:10px 10px 70px}
+.rt{direction:ltr;unicode-bidi:isolate;display:inline-block}.wx,.bx{border:1px solid #dbe5f5;border-radius:12px;padding:8px 10px;margin:8px 0;background:#fbfcff}.wxq{font-weight:700;line-height:2}.wst{background:#fff;border-right:4px solid var(--tl);border-radius:8px;padding:4px 10px;margin:5px 0;animation:in .3s;line-height:2}.wst.fin{border-color:var(--gr);background:#eefaf2}.sn{display:inline-block;background:var(--tl);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:.8rem;margin-left:6px}.bh{background:#fff7e8;border-radius:8px;padding:6px 10px;margin:4px 0}.ans{font-weight:900;color:var(--gr);margin-top:4px}.exb{border-color:#a9c3ea}.M.det .br.r,.M.det .br.l{border:none;border-radius:0;width:0}.M.det .br.r{border-right:3px solid var(--ink)}.M.det .br.l{border-left:3px solid var(--ink)}.bkb{border-color:#f5c27a;background:#fffdf8}/*darkfix*/input,select,textarea,.cf,.M input.c{background-color:#fff !important;color:#1f2a44 !important;-webkit-text-fill-color:#1f2a44 !important;caret-color:#1f2a44}input.cf.ok{background-color:#eefaf2 !important}input.cf.no{background-color:#fdeeee !important}svg text{font-family:Cairo,Tahoma,Arial,sans-serif}
+canvas{touch-action:manipulation;max-width:100%;height:auto}
+.shk{animation:shk .4s}@keyframes shk{25%{transform:translateX(6px)}75%{transform:translateX(-6px)}}
+ol.steps{display:block;background:none}
+</style>
+</head>
+<body>
+<div class="book">
+<header><h1>📈 رياضيات الثاني الثانوي</h1><div>الكتاب الحي · القسم العلمي · المتباينات · حساب المثلثات · الدوال · النهايات · التفاضل · التكامل</div></header>
+<div class="bar" id="bar">
+  <button data-p="home" class="on">📚 الفهرس</button>
+  <button data-p="i1">1 الفترات وخط الأعداد</button>
+  <button data-p="i2">1 حل المتباينات الخطية</button>
+  <button data-p="i3">1 متباينات الدرجة الثانية</button>
+  <button data-p="i4">1 القيمة المطلقة</button>
+  <button data-p="rv1">🏁 مراجعة 1</button>
+  <button data-p="g1">2 قاعدة الجيب</button>
+  <button data-p="g2">2 قاعدة جيب التمام</button>
+  <button data-p="g3">2 المساحة والاتجاهات</button>
+  <button data-p="rv2">🏁 مراجعة 2</button>
+  <button data-p="t1">3 النسب المثلثية لأي زاوية</button>
+  <button data-p="t2">3 المتطابقات والمعادلات</button>
+  <button data-p="t3">3 الأشكال البيانية</button>
+  <button data-p="rv3">🏁 مراجعة 3</button>
+  <button data-p="f1">4 العلاقة والدالة وأنواعها</button>
+  <button data-p="f2">4 جبر الدوال وتساويها</button>
+  <button data-p="l1">5 معنى النهاية وحسابها</button>
+  <button data-p="l2">5 النهايات من الجهتين وعند اللانهاية</button>
+  <button data-p="l3">5 الاتصال</button>
+  <button data-p="rv4">🏁 مراجعة 4–5</button>
+  <button data-p="d1">6 ميل المماس والمشتقة</button>
+  <button data-p="d2">6 قواعد الاشتقاق</button>
+  <button data-p="n1">7 الدالة البدائية والتكامل</button>
+  <button data-p="n2">7 المساحة والنظرية الأساسية</button>
+  <button data-p="rv5">🏁 مراجعة 6–7</button>
+</div>
+<style>
+.sl{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px 0;font-weight:800}
+.sl input[type=range]{width:200px;accent-color:var(--tl)}
+.pool{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.pool button{border:2px solid var(--line);border-radius:12px;background:#fff;padding:7px 11px;font-family:inherit;font-weight:800;cursor:pointer;font-size:.92rem}
+.pool button.sel{border-color:var(--tl);background:var(--tl2)}
+.pool button.ok{border-color:#2fb24c;background:#e6f7ea}.pool button.no{border-color:#e5484d;background:#fde8e8}
+.cat{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}
+.cat>div{border:2px dashed var(--line);border-radius:14px;padding:8px;min-height:70px;text-align:center;cursor:pointer}
+.cat>div b{display:block;margin-bottom:4px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.steps li{background:#fff;border:2px solid var(--line);border-radius:12px;padding:8px 12px;margin:6px 0;font-weight:800;cursor:pointer;display:flex;gap:8px;align-items:center}
+.steps li.ok{border-color:#2fb24c;background:#e6f7ea}.steps li b{min-width:26px;height:26px;border-radius:50%;background:var(--tl);color:#fff;display:grid;place-items:center;font-size:.85rem}
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0}
+.tools button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px 2px;font-family:inherit;font-weight:800;font-size:.72rem;cursor:pointer}
+.tools button svg{width:100%;height:58px;display:block}.tools button.sel{border-color:var(--tl);background:var(--tl2)}
+.hz{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.hz button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px;cursor:pointer;font-family:inherit;font-weight:800;font-size:.75rem}
+.hz button.sel{border-color:var(--tl);background:var(--tl2)}.hz button.ok{border-color:#2fb24c;background:#e6f7ea}
+.hz svg{width:64px;height:64px;display:block;margin:auto}
+.big2{font-size:1.5rem;font-weight:900;text-align:center;margin:6px 0}
+.matr{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:8px 0}
+.matr button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 2px;font-family:inherit;font-weight:800;font-size:.8rem;cursor:pointer}
+.matr button span{font-size:1.6rem;display:block}.matr button.sel{border-color:var(--tl);background:var(--tl2)}
+.ptab{display:grid;grid-template-columns:repeat(18,1fr);gap:2px;direction:ltr;margin:8px 0}
+.ptab div{aspect-ratio:1;border-radius:4px;font-size:.55rem;font-weight:900;display:grid;place-items:center;cursor:pointer;line-height:1}
+.ptab div.m{background:#ffd8a8}.ptab div.n{background:#b2f2bb}.ptab div.g{background:#a5d8ff}.ptab div.sel{outline:3px solid #e5484d}
+</style>
+<style>
+.cv{width:100%;height:auto;display:block;background:#fff;border-radius:14px;border:2px solid var(--line);touch-action:none}
+.kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.kpi div{background:var(--tl2);border-radius:12px;padding:8px;text-align:center;font-weight:800;font-size:.85rem}.kpi b{display:block;font-size:1.25rem;color:var(--tl)}
+.tbl{width:100%;border-collapse:collapse;margin:8px 0;font-weight:700}.tbl td,.tbl th{border:2px solid var(--line);padding:6px;text-align:center}.tbl th{background:var(--tl2)}
+.tbl td.v{color:var(--tl);font-size:1.1rem}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}.cards button{background:#fff;border:2px solid var(--line);border-radius:12px;padding:8px 4px;font-family:inherit;font-weight:800;cursor:pointer}.cards button.on{border-color:var(--tl);background:var(--tl2)}
+.inp{width:80px;padding:6px;border-radius:10px;border:2px solid var(--line);font-family:inherit;font-weight:800;text-align:center}
+.scn{background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px;margin:8px 0;font-weight:800;line-height:1.9}
+.opts2 button{display:block;width:100%;text-align:right;margin:6px 0;background:#fff;border:2px solid var(--line);border-radius:12px;padding:10px;font-family:inherit;font-weight:700;cursor:pointer}
+.opts2 button.ok{border-color:#2fb24c;background:#e6f7ea}.opts2 button.no{border-color:#e5484d;background:#fde8e8}
+.grid100{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;max-width:320px;margin:8px auto;direction:ltr}.grid100 i{aspect-ratio:1;background:#e9ecef;border-radius:3px;cursor:pointer}.grid100 i.on{background:var(--tl)}
+.big2{font-size:1.4rem;font-weight:900;text-align:center;color:var(--tl);margin:6px 0}
+</style>
+
+
+<style>
+.fr{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;line-height:1.15;font-weight:800;margin:0 2px}.fr>span:first-child{border-bottom:2px solid currentColor;padding:0 3px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.chips button{border:2px solid var(--line);border-radius:20px;background:#fff;padding:6px 12px;font-family:inherit;font-weight:800;cursor:pointer}
+.chips button.on{border-color:var(--tl);background:var(--tl2)}
+.sl{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;margin:6px 0;font-weight:800}
+.sl input[type=range]{flex:1;min-width:130px;max-width:300px}
+.sl select{font-family:inherit;font-weight:800;font-size:1rem;border:2px solid var(--tl);border-radius:10px;padding:4px 6px;max-width:100%}
+.tbl{width:100%;border-collapse:collapse;margin:8px 0;font-weight:800;text-align:center;background:#fff}.tbl td,.tbl th{border:2px solid var(--line);padding:5px}.tbl th{background:var(--tl2)}
+.big2{font-size:1.15rem;font-weight:900;text-align:center;color:var(--tl);margin:6px 0;line-height:1.9}
+.stp>div{background:#fff;border-right:4px solid var(--tl);border-radius:8px;padding:6px 10px;margin:4px 0;font-weight:800;animation:pop .35s both}
+@keyframes pop{from{transform:scale(.85);opacity:0}to{transform:none;opacity:1}}
+.hud{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;font-weight:900}.hud span{background:#fff;border:2px solid var(--line);border-radius:12px;padding:4px 12px}
+</style>
+
+<section class="page on" id="home">
+  <h2>فهرس الكتاب</h2>
+  <div class="idea">📈 أهلًا بك في رياضيات الثاني الثانوي الحي!<small>هنا لا تحفظ القوانين… بل تراها تعمل: اقلب إشارة المتباينة بيدك، وادفع قطع المكافئ ليتغير الحل، وقُد سفينة بالاتجاهات بين الجزر، وأدِر الزاوية على دائرة الوحدة، واصنع موجة جيب بالمؤشرات، وامسح الخط الرأسي على المنحنيات، واقترب من النهاية خطوة خطوة، وسدّ فجوة الطريق لتعبر السيارة، وشاهد القاطع يصبح مماسًا، واملأ المساحة تحت المنحنى بالمستطيلات… مع أسئلة لا تنتهي وشرح صوتي.</small></div>
+  <div id="toc"></div>
+</section>
+
+<!-- ===== الباب 1 ===== -->
+<section class="page" id="i1">
+  <div class="muted">الباب 1 · 1-1 · ص 14–15</div>
+  <h2><span class="num">1</span>الفترات والمتباينات على خط الأعداد</h2>
+  <div class="idea">💡 <b>الفترة المغلقة</b> [أ، ب] تشمل طرفيها (نقطة مصمتة ●)، و<b>المفتوحة</b> ]أ، ب[ لا تشملهما (نقطة مفرغة ○)، و<b>نصف المفتوحة</b> تشمل طرفًا واحدًا.<small>{س : س ≥ 2} = [2، ∞[ · {س : س &lt; −1} = ]−∞، −1[ · اللانهاية ∞ لا تُغلق أبدًا.</small></div>
+  <div class="box lab"><h3>🎯 المختبر: ارسم الفترة</h3><div class="hint" style="text-align:center">حرّك الطرفين واضغط على النقطة لتبدّل بين ● و ○</div>
+    <div class="sl">الطرف الأيسر أ <input type="range" id="ivA" min="-6" max="6" value="-2"><b id="ivAv"></b> الطرف الأيمن ب <input type="range" id="ivB" min="-6" max="7" value="3"><b id="ivBv"></b></div>
+    <div class="chips" id="ivK"></div>
+    <canvas id="ivC" class="cv" width="640" height="170"></canvas><div class="big2" id="ivOut"></div></div>
+  <div class="box lab"><h3>🎮 لعبة: اصطد الفترة</h3><div id="ivG"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qi1"></div></div>
+</section>
+
+<section class="page" id="i2">
+  <div class="muted">الباب 1 · 2-1 إلى 4-1 · ص 16–21</div>
+  <h2><span class="num">1</span>حل المتباينات الخطية</h2>
+  <div class="idea">💡 نحل المتباينة مثل المعادلة: نجمع ونطرح ونضرب ونقسم على الطرفين…<small>⚠️ <b>القاعدة الذهبية</b>: عند الضرب أو القسمة على عدد <b>سالب</b> نقلب اتجاه المتباينة: −2س &lt; 6 ⟸ س <b>&gt;</b> −3</small></div>
+  <div class="box lab"><h3>⚖️ المختبر: آلة المتباينة</h3><div class="hint" style="text-align:center">اختر العملية المناسبة حتى تبقى «س» وحدها… وراقب ماذا يحدث للإشارة!</div>
+    <div class="big2" id="lnEq" style="font-size:1.5rem"></div><div class="chips" id="lnOps"></div><div class="stp" id="lnS"></div>
+    <canvas id="lnC" class="cv" width="640" height="150"></canvas><div class="fb" id="lnOut"></div><div class="btns"><button class="btn" id="lnNew">🎲 متباينة جديدة</button></div></div>
+  <div class="box lab"><h3>🔍 لماذا تنقلب الإشارة؟</h3><div class="sl">العدد المضروب فيه <input type="range" id="flK" min="-3" max="3" value="-1"><b id="flKv"></b></div><canvas id="flC" class="cv" width="640" height="180"></canvas><div class="fb" id="flOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qi2"></div></div>
+</section>
+
+<section class="page" id="i3">
+  <div class="muted">الباب 1 · 5-1 و 6-1 · ص 22–34</div>
+  <h2><span class="num">1</span>حل متباينتين بيانيًا · متباينات الدرجة الثانية</h2>
+  <div class="idea">💡 لحل أ س² + ب س + جـ &gt; 0: نجد الجذرين، ثم ننظر أين يقع المنحنى <b>فوق</b> محور السينات (&gt; 0) أو <b>تحته</b> (&lt; 0).<small>إذا كان أ &gt; 0 (الفتحة لأعلى): المقدار <b>سالب بين الجذرين</b> وموجب خارجهما. لحل متباينتين معًا نأخذ <b>تقاطع</b> مجموعتي الحل.</small></div>
+  <div class="box lab"><h3>🌉 المختبر: قطع المكافئ والإشارة</h3>
+    <div class="sl">أ <input type="range" id="qdA" min="-2" max="2" step="0.5" value="1"><b id="qdAv"></b> الجذر الأول <input type="range" id="qdR" min="-5" max="5" value="-2"><b id="qdRv"></b> الجذر الثاني <input type="range" id="qdS" min="-5" max="5" value="3"><b id="qdSv"></b></div>
+    <div class="chips" id="qdK"></div>
+    <canvas id="qdC" class="cv" width="640" height="380"></canvas><div class="big2" id="qdOut"></div></div>
+  <div class="box lab"><h3>🧩 متباينتان معًا: أين التقاطع؟</h3><div id="sysH"></div><canvas id="sysC" class="cv" width="640" height="170"></canvas></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qi3"></div></div>
+</section>
+
+<section class="page" id="i4">
+  <div class="muted">الباب 1 · 7-1 و 8-1 · ص 35–41</div>
+  <h2><span class="num">1</span>القيمة المطلقة وخواصها</h2>
+  <div class="idea">💡 |س| = بُعد العدد س عن الصفر، لذلك هي <b>لا تكون سالبة أبدًا</b>.<small>|س − أ| &lt; ب ⟺ أ − ب &lt; س &lt; أ + ب (المسافة عن أ أقل من ب) · |س − أ| &gt; ب ⟺ س &lt; أ − ب أو س &gt; أ + ب · |أ × ب| = |أ| × |ب| · |أ + ب| ≤ |أ| + |ب|</small></div>
+  <div class="box lab"><h3>📡 المختبر: برج الإرسال</h3><div class="hint" style="text-align:center">البرج في النقطة أ، ومدى إشارته ب. أين تصل الإشارة؟</div>
+    <div class="sl">موقع البرج أ <input type="range" id="abA" min="-4" max="4" value="1"><b id="abAv"></b> المدى ب <input type="range" id="abB" min="1" max="5" value="2"><b id="abBv"></b></div><div class="chips" id="abK"></div>
+    <canvas id="abC" class="cv" width="640" height="220"></canvas><div class="big2" id="abOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qi4"></div></div>
+</section>
+
+<section class="page" id="rv1"><div class="muted">الباب 1 · مراجعة</div><h2>🏁 مراجعة: المتباينات</h2><div class="sc" id="rv1Sc"></div><div id="rv1Q"></div><div class="btns"><button class="btn or" id="rv1New">🔄 اختبار جديد</button></div></section>
+
+<!-- ===== الباب 2 ===== -->
+<section class="page" id="g1">
+  <div class="muted">الباب 2 · 1-2 · ص 42–46</div>
+  <h2><span class="num">2</span>قاعدة الجيب</h2>
+  <div class="idea">💡 في أي مثلث أ ب جـ: <b>نسبة كل ضلع إلى جيب الزاوية المقابلة له ثابتة</b>:<br>س ÷ جا أ = ص ÷ جا ب = ع ÷ جا جـ<small>نستخدمها عندما نعرف <b>زاويتين وضلعًا</b>، أو <b>ضلعين وزاوية مقابلة لأحدهما</b>.</small></div>
+  <div class="box lab"><h3>🔺 المختبر: المثلث المطاطي</h3><div class="hint" style="text-align:center">اسحب أي رأس… النسب الثلاث تبقى متساوية دائمًا!</div>
+    <canvas id="snC" class="cv" width="640" height="380"></canvas><table class="tbl" id="snT"></table></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qg1"></div></div>
+</section>
+
+<section class="page" id="g2">
+  <div class="muted">الباب 2 · 2-2 · ص 47–51</div>
+  <h2><span class="num">2</span>قاعدة جيب التمام</h2>
+  <div class="idea">💡 ع² = س² + ص² − 2 س ص جتا جـ<small>نستخدمها عندما نعرف <b>ضلعين والزاوية المحصورة</b> بينهما، أو <b>الأضلاع الثلاثة</b> (لإيجاد زاوية: جتا جـ = (س² + ص² − ع²) ÷ 2 س ص). عندما جـ = 90° يصبح جتا جـ = 0 فنحصل على <b>فيثاغورس</b>!</small></div>
+  <div class="box lab"><h3>🦾 المختبر: الذراع الآلي</h3><div class="hint" style="text-align:center">ذراع بطولين ثابتين… افتح المفصل وشاهد المسافة ع تتغير</div>
+    <div class="sl">س <input type="range" id="csA" min="2" max="8" value="5"><b id="csAv"></b> ص <input type="range" id="csB" min="2" max="8" value="6"><b id="csBv"></b></div><div class="sl">زاوية المفصل جـ <input type="range" id="csG" min="10" max="170" value="60"><b id="csGv"></b></div>
+    <canvas id="csC" class="cv" width="640" height="340"></canvas><div class="big2" id="csOut"></div></div>
+  <div class="box lab"><h3>🎯 لعبة: التقط الكرة</h3><div class="hint" style="text-align:center">الكرة على بُعد معيّن… اختر زاوية المفصل التي تجعل طرف الذراع يلمسها</div><canvas id="cgC" class="cv" width="640" height="300"></canvas><div class="sl">الزاوية <input type="range" id="cgG" min="10" max="170" value="90"><b id="cgGv"></b></div><div class="btns"><button class="btn main" id="cgGo">🤖 حرّك الذراع</button><button class="btn" id="cgN">🎲 كرة جديدة</button></div><div class="fb" id="cgOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qg2"></div></div>
+</section>
+
+<section class="page" id="g3">
+  <div class="muted">الباب 2 · 3-2 إلى 5-2 · ص 52–66</div>
+  <h2><span class="num">2</span>مساحة المثلث · الاتجاهات</h2>
+  <div class="idea">💡 <b>مساحة المثلث</b> = ½ × س × ص × جا جـ (ضلعان والزاوية المحصورة).<small><b>الاتجاه (الزاوية الاتجاهية)</b>: يُقاس من <b>الشمال</b> باتجاه عقارب الساعة بثلاثة أرقام: 045° شمال شرق، 090° شرق، 180° جنوب، 270° غرب.</small></div>
+  <div class="box lab"><h3>📐 المختبر: باب المثلث</h3><div class="sl">الزاوية جـ <input type="range" id="arG" min="5" max="175" value="40"><b id="arGv"></b></div><canvas id="arC" class="cv" width="640" height="260"></canvas><div class="big2" id="arOut"></div></div>
+  <div class="box lab"><h3>⛵ لعبة: قبطان الجزر</h3><div class="hint" style="text-align:center">أبحر من الميناء إلى الجزيرة 🏝️ باختيار الاتجاه والمسافة. لديك 3 مراحل فقط!</div>
+    <div class="sl">الاتجاه <input type="range" id="shB" min="0" max="355" step="5" value="45"><b id="shBv"></b> المسافة (km) <input type="range" id="shD" min="1" max="12" value="5"><b id="shDv"></b></div>
+    <canvas id="shC" class="cv" width="640" height="420"></canvas><div class="btns"><button class="btn main" id="shGo">⛵ أبحر</button><button class="btn" id="shN">🗺️ خريطة جديدة</button></div><div class="fb" id="shOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qg3"></div></div>
+</section>
+
+<section class="page" id="rv2"><div class="muted">الباب 2 · مراجعة</div><h2>🏁 مراجعة: قاعدتا الجيب وجيب التمام والاتجاهات</h2><div class="sc" id="rv2Sc"></div><div id="rv2Q"></div><div class="btns"><button class="btn or" id="rv2New">🔄 اختبار جديد</button></div></section>
+
+<!-- ===== الباب 3 ===== -->
+<section class="page" id="t1">
+  <div class="muted">الباب 3 · 1-3 إلى 3-3 · ص 71–80</div>
+  <h2><span class="num">3</span>الزوايا الموجبة والسالبة · النسب المثلثية لأي زاوية</h2>
+  <div class="idea">💡 الزاوية <b>الموجبة</b> تُقاس عكس عقارب الساعة، و<b>السالبة</b> مع عقارب الساعة. <b>الزاوية الحادة الأساسية</b>: الزاوية الحادة بين ضلع الانتهاء ومحور السينات.<small>إشارات النسب في الأرباع: الربع الأول <b>الكل موجب</b> · الثاني <b>جا</b> موجب · الثالث <b>ظا</b> موجب · الرابع <b>جتا</b> موجب.</small></div>
+  <div class="box lab"><h3>🎡 المختبر: دائرة الوحدة</h3><div class="hint" style="text-align:center">اسحب النقطة البرتقالية حول الدائرة (أو استخدم المؤشر)</div>
+    <div class="sl">θ <input type="range" id="ucT" min="-360" max="720" value="150"><b id="ucTv"></b></div>
+    <canvas id="ucC" class="cv" width="640" height="420"></canvas><div class="big2" id="ucOut"></div></div>
+  <div class="box lab"><h3>🃏 لعبة: الإشارة السريعة</h3><div id="sgG"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qt1"></div></div>
+</section>
+
+<section class="page" id="t2">
+  <div class="muted">الباب 3 · 4-3 و 5-3 · ص 81–86</div>
+  <h2><span class="num">3</span>المتطابقات المثلثية · المعادلات المثلثية</h2>
+  <div class="idea">💡 <b>جا² θ + جتا² θ = 1</b> · <b>ظا θ = جا θ ÷ جتا θ</b> · <b>1 + ظا² θ = قا² θ</b><small>المعادلة جا θ = 0.5 لها حلول كثيرة: 30°، 150°، 390°… لذلك نحدد مدى θ. نجد الزاوية الأساسية ثم نضعها في الأرباع التي تناسب الإشارة.</small></div>
+  <div class="box lab"><h3>🟦 المختبر: فيثاغورس داخل الدائرة</h3><div class="sl">θ <input type="range" id="idT" min="0" max="360" value="40"><b id="idTv"></b></div><canvas id="idC" class="cv" width="640" height="300"></canvas><div class="big2" id="idOut"></div></div>
+  <div class="box lab"><h3>🎯 المختبر: حل المعادلة بالصيد</h3><div class="sl"><select id="eqF"><option value="s">جا θ</option><option value="c">جتا θ</option><option value="t">ظا θ</option></select> = <input type="range" id="eqK" min="-1" max="1" step="0.05" value="0.5"><b id="eqKv"></b></div>
+    <canvas id="eqC" class="cv" width="640" height="300"></canvas><div class="big2" id="eqOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qt2"></div></div>
+</section>
+
+<section class="page" id="t3">
+  <div class="muted">الباب 3 · 6-3 · ص 87–94</div>
+  <h2><span class="num">3</span>الأشكال البيانية للدوال المثلثية</h2>
+  <div class="idea">💡 ص = أ جا (ب θ) + جـ: <b>|أ|</b> السعة (الارتفاع)، <b>360° ÷ ب</b> الدورة، <b>جـ</b> إزاحة رأسية.<small>جا وجتا: مداهما [−1، 1] ودورتهما 360°. ظا: دورتها 180° وغير معرّفة عند 90° و 270°.</small></div>
+  <div class="box lab"><h3>🌊 المختبر: صانع الموجات</h3><div class="chips" id="wvK"></div>
+    <div class="sl">أ (السعة) <input type="range" id="wvA" min="-3" max="3" step="0.5" value="1"><b id="wvAv"></b> ب <input type="range" id="wvB" min="0.5" max="4" step="0.5" value="1"><b id="wvBv"></b> جـ <input type="range" id="wvC" min="-2" max="2" step="0.5" value="0"><b id="wvCv"></b></div>
+    <canvas id="wvCv2" class="cv" width="640" height="320"></canvas><div class="big2" id="wvOut"></div><div class="btns"><button class="btn main" id="wvG">🎯 تحدٍّ: طابق الموجة الذهبية</button></div><div class="fb" id="wvF"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qt3"></div></div>
+</section>
+
+<section class="page" id="rv3"><div class="muted">الباب 3 · مراجعة</div><h2>🏁 مراجعة: النسب والدوال المثلثية</h2><div class="sc" id="rv3Sc"></div><div id="rv3Q"></div><div class="btns"><button class="btn or" id="rv3New">🔄 اختبار جديد</button></div></section>
+
+<!-- ===== الباب 4 ===== -->
+<section class="page" id="f1">
+  <div class="muted">الباب 4 · 1-4 إلى 7-4 · ص 95–106</div>
+  <h2><span class="num">4</span>العلاقة والدالة · كثيرة الحدود والكسرية والجذرية</h2>
+  <div class="idea">💡 العلاقة تكون <b>دالة</b> إذا ارتبط كل عنصر من المجال بعنصر <b>واحد فقط</b>. بيانيًا: <b>اختبار الخط الرأسي</b> يقطع المنحنى في نقطة واحدة على الأكثر.<small><b>كثيرة الحدود</b> مجالها كل الأعداد ح · <b>الكسرية</b> نستبعد أصفار المقام · <b>الجذرية</b> (جذر تربيعي) ما تحت الجذر ≥ 0. س هو <b>المتغير المستقل</b> و ص <b>التابع</b>.</small></div>
+  <div class="box lab"><h3>📏 المختبر: الخط الرأسي الماسح</h3><div class="chips" id="vtK"></div><div class="hint" style="text-align:center">اسحب الخط الأحمر يمينًا ويسارًا</div><canvas id="vtC" class="cv" width="640" height="340"></canvas><div class="fb" id="vtOut"></div></div>
+  <div class="box lab"><h3>🗺️ المختبر: مستكشف المجال</h3><div class="sl"><select id="dmF"></select></div><canvas id="dmC" class="cv" width="640" height="320"></canvas><div class="big2" id="dmOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qf1"></div></div>
+</section>
+
+<section class="page" id="f2">
+  <div class="muted">الباب 4 · 8-4 و 9-4 · ص 107–110</div>
+  <h2><span class="num">4</span>جبر الدوال · تساوي دالتين</h2>
+  <div class="idea">💡 (د + هـ)(س) = د(س) + هـ(س) · (د × هـ)(س) = د(س) × هـ(س) · (د ÷ هـ)(س) = د(س) ÷ هـ(س) حيث هـ(س) ≠ 0<small>مجال الناتج = <b>تقاطع</b> مجالي الدالتين (وفي القسمة نستبعد أصفار المقام). الدالتان <b>متساويتان</b> إذا كان لهما <b>نفس المجال</b> ونفس الصورة لكل عنصر.</small></div>
+  <div class="box lab"><h3>🧮 المختبر: خلاط الدوال</h3><div class="chips" id="alO"></div><canvas id="alC" class="cv" width="640" height="340"></canvas><div class="big2" id="alOut"></div></div>
+  <div class="box lab"><h3>👯 هل الدالتان متساويتان؟</h3><div id="eqfQ"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qf2"></div></div>
+</section>
+
+<!-- ===== الباب 5 ===== -->
+<section class="page" id="l1">
+  <div class="muted">الباب 5 · 1-5 إلى 3-5 · ص 111–124</div>
+  <h2><span class="num">5</span>القيم غير المعينة · معنى النهاية وحسابها</h2>
+  <div class="idea">💡 <b>نها د(س) عندما س ← أ = ل</b> تعني أن قيم د(س) <b>تقترب</b> من ل كلما اقتربت س من أ، حتى لو كانت د(أ) غير معرّفة!<small>بالتعويض المباشر إذا أمكن. إذا ظهر <b>0 ÷ 0</b> (كمية غير معينة) نحلل ونختصر: نها (س² − 4) ÷ (س − 2) = نها (س + 2) = 4</small></div>
+  <div class="box lab"><h3>🔭 المختبر: الاقتراب من الثقب</h3><div class="sl"><select id="lmF"></select></div><div class="sl">المسافة عن أ <input type="range" id="lmH" min="0" max="100" value="0"><b id="lmHv"></b></div>
+    <canvas id="lmC" class="cv" width="640" height="340"></canvas><div id="lmT"></div><div class="big2" id="lmOut"></div></div>
+  <div class="box lab"><h3>🔨 حطّم الـ 0 ÷ 0</h3><div id="lmS"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="ql1"></div></div>
+</section>
+
+<section class="page" id="l2">
+  <div class="muted">الباب 5 · 4-5 و 5-5 · ص 125–131</div>
+  <h2><span class="num">5</span>النهايات من الجهتين · النهاية عند اللانهاية</h2>
+  <div class="idea">💡 للنهاية أن توجد عند أ يجب أن <b>تتساوى النهاية اليمنى واليسرى</b>.<small>عند ∞ للدالة الكسرية: درجة البسط &lt; درجة المقام ⟸ النهاية 0 · متساويتان ⟸ النهاية = نسبة المعاملين الرئيسيين · البسط أكبر ⟸ لا توجد نهاية (∞).</small></div>
+  <div class="box lab"><h3>🚗 المختبر: سيارتان تلتقيان؟</h3><div class="hint" style="text-align:center">د(س) = 3 − س عندما س ≥ 0 ، و د(س) = م س + ك عندما س &lt; 0. السيارتان تقتربان من س = 0 من الجهتين</div>
+    <div class="sl">م <input type="range" id="osM" min="-2" max="2" step="0.5" value="1"><b id="osMv"></b> ك <input type="range" id="osK" min="-2" max="5" step="0.5" value="1"><b id="osKv"></b></div>
+    <canvas id="osC" class="cv" width="640" height="340"></canvas><div class="btns"><button class="btn main" id="osGo">🏁 انطلقا</button></div><div class="fb" id="osOut"></div></div>
+  <div class="box lab"><h3>🚀 المختبر: الرحلة إلى اللانهاية</h3><div class="sl"><select id="infF"></select></div><div class="sl">س <input type="range" id="infX" min="1" max="6" step="0.1" value="1"><b id="infXv"></b></div><canvas id="infC" class="cv" width="640" height="300"></canvas><div class="big2" id="infOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="ql2"></div></div>
+</section>
+
+<section class="page" id="l3">
+  <div class="muted">الباب 5 · 6-5 · ص 132–138</div>
+  <h2><span class="num">5</span>اتصال دالة عند نقطة</h2>
+  <div class="idea">💡 تكون د <b>متصلة</b> عند س = أ إذا تحققت ثلاثة شروط: ① د(أ) معرّفة ② نها د(س) عند أ موجودة ③ <b>نها د(س) = د(أ)</b><small>ببساطة: نرسم المنحنى دون أن نرفع القلم!</small></div>
+  <div class="box lab"><h3>🌉 لعبة: ابنِ الجسر</h3><div class="hint" style="text-align:center">د(س) = س + 1 عندما س &lt; 2 ، و د(س) = ك س − 1 عندما س ≥ 2. اختر ك لتعبر السيارة دون أن تسقط!</div>
+    <div class="sl">ك <input type="range" id="brK" min="0" max="4" step="0.5" value="1"><b id="brKv"></b></div>
+    <canvas id="brC" class="cv" width="640" height="340"></canvas><div class="btns"><button class="btn main" id="brGo">🚗 انطلق</button></div><div class="fb" id="brOut"></div></div>
+  <div class="box lab"><h3>✅ الشروط الثلاثة</h3><div id="ctQ"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="ql3"></div></div>
+</section>
+
+<section class="page" id="rv4"><div class="muted">البابان 4–5 · مراجعة</div><h2>🏁 مراجعة: الدوال والنهايات والاتصال</h2><div class="sc" id="rv4Sc"></div><div id="rv4Q"></div><div class="btns"><button class="btn or" id="rv4New">🔄 اختبار جديد</button></div></section>
+
+<!-- ===== الباب 6 ===== -->
+<section class="page" id="d1">
+  <div class="muted">الباب 6 · 1-6 و 2-6 · ص 139–145</div>
+  <h2><span class="num">6</span>التغير · ميل المماس · المشتقة عند نقطة</h2>
+  <div class="idea">💡 ميل القاطع = (د(س + هـ) − د(س)) ÷ هـ. عندما <b>هـ ← 0</b> يصبح القاطع <b>مماسًا</b>، وميله هو <b>المشتقة</b>:<br>دَ(س) = نها (د(س + هـ) − د(س)) ÷ هـ<small>نكتب المشتقة أيضًا: دص ÷ دس. وهي معدل التغير اللحظي (مثل السرعة اللحظية).</small></div>
+  <div class="box lab"><h3>🎯 المختبر: القاطع يصبح مماسًا</h3><div class="sl"><select id="scF"></select></div><div class="sl">النقطة س <input type="range" id="scX" min="-2" max="2" step="0.5" value="1"><b id="scXv"></b> هـ <input type="range" id="scH" min="0" max="100" value="100"><b id="scHv"></b></div>
+    <canvas id="scC" class="cv" width="640" height="360"></canvas><div class="btns"><button class="btn main" id="scGo">🎬 اجعل هـ ← 0</button></div><div id="scT"></div><div class="big2" id="scOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qd1"></div></div>
+</section>
+
+<section class="page" id="d2">
+  <div class="muted">الباب 6 · 3-6 وقواعد الاشتقاق · ص 146–160</div>
+  <h2><span class="num">6</span>قواعد الاشتقاق · الاتصال والاشتقاق</h2>
+  <div class="idea">💡 مشتقة الثابت = 0 · <b>د/دس (سⁿ) = ن سⁿ⁻¹</b> · مشتقة (أ × د) = أ × دَ · مشتقة المجموع = مجموع المشتقات.<small>كل دالة قابلة للاشتقاق عند نقطة متصلة عندها، لكن العكس غير صحيح: |س| متصلة عند 0 وليس لها مشتقة هناك (زاوية حادة).</small></div>
+  <div class="box lab"><h3>🏭 المختبر: مصنع المشتقات</h3><div class="hint" style="text-align:center">ابنِ دالتك بالمؤشرات، وشاهد المشتقة تُرسم تحتها. حرّك النقطة لترى ميل المماس = قيمة المشتقة</div>
+    <div class="sl">س³ <input type="range" id="pfA" min="-2" max="2" step="0.5" value="0"><b id="pfAv"></b> س² <input type="range" id="pfB" min="-3" max="3" step="0.5" value="1"><b id="pfBv"></b> س <input type="range" id="pfC" min="-4" max="4" step="0.5" value="-2"><b id="pfCv"></b> ثابت <input type="range" id="pfD" min="-4" max="4" value="1"><b id="pfDv"></b></div>
+    <div class="sl">النقطة س <input type="range" id="pfX" min="-3" max="3" step="0.1" value="1.5"><b id="pfXv"></b></div>
+    <canvas id="pfCnv" class="cv" width="640" height="440"></canvas><div class="big2" id="pfOut"></div></div>
+  <div class="box lab"><h3>⚡ لعبة: سباق المشتقات</h3><div id="drG"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qd2"></div></div>
+</section>
+
+<!-- ===== الباب 7 ===== -->
+<section class="page" id="n1">
+  <div class="muted">الباب 7 · 1-7 إلى 4-7 · ص 161–171</div>
+  <h2><span class="num">7</span>الدالة البدائية · قواعد التكامل غير المحدود · الثابت</h2>
+  <div class="idea">💡 التكامل <b>عكس التفاضل</b>: إذا كانت مشتقة ق(س) هي د(س) فإن ق دالة بدائية لـ د.<br><b>∫ سⁿ دس = سⁿ⁺¹ ÷ (ن + 1) + ث</b> (ن ≠ −1)<small>نضيف دائمًا <b>الثابت الاختياري ث</b> لأن مشتقة أي ثابت صفر، فهناك <b>عائلة</b> من المنحنيات المتوازية. ونحدد ث إذا عرفنا نقطة على المنحنى.</small></div>
+  <div class="box lab"><h3>👨‍👩‍👧 المختبر: عائلة المنحنيات</h3><div class="hint" style="text-align:center">دص ÷ دس = 2س ⟸ ص = س² + ث. اختر ث ليمر المنحنى بالنجمة ⭐</div>
+    <div class="sl">ث <input type="range" id="fmC" min="-4" max="4" step="0.5" value="0"><b id="fmCv"></b></div><canvas id="fmCv2" class="cv" width="640" height="360"></canvas><div class="btns"><button class="btn" id="fmN">⭐ نجمة جديدة</button></div><div class="fb" id="fmOut"></div></div>
+  <div class="box lab"><h3>🔄 آلة العكس</h3><div id="rvG"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qn1"></div></div>
+</section>
+
+<section class="page" id="n2">
+  <div class="muted">الباب 7 · 5-7 و 6-7 · ص 172–196</div>
+  <h2><span class="num">7</span>التفسير الهندسي · النظرية الأساسية للتفاضل والتكامل</h2>
+  <div class="idea">💡 التكامل المحدود من أ إلى ب يمثل <b>المساحة</b> تحت المنحنى (فوق محور السينات).<br><b>∫ من أ إلى ب د(س) دس = ق(ب) − ق(أ)</b> حيث ق دالة بدائية لـ د.<small>نقرّب المساحة بمستطيلات رفيعة، وكلما زاد عددها اقترب مجموعها من القيمة الدقيقة.</small></div>
+  <div class="box lab"><h3>🟩 المختبر: املأ المساحة بالمستطيلات</h3><div class="sl"><select id="rmF"></select></div><div class="sl">أ <input type="range" id="rmA" min="0" max="3" step="0.5" value="0"><b id="rmAv"></b> ب <input type="range" id="rmB" min="0.5" max="4" step="0.5" value="2"><b id="rmBv"></b></div><div class="sl">عدد المستطيلات <input type="range" id="rmN" min="1" max="60" value="4"><b id="rmNv"></b></div>
+    <canvas id="rmC" class="cv" width="640" height="340"></canvas><div class="big2" id="rmOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qn2"></div></div>
+</section>
+
+<section class="page" id="rv5"><div class="muted">البابان 6–7 · مراجعة</div><h2>🏁 مراجعة: التفاضل والتكامل</h2><div class="sc" id="rv5Sc"></div><div id="rv5Q"></div><div class="btns"><button class="btn or" id="rv5New">🔄 اختبار جديد</button></div></section>
+<footer>الكتاب الحي · مبني على كتاب الرياضيات للسنة الثانية بمرحلة التعليم الثانوي – القسم العلمي 2025–2026 (مركز المناهج التعليمية والبحوث التربوية – ليبيا)</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const pages=[...document.querySelectorAll('.page')],nb=[...document.querySelectorAll('#bar button')];
+function go(id){pages.forEach(p=>p.classList.toggle('on',p.id===id));nb.forEach(b=>b.classList.toggle('on',b.dataset.p===id));window.scrollTo({top:0,behavior:'smooth'})}
+nb.forEach(b=>b.onclick=()=>go(b.dataset.p));
+(function(){const h=location.hash.slice(1);if(h&&$(h))go(h);addEventListener('hashchange',()=>{const x=location.hash.slice(1);if($(x))go(x)})})();
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),nz=(a,b)=>{let x;do{x=rnd(a,b)}while(!x);return x},pick=a=>a[rnd(0,a.length-1)];
+const ms=n=>n<0?'−'+(-n):String(n);const pr=n=>n<0?'('+ms(n)+')':String(n);
+const V='س';
+const parse=s=>{s=(s||'').trim().replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[−–—]/g,'-').replace(/\s/g,'');if(s===''||s==='+'||s==='-')return NaN;if(/^-?\d+\/\d+$/.test(s)){const[a,b]=s.split('/');return a/b}return Number(s)};
+function term(c,p,first,v){v=v||V;if(c===0)return'';const a=Math.abs(c);const cs=(a===1&&p>0)?'':String(a);const vs=p===0?'':(p===1?v:v+'<sup>'+p+'</sup>');const s=c<0?(first?'−':' − '):(first?'':' + ');return s+cs+vs}
+function poly(cs,v){let out='',f=true;cs.forEach(([c,p])=>{if(c){out+=term(c,p,f,v);f=false}});return out||'0'}
+/* matrix renderer: A 2D array, o:{det, cls(i,j)->class, inp:prefix} */
+function M(A,o){o=o||{};const r=A.length,c=A[0].length;let g='<div class="g" style="grid-template-columns:repeat('+c+',auto)">';
+ A.forEach((row,i)=>row.forEach((v,j)=>{const cl=o.cls?o.cls(i,j)||'':'';g+=o.inp?'<input class="c '+cl+'" data-i="'+i+'" data-j="'+j+'" data-m="'+o.inp+'" value="'+(v===''?'':ms(v))+'" inputmode="text">':'<div class="c '+cl+'" data-i="'+i+'" data-j="'+j+'">'+(typeof v==='number'?ms(Math.round(v*1000)/1000):v)+'</div>'}));
+ return '<span class="M'+(o.det?' det':'')+'"'+(o.id?' id="'+o.id+'"':'')+'><span class="br r"></span>'+g+'</div><span class="br l"></span></span>'}
+function readM(host,name,r,c){const A=Array.from({length:r},()=>Array(c).fill(0));host.querySelectorAll('input[data-m="'+name+'"]').forEach(x=>{const v=parse(x.value);A[+x.dataset.i][+x.dataset.j]=isNaN(v)?0:v});return A}
+const det2=a=>a[0][0]*a[1][1]-a[0][1]*a[1][0];
+const minor=(a,i,j)=>a.filter((_,r)=>r!==i).map(row=>row.filter((_,c)=>c!==j));
+const det3=a=>a[0][0]*det2(minor(a,0,0))-a[0][1]*det2(minor(a,0,1))+a[0][2]*det2(minor(a,0,2));
+const det=a=>a.length===2?det2(a):det3(a);
+const rM=(r,c,lo,hi)=>Array.from({length:r},()=>Array.from({length:c},()=>rnd(lo==null?-5:lo,hi==null?9:hi)));
+const mul=(A,B)=>A.map(row=>B[0].map((_,j)=>row.reduce((s,v,k)=>s+v*B[k][j],0)));
+const T=A=>A[0].map((_,j)=>A.map(r=>r[j]));
+const sub='₀₁₂₃₄₅₆₇₈₉';const ij=(i,j)=>''+sub[i]+sub[j];
+function mcq(host,q,opts,right,onAns){const d=document.createElement('div');d.className='box';d.style.margin='8px 0';d.innerHTML='<div style="font-weight:800">'+q+'</div>';let dn=false;const order=opts.map((o,i)=>i).sort(()=>Math.random()-.5);
+ order.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=opts[i];b.onclick=()=>{if(dn)return;dn=true;b.classList.add(i===right?'ok':'no');if(i!==right)[...d.querySelectorAll('.opt')][order.indexOf(right)].classList.add('ok');onAns&&onAns(i===right)};d.appendChild(b)});host.appendChild(d)}
+function MCQP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();g.o=g.o.filter((x,i)=>g.o.indexOf(x)===i);const ord=g.o.map((x,i)=>i).sort(()=>Math.random()-.5);let done=false;
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div>';const opts=document.createElement('div');box.appendChild(opts);const fb=document.createElement('div');fb.className='fb';const nx=document.createElement('div');nx.className='btns';box.appendChild(fb);box.appendChild(nx);
+  ord.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=g.o[i];b.onclick=()=>{if(done)return;done=true;const r=i===0;b.classList.add(r?'ok':'no');if(!r)[...opts.children][ord.indexOf(0)].classList.add('ok');dn++;if(r)ok++;sc.textContent='✔️ صحيح: '+ok+' من '+dn;fb.className='fb '+(r?'ok':'no');fb.innerHTML=(r?'🎉 صحيح! ':'❌ ليس صحيحًا. ')+(g.ex?'<div style="font-size:.95rem;color:var(--ink);font-weight:700">'+g.ex+'</div>':'');nx.innerHTML='<button class="btn or">سؤال جديد ⬅</button>';nx.firstChild.onclick=render};opts.appendChild(b)})}render()}
+/* matrix-answer practice: gen -> {q, ans(2D), steps[]} */
+function MatP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();let tries=0;const E=g.ans.map(r=>r.map(()=>''));
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div><div style="text-align:center;margin:8px 0">= '+M(E,{inp:'z'})+'</div><div class="btns"><button class="btn main" data-k="chk">✔️ تحقّق</button><button class="btn" data-k="help">💡 أرني الحل</button><button class="btn or" data-k="new">سؤال جديد ⬅</button></div><div class="fb"></div><div class="steps"></div>';
+  const ins=[...box.querySelectorAll('input.c')],fb=box.querySelector('.fb'),st=box.querySelector('.steps');const steps=()=>{st.style.display='block';st.innerHTML='<b>الحل:</b>'+g.steps.map(s=>'<div class="mx" style="font-size:1rem">'+s+'</div>').join('')};
+  box.querySelector('[data-k=chk]').onclick=()=>{let all=true,emp=false;ins.forEach(x=>{const v=parse(x.value);if(isNaN(v)){emp=true;all=false;return}const g2=Math.abs(v-g.ans[+x.dataset.i][+x.dataset.j])<.001;x.classList.remove('ok','no');x.classList.add(g2?'ok':'no');if(!g2)all=false});
+   if(emp&&!all){fb.className='fb';fb.textContent='املأ كل الخانات';return}tries++;if(tries===1){dn++;if(all)ok++;sc.textContent='✔️ صحيح من أول محاولة: '+ok+' من '+dn}fb.className='fb '+(all?'ok':'no');fb.textContent=all?'🎉 ممتاز!':'🤔 الخانات الحمراء غير صحيحة';if(all||tries>=2)steps();if(all)setTimeout(render,2400)};
+  box.querySelector('[data-k=help]').onclick=()=>{ins.forEach(x=>{x.value=ms(g.ans[+x.dataset.i][+x.dataset.j]);x.classList.add('ok')});steps()};box.querySelector('[data-k=new]').onclick=render}render()}
+
+
+const TOC=[['الباب الأول: الفترات والمتباينات',14,[['1-1','الفترات',14,'i1'],['2-1 إلى 4-1','المتباينات الخطية وخواصها',20,'i2'],['5-1 و 6-1','متباينات الدرجة الثانية وأنظمة المتباينات',28,'i3'],['7-1','متباينات القيمة المطلقة',35,'i4'],['','مراجعة الباب الأول',40,'rv1']]],
+ ['الباب الثاني: حل المثلث',42,[['1-2','قاعدة الجيب',42,'g1'],['2-2','قاعدة جيب التمام',50,'g2'],['3-2 إلى 5-2','مساحة المثلث والاتجاهات',58,'g3'],['','مراجعة الباب الثاني',68,'rv2']]],
+ ['الباب الثالث: حساب المثلثات',71,[['1-3 إلى 3-3','الزاوية الموجهة ودائرة الوحدة',71,'t1'],['4-3 و 5-3','المتطابقات والمعادلات المثلثية',80,'t2'],['6-3','التمثيل البياني للدوال المثلثية',87,'t3'],['','مراجعة الباب الثالث',93,'rv3']]],
+ ['الباب الرابع: الدوال',95,[['1-4 إلى 7-4','العلاقة والدالة ومجالها',95,'f1'],['8-4 و 9-4','جبر الدوال وتساوي دالتين',107,'f2']]],
+ ['الباب الخامس: النهايات والاتصال',111,[['1-5 إلى 3-5','معنى النهاية وحسابها',111,'l1'],['4-5 و 5-5','النهايات من الجهتين وعند اللانهاية',125,'l2'],['6-5','الاتصال',132,'l3'],['','مراجعة البابين الرابع والخامس',138,'rv4']]],
+ ['الباب السادس: التفاضل',139,[['1-6 و 2-6','ميل المماس والمشتقة',139,'d1'],['3-6','قواعد الاشتقاق',146,'d2']]],
+ ['الباب السابع: التكامل',161,[['1-7 إلى 4-7','الدالة البدائية والتكامل غير المحدود',161,'n1'],['5-7 و 6-7','التكامل المحدود والنظرية الأساسية',172,'n2'],['','مراجعة البابين السادس والسابع',196,'rv5']]]];
+(function(){const t=$('toc');TOC.forEach(([n,pg,ls],i)=>{const r=ls.filter(l=>l[3]).length;const d=document.createElement('div');d.className='chap'+(i===0?' open':'');
+ d.innerHTML='<div><span class="cn">'+(i+1)+'</span><span style="flex:1">'+n+'</span><span class="tg '+(r?'r':'s')+'">'+(r?'جاهز ✅':'قريبًا')+'</span></div><div class="ls">'+ls.map(l=>'<div class="li'+(l[3]?' ready" data-go="'+l[3]:'')+'"><span>'+(l[3]?'✅':'⏳')+'</span><span>'+(l[0]?'<b>'+l[0]+'</b> ':'')+l[1]+'</span><span class="pg">ص '+l[2]+'</span></div>').join('')+'</div>';
+ d.firstChild.onclick=()=>d.classList.toggle('open');t.appendChild(d)});t.querySelectorAll('[data-go]').forEach(x=>x.onclick=()=>go(x.dataset.go))})();
+
+/* ================= أمثلة الكتاب وتمارينه (عام) ================= */
+const QB=s=>s.replace(/ (?=(?:أ|ب|ج|د|هـ|و)\) )/g,'<br>').replace(/ (?=\((?:i|ii|iii|iv|1|2|3)\) )/g,'<br>');
+const FX=s=>s.replace(/(−?\d+(?:\.\d+)?)\/(\d+)/g,'<span class="rt">$1/$2</span>');
+function addSecs(pid,exs,bks){const pg=$(pid);if(!pg)return;const first=[...pg.querySelectorAll('.box')].find(b=>(b.querySelector('h3')||{}).textContent&&b.querySelector('h3').textContent.trim().startsWith('✏️'));
+ if(exs&&exs.length){const b=document.createElement('div');b.className='box exb';b.innerHTML='<h3>📖 أمثلة الكتاب محلولة خطوة بخطوة</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">اضغط «الخطوة التالية» وحاول أن تتوقع الخطوة قبل أن تظهر 🤔</p>';exs.forEach(e=>b.appendChild(wex(e)));first?pg.insertBefore(b,first):pg.appendChild(b)}
+ if(bks&&bks.length){const b=document.createElement('div');b.className='box bkb';b.innerHTML='<h3>📝 تمارين الكتاب مع الحلول</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">✍️ حلّ في دفترك أولًا، ثم اضغط «تلميح» إذا احتجت، و«الحل» لتتأكد.</p>';bks.forEach(e=>b.appendChild(bkx(e)));pg.appendChild(b)}}
+function wex(e){const d=document.createElement('div');d.className='wx';let k=0;
+ d.innerHTML='<div class="wxq"><b style="color:var(--tl)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="wxs"></div><div class="btns"><button class="btn main" data-a="n">▶️ الخطوة التالية</button><button class="btn" data-a="all">📜 الحل كاملًا</button><button class="btn" data-a="r">↺ من جديد</button></div>';
+ const S=d.querySelector('.wxs'),nb=d.querySelector('[data-a=n]');const add=()=>{if(k>=e.s.length)return;const x=document.createElement('div');x.className='wst';x.innerHTML='<span class="sn">'+(k+1)+'</span>'+FX(e.s[k]);S.appendChild(x);k++;if(k>=e.s.length){nb.textContent='✅ انتهى الحل';nb.disabled=true;try{S.lastChild.classList.add('fin')}catch(_){}}};
+ nb.onclick=add;d.querySelector('[data-a=all]').onclick=()=>{while(k<e.s.length)add()};d.querySelector('[data-a=r]').onclick=()=>{k=0;S.innerHTML='';nb.disabled=false;nb.textContent='▶️ الخطوة التالية'};return d}
+function bkx(e){const d=document.createElement('div');d.className='bx';
+ d.innerHTML='<div class="wxq"><b style="color:var(--or)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="btns" style="justify-content:flex-start"><button class="btn" data-a="h">💡 تلميح</button><button class="btn ok" data-a="s">✅ الحل</button></div><div class="bh" style="display:none"></div><div class="bs" style="display:none"></div>';
+ const H=d.querySelector('.bh'),S=d.querySelector('.bs');H.innerHTML='💡 '+FX(e.h);S.innerHTML=e.s.map(x=>'<div class="wst">'+FX(x)+'</div>').join('')+(e.a?'<div class="ans">🎯 الجواب: '+FX(e.a)+'</div>':'');
+ d.querySelector('[data-a=h]').onclick=()=>{H.style.display=H.style.display==='none'?'block':'none'};d.querySelector('[data-a=s]').onclick=()=>{S.style.display=S.style.display==='none'?'block':'none'};return d}
+
+
+const nf=(v,d)=>{d=d==null?3:d;const r=Math.round(v*10**d)/10**d;return ms(r)};
+/* ================= فيزياء: الوحدة 1 ================= */
+const sci=(v,d)=>{d=d==null?2:d;if(v===0)return'0';const e=Math.floor(Math.log10(Math.abs(v)));if(e>=-2&&e<=4)return nf(v,Math.max(0,d+1-Math.max(0,e)));const m=v/10**e;return '<span dir="ltr" style="unicode-bidi:isolate">'+(+m.toFixed(d))+' × 10<sup>'+e+'</sup></span>'};
+function cv(id){const c=$(id),x=c.getContext('2d');return{c,x,W:c.width,H:c.height}}
+const loops={};function loop(id,fn){if(loops[id])return;let last=performance.now();const st=()=>{const now=performance.now(),dt=Math.min(0.05,(now-last)/1000);last=now;const pg=$(id).closest('.page');if(pg.classList.contains('on'))fn(dt);loops[id]=requestAnimationFrame(st)};loops[id]=requestAnimationFrame(st)}
+function glow(x,X,Y,r,col){const g=x.createRadialGradient(X,Y,0,X,Y,r);g.addColorStop(0,col);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.beginPath();x.arc(X,Y,r,0,7);x.fill()}
+function chg(x,X,Y,q,r){r=r||10;x.fillStyle=q>0?'#ff6b6b':'#5ab0ff';x.beginPath();x.arc(X,Y,r,0,7);x.fill();x.fillStyle='#fff';x.font='bold '+(r*1.6)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(q>0?'+':'−',X,Y+1)}
+function label(x,t,X,Y,col,sz){x.fillStyle=col||'#fff';x.font='bold '+(sz||16)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(t,X,Y)}
+
+
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){r=Math.min(r||0,Math.abs(w)/2,Math.abs(h)/2);this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();return this};
+/* ================= الصف السابع – الوحدة 1 ================= */
+/* عرض الرياضيات من اليمين لليسار كما في الكتاب: X('1 + 2 − 3 × 4') */
+const SN=n=>n<0?'−'+(-n):''+n;               // نص عدد بإشارة
+const PN=n=>n<0?'('+SN(n)+')':SN(n);          // عدد سالب بين قوسين
+function xnum(s,i){let j=i;while(j<s.length&&/[0-9.□\u0307]/.test(s[j]))j++;const v=s.slice(i,j);
+ if(s[j]==='_'&&/[0-9□]/.test(s[j+1]||'')){let a=j+1,b=a;while(/[0-9□]/.test(s[b]||''))b++;if(s[b]==='/'){let c=b+1,e=c;while(/[0-9□]/.test(s[e]||''))e++;return[{k:'f',w:v,n:s.slice(a,b),d:s.slice(c,e)},e]}}
+ if(s[j]==='/'&&/[0-9□]/.test(s[j+1]||'')){let c=j+1,e=c;while(/[0-9□]/.test(s[e]||''))e++;return[{k:'f',n:v,d:s.slice(c,e)},e]}
+ let sup='';while(j<s.length&&/[²³⁴]/.test(s[j])){sup+=s[j];j++}return[{k:'n',v,sup},j]}
+function xtok(s){const t=[];let i=0;s=String(s);
+ while(i<s.length){const c=s[i];
+  if(c===' '){i++;continue}
+  const prev=t.length?t[t.length-1]:null;const unaryOK=!prev||(prev.k==='op'||prev.v==='('||prev.v==='['||prev.v===',');
+  if((c==='−'||c==='+')&&unaryOK&&/[0-9]/.test(s[i+1]||'')){if(c==='+'&&!(prev&&prev.v==='(')){t.push({k:'op',v:c});i++;continue}let [tk,j]=xnum(s,i+1);if(/[\u0621-\u064A]/.test(s[j]||'')){let e=j;while(e<s.length&&/[\u0621-\u064A\u0640\u200C²³]/.test(s[e]))e++;tk={k:'t',c:tk,v:s.slice(j,e)};j=e}tk.sg=c;t.push(tk);i=j;continue}
+  if(/[0-9□]/.test(c)){let [tk,j]=xnum(s,i);if(/[\u0621-\u064A]/.test(s[j]||'')){let e=j;while(e<s.length&&/[\u0621-\u064A\u0640\u200C²³]/.test(s[e]))e++;tk={k:'t',c:tk,v:s.slice(j,e),sg:tk.sg};j=e}t.push(tk);i=j;continue}
+  if('+−×÷=<>≠≤≥'.includes(c)){t.push({k:'op',v:c});i++;continue}
+  if('()[]'.includes(c)){t.push({k:'b',v:c});i++;continue}
+  let j=i;while(j<s.length&&!' +−×÷=<>≠()[]'.includes(s[j])&&!/[0-9□]/.test(s[j]))j++;if(j===i)j=i+1;t.push({k:'w',v:s.slice(i,j)});i=j}
+ return t}
+const FRH=(n,d)=>'<span class="fr"><span>'+n+'</span><span>'+d+'</span></span>';
+function xspan(tok,cls){if(tok.k==='t'){const cc=tok.c.k==='f'?FRH(tok.c.n,tok.c.d):tok.c.v;return '<span class="xt'+(cls||'')+'"><span style="display:inline-flex;direction:rtl;align-items:center;gap:1px">'+(tok.sg==='−'?'<i style="font-style:normal">−</i>':'')+'<span style="direction:ltr">'+cc+'</span><span>'+tok.v+'</span></span></span>'}let num;if(tok.k==='f'){const f=FRH(tok.n,tok.d);num=tok.w?'<span class="mxn">'+tok.w+f+'</span>':f}
+ else if(tok.k==='n')num='<span style="direction:ltr;unicode-bidi:isolate">'+tok.v+(tok.sup||'')+'</span>';
+ else return '<span class="xt'+(cls||'')+'">'+tok.v+'</span>';
+ return '<span class="xt'+(cls||'')+'">'+(tok.sg&&tok.sg!=='+'?'<span class="xs">'+num+'<i>'+tok.sg+'</i></span>':tok.sg==='+'?'<span class="xs">'+num+'<i>+</i></span>':num)+'</span>'}
+const X=(s,hi)=>'<span class="x">'+xtok(s).map((t,i)=>xspan(t,hi&&i>=hi[0]&&i<=hi[1]?' hi':'')).join('')+'</span>';
+(function(){const st=document.createElement('style');st.textContent='.x{display:inline-flex;direction:rtl;gap:.28em;align-items:center;flex-wrap:wrap;font-weight:800;unicode-bidi:isolate;vertical-align:baseline}.x .xs{display:inline-flex;direction:ltr;flex-direction:row-reverse}.x .xs i{font-style:normal}.x .xt{transition:.25s;border-radius:6px;padding:0 1px}.x .xt.hi{background:#ffd54f;box-shadow:0 0 0 3px #ffd54f}';document.head.appendChild(st);
+ document.querySelectorAll('.e').forEach(e=>{e.innerHTML=X(e.textContent);e.classList.remove('e')})})();
+/* ================= علوم الصف السابع – الجزء الأول والثاني ================= */
+const C2=id=>{const c=$(id);return [c,c.getContext('2d')]};
+const FONT=(s,w)=>(w||800)+' '+s+'px Cairo, Tahoma, Arial';
+const shake=el=>{el.classList.remove('shk');void el.offsetWidth;el.classList.add('shk')};
+const cheer=()=>{try{window.FX&&FX.ok()}catch(e){}};
+const N=s=>'<bdi'+(/[\u0600-\u06FF]/.test(s)?'':' dir="ltr"')+' style="font-weight:800">'+s+'</bdi>';
+const fx=(x,k)=>String(+(+x).toFixed(k==null?2:k));
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){r=Math.min(r||0,Math.abs(w)/2,Math.abs(h)/2);this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();return this};
+/* لعبة التصنيف العامة: اختر عنصرًا ثم بيتًا */
+function sortGame(poolId,catId,outId,cats,items,done){const P=$(poolId),Cc=$(catId);let sel=null,left=items.length;P.innerHTML='';Cc.innerHTML='';
+ shuf(items).forEach(([lab,k,why])=>{const b=document.createElement('button');b.innerHTML=lab;b.dataset.k=k;b.dataset.why=why||'';b.onclick=()=>{P.querySelectorAll('button').forEach(y=>y.classList.remove('sel'));b.classList.add('sel');sel=b};P.appendChild(b)});
+ cats.forEach(([n,s,c],i)=>{const d=document.createElement('div');d.style.borderColor=c;d.innerHTML='<b style="color:'+c+'">'+n+'</b>'+(s?'<small>'+s+'</small>':'')+'<div class="pool" style="margin:4px 0"></div>';
+  d.onclick=()=>{if(!sel)return;if(+sel.dataset.k===i){sel.classList.remove('sel');sel.classList.add('ok');sel.onclick=null;d.querySelector('.pool').appendChild(sel);$(outId).innerHTML='✅ صحيح! '+sel.dataset.why;sel=null;left--;if(!left){$(outId).innerHTML='🎉 أحسنت! رتّبت كل شيء.';cheer();done&&done()}}else{shake(d);$(outId).innerHTML='🤔 حاول مرة أخرى'}};Cc.appendChild(d)});$(outId).textContent=''}
+/* اختبار فصل من 12 سؤالًا */
+function chapterTest(pfx,G){let ok=0,dn=0;const host=$(pfx+'Q');function upd(){$(pfx+'Sc').textContent=dn<G.length?'أجبت عن '+dn+' من '+G.length+' · صحيح: '+ok:(ok>=G.length-1?'🌟 ممتاز! ':ok>=G.length-3?'👍 جيد جدًا! ':'💪 راجع الدروس. ')+'النتيجة: '+ok+' من '+G.length}
+ function make(){host.innerHTML='';ok=0;dn=0;shuf(G).forEach((g,i)=>{const [q,o]=typeof g==='function'?g():g;mcq(host,(i+1)+') '+q,o,0,r=>{dn++;if(r)ok++;upd();if(dn===G.length&&ok>=G.length-3)cheer()})});upd()}
+ $(pfx+'New').onclick=make;make()}
+const bank=(arr)=>()=>{const [q,o,ex]=pick(arr);return{q,o,ex:ex||''}};
+const vis=el=>{const p=el.closest('.page');return p&&p.classList.contains('on')};
+function anim(id,fn){const [c,x]=C2(id);let t0=performance.now();(function f(t){if(vis(c))fn(x,c,(t-t0)/1000);requestAnimationFrame(f)})(t0);return[c,x]}
+const flipCards=(id,arr)=>{const C=$(id);C.innerHTML=arr.map(([ic,t,b])=>'<div class="card"><div class="fr"><span class="big">'+ic+'</span>'+t+'</div><div class="bk"><b>'+t+':</b> '+b+'</div></div>').join('');C.querySelectorAll('.card').forEach(c=>c.onclick=()=>c.classList.toggle('flip'))};
+const TF=(s,t)=>[s,t?['✔️ صح','❌ خطأ']:['❌ خطأ','✔️ صح']];
+function txt(x,s,X,Y,sz,col,al){x.font=FONT(sz||16);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='rtl';x.fillText(s,X,Y)}
+function steps(id,outId,newId,S){let k=0;function mk(){k=0;const L=$(id);L.innerHTML='';shuf(S.map((s,i)=>[s,i])).forEach(([[a,b],i])=>{const li=document.createElement('li');li.innerHTML='<b>?</b><span>'+a+'<br><small style="color:var(--soft)">'+b+'</small></span>';li.onclick=()=>{if(li.classList.contains('ok'))return;if(i===k){li.classList.add('ok');li.querySelector('b').textContent=k+1;k++;$(outId).innerHTML='✅ صحيح!';if(k===S.length){$(outId).innerHTML='🎉 رتّبت الرحلة كاملة!';cheer()}}else{shake(li);$(outId).innerHTML='🤔 ليس هذا… ما الذي جاء قبله؟'}};L.appendChild(li)});$(outId).textContent=''}$(newId).onclick=mk;mk()}
+function choiceQs(host,Q,scId){const H=$(host);let i=0,ok=0;function show(){if(i>=Q.length){H.innerHTML='<div class="big2">🎉 '+ok+' من '+Q.length+'</div><div class="btns"><button class="btn" id="'+host+'R">🔄 من جديد</button></div>';$(host+'R').onclick=()=>{i=0;ok=0;show()};if(ok>=Q.length-1)cheer();return}
+ const [s,o,why]=Q[i];const ord=shuf(o.map((t,j)=>j));H.innerHTML='<div class="scn">'+s+'</div><div class="opts2">'+ord.map(j=>'<button data-j="'+j+'">'+o[j]+'</button>').join('')+'</div><div class="fb" id="'+host+'F"></div>';
+ let dn=0;H.querySelectorAll('[data-j]').forEach(b=>b.onclick=()=>{if(dn)return;dn=1;const j=+b.dataset.j;b.classList.add(j===0?'ok':'no');if(j)H.querySelector('[data-j="0"]').classList.add('ok');else ok++;$(host+'F').innerHTML=(j?'💡 ':'✅ ')+why+'<br><button class="btn main" style="margin-top:6px" id="'+host+'N">التالي ⬅️</button>';$(host+'N').onclick=()=>{i++;show()};if(scId)$(scId).textContent='✔️ '+ok+' / '+Q.length})}show()}
+const gcd=(a,b)=>b?gcd(b,a%b):Math.abs(a);
+
+/* ================= رياضيات الثاني الثانوي – الأبواب 1-3 ================= */
+const sn=v=>v<0?'−'+(-v):''+v,r2=v=>Math.round(v*100)/100,r1=v=>Math.round(v*10)/10,DEG=Math.PI/180;
+const cpos=(c,e)=>{const r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}};
+const OPSM=(ok,bad)=>[ok,...shuf(bad.filter((b,i,a)=>String(b)!==String(ok)&&a.indexOf(b)===i)).slice(0,3)];
+const SUPD={'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','-':'⁻'};
+const pw=n=>n===1?'':[...String(n)].map(c=>SUPD[c]).join('');
+const fmtN=v=>{v=r2(v);return v<0?'−'+(-v):''+v};
+/* كثيرة حدود: معاملات من الأعلى درجة إلى الثابت */
+function PS(co,vr){vr=vr||'س';const n=co.length-1;let s='';co.forEach((c,i)=>{c=r2(c);if(!c)return;const d=n-i,ab=Math.abs(c);let t=(d&&ab===1?'':fmtN(ab))+(d?vr+pw(d):'');s+=s?(c<0?' − ':' + ')+t:(c<0?'−':'')+t});return s||'0'}
+const ev=(co,x)=>co.reduce((a,c)=>a*x+c,0),der=co=>co.slice(0,-1).map((c,i)=>c*(co.length-1-i));
+function tL(x,s,X,Y,sz,col,al){x.font=FONT(sz||14);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='ltr';x.fillText(s,X,Y);x.direction='rtl'}
+function EMJ(x,e,X,Y,sz){x.font=(sz||40)+'px "Segoe UI Emoji","Noto Color Emoji",sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(e,X,Y);x.textBaseline='alphabetic'}
+function chipsM(id,arr,on,cb){const H=$(id);H.innerHTML=arr.map((t,i)=>'<button data-i="'+i+'"'+(i===on?' class="on"':'')+'>'+t+'</button>').join('');H.querySelectorAll('button').forEach(b=>b.onclick=()=>{H.querySelectorAll('button').forEach(y=>y.classList.toggle('on',y===b));cb(+b.dataset.i)})}
+function dragOn(c,pts,cb){let d=-1;c.style.touchAction='none';c.addEventListener('pointerdown',e=>{const p=cpos(c,e);d=pts.findIndex(q=>Math.hypot(p.x-q.px(),p.y-q.py())<32);if(d>=0){c.setPointerCapture(e.pointerId);e.preventDefault()}});
+ c.addEventListener('pointermove',e=>{if(d<0)return;pts[d].set(cpos(c,e));cb()});c.addEventListener('pointerup',()=>{d=-1})}
+function Plane(id,U,O,Uy){const c=$(id),x=c.getContext('2d'),W=c.width,H=c.height;Uy=Uy||U;const P={c,x,U,Uy,O,W,H,px:X=>O.x+X*U,py:Y=>O.y-Y*Uy,gx:p=>(p-O.x)/U,gy:p=>(O.y-p)/Uy,
+ grid(st){st=st||1;x.clearRect(0,0,W,H);x.strokeStyle='#eef0f3';x.lineWidth=1;for(let i=Math.ceil(-O.x/U/st)*st;i<=(W-O.x)/U;i+=st){x.beginPath();x.moveTo(P.px(i),0);x.lineTo(P.px(i),H);x.stroke()}for(let j=Math.ceil((O.y-H)/Uy);j<=O.y/Uy;j++){x.beginPath();x.moveTo(0,P.py(j));x.lineTo(W,P.py(j));x.stroke()}
+  x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(4,O.y);x.lineTo(W-4,O.y);x.moveTo(O.x,H-4);x.lineTo(O.x,4);x.stroke();txt(x,'س',W-12,O.y-8,15);txt(x,'ص',O.x+14,16,15);
+  for(let i=Math.ceil(-O.x/U/st)*st;i<(W-O.x)/U;i+=st)if(i)tL(x,''+r2(i),P.px(i),O.y+15,11,'#868e96');const sy=Uy<25?2:1;for(let j=Math.ceil((O.y-H)/Uy);j<O.y/Uy;j++)if(j&&j%sy===0)tL(x,''+j,O.x-12,P.py(j)+4,11,'#868e96')},
+ plot(f,col,w,a,b,dash){a=a==null?-O.x/U:a;b=b==null?(W-O.x)/U:b;x.strokeStyle=col;x.lineWidth=w||3;x.setLineDash(dash||[]);x.beginPath();let pen=0,py0=null;for(let X=a;X<=b+1e-9;X+=(b-a)/600){const Y=f(X);const yy=P.py(Y);if(!isFinite(Y)||Math.abs(yy)>H*3||(py0!==null&&Math.abs(yy-py0)>H)){pen=0;py0=null;continue}pen?x.lineTo(P.px(X),yy):x.moveTo(P.px(X),yy);pen=1;py0=yy}x.stroke();x.setLineDash([])},
+ dot(X,Y,col,r,hole){x.beginPath();x.arc(P.px(X),P.py(Y),r||7,0,7);if(hole){x.fillStyle='#fff';x.fill();x.strokeStyle=col;x.lineWidth=3;x.stroke()}else{x.fillStyle=col;x.fill()}}};return P}
+/* خط الأعداد */
+function NL(x,W,Y,a,b,lab){const s=(W-60)/(b-a),px=v=>30+(v-a)*s;x.strokeStyle='#343a40';x.lineWidth=2.5;x.beginPath();x.moveTo(14,Y);x.lineTo(W-14,Y);x.stroke();for(let v=Math.ceil(a);v<=b;v++){x.beginPath();x.moveTo(px(v),Y-6);x.lineTo(px(v),Y+6);x.stroke();if(lab!==false)tL(x,''+v,px(v),Y+22,12,'#495057')}return px}
+function seg(x,px,Y,a,b,ca,cb,col,L,R){col=col||'#3b5bdb';const X1=a===-Infinity?14:px(a),X2=b===Infinity?626:px(b);x.strokeStyle=col;x.lineWidth=7;x.globalAlpha=.75;x.beginPath();x.moveTo(X1,Y);x.lineTo(X2,Y);x.stroke();x.globalAlpha=1;
+ if(a===-Infinity){x.fillStyle=col;x.beginPath();x.moveTo(8,Y);x.lineTo(22,Y-9);x.lineTo(22,Y+9);x.fill()}else{x.beginPath();x.arc(X1,Y,8,0,7);x.fillStyle=ca?col:'#fff';x.fill();x.strokeStyle=col;x.lineWidth=3;x.stroke()}
+ if(b===Infinity){x.fillStyle=col;x.beginPath();x.moveTo(632,Y);x.lineTo(618,Y-9);x.lineTo(618,Y+9);x.fill()}else{x.beginPath();x.arc(X2,Y,8,0,7);x.fillStyle=cb?col:'#fff';x.fill();x.strokeStyle=col;x.lineWidth=3;x.stroke()}}
+const IV=(a,b,ca,cb)=>'<bdi dir="ltr" style="font-weight:900">'+(a===-Infinity?']−∞':(ca?'[':']')+sn(a))+' ، '+(b===Infinity?'∞[':sn(b)+(cb?']':'['))+'</bdi>';
+function svgNL(a,b,ca,cb){const px=v=>20+(v+6)*20;let s='<svg viewBox="0 0 280 46" style="width:100%;max-width:330px;display:block;margin:6px auto;direction:ltr"><line x1="6" y1="20" x2="274" y2="20" stroke="#343a40" stroke-width="2"/>';
+ for(let v=-6;v<=6;v++)s+='<line x1="'+px(v)+'" y1="15" x2="'+px(v)+'" y2="25" stroke="#343a40"/><text x="'+px(v)+'" y="40" font-size="9" text-anchor="middle" fill="#495057">'+v+'</text>';
+ const X1=a===-Infinity?8:px(a),X2=b===Infinity?272:px(b);s+='<line x1="'+X1+'" y1="20" x2="'+X2+'" y2="20" stroke="#3b5bdb" stroke-width="6" opacity=".75"/>';
+ if(a!==-Infinity)s+='<circle cx="'+X1+'" cy="20" r="5" fill="'+(ca?'#3b5bdb':'#fff')+'" stroke="#3b5bdb" stroke-width="2.5"/>';else s+='<path d="M4 20 L13 14 L13 26Z" fill="#3b5bdb"/>';
+ if(b!==Infinity)s+='<circle cx="'+X2+'" cy="20" r="5" fill="'+(cb?'#3b5bdb':'#fff')+'" stroke="#3b5bdb" stroke-width="2.5"/>';else s+='<path d="M276 20 L267 14 L267 26Z" fill="#3b5bdb"/>';return s+'</svg>'}
+
+/* ---------- 1-1 الفترات ---------- */
+(function(){const [c,x]=C2('ivC');let K=0,ca=1,cb=1;const T=['[أ، ب] مغلقة','] أ، ب[ مفتوحة','[أ، ب[ نصف مفتوحة',']أ، ب] نصف مفتوحة','[أ، ∞[ ',']−∞، ب]'];
+ chipsM('ivK',T,0,i=>{K=i;ca=[1,0,1,0,1,0][i];cb=[1,0,0,1,0,1][i];draw()});
+ let px;function draw(){let A=+$('ivA').value,B=+$('ivB').value;if(B<=A){B=A+1;$('ivB').value=B}$('ivAv').textContent=sn(A);$('ivBv').textContent=sn(B);x.clearRect(0,0,640,170);px=NL(x,640,90,-7,8);
+  const a=K===5?-Infinity:A,b=K===4?Infinity:B;seg(x,px,90,a,b,ca,cb);txt(x,'👆 اضغط على طرف لتبدّل ● و ○',320,30,13,'#868e96');
+  const L=a===-Infinity?'':(sn(A)+(ca?' ≤ ':' < ')),R=b===Infinity?'':((cb?' ≤ ':' < ')+sn(B));const ineq=a===-Infinity?'س '+(cb?'≤':'<')+' '+sn(B):b===Infinity?'س '+(ca?'≥':'>')+' '+sn(A):'<bdi dir="ltr">'+L+'س‎'+R+'</bdi>';
+  $('ivOut').innerHTML=IV(a,b,ca,cb)+' = {س : '+ineq+'}'+(ca&&cb&&a!==-Infinity&&b!==Infinity?' · مغلقة':!ca&&!cb||a===-Infinity&&!cb||b===Infinity&&!ca?' · مفتوحة':' · نصف مفتوحة')}
+ c.addEventListener('pointerdown',e=>{const p=cpos(c,e),A=+$('ivA').value,B=+$('ivB').value;if(K!==5&&Math.abs(p.x-px(A))<16&&Math.abs(p.y-90)<20){ca=1-ca;draw()}else if(K!==4&&Math.abs(p.x-px(B))<16&&Math.abs(p.y-90)<20){cb=1-cb;draw()}});
+ ['ivA','ivB'].forEach(i=>$(i).oninput=draw);draw()})();
+MCQP($('ivG'),()=>{const t=rnd(0,5);let a=rnd(-5,2),b=rnd(a+1,5),ca=rnd(0,1),cb=rnd(0,1);if(t===4){b=Infinity;cb=0}if(t===5){a=-Infinity;ca=0}
+ const w=[IV(a,b,1-ca,cb),IV(a,b,ca,1-cb),IV(a,b,1-ca,1-cb),a!==-Infinity&&b!==Infinity?IV(a,Infinity,ca,0):IV(a===-Infinity?b:-Infinity,a===-Infinity?Infinity:a,0,0)];
+ return{q:'🎯 أي فترة تمثل الرسم؟'+svgNL(a,b,ca,cb),o:OPSM(IV(a,b,ca,cb),w),ex:'● تعني أن الطرف ضمن الفترة، و ○ لا'}});
+MCQP($('qi1'),()=>{const t=rnd(0,2),a=rnd(-6,3),b=a+rnd(2,6);if(t===0)return{q:'{س : '+N(sn(a))+' ≤ س &lt; '+N(sn(b))+'} بصورة فترة:',o:OPSM(IV(a,b,1,0),[IV(a,b,0,1),IV(a,b,1,1),IV(a,b,0,0)]),ex:'≤ تغلق الطرف و &lt; تفتحه'};
+ if(t===1)return{q:'{س : س &gt; '+N(sn(a))+'} بصورة فترة:',o:OPSM(IV(a,Infinity,0,0),[IV(a,Infinity,1,0),IV(-Infinity,a,0,0),IV(-Infinity,a,0,1)]),ex:'اللانهاية مفتوحة دائمًا'};
+ return bank([['الفترة [2، 5] تحتوي على العدد 5؟',['نعم، لأنها مغلقة عند 5','لا، لأنها مفتوحة','لا يمكن تحديد ذلك','فقط إذا كان العدد صحيحًا']],['الرمز ∞ في الفترات يكون دائمًا:',['مفتوحًا','مغلقًا','مغلقًا من اليمين فقط','غير مستخدم']],['النقطة المفرغة ○ على خط الأعداد تعني أن الطرف:',['غير داخل في الفترة','داخل في الفترة','يساوي صفرًا','لا نهائي']],['عدد الأعداد الصحيحة في الفترة ]1، 5[:',['3','4','5','2']]])()});
+
+/* ---------- 2-1 آلة المتباينة ---------- */
+(function(){const [c,x]=C2('lnC');let a,b,cc,sg,stp,done;const SG=['<','>','≤','≥'],FL={'<':'>','>':'<','≤':'≥','≥':'≤'};
+ const lhs=()=>(a===1?'':a===-1?'−':fmtN(a))+'س'+(b?(b>0?' + ':' − ')+Math.abs(b):'');
+ function show(){$('lnEq').innerHTML='<bdi dir="rtl">'+lhs()+' <span style="color:#e03131">'+sg.replace('<','&lt;').replace('>','&gt;')+'</span> '+fmtN(cc)+'</bdi>';const O=[];
+  if(done){O.length=0}else if(b){O.push([(b>0?'اطرح ':'أضف ')+Math.abs(b)+' للطرفين','add'])}else{O.push(['اقسم الطرفين على '+fmtN(a)+(a<0?' واقلب الإشارة':''),'div1']);if(a<0)O.push(['اقسم الطرفين على '+fmtN(a)+' وأبقِ الإشارة','div0'])}
+  if(!done&&b)O.push(['اقسم الطرفين على '+fmtN(a)+' أولًا','early']);
+  $('lnOps').innerHTML=shuf(O).map(o=>'<button data-k="'+o[1]+'">'+o[0]+'</button>').join('');$('lnOps').querySelectorAll('button').forEach(bt=>bt.onclick=()=>op(bt.dataset.k));draw()}
+ function op(k){if(k==='add'){cc-=b;stp.push('بإضافة '+fmtN(-b)+' للطرفين: '+lhs().split(' ')[0]+' '+sg+' '+fmtN(cc));b=0;$('lnOut').textContent=''}
+  else if(k==='early'){$('lnOut').innerHTML='💡 يمكن ذلك، لكن الأسهل أن نتخلص من الحد الثابت أولًا.';return}
+  else if(k==='div0'){$('lnOut').innerHTML='❌ تحقق بعدد: إذا كانت س = '+fmtN(r2(cc/a)+(sg==='<'||sg==='≤'?-1:1))+'… لن تتحقق المتباينة الأصلية! عند القسمة على <b>سالب</b> يجب <b>قلب الإشارة</b>.';shake($('lnEq'));return}
+  else{cc=r2(cc/a);if(a<0){sg=FL[sg];stp.push('قسمنا على '+fmtN(a)+' (سالب) فانقلبت الإشارة ↺: س '+sg+' '+fmtN(cc))}else stp.push('بالقسمة على '+fmtN(a)+': س '+sg+' '+fmtN(cc));a=1;done=1;cheer();
+   $('lnOut').innerHTML='🎉 الحل: س '+sg.replace('<','&lt;').replace('>','&gt;')+' '+N(fmtN(cc))+' = '+(sg==='<'||sg==='≤'?IV(-Infinity,cc,0,sg==='≤'):IV(cc,Infinity,sg==='≥',0))}
+  $('lnS').innerHTML=stp.map(s=>'<div>'+s+'</div>').join('');show()}
+ function draw(){x.clearRect(0,0,640,150);const px=NL(x,640,80,-8,8);if(done){const lo=sg==='<'||sg==='≤';seg(x,px,80,lo?-Infinity:cc,lo?cc:Infinity,sg==='≥',sg==='≤','#2f9e44')}else txt(x,'الحل سيظهر هنا ✨',320,40,15,'#868e96')}
+ function nw(){a=pick([2,3,4,5,-2,-3,-4,-5,-1]);const s0=rnd(-4,4);b=nz(-9,9);sg=pick(SG);cc=a*s0+b;stp=[];done=0;$('lnS').innerHTML='';$('lnOut').textContent='';show()}
+ $('lnNew').onclick=nw;nw()})();
+(function(){const [c,x]=C2('flC');function draw(){const k=+$('flK').value;$('flKv').textContent=sn(k);x.clearRect(0,0,640,180);const px=NL(x,640,110,-16,16,false);for(let v=-16;v<=16;v+=4)tL(x,''+v,px(v),132,11,'#495057');
+  [[2,'#3b5bdb'],[5,'#e8590c']].forEach(([v,col])=>{x.fillStyle=col;x.beginPath();x.arc(px(v),110,7,0,7);x.fill();tL(x,''+v,px(v),95,13,col);x.globalAlpha=.6;x.beginPath();x.arc(px(v*k),110,11,0,7);x.fill();x.globalAlpha=1;tL(x,''+v*k,px(v*k),160,14,col);x.strokeStyle=col;x.setLineDash([4,4]);x.beginPath();x.moveTo(px(v),102);x.quadraticCurveTo((px(v)+px(v*k))/2,30+v*6,px(v*k),102);x.stroke();x.setLineDash([])});
+  const r=2*k<5*k?'<':2*k>5*k?'>':'=';$('flOut').innerHTML='2 &lt; 5 ⟸ بالضرب في '+N(sn(k))+': '+N(sn(2*k))+' '+r.replace('<','&lt;').replace('>','&gt;')+' '+N(sn(5*k))+(k<0?' ⟸ <b>انقلب الترتيب!</b> الضرب في سالب يعكس الأعداد حول الصفر كالمرآة 🪞':k===0?' (الضرب في الصفر يجعلهما متساويين)':' ⟸ الترتيب كما هو')}
+ $('flK').oninput=draw;draw()})();
+MCQP($('qi2'),()=>{const a=pick([2,3,4,5,-2,-3,-4,-5]),s0=rnd(-5,5),b=nz(-8,8),cc=a*s0+b,sg=pick(['<','>','≤','≥']),FL={'<':'>','>':'<','≤':'≥','≥':'≤'},rs=a<0?FL[sg]:sg,e=s=>s.replace('<','&lt;').replace('>','&gt;');
+ const L=(a===-1?'−':fmtN(a))+'س '+(b>0?'+ ':'− ')+Math.abs(b);return{q:'حل المتباينة: '+L+' '+e(sg)+' '+N(fmtN(cc)),o:OPSM('س '+e(rs)+' '+N(fmtN(s0)),['س '+e(FL[rs])+' '+N(fmtN(s0)),'س '+e(rs)+' '+N(fmtN(-s0||1)),'س '+e(rs)+' '+N(fmtN(r2((cc+b)/a)))]),ex:a<0?'قسمنا على سالب فانقلبت الإشارة':''}});
+
+/* ---------- 5-1 و 6-1 قطع المكافئ ---------- */
+(function(){const P=Plane('qdC',36,{x:320,y:220},18);let K=0;const SG=['&gt; 0','&lt; 0','≥ 0','≤ 0'];chipsM('qdK',['المقدار > 0','المقدار < 0','المقدار ≥ 0','المقدار ≤ 0'],0,i=>{K=i;draw()});
+ function draw(){const a=+$('qdA').value,r=+$('qdR').value,s=+$('qdS').value;['qdA','qdR','qdS'].forEach(i=>$(i+'v').textContent=sn(+$(i).value));const f=X=>a*(X-r)*(X-s);P.grid();const x=P.x;
+  if(!a){$('qdOut').innerHTML='⚠️ أ = 0 ليس قطعًا مكافئًا! اختر أ ≠ 0';return}
+  const ok=v=>K===0?v>1e-9:K===1?v<-1e-9:K===2?v>=-1e-9:v<=1e-9;
+  for(let X=-9;X<=9;X+=.02){const v=f(X);x.fillStyle=ok(v)?'rgba(47,158,68,.9)':'rgba(224,49,49,.25)';x.fillRect(P.px(X),P.O.y-4,P.U*.02+1,8)}
+  x.strokeStyle='#3b5bdb';x.lineWidth=3.5;x.beginPath();for(let X=-9;X<=9;X+=.05){const v=f(X),Y=P.py(v);if(Y<-500||Y>900)continue;x.lineTo(P.px(X),Y)}x.stroke();
+  [r,s].forEach(z=>{x.fillStyle='#e8590c';x.beginPath();x.arc(P.px(z),P.O.y,7,0,7);x.fill()});
+  const lo=Math.min(r,s),hi=Math.max(r,s),inc=K>=2,between=(a>0)===(K===1||K===3),c=v=>N(sn(v));let sol;
+  if(lo===hi){sol=K===0?'ح − {'+c(lo)+'}':K===1?'∅ (لا يوجد حل)':K===2?'ح (كل الأعداد)':'{'+c(lo)+'}';if(a<0)sol=K===1?'ح − {'+c(lo)+'}':K===0?'∅ (لا يوجد حل)':K===3?'ح (كل الأعداد)':'{'+c(lo)+'}'}
+  else sol=between?IV(lo,hi,inc,inc):IV(-Infinity,lo,0,inc)+' ∪ '+IV(hi,Infinity,inc,0);
+  $('qdOut').innerHTML='<bdi dir="rtl">'+N(fmtN(a))+'(س '+(r<0?'+ '+(-r):'− '+r)+')(س '+(s<0?'+ '+(-s):'− '+s)+') '+SG[K]+'</bdi><br>🟢 الحل: '+sol+'<br><small>الجذران '+c(lo)+' و '+c(hi)+' · الفتحة '+(a>0?'لأعلى ⟸ سالب بين الجذرين':'لأسفل ⟸ موجب بين الجذرين')+'</small>'}
+ ['qdA','qdR','qdS'].forEach(i=>$(i).oninput=draw);draw()})();
+(function(){const [c,x]=C2('sysC');MCQP($('sysH'),()=>{const p=rnd(-5,1),q=rnd(p+1,5),ca=rnd(0,1),cb=rnd(0,1),e=s=>s.replace('<','&lt;').replace('>','&gt;');
+  x.clearRect(0,0,640,170);let px=NL(x,640,40,-7,7,false);seg(x,px,40,p,Infinity,ca,0,'#3b5bdb');txt(x,'①',620,26,13,'#3b5bdb');px=NL(x,640,95,-7,7,false);seg(x,px,95,-Infinity,q,0,cb,'#e8590c');txt(x,'②',20,81,13,'#e8590c');px=NL(x,640,145,-7,7);txt(x,'التقاطع = ؟',320,128,13,'#2f9e44');
+  return{q:'① س '+e(ca?'≥':'>')+' '+N(sn(p))+' و ② س '+e(cb?'≤':'<')+' '+N(sn(q))+'<br>مجموعة الحل المشتركة:',o:OPSM(IV(p,q,ca,cb),[IV(p,q,1-ca,cb),IV(-Infinity,Infinity,0,0),IV(p,q,ca,1-cb),IV(-Infinity,p,0,ca)]),ex:'الجزء الذي يغطيه اللونان معًا'}})})();
+MCQP($('qi3'),()=>{const r=rnd(-5,2),s=r+rnd(1,6),t=rnd(0,1),bb=-(r+s),cc=r*s;const P='س²'+(bb?(bb>0?' + ':' − ')+(Math.abs(bb)===1?'':Math.abs(bb))+'س':'')+(cc?(cc>0?' + ':' − ')+Math.abs(cc):'');
+ return t?{q:'حل المتباينة: '+P+' &lt; 0',o:OPSM(IV(r,s,0,0),[IV(-Infinity,r,0,0)+' ∪ '+IV(s,Infinity,0,0),IV(r,s,1,1),IV(-s,-r,0,0)]),ex:'الجذران '+r+' و '+s+' · سالب بين الجذرين'}:{q:'حل المتباينة: '+P+' ≥ 0',o:OPSM(IV(-Infinity,r,0,1)+' ∪ '+IV(s,Infinity,1,0),[IV(r,s,1,1),IV(-Infinity,r,0,0)+' ∪ '+IV(s,Infinity,0,0),IV(-Infinity,-s,0,1)+' ∪ '+IV(-r,Infinity,1,0)]),ex:'موجب خارج الجذرين، والجذران ضمن الحل'}});
+
+/* ---------- 7-1 القيمة المطلقة ---------- */
+(function(){const [c,x]=C2('abC');let K=0;chipsM('abK',['|س‎ − أ| < ب (داخل المدى)','|س‎ − أ| > ب (خارج المدى)'],0,i=>{K=i});
+ anim('abC',(x,c,t)=>{const A=+$('abA').value,B=+$('abB').value;$('abAv').textContent=sn(A);$('abBv').textContent=B;x.clearRect(0,0,640,220);const px=NL(x,640,170,-9,9);
+  for(let k=0;k<4;k++){const r=((t*.6+k/4)%1)*B;x.strokeStyle='rgba(59,91,219,'+(1-r/B)*.8+')';x.lineWidth=2;x.beginPath();x.arc(px(A),150,r*(px(1)-px(0)),Math.PI,0);x.stroke()}
+  EMJ(x,'📡',px(A),118,34);for(let v=-9;v<=9;v++){const inside=Math.abs(v-A)<B,ok=K?Math.abs(v-A)>B:inside;if(v===A)continue;EMJ(x,ok?'🏠':'🏚️',px(v),150,ok?20:16)}
+  if(K)seg(x,px,190,-Infinity,A-B,0,0,'#2f9e44'),seg(x,px,190,A+B,Infinity,0,0,'#2f9e44');else seg(x,px,190,A-B,A+B,0,0,'#2f9e44');
+  $('abOut').innerHTML='<bdi dir="ltr">|س‎ − ('+sn(A)+')| '+(K?'&gt;':'&lt;')+' '+B+'</bdi> ⟺ '+(K?'س &lt; '+N(sn(A-B))+' أو س &gt; '+N(sn(A+B))+' = '+IV(-Infinity,A-B,0,0)+' ∪ '+IV(A+B,Infinity,0,0):'<bdi dir="ltr">'+sn(A-B)+' &lt; س‎ &lt; '+sn(A+B)+'</bdi> = '+IV(A-B,A+B,0,0))+'<br><small>'+(K?'البيوت 🏠 خارج مدى الإشارة':'البيوت 🏠 تصلها الإشارة')+'</small>'})})();
+MCQP($('qi4'),()=>{const t=rnd(0,3);if(t===0){const a=rnd(-4,4),b=rnd(1,5);return{q:'حل المتباينة: <bdi dir="ltr">|س‎ − ('+sn(a)+')| &lt; '+b+'</bdi>',o:OPSM(IV(a-b,a+b,0,0),[IV(a-b,a+b,1,1),IV(-Infinity,a-b,0,0)+' ∪ '+IV(a+b,Infinity,0,0),IV(-b-a,b-a,0,0)]),ex:'أ − ب &lt; س &lt; أ + ب'}}
+ if(t===1){const a=rnd(-4,4),b=rnd(1,5);return{q:'حل المتباينة: <bdi dir="ltr">|س‎ − ('+sn(a)+')| ≥ '+b+'</bdi>',o:OPSM(IV(-Infinity,a-b,0,1)+' ∪ '+IV(a+b,Infinity,1,0),[IV(a-b,a+b,1,1),IV(-Infinity,a-b,0,0)+' ∪ '+IV(a+b,Infinity,0,0),IV(a-b,a+b,0,0)]),ex:'خارج المسافة ب حول أ'}}
+ if(t===2){const v=nz(-9,9),w=nz(-9,9);return{q:'<bdi dir="ltr">|'+sn(v)+'| × |'+sn(w)+'| = </bdi>',o:OPSM(N(Math.abs(v*w)),[N(sn(v*w>0?-v*w:v*w)),N(Math.abs(v)+Math.abs(w)),N(Math.abs(v-w))]),ex:'|أ × ب| = |أ| × |ب|'}}
+ return bank([['|س| لا يمكن أن تكون:',['سالبة','صفرًا','موجبة','أكبر من 10']],['حل المعادلة |س| = 4:',['س = 4 أو س = −4','س = 4 فقط','س = −4 فقط','لا يوجد حل']],['حل المتباينة |س| &lt; 0:',['لا يوجد حل (∅)','كل الأعداد','س = 0','س &gt; 0']],['أي العبارات صحيحة دائمًا؟',['|أ + ب| ≤ |أ| + |ب|','|أ + ب| = |أ| + |ب|','|أ − ب| = |أ| − |ب|','|أ| &lt; أ']]])()});
+chapterTest('rv1',[['{س : 1 ≤ س &lt; 4} = ',['[1، 4[',']1، 4]','[1، 4]']],['∞ في الفترة تكون:',['مفتوحة','مغلقة','نصف مغلقة']],['−3س &gt; 12 ⟸',['س &lt; −4','س &gt; −4','س &lt; 4']],['2س − 1 ≤ 7 ⟸',['س ≤ 4','س ≥ 4','س ≤ 3']],['عند القسمة على سالب:',['نقلب الإشارة','لا تتغير الإشارة','نحذف الإشارة']],['س² − 9 &lt; 0 ⟸',[']−3، 3[','س &gt; 3','[−3، 3]']],['(س − 1)(س − 5) &gt; 0 ⟸',[']−∞، 1[ ∪ ]5، ∞[',']1، 5[','[1، 5]']],['|س‎ − 2| &lt; 3 ⟸',[']−1، 5[',']−5، 1[','[−1، 5]']],['|س| = 7 ⟸',['س = ±7','س = 7','لا حل']],['|−3| × |4| = ',['12','−12','1']],['تقاطع س &gt; 1 و س &lt; 4:',[']1، 4[','∅',']−∞، 4[']],['|س| &lt; −2:',['لا حل','كل الأعداد','س = 2']]]);
+
+/* ---------- 1-2 قاعدة الجيب ---------- */
+(function(){const P=[{x:120,y:320},{x:540,y:310},{x:330,y:70}],c=$('snC'),x=c.getContext('2d'),L=['أ','ب','جـ'],S=['س','ص','ع'],U=40;
+ const ang=(a,b,d)=>{const u=[b.x-a.x,b.y-a.y],v=[d.x-a.x,d.y-a.y];return Math.acos(Math.max(-1,Math.min(1,(u[0]*v[0]+u[1]*v[1])/Math.hypot(...u)/Math.hypot(...v))))};
+ function draw(){x.clearRect(0,0,640,380);x.fillStyle='rgba(59,91,219,.08)';x.strokeStyle='#3b5bdb';x.lineWidth=3.5;x.beginPath();P.forEach((p,i)=>i?x.lineTo(p.x,p.y):x.moveTo(p.x,p.y));x.closePath();x.fill();x.stroke();
+  const A=[ang(P[0],P[1],P[2]),ang(P[1],P[2],P[0]),ang(P[2],P[0],P[1])],sd=[0,1,2].map(i=>Math.hypot(P[(i+1)%3].x-P[(i+2)%3].x,P[(i+1)%3].y-P[(i+2)%3].y)/U),col=['#e03131','#2f9e44','#ae3ec9'];
+  P.forEach((p,i)=>{const q=P[(i+1)%3],r=P[(i+2)%3],a1=Math.atan2(q.y-p.y,q.x-p.x),a2=Math.atan2(r.y-p.y,r.x-p.x);x.strokeStyle=col[i];x.lineWidth=3;x.beginPath();let s=a1,e=a2;if(((e-s+2*Math.PI)%(2*Math.PI))>Math.PI){[s,e]=[e,s]}x.arc(p.x,p.y,28,s,e);x.stroke();
+   const cx=(P[0].x+P[1].x+P[2].x)/3,cy=(P[0].y+P[1].y+P[2].y)/3,dx=p.x-cx,dy=p.y-cy,d=Math.hypot(dx,dy);txt(x,L[i],p.x+dx/d*24,p.y+dy/d*24+6,18,col[i]);
+   const mx=(q.x+r.x)/2,my=(q.y+r.y)/2,ox=mx-cx,oy=my-cy,od=Math.hypot(ox,oy);txt(x,S[i]+' = '+r1(sd[i]),mx+ox/od*30,my+oy/od*30+5,14,col[i]);x.fillStyle='#f08c00';x.beginPath();x.arc(p.x,p.y,10,0,7);x.fill()});
+  $('snT').innerHTML='<tr><th>الضلع</th><th>الزاوية المقابلة</th><th>جا الزاوية</th><th>الضلع ÷ جا</th></tr>'+[0,1,2].map(i=>'<tr><td style="color:'+col[i]+'">'+S[i]+' = '+r2(sd[i])+'</td><td>'+L[i]+' = '+r1(A[i]/DEG)+'°</td><td>'+Math.sin(A[i]).toFixed(3)+'</td><td style="background:#fff3bf">'+(sd[i]/Math.sin(A[i])).toFixed(2)+'</td></tr>').join('')}
+ dragOn(c,P.map(p=>({px:()=>p.x,py:()=>p.y,set:q=>{p.x=Math.max(20,Math.min(620,q.x));p.y=Math.max(20,Math.min(360,q.y))}})),draw);draw()})();
+MCQP($('qg1'),()=>{const A=pick([30,40,50,60,70]),B=pick([35,45,55,65]),C=180-A-B,a=pick([6,8,10,12]);const b=a*Math.sin(B*DEG)/Math.sin(A*DEG);
+ return{q:'في المثلث أ ب جـ: الزاوية أ = '+A+'° ، ب = '+B+'° ، والضلع س (المقابل لـ أ) = '+a+' cm. طول الضلع ص (المقابل لـ ب) ≈',o:OPSM(N(r1(b))+' cm',[N(r1(a*Math.sin(A*DEG)/Math.sin(B*DEG)))+' cm',N(r1(a*Math.sin(C*DEG)/Math.sin(A*DEG)))+' cm',N(r1(b+2))+' cm']),ex:'ص ÷ جا ب = س ÷ جا أ'}});
+
+/* ---------- 2-2 قاعدة جيب التمام ---------- */
+(function(){const [c,x]=C2('csC');function draw(){const a=+$('csA').value,b=+$('csB').value,g=+$('csG').value;['csA','csB'].forEach(i=>$(i+'v').textContent=$(i).value);$('csGv').textContent=g+'°';x.clearRect(0,0,640,340);
+  const k=26,C={x:300,y:250},A={x:C.x-a*k,y:C.y},B={x:C.x+b*k*Math.cos(Math.PI-g*DEG),y:C.y-b*k*Math.sin(Math.PI-g*DEG)};const cc=Math.sqrt(a*a+b*b-2*a*b*Math.cos(g*DEG));
+  x.setLineDash([7,5]);x.strokeStyle='#e8590c';x.lineWidth=3;x.beginPath();x.moveTo(A.x,A.y);x.lineTo(B.x,B.y);x.stroke();x.setLineDash([]);
+  x.lineCap='round';x.strokeStyle='#495057';x.lineWidth=14;x.beginPath();x.moveTo(A.x,A.y);x.lineTo(C.x,C.y);x.lineTo(B.x,B.y);x.stroke();x.lineCap='butt';x.fillStyle='#3b5bdb';[A,C].forEach(p=>{x.beginPath();x.arc(p.x,p.y,11,0,7);x.fill()});EMJ(x,'🤖',B.x,B.y-6,30);
+  x.strokeStyle='#c92a2a';x.lineWidth=3;x.beginPath();x.arc(C.x,C.y,36,Math.PI,Math.PI+g*DEG*(B.y<C.y?1:1),false);x.stroke();
+  txt(x,'س = '+a,(A.x+C.x)/2,C.y+28,14,'#495057');txt(x,'ص = '+b,(C.x+B.x)/2+22,(C.y+B.y)/2,14,'#495057');txt(x,'ع = '+r2(cc),(A.x+B.x)/2-10,(A.y+B.y)/2-14,16,'#e8590c');txt(x,'جـ',C.x+4,C.y+30,15,'#c92a2a');
+  $('csOut').innerHTML='ع² = '+a+'² + '+b+'² − 2 × '+a+' × '+b+' × جتا '+g+'°<br>= '+(a*a+b*b)+' − '+2*a*b+' × ('+Math.cos(g*DEG).toFixed(3)+') = '+r2(cc*cc)+' ⟸ <b>ع ≈ '+r2(cc)+'</b>'+(g===90?' 🎯 جتا 90° = 0 ⟸ فيثاغورس!':'')}
+ ['csA','csB','csG'].forEach(i=>$(i).oninput=draw);draw()})();
+(function(){const [c,x]=C2('cgC');const a=5,b=6,k=24;let g0,anim0=null,cur=90,hits=0;
+ function nb(){g0=rnd(25,160);anim0=null;$('cgOut').innerHTML='☁️ الكرة مختفية خلف السحابة على بُعد <b>'+r2(Math.sqrt(a*a+b*b-2*a*b*Math.cos(g0*DEG)))+'</b> من القاعدة أ. احسب زاوية المفصل بقاعدة جيب التمام!';draw(90,0)}
+ function draw(g,rev){const C={x:250,y:250},A={x:C.x-a*k,y:C.y},B={x:C.x+b*k*Math.cos(Math.PI-g*DEG),y:C.y-b*k*Math.sin(Math.PI-g*DEG)},T={x:C.x+b*k*Math.cos(Math.PI-g0*DEG),y:C.y-b*k*Math.sin(Math.PI-g0*DEG)};x.clearRect(0,0,640,300);
+  EMJ(x,rev?'⚽':'☁️',T.x,T.y,rev?26:46);x.lineCap='round';x.strokeStyle='#495057';x.lineWidth=12;x.beginPath();x.moveTo(A.x,A.y);x.lineTo(C.x,C.y);x.lineTo(B.x,B.y);x.stroke();x.lineCap='butt';x.fillStyle='#3b5bdb';[A,C].forEach(p=>{x.beginPath();x.arc(p.x,p.y,10,0,7);x.fill()});EMJ(x,'🖐️',B.x,B.y,24);txt(x,'أ',A.x,A.y+28,15);txt(x,'س = 5 ، ص = 6',540,40,14,'#495057');tL(x,'⭐ '+hits,590,280,16,'#e8590c')}
+ $('cgG').oninput=()=>{$('cgGv').textContent=$('cgG').value+'°'};$('cgGv').textContent='90°';
+ $('cgGo').onclick=()=>{anim0={t:performance.now(),from:cur,to:+$('cgG').value}};$('cgN').onclick=nb;
+ anim('cgC',()=>{if(!anim0)return;const k2=Math.min(1,(performance.now()-anim0.t)/900),g=anim0.from+(anim0.to-anim0.from)*k2;draw(g,k2>=1);if(k2>=1&&!anim0.d){anim0.d=1;cur=anim0.to;const ok=Math.abs(cur-g0)<=3;if(ok){hits++;cheer()}
+   $('cgOut').innerHTML=(ok?'🎉 التقطتها! ':'😅 فاتتك! ')+'الزاوية الصحيحة: جتا جـ = (25 + 36 − ع²) ÷ 60 ⟸ جـ ≈ <b>'+g0+'°</b>'}});nb()})();
+MCQP($('qg2'),()=>{const t=rnd(0,1);if(t===0){const a=rnd(3,9),b=rnd(3,9),g=pick([30,45,60,90,120]),cc=Math.sqrt(a*a+b*b-2*a*b*Math.cos(g*DEG));return{q:'ضلعان طولاهما '+a+' و '+b+' والزاوية المحصورة بينهما '+g+'°. طول الضلع الثالث ≈',o:OPSM(N(r1(cc)),[N(r1(Math.sqrt(a*a+b*b))),N(r1(Math.sqrt(a*a+b*b+2*a*b*Math.cos(g*DEG)))),N(a+b)]),ex:'ع² = س² + ص² − 2 س ص جتا جـ'}}
+ const [a,b,cc]=pick([[4,6,8],[5,7,9],[3,5,7],[6,8,10],[7,8,9]]),g=Math.acos((a*a+b*b-cc*cc)/(2*a*b))/DEG;return{q:'مثلث أضلاعه '+a+' و '+b+' و '+cc+'. أكبر زاوية فيه ≈',o:OPSM(N(r1(g))+'°',[N(r1(180-g))+'°',N(r1(g/2))+'°','90°']),ex:'أكبر زاوية تقابل أطول ضلع'}});
+
+/* ---------- 3-2 إلى 5-2 المساحة والاتجاهات ---------- */
+(function(){const [c,x]=C2('arC');function draw(){const g=+$('arG').value;$('arGv').textContent=g+'°';x.clearRect(0,0,640,260);const O={x:220,y:230},k=24,A={x:O.x+8*k,y:O.y},B={x:O.x+6*k*Math.cos(g*DEG),y:O.y-6*k*Math.sin(g*DEG)},ar=.5*6*8*Math.sin(g*DEG);
+  x.fillStyle='rgba(47,158,68,'+(.15+ar/24*.6)+')';x.strokeStyle='#2f9e44';x.lineWidth=3;x.beginPath();x.moveTo(O.x,O.y);x.lineTo(A.x,A.y);x.lineTo(B.x,B.y);x.closePath();x.fill();x.stroke();x.setLineDash([5,4]);x.strokeStyle='#ae3ec9';x.beginPath();x.moveTo(B.x,B.y);x.lineTo(B.x,O.y);x.stroke();x.setLineDash([]);
+  txt(x,'8',(O.x+A.x)/2,O.y+20,14);txt(x,'6',(O.x+B.x)/2-14,(O.y+B.y)/2,14);txt(x,'الارتفاع = 6 جا جـ',B.x+70,(B.y+O.y)/2,12,'#ae3ec9');x.fillStyle='#d9480f';x.fillRect(560,230-ar*7,40,ar*7);tL(x,r1(ar),580,222-ar*7,13,'#d9480f');
+  $('arOut').innerHTML='المساحة = ½ × 6 × 8 × جا '+g+'° = 24 × '+Math.sin(g*DEG).toFixed(3)+' ≈ <b>'+r1(ar)+'</b> وحدة مربعة'+(g===90?' 🏆 أكبر مساحة عند 90°':'')}
+ $('arG').oninput=draw;draw()})();
+(function(){const [c,x]=C2('shC');const K=28;let port,isl,pos,path,legs,run=null,ok=0;
+ const b3=b=>String(Math.round((b+360)%360)).padStart(3,'0')+'°';
+ function nm(){port={x:rnd(60,200),y:rnd(250,380)};do{isl={x:rnd(320,600),y:rnd(40,200)}}while(Math.hypot(isl.x-port.x,isl.y-port.y)<200);pos={...port};path=[{...pos}];legs=0;ok=0;run=null;$('shOut').innerHTML='المراحل المتبقية: <b>3</b>';draw()}
+ function draw(){x.clearRect(0,0,640,420);x.fillStyle='#d0ebff';x.fillRect(0,0,640,420);x.strokeStyle='rgba(255,255,255,.6)';for(let i=0;i<14;i++){x.beginPath();x.arc((i*97)%640,(i*61)%420,30,0,Math.PI);x.stroke()}
+  EMJ(x,'🧭',600,40,34);tL(x,'N',600,16,12,'#c92a2a');EMJ(x,'🏝️',isl.x,isl.y,44);EMJ(x,'🏠',port.x,port.y+10,26);x.strokeStyle='#e8590c';x.lineWidth=3;x.setLineDash([8,6]);x.beginPath();path.forEach((p,i)=>i?x.lineTo(p.x,p.y):x.moveTo(p.x,p.y));x.stroke();x.setLineDash([]);
+  const b=+$('shB').value;if(!run&&legs<3&&!ok){x.strokeStyle='rgba(224,49,49,.5)';x.lineWidth=2;const d=+$('shD').value*K;x.beginPath();x.moveTo(pos.x,pos.y);x.lineTo(pos.x+d*Math.sin(b*DEG),pos.y-d*Math.cos(b*DEG));x.stroke();x.setLineDash([3,3]);x.strokeStyle='#495057';x.beginPath();x.moveTo(pos.x,pos.y);x.lineTo(pos.x,pos.y-60);x.stroke();x.setLineDash([]);tL(x,'N',pos.x,pos.y-66,11,'#c92a2a')}
+  EMJ(x,'⛵',pos.x,pos.y,30);const d=Math.hypot(isl.x-pos.x,isl.y-pos.y)/K;tL(x,'🏝️ '+r1(d)+' km',80,24,14,'#1864ab')}
+ $('shB').oninput=$('shD').oninput=()=>{$('shBv').textContent=b3(+$('shB').value);$('shDv').textContent=$('shD').value+' km';if(!run)draw()};$('shBv').textContent=b3(45);$('shDv').textContent='5 km';
+ $('shGo').onclick=()=>{if(run||legs>=3||ok)return;const b=+$('shB').value,d=+$('shD').value*K;run={t:performance.now(),f:{...pos},to:{x:pos.x+d*Math.sin(b*DEG),y:pos.y-d*Math.cos(b*DEG)}}};$('shN').onclick=nm;
+ anim('shC',()=>{if(!run)return;const k=Math.min(1,(performance.now()-run.t)/1400);pos={x:run.f.x+(run.to.x-run.f.x)*k,y:run.f.y+(run.to.y-run.f.y)*k};draw();if(k>=1){run=null;legs++;path.push({...pos});const d=Math.hypot(isl.x-pos.x,isl.y-pos.y)/K;
+   const dx=isl.x-port.x,dy=port.y-isl.y,D=Math.hypot(dx,dy)/K,BB=(Math.atan2(dx,dy)/DEG+360)%360;
+   if(d<.9){ok=1;cheer();$('shOut').innerHTML='🎉 وصلت إلى الجزيرة في '+legs+' مرحلة! الطريق المباشر من الميناء كان: الاتجاه <b>'+b3(BB)+'</b> والمسافة <b>'+r1(D)+' km</b>'}
+   else if(legs>=3)$('shOut').innerHTML='⚓ انتهت المراحل! بقيت '+r1(d)+' km. الطريق المباشر كان: الاتجاه '+b3(BB)+' والمسافة '+r1(D)+' km. اضغط «خريطة جديدة»';else $('shOut').innerHTML='المراحل المتبقية: <b>'+(3-legs)+'</b> · المسافة إلى الجزيرة '+r1(d)+' km'}});nm()})();
+MCQP($('qg3'),()=>{const t=rnd(0,2);if(t===0){const a=rnd(4,10),b=rnd(4,10),g=pick([30,45,60,90,150]);return{q:'مساحة مثلث ضلعاه '+a+' و '+b+' والزاوية المحصورة '+g+'° ≈',o:OPSM(N(r1(.5*a*b*Math.sin(g*DEG))),[N(r1(a*b*Math.sin(g*DEG))),N(r1(.5*a*b*Math.cos(g*DEG))||1),N(.5*a*b)]),ex:'½ س ص جا جـ'}}
+ if(t===1){const b=pick([30,45,60,120,135,200,250,300]);return{q:'إذا كان اتجاه ب من أ هو '+String(b).padStart(3,'0')+'°، فإن اتجاه أ من ب:',o:OPSM(String((b+180)%360).padStart(3,'0')+'°',[String((360-b)%360).padStart(3,'0')+'°',String(b).padStart(3,'0')+'°',String((b+90)%360).padStart(3,'0')+'°']),ex:'الاتجاه العكسي = الاتجاه ± 180°'}}
+ return bank([['تُقاس الاتجاهات بدءًا من:',['الشمال باتجاه عقارب الساعة','الشرق عكس عقارب الساعة','الجنوب','الغرب']],['الاتجاه 090° يعني:',['الشرق','الشمال','الغرب','الجنوب']],['الاتجاه 270° يعني:',['الغرب','الشرق','الجنوب','الشمال']],['أكبر مساحة لمثلث ضلعاه ثابتان تكون عندما الزاوية المحصورة:',['90°','45°','180°','0°']]])()});
+chapterTest('rv2',[['قاعدة الجيب:',['س ÷ جا أ = ص ÷ جا ب','س × جا أ = ص × جا ب','س + جا أ = ص + جا ب']],['نستخدم قاعدة جيب التمام عند معرفة:',['ضلعين والزاوية المحصورة','زاويتين وضلع','زاوية فقط']],['ع² = ',['س² + ص² − 2 س ص جتا جـ','س² + ص² + 2 س ص','س² − ص²']],['إذا جـ = 90° تصبح قاعدة جيب التمام:',['فيثاغورس','قاعدة الجيب','قانون المساحة']],['جتا جـ سالب ⟸ الزاوية جـ:',['منفرجة','حادة','قائمة']],['المساحة = ',['½ س ص جا جـ','س ص جتا جـ','½ س ص']],['مثلث 6 ، 8 والزاوية 30°. المساحة:',['12','24','48']],['الاتجاه 180°:',['جنوب','شمال','شرق']],['عكس الاتجاه 040° هو:',['220°','320°','140°']],['أكبر زاوية في المثلث تقابل:',['أطول ضلع','أقصر ضلع','أي ضلع']],['الاتجاه يُكتب بـ:',['ثلاثة أرقام','رقمين','رقم واحد']],['مثلث زاويتاه 50° و 60°. الثالثة:',['70°','90°','110°']]]);
+
+/* ---------- 1-3 إلى 3-3 دائرة الوحدة ---------- */
+(function(){const c=$('ucC'),x=c.getContext('2d'),O={x:230,y:210},R=150;
+ function draw(){const th=+$('ucT').value;$('ucTv').textContent=th+'°';x.clearRect(0,0,640,420);const q=((th%360)+360)%360,qd=q===0||q===90||q===180||q===270?0:Math.floor(q/90)+1;
+  ['الكل ✓','جا ✓','ظا ✓','جتا ✓'].forEach((s,i)=>{const a=(45+i*90)*DEG;x.fillStyle=qd===i+1?'rgba(255,212,59,.35)':'rgba(0,0,0,0)';x.beginPath();x.moveTo(O.x,O.y);x.arc(O.x,O.y,R+30,-(i+1)*Math.PI/2,-i*Math.PI/2);x.closePath();x.fill();txt(x,s,O.x+(R+8)*.62*Math.cos(a),O.y-(R+8)*.62*Math.sin(a),14,'#868e96')});
+  x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(O.x-R-30,O.y);x.lineTo(O.x+R+30,O.y);x.moveTo(O.x,O.y-R-30);x.lineTo(O.x,O.y+R+30);x.stroke();x.strokeStyle='#adb5bd';x.beginPath();x.arc(O.x,O.y,R,0,7);x.stroke();
+  x.strokeStyle=th>=0?'#2f9e44':'#e03131';x.lineWidth=2.5;x.beginPath();const n=Math.abs(th);for(let a=0;a<=n;a+=2){const rr=24+a/360*14,aa=(th>=0?a:-a)*DEG;x.lineTo(O.x+rr*Math.cos(aa),O.y-rr*Math.sin(aa))}x.stroke();
+  const P={x:O.x+R*Math.cos(th*DEG),y:O.y-R*Math.sin(th*DEG)};x.strokeStyle='#3b5bdb';x.lineWidth=3;x.beginPath();x.moveTo(O.x,O.y);x.lineTo(P.x,P.y);x.stroke();
+  x.strokeStyle='#e03131';x.lineWidth=4;x.beginPath();x.moveTo(P.x,O.y);x.lineTo(P.x,P.y);x.stroke();x.strokeStyle='#1971c2';x.beginPath();x.moveTo(O.x,O.y);x.lineTo(P.x,O.y);x.stroke();
+  const ref=q<=90?q:q<=180?180-q:q<=270?q-180:360-q;x.fillStyle='rgba(174,62,201,.25)';x.beginPath();x.moveTo(O.x,O.y);const base=q<=90||q>270?0:Math.PI;const pa=-th*DEG;x.arc(O.x,O.y,46,Math.min(-base,pa)%(2*Math.PI),Math.max(-base,pa)%(2*Math.PI));x.closePath();
+  x.fillStyle='#f08c00';x.beginPath();x.arc(P.x,P.y,12,0,7);x.fill();const s=Math.sin(th*DEG),co=Math.cos(th*DEG),f=v=>Math.abs(v)<1e-9?'0':v.toFixed(3);
+  const X0=420;[['جا θ',s,'#e03131'],['جتا θ',co,'#1971c2'],['ظا θ',Math.abs(co)<1e-9?NaN:s/co,'#2f9e44']].forEach(([n,v,col],i)=>{txt(x,n,X0+170,80+i*60,16,col,'right');tL(x,isNaN(v)?'غير معرّف':f(v),X0+40,80+i*60,18,col);x.fillStyle=isNaN(v)?'#adb5bd':v>1e-9?'#2f9e44':v<-1e-9?'#e03131':'#868e96';tL(x,isNaN(v)?'':v>1e-9?'+':v<-1e-9?'−':'0',X0-20,80+i*60,22,x.fillStyle)});
+  $('ucOut').innerHTML='θ = '+N(sn(th))+'° '+(th<0?'(سالبة: مع عقارب الساعة)':'(موجبة: عكس عقارب الساعة)')+(Math.abs(th)>=360?' · لفّت '+Math.floor(Math.abs(th)/360)+' دورة كاملة':'')+'<br>'+(qd?'الربع <b>'+['الأول','الثاني','الثالث','الرابع'][qd-1]+'</b> · الزاوية الحادة الأساسية = <b>'+ref+'°</b>':'الزاوية على أحد المحورين')+'<br><small>🔴 جا = الإحداثي الصادي · 🔵 جتا = الإحداثي السيني · ظا = جا ÷ جتا</small>'}
+ dragOn(c,[{px:()=>O.x+R*Math.cos(+$('ucT').value*DEG),py:()=>O.y-R*Math.sin(+$('ucT').value*DEG),set:p=>{let a=Math.round(Math.atan2(O.y-p.y,p.x-O.x)/DEG);if(a<0)a+=360;$('ucT').value=a}}],draw);$('ucT').oninput=draw;draw()})();
+MCQP($('sgG'),()=>{const f=pick([['جا',Math.sin],['جتا',Math.cos],['ظا',Math.tan]]);let a=pick([20,50,110,140,200,250,290,330,-40,-120,400,180,90,270]);if(f[0]==='ظا'&&(a===90||a===270))a=60;const v=f[1](a*DEG),r=Math.abs(v)<1e-9?'صفر':v>0?'موجبة ➕':'سالبة ➖';
+ return{q:'⚡ إشارة <b>'+f[0]+' ('+N(sn(a))+'°)</b>:',o:['موجبة ➕','سالبة ➖','صفر'].sort(()=>0).filter(()=>1).map(o=>o).slice(0,3).sort((p,q)=>p===r?-1:q===r?1:0),ex:'الربع: الكل ← جا ← ظا ← جتا'}});
+MCQP($('qt1'),()=>{const t=rnd(0,2);if(t===0){const a=pick([120,135,150,210,225,240,300,315,330]),ref=a<180?180-a:a<270?a-180:360-a;return{q:'الزاوية الحادة الأساسية للزاوية '+a+'°:',o:OPSM(ref+'°',[(90-ref)+'°',(a-90)+'°',(360-a)+'°'].filter(v=>v!==ref+'°')),ex:'الزاوية بين ضلع الانتهاء ومحور السينات'}}
+ if(t===1){const [a,s]=pick([[150,'½'],[210,'−½'],[330,'−½'],[30,'½']]);return{q:'جا '+a+'° = ',o:OPSM(N(s),[N(s.startsWith('−')?s.slice(1):'−'+s),N('√3/2'),'0']),ex:'جا 30° = ½ مع إشارة الربع'}}
+ return bank([['الزاوية '+N('−90')+'° تنطبق على:',['الجزء السالب من محور الصادات','الجزء الموجب من محور الصادات','محور السينات الموجب','محور السينات السالب']],['في الربع الثالث تكون موجبة:',['ظا','جا','جتا','الكل']],['جتا 180° = ',['−1','1','0','غير معرّف']],['ظا 90°:',['غير معرّف','0','1','−1']],['الزاوية 420° تكافئ:',['60°','120°','420°','300°']]])()});
+
+/* ---------- 4-3 و 5-3 المتطابقات والمعادلات ---------- */
+(function(){const [c,x]=C2('idC');function draw(){const th=+$('idT').value;$('idTv').textContent=th+'°';x.clearRect(0,0,640,300);const O={x:150,y:150},R=110,s=Math.sin(th*DEG),co=Math.cos(th*DEG),P={x:O.x+R*co,y:O.y-R*s};
+  x.strokeStyle='#adb5bd';x.lineWidth=2;x.beginPath();x.arc(O.x,O.y,R,0,7);x.stroke();x.beginPath();x.moveTo(O.x-R-10,O.y);x.lineTo(O.x+R+10,O.y);x.moveTo(O.x,O.y-R-10);x.lineTo(O.x,O.y+R+10);x.stroke();
+  x.strokeStyle='#e03131';x.lineWidth=4;x.beginPath();x.moveTo(P.x,O.y);x.lineTo(P.x,P.y);x.stroke();x.strokeStyle='#1971c2';x.beginPath();x.moveTo(O.x,O.y);x.lineTo(P.x,O.y);x.stroke();x.strokeStyle='#495057';x.lineWidth=3;x.beginPath();x.moveTo(O.x,O.y);x.lineTo(P.x,P.y);x.stroke();txt(x,'1',(O.x+P.x)/2-10,(O.y+P.y)/2-6,14);
+  const X0=320,W=280;x.fillStyle='#e03131';x.fillRect(X0,120,W*s*s,46);x.fillStyle='#1971c2';x.fillRect(X0+W*s*s,120,W*co*co,46);x.strokeStyle='#222';x.lineWidth=2;x.strokeRect(X0,120,W,46);tL(x,'جا²θ = '+(s*s).toFixed(3),X0+70,105,13,'#e03131');tL(x,'جتا²θ = '+(co*co).toFixed(3),X0+W-70,190,13,'#1971c2');txt(x,'المجموع دائمًا = 1 ✅',X0+W/2,235,16,'#2f9e44');
+  $('idOut').innerHTML='جا² '+th+'° + جتا² '+th+'° = '+(s*s).toFixed(3)+' + '+(co*co).toFixed(3)+' = <b>1</b><br><small>لأن ضلعي المثلث القائم داخل دائرة الوحدة هما جا θ و جتا θ، والوتر = 1 (فيثاغورس!)</small>'}
+ $('idT').oninput=draw;draw()})();
+(function(){const P=Plane('eqC',1.6,{x:40,y:150},90);function draw(){const k=+$('eqK').value,F=$('eqF').value;$('eqKv').textContent=k;const f=F==='s'?Math.sin:F==='c'?Math.cos:Math.tan,nm=F==='s'?'جا':F==='c'?'جتا':'ظا';
+  P.grid(30);P.plot(X=>f(X*DEG),'#3b5bdb',3,0,360);const x=P.x;x.strokeStyle='#e8590c';x.lineWidth=2;x.setLineDash([6,4]);x.beginPath();x.moveTo(P.px(0),P.py(k));x.lineTo(P.px(360),P.py(k));x.stroke();x.setLineDash([]);
+  const sol=[];for(let a=0;a<=360;a+=.5){const v=f(a*DEG)-k,v2=f((a+.5)*DEG)-k;if(Math.abs(v)<1e-9)sol.push(a);else if(a<360&&v*v2<0&&Math.abs(v-v2)<5)sol.push(r1(a+.5*v/(v-v2)))}const S=[...new Set(sol.map(v=>r1(v)))].filter((v,i,a)=>i===0||v-a[i-1]>1);
+  S.forEach(a=>{x.fillStyle='#e8590c';x.beginPath();x.arc(P.px(a),P.py(k),8,0,7);x.fill();tL(x,a+'°',P.px(a),P.py(k)-14,12,'#e8590c')});
+  $('eqOut').innerHTML=nm+' θ = '+N(sn(k))+' حيث 0° ≤ θ ≤ 360°<br>'+(S.length?'🎯 الحلول: θ = '+S.map(v=>N(v)+'°').join(' ، '):'❌ لا توجد حلول')}
+ ['eqF','eqK'].forEach(i=>$(i).oninput=$(i).onchange=draw);draw()})();
+MCQP($('qt2'),()=>{const t=rnd(0,2);if(t===0){const [k,s]=pick([['½','30° ، 150°'],['−½','210° ، 330°'],['√3/2','60° ، 120°'],['1','90°'],['0','0° ، 180° ، 360°']]);return{q:'حل المعادلة جا θ = '+N(k)+' حيث 0° ≤ θ ≤ 360°:',o:OPSM(s,['30° ، 150°','210° ، 330°','60° ، 120°','90°','0° ، 180° ، 360°','30° ، 330°']),ex:'نجد الزاوية الأساسية ثم الأرباع المناسبة للإشارة'}}
+ if(t===1){const [k,s]=pick([['½','60° ، 300°'],['−½','120° ، 240°'],['1','0° ، 360°'],['−1','180°']]);return{q:'حل المعادلة جتا θ = '+N(k)+' حيث 0° ≤ θ ≤ 360°:',o:OPSM(s,['60° ، 300°','120° ، 240°','60° ، 120°','0° ، 360°','180°']),ex:'جتا موجب في الأول والرابع'}}
+ return bank([['جا² θ + جتا² θ = ',['1','0','2','ظا θ']],['ظا θ = ',['جا θ ÷ جتا θ','جتا θ ÷ جا θ','جا θ × جتا θ','1 ÷ جا θ']],['1 + ظا² θ = ',['قا² θ','قتا² θ','جتا² θ','1']],['جا⁴ θ − جتا⁴ θ = ',['جا² θ − جتا² θ','1','جا θ − جتا θ','0']],['قا θ = ',['1 ÷ جتا θ','1 ÷ جا θ','1 ÷ ظا θ','جا θ']]])()});
+
+/* ---------- 6-3 صانع الموجات ---------- */
+(function(){const P=Plane('wvCv2',1.6,{x:40,y:160},34);let K=0,goal=null;chipsM('wvK',['جا','جتا','ظا'],0,i=>{K=i;draw()});
+ function draw(){const a=+$('wvA').value,b=+$('wvB').value,cc=+$('wvC').value;['wvA','wvB','wvC'].forEach(i=>$(i+'v').textContent=sn(+$(i).value));const f=[Math.sin,Math.cos,Math.tan][K],nm=['جا','جتا','ظا'][K];
+  P.grid(30);if(goal){const g=goal;P.plot(X=>g.a*[Math.sin,Math.cos,Math.tan][g.k](g.b*X*DEG)+g.c,'#fcc419',9,0,360)}P.plot(X=>a*f(b*X*DEG)+cc,'#3b5bdb',3.5,0,360);
+  if(K<2){const x=P.x;x.setLineDash([4,4]);x.strokeStyle='#e8590c';x.lineWidth=1.5;[cc+Math.abs(a),cc-Math.abs(a)].forEach(y=>{x.beginPath();x.moveTo(P.px(0),P.py(y));x.lineTo(P.px(360),P.py(y));x.stroke()});x.setLineDash([])}
+  $('wvOut').innerHTML='ص = '+(a===1?'':a===-1?'−':N(sn(a)))+nm+'('+(b===1?'':N(b))+'θ)'+(cc?(cc>0?' + ':' − ')+N(Math.abs(cc)):'')+'<br>'+(K<2?'السعة = '+N(Math.abs(a))+' · الدورة = 360° ÷ '+N(b)+' = <b>'+N(r1(360/b))+'°</b> · المدى = '+IV(cc-Math.abs(a),cc+Math.abs(a),1,1):'الدورة = 180° ÷ '+N(b)+' = <b>'+N(r1(180/b))+'°</b> · المدى = ح');
+  if(goal&&goal.k===K&&a===goal.a&&b===goal.b&&cc===goal.c&&!goal.d){goal.d=1;$('wvF').innerHTML='🏆 طابقت الموجة الذهبية تمامًا!';cheer()}}
+ ['wvA','wvB','wvC'].forEach(i=>$(i).oninput=draw);$('wvG').onclick=()=>{goal={k:K,a:pick([-3,-2,-1,1,2,3,1.5,-1.5]),b:pick([1,2,3,0.5]),c:pick([-1,0,1,0.5]),d:0};if(K===2){goal.a=pick([1,-1,2]);goal.b=pick([1,2])}$('wvF').innerHTML='🟡 حرّك المؤشرات حتى ينطبق المنحنى الأزرق على الموجة الذهبية';draw()};draw()})();
+MCQP($('qt3'),()=>{const t=rnd(0,2),a=pick([2,3,4,5]),b=pick([2,3,4,6]);if(t===0)return{q:'سعة الدالة ص = '+N(a)+' جا ('+N(b)+'θ):',o:OPSM(N(a),[N(b),N(a*b),N(r1(360/b))+'°']),ex:'السعة = |أ|'};
+ if(t===1)return{q:'دورة الدالة ص = جتا ('+N(b)+'θ):',o:OPSM(N(r1(360/b))+'°',['360°',N(360*b)+'°',N(r1(180/b))+'°']),ex:'الدورة = 360° ÷ ب'};
+ return bank([['مدى الدالة ص = جا θ:',['[−1، 1]','ح','[0، 1]',']−1، 1[']],['دورة الدالة ظا θ:',['180°','360°','90°','720°']],['الدالة ظا θ غير معرّفة عند:',['90°','0°','180°','45°']],['منحنى ص = جا θ + 2 يتحرك:',['2 وحدة لأعلى','2 وحدة لليمين','يتضاعف ارتفاعه','لأسفل']],['القيمة العظمى للدالة ص = 3 جا θ:',['3','1','−3','6']]])()});
+chapterTest('rv3',[['الزاوية الموجبة تقاس:',['عكس عقارب الساعة','مع عقارب الساعة','على محور الصادات']],['في الربع الثاني موجبة:',['جا','جتا','ظا']],['الزاوية الحادة الأساسية لـ 210°:',['30°','60°','150°']],['جا 150° = ',['½','−½','√3/2']],['جتا 120° = ',['−½','½','√3/2']],['جا²θ + جتا²θ = ',['1','0','2']],['ظا θ = ',['جا θ ÷ جتا θ','جتا θ ÷ جا θ','جا θ × جتا θ']],['حلول جا θ = ½ في [0°، 360°]:',['30° ، 150°','30° ، 330°','60° ، 120°']],['دورة جا 2θ:',['180°','360°','720°']],['سعة 4 جتا θ:',['4','1','2']],['مدى جا θ:',['[−1، 1]','ح','[0، 1]']],['ظا غير معرّفة عند:',['90°','0°','45°']]]);
+
+/* ================= رياضيات الثاني الثانوي – الأبواب 4-7 ================= */
+function selM(id,arr,cb){const s=$(id);s.innerHTML=arr.map((a,i)=>'<option value="'+i+'">'+a+'</option>').join('');s.onchange=cb}
+const FRs=(p,q)=>{if(q<0){p=-p;q=-q}const g=gcd(Math.abs(p),q)||1;p/=g;q/=g;return (p<0?'−':'')+Math.abs(p)+(q===1?'':'/'+q)};
+const HOLE=(P,X,Y,col)=>P.dot(X,Y,col,7,1);
+
+/* ---------- 1-4 الخط الرأسي ---------- */
+(function(){const P=Plane('vtC',40,{x:320,y:170});let K=0,X0=0.5;const R=[
+ ['ص = س²',[X=>X*X],1],['س² + ص² = 9 (دائرة)',[X=>Math.sqrt(9-X*X),X=>-Math.sqrt(9-X*X)],0],['س = ص² (قطع أفقي)',[X=>Math.sqrt(X),X=>-Math.sqrt(X)],0],['ص = س³ − 3س',[X=>X*X*X-3*X],1],['ص = |س|',[X=>Math.abs(X)],1],['ص² = س + 4',[X=>Math.sqrt(X+4),X=>-Math.sqrt(X+4)],0]];
+ chipsM('vtK',R.map(r=>r[0]),0,i=>{K=i;draw()});
+ function draw(){P.grid();const r=R[K];r[1].forEach(f=>P.plot(f,'#3b5bdb',3.5));const x=P.x;x.strokeStyle='#e03131';x.lineWidth=4;x.beginPath();x.moveTo(P.px(X0),0);x.lineTo(P.px(X0),P.H);x.stroke();x.fillStyle='#e03131';x.beginPath();x.arc(P.px(X0),18,12,0,7);x.fill();tL(x,'↔',P.px(X0),23,14,'#fff');
+  const ys=r[1].map(f=>f(X0)).filter(v=>isFinite(v)),u=ys.filter((v,i)=>ys.findIndex(w=>Math.abs(w-v)<1e-6)===i);u.forEach(y=>{x.fillStyle='#f08c00';x.beginPath();x.arc(P.px(X0),P.py(y),9,0,7);x.fill()});
+  $('vtOut').innerHTML='الخط س = '+N(sn(r2(X0)))+' يقطع المنحنى في <b>'+u.length+'</b> نقطة'+(u.length>1?' ⟸ ❌ <b>ليست دالة</b> (عنصر واحد ارتبط بأكثر من صورة)':r[2]?' · '+(K===0||K>2?'✅ <b>دالة</b> (كل خط رأسي يقطعها مرة واحدة على الأكثر)':''):' · حرّك الخط… هل تجد موضعًا يقطع فيه نقطتين؟')}
+ dragOn(P.c,[{px:()=>P.px(X0),py:()=>18,set:p=>{X0=Math.max(-7.5,Math.min(7.5,Math.round(P.gx(p.x)*10)/10))}}],draw);
+ P.c.addEventListener('pointerdown',e=>{const p=cpos(P.c,e);if(Math.abs(p.x-P.px(X0))<40){}else{X0=Math.round(P.gx(p.x)*10)/10;draw()}});draw()})();
+(function(){const P=Plane('dmC',40,{x:320,y:160});const F=[
+ ['د(س) = س² − 2س (كثيرة حدود)',X=>X*X-2*X,()=>true,'ح (كل الأعداد الحقيقية)',[]],
+ ['د(س) = 3 ÷ (س − 2) (كسرية)',X=>3/(X-2),X=>X!==2,'ح − {2}',[2]],
+ ['د(س) = (س + 1) ÷ (س² − 4)',X=>(X+1)/(X*X-4),X=>Math.abs(X)!==2,'ح − {2 ، −2}',[2,-2]],
+ ['د(س) = √(س − 1) (جذرية)',X=>Math.sqrt(X-1),X=>X>=1,IV(1,Infinity,1,0),[]],
+ ['د(س) = √(4 − س)',X=>Math.sqrt(4-X),X=>X<=4,IV(-Infinity,4,0,1),[]],
+ ['د(س) = 1 ÷ √(س + 2)',X=>1/Math.sqrt(X+2),X=>X>-2,IV(-2,Infinity,0,0),[]]];
+ selM('dmF',F.map(f=>f[0]),draw);
+ function draw(){const f=F[+$('dmF').value];P.grid();const x=P.x;for(let X=-8;X<=8;X+=.05){x.fillStyle=f[2](r2(X))&&isFinite(f[1](X))?'rgba(47,158,68,.85)':'rgba(224,49,49,.35)';x.fillRect(P.px(X),P.O.y-5,P.U*.05+1,10)}
+  f[4].forEach(a=>{x.setLineDash([6,5]);x.strokeStyle='#e03131';x.lineWidth=2;x.beginPath();x.moveTo(P.px(a),0);x.lineTo(P.px(a),P.H);x.stroke();x.setLineDash([]);x.fillStyle='#fff';x.beginPath();x.arc(P.px(a),P.O.y,7,0,7);x.fill();x.strokeStyle='#e03131';x.lineWidth=3;x.stroke()});
+  P.plot(f[1],'#3b5bdb',3.5);$('dmOut').innerHTML='🟢 المجال = '+f[3]+'<br><small>'+(f[4].length?'نستبعد ما يجعل المقام صفرًا 🚫':+$('dmF').value>=3?'ما تحت الجذر التربيعي يجب ألا يكون سالبًا'+(+$('dmF').value===5?' (وفي المقام لا يساوي صفرًا)':''):'كثيرة الحدود معرّفة لكل عدد')+'</small>'}
+ draw()})();
+MCQP($('qf1'),()=>{const t=rnd(0,3),a=nz(-6,6);if(t===0)return{q:'مجال الدالة د(س) = 5 ÷ (س − ('+N(sn(a))+')):',o:OPSM('ح − {'+N(sn(a))+'}',['ح','ح − {'+N(sn(-a))+'}',IV(a,Infinity,0,0)]),ex:'المقام ≠ 0'};
+ if(t===1)return{q:'مجال الدالة د(س) = √(س − ('+N(sn(a))+')):',o:OPSM(IV(a,Infinity,1,0),[IV(a,Infinity,0,0),IV(-Infinity,a,0,1),'ح']),ex:'ما تحت الجذر ≥ 0'};
+ if(t===2){const b=rnd(1,6);return{q:'مجال الدالة د(س) = 1 ÷ (س² − '+b*b+'):',o:OPSM('ح − {'+b+' ، −'+b+'}',['ح − {'+b+'}','ح − {'+b*b+'}','ح']),ex:'س² = '+b*b+' ⟸ س = ±'+b}}
+ const v=rnd(-3,3),p=nz(-3,3),q=rnd(-5,5);return{q:'إذا كانت د(س) = '+PS([1,p,q])+' فإن د('+N(sn(v))+') = ',o:OPSM(N(sn(ev([1,p,q],v))),[N(sn(ev([1,-p,q],v))),N(sn(ev([1,p,-q],v))),N(sn(v*v+q))]),ex:'نعوّض س = '+sn(v)}});
+
+/* ---------- 8-4 و 9-4 جبر الدوال ---------- */
+(function(){const P=Plane('alC',40,{x:320,y:190},20);const d=X=>X*X-1,h=X=>X-1;const O=[['(د + هـ)(س)',X=>d(X)+h(X),'س² + س − 2','ح'],['(د − هـ)(س)',X=>d(X)-h(X),'س² − س','ح'],['(د × هـ)(س)',X=>d(X)*h(X),'(س² − 1)(س − 1) = س³ − س² − س + 1','ح'],['(د ÷ هـ)(س)',X=>d(X)/h(X),'(س² − 1) ÷ (س − 1) = س + 1','ح − {1}']];let K=0;
+ chipsM('alO',O.map(o=>o[0]),0,i=>{K=i;draw()});
+ function draw(){P.grid();P.plot(d,'#ae3ec9',2.5,null,null,[7,5]);P.plot(h,'#f08c00',2.5,null,null,[7,5]);const o=O[K];P.plot(X=>Math.abs(X-1)<1e-9&&K===3?NaN:o[1](X),'#2f9e44',4.5);if(K===3)HOLE(P,1,2,'#2f9e44');
+  tL(P.x,'د(س) = س² − 1',90,24,13,'#ae3ec9');tL(P.x,'هـ(س) = س − 1',90,44,13,'#f08c00');
+  $('alOut').innerHTML=o[0]+' = '+o[2]+'<br>المجال = '+o[3]+(K===3?' 🕳️ <small>(ثقب عند س = 1 لأن هـ(1) = 0)</small>':'')}draw()})();
+MCQP($('eqfQ'),bank([['د(س) = (س² − 4) ÷ (س − 2) و هـ(س) = س + 2. هل د = هـ؟',['لا، المجالان مختلفان (د غير معرّفة عند 2)','نعم، دائمًا متساويتان','نعم، لأن القاعدة واحدة بعد الاختصار','لا، لأن القاعدتين مختلفتان عند كل نقطة']],['د(س) = √(س²) و هـ(س) = |س|. هل د = هـ؟',['نعم، نفس المجال ح ونفس القيم','لا، لأن √(س²) = س','لا، المجالان مختلفان','نعم، فقط إذا س موجبة']],['د(س) = س و هـ(س) = (√س)². هل د = هـ؟',['لا، مجال هـ هو [0، ∞[ فقط','نعم، متساويتان','لا، القيم مختلفة عند س = 4','نعم، لأن الجذر يلغي التربيع']],['د(س) = 2س + 2 و هـ(س) = 2(س + 1). هل د = هـ؟',['نعم، نفس المجال ونفس القاعدة','لا، الشكل مختلف','لا، المجالان مختلفان','لا يمكن المقارنة']],['د(س) = س² ÷ س و هـ(س) = س. هل د = هـ؟',['لا، د غير معرّفة عند 0','نعم، تمامًا','نعم، لأن س² ÷ س = س','لا، د تساوي س²']]]));
+MCQP($('qf2'),()=>{const p=nz(-3,3),q=rnd(-4,4),r=nz(-3,3),v=rnd(-3,3),t=rnd(0,2);const d=[1,0,q],h=[r,p],dv=ev(d,v),hv=ev(h,v),D='د(س) = '+PS(d)+' ، هـ(س) = '+PS(h)+'<br>';
+ if(t===0)return{q:D+'(د + هـ)('+N(sn(v))+') = ',o:OPSM(N(sn(dv+hv)),[N(sn(dv-hv)),N(sn(dv*hv)),N(sn(dv+hv+1))]),ex:'د('+sn(v)+') = '+sn(dv)+' ، هـ('+sn(v)+') = '+sn(hv)};
+ if(t===1)return{q:D+'(د × هـ)('+N(sn(v))+') = ',o:OPSM(N(sn(dv*hv)),[N(sn(dv+hv)),N(sn(dv-hv)),N(sn(-dv*hv||5))]),ex:'نضرب القيمتين'};
+ const z=r2(-p/r);return{q:D+'مجال (د ÷ هـ):',o:OPSM('ح − {'+N(fmtN(z))+'}',['ح','ح − {'+N(fmtN(-z||1))+'}','ح − {0}']),ex:'نستبعد صفر المقام هـ(س) = 0'}});
+
+/* ---------- 1-5 إلى 3-5 النهاية ---------- */
+(function(){const P=Plane('lmC',46,{x:250,y:300},18);const F=[['(س² − 4) ÷ (س − 2) عند س ← 2',X=>(X*X-4)/(X-2),2,4],['(س² − 9) ÷ (س + 3) عند س ← −3',X=>(X*X-9)/(X+3),-3,-6],['(س² − 1) ÷ (س − 1) عند س ← 1',X=>(X*X-1)/(X-1),1,2],['(س³ − 8) ÷ (س − 2) عند س ← 2',X=>(X*X*X-8)/(X-2),2,12]];
+ selM('lmF',F.map(f=>'نها '+f[0]),()=>{$('lmH').value=0;draw()});
+ function draw(){const f=F[+$('lmF').value],v=+$('lmH').value,h=Math.pow(10,-3*v/100),a=f[2],L=f[3];$('lmHv').textContent=h.toFixed(3);P.O.x=320-a*P.U;P.O.y=L>8?330:L<0?100:290;P.grid();
+  P.plot(X=>Math.abs(X-a)<1e-9?NaN:f[1](X),'#3b5bdb',3.5);HOLE(P,a,L,'#e03131');const x=P.x;x.setLineDash([5,4]);x.strokeStyle='#e8590c';x.lineWidth=1.5;x.beginPath();x.moveTo(0,P.py(L));x.lineTo(P.W,P.py(L));x.stroke();x.beginPath();x.moveTo(P.px(a),0);x.lineTo(P.px(a),P.H);x.stroke();x.setLineDash([]);
+  [a-h,a+h].forEach((X,i)=>{EMJ(x,i?'🐇':'🐢',P.px(X)+(i?14:-14),P.py(f[1](X))-22,24);P.dot(X,f[1](X),i?'#2f9e44':'#ae3ec9',7)});
+  const hs=[.1,.01,.001];$('lmT').innerHTML='<div style="overflow-x:auto"><table class="tbl" style="font-size:.8rem"><tr><th>س</th>'+hs.map(k=>'<td>'+(+(a-k).toFixed(3))+'</td>').join('')+'<td style="background:#ffe3e3">'+a+'</td>'+hs.slice().reverse().map(k=>'<td>'+(+(a+k).toFixed(3))+'</td>').join('')+'</tr><tr><th>د(س)</th>'+hs.map(k=>'<td>'+(+f[1](a-k).toFixed(3))+'</td>').join('')+'<td style="background:#ffe3e3">0÷0 ❓</td>'+hs.slice().reverse().map(k=>'<td>'+(+f[1](a+k).toFixed(3))+'</td>').join('')+'</tr></table></div>';
+  $('lmOut').innerHTML='عند س = '+N(sn(a))+' بالتعويض: <b>0 ÷ 0</b> (غير معيّنة) 🕳️<br>لكن من الجهتين القيم تقترب من <b>'+N(sn(L))+'</b> ⟸ نها = '+N(sn(L))+(v>=100?' 🎯':'')}
+ $('lmH').oninput=draw;draw()})();
+MCQP($('lmS'),()=>{const a=nz(-5,5),b=rnd(-5,5);const c0=-(a+b),cc=a*b;const Pq='س²'+(c0?(c0>0?' + ':' − ')+(Math.abs(c0)===1?'':Math.abs(c0))+'س':'')+(cc?(cc>0?' + ':' − ')+Math.abs(cc):'');
+ return{q:'🔨 نها ('+Pq+') ÷ (س − ('+N(sn(a))+')) عندما س ← '+N(sn(a))+'<br><small>بعد التحليل: (س − '+(a<0?'('+sn(a)+')':a)+')(س − '+(b<0?'('+sn(b)+')':b)+') ÷ (س − '+(a<0?'('+sn(a)+')':a)+')</small>',o:OPSM(N(sn(a-b)),[N(sn(a+b)),N(sn(b-a)),'0 ÷ 0 (لا توجد)',N(sn(a*b))]),ex:'نختصر ⟸ نها (س − '+sn(b)+') = '+sn(a)+' − ('+sn(b)+') = '+sn(a-b)}});
+MCQP($('ql1'),()=>{const t=rnd(0,2);if(t===0){const v=rnd(-3,3),co=[nz(-3,3),rnd(-4,4),rnd(-5,5)];return{q:'نها ('+PS(co)+') عندما س ← '+N(sn(v))+' = ',o:OPSM(N(sn(ev(co,v))),[N(sn(ev(co,-v)+1)),N(sn(co[2])),N(sn(ev(co,v)+2))]),ex:'كثيرة حدود ⟸ تعويض مباشر'}}
+ if(t===1){const a=rnd(1,5);return{q:'نها (س² − '+a*a+') ÷ (س − '+a+') عندما س ← '+a+' = ',o:OPSM(N(2*a),[N(a),'0',N(a*a)]),ex:'(س − '+a+')(س + '+a+') ÷ (س − '+a+') = س + '+a+' ⟸ '+2*a}}
+ return bank([['التعويض المباشر أعطى 0 ÷ 0. هذا يعني:',['كمية غير معيّنة، نحاول التحليل والاختصار','النهاية = 0','النهاية غير موجودة حتمًا','النهاية = 1']],['5 ÷ 0 كمية:',['غير معرّفة','غير معيّنة','تساوي 0','تساوي 5']],['نها 7 عندما س ← 3 = ',['7','3','21','0']],['يمكن أن توجد نها د(س) عند أ حتى لو كانت د(أ):',['غير معرّفة','تساوي النهاية','موجبة','صفرًا فقط']]])()});
+
+/* ---------- 4-5 و 5-5 ---------- */
+(function(){const P=Plane('osC',50,{x:320,y:280},40);let run=null;
+ function draw(t){const m=+$('osM').value,k=+$('osK').value;$('osMv').textContent=sn(m);$('osKv').textContent=sn(k);P.grid();P.plot(X=>3-X,'#3b5bdb',4,0,6.4);P.plot(X=>m*X+k,'#e8590c',4,-6.4,0);P.dot(0,3,'#3b5bdb',7);P.dot(0,k,'#e8590c',7,1);
+  const s=t==null?0:Math.min(1,t),xr=3*(1-s)+.12,xl=-3*(1-s)-.12;EMJ(P.x,'🚙',P.px(xr),P.py(3-xr)-16,28);P.x.save();P.x.translate(P.px(xl),P.py(m*xl+k)-16);P.x.scale(-1,1);EMJ(P.x,'🚗',0,0,28);P.x.restore();
+  if(s>=1&&!run.d){run.d=1;const ok=k===3;if(ok)cheer();$('osOut').innerHTML='النهاية من اليمين نها<sup>+</sup> = '+N('3')+' · من اليسار نها<sup>−</sup> = '+N(sn(k))+'<br>'+(ok?'🎉 التقتا! النهايتان متساويتان ⟸ <b>نها د(س) عند 0 موجودة = 3</b>':'💥 لم تلتقيا! النهايتان مختلفتان ⟸ <b>النهاية غير موجودة</b>. (جرّب ك = 3)')}}
+ ['osM','osK'].forEach(i=>$(i).oninput=()=>{run=null;draw()});$('osGo').onclick=()=>{run={t:performance.now()}};anim('osC',()=>{if(run)draw((performance.now()-run.t)/1500)});draw()})();
+(function(){const P=Plane('infC',28,{x:30,y:240},50);const F=[['(2س + 1) ÷ (س + 3)',X=>(2*X+1)/(X+3),2,'متساويتان في الدرجة ⟸ 2 ÷ 1 = 2'],['5 ÷ س',X=>5/X,0,'درجة البسط أصغر ⟸ 0'],['(3س²) ÷ (س² + 1)',X=>3*X*X/(X*X+1),3,'متساويتان ⟸ 3 ÷ 1 = 3'],['(س² − 1) ÷ (2س² + س)',X=>(X*X-1)/(2*X*X+X),.5,'متساويتان ⟸ 1 ÷ 2 = ½']];
+ selM('infF',F.map(f=>'د(س) = '+f[0]),draw);
+ function draw(){const f=F[+$('infF').value],e=+$('infX').value,X=Math.pow(10,e);$('infXv').textContent=Math.round(X).toLocaleString('en');P.grid(2);P.plot(f[1],'#3b5bdb',3.5,.2,22);const x=P.x;
+  x.setLineDash([8,5]);x.strokeStyle='#e03131';x.lineWidth=2;x.beginPath();x.moveTo(0,P.py(f[2]));x.lineTo(P.W,P.py(f[2]));x.stroke();x.setLineDash([]);const sx=Math.min(P.W-30,P.px(Math.min(X,21)));EMJ(x,'🚀',sx,P.py(f[1](Math.min(X,21)))-18,28);
+  $('infOut').innerHTML='د('+Math.round(X).toLocaleString('en')+') = '+N(f[1](X).toFixed(6).replace(/\.?0+$/,''))+'<br>نها د(س) عندما س ← ∞ = <b>'+N(f[2]===.5?'½':''+f[2])+'</b> · <small>'+f[3]+'</small>'}
+ $('infX').oninput=draw;draw()})();
+MCQP($('ql2'),()=>{const t=rnd(0,2),a=nz(-6,6),b=nz(1,6),c=rnd(-5,5);if(t===0)return{q:'نها ('+PS([a,c])+') ÷ ('+PS([b,1])+') عندما س ← ∞ = ',o:OPSM(N(FRs(a,b)),[N(sn(c||1)),'0','∞ (لا توجد)']).filter((v,i,A)=>A.indexOf(v)===i),ex:'نقسم المعاملين الرئيسيين'};
+ if(t===1)return{q:'نها '+N(sn(a))+' ÷ ('+PS([b,0,c||1])+') عندما س ← ∞ = ',o:OPSM('0',[N(FRs(a,b)),'∞',N(sn(a))]),ex:'درجة البسط أصغر ⟸ 0'};
+ return bank([['تكون نها د(س) عند أ موجودة إذا كانت:',['النهاية اليمنى = النهاية اليسرى','النهاية اليمنى أكبر','د(أ) معرّفة فقط','النهاية اليسرى = 0']],['نها<sup>+</sup> = 4 و نها<sup>−</sup> = 1 عند س = 2. إذن:',['النهاية عند 2 غير موجودة','النهاية = 4','النهاية = 2.5','النهاية = 1']],['نها 1 ÷ س عندما س ← ∞ = ',['0','1','∞','−1']],['نها (س³) ÷ (س² + 1) عندما س ← ∞:',['غير موجودة (∞)','0','1','3']]])()});
+
+/* ---------- 6-5 الاتصال: ابنِ الجسر ---------- */
+(function(){const P=Plane('brC',60,{x:110,y:300},40);let run=null;
+ function scene(t){const k=+$('brK').value;$('brKv').textContent=k;P.grid();const x=P.x;x.fillStyle='#d0ebff';x.fillRect(P.px(1.7),P.py(9),P.px(2.3)-P.px(1.7),P.H);for(let i=0;i<5;i++)EMJ(x,'🌊',P.px(2)+((i%2)?10:-10),P.H-15-i*40,18);
+  P.plot(X=>X+1,'#495057',8,-1.8,2);P.plot(X=>k*X-1,'#495057',8,2,8.5);const L=3,R=2*k-1;P.dot(2,L,'#3b5bdb',8,1);P.dot(2,R,'#e8590c',8);
+  tL(x,'نها⁻ = 3',P.px(2)-60,P.py(L)-16,13,'#3b5bdb');tL(x,'د(2) = '+R,P.px(2)+60,P.py(R)+26,13,'#e8590c');
+  let cx=-1.5,cy,fall=0;if(t!=null){const s=Math.min(1,t);cx=-1.5+s*9;if(cx<2)cy=cx+1;else if(R===L)cy=k*cx-1;else{fall=1;const tt=(cx-2);cx=2+tt*.2;cy=L-tt*tt*8}}else cy=cx+1;
+  EMJ(x,fall?'💥':'🚗',P.px(cx),P.py(cy)-16,28);return{fall,s:t==null?0:Math.min(1,t),L,R}}
+ $('brK').oninput=()=>{run=null;scene();$('brOut').textContent=''};$('brGo').onclick=()=>{run={t:performance.now()}};
+ anim('brC',()=>{if(!run)return;const r=scene((performance.now()-run.t)/2500);if((r.s>=1||r.fall&&r.s>.6)&&!run.d){run.d=1;if(!r.fall)cheer();
+  $('brOut').innerHTML=r.fall?'💦 سقطت السيارة! نها<sup>−</sup> = 3 لكن د(2) = '+r.R+' ⟸ <b>الدالة غير متصلة</b> عند س = 2':'🎉 عبرت بسلام! 2ك − 1 = 3 ⟸ ك = 2 ⟸ نها د(س) = د(2) = 3 ⟸ <b>الدالة متصلة</b> عند س = 2'}});scene()})();
+MCQP($('ctQ'),bank([['د(س) = (س² − 1) ÷ (س − 1). هل هي متصلة عند س = 1؟',['لا، لأن د(1) غير معرّفة (الشرط ① فشل)','نعم، لأن النهاية = 2','نعم، كل دالة كسرية متصلة','لا، لأن النهاية غير موجودة']],['د(س) = |س|. هل هي متصلة عند 0؟',['نعم، الشروط الثلاثة متحققة','لا، لها زاوية حادة','لا، د(0) غير معرّفة','لا يمكن تحديد ذلك']],['نها د(س) عند 3 = 5 و د(3) = 7. الدالة عند 3:',['غير متصلة (الشرط ③ فشل)','متصلة','متصلة من اليمين فقط','غير معرّفة']],['أي دالة متصلة عند كل الأعداد الحقيقية؟',['كثيرة الحدود','1 ÷ س','√س','(س + 1) ÷ (س − 2)']],['الشرط الثالث للاتصال عند أ:',['نها د(س) = د(أ)','د(أ) = 0','النهاية = ∞','د(أ) موجبة']]]));
+MCQP($('ql3'),()=>{const a=rnd(1,4),m=rnd(1,3),b=rnd(-3,3);const L=m*a+b,k=r2((L+1)/a);if(Number.isInteger(k)||rnd(0,1))return{q:'د(س) = '+PS([m,b])+' عندما س &lt; '+a+' ، و د(س) = ك س − 1 عندما س ≥ '+a+'. قيمة ك التي تجعل د متصلة عند '+a+':',o:OPSM(N(fmtN(k)),[N(fmtN(r2(k+1))),N(fmtN(L)),N(fmtN(r2((L-1)/a)))]),ex:'ك × '+a+' − 1 = '+L};
+ return bank([['الدالة المتصلة نرسمها:',['دون رفع القلم','بخطوط متقطعة','بنقاط فقط','بقفزات']],['تكون د متصلة على فترة إذا كانت:',['متصلة عند كل نقطة فيها','معرّفة عند طرفيها فقط','موجبة فيها','ثابتة']]])()});
+chapterTest('rv4',[['اختبار الخط الرأسي يحدد:',['هل العلاقة دالة','مجال الدالة','ميل المنحنى']],['مجال كثيرة الحدود:',['ح','ح − {0}','[0، ∞[']],['مجال 1 ÷ (س − 3):',['ح − {3}','ح','ح − {−3}']],['مجال √(س − 2):',['[2، ∞[',']2، ∞[','ح']],['مجال (د ÷ هـ) نستبعد منه:',['أصفار هـ','أصفار د','لا شيء']],['0 ÷ 0 كمية:',['غير معيّنة','تساوي 0','تساوي 1']],['نها (س² − 4) ÷ (س − 2) عند 2:',['4','0','2']],['نها (3س + 1) ÷ (س − 5) عند ∞:',['3','0','∞']],['نها 2 ÷ س² عند ∞:',['0','2','∞']],['النهاية موجودة إذا:',['اليمنى = اليسرى','اليمنى &gt; اليسرى','د(أ) = 0']],['عدد شروط الاتصال:',['3','2','1']],['كثيرة الحدود متصلة:',['عند كل نقطة','عند الصفر فقط','غير متصلة']]]);
+
+/* ---------- 1-6 و 2-6 القاطع والمماس ---------- */
+(function(){const P=Plane('scC',60,{x:320,y:300},30);const F=[['د(س) = س²',[1,0,0]],['د(س) = س³',[1,0,0,0]],['د(س) = ½س² + 1',[.5,0,1]],['د(س) = 3 − س²',[-1,0,3]]];let run=null;
+ selM('scF',F.map(f=>f[0]),()=>draw());
+ function draw(){const co=F[+$('scF').value][1],a=+$('scX').value,h=Math.max(.001,+$('scH').value/100*2),f=X=>ev(co,X),m=(f(a+h)-f(a))/h,mt=ev(der(co),a);$('scXv').textContent=sn(a);$('scHv').textContent=r2(h)<.01?h.toFixed(3):r2(h);P.grid();P.plot(f,'#3b5bdb',3.5);const x=P.x;
+  x.strokeStyle='#e8590c';x.lineWidth=3;x.beginPath();x.moveTo(P.px(a-6),P.py(f(a)-6*m));x.lineTo(P.px(a+6),P.py(f(a)+6*m));x.stroke();if(h<.02){x.strokeStyle='rgba(47,158,68,.5)';x.lineWidth=9;x.beginPath();x.moveTo(P.px(a-6),P.py(f(a)-6*mt));x.lineTo(P.px(a+6),P.py(f(a)+6*mt));x.stroke()}
+  x.setLineDash([4,4]);x.strokeStyle='#868e96';x.lineWidth=1.5;x.beginPath();x.moveTo(P.px(a),P.py(f(a)));x.lineTo(P.px(a+h),P.py(f(a)));x.lineTo(P.px(a+h),P.py(f(a+h)));x.stroke();x.setLineDash([]);tL(x,'هـ',P.px(a+h/2),P.py(f(a))+16,13,'#868e96');
+  P.dot(a,f(a),'#e03131',8);P.dot(a+h,f(a+h),'#f08c00',8);
+  $('scT').innerHTML='<table class="tbl"><tr><th>هـ</th>'+[1,.5,.1,.01,.001].map(k=>'<td>'+k+'</td>').join('')+'</tr><tr><th>ميل القاطع</th>'+[1,.5,.1,.01,.001].map(k=>'<td>'+(+((f(a+k)-f(a))/k).toFixed(3))+'</td>').join('')+'</tr></table>';
+  $('scOut').innerHTML='ميل القاطع = (د('+N(sn(a))+' + هـ) − د('+N(sn(a))+')) ÷ هـ = <b>'+N(m.toFixed(3))+'</b><br>'+(h<.02?'🎯 أصبح القاطع مماسًا! دَ('+N(sn(a))+') = <b>'+N(fmtN(mt))+'</b>':'اجعل هـ ← 0 وراقب الميل يقترب من '+N(fmtN(mt))+' …')}
+ ['scX','scH'].forEach(i=>$(i).oninput=()=>{run=null;draw()});$('scGo').onclick=()=>{run={t:performance.now(),h0:+$('scH').value}};
+ anim('scC',()=>{if(!run)return;const k=Math.min(1,(performance.now()-run.t)/2500);$('scH').value=run.h0*(1-k);draw();if(k>=1){run=null;cheer()}});draw()})();
+MCQP($('qd1'),()=>{const t=rnd(0,2);if(t===0){const a=rnd(-3,3),c=nz(-3,3);return{q:'باستخدام التعريف، المشتقة للدالة د(س) = '+PS([c,0,0])+' عند س = '+N(sn(a))+' = ',o:OPSM(N(sn(2*c*a)),[N(sn(c*a*a)),N(sn(c*a)),N(sn(2*c*a+1))]),ex:'(د(س + هـ) − د(س)) ÷ هـ = '+sn(2*c)+'س + '+sn(c)+'هـ ⟸ هـ ← 0'}}
+ if(t===1){const a=rnd(1,4),b=rnd(a+1,6);return{q:'متوسط معدل التغير للدالة د(س) = س² من س = '+a+' إلى س = '+b+':',o:OPSM(N(a+b),[N(b*b-a*a),N(b-a),N(2*b)]),ex:'('+b*b+' − '+a*a+') ÷ ('+b+' − '+a+') = '+(a+b)}}
+ return bank([['ميل المماس عند نقطة يساوي:',['قيمة المشتقة عند تلك النقطة','قيمة الدالة عند النقطة','ميل القاطع دائمًا','صفرًا']],['عندما هـ ← 0 يصبح القاطع:',['مماسًا','موازيًا لمحور السينات','عموديًا','منحنى']],['المشتقة تمثل معدل التغير:',['اللحظي','المتوسط على فترة طويلة','الثابت دائمًا','السالب فقط']],['الرمز دص ÷ دس يعني:',['مشتقة ص بالنسبة إلى س','ص مقسومة على س','تكامل ص','نهاية ص']]])()});
+
+/* ---------- 3-6 مصنع المشتقات ---------- */
+(function(){const c=$('pfCnv'),x=c.getContext('2d');const top={U:44,O:{x:320,y:120}},bot={U:44,O:{x:320,y:340}};
+ function axes(Pp,y0,y1,lab){x.strokeStyle='#eef0f3';x.lineWidth=1;for(let i=-7;i<=7;i++){x.beginPath();x.moveTo(Pp.O.x+i*Pp.U,y0);x.lineTo(Pp.O.x+i*Pp.U,y1);x.stroke()}x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(4,Pp.O.y);x.lineTo(636,Pp.O.y);x.moveTo(Pp.O.x,y0);x.lineTo(Pp.O.x,y1);x.stroke();tL(x,lab,60,y0+20,15,'#495057')}
+ function curve(Pp,f,y0,y1,col,w){x.save();x.beginPath();x.rect(0,y0,640,y1-y0);x.clip();x.strokeStyle=col;x.lineWidth=w;x.beginPath();let pen=0;for(let X=-7.3;X<=7.3;X+=.02){const Y=Pp.O.y-f(X)*Pp.U/(Pp.s||1);pen?x.lineTo(Pp.O.x+X*Pp.U,Y):x.moveTo(Pp.O.x+X*Pp.U,Y);pen=1}x.stroke();x.restore()}
+ function draw(){const co=['pfA','pfB','pfC','pfD'].map(i=>+$(i).value),X0=+$('pfX').value;['pfA','pfB','pfC','pfD','pfX'].forEach(i=>$(i+'v').textContent=sn(+$(i).value));const dc=der(co),f=X=>ev(co,X),g=X=>ev(dc,X),m=g(X0);
+  x.clearRect(0,0,640,440);x.fillStyle='#f8f9fa';x.fillRect(0,225,640,4);top.s=bot.s=2;axes(top,0,222,'د(س)');axes(bot,232,440,'دَ(س)');curve(top,f,0,222,'#3b5bdb',3.5);curve(bot,g,232,440,'#e8590c',3.5);
+  const py=Y=>top.O.y-Y*top.U/2;x.save();x.beginPath();x.rect(0,0,640,222);x.clip();x.strokeStyle='#2f9e44';x.lineWidth=3;x.beginPath();x.moveTo(top.O.x+(X0-2)*top.U,py(f(X0)-2*m));x.lineTo(top.O.x+(X0+2)*top.U,py(f(X0)+2*m));x.stroke();x.restore();
+  x.fillStyle='#e03131';x.beginPath();x.arc(top.O.x+X0*top.U,py(f(X0)),8,0,7);x.fill();const by=bot.O.y-m*bot.U/2;x.setLineDash([4,4]);x.strokeStyle='#868e96';x.beginPath();x.moveTo(top.O.x+X0*top.U,py(f(X0)));x.lineTo(top.O.x+X0*top.U,Math.max(232,Math.min(440,by)));x.stroke();x.setLineDash([]);
+  if(by>232&&by<440){x.fillStyle='#e8590c';x.beginPath();x.arc(bot.O.x+X0*bot.U,by,8,0,7);x.fill()}
+  $('pfOut').innerHTML='د(س) = '+PS(co)+'<br>دَ(س) = <b>'+PS(dc)+'</b><br>عند س = '+N(sn(X0))+': ميل المماس 🟢 = دَ('+N(sn(X0))+') = <b>'+N(fmtN(m))+'</b>'+(Math.abs(m)<.05?' ⟸ مماس أفقي ⛰️':m>0?' ⟸ الدالة متزايدة ↗':' ⟸ الدالة متناقصة ↘')}
+ ['pfA','pfB','pfC','pfD','pfX'].forEach(i=>$(i).oninput=draw);draw()})();
+(function(){let st=0,best=0;MCQP($('drG'),()=>{const n=rnd(2,5),a=nz(-5,5),b=nz(-6,6),c=rnd(-9,9);const co=[a,0,b,c].slice(4-n>0?0:0);const C=n===2?[a,b,c]:n===3?[a,0,b,c]:n===4?[a,0,0,b,c]:[a,0,0,0,b,c];
+  return{q:'⚡ اشتق بسرعة: د(س) = '+PS(C),o:OPSM(PS(der(C)),[PS(der(C).map((v,i,A)=>i===A.length-1?v+C[C.length-1]:v)),PS(C.slice(0,-1).map(v=>v)),PS(der(C).map((v,i)=>i===0?v/n*(n+1):v))]),ex:'د/دس (سⁿ) = ن سⁿ⁻¹ ، ومشتقة الثابت = 0'}})})();
+MCQP($('qd2'),()=>{const t=rnd(0,2);if(t===0){const n=rnd(2,9),a=nz(-5,5);return{q:'مشتقة '+PS([a,...Array(n).fill(0)])+' هي:',o:OPSM(PS([a*n,...Array(n-1).fill(0)]),[PS([a,...Array(n-1).fill(0)]),PS([a*n,...Array(n).fill(0)]),PS([a*(n-1),...Array(n-1).fill(0)])]),ex:'ن سⁿ⁻¹'}}
+ if(t===1){const C=[nz(-3,3),nz(-4,4),rnd(-5,5)],v=rnd(-3,3);return{q:'د(س) = '+PS(C)+'. قيمة دَ('+N(sn(v))+'):',o:OPSM(N(sn(ev(der(C),v))),[N(sn(ev(C,v))),N(sn(ev(der(C),-v)+1)),N(sn(C[1]))]),ex:'دَ(س) = '+PS(der(C))}}
+ return bank([['مشتقة الثابت 7:',['0','7','1','س']],['د(س) = |س| عند س = 0:',['متصلة وغير قابلة للاشتقاق','قابلة للاشتقاق ومشتقتها 0','غير متصلة','مشتقتها 1']],['إذا كانت د قابلة للاشتقاق عند أ فإنها:',['متصلة عند أ','غير متصلة عند أ','ثابتة','صفرية']],['مشتقة (د + هـ):',['دَ + هـَ','دَ × هـَ','د × هـَ','دَ − هـ']],['دص ÷ دس للدالة ص = 5س:',['5','5س','س','0']]])()});
+
+/* ---------- 1-7 إلى 4-7 الدالة البدائية ---------- */
+(function(){const P=Plane('fmCv2',50,{x:320,y:250},28);let st;
+ function nw(){let c0;do{c0=pick([-4,-3.5,-3,-2.5,-2,-1.5,-1,-.5,.5,1,1.5,2,2.5,3])}while(c0===+$('fmC').value);const X=pick([-2,-1.5,-1,-.5,.5,1,1.5,2]);st={x:X,y:X*X+c0,c:c0,d:0};draw()}
+ function draw(){const c=+$('fmC').value;$('fmCv').textContent=sn(c);P.grid();for(let k=-4;k<=4;k++)P.plot(X=>X*X+k,'rgba(134,142,150,.3)',1.5);P.plot(X=>X*X+c,'#3b5bdb',4.5);
+  const hit=Math.abs(st.x*st.x+c-st.y)<1e-9;EMJ(P.x,hit?'🌟':'⭐',P.px(st.x),P.py(st.y),hit?40:30);
+  $('fmOut').innerHTML='ص = س² '+(c?(c>0?'+ ':'− ')+N(Math.abs(c)):'')+' · النجمة عند ('+N(sn(st.x))+'، '+N(fmtN(st.y))+')'+(hit?'<br>🎉 أصبتها! بالتعويض: '+N(fmtN(st.y))+' = '+N(fmtN(st.x*st.x))+' + ث ⟸ ث = <b>'+N(fmtN(st.c))+'</b>':'<br><small>كل منحنيات العائلة لها نفس المشتقة 2س — الفرق فقط في الثابت ث</small>');if(hit&&!st.d){st.d=1;cheer()}}
+ $('fmC').oninput=draw;$('fmN').onclick=nw;nw()})();
+MCQP($('rvG'),()=>{const n=rnd(1,4),a=nz(-4,4)*(n+1);const F=[a/(n+1),...Array(n+1).fill(0)],f=der(F);return{q:'🔄 أي دالة مشتقتها <b>'+PS(f)+'</b> ؟',o:OPSM(PS(F)+' + ث',[PS([a,...Array(n+1).fill(0)])+' + ث',PS([a*n,...Array(n-1).fill(0)])+' + ث',PS([a/(n+1),...Array(n).fill(0)])+' + ث']),ex:'∫ سⁿ دس = سⁿ⁺¹ ÷ (ن + 1) + ث'}});
+MCQP($('qn1'),()=>{const t=rnd(0,2);if(t===0){const n=rnd(1,5),a=(n+1)*nz(-3,3);return{q:'∫ '+PS([a,...Array(n).fill(0)])+' دس = ',o:OPSM(PS([a/(n+1),...Array(n+1).fill(0)])+' + ث',[PS([a*n,...Array(n-1).fill(0)])+' + ث',PS([a,...Array(n+1).fill(0)])+' + ث',PS([a/(n+1),...Array(n+1).fill(0)])]),ex:'لا تنسَ الثابت ث'}}
+ if(t===1){const k=nz(-9,9);return{q:'∫ '+N(sn(k))+' دس = ',o:OPSM(PS([k,0])+' + ث',[N(sn(k))+' + ث','0 + ث',PS([k/2,0,0])+' + ث']),ex:'تكامل الثابت ك = ك س + ث'}}
+ const x0=rnd(-2,2),c0=rnd(-4,4);return{q:'دص ÷ دس = 2س ، والمنحنى يمر بالنقطة ('+N(sn(x0))+'، '+N(sn(x0*x0+c0))+'). معادلته:',o:OPSM(PS([1,0,c0]),[PS([1,0,c0+1]),PS([2,0,c0]),PS([1,0,0])]),ex:'ص = س² + ث ⟸ ث = '+sn(c0)}});
+
+/* ---------- 5-7 و 6-7 المساحة والنظرية الأساسية ---------- */
+(function(){const P=Plane('rmC',100,{x:50,y:320},38);const F=[['د(س) = س²',[1,0,0],'س³ ÷ 3'],['د(س) = 2س + 1',[2,1],'س² + س'],['د(س) = س³ ÷ 4',[.25,0,0,0],'س⁴ ÷ 16'],['د(س) = 4 − س² ÷ 4',[-.25,0,4],'4س − س³ ÷ 12']];
+ selM('rmF',F.map(f=>f[0]),draw);
+ function draw(){const co=F[+$('rmF').value][1];let a=+$('rmA').value,b=+$('rmB').value;if(b<=a){b=a+.5;$('rmB').value=b}const n=+$('rmN').value;['rmA','rmB','rmN'].forEach(i=>$(i+'v').textContent=$(i).value);
+  const f=X=>ev(co,X),Fi=co.map((c,i)=>c/(co.length-i)).concat([0]),G=X=>ev(Fi,X),ex=G(b)-G(a),dx=(b-a)/n;P.grid(.5);const x=P.x;let s=0;
+  for(let i=0;i<n;i++){const X=a+i*dx,h=f(X+dx/2);s+=h*dx;x.fillStyle=i%2?'rgba(47,158,68,.45)':'rgba(64,192,87,.6)';x.fillRect(P.px(X),P.py(h),dx*P.U,h*P.Uy);if(n<=24){x.strokeStyle='#2b8a3e';x.lineWidth=1;x.strokeRect(P.px(X),P.py(h),dx*P.U,h*P.Uy)}}
+  P.plot(f,'#3b5bdb',3.5,0,5.6);[a,b].forEach(v=>{x.strokeStyle='#e03131';x.lineWidth=2;x.beginPath();x.moveTo(P.px(v),P.O.y);x.lineTo(P.px(v),P.py(f(v)));x.stroke()});
+  const err=Math.abs(s-ex);x.fillStyle='#e9ecef';x.fillRect(440,20,180,18);x.fillStyle=err<.01?'#2f9e44':'#f08c00';x.fillRect(440,20,180*Math.max(0,1-err/Math.max(.5,ex)),18);tL(x,'الدقة',530,54,12,'#495057');
+  $('rmOut').innerHTML='مجموع '+N(n)+' مستطيلًا ≈ <b>'+N(s.toFixed(4))+'</b><br>∫ من '+N(a)+' إلى '+N(b)+' = ق('+N(b)+') − ق('+N(a)+') = <b>'+N(r2(ex))+'</b> حيث ق(س) = '+F[+$('rmF').value][2]+(err<.01?' 🎯 تطابقا تقريبًا!':'<br><small>زِد عدد المستطيلات ليقترب المجموع من القيمة الدقيقة</small>')}
+ ['rmA','rmB','rmN'].forEach(i=>$(i).oninput=draw);draw()})();
+MCQP($('qn2'),()=>{const t=rnd(0,2);if(t===0){const a=rnd(0,2),b=rnd(a+1,4);return{q:'∫ من '+a+' إلى '+b+' 3س² دس = ',o:OPSM(N(b**3-a**3),[N(3*(b*b-a*a)),N(b**3),N(6*(b-a))]),ex:'ق(س) = س³ ⟸ '+b**3+' − '+a**3}}
+ if(t===1){const a=rnd(0,3),b=rnd(a+1,6),k=rnd(2,9);return{q:'∫ من '+a+' إلى '+b+' '+k+' دس = ',o:OPSM(N(k*(b-a)),[N(k*b),N(k),N(b-a)]),ex:'مساحة مستطيل: '+k+' × ('+b+' − '+a+')'}}
+ const b=rnd(1,5);return{q:'مساحة المنطقة تحت ص = 2س فوق محور السينات من 0 إلى '+b+':',o:OPSM(N(b*b),[N(2*b),N(b*b/2),N(2*b*b)]),ex:'∫ 2س دس = س² ⟸ '+b*b+' − 0'}});
+chapterTest('rv5',[['دَ(س) = نها … عندما:',['هـ ← 0','هـ ← ∞','س ← 0']],['مشتقة س⁵:',['5س⁴','س⁴','5س⁵']],['مشتقة 3س² − 4س + 7:',['6س − 4','6س + 7','3س − 4']],['مشتقة الثابت:',['0','1','الثابت نفسه']],['|س| عند 0:',['متصلة غير قابلة للاشتقاق','قابلة للاشتقاق','غير متصلة']],['ميل المماس = ',['قيمة المشتقة','قيمة الدالة','صفر']],['∫ س² دس = ',['س³ ÷ 3 + ث','2س + ث','س³ + ث']],['∫ 5 دس = ',['5س + ث','5 + ث','0']],['نضيف ث في التكامل غير المحدود لأن:',['مشتقة الثابت صفر','التكامل يحتاجه للضرب','المساحة سالبة']],['∫ من 0 إلى 2 س دس = ',['2','4','1']],['∫ من 1 إلى 3 2س دس = ',['8','9','4']],['النظرية الأساسية: ∫ من أ إلى ب د = ',['ق(ب) − ق(أ)','ق(أ) − ق(ب)','د(ب) − د(أ)']]]);
+
+</script>
+<script>window.NARR=["i1", "i2", "i3", "i4", "rv1", "g1", "g2", "g3", "rv2", "t1", "t2", "t3", "rv3", "f1", "f2", "l1", "l2", "l3", "rv4", "d1", "d2", "n1", "n2", "rv5"];window.AUDIO_BASE="audio-m11/";</script>
+<style>
+.fxbar{position:fixed;left:10px;bottom:10px;z-index:90;display:flex;gap:6px}
+.fxbar button{width:46px;height:46px;border-radius:50%;border:none;background:#1f2a44;color:#fff;font-size:1.3rem;box-shadow:0 4px 12px #0004;cursor:pointer}
+.say{border:2px solid #f08c2e;background:#fff7e8;color:#b35b00;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.9rem;margin:0 6px;vertical-align:middle;font-family:inherit}
+.say.on{background:#f08c2e;color:#fff;animation:pul 1s infinite}
+@keyframes pul{50%{transform:scale(1.06)}}
+.cfx{position:fixed;pointer-events:none;z-index:95;font-size:20px;animation:cf 1.1s ease-out forwards}
+@keyframes cf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+.pop{animation:popk .35s}
+@keyframes popk{50%{transform:scale(1.08)}}
+.shk{animation:shk .4s}
+@keyframes shk{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.stars{position:fixed;bottom:16px;left:66px;background:#1f2a44;color:#fff;border-radius:20px;padding:3px 14px;font-weight:900;z-index:91;font-family:inherit;transition:.3s}
+</style>
+<div class="fxbar"><button id="fxMute" title="الأصوات">🔊</button></div>
+<div class="stars" id="fxStars">⭐ 0</div>
+<script>
+(function(){let AC=null,mute=false,stars=0;try{mute=localStorage.getItem('lb_mute')==='1';stars=+localStorage.getItem('lb_stars_'+location.pathname)||0}catch(e){}
+ const mb=document.getElementById('fxMute');const sb=document.getElementById('fxStars');const upd=()=>{mb.textContent=mute?'🔇':'🔊';sb.textContent='⭐ '+stars};upd();
+ mb.onclick=()=>{mute=!mute;try{localStorage.setItem('lb_mute',mute?'1':'0')}catch(e){}upd();if(mute&&cur){cur.pause();cur=null;document.querySelectorAll('.say.on').forEach(b=>b.classList.remove('on'))}};
+ function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC}
+ function tone(f,t0,d,type,v){const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,a.currentTime+t0);g.gain.setValueAtTime(0,a.currentTime+t0);g.gain.linearRampToValueAtTime(v||.18,a.currentTime+t0+.015);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+t0+d);o.connect(g);g.connect(a.destination);o.start(a.currentTime+t0);o.stop(a.currentTime+t0+d+.05)}
+ const S={ok:()=>{tone(523,0,.15,'triangle');tone(659,.09,.15,'triangle');tone(784,.18,.3,'triangle')},no:()=>{tone(220,0,.18,'sawtooth',.08);tone(185,.12,.25,'sawtooth',.08)},tick:()=>tone(900,0,.04,'square',.03),win:()=>{[523,659,784,1046,784,1046].forEach((f,i)=>tone(f,i*.1,.22,'triangle'))},whoosh:()=>{const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.frequency.setValueAtTime(300,a.currentTime);o.frequency.exponentialRampToValueAtTime(1200,a.currentTime+.25);g.gain.setValueAtTime(.06,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.3);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.32)}};
+ window.FX=S;
+ function confetti(el,big){const r=el&&el.getBoundingClientRect?el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};const E=['⭐','✨','🎉','💚','🌟','🎊'];const n=big?26:9;
+  for(let i=0;i<n;i++){const s=document.createElement('div');s.className='cfx';s.textContent=E[i%E.length];s.style.left=(r.left+r.width/2)+'px';s.style.top=(r.top+r.height/2)+'px';const a=Math.random()*6.28,d=(big?160:70)+Math.random()*80;s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',(Math.sin(a)*d-40)+'px');s.style.setProperty('--r',(Math.random()*720-360)+'deg');document.body.appendChild(s);setTimeout(()=>s.remove(),1200)}}
+ let last=0,lastNo=0;function hit(el,good){const now=Date.now();if(good){if(now-lastNo<400||now-last<250)return;last=now;S.ok();confetti(el);stars++;try{localStorage.setItem('lb_stars_'+location.pathname,stars)}catch(e){}upd();sb.classList.add('pop');setTimeout(()=>sb.classList.remove('pop'),400);el.classList&&el.classList.add('pop');setTimeout(()=>el.classList&&el.classList.remove('pop'),400);
+   if(stars%10===0){S.win();confetti(sb,true)}}else{lastNo=now;S.no();el.classList&&el.classList.add('shk');setTimeout(()=>el.classList&&el.classList.remove('shk'),450)}}
+ new MutationObserver(ms=>{ms.forEach(m=>{const t=m.target;if(!(t instanceof Element))return;if(m.type==='attributes'){const was=(m.oldValue||'').split(/\s+/);const c=t.classList;if(c.contains('ok')&&!was.includes('ok')&&(t.matches('button,input,.fb,.opt')))hit(t,true);else if(c.contains('no')&&!was.includes('no')&&t.matches('button,input,.opt'))hit(t,false)}})}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class'],attributeOldValue:true});
+ document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&!b.classList.contains('say')&&b.id!=='fxMute')S.tick()},true);
+ document.addEventListener('input',e=>{if(e.target.type==='range'){const n=Date.now();if(!window._lt||n-window._lt>90){window._lt=n;tone(400+(+e.target.value-+e.target.min)/(+e.target.max-+e.target.min+.001)*600,0,.03,'sine',.03)}}},true);
+ /* narration */
+ let cur=null;const base=window.AUDIO_BASE||'audio/';
+ function addSay(){document.querySelectorAll('.page').forEach(p=>{if(!(window.NARR||[]).includes(p.id))return;const h=p.querySelector('h2');if(!h||h.querySelector('.say'))return;const b=document.createElement('button');b.className='say';b.textContent='🔊 اسمع';
+  b.onclick=()=>{if(cur){cur.pause();const was=b.classList.contains('on');document.querySelectorAll('.say.on').forEach(x=>x.classList.remove('on'));cur=null;if(was)return}if(mute){mute=false;upd()}const a=new Audio(base+p.id+'.mp3');cur=a;b.classList.add('on');b.textContent='⏸️ إيقاف';a.onended=a.onerror=()=>{b.classList.remove('on');b.textContent='🔊 اسمع';cur=null};a.play().catch(()=>{b.classList.remove('on');b.textContent='🔊 اسمع'})};h.appendChild(b)})}
+ addSay();document.querySelectorAll('#bar button,[data-go]').forEach(b=>b.addEventListener('click',()=>{S.whoosh();if(cur){cur.pause();cur=null;document.querySelectorAll('.say').forEach(x=>{x.classList.remove('on');x.textContent='🔊 اسمع'})}}));
+})();
+</script>
+
+</body>
+</html>
