@@ -1102,8 +1102,19 @@ if(!navigator.onLine)$('offl').classList.add('on');
 if(S.tok&&S.user){home();refresh()}else show('login');navSync();
 
 /* ============ التثبيت كتطبيق ============ */
-let dp=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;$('install').style.display='inline-block'});
-$('install').onclick=()=>{if(dp){dp.prompt();dp=null;$('install').style.display='none'}};
+let dp=null;const isApp=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+const UA=navigator.userAgent,isIOS=/iPhone|iPad|iPod/i.test(UA)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),inApp=/FBAN|FBAV|Instagram|Line\/|; wv\)|WhatsApp|Snapchat|TikTok/i.test(UA);
+if(!isApp())$('install').style.display='inline-block';
+addEventListener('beforeinstallprompt',e=>{e.preventDefault();dp=e;if(!isApp())$('install').style.display='inline-block'});
+addEventListener('appinstalled',()=>{dp=null;$('install').style.display='none';toast('🎉 تم تثبيت التطبيق! تجده على الشاشة الرئيسية')});
+function installHelp(){const stp=a=>'<ol style="line-height:2;font-weight:700;padding-inline-start:20px">'+a.map(x=>'<li>'+x+'</li>').join('')+'</ol>';
+ if(inApp)return'<p style="font-weight:800">أنت تفتح الموقع من داخل تطبيق آخر (فيسبوك أو واتساب…)، ومنه لا يمكن التثبيت.</p>'+stp(['اضغط النقاط الثلاث ⋮ أو ••• في الأعلى','اختر «فتح في المتصفح» أو «Open in Chrome»','ثم اضغط «📲 ثبّت التطبيق» مرة أخرى']);
+ if(isIOS)return'<p style="font-weight:800">على الآيفون يتم التثبيت من Safari بخطوتين:</p>'+stp(['اضغط زر المشاركة <b>⬆️</b> في أسفل الشاشة','اختر <b>«إضافة إلى الشاشة الرئيسية»</b> ثم «إضافة»']);
+ return'<p style="font-weight:800">إذا لم تظهر نافذة التثبيت:</p>'+stp(['افتح الموقع في متصفح <b>Chrome</b>','اضغط النقاط الثلاث <b>⋮</b> في الأعلى','اختر <b>«تثبيت التطبيق»</b> أو «إضافة إلى الشاشة الرئيسية»'])+'<p class="muted">إذا كان التطبيق مثبتًا من قبل، تجده على الشاشة الرئيسية لهاتفك.</p>'}
+function doInstall(){if(dp){const p=dp;dp=null;p.prompt();return}ask('📲 تثبيت التطبيق',installHelp(),null,null)}
+$('install').onclick=doInstall;
+setTimeout(()=>{if(isApp())return;let last=0;try{last=+localStorage.getItem('lb_instAsk')||0}catch(e){}if(Date.now()-last<864e5)return;try{localStorage.setItem('lb_instAsk',Date.now())}catch(e){}
+ ask('📲 ثبّت «الكتاب الحي» على هاتفك','<div style="text-align:center"><img src="icon-192.png" style="width:84px;border-radius:20px;box-shadow:0 8px 24px rgba(0,0,0,.2)"><p style="font-weight:800;margin:10px 0 4px">افتحه بلمسة من شاشتك الرئيسية مثل أي تطبيق، ويعمل أسرع وبملء الشاشة ✨</p><p class="muted">مجاني ولا يأخذ مساحة تُذكر</p></div>'+(dp?'':installHelp()),dp?'📲 ثبّت الآن':null,dp?()=>{doInstall()}:null)},4200);
 if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 <script src="fun.js"></script>
