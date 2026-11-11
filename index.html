@@ -258,6 +258,7 @@ input:focus,select:focus{outline:none;border-color:var(--roy2)!important;box-sha
 @keyframes spRise{from{transform:translateY(0);opacity:0}15%{opacity:.8}to{transform:translateY(-110vh);opacity:0}}
 @media (prefers-reduced-motion:reduce){#splash *{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}}
 </style>
+<style>.kidAct{display:flex;gap:8px;margin:8px 0 4px}.kidAct .btn{flex:1;font-size:.92rem;padding:10px 6px}.addKid{border:2px dashed var(--or)}#hParent{display:none;background:#fff4e6;border:2px solid #ffa94d;border-radius:14px;padding:8px 12px;margin:8px 0;font-weight:800;align-items:center;gap:8px;justify-content:space-between}#hParent.on{display:flex}.pinBox{background:#f1f3ff;border-radius:14px;padding:12px;text-align:center;margin:8px 0}.pinBox b{display:block;font-size:1.6rem;letter-spacing:3px;direction:ltr;color:var(--ink)}</style>
 </head>
 <body>
 <div id="splash" aria-hidden="true"><div class="sp-dots"><i style="left:8%;animation-duration:4.2s;animation-delay:0.3s;width:5px;height:5px"></i><i style="left:18%;animation-duration:5.5s;animation-delay:1.1s;width:4px;height:4px"></i><i style="left:30%;animation-duration:3.8s;animation-delay:0.6s;width:6px;height:6px"></i><i style="left:44%;animation-duration:6.0s;animation-delay:1.6s;width:3px;height:3px"></i><i style="left:57%;animation-duration:4.6s;animation-delay:0.2s;width:5px;height:5px"></i><i style="left:68%;animation-duration:5.2s;animation-delay:1.3s;width:4px;height:4px"></i><i style="left:79%;animation-duration:3.6s;animation-delay:0.9s;width:6px;height:6px"></i><i style="left:90%;animation-duration:4.9s;animation-delay:0.5s;width:4px;height:4px"></i></div>
@@ -295,7 +296,7 @@ function bye(){if(!s.parentNode)return;s.classList.add('out');setTimeout(functio
     </div>
     <h2>من أنت؟</h2>
     <div class="card role" data-role="student"><div class="ic" style="background:#e8f0ff"><img class="stu" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 120 120%22%3E%3Cpath d=%22M22 120c2-22 18-34 38-34s36 12 38 34z%22 fill=%22%232329C9%22/%3E%3Cpath d=%22M48 86l12 16 12-16z%22 fill=%22%23fff%22/%3E%3Cpath d=%22M57 92h6l2 22h-10z%22 fill=%22%23e8475f%22/%3E%3Crect x=%2252%22 y=%2274%22 width=%2216%22 height=%2216%22 rx=%226%22 fill=%22%23f2c39b%22/%3E%3Cellipse cx=%2260%22 cy=%2258%22 rx=%2224%22 ry=%2226%22 fill=%22%23f6cfa8%22/%3E%3Cellipse cx=%2235%22 cy=%2260%22 rx=%224.5%22 ry=%227%22 fill=%22%23f2c39b%22/%3E%3Cellipse cx=%2285%22 cy=%2260%22 rx=%224.5%22 ry=%227%22 fill=%22%23f2c39b%22/%3E%3Cpath d=%22M36 52c0-16 10-24 24-24s24 8 24 24c-6-6-14-8-24-8s-18 2-24 8z%22 fill=%22%233b2516%22/%3E%3Cellipse cx=%2251%22 cy=%2260%22 rx=%223%22 ry=%223.6%22 fill=%22%232b1a10%22/%3E%3Cellipse cx=%2269%22 cy=%2260%22 rx=%223%22 ry=%223.6%22 fill=%22%232b1a10%22/%3E%3Ccircle cx=%2252%22 cy=%2259%22 r=%221%22 fill=%22%23fff%22/%3E%3Ccircle cx=%2270%22 cy=%2259%22 r=%221%22 fill=%22%23fff%22/%3E%3Cpath d=%22M46 52q5-3 10 0M64 52q5-3 10 0%22 stroke=%22%233b2516%22 stroke-width=%222.4%22 fill=%22none%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M51 71q9 8 18 0%22 stroke=%22%23b5533c%22 stroke-width=%222.6%22 fill=%22none%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%2245%22 cy=%2268%22 r=%223.5%22 fill=%22%23f4a3a0%22 opacity=%22.55%22/%3E%3Ccircle cx=%2275%22 cy=%2268%22 r=%223.5%22 fill=%22%23f4a3a0%22 opacity=%22.55%22/%3E%3Cpath d=%22M38 38q22-10 44 0v8q-22-8-44 0z%22 fill=%22%2316183d%22/%3E%3Cpath d=%22M60 14l42 16-42 16-42-16z%22 fill=%22%231f2257%22/%3E%3Cpath d=%22M60 18l34 12-34 12-34-12z%22 fill=%22%232a2e75%22/%3E%3Ccircle cx=%2260%22 cy=%2230%22 r=%223%22 fill=%22%23ffc83d%22/%3E%3Cpath d=%22M60 30q24 2 30 4v18%22 stroke=%22%23ffc83d%22 stroke-width=%222.4%22 fill=%22none%22/%3E%3Cpath d=%22M87 50h6l1 10h-8z%22 fill=%22%23ffc83d%22/%3E%3C/svg%3E" alt="طالب"></div><div><b>أنا طالب</b><span class="muted">ادخل إلى دروسك وتجاربك</span></div></div>
-    <div class="card role" data-role="parent"><div class="ic" style="background:#e6f6f4">👨‍👩‍👧</div><div><b>أنا ولي أمر</b><span class="muted">تابع تقدّم أبنائك من جوالك</span></div></div>
+    <div class="card role" data-role="parent"><div class="ic" style="background:#e6f6f4">👨‍👩‍👧</div><div><b>أنا ولي أمر</b><span class="muted">سجّل أبناءك وتابع دراستهم من جوالك</span></div></div>
     <div style="text-align:center;margin-top:18px"><button class="ghost" id="adminLink" style="font-size:.85rem;color:var(--soft)">🏢 دخول الإدارة</button></div>
   </div>
 </section>
@@ -335,6 +336,7 @@ function bye(){if(!s.parentNode)return;s.classList.add('out');setTimeout(functio
       <h1 id="hName"></h1>
       <div class="chips"><span class="chip" id="hGrade"></span><span class="chip" id="hPts"></span><span class="chip" id="hStreak"></span></div>
     </div>
+    <div id="hParent"><span id="hParentT"></span><button class="btn ink" id="hBack" style="padding:6px 10px;font-size:.85rem">↩ رجوع لولي الأمر</button></div>
     <div class="plan" id="hPlan" style="margin-bottom:10px"></div>
     <div id="feat"></div>
     <h2>موادي</h2>
@@ -363,6 +365,7 @@ function bye(){if(!s.parentNode)return;s.classList.add('out');setTimeout(functio
     <div class="kids" id="pKids"></div>
     <div id="pBody">
       <div class="card" style="display:flex;align-items:center;gap:12px"><div style="font-size:2.4rem"><img class="stu" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 120 120%22%3E%3Cpath d=%22M22 120c2-22 18-34 38-34s36 12 38 34z%22 fill=%22%232329C9%22/%3E%3Cpath d=%22M48 86l12 16 12-16z%22 fill=%22%23fff%22/%3E%3Cpath d=%22M57 92h6l2 22h-10z%22 fill=%22%23e8475f%22/%3E%3Crect x=%2252%22 y=%2274%22 width=%2216%22 height=%2216%22 rx=%226%22 fill=%22%23f2c39b%22/%3E%3Cellipse cx=%2260%22 cy=%2258%22 rx=%2224%22 ry=%2226%22 fill=%22%23f6cfa8%22/%3E%3Cellipse cx=%2235%22 cy=%2260%22 rx=%224.5%22 ry=%227%22 fill=%22%23f2c39b%22/%3E%3Cellipse cx=%2285%22 cy=%2260%22 rx=%224.5%22 ry=%227%22 fill=%22%23f2c39b%22/%3E%3Cpath d=%22M36 52c0-16 10-24 24-24s24 8 24 24c-6-6-14-8-24-8s-18 2-24 8z%22 fill=%22%233b2516%22/%3E%3Cellipse cx=%2251%22 cy=%2260%22 rx=%223%22 ry=%223.6%22 fill=%22%232b1a10%22/%3E%3Cellipse cx=%2269%22 cy=%2260%22 rx=%223%22 ry=%223.6%22 fill=%22%232b1a10%22/%3E%3Ccircle cx=%2252%22 cy=%2259%22 r=%221%22 fill=%22%23fff%22/%3E%3Ccircle cx=%2270%22 cy=%2259%22 r=%221%22 fill=%22%23fff%22/%3E%3Cpath d=%22M46 52q5-3 10 0M64 52q5-3 10 0%22 stroke=%22%233b2516%22 stroke-width=%222.4%22 fill=%22none%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M51 71q9 8 18 0%22 stroke=%22%23b5533c%22 stroke-width=%222.6%22 fill=%22none%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%2245%22 cy=%2268%22 r=%223.5%22 fill=%22%23f4a3a0%22 opacity=%22.55%22/%3E%3Ccircle cx=%2275%22 cy=%2268%22 r=%223.5%22 fill=%22%23f4a3a0%22 opacity=%22.55%22/%3E%3Cpath d=%22M38 38q22-10 44 0v8q-22-8-44 0z%22 fill=%22%2316183d%22/%3E%3Cpath d=%22M60 14l42 16-42 16-42-16z%22 fill=%22%231f2257%22/%3E%3Cpath d=%22M60 18l34 12-34 12-34-12z%22 fill=%22%232a2e75%22/%3E%3Ccircle cx=%2260%22 cy=%2230%22 r=%223%22 fill=%22%23ffc83d%22/%3E%3Cpath d=%22M60 30q24 2 30 4v18%22 stroke=%22%23ffc83d%22 stroke-width=%222.4%22 fill=%22none%22/%3E%3Cpath d=%22M87 50h6l1 10h-8z%22 fill=%22%23ffc83d%22/%3E%3C/svg%3E" alt="طالب"></div><div style="flex:1"><b style="color:var(--ink);font-size:1.15rem" id="pChild"></b><div class="muted" id="pGrade"></div><div class="muted" id="pSeen" style="font-size:.8rem"></div></div></div>
+      <div class="kidAct"><button class="btn or" id="pOpen">📖 افتح كتبه هنا</button><button class="btn" id="pLogin">📲 دخوله من جواله</button></div>
       <div class="plan" id="pPlan"></div>
       <h2>📊 التقرير</h2>
       <div class="stat3"><div class="st3"><b id="pMin">0</b><span>دقيقة تعلّم</span></div><div class="st3"><b id="pOk">0</b><span>إجابة صحيحة</span></div><div class="st3"><b id="pAcc">–</b><span>نسبة الدقة</span></div></div>
@@ -371,7 +374,14 @@ function bye(){if(!s.parentNode)return;s.classList.add('out');setTimeout(functio
       <div class="card"><b style="color:var(--ink)">🕒 آخر نشاط</b><div id="pAct"></div></div>
       <div class="card" style="background:#EEF1FF"><b style="color:var(--ink)">💡 نصيحة لك</b><div id="pTip" style="margin-top:4px"></div></div>
     </div>
-    <div class="card" id="pLinkCard">
+    <div class="card addKid" id="pAddCard"><b style="color:var(--ink);font-size:1.1rem" id="pAddT">➕ أضف ابنك</b>
+      <p class="muted" style="margin:4px 0" id="pAddP">اكتب اسمه واختر صفّه، وسننشئ له حسابًا مربوطًا بك فورًا. لا يحتاج جوالًا خاصًا!</p>
+      <div id="pAddBody"><div class="fld"><label>اسم ابنك</label><input id="pAddName" placeholder="مثال: أحمد"></div>
+      <div class="fld"><label>صفّه</label><div id="pAddGrades"></div></div>
+      <button class="btn or w" id="pAddGo">➕ أضف ابني</button><div id="pAddMsg" class="msg"></div></div>
+      <button class="btn w" id="pAddOpen" style="display:none">➕ أضف ابنًا آخر</button></div>
+    <div class="muted" style="text-align:center;margin:6px 0"><a href="#" id="pLinkShow">ابنك سجّل بنفسه من قبل؟ اربط حسابه من هنا</a></div>
+    <div class="card" style="display:none" id="pLinkCard">
       <b style="color:var(--ink)" id="pLinkT">🔗 اربط حساب ابنك</b>
       <p class="muted" style="margin:4px 0">من جوال ابنك: افتح التطبيق ← اضغط «ربط ولي الأمر» ← يظهر رقم من 6 خانات. اكتبه هنا.</p>
       <div class="row"><input class="code" id="pLinkIn" inputmode="numeric" maxlength="6" placeholder="000000" style="flex:2"><button class="btn ink" id="pLinkGo" style="flex:1">ربط</button></div>
@@ -789,7 +799,7 @@ async function refresh(){if(!S.tok)return;
  S.user=r.user;if(role()==='student'){S.student=r.user;mergeProg(r.progress);store();dirty=true;push()}else store();
  const on=document.querySelector('.scr.on').id;if(on==='s-home')renderHome();else if(on==='s-subj'&&curSubj)openSubj(curSubj)}
 function authLost(){const keep=devId;S=fresh();store();show('login');toast('انتهت الجلسة، سجّل الدخول من جديد')}
-async function logout(){if(!confirm('تسجيل الخروج من هذا الجهاز؟'))return;await push();if(S.tok)rpc('lb_logout',{p_token:S.tok});S=fresh();store();dirty=false;show('login')}
+async function logout(){if(role()==='student'&&parentSaved())return backToParent();if(!confirm('تسجيل الخروج من هذا الجهاز؟'))return;try{localStorage.removeItem('lb_parent')}catch(e){}await push();if(S.tok)rpc('lb_logout',{p_token:S.tok});S=fresh();store();dirty=false;show('login')}
 
 /* ============ التنقل ============ */
 function home(){const r=role();show(r==='admin'?'admin':r==='parent'?'parent':r==='student'?'home':'login')}
@@ -821,15 +831,15 @@ function auView(){const reg=auMode==='reg';
  $('auTabs').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.t===auMode));
  $('auNameF').style.display=reg?'block':'none';$('auGradeF').style.display=reg&&auRole==='student'?'block':'none';
  $('auNameL').textContent=auRole==='parent'?'اسمك':'اسم الطالب';
- $('auPhoneL').textContent=auRole==='student'?'رقم الهاتف (رقمك أو رقم ولي الأمر)':'رقم هاتفك';
- $('auIntro').innerHTML=reg?(auRole==='student'?'سجّل مرة واحدة وجرّب <b>5 دروس مجانية</b> في كل مادة. احفظ رقمك وكلمة المرور جيدًا.':'أنشئ حسابك، ثم اربطه بحساب ابنك لتتابع تقدّمه من جوالك.'):'ادخل برقم الهاتف وكلمة المرور.';
+ $('auPhoneL').textContent=auRole==='student'?(reg?'رقم الهاتف (رقمك أو رقم ولي الأمر)':'رقم الهاتف أو رقم الدخول'):'رقم هاتفك';
+ $('auIntro').innerHTML=reg?(auRole==='student'?'سجّل مرة واحدة وجرّب <b>5 دروس مجانية</b> في كل مادة. احفظ رقمك وكلمة المرور جيدًا.':'أنشئ حسابك، ثم أضف أبناءك بخطوة واحدة وتابع دراستهم من جوالك.'):'ادخل برقم الهاتف وكلمة المرور.';
  $('auGo').textContent=reg?'إنشاء الحساب 🚀':'دخول';$('auForgot').style.display=reg?'none':'block'}
 $('auTabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{auMode=b.dataset.t;msg('auMsg','');auView()});
 $('auEye').onclick=()=>{const p=$('auPass');p.type=p.type==='password'?'text':'password'};
 $('auWa').onclick=e=>{e.preventDefault();open('https://wa.me/'+CONFIG.whatsapp+'?text='+encodeURIComponent('السلام عليكم، نسيت كلمة المرور في تطبيق الكتاب الحي. رقمي: '+$('auPhone').value),'_blank')};
 $('auPass').onkeydown=e=>{if(e.key==='Enter')$('auGo').click()};
 $('auGo').onclick=async()=>{const b=$('auGo'),ph=normPhone($('auPhone').value),pw=$('auPass').value,nm=$('auName').value.trim();
- if(ph.length!==9)return msg('auMsg','اكتب رقم هاتف صحيح (10 أرقام يبدأ بـ 09)');
+ if(ph.length!==9)return msg('auMsg','اكتب رقم الهاتف أو رقم الدخول (10 أرقام)');
  if(pw.length<4)return msg('auMsg','كلمة المرور 4 أحرف أو أرقام على الأقل');
  if(auMode==='reg'&&nm.length<2)return msg('auMsg',auRole==='parent'?'اكتب اسمك':'اكتب اسم الطالب');
  busy(b,1);msg('auMsg','');
@@ -872,7 +882,7 @@ function planBox(el,w){const sb=subOf(who());el.className='plan'+(active()?'':' 
 function renderHome(){if(role()!=='student'){home();return}const g=grade(),h=new Date().getHours();
  $('hGreet').textContent=h<12?'صباح الخير ☀️':'مساء الخير 🌙';$('hName').textContent='أهلًا '+S.user.name+'!';
  $('hGrade').textContent=g.icon+' '+g.name;$('hPts').textContent='⭐ '+points()+' نقطة';$('hStreak').textContent='🔥 '+streak()+' يوم';
- planBox($('hPlan'),'s');
+ planBox($('hPlan'),'s');{const pp=parentSaved();$('hParent').classList.toggle('on',!!pp);if(pp)$('hParentT').textContent='👨‍👩‍👧 حساب '+S.user.name}
  const stars=Object.values(ALL).filter(l=>l.grade===g&&l.star&&l.f.includes('3d'));$('feat').innerHTML='';
  stars.forEach(l=>{const d=document.createElement('div');d.className='feat';d.innerHTML='<div class="ic">'+(l.t.match(/^\S+/)[0])+'</div><div><b>'+l.t.replace(/^\S+\s/,'')+'</b><span>تجربة ثلاثية الأبعاد – جرّبها الآن!</span></div>';d.onclick=()=>openLesson(l.id);$('feat').appendChild(d)});
  const G=$('subs');G.innerHTML='';(g.subjects||[]).forEach(s=>{const d=document.createElement('div');d.className='sub'+(s.soon?' soon':'');d.style.setProperty('--c',s.c);
@@ -917,7 +927,7 @@ function renderParent(noFetch){if(role()!=='parent'){home();return}
  $('pHello').textContent='أهلًا '+S.user.name+' 👋';
  const K=$('pKids');K.innerHTML=S.kids.length>1?S.kids.map((k,i)=>'<button data-k="'+i+'" class="'+(i===S.kid?'on':'')+'">'+STU+' '+esc(k.name)+'</button>').join(''):'';
  K.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{S.kid=+b.dataset.k;store();renderParent(true)});
- const k=kid();$('pBody').style.display=k?'block':'none';$('pLinkT').textContent=k?'➕ ربط ابن آخر':'🔗 اربط حساب ابنك';
+ const k=kid();$('pBody').style.display=k?'block':'none';$('pLinkT').textContent=k?'🔗 ربط حساب ابن آخر':'🔗 اربط حساب ابنك';renderAdd(k);
  if(!noFetch)loadKids();window.funParent&&funParent(k);if(!k)return;
  const P=k.progress||{},SS=P.stats||{},LG=P.log||[];const g=grade();
  $('pChild').textContent=k.name;$('pGrade').textContent=g.name+(g.sub?' · '+g.sub:'');$('pSeen').textContent='آخر دخول: '+(k.last_seen?new Date(k.last_seen).toLocaleString('ar-LY',{dateStyle:'medium',timeStyle:'short'}):'—');
@@ -935,6 +945,29 @@ $('pLinkGo').onclick=async()=>{const c=normPhone($('pLinkIn').value).slice(-6);i
  const b=$('pLinkGo');busy(b,1);const r=await rpc('lb_link_child',{p_token:S.tok,p_code:c});busy(b,0);if(r.err)return msg('pLinkMsg',r.err);
  msg('pLinkMsg','✅ تم ربط '+r.child,true);$('pLinkIn').value='';await loadKids();S.kid=Math.max(0,S.kids.findIndex(k=>k.name===r.child));store();renderParent(true)};
 $('pRefresh').onclick=()=>{loadKids();toast('جارٍ التحديث…')};
+/* ============ حساب العائلة ============ */
+let addGrade=null;
+function renderAdd(k){const has=S.kids.length>0,open=!has||renderAdd.open;
+ ['pAddBody','pAddP','pAddT'].forEach(i=>$(i).style.display=open?'block':'none');$('pAddOpen').style.display=open?'none':'block';$('pAddT').textContent=has?'➕ أضف ابنًا آخر':'➕ أضف ابنك';
+ if(open&&!$('pAddGrades').children.length)gradeList($('pAddGrades'),addGrade,g=>addGrade=g);
+ if(k){$('pOpen').textContent='📖 افتح كتب '+k.name+' هنا';$('pLogin').textContent='📲 دخول '+k.name+' من جواله'}}
+$('pAddOpen').onclick=()=>{renderAdd.open=1;renderAdd(kid())};
+$('pLinkShow').onclick=e=>{e.preventDefault();const c=$('pLinkCard');c.style.display=c.style.display==='none'?'block':'none';if(c.style.display==='block')c.scrollIntoView({behavior:'smooth'})};
+const pinHtml=(nm,login,pin)=>'<div class="pinBox">رقم الدخول<b>'+esc(login)+'</b></div><div class="pinBox">الرقم السري<b>'+esc(pin)+'</b></div><p class="muted">📲 من جوال '+esc(nm)+': افتح livebook.ly ← «أنا طالب» ← «لديّ حساب»، واكتب الرقمين. احفظهما في مكان آمن.</p>';
+$('pAddGo').onclick=async()=>{const nm=$('pAddName').value.trim();if(nm.length<2)return msg('pAddMsg','اكتب اسم ابنك');if(!addGrade)return msg('pAddMsg','اختر صفّ ابنك');
+ const b=$('pAddGo');busy(b,1,'⏳ ننشئ الحساب…');const r=await rpc('lb_add_child',{p_token:S.tok,p_name:nm,p_grade:addGrade});busy(b,0);if(r.err)return msg('pAddMsg',r.err);
+ msg('pAddMsg','');$('pAddName').value='';renderAdd.open=0;await loadKids();S.kid=Math.max(0,S.kids.findIndex(x=>x.id===r.child.id));store();renderParent(true);cheerP&&cheerP();
+ ask('🎉 تم إنشاء حساب '+r.child.name,'<p style="font-weight:800">يستطيع '+esc(r.child.name)+' الدراسة <b>من جوالك الآن</b>: اضغط «📖 افتح كتب '+esc(r.child.name)+' هنا».</p><p class="muted">وإن كان له جوال خاص، يدخل بهذين الرقمين:</p>'+pinHtml(r.child.name,r.login,r.pin),null,null)};
+$('pLogin').onclick=()=>{const k=kid();if(!k)return;ask('📲 دخول '+k.name+' من جواله','سننشئ له <b>رقمًا سريًا جديدًا</b> ليدخل به من جواله (الرقم القديم يتوقف). نكمل؟','✅ نعم، أظهر الرقمين',async()=>{const r=await rpc('lb_child_pin',{p_token:S.tok,p_child:k.id});if(r.err)return r.err;setTimeout(()=>ask('📲 دخول '+k.name,pinHtml(k.name,r.login,r.pin),null,null),60)})};
+function parentSaved(){try{return JSON.parse(localStorage.getItem('lb_parent')||'null')}catch(e){return null}}
+$('pOpen').onclick=async()=>{const k=kid();if(!k)return;const b=$('pOpen');busy(b,1);const r=await rpc('lb_child_session',{p_token:S.tok,p_child:k.id,p_device:devId});busy(b,0);if(r.err)return toast(r.err);
+ try{localStorage.setItem('lb_parent',JSON.stringify({tok:S.tok,user:S.user,kids:S.kids,kid:S.kid}))}catch(e){}
+ S=fresh();setUser(r);show('home');await refresh();toast('📖 أهلًا '+k.name+'! بالتوفيق في دراستك')};
+async function backToParent(){const p=parentSaved();if(!p)return;await push();if(S.tok)rpc('lb_logout',{p_token:S.tok});
+ S=fresh();S.tok=p.tok;S.user=p.user;S.kids=p.kids||[];S.kid=p.kid||0;store();dirty=false;try{localStorage.removeItem('lb_parent')}catch(e){}show('parent')}
+$('hBack').onclick=backToParent;
+function cheerP(){}
+
 
 /* ============ الدفع ============ */
 let selPlan='T7';
@@ -948,8 +981,8 @@ function renderPay(){const gp=PLANS.filter(p=>p.g===grade().id);if(!gp.some(p=>p
  $('sibChk').onchange=e=>{SIB=e.target.checked;renderPay()};
  $('bank').querySelectorAll('[data-cp]').forEach(b=>b.onclick=()=>copy(b.dataset.cp));
  $('ref').textContent=refNo();const ok=/^\d{11,13}$/.test(CONFIG.whatsapp);$('waBtn').href=ok?'https://wa.me/'+CONFIG.whatsapp+'?text='+encodeURIComponent(waMsg()):'#';$('waBtn').onclick=e=>{if(!ok){e.preventDefault();toast('رقم واتساب الشركة لم يُضبط بعد')}};$('waNum').textContent=ok?'أو أرسل على الرقم: +'+CONFIG.whatsapp:'';
- const par=role()==='parent';$('codeIn').style.display=par?'none':'';$('codeGo').style.display=par?'none':'';$('codeHint').textContent=par?'سيصلك كود مثل KH-XXXX-XXXX. أعطه لابنك ليدخله من حسابه (اشترك الآن ← أدخل الكود).':'سيصلك كود مثل KH-XXXX-XXXX، اكتبه هنا.'}
-function openPay(){if(!who()){toast('اربط حساب ابنك أولًا');return}renderPay();$('pay').classList.add('on');msg('codeMsg','');$('codeIn').value='';rcData=null;$('rcLbl').classList.remove('has');$('rcTxt').textContent='📷 اختر صورة الإيصال';$('rcNote').value='';msg('rcMsg','');payView()}
+ const par=role()==='parent';$('codeIn').style.display=par?'none':'';$('codeGo').style.display=par?'none':'';$('codeHint').textContent=par?'عند قبول التحويل يُفعَّل اشتراك ابنك تلقائيًا ✅. هذه الخانة لأكواد المدارس والعروض فقط: أعطِ الكود لابنك ليدخله من حسابه.':'سيصلك كود مثل KH-XXXX-XXXX، اكتبه هنا.'}
+function openPay(){if(!who()){toast('أضف ابنك أولًا من لوحة ولي الأمر');return}renderPay();$('pay').classList.add('on');msg('codeMsg','');$('codeIn').value='';rcData=null;$('rcLbl').classList.remove('has');$('rcTxt').textContent='📷 اختر صورة الإيصال';$('rcNote').value='';msg('rcMsg','');payView()}
 function payView(){const pp=payOf(who()),pend=pp&&pp.status==='pending';$('payForm').style.display=pend?'none':'';$('payPend').innerHTML=(pp?payBadge(pp,1):'')+(pend?'<div class="muted" style="font-size:.85rem;margin:6px 0">✅ وصلنا إيصالك وسنفعّل الاشتراك بعد مراجعته. أرسلت صورة خاطئة أو اخترت باقة غير صحيحة؟</div><button class="btn w" id="payCancel">🔄 إلغاء الطلب وإرسال إيصال جديد</button>':'');
  if(pend)$('payCancel').onclick=()=>ask('🔄 إلغاء الطلب','سيُلغى طلبك الحالي وتستطيع رفع إيصال جديد. متأكد؟','نعم، ألغِ',async()=>{const r=await rpc('lb_pay_cancel',{p_token:S.tok,p_child:role()==='parent'&&kid()?kid().id:null});if(r.err)return toast(r.err);toast('تم الإلغاء، ارفع الإيصال الجديد');await loadPays();payView()})}
 let rcData=null;
