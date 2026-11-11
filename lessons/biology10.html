@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>أحياء الأول الثانوي – الكتاب الحي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+html{color-scheme:light}button,input,select{font-family:inherit;color:#1f2a44}
+:root{--ink:#1f2a44;--tl:#2b8a3e;--tl2:#ebfbee;--or:#f08c2e;--gr:#2e9e5b;--rd:#d64545;--pu:#6b4fd8;--line:#e2e8ee;--soft:#6b7690}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Cairo',Tahoma,sans-serif;background:#e9eef6;color:var(--ink);line-height:1.85}
+.book{max-width:800px;margin:12px auto;background:#fff;border-radius:16px;box-shadow:0 10px 30px #0002;overflow:hidden}
+header{background:linear-gradient(135deg,#1b5e2b,#37b24d);color:#fff;padding:16px;text-align:center}
+header h1{margin:0;font-size:1.3rem;font-weight:900}header div{opacity:.9;font-size:.85rem}
+.bar{display:flex;gap:6px;padding:8px 10px;background:var(--tl2);border-bottom:2px solid #c9d8f0;position:sticky;top:0;z-index:5;overflow-x:auto}
+.bar button{flex:0 0 auto;border:2px solid var(--tl);background:#fff;color:#1b3f73;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.86rem}
+.bar button.on{background:var(--tl);color:#fff}
+.page{display:none;padding:14px 16px 40px;animation:in .35s}.page.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h2{color:#1b3f73;margin:4px 0 6px;font-size:1.35rem;line-height:1.5}
+.num{display:inline-block;background:var(--tl);color:#fff;border-radius:10px;padding:0 10px;margin-left:6px;font-size:1rem}
+.box{border:2px solid var(--line);border-radius:16px;padding:14px;margin:14px 0;background:#fff}
+.box h3{margin:0 0 6px;font-size:1.05rem;color:#1b3f73}
+.lab{border-style:dashed;border-color:#a9c3ea;background:#fbfcff}
+.idea{background:linear-gradient(135deg,#1b5e2b,#37b24d);color:#fff;border-radius:16px;padding:12px 16px;margin:10px 0;font-weight:800}
+.idea small{display:block;opacity:.85;font-weight:600}
+.life{background:#fff7e8;border-right:5px solid var(--or);border-radius:10px;padding:8px 12px;margin:10px 0}
+.law{background:#fff7e8;border:2px solid #f5c27a;border-radius:14px;padding:10px 14px;margin:10px 0;font-weight:800;text-align:center;font-size:1.05rem}
+.warn{background:#fdeeee;border-right:5px solid var(--rd);border-radius:10px;padding:8px 12px;margin:10px 0}
+.btn{border:2px solid var(--ink);background:#fff;border-radius:10px;padding:6px 14px;font-weight:800;cursor:pointer;font-size:.95rem}
+.btn.main{background:var(--tl);border-color:var(--tl);color:#fff}.btn.or{background:var(--or);border-color:var(--or);color:#2a1600}
+.btn.ok{background:#dff5e7;border-color:var(--gr)}.btn.no{background:#fde4e4;border-color:var(--rd)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;justify-content:center}
+.fb{font-weight:800;min-height:1.4em;text-align:center;margin-top:6px}.fb.ok{color:var(--gr)}.fb.no{color:var(--rd)}
+.prob{background:#f5f8fd;border-radius:14px;padding:10px;text-align:center;font-weight:700}
+.mx{font-size:1.2rem;font-weight:800;line-height:2.1}
+.sc{text-align:center;font-weight:900;background:var(--tl2);border-radius:12px;padding:8px}
+.steps{background:#f8f9fc;border-radius:12px;padding:8px 12px;margin-top:8px;display:none}
+.opt{display:block;width:100%;text-align:right;margin:5px 0}.opt.ok{background:#dff5e7;border-color:var(--gr)}.opt.no{background:#fde4e4;border-color:var(--rd)}
+input.cf{width:60px;height:42px;font-size:1.15rem;font-weight:900;text-align:center;border:3px solid #c9d8f0;border-radius:10px;direction:ltr;vertical-align:middle;margin:0 2px}
+input.cf.ok{border-color:var(--gr);background:#eefaf2}input.cf.no{border-color:var(--rd);background:#fdeeee}
+/* matrix */
+.M{display:inline-flex;align-items:stretch;vertical-align:middle;margin:2px 4px}
+.M .br{width:8px;border:3px solid var(--ink)}.M .br.r{border-left:none;border-radius:0 6px 6px 0}.M .br.l{border-right:none;border-radius:6px 0 0 6px}
+.M.det .br{width:0;border-width:0 0 0 3px;border-radius:0}.M.det .br.l{border-width:0 3px 0 0}
+.M .g{display:grid;direction:rtl;gap:2px 4px;padding:2px 4px}
+.M .c{min-width:36px;text-align:center;font-weight:900;font-size:1.1rem;padding:2px 4px;border-radius:8px;direction:ltr;transition:.25s}
+.M .c.h1{background:#ffe08a}.M .c.h2{background:#b9e4ff}.M .c.x{opacity:.18;text-decoration:line-through}.M .c.h3{background:#c8f0d2}
+.M input.c{width:48px;height:36px;border:2px solid #c9d8f0;border-radius:8px;background:#fff;font-family:inherit}
+.chap{border:2px solid var(--line);border-radius:14px;margin:8px 0;overflow:hidden}
+.chap>div:first-child{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;font-weight:800;background:#f8faff}
+.chap .cn{background:var(--tl);color:#fff;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;flex:0 0 auto}
+.chap .ls{display:none;padding:4px 12px 10px}.chap.open .ls{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px dashed var(--line);font-size:.95rem}
+.li .pg{margin-right:auto;color:var(--soft);font-size:.8rem}.li.ready{cursor:pointer;font-weight:800;color:#1b3f73}
+.tg{font-size:.72rem;border-radius:8px;padding:0 8px;font-weight:800}.tg.r{background:#e6f6ec;color:#1d7a3f}.tg.s{background:#f1f1f1;color:#999}
+table.t{border-collapse:collapse;width:100%;font-size:.92rem;margin:6px 0}table.t td,table.t th{border:1px solid #d6e1f2;padding:5px 8px}table.t th{background:var(--tl2)}
+.sl{display:flex;align-items:center;gap:8px;margin:4px 0}.sl label{min-width:90px;font-weight:800}.sl input{flex:1;accent-color:var(--tl)}
+footer{text-align:center;color:#999;font-size:.8rem;padding:10px 10px 70px}
+.rt{direction:ltr;unicode-bidi:isolate;display:inline-block}.wx,.bx{border:1px solid #dbe5f5;border-radius:12px;padding:8px 10px;margin:8px 0;background:#fbfcff}.wxq{font-weight:700;line-height:2}.wst{background:#fff;border-right:4px solid var(--tl);border-radius:8px;padding:4px 10px;margin:5px 0;animation:in .3s;line-height:2}.wst.fin{border-color:var(--gr);background:#eefaf2}.sn{display:inline-block;background:var(--tl);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:.8rem;margin-left:6px}.bh{background:#fff7e8;border-radius:8px;padding:6px 10px;margin:4px 0}.ans{font-weight:900;color:var(--gr);margin-top:4px}.exb{border-color:#a9c3ea}.M.det .br.r,.M.det .br.l{border:none;border-radius:0;width:0}.M.det .br.r{border-right:3px solid var(--ink)}.M.det .br.l{border-left:3px solid var(--ink)}.bkb{border-color:#f5c27a;background:#fffdf8}/*darkfix*/input,select,textarea,.cf,.M input.c{background-color:#fff !important;color:#1f2a44 !important;-webkit-text-fill-color:#1f2a44 !important;caret-color:#1f2a44}input.cf.ok{background-color:#eefaf2 !important}input.cf.no{background-color:#fdeeee !important}svg text{font-family:Cairo,Tahoma,Arial,sans-serif}
+canvas{touch-action:manipulation;max-width:100%;height:auto}
+.shk{animation:shk .4s}@keyframes shk{25%{transform:translateX(6px)}75%{transform:translateX(-6px)}}
+ol.steps{display:block;background:none}
+</style>
+</head>
+<body>
+<div class="book">
+<header><h1>🧬 أحياء الأول الثانوي</h1><div>الكتاب الحي · الخلايا · الانتشار والأسموزية · الإنزيمات · التغذية · الهضم · البناء الضوئي</div></header>
+<div class="bar" id="bar">
+  <button data-p="home" class="on">📚 الفهرس</button>
+  <button data-p="g1">1 ما علم الأحياء؟</button>
+  <button data-p="c1">2 تركيب الخلية</button>
+  <button data-p="c2">2 الخلايا المتخصصة والأنسجة</button>
+  <button data-p="t1">3 الانتشار</button>
+  <button data-p="t2">3 الأسموزية والنقل النشط</button>
+  <button data-p="rv1">🏁 مراجعة 1–3</button>
+  <button data-p="e1">4 الإنزيمات</button>
+  <button data-p="n1">5 المواد المغذية والكشف عنها</button>
+  <button data-p="n2">5 الفيتامينات والنظام الغذائي</button>
+  <button data-p="rv2">🏁 مراجعة 4–5</button>
+  <button data-p="h1">6 الجهاز الهضمي والهضم</button>
+  <button data-p="h2">6 الامتصاص والتمثيل الغذائي</button>
+  <button data-p="p1">7 البناء الضوئي</button>
+  <button data-p="p2">7 الورقة والتغذية المعدنية</button>
+  <button data-p="rv3">🏁 مراجعة 6–7</button>
+</div>
+<style>
+.sl{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px 0;font-weight:800}
+.sl input[type=range]{width:200px;accent-color:var(--tl)}
+.pool{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.pool button{border:2px solid var(--line);border-radius:12px;background:#fff;padding:7px 11px;font-family:inherit;font-weight:800;cursor:pointer;font-size:.92rem}
+.pool button.sel{border-color:var(--tl);background:var(--tl2)}
+.pool button.ok{border-color:#2fb24c;background:#e6f7ea}.pool button.no{border-color:#e5484d;background:#fde8e8}
+.cat{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}
+.cat>div{border:2px dashed var(--line);border-radius:14px;padding:8px;min-height:70px;text-align:center;cursor:pointer}
+.cat>div b{display:block;margin-bottom:4px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.steps li{background:#fff;border:2px solid var(--line);border-radius:12px;padding:8px 12px;margin:6px 0;font-weight:800;cursor:pointer;display:flex;gap:8px;align-items:center}
+.steps li.ok{border-color:#2fb24c;background:#e6f7ea}.steps li b{min-width:26px;height:26px;border-radius:50%;background:var(--tl);color:#fff;display:grid;place-items:center;font-size:.85rem}
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0}
+.tools button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px 2px;font-family:inherit;font-weight:800;font-size:.72rem;cursor:pointer}
+.tools button svg{width:100%;height:58px;display:block}.tools button.sel{border-color:var(--tl);background:var(--tl2)}
+.hz{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.hz button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px;cursor:pointer;font-family:inherit;font-weight:800;font-size:.75rem}
+.hz button.sel{border-color:var(--tl);background:var(--tl2)}.hz button.ok{border-color:#2fb24c;background:#e6f7ea}
+.hz svg{width:64px;height:64px;display:block;margin:auto}
+.big2{font-size:1.5rem;font-weight:900;text-align:center;margin:6px 0}
+.matr{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:8px 0}
+.matr button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 2px;font-family:inherit;font-weight:800;font-size:.8rem;cursor:pointer}
+.matr button span{font-size:1.6rem;display:block}.matr button.sel{border-color:var(--tl);background:var(--tl2)}
+.ptab{display:grid;grid-template-columns:repeat(18,1fr);gap:2px;direction:ltr;margin:8px 0}
+.ptab div{aspect-ratio:1;border-radius:4px;font-size:.55rem;font-weight:900;display:grid;place-items:center;cursor:pointer;line-height:1}
+.ptab div.m{background:#ffd8a8}.ptab div.n{background:#b2f2bb}.ptab div.g{background:#a5d8ff}.ptab div.sel{outline:3px solid #e5484d}
+</style>
+<style>
+.info{background:#fff;border:2px solid var(--tl);border-radius:14px;padding:10px 12px;margin:8px 0;font-weight:700;line-height:1.9;min-height:60px}
+.info b{color:var(--tl)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.chips button{border:2px solid var(--line);border-radius:20px;background:#fff;padding:6px 12px;font-family:inherit;font-weight:800;cursor:pointer}
+.chips button.on{border-color:var(--tl);background:var(--tl2)}
+.sl{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;margin:6px 0;font-weight:800}
+.sl input[type=range]{flex:1;min-width:140px;max-width:320px}
+.tbl{width:100%;border-collapse:collapse;margin:8px 0;font-weight:800;text-align:center;background:#fff}.tbl td,.tbl th{border:2px solid var(--line);padding:6px}.tbl th{background:var(--tl2)}
+.bars{display:flex;gap:6px;align-items:flex-end;height:150px;margin:8px 0;direction:rtl}
+.bars>div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;font-weight:800;font-size:.75rem;height:100%}
+.bars i{display:block;width:100%;border-radius:8px 8px 0 0;transition:height .5s}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}.card{border:2px solid var(--line);border-radius:14px;padding:10px;text-align:center;cursor:pointer;background:#fff;font-weight:800;min-height:80px}.card .big{font-size:1.8rem;display:block}.card .bk{display:none;font-weight:600;font-size:.88rem;color:#333}.card.flip{background:var(--tl2);border-color:var(--tl)}.card.flip .bk{display:block}.card.flip .fr{display:none}
+.eqn{background:#fff;border:2px dashed var(--tl);border-radius:14px;padding:10px;text-align:center;font-weight:900;font-size:1.05rem;line-height:2;margin:8px 0}
+</style>
+
+<section class="page on" id="home">
+  <h2>فهرس الكتاب</h2>
+  <div class="idea">🧬 أهلًا بك في أحياء الأول الثانوي الحي!<small>استكشف عضيات الخلية بالنقر، وشاهد الجزيئات تنتشر أمامك، وضع الخلية في محاليل مختلفة لترى الأسموزية، وجرّب القفل والمفتاح مع الإنزيمات، واكشف عن الغذاء بالكواشف في أنابيب الاختبار، وتتبّع لقمة طعام في رحلة الهضم، وتحكّم في الضوء وثاني أكسيد الكربون لتعدّ فقاعات البناء الضوئي… مع أسئلة لا تنتهي وشرح صوتي.</small></div>
+  <div id="toc"></div>
+</section>
+
+<!-- ================= الوحدة 1 ================= -->
+<section class="page" id="g1">
+  <div class="muted">الوحدة 1 · 1-1 إلى 3-1 · ص 9–15</div>
+  <h2><span class="num">1</span>ما علم الأحياء؟</h2>
+  <div class="idea">💡 <b>علم الأحياء (البيولوجيا)</b>: دراسة منظمة للكائنات الحية. تشترك الكائنات الحية في خصائص: <b>التغذية، التنفس، النمو، التكاثر، الإخراج، الاستجابة (الإحساس) والحركة</b>.<small><b>التصنيف</b>: وضع الكائنات في مجموعات حسب أوجه الشبه. المراتب: مملكة ← شعبة ← طائفة ← رتبة ← عائلة ← جنس ← نوع. اخترع لينيه (لينيوس) نظام التصنيف عام 1753م، و<b>التسمية الثنائية</b> = اسم الجنس + اسم النوع.</small></div>
+  <div class="box lab"><h3>🃏 خصائص الكائنات الحية</h3><div class="hint" style="text-align:center">اضغط البطاقة لتقلبها</div><div class="cards" id="chCards"></div></div>
+  <div class="box lab"><h3>🔎 حي أم غير حي؟</h3><div class="pool" id="lvP"></div><div class="cat" id="lvC"></div><div class="fb" id="lvOut"></div></div>
+  <div class="box lab"><h3>🪜 رتّب سلّم التصنيف من الأعم إلى الأخص</h3><ol class="steps" id="txL"></ol><div class="btns"><button class="btn" id="txNew">🔄 من جديد</button></div><div class="fb" id="txOut"></div></div>
+  <div class="box lab"><h3>🐺 كلما نزلنا في السلّم زاد التشابه</h3><div class="sl">المرتبة <input type="range" id="lnR" min="0" max="6" value="0"><b id="lnRv"></b></div><canvas id="lnC" class="cv" width="640" height="260"></canvas><div class="fb" id="lnOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qg1"></div></div>
+</section>
+
+<!-- ================= الوحدة 2 ================= -->
+<section class="page" id="c1">
+  <div class="muted">الوحدة 2 · 1-2 · ص 16–20</div>
+  <h2><span class="num">2</span>تركيب الخلية وتنظيمها</h2>
+  <div class="idea">💡 <b>الخلية</b> وحدة بناء الكائن الحي. في كل خلية: <b>غشاء خلوي</b> يتحكم بما يدخل ويخرج، و<b>سيتوبلازم</b> تحدث فيه التفاعلات، و<b>نواة</b> تحمل المادة الوراثية وتتحكم بأنشطة الخلية.<small>تنفرد الخلية النباتية بـ: <b>جدار خلوي</b> من السليولوز، و<b>بلاستيدات خضراء</b> فيها اليخضور للبناء الضوئي، و<b>فجوة عصارية كبيرة</b>. أما <b>الميتوكوندريا</b> فهي مكان التنفس الخلوي وإنتاج الطاقة.</small></div>
+  <div class="box lab"><h3>🔬 المختبر: المجهر التفاعلي</h3><div class="chips" id="clK"></div><div class="hint" style="text-align:center">اضغط على أي جزء من الخلية لتتعرف عليه</div>
+    <canvas id="clC" class="cv" width="640" height="380"></canvas><div class="info" id="clI">👆 اضغط على عضية…</div><div class="btns"><button class="btn main" id="clQ">🎯 تحدٍّ: أين …؟</button></div><div class="fb" id="clF"></div></div>
+  <div class="box lab"><h3>🧩 نباتية فقط؟ حيوانية فقط؟ أم في الاثنتين؟</h3><div class="pool" id="pvP"></div><div class="cat" id="pvC" style="grid-template-columns:repeat(3,1fr)"></div><div class="fb" id="pvOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qc1"></div></div>
+</section>
+
+<section class="page" id="c2">
+  <div class="muted">الوحدة 2 · 2-2 · ص 21–25</div>
+  <h2><span class="num">2</span>الخلايا المتخصصة والأنسجة والأعضاء والأجهزة</h2>
+  <div class="idea">💡 في الكائنات عديدة الخلايا تتخصص الخلايا: يتلاءم <b>شكلها</b> مع <b>وظيفتها</b>.<small><b>النسيج</b>: مجموعة خلايا متشابهة تؤدي وظيفة واحدة · <b>العضو</b>: عدة أنسجة تعمل معًا · <b>الجهاز</b>: عدة أعضاء تتعاون في وظيفة · الخلية ← النسيج ← العضو ← الجهاز ← الكائن الحي</small></div>
+  <div class="box lab"><h3>🎴 الشكل يناسب الوظيفة</h3><div class="hint" style="text-align:center">اضغط البطاقة لتعرف سرّ تصميم الخلية</div><div class="cards" id="spCards"></div></div>
+  <div class="box lab"><h3>🔭 المختبر: التكبير من الكائن إلى الخلية</h3><div class="sl">التكبير <input type="range" id="zmZ" min="0" max="4" value="0"><b id="zmZv"></b></div><canvas id="zmC" class="cv" width="640" height="300"></canvas><div class="fb" id="zmOut"></div></div>
+  <div class="box lab"><h3>🪜 رتّب مستويات التنظيم</h3><ol class="steps" id="lvL"></ol><div class="btns"><button class="btn" id="lvNew">🔄 من جديد</button></div><div class="fb" id="lvO"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qc2"></div></div>
+</section>
+
+<!-- ================= الوحدة 3 ================= -->
+<section class="page" id="t1">
+  <div class="muted">الوحدة 3 · 1-3 · ص 26–28</div>
+  <h2><span class="num">3</span>الانتشار</h2>
+  <div class="idea">💡 <b>الانتشار</b>: انتقال الجزيئات من منطقة <b>عالية التركيز</b> إلى منطقة <b>منخفضة التركيز</b> بسبب حركتها العشوائية، حتى يتساوى التركيز. لا يحتاج طاقة من الخلية.<small>يزداد معدل الانتشار بزيادة: <b>فرق التركيز</b>، و<b>درجة الحرارة</b>، و<b>مساحة السطح</b>، وبقِصر <b>المسافة</b>. مثال: انتقال الأكسجين من الحويصلات الهوائية إلى الدم.</small></div>
+  <div class="box lab"><h3>🌬️ المختبر: شاهد الجزيئات تنتشر</h3><div class="sl">🌡️ درجة الحرارة <input type="range" id="dfT" min="1" max="10" value="4"><b id="dfTv"></b></div>
+    <canvas id="dfC" class="cv" width="640" height="300"></canvas><div class="btns"><button class="btn main" id="dfGo">🧪 أضف قطرة حبر</button><button class="btn" id="dfW">🧱 غشاء بفتحات</button></div><div class="fb" id="dfOut"></div></div>
+  <div class="box lab"><h3>🧠 أين يحدث الانتشار؟</h3><div id="dfQ"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qt1"></div></div>
+</section>
+
+<section class="page" id="t2">
+  <div class="muted">الوحدة 3 · 2-3 و 3-3 · ص 29–38</div>
+  <h2><span class="num">3</span>الأسموزية والنقل النشط</h2>
+  <div class="idea">💡 <b>الأسموزية</b>: انتشار <b>جزيئات الماء</b> عبر غشاء <b>شبه منفذ</b> من المحلول المخفف (جهد مائي مرتفع) إلى المحلول المركز (جهد مائي منخفض).<small>خلية الدم في ماء نقي <b>تنتفخ وتنفجر</b>، وفي محلول مركز <b>تنكمش</b>. الخلية النباتية في ماء نقي تصبح <b>منتفخة (مكتنزة)</b> ولا تنفجر بفضل الجدار، وفي المحلول المركز <b>تتبلزم</b>. <b>النقل النشط</b>: نقل المواد عكس فرق التركيز باستخدام <b>الطاقة</b>، مثل امتصاص الأملاح المعدنية بالشعيرات الجذرية.</small></div>
+  <div class="box lab"><h3>💧 المختبر: ضع الخلية في المحلول</h3><div class="chips" id="osK"></div><div class="chips" id="osS"></div>
+    <canvas id="osC" class="cv" width="640" height="320"></canvas><div class="fb" id="osOut"></div></div>
+  <div class="box lab"><h3>⚡ المختبر: مضخة النقل النشط</h3><div class="hint" style="text-align:center">أيونات النترات في التربة قليلة… والشعيرة الجذرية تريد المزيد!</div>
+    <canvas id="atC" class="cv" width="640" height="260"></canvas><div class="btns"><button class="btn main" id="atP">⚡ اضخ (استخدم الطاقة)</button><button class="btn" id="atR">🔄 من جديد</button></div><div class="fb" id="atOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qt2"></div></div>
+</section>
+
+<section class="page" id="rv1">
+  <div class="muted">الوحدات 1–3 · مراجعة</div>
+  <h2>🏁 مراجعة: علم الأحياء والخلايا والانتشار والأسموزية</h2>
+  <div class="sc" id="rv1Sc"></div><div id="rv1Q"></div><div class="btns"><button class="btn or" id="rv1New">🔄 اختبار جديد</button></div>
+</section>
+
+<!-- ================= الوحدة 4 ================= -->
+<section class="page" id="e1">
+  <div class="muted">الوحدة 4 · 1-4 إلى 3-4 · ص 39–49</div>
+  <h2><span class="num">4</span>الإنزيمات</h2>
+  <div class="idea">💡 <b>الإنزيمات</b>: بروتينات تعمل <b>كعوامل حفز حيوية</b> تسرّع التفاعلات الكيميائية في الخلية ولا تتغير في نهايتها، وتلزم منها كميات ضئيلة.<small>كل إنزيم <b>متخصص</b>: مادة التفاعل تناسب <b>الموقع الفعال</b> كما يناسب المفتاح قفله. للإنزيم <b>درجة حرارة مثلى</b> (37°س في الإنسان) و<b>درجة حموضة مثلى</b>، والحرارة العالية <b>تمسخه</b> (يفقد شكله). الإنزيمات الهاضمة إنزيمات <b>تحلل مائي</b>: الأميلاز (النشا)، البروتياز مثل الببسين (البروتينات)، الليباز (الدهون).</small></div>
+  <div class="box lab"><h3>🔑 المختبر: القفل والمفتاح</h3><div class="chips" id="lkS"></div><canvas id="lkC" class="cv" width="640" height="280"></canvas><div class="fb" id="lkOut"></div></div>
+  <div class="box lab"><h3>🌡️ المختبر: الحرارة ودرجة الحموضة</h3><div class="chips" id="enK"></div><div class="sl" id="enSl"><span id="enL">🌡️ درجة الحرارة</span> <input type="range" id="enV" min="0" max="80" value="37"><b id="enVv"></b></div>
+    <canvas id="enC" class="cv" width="640" height="320"></canvas><div class="fb" id="enOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qe1"></div></div>
+</section>
+
+<!-- ================= الوحدة 5 ================= -->
+<section class="page" id="n1">
+  <div class="muted">الوحدة 5 · 1-5 و 2-5 · ص 50–65</div>
+  <h2><span class="num">5</span>المواد المغذية والكشف عنها</h2>
+  <div class="idea">💡 المواد المغذية: <b>الكربوهيدرات</b> (طاقة)، <b>البروتينات</b> (بناء وتجديد الخلايا)، <b>الدهون</b> (طاقة مخزّنة وعزل)، و<b>الفيتامينات</b> و<b>الأملاح المعدنية</b> و<b>الماء</b> و<b>الألياف</b>.<small>الكشف: <b>اليود</b> مع النشا ⟸ أزرق داكن · <b>بندكت</b> مع السكر المختزل والتسخين ⟸ برتقالي محمر · <b>بيوريت</b> مع البروتين ⟸ بنفسجي · <b>الإيثانول</b> مع الدهون ثم الماء ⟸ مستحلب أبيض حليبي</small></div>
+  <div class="box lab"><h3>🧪 المختبر: أنابيب الكشف عن الغذاء</h3><div class="hint" style="text-align:center">اختر عينة الطعام ثم الكاشف</div><div class="chips" id="ftF"></div><div class="chips" id="ftR"></div>
+    <canvas id="ftC" class="cv" width="640" height="320"></canvas><div class="fb" id="ftOut"></div><div id="ftT"></div></div>
+  <div class="box lab"><h3>🍽️ صنّف الطعام حسب المادة الغالبة</h3><div class="pool" id="nuP"></div><div class="cat" id="nuC" style="grid-template-columns:repeat(3,1fr)"></div><div class="fb" id="nuOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qn1"></div></div>
+</section>
+
+<section class="page" id="n2">
+  <div class="muted">الوحدة 5 · 2-5 و 3-5 · ص 51–75</div>
+  <h2><span class="num">5</span>الفيتامينات والأملاح والنظام الغذائي المتوازن</h2>
+  <div class="idea">💡 <b>النظام الغذائي المتوازن</b>: يحتوي كل المواد المغذية بالكميات المناسبة لعمر الشخص ونشاطه.<small>الطاقة من احتراق 1 جرام: الكربوهيدرات ≈ <b>16 كيلوجول</b>، البروتين ≈ <b>17 كيلوجول</b>، الدهون ≈ <b>38 كيلوجول</b>. نقص فيتامين (ج) ⟸ <b>الإسقربوط</b> · نقص فيتامين (د) أو الكالسيوم ⟸ <b>الكساح</b> · نقص البروتين ⟸ <b>كواشيوركر</b></small></div>
+  <div class="box lab"><h3>🍱 المختبر: املأ صحنك</h3><div class="hint" style="text-align:center">اضغط على الأطعمة لإضافتها (اضغط مرة أخرى لإزالتها)</div><div class="chips" id="plF"></div>
+    <div class="bars" id="plB"></div><div class="fb" id="plOut"></div></div>
+  <div class="box lab"><h3>🩺 أمراض النقص</h3><div class="hint" style="text-align:center">اضغط البطاقة لتعرف السبب والمصدر</div><div class="cards" id="dfCards"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qn2"></div></div>
+</section>
+
+<section class="page" id="rv2">
+  <div class="muted">الوحدتان 4–5 · مراجعة</div>
+  <h2>🏁 مراجعة: الإنزيمات والتغذية</h2>
+  <div class="sc" id="rv2Sc"></div><div id="rv2Q"></div><div class="btns"><button class="btn or" id="rv2New">🔄 اختبار جديد</button></div>
+</section>
+
+<!-- ================= الوحدة 6 ================= -->
+<section class="page" id="h1">
+  <div class="muted">الوحدة 6 · 1-6 إلى 3-6 · ص 76–84</div>
+  <h2><span class="num">6</span>الجهاز الهضمي والهضم في الإنسان</h2>
+  <div class="idea">💡 مراحل التغذية: <b>الابتلاع</b> ← <b>الهضم</b> ← <b>الامتصاص</b> ← <b>التمثّل</b> ← <b>الإخراج (التبرز)</b>.<small><b>الهضم الميكانيكي</b>: تقطيع الطعام بالأسنان وحركة المعدة. <b>الهضم الكيميائي</b>: إنزيمات تحلل الجزيئات الكبيرة: النشا ← مالتوز ← جلوكوز · البروتين ← أحماض أمينية · الدهون ← أحماض دهنية وجليسرول. <b>العصارة الصفراوية</b> من الكبد تستحلب الدهون (ليست إنزيمًا).</small></div>
+  <div class="box lab"><h3>🍔 المختبر: رحلة اللقمة</h3><div class="hint" style="text-align:center">اضغط «التالي» لتتبع اللقمة، أو اضغط على أي عضو</div>
+    <canvas id="dgC" class="cv" width="640" height="440"></canvas><div class="info" id="dgI"></div><div class="btns"><button class="btn main" id="dgN">⬇️ التالي</button><button class="btn" id="dgR">🔄 لقمة جديدة</button></div></div>
+  <div class="box lab"><h3>🧩 الإنزيم ومكانه وعمله</h3><div id="dgQ"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qh1"></div></div>
+</section>
+
+<section class="page" id="h2">
+  <div class="muted">الوحدة 6 · 4-6 و 5-6 · ص 85–91</div>
+  <h2><span class="num">6</span>الامتصاص والتمثيل الغذائي</h2>
+  <div class="idea">💡 يحدث <b>الامتصاص</b> في <b>الأمعاء الدقيقة</b>: جدارها مبطّن بملايين <b>الخملات</b> التي تزيد مساحة السطح، وجدارها رقيق (خلية واحدة)، وغنية بالشعيرات الدموية، وفي وسطها <b>وعاء لبني</b> يمتص الدهون.<small><b>التمثيل الغذائي (الأيض)</b>: كل التفاعلات الكيميائية في الجسم: <b>البناء</b> (تكوين جزيئات كبيرة مثل البروتينات) و<b>الهدم</b> (تحليلها لإطلاق الطاقة). يحوّل الكبد الجلوكوز الزائد إلى <b>جلايكوجين</b>، ويتخلص من الأحماض الأمينية الزائدة بتكوين <b>اليوريا</b>.</small></div>
+  <div class="box lab"><h3>🌊 المختبر: الخملات تزيد المساحة</h3><div class="sl">عدد الخملات <input type="range" id="vlN" min="0" max="12" value="0"><b id="vlNv"></b></div>
+    <canvas id="vlC" class="cv" width="640" height="300"></canvas><div class="fb" id="vlOut"></div></div>
+  <div class="box lab"><h3>⚙️ بناء أم هدم؟</h3><div class="pool" id="mbP"></div><div class="cat" id="mbC"></div><div class="fb" id="mbOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qh2"></div></div>
+</section>
+
+<!-- ================= الوحدة 7 ================= -->
+<section class="page" id="p1">
+  <div class="muted">الوحدة 7 · 1-7 · ص 92–100</div>
+  <h2><span class="num">7</span>البناء الضوئي</h2>
+  <div class="idea">💡 تصنع النباتات الخضراء غذاءها: <b>ثاني أكسيد الكربون + ماء ⟵ (ضوء + يخضور) ⟵ جلوكوز + أكسجين</b><small>يمتص <b>اليخضور (الكلوروفيل)</b> الضوء الأحمر والأزرق ويعكس الأخضر. يحدث البناء الضوئي على مرحلتين: <b>مرحلة الاعتماد على الضوء</b> (انشطار الماء وإطلاق الأكسجين) و<b>مرحلة عدم الاعتماد على الضوء</b> (تكوين الجلوكوز). يتأثر معدله بشدة الضوء، وتركيز ثاني أكسيد الكربون، ودرجة الحرارة… وأقلها توافرًا هو <b>العامل المحدد</b>.</small></div>
+  <div class="box lab"><h3>🫧 المختبر: نبات الإيلوديا تحت الماء</h3><div class="hint" style="text-align:center">عدّ فقاعات الأكسجين… أي عامل يحدّ من السرعة؟</div>
+    <div class="sl">💡 شدة الضوء <input type="range" id="psL" min="0" max="10" value="5"><b id="psLv"></b></div>
+    <div class="sl">🫙 ثاني أكسيد الكربون <input type="range" id="psC" min="0" max="10" value="3"><b id="psCv"></b></div>
+    <div class="sl">🌡️ الحرارة <input type="range" id="psT" min="0" max="50" value="25"><b id="psTv"></b></div>
+    <canvas id="psCv2" class="cv" width="640" height="340"></canvas><div class="fb" id="psOut"></div></div>
+  <div class="box lab"><h3>⚗️ ركّب المعادلة</h3><div id="eqQ"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qp1"></div></div>
+</section>
+
+<section class="page" id="p2">
+  <div class="muted">الوحدة 7 · 2-7 و 3-7 · ص 101–108</div>
+  <h2><span class="num">7</span>ورقة النبات · التغذية المعدنية</h2>
+  <div class="idea">💡 الورقة مصنع الغذاء: <b>نصل</b> عريض رقيق لامتصاص الضوء، و<b>ثغور</b> لتبادل الغازات تفتحها وتغلقها <b>الخلايا الحارسة</b>، و<b>عروق</b> فيها الخشب (ينقل الماء) واللحاء (ينقل الغذاء).<small>يحتاج النبات <b>النترات</b> لتكوين الأحماض الأمينية والبروتينات، و<b>المغنيسيوم</b> لتكوين اليخضور. نقص النيتروجين ⟸ نمو ضعيف وأوراق صفراء · نقص المغنيسيوم ⟸ اصفرار الأوراق (نقص اليخضور).</small></div>
+  <div class="box lab"><h3>🍃 المختبر: مقطع في الورقة</h3><div class="hint" style="text-align:center">اضغط على أي طبقة لتتعرف عليها</div><canvas id="lfC" class="cv" width="640" height="340"></canvas><div class="info" id="lfI">👆 اضغط على طبقة…</div></div>
+  <div class="box lab"><h3>🚪 الخلايا الحارسة والثغر</h3><div class="sl">☀️ نهار ⟷ 🌙 ليل / عطش <input type="range" id="stV" min="0" max="10" value="10"><b id="stVv"></b></div><canvas id="stC" class="cv" width="640" height="220"></canvas><div class="fb" id="stOut"></div></div>
+  <div class="box lab"><h3>🌽 تجربة الاستنبات</h3><div class="chips" id="mnK"></div><canvas id="mnC" class="cv" width="640" height="300"></canvas><div class="fb" id="mnOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qp2"></div></div>
+</section>
+
+<section class="page" id="rv3">
+  <div class="muted">الوحدتان 6–7 · مراجعة</div>
+  <h2>🏁 مراجعة: الهضم والبناء الضوئي</h2>
+  <div class="sc" id="rv3Sc"></div><div id="rv3Q"></div><div class="btns"><button class="btn or" id="rv3New">🔄 اختبار جديد</button></div>
+</section>
+<footer>الكتاب الحي · مبني على كتاب الأحياء للسنة الأولى من مرحلة التعليم الثانوي 2025–2026 (مركز المناهج التعليمية والبحوث التربوية – ليبيا)</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const pages=[...document.querySelectorAll('.page')],nb=[...document.querySelectorAll('#bar button')];
+function go(id){pages.forEach(p=>p.classList.toggle('on',p.id===id));nb.forEach(b=>b.classList.toggle('on',b.dataset.p===id));window.scrollTo({top:0,behavior:'smooth'})}
+nb.forEach(b=>b.onclick=()=>go(b.dataset.p));
+(function(){const h=location.hash.slice(1);if(h&&$(h))go(h);addEventListener('hashchange',()=>{const x=location.hash.slice(1);if($(x))go(x)})})();
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),nz=(a,b)=>{let x;do{x=rnd(a,b)}while(!x);return x},pick=a=>a[rnd(0,a.length-1)];
+const ms=n=>n<0?'−'+(-n):String(n);const pr=n=>n<0?'('+ms(n)+')':String(n);
+const V='س';
+const parse=s=>{s=(s||'').trim().replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[−–—]/g,'-').replace(/\s/g,'');if(s===''||s==='+'||s==='-')return NaN;if(/^-?\d+\/\d+$/.test(s)){const[a,b]=s.split('/');return a/b}return Number(s)};
+function term(c,p,first,v){v=v||V;if(c===0)return'';const a=Math.abs(c);const cs=(a===1&&p>0)?'':String(a);const vs=p===0?'':(p===1?v:v+'<sup>'+p+'</sup>');const s=c<0?(first?'−':' − '):(first?'':' + ');return s+cs+vs}
+function poly(cs,v){let out='',f=true;cs.forEach(([c,p])=>{if(c){out+=term(c,p,f,v);f=false}});return out||'0'}
+/* matrix renderer: A 2D array, o:{det, cls(i,j)->class, inp:prefix} */
+function M(A,o){o=o||{};const r=A.length,c=A[0].length;let g='<div class="g" style="grid-template-columns:repeat('+c+',auto)">';
+ A.forEach((row,i)=>row.forEach((v,j)=>{const cl=o.cls?o.cls(i,j)||'':'';g+=o.inp?'<input class="c '+cl+'" data-i="'+i+'" data-j="'+j+'" data-m="'+o.inp+'" value="'+(v===''?'':ms(v))+'" inputmode="text">':'<div class="c '+cl+'" data-i="'+i+'" data-j="'+j+'">'+(typeof v==='number'?ms(Math.round(v*1000)/1000):v)+'</div>'}));
+ return '<span class="M'+(o.det?' det':'')+'"'+(o.id?' id="'+o.id+'"':'')+'><span class="br r"></span>'+g+'</div><span class="br l"></span></span>'}
+function readM(host,name,r,c){const A=Array.from({length:r},()=>Array(c).fill(0));host.querySelectorAll('input[data-m="'+name+'"]').forEach(x=>{const v=parse(x.value);A[+x.dataset.i][+x.dataset.j]=isNaN(v)?0:v});return A}
+const det2=a=>a[0][0]*a[1][1]-a[0][1]*a[1][0];
+const minor=(a,i,j)=>a.filter((_,r)=>r!==i).map(row=>row.filter((_,c)=>c!==j));
+const det3=a=>a[0][0]*det2(minor(a,0,0))-a[0][1]*det2(minor(a,0,1))+a[0][2]*det2(minor(a,0,2));
+const det=a=>a.length===2?det2(a):det3(a);
+const rM=(r,c,lo,hi)=>Array.from({length:r},()=>Array.from({length:c},()=>rnd(lo==null?-5:lo,hi==null?9:hi)));
+const mul=(A,B)=>A.map(row=>B[0].map((_,j)=>row.reduce((s,v,k)=>s+v*B[k][j],0)));
+const T=A=>A[0].map((_,j)=>A.map(r=>r[j]));
+const sub='₀₁₂₃₄₅₆₇₈₉';const ij=(i,j)=>''+sub[i]+sub[j];
+function mcq(host,q,opts,right,onAns){const d=document.createElement('div');d.className='box';d.style.margin='8px 0';d.innerHTML='<div style="font-weight:800">'+q+'</div>';let dn=false;const order=opts.map((o,i)=>i).sort(()=>Math.random()-.5);
+ order.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=opts[i];b.onclick=()=>{if(dn)return;dn=true;b.classList.add(i===right?'ok':'no');if(i!==right)[...d.querySelectorAll('.opt')][order.indexOf(right)].classList.add('ok');onAns&&onAns(i===right)};d.appendChild(b)});host.appendChild(d)}
+function MCQP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();g.o=g.o.filter((x,i)=>g.o.indexOf(x)===i);const ord=g.o.map((x,i)=>i).sort(()=>Math.random()-.5);let done=false;
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div>';const opts=document.createElement('div');box.appendChild(opts);const fb=document.createElement('div');fb.className='fb';const nx=document.createElement('div');nx.className='btns';box.appendChild(fb);box.appendChild(nx);
+  ord.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=g.o[i];b.onclick=()=>{if(done)return;done=true;const r=i===0;b.classList.add(r?'ok':'no');if(!r)[...opts.children][ord.indexOf(0)].classList.add('ok');dn++;if(r)ok++;sc.textContent='✔️ صحيح: '+ok+' من '+dn;fb.className='fb '+(r?'ok':'no');fb.innerHTML=(r?'🎉 صحيح! ':'❌ ليس صحيحًا. ')+(g.ex?'<div style="font-size:.95rem;color:var(--ink);font-weight:700">'+g.ex+'</div>':'');nx.innerHTML='<button class="btn or">سؤال جديد ⬅</button>';nx.firstChild.onclick=render};opts.appendChild(b)})}render()}
+/* matrix-answer practice: gen -> {q, ans(2D), steps[]} */
+function MatP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();let tries=0;const E=g.ans.map(r=>r.map(()=>''));
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div><div style="text-align:center;margin:8px 0">= '+M(E,{inp:'z'})+'</div><div class="btns"><button class="btn main" data-k="chk">✔️ تحقّق</button><button class="btn" data-k="help">💡 أرني الحل</button><button class="btn or" data-k="new">سؤال جديد ⬅</button></div><div class="fb"></div><div class="steps"></div>';
+  const ins=[...box.querySelectorAll('input.c')],fb=box.querySelector('.fb'),st=box.querySelector('.steps');const steps=()=>{st.style.display='block';st.innerHTML='<b>الحل:</b>'+g.steps.map(s=>'<div class="mx" style="font-size:1rem">'+s+'</div>').join('')};
+  box.querySelector('[data-k=chk]').onclick=()=>{let all=true,emp=false;ins.forEach(x=>{const v=parse(x.value);if(isNaN(v)){emp=true;all=false;return}const g2=Math.abs(v-g.ans[+x.dataset.i][+x.dataset.j])<.001;x.classList.remove('ok','no');x.classList.add(g2?'ok':'no');if(!g2)all=false});
+   if(emp&&!all){fb.className='fb';fb.textContent='املأ كل الخانات';return}tries++;if(tries===1){dn++;if(all)ok++;sc.textContent='✔️ صحيح من أول محاولة: '+ok+' من '+dn}fb.className='fb '+(all?'ok':'no');fb.textContent=all?'🎉 ممتاز!':'🤔 الخانات الحمراء غير صحيحة';if(all||tries>=2)steps();if(all)setTimeout(render,2400)};
+  box.querySelector('[data-k=help]').onclick=()=>{ins.forEach(x=>{x.value=ms(g.ans[+x.dataset.i][+x.dataset.j]);x.classList.add('ok')});steps()};box.querySelector('[data-k=new]').onclick=render}render()}
+
+
+const TOC=[['الوحدة 1: ما علم الأحياء؟',9,[['1-1 إلى 3-1','الكائن الحي والتصنيف',9,'g1']]],
+ ['الوحدة 2: الخلايا وحدات بناء الحياة',16,[['1-2','تركيب الخلية وتنظيمها',17,'c1'],['2-2','الخلايا المتخصصة والأنسجة والأعضاء والأجهزة',21,'c2']]],
+ ['الوحدة 3: الانتشار والأسموزية',26,[['1-3','الانتشار',27,'t1'],['2-3 و 3-3','الأسموزية والنقل النشط',29,'t2'],['','مراجعة الوحدات 1–3',38,'rv1']]],
+ ['الوحدة 4: الإنزيمات',39,[['1-4 إلى 3-4','ما الإنزيمات؟ تصنيفها وخصائصها',41,'e1']]],
+ ['الوحدة 5: التغذية',50,[['1-5 و 2-5','المواد المغذية والكشف عنها',50,'n1'],['3-5','الفيتامينات والقيم الغذائية والنظام الغذائي',66,'n2'],['','مراجعة الوحدتين 4–5',75,'rv2']]],
+ ['الوحدة 6: التغذية في الثدييات',76,[['1-6 إلى 3-6','الجهاز الهضمي والهضم في الإنسان',77,'h1'],['4-6 و 5-6','الامتصاص والتمثيل الغذائي',85,'h2']]],
+ ['الوحدة 7: التغذية في النباتات',92,[['1-7','البناء الضوئي',93,'p1'],['2-7 و 3-7','ورقة النبات والتغذية المعدنية',101,'p2'],['','مراجعة الوحدتين 6–7',108,'rv3']]]];
+(function(){const t=$('toc');TOC.forEach(([n,pg,ls],i)=>{const r=ls.filter(l=>l[3]).length;const d=document.createElement('div');d.className='chap'+(i===0?' open':'');
+ d.innerHTML='<div><span class="cn">'+(i+1)+'</span><span style="flex:1">'+n+'</span><span class="tg '+(r?'r':'s')+'">'+(r?'جاهز ✅':'قريبًا')+'</span></div><div class="ls">'+ls.map(l=>'<div class="li'+(l[3]?' ready" data-go="'+l[3]:'')+'"><span>'+(l[3]?'✅':'⏳')+'</span><span>'+(l[0]?'<b>'+l[0]+'</b> ':'')+l[1]+'</span><span class="pg">ص '+l[2]+'</span></div>').join('')+'</div>';
+ d.firstChild.onclick=()=>d.classList.toggle('open');t.appendChild(d)});t.querySelectorAll('[data-go]').forEach(x=>x.onclick=()=>go(x.dataset.go))})();
+
+/* ================= أمثلة الكتاب وتمارينه (عام) ================= */
+const QB=s=>s.replace(/ (?=(?:أ|ب|ج|د|هـ|و)\) )/g,'<br>').replace(/ (?=\((?:i|ii|iii|iv|1|2|3)\) )/g,'<br>');
+const FX=s=>s.replace(/(−?\d+(?:\.\d+)?)\/(\d+)/g,'<span class="rt">$1/$2</span>');
+function addSecs(pid,exs,bks){const pg=$(pid);if(!pg)return;const first=[...pg.querySelectorAll('.box')].find(b=>(b.querySelector('h3')||{}).textContent&&b.querySelector('h3').textContent.trim().startsWith('✏️'));
+ if(exs&&exs.length){const b=document.createElement('div');b.className='box exb';b.innerHTML='<h3>📖 أمثلة الكتاب محلولة خطوة بخطوة</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">اضغط «الخطوة التالية» وحاول أن تتوقع الخطوة قبل أن تظهر 🤔</p>';exs.forEach(e=>b.appendChild(wex(e)));first?pg.insertBefore(b,first):pg.appendChild(b)}
+ if(bks&&bks.length){const b=document.createElement('div');b.className='box bkb';b.innerHTML='<h3>📝 تمارين الكتاب مع الحلول</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">✍️ حلّ في دفترك أولًا، ثم اضغط «تلميح» إذا احتجت، و«الحل» لتتأكد.</p>';bks.forEach(e=>b.appendChild(bkx(e)));pg.appendChild(b)}}
+function wex(e){const d=document.createElement('div');d.className='wx';let k=0;
+ d.innerHTML='<div class="wxq"><b style="color:var(--tl)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="wxs"></div><div class="btns"><button class="btn main" data-a="n">▶️ الخطوة التالية</button><button class="btn" data-a="all">📜 الحل كاملًا</button><button class="btn" data-a="r">↺ من جديد</button></div>';
+ const S=d.querySelector('.wxs'),nb=d.querySelector('[data-a=n]');const add=()=>{if(k>=e.s.length)return;const x=document.createElement('div');x.className='wst';x.innerHTML='<span class="sn">'+(k+1)+'</span>'+FX(e.s[k]);S.appendChild(x);k++;if(k>=e.s.length){nb.textContent='✅ انتهى الحل';nb.disabled=true;try{S.lastChild.classList.add('fin')}catch(_){}}};
+ nb.onclick=add;d.querySelector('[data-a=all]').onclick=()=>{while(k<e.s.length)add()};d.querySelector('[data-a=r]').onclick=()=>{k=0;S.innerHTML='';nb.disabled=false;nb.textContent='▶️ الخطوة التالية'};return d}
+function bkx(e){const d=document.createElement('div');d.className='bx';
+ d.innerHTML='<div class="wxq"><b style="color:var(--or)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="btns" style="justify-content:flex-start"><button class="btn" data-a="h">💡 تلميح</button><button class="btn ok" data-a="s">✅ الحل</button></div><div class="bh" style="display:none"></div><div class="bs" style="display:none"></div>';
+ const H=d.querySelector('.bh'),S=d.querySelector('.bs');H.innerHTML='💡 '+FX(e.h);S.innerHTML=e.s.map(x=>'<div class="wst">'+FX(x)+'</div>').join('')+(e.a?'<div class="ans">🎯 الجواب: '+FX(e.a)+'</div>':'');
+ d.querySelector('[data-a=h]').onclick=()=>{H.style.display=H.style.display==='none'?'block':'none'};d.querySelector('[data-a=s]').onclick=()=>{S.style.display=S.style.display==='none'?'block':'none'};return d}
+
+
+const nf=(v,d)=>{d=d==null?3:d;const r=Math.round(v*10**d)/10**d;return ms(r)};
+/* ================= فيزياء: الوحدة 1 ================= */
+const sci=(v,d)=>{d=d==null?2:d;if(v===0)return'0';const e=Math.floor(Math.log10(Math.abs(v)));if(e>=-2&&e<=4)return nf(v,Math.max(0,d+1-Math.max(0,e)));const m=v/10**e;return '<span dir="ltr" style="unicode-bidi:isolate">'+(+m.toFixed(d))+' × 10<sup>'+e+'</sup></span>'};
+function cv(id){const c=$(id),x=c.getContext('2d');return{c,x,W:c.width,H:c.height}}
+const loops={};function loop(id,fn){if(loops[id])return;let last=performance.now();const st=()=>{const now=performance.now(),dt=Math.min(0.05,(now-last)/1000);last=now;const pg=$(id).closest('.page');if(pg.classList.contains('on'))fn(dt);loops[id]=requestAnimationFrame(st)};loops[id]=requestAnimationFrame(st)}
+function glow(x,X,Y,r,col){const g=x.createRadialGradient(X,Y,0,X,Y,r);g.addColorStop(0,col);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.beginPath();x.arc(X,Y,r,0,7);x.fill()}
+function chg(x,X,Y,q,r){r=r||10;x.fillStyle=q>0?'#ff6b6b':'#5ab0ff';x.beginPath();x.arc(X,Y,r,0,7);x.fill();x.fillStyle='#fff';x.font='bold '+(r*1.6)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(q>0?'+':'−',X,Y+1)}
+function label(x,t,X,Y,col,sz){x.fillStyle=col||'#fff';x.font='bold '+(sz||16)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(t,X,Y)}
+
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){this.rect(x,y,w,h)};
+/* ================= علوم الصف السابع – الجزء الأول والثاني ================= */
+const C2=id=>{const c=$(id);return [c,c.getContext('2d')]};
+const FONT=(s,w)=>(w||800)+' '+s+'px Cairo, Tahoma, Arial';
+const shake=el=>{el.classList.remove('shk');void el.offsetWidth;el.classList.add('shk')};
+const cheer=()=>{try{window.FX&&FX.ok()}catch(e){}};
+const N=s=>'<bdi'+(/[\u0600-\u06FF]/.test(s)?'':' dir="ltr"')+' style="font-weight:800">'+s+'</bdi>';
+const fx=(x,k)=>String(+(+x).toFixed(k==null?2:k));
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){r=Math.min(r||0,Math.abs(w)/2,Math.abs(h)/2);this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();return this};
+/* لعبة التصنيف العامة: اختر عنصرًا ثم بيتًا */
+function sortGame(poolId,catId,outId,cats,items,done){const P=$(poolId),Cc=$(catId);let sel=null,left=items.length;P.innerHTML='';Cc.innerHTML='';
+ shuf(items).forEach(([lab,k,why])=>{const b=document.createElement('button');b.innerHTML=lab;b.dataset.k=k;b.dataset.why=why||'';b.onclick=()=>{P.querySelectorAll('button').forEach(y=>y.classList.remove('sel'));b.classList.add('sel');sel=b};P.appendChild(b)});
+ cats.forEach(([n,s,c],i)=>{const d=document.createElement('div');d.style.borderColor=c;d.innerHTML='<b style="color:'+c+'">'+n+'</b>'+(s?'<small>'+s+'</small>':'')+'<div class="pool" style="margin:4px 0"></div>';
+  d.onclick=()=>{if(!sel)return;if(+sel.dataset.k===i){sel.classList.remove('sel');sel.classList.add('ok');sel.onclick=null;d.querySelector('.pool').appendChild(sel);$(outId).innerHTML='✅ صحيح! '+sel.dataset.why;sel=null;left--;if(!left){$(outId).innerHTML='🎉 أحسنت! رتّبت كل شيء.';cheer();done&&done()}}else{shake(d);$(outId).innerHTML='🤔 حاول مرة أخرى'}};Cc.appendChild(d)});$(outId).textContent=''}
+/* اختبار فصل من 12 سؤالًا */
+function chapterTest(pfx,G){let ok=0,dn=0;const host=$(pfx+'Q');function upd(){$(pfx+'Sc').textContent=dn<G.length?'أجبت عن '+dn+' من '+G.length+' · صحيح: '+ok:(ok>=G.length-1?'🌟 ممتاز! ':ok>=G.length-3?'👍 جيد جدًا! ':'💪 راجع الدروس. ')+'النتيجة: '+ok+' من '+G.length}
+ function make(){host.innerHTML='';ok=0;dn=0;shuf(G).forEach((g,i)=>{const [q,o]=typeof g==='function'?g():g;mcq(host,(i+1)+') '+q,o,0,r=>{dn++;if(r)ok++;upd();if(dn===G.length&&ok>=G.length-3)cheer()})});upd()}
+ $(pfx+'New').onclick=make;make()}
+const bank=(arr)=>()=>{const [q,o,ex]=pick(arr);return{q,o,ex:ex||''}};
+const vis=el=>{const p=el.closest('.page');return p&&p.classList.contains('on')};
+function anim(id,fn){const [c,x]=C2(id);let t0=performance.now();(function f(t){if(vis(c))fn(x,c,(t-t0)/1000);requestAnimationFrame(f)})(t0);return[c,x]}
+const flipCards=(id,arr)=>{const C=$(id);C.innerHTML=arr.map(([ic,t,b])=>'<div class="card"><div class="fr"><span class="big">'+ic+'</span>'+t+'</div><div class="bk"><b>'+t+':</b> '+b+'</div></div>').join('');C.querySelectorAll('.card').forEach(c=>c.onclick=()=>c.classList.toggle('flip'))};
+const TF=(s,t)=>[s,t?['✔️ صح','❌ خطأ']:['❌ خطأ','✔️ صح']];
+function txt(x,s,X,Y,sz,col,al){x.font=FONT(sz||16);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='rtl';x.fillText(s,X,Y)}
+function steps(id,outId,newId,S){let k=0;function mk(){k=0;const L=$(id);L.innerHTML='';shuf(S.map((s,i)=>[s,i])).forEach(([[a,b],i])=>{const li=document.createElement('li');li.innerHTML='<b>?</b><span>'+a+'<br><small style="color:var(--soft)">'+b+'</small></span>';li.onclick=()=>{if(li.classList.contains('ok'))return;if(i===k){li.classList.add('ok');li.querySelector('b').textContent=k+1;k++;$(outId).innerHTML='✅ صحيح!';if(k===S.length){$(outId).innerHTML='🎉 رتّبت الرحلة كاملة!';cheer()}}else{shake(li);$(outId).innerHTML='🤔 ليس هذا… ما الذي جاء قبله؟'}};L.appendChild(li)});$(outId).textContent=''}$(newId).onclick=mk;mk()}
+function choiceQs(host,Q,scId){const H=$(host);let i=0,ok=0;function show(){if(i>=Q.length){H.innerHTML='<div class="big2">🎉 '+ok+' من '+Q.length+'</div><div class="btns"><button class="btn" id="'+host+'R">🔄 من جديد</button></div>';$(host+'R').onclick=()=>{i=0;ok=0;show()};if(ok>=Q.length-1)cheer();return}
+ const [s,o,why]=Q[i];const ord=shuf(o.map((t,j)=>j));H.innerHTML='<div class="scn">'+s+'</div><div class="opts2">'+ord.map(j=>'<button data-j="'+j+'">'+o[j]+'</button>').join('')+'</div><div class="fb" id="'+host+'F"></div>';
+ let dn=0;H.querySelectorAll('[data-j]').forEach(b=>b.onclick=()=>{if(dn)return;dn=1;const j=+b.dataset.j;b.classList.add(j===0?'ok':'no');if(j)H.querySelector('[data-j="0"]').classList.add('ok');else ok++;$(host+'F').innerHTML=(j?'💡 ':'✅ ')+why+'<br><button class="btn main" style="margin-top:6px" id="'+host+'N">التالي ⬅️</button>';$(host+'N').onclick=()=>{i++;show()};if(scId)$(scId).textContent='✔️ '+ok+' / '+Q.length})}show()}
+
+/* ================= أحياء الأول الثانوي ================= */
+const cposB=(c,e)=>{const r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}};
+const EMB=(x,e,X,Y,sz)=>{x.font=(sz||40)+'px "Segoe UI Emoji","Noto Color Emoji",sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(e,X,Y);x.textBaseline='alphabetic'};
+const chipsB=(id,arr,on,cb)=>{const H=$(id);H.innerHTML=arr.map((t,i)=>'<button data-i="'+i+'"'+(i===on?' class="on"':'')+'>'+t+'</button>').join('');H.querySelectorAll('button').forEach(b=>b.onclick=()=>{H.querySelectorAll('button').forEach(y=>y.classList.toggle('on',y===b));cb(+b.dataset.i)})};
+const ell=(x,X,Y,rx,ry,fill,stroke,lw,rot)=>{x.beginPath();x.ellipse(X,Y,rx,ry,rot||0,0,7);if(fill){x.fillStyle=fill;x.fill()}if(stroke){x.strokeStyle=stroke;x.lineWidth=lw||2;x.stroke()}};
+
+/* ---------- الوحدة 1 ---------- */
+flipCards('chCards',[['🍽️','التغذية','الحصول على الغذاء وتحويله إلى طاقة وجزيئات ضرورية لجسم الكائن الحي.'],['🫁','التنفس','التنفس الخلوي داخل الخلايا لإنتاج الطاقة: تستقبل الخلية الأكسجين وتطرح ثاني أكسيد الكربون. بعض الكائنات تتنفس لاهوائيًا (التخمر).'],['📈','النمو','تكبر الكائنات وحيدة الخلية في الحجم، وتنمو عديدة الخلايا بانقسام خلاياها.'],['🐣','التكاثر','إنتاج أفراد جدد: لا جنسيًا (وحده) أو جنسيًا (بمشاركة المادة الوراثية مع فرد آخر).'],['🚽','الإخراج','التخلص من فضلات الأيض، والمحافظة على توازن الماء والأيونات والحموض في الجسم.'],['🌻','الاستجابة والحركة','الإحساس بالمؤثرات (الضوء، الحرارة، الجاذبية، المواد الكيميائية) والاستجابة لها. النبات يتجه نحو ضوء الشمس.']]);
+sortGame('lvP','lvC','lvOut',[['💚 كائن حي','','#2b8a3e'],['🪨 غير حي','','#868e96']],[['🐪 الجمل',0,'يتغذى ويتنفس ويتكاثر.'],['🌴 النخلة',0,'تنمو وتتكاثر وتتنفس.'],['🍄 الفطر',0,'كائن حي يتغذى على المواد العضوية.'],['🦠 البكتيريا',0,'كائن حي وحيد الخلية.'],['🍞 الخميرة',0,'فطر وحيد الخلية يتنفس لاهوائيًا (تخمر).'],['🔥 النار',1,'تكبر وتستهلك الأكسجين، لكنها لا تتكون من خلايا ولا تتكاثر.'],['🚗 السيارة',1,'تتحرك وتطلق غازات، لكنها لا تنمو ولا تتكاثر.'],['🧂 بلورة الملح',1,'قد تكبر، لكنها ليست خلايا ولا تتغذى.'],['🤖 الروبوت',1,'يستجيب لكنه لا يتكاثر ولا ينمو.']]);
+steps('txL','txOut','txNew',[['👑 المملكة','مثل المملكة الحيوانية'],['🦴 الشعبة','الحبليات'],['🐾 الطائفة','الثدييات'],['🥩 الرتبة','اللواحم'],['🐕 العائلة','الكلبيات'],['🔤 الجنس','Canis'],['🐺 النوع','الذئب Canis lupus']]);
+(function(){const R=[['المملكة الحيوانية','🐺🐕🦊🐱🦁🐄🐟🐦🐸🐍🦋🐜'],['شعبة الحبليات','🐺🐕🦊🐱🦁🐄🐟🐦🐸🐍'],['طائفة الثدييات','🐺🐕🦊🐱🦁🐄'],['رتبة اللواحم','🐺🐕🦊🐱🦁'],['عائلة الكلبيات','🐺🐕🦊'],['الجنس Canis','🐺🐕'],['النوع: الذئب Canis lupus','🐺']],[c,x]=C2('lnC');
+ function draw(){const k=+$('lnR').value,[n,e]=R[k],E=[...e];$('lnRv').textContent=n;x.clearRect(0,0,640,260);
+  const cols=Math.min(6,E.length),sz=E.length>8?44:E.length>3?56:80;E.forEach((m,i)=>EMB(x,m,320+((i%cols)-(cols-1)/2)*(sz+22),70+Math.floor(i/cols)*(sz+26),sz));
+  $('lnOut').innerHTML='📊 '+n+': '+E.length+' من الكائنات المعروضة · '+(k<6?'كلما نزلنا مرتبة قلّ العدد وزاد التشابه.':'🎯 النوع: أفراد متشابهة جدًا تتزاوج وتنتج نسلًا خصبًا. الاسم العلمي = الجنس + النوع (التسمية الثنائية).')}
+ $('lnR').oninput=draw;draw()})();
+MCQP($('qg1'),bank([['أي مما يلي ليس من خصائص الكائنات الحية؟',['التبلور','التكاثر','الإخراج','النمو']],['العالم الذي اخترع نظام التصنيف عام 1753م:',['كارل لينيه (لينيوس)','داروين','نيوتن','باستير']],['الاسم العلمي للكائن الحي يتكون من:',['اسم الجنس + اسم النوع','اسم المملكة + اسم الشعبة','اسم العائلة فقط','اسم الرتبة + اسم الطائفة']],['المرتبة التي تأتي مباشرة بعد الطائفة:',['الرتبة','الشعبة','العائلة','الجنس']],['أكثر المراتب تشابهًا بين أفرادها:',['النوع','المملكة','الشعبة','الطائفة']],['التنفس الذي يحدث دون أكسجين يسمى:',['التنفس اللاهوائي (التخمر)','الإخراج','البناء الضوئي','الانتشار']],['التخلص من فضلات الأيض يسمى:',['الإخراج','التغذية','الحركة','النمو']],['يصنّف علم الأحياء الكائنات الحية في نظام:',['طبيعي يعكس النشأة والتطور','اصطناعي حسب فائدتها للإنسان فقط','حسب ألوانها','حسب أحجامها']],['النبات يتجه نحو الضوء. هذه خاصية:',['الاستجابة والحركة','الإخراج','التكاثر','التغذية']]]));
+
+/* ---------- الوحدة 2: الخلية ---------- */
+(function(){const c=$('clC'),x=c.getContext('2d');let mode=0,hi=null,target=null,rib=[];for(let i=0;i<40;i++)rib.push([rnd(110,540),rnd(70,320)]);
+ const INFO={mem:['🧱 الغشاء الخلوي (البلازمي)','غشاء رقيق <b>شبه منفذ</b> يحيط بالسيتوبلازم ويتحكم في دخول المواد وخروجها.'],cyt:['🫗 السيتوبلازم','مادة هلامية تحدث فيها معظم التفاعلات الكيميائية، وتسبح فيها العضيات.'],nuc:['🧠 النواة','تحتوي <b>المادة الوراثية</b> (الكروموسومات) وتتحكم في أنشطة الخلية وانقسامها.'],
+  mit:['⚡ الميتوكوندريا','«محطة الطاقة»: مكان <b>التنفس الخلوي</b> وإطلاق الطاقة من الغذاء.'],rib:['🔹 الرايبوسومات','حبيبات صغيرة جدًا يُصنع عليها <b>البروتين</b>.'],er:['〰️ الشبكة الإندوبلازمية','أغشية تكوّن قنوات لنقل المواد داخل الخلية، يلتصق ببعضها الرايبوسومات.'],gol:['📦 جهاز جولجي','يعدّل البروتينات ويغلّفها ويرسلها إلى خارج الخلية.'],
+  vacS:['🫧 فجوات صغيرة','في الخلية الحيوانية فجوات صغيرة مؤقتة.'],vac:['💧 الفجوة العصارية الكبيرة','تملأ معظم الخلية النباتية، فيها <b>العصارة الخلوية</b> (ماء وأملاح وسكريات)، وتحافظ على <b>انتفاخ</b> الخلية.'],wall:['🧱 الجدار الخلوي','طبقة صلبة من <b>السليولوز</b> خارج الغشاء في الخلية النباتية فقط، تمنح الخلية الشكل والدعم وتمنعها من الانفجار.'],chl:['🌿 البلاستيدات الخضراء','فيها <b>اليخضور (الكلوروفيل)</b> الذي يمتص الضوء للقيام بـ<b>البناء الضوئي</b>. في الخلية النباتية فقط.']};
+ const A=[{k:'nuc',h:(X,Y)=>Math.hypot(X-300,Y-185)<58,d:()=>{ell(x,300,185,58,52,'#d0bfff','#7048e8',3);ell(x,312,178,16,14,'#7048e8')}},
+  {k:'mit',h:(X,Y)=>[[455,120],[190,270],[470,270],[175,135]].some(([a,b])=>Math.hypot(X-a,Y-b)<34),d:()=>[[455,120,.4],[190,270,-.3],[470,270,.8],[175,135,1.2]].forEach(([a,b,r])=>{ell(x,a,b,34,17,'#ffc078','#e8590c',2.5,r);x.strokeStyle='#e8590c';x.lineWidth=1.5;x.beginPath();for(let t=-24;t<=24;t+=8){x.moveTo(a+t*Math.cos(r),b+t*Math.sin(r));x.lineTo(a+t*Math.cos(r)-8*Math.sin(r),b+t*Math.sin(r)+8*Math.cos(r))}x.stroke()})},
+  {k:'gol',h:(X,Y)=>Math.hypot(X-230,Y-210)<34,d:()=>{for(let i=0;i<4;i++){x.strokeStyle='#f06595';x.lineWidth=5;x.beginPath();x.arc(230,240+i*9,30-i*3,-2.6,-.55);x.stroke()}}},
+  {k:'er',h:(X,Y)=>X>365&&X<430&&Y>150&&Y<240,d:()=>{x.strokeStyle='#4dabf7';x.lineWidth=4;for(let i=0;i<3;i++){x.beginPath();for(let t=0;t<=90;t+=6)x.lineTo(372+i*18+6*Math.sin(t/8),150+t);x.stroke()}}},
+  {k:'vacS',h:(X,Y)=>Math.hypot(X-400,Y-300)<18,d:()=>ell(x,400,300,16,14,'#e7f5ff','#74c0fc',2)},
+  {k:'rib',h:(X,Y)=>rib.some(([a,b])=>Math.hypot(X-a,Y-b)<7),d:()=>rib.forEach(([a,b])=>{if(((a-320)/245)**2+((b-190)/150)**2<.85&&Math.hypot(a-300,b-185)>64){x.fillStyle='#1c7ed6';x.beginPath();x.arc(a,b,3.2,0,7);x.fill()}})},
+  {k:'mem',h:(X,Y)=>{const v=((X-320)/250)**2+((Y-190)/160)**2;return v>.88&&v<1.15},d:()=>ell(x,320,190,250,160,null,'#2b8a3e',6)},
+  {k:'cyt',h:(X,Y)=>((X-320)/250)**2+((Y-190)/160)**2<.88,d:()=>ell(x,320,190,250,160,'#fff9db')}];
+ const P=[{k:'nuc',h:(X,Y)=>Math.hypot(X-160,Y-110)<44,d:()=>{ell(x,160,110,44,40,'#d0bfff','#7048e8',3);ell(x,170,104,12,11,'#7048e8')}},
+  {k:'chl',h:(X,Y)=>[[150,250],[200,320],[470,70],[520,140],[520,260],[300,322],[420,322],[110,190]].some(([a,b])=>Math.hypot(X-a,Y-b)<26),d:()=>[[150,250,0],[200,320,.2],[470,70,.1],[520,140,1.5],[520,260,1.4],[300,322,0],[420,322,-.2],[110,190,1.6]].forEach(([a,b,r])=>{ell(x,a,b,26,14,'#69db7c','#2b8a3e',2,r);x.strokeStyle='#2b8a3e';x.lineWidth=1.2;for(let k=-1;k<=1;k++){x.beginPath();x.moveTo(a-14*Math.cos(r)-k*5*Math.sin(r),b-14*Math.sin(r)+k*5*Math.cos(r));x.lineTo(a+14*Math.cos(r)-k*5*Math.sin(r),b+14*Math.sin(r)+k*5*Math.cos(r));x.stroke()}})},
+  {k:'mit',h:(X,Y)=>[[260,70],[380,70]].some(([a,b])=>Math.hypot(X-a,Y-b)<26),d:()=>[[260,70],[380,70]].forEach(([a,b])=>ell(x,a,b,26,13,'#ffc078','#e8590c',2.5))},
+  {k:'vac',h:(X,Y)=>X>215&&X<495&&Y>105&&Y<295,d:()=>{x.fillStyle='#d0ebff';x.strokeStyle='#339af0';x.lineWidth=3;x.beginPath();x.roundRect(215,105,280,190,40);x.fill();x.stroke();txt(x,'عصارة خلوية',355,205,14,'#1971c2')}},
+  {k:'wall',h:(X,Y)=>(X>70&&X<570&&Y>22&&Y<358)&&!(X>88&&X<552&&Y>40&&Y<340),d:()=>{x.fillStyle='#b2f2bb';x.strokeStyle='#2b8a3e';x.lineWidth=2;x.beginPath();x.roundRect(70,22,500,336,14);x.fill();x.stroke()}},
+  {k:'mem',h:(X,Y)=>(X>88&&X<552&&Y>40&&Y<340)&&!(X>98&&X<542&&Y>50&&Y<330),d:()=>{x.strokeStyle='#e8590c';x.lineWidth=4;x.beginPath();x.roundRect(92,44,456,292,10);x.stroke()}},
+  {k:'cyt',h:(X,Y)=>X>98&&X<542&&Y>50&&Y<330,d:()=>{x.fillStyle='#fff9db';x.beginPath();x.roundRect(94,46,452,288,10);x.fill()}}];
+ const S=()=>mode?P:A;
+ function draw(){x.clearRect(0,0,640,380);const L=S(),order=['wall','cyt','mem','vac','vacS','er','gol','rib','mit','chl','nuc'];order.forEach(k=>{const o=L.find(q=>q.k===k);if(o)o.d()});
+  if(hi){x.save();x.globalAlpha=.25;x.fillStyle='#ffd43b';for(let X=0;X<640;X+=6)for(let Y=0;Y<380;Y+=6){const o=L.find(q=>q.h(X,Y));if(o&&o.k===hi)x.fillRect(X,Y,6,6)}x.restore()}
+  txt(x,mode?'🌿 خلية نباتية':'🐾 خلية حيوانية',560,370,15,'#495057')}
+ chipsB('clK',['🐾 خلية حيوانية','🌿 خلية نباتية'],0,i=>{mode=i;hi=null;$('clI').innerHTML='👆 اضغط على عضية…';draw()});
+ c.addEventListener('pointerdown',e=>{const p=cposB(c,e),o=S().find(q=>q.h(p.x,p.y));if(!o)return;hi=o.k;const [t,d]=INFO[o.k];$('clI').innerHTML='<b>'+t+'</b><br>'+d;
+  if(target){if(o.k===target){$('clF').innerHTML='🎉 أحسنت! هذه هي '+INFO[target][0];cheer();target=null}else{$('clF').innerHTML='🤔 هذه '+INFO[o.k][0]+'… حاول مرة أخرى';shake(c)}}draw()});
+ $('clQ').onclick=()=>{const ks=[...new Set(S().map(q=>q.k))].filter(k=>k!=='vacS');target=pick(ks);hi=null;$('clF').innerHTML='🎯 أين '+INFO[target][0]+'؟ اضغط عليها';draw()};draw()})();
+sortGame('pvP','pvC','pvOut',[['🌿 نباتية فقط','','#2b8a3e'],['🐾 حيوانية فقط','','#e8590c'],['🤝 في الاثنتين','','#1971c2']],[['جدار خلوي',0,''],['بلاستيدات خضراء',0,''],['فجوة عصارية كبيرة',0,''],['مريكزات',1,'تساعد في انقسام الخلية الحيوانية.'],['شكل غير منتظم',1,'لعدم وجود جدار خلوي.'],['نواة',2,''],['غشاء خلوي',2,''],['سيتوبلازم',2,''],['ميتوكوندريا',2,''],['رايبوسومات',2,'']]);
+MCQP($('qc1'),bank([['العضية المسؤولة عن التنفس الخلوي وإنتاج الطاقة:',['الميتوكوندريا','النواة','الرايبوسومات','جهاز جولجي']],['يتكون الجدار الخلوي في الخلية النباتية من:',['السليولوز','البروتين','الدهون','النشا']],['يُصنع البروتين على:',['الرايبوسومات','الفجوة العصارية','الجدار الخلوي','البلاستيدات الخضراء']],['تحتوي النواة على:',['المادة الوراثية (الكروموسومات)','اليخضور','العصارة الخلوية','السليولوز']],['الغشاء الخلوي:',['شبه منفذ يتحكم في دخول المواد وخروجها','صلب من السليولوز','يصنع الغذاء','يخزن الماء فقط']],['تحتوي البلاستيدات الخضراء على:',['اليخضور (الكلوروفيل)','الهيموجلوبين','الكيراتين','الإنزيمات الهاضمة فقط']],['جزء يوجد في الخلية الحيوانية ولا يوجد في النباتية:',['المريكزات','النواة','الميتوكوندريا','الغشاء الخلوي']],['تحدث معظم التفاعلات الكيميائية في الخلية في:',['السيتوبلازم','الجدار الخلوي','الفجوة','الغشاء']],['يعدّل البروتينات ويغلّفها لإفرازها:',['جهاز جولجي','الميتوكوندريا','النواة','الفجوة']]]));
+
+flipCards('spCards',[['🩸','خلية الدم الحمراء','مقعرة الوجهين لزيادة المساحة، <b>بلا نواة</b> لتتسع للهيموجلوبين الذي ينقل الأكسجين، ومرنة لتمر في الشعيرات.'],['⚡','الخلية العصبية','لها <b>محور طويل</b> ينقل السيالات العصبية لمسافات بعيدة بسرعة.'],['🌱','الشعيرة الجذرية','امتداد طويل رفيع يزيد <b>مساحة السطح</b> لامتصاص الماء والأملاح من التربة.'],['💪','الخلية العضلية','طويلة وتستطيع <b>الانقباض</b>، وغنية بالميتوكوندريا للطاقة.'],['🌀','الخلايا الهدبية','لها <b>أهداب</b> تتحرك لتدفع المخاط والجراثيم بعيدًا عن الرئتين.'],['🚪','الخلية الحارسة','زوج من الخلايا يفتح <b>الثغر</b> ويغلقه لتبادل الغازات.'],['🐟','الحيوان المنوي','له <b>ذيل</b> للسباحة، وميتوكوندريا كثيرة تمدّه بالطاقة.'],['🪵','أوعية الخشب','خلايا ميتة مجوفة متصلة كالأنابيب لنقل الماء، جدرانها مقواة.']]);
+(function(){const [c,x]=C2('zmC'),L=[['🧍 الكائن الحي','الإنسان كائن حي يتكون من عدة أجهزة تعمل معًا.'],['🫃 الجهاز','الجهاز الهضمي: عدة أعضاء (الفم، المريء، المعدة، الأمعاء…) تتعاون في الهضم.'],['🫙 العضو','المعدة: عضو يتكون من عدة أنسجة (عضلي، طلائي، عصبي…).'],['🧱 النسيج','النسيج العضلي: خلايا عضلية متشابهة تنقبض معًا لتخلط الطعام.'],['🔬 الخلية','الخلية العضلية: الوحدة الأساسية… طويلة وفيها أنوية وميتوكوندريا كثيرة.']];
+ function draw(){const k=+$('zmZ').value;$('zmZv').textContent=L[k][0];x.clearRect(0,0,640,300);
+  if(k===0){EMB(x,'🧍',320,150,230);x.strokeStyle='#e8590c';x.lineWidth=3;x.setLineDash([6,5]);x.strokeRect(282,110,76,80);x.setLineDash([])}
+  if(k===1){x.strokeStyle='#e8590c';x.lineWidth=14;x.lineCap='round';x.beginPath();x.moveTo(320,20);x.lineTo(320,100);x.stroke();ell(x,355,125,48,30,'#ffa8a8','#c92a2a',3,.3);x.strokeStyle='#ffc078';x.lineWidth=12;x.beginPath();for(let t=0;t<14;t++)x.lineTo(270+(t%2?100:0),165+t*8);x.stroke();x.strokeStyle='#d9480f';x.lineWidth=16;x.beginPath();x.moveTo(250,170);x.lineTo(250,290);x.moveTo(250,170);x.lineTo(390,170);x.lineTo(390,290);x.stroke();x.lineCap='butt';txt(x,'المعدة',440,110,15,'#c92a2a')}
+  if(k===2){ell(x,320,150,190,110,'#ffc9c9','#c92a2a',5,.25);ell(x,320,150,150,75,'#ffe3e3',null,0,.25);txt(x,'طبقة عضلية',150,60,15,'#c92a2a');txt(x,'طبقة مخاطية',320,155,15,'#862e9c');x.strokeStyle='#e8590c';x.setLineDash([6,5]);x.strokeRect(440,80,70,60);x.setLineDash([])}
+  if(k===3){for(let r=0;r<6;r++)for(let i=0;i<4;i++){const X=60+i*140+(r%2)*40,Y=40+r*40;x.fillStyle='#ffa8a8';x.strokeStyle='#c92a2a';x.lineWidth=2;x.beginPath();x.roundRect(X,Y,130,32,16);x.fill();x.stroke();x.fillStyle='#862e9c';x.beginPath();x.arc(X+65,Y+16,6,0,7);x.fill()}}
+  if(k===4){x.fillStyle='#ffa8a8';x.strokeStyle='#c92a2a';x.lineWidth=4;x.beginPath();x.roundRect(70,100,500,100,50);x.fill();x.stroke();[170,320,470].forEach(X=>ell(x,X,150,20,13,'#862e9c'));[[240,130],[400,170],[530,140]].forEach(([a,b])=>ell(x,a,b,18,9,'#ffc078','#e8590c',2));txt(x,'نواة',170,125,13,'#862e9c');txt(x,'ميتوكوندريا',400,200,13,'#e8590c')}
+  $('zmOut').innerHTML='<b>'+L[k][0]+'</b>: '+L[k][1]}
+ $('zmZ').oninput=draw;draw()})();
+steps('lvL','lvO','lvNew',[['🔬 الخلية','الوحدة الأساسية'],['🧱 النسيج','خلايا متشابهة تؤدي وظيفة واحدة'],['🫙 العضو','عدة أنسجة تعمل معًا'],['🫃 الجهاز','عدة أعضاء تتعاون في وظيفة'],['🧍 الكائن الحي','مجموعة أجهزة تعمل معًا']]);
+MCQP($('qc2'),bank([['مجموعة من الخلايا المتشابهة تؤدي وظيفة واحدة:',['النسيج','العضو','الجهاز','الكائن الحي']],['المعدة مثال على:',['عضو','نسيج','خلية','جهاز']],['لماذا لا توجد نواة في خلية الدم الحمراء؟',['لتتسع لكمية أكبر من الهيموجلوبين','لتنقسم بسرعة','لتصنع البروتين','لتتحرك بالأهداب']],['وظيفة امتداد الشعيرة الجذرية الطويل:',['زيادة مساحة السطح لامتصاص الماء','البناء الضوئي','نقل السيالات العصبية','حماية الجذر']],['الخلية التي لها محور طويل لنقل السيالات:',['الخلية العصبية','الخلية العضلية','خلية الدم الحمراء','الخلية الحارسة']],['الترتيب الصحيح لمستويات التنظيم:',['خلية ← نسيج ← عضو ← جهاز','نسيج ← خلية ← جهاز ← عضو','عضو ← نسيج ← خلية ← جهاز','جهاز ← عضو ← خلية ← نسيج']],['الخلايا الهدبية في القصبة الهوائية وظيفتها:',['دفع المخاط والجراثيم بعيدًا عن الرئتين','نقل الأكسجين','امتصاص الغذاء','إفراز الإنزيمات']]]));
+
+/* ---------- الوحدة 3: الانتشار ---------- */
+(function(){let P=[],wall=0,t0=0;const [c,x]=C2('dfC');
+ function drop(){P=[];for(let i=0;i<140;i++)P.push({x:rnd(40,110),y:rnd(110,190),vx:0,vy:0});t0=performance.now()}
+ $('dfGo').onclick=drop;$('dfW').onclick=()=>{wall=!wall;$('dfW').textContent=wall?'🚫 أزل الغشاء':'🧱 غشاء بفتحات';drop()};
+ anim('dfC',(x)=>{const T=+$('dfT').value;$('dfTv').textContent=T*10+'°س';x.clearRect(0,0,640,300);x.fillStyle='#e7f5ff';x.fillRect(20,20,600,260);x.strokeStyle='#74c0fc';x.lineWidth=3;x.strokeRect(20,20,600,260);
+  if(wall){x.fillStyle='#868e96';for(let y=20;y<280;y+=40)x.fillRect(316,y,8,24)}
+  const s=.6+T*.55;P.forEach(p=>{p.vx=p.vx*.6+(Math.random()-.5)*s*2;p.vy=p.vy*.6+(Math.random()-.5)*s*2;let nx=p.x+p.vx,ny=p.y+p.vy;
+   if(wall&&((p.x<320&&nx>=316)||(p.x>320&&nx<=324))){const g=((ny-20)%40);if(g<24){nx=p.x;p.vx*=-1}}
+   if(nx<24||nx>616){p.vx*=-1;nx=p.x}if(ny<24||ny>276){p.vy*=-1;ny=p.y}p.x=nx;p.y=ny;x.fillStyle='#7048e8';x.beginPath();x.arc(p.x,p.y,4,0,7);x.fill()});
+  if(!P.length){txt(x,'اضغط «أضف قطرة حبر» 🧪',320,155,20,'#495057');return}
+  const L=P.filter(p=>p.x<320).length,R=P.length-L;x.fillStyle='rgba(112,72,232,.12)';x.fillRect(20,284,600*L/P.length,12);
+  txt(x,'يسار: '+L,170,48,15,'#495057');txt(x,'يمين: '+R,470,48,15,'#495057');
+  const sec=((performance.now()-t0)/1000).toFixed(0);$('dfOut').innerHTML=Math.abs(L-R)<P.length*.12?'⚖️ <b>تساوى التركيز</b> بعد نحو '+sec+' ثانية! الجزيئات ما زالت تتحرك عشوائيًا، لكن لم يعد هناك انتقال صافٍ.':'➡️ الجزيئات تنتقل من التركيز <b>العالي</b> (اليسار) إلى <b>المنخفض</b> (اليمين)… ارفع الحرارة لتسرّع الانتشار'+(wall?' · الغشاء يبطئ الانتشار':'')})})();
+choiceQs('dfQ',[['ينتقل الأكسجين من الحويصلات الهوائية إلى الدم لأن:',['تركيزه في الحويصلات أعلى منه في الدم','الدم يسحبه بالطاقة','الرئة تضغطه','تركيزه في الدم أعلى'],'الانتشار من العالي إلى المنخفض.'],['ينتشر ثاني أكسيد الكربون من الخلايا إلى الدم لأن:',['الخلايا تنتجه في التنفس فيرتفع تركيزه فيها','الدم يصنعه','الخلايا تحتاجه','لا ينتشر'],'التنفس الخلوي يرفع تركيزه داخل الخلية.'],['يدخل ثاني أكسيد الكربون إلى الورقة نهارًا لأن:',['البناء الضوئي يستهلكه فيقل تركيزه داخل الورقة','الورقة تفرزه','الثغور مغلقة','الضوء يدفعه'],'استهلاكه يخفض تركيزه داخل الورقة.'],['أي العوامل يزيد معدل الانتشار؟',['زيادة فرق التركيز','زيادة المسافة','خفض درجة الحرارة','تقليل مساحة السطح'],'كلما زاد الفرق زادت السرعة.'],['هل يحتاج الانتشار إلى طاقة من الخلية؟',['لا، يعتمد على الحركة العشوائية للجزيئات','نعم، دائمًا','فقط في النبات','فقط في الحيوان'],'الانتشار عملية سلبية (غير نشطة).']]);
+MCQP($('qt1'),bank([['الانتشار هو انتقال الجزيئات من منطقة:',['عالية التركيز إلى منخفضة التركيز','منخفضة التركيز إلى عالية التركيز','باردة إلى ساخنة فقط','لا ينتقل']],['يتوقف الانتقال الصافي في الانتشار عندما:',['يتساوى التركيز','تتوقف الجزيئات عن الحركة','تنفد الطاقة','ترتفع الحرارة']],['ارتفاع درجة الحرارة يجعل الانتشار:',['أسرع','أبطأ','يتوقف','لا يتأثر']],['مثال على الانتشار في جسم الإنسان:',['انتقال الأكسجين من الحويصلات الهوائية إلى الدم','ضخ القلب للدم','امتصاص الأملاح بالطاقة','حركة العضلات']],['يزداد معدل الانتشار عند:',['زيادة مساحة السطح','زيادة سمك الغشاء','تقليل فرق التركيز','خفض الحرارة']]]));
+
+/* ---------- الوحدة 3: الأسموزية والنقل النشط ---------- */
+(function(){const [c,x]=C2('osC');let K=0,S=0,sc=1,burst=0,W=[];for(let i=0;i<30;i++)W.push({a:Math.random()*7,r:Math.random()});
+ const SOL=['💧 ماء مقطر (مخفف)','⚖️ محلول متساوي التركيز','🧂 محلول ملحي مركز'];
+ chipsB('osK',['🩸 خلية دم حمراء','🌿 خلية نباتية'],0,i=>{K=i;sc=1;burst=0;upd()});chipsB('osS',SOL,0,i=>{S=i;sc=1;burst=0;upd()});
+ function upd(){const A=[['💥 الماء يدخل الخلية بالأسموزية (جهد الماء خارجها أعلى)، فتنتفخ… ولأنها بلا جدار خلوي <b>تنفجر</b> (تتحلل).','⚖️ لا يوجد انتقال صافٍ للماء ⟸ تبقى الخلية بشكلها الطبيعي.','🔻 الماء يخرج من الخلية إلى المحلول المركز ⟸ <b>تنكمش</b> الخلية وتتجعد.'],['💪 الماء يدخل الفجوة فتنتفخ وتضغط على الجدار ⟸ خلية <b>منتفخة (مكتنزة)</b>، والجدار يمنعها من الانفجار. هذا يدعم النبات!','😐 لا انتقال صافٍ للماء ⟸ خلية <b>رخوة</b> قليلًا.','🥀 الماء يخرج من الفجوة ⟸ ينكمش السيتوبلازم وينفصل عن الجدار ⟸ خلية <b>مُتبلزمة</b>، والنبات يذبل.']];$('osOut').innerHTML=A[K][S]}
+ anim('osC',(x,c,t)=>{x.clearRect(0,0,640,320);const conc=[.05,.35,.8][S];x.fillStyle='rgba(255,212,59,'+conc*.5+')';x.fillRect(40,20,560,280);x.strokeStyle='#495057';x.lineWidth=3;x.strokeRect(40,20,560,280);
+  for(let i=0;i<conc*60;i++){x.fillStyle='#f59f00';x.beginPath();x.arc(60+(i*97)%540,40+(i*53)%250,3,0,7);x.fill()}
+  const tgt=K===0?[1.35,1,.72][S]:[1,.93,.62][S];sc+=(tgt-sc)*.03;if(K===0&&S===0&&sc>1.32&&!burst)burst=t;
+  const dir=S===0?-1:S===2?1:0;W.forEach((w,i)=>{const ph=(t*.35+w.r)%1,R0=K?110:90;const rr=dir===0?R0+20*Math.sin(t*2+i):dir<0?R0+70-ph*70:R0+ph*70;x.fillStyle='#1c7ed6';x.beginPath();x.arc(320+rr*Math.cos(w.a),160+rr*.7*Math.sin(w.a),3.2,0,7);x.fill()});
+  if(K===0){if(burst){const k=Math.min(1,(t-burst)/1.2);for(let i=0;i<10;i++){const a=i*.63,d=20+k*120;x.fillStyle='rgba(224,49,49,'+(1-k*.7)+')';x.beginPath();x.arc(320+d*Math.cos(a),160+d*Math.sin(a),12,0,7);x.fill()}txt(x,'💥 انفجرت!',320,170,22,'#c92a2a');if(t-burst>3){burst=0;sc=1}return}
+   x.fillStyle='#ff6b6b';x.strokeStyle='#c92a2a';x.lineWidth=3;x.beginPath();const R=80*sc;for(let a=0;a<=6.3;a+=.1){const sp=S===2?1+.12*Math.sin(a*14):1;x.lineTo(320+R*sp*Math.cos(a),160+R*.75*sp*Math.sin(a))}x.closePath();x.fill();x.stroke();ell(x,320,160,R*.45,R*.28,'#fa5252')}
+  else{x.fillStyle='#d3f9d8';x.strokeStyle='#2b8a3e';x.lineWidth=7;x.beginPath();x.roundRect(200,70,240,180,12);x.fill();x.stroke();const w=220*sc,h=160*sc;x.fillStyle='#8ce99a';x.strokeStyle='#e8590c';x.lineWidth=3;x.beginPath();x.roundRect(320-w/2,160-h/2,w,h,14);x.fill();x.stroke();x.fillStyle='#a5d8ff';x.beginPath();x.roundRect(320-w*.35,160-h*.33,w*.7,h*.66,20);x.fill();txt(x,'فجوة',320,165,13,'#1971c2');txt(x,'جدار خلوي',320,62,13,'#2b8a3e')}
+  txt(x,'🔵 جزيئات الماء  🟠 جزيئات الملح',520,312,12,'#495057')});upd()})();
+(function(){const [c,x]=C2('atC');let soil,cell,E;function reset(){soil=4;cell=14;E=0;draw();$('atOut').innerHTML='التركيز داخل الشعيرة الجذرية (14) أعلى من التربة (4)… الانتشار لن يُدخل الأيونات!'}
+ function draw(mv){x.clearRect(0,0,640,260);x.fillStyle='#e9d8a6';x.fillRect(0,0,300,260);x.fillStyle='#d3f9d8';x.strokeStyle='#2b8a3e';x.lineWidth=5;x.beginPath();x.roundRect(330,30,290,200,30);x.fill();x.stroke();
+  txt(x,'🟫 التربة',150,24,15,'#7f5539');txt(x,'🌱 الشعيرة الجذرية',475,22,15,'#2b8a3e');x.fillStyle='#ffd43b';x.strokeStyle='#e8590c';x.lineWidth=3;x.beginPath();x.roundRect(306,100,40,60,8);x.fill();x.stroke();txt(x,'⚡',326,138,20);
+  for(let i=0;i<soil;i++){x.fillStyle='#7048e8';x.beginPath();x.arc(40+(i%5)*50,70+Math.floor(i/5)*45,9,0,7);x.fill()}
+  for(let i=0;i<cell;i++){x.fillStyle='#7048e8';x.beginPath();x.arc(370+(i%6)*40,70+Math.floor(i/6)*40,9,0,7);x.fill()}
+  txt(x,'التركيز: '+soil,150,240,15,'#495057');txt(x,'التركيز: '+cell+' · طاقة مستهلكة ⚡'+E,475,250,13,'#495057')}
+ $('atP').onclick=()=>{if(!soil){$('atOut').innerHTML='🏁 نقلت كل الأيونات! استُهلكت '+E+' وحدة طاقة من التنفس الخلوي.';cheer();return}soil--;cell++;E++;draw();$('atOut').innerHTML='⚡ <b>نقل نشط</b>: أيون نترات انتقل من التركيز <b>المنخفض</b> إلى <b>العالي</b> (عكس فرق التركيز) باستخدام الطاقة.'};$('atR').onclick=reset;reset()})();
+MCQP($('qt2'),bank([['الأسموزية هي انتقال جزيئات الماء من:',['المحلول المخفف إلى المركز عبر غشاء شبه منفذ','المحلول المركز إلى المخفف','أي مكان دون غشاء','الخلية إلى الجدار فقط']],['عند وضع خلية دم حمراء في ماء مقطر فإنها:',['تنتفخ وتنفجر','تنكمش','لا تتغير','تتبلزم']],['عند وضع خلية نباتية في محلول ملحي مركز فإنها:',['تتبلزم (ينكمش السيتوبلازم)','تنفجر','تنتفخ','لا تتغير']],['لا تنفجر الخلية النباتية في الماء المقطر بسبب:',['الجدار الخلوي','الغشاء الخلوي','النواة','البلاستيدات']],['النقل النشط يحتاج إلى:',['طاقة من التنفس الخلوي','فرق تركيز فقط','ضوء الشمس','ماء مقطر']],['تمتص الشعيرات الجذرية الأملاح المعدنية من التربة بـ:',['النقل النشط','الأسموزية','الانتشار فقط','البناء الضوئي']],['إضافة كميات كبيرة من الأسمدة حول النبات قد تسبب:',['خروج الماء من الجذور وذبول النبات','زيادة الانتفاخ','انفجار الخلايا','زيادة البناء الضوئي فورًا']],['الخلية المنتفخة (المكتنزة) تساعد النبات على:',['الدعم والتماسك','الذبول','فقد الماء','التنفس']]]));
+
+/* ---------- مراجعة 1-3 ---------- */
+chapterTest('rv1',[['أي مما يلي من خصائص الكائنات الحية؟',['التكاثر','التبلور','الصدأ']],['أكثر المراتب تشابهًا بين أفرادها:',['النوع','المملكة','الطائفة']],['الاسم العلمي = ',['الجنس + النوع','المملكة + الشعبة','العائلة + الرتبة']],['مكان التنفس الخلوي:',['الميتوكوندريا','الرايبوسومات','النواة']],['توجد في الخلية النباتية فقط:',['البلاستيدات الخضراء','الميتوكوندريا','النواة']],['مجموعة أنسجة تعمل معًا تكوّن:',['عضوًا','خلية','نسيجًا']],['خلية الدم الحمراء بلا نواة لكي:',['تحمل هيموجلوبين أكثر','تنقسم بسرعة','تتحرك بالأهداب']],['الانتشار من تركيز:',['عالٍ إلى منخفض','منخفض إلى عالٍ','متساوٍ إلى عالٍ']],['زيادة الحرارة تجعل الانتشار:',['أسرع','أبطأ','يتوقف']],['خلية الدم في ماء مقطر:',['تنتفخ وتنفجر','تنكمش','تتبلزم']],['الخلية النباتية في محلول مركز:',['تتبلزم','تنفجر','تنتفخ']],['النقل الذي يحتاج طاقة ويحدث عكس فرق التركيز:',['النقل النشط','الانتشار','الأسموزية']]]);
+
+/* ---------- الوحدة 4: الإنزيمات ---------- */
+(function(){const [c,x]=C2('lkC');let K=0,t0=performance.now(),cnt=0,last=-1;
+ chipsB('lkS',['🔷 مادة مناسبة (نشا + أميلاز)','🔺 مادة غير مناسبة (بروتين)','🔥 إنزيم ممسوخ (70°س)'],0,i=>{K=i;t0=performance.now();last=-1;$('lkOut').innerHTML=''});
+ function enzyme(X,Y,bent){x.fillStyle=bent?'#adb5bd':'#74c0fc';x.strokeStyle=bent?'#495057':'#1971c2';x.lineWidth=3;x.beginPath();x.moveTo(X-90,Y+60);x.lineTo(X-90,Y-30);x.quadraticCurveTo(X-90,Y-60,X-60,Y-60);
+  if(bent){x.lineTo(X-20,Y-60);x.quadraticCurveTo(X,Y-20,X+20,Y-60)}else{x.lineTo(X-28,Y-60);x.lineTo(X,Y-20);x.lineTo(X+28,Y-60)}x.lineTo(X+60,Y-60);x.quadraticCurveTo(X+90,Y-60,X+90,Y-30);x.lineTo(X+90,Y+60);x.closePath();x.fill();x.stroke();txt(x,bent?'إنزيم ممسوخ':'إنزيم',X,Y+30,15,bent?'#495057':'#1971c2');if(!bent)txt(x,'الموقع الفعال',X+120,Y-48,12,'#1971c2')}
+ anim('lkC',(x,c,tt)=>{x.clearRect(0,0,640,280);const t=((performance.now()-t0)/1000)%4,X=320,Y=180;enzyme(X,Y,K===2);
+  const fit=K===0,sub=(sx,sy,col)=>{x.fillStyle=col;x.strokeStyle='#222';x.lineWidth=2;x.beginPath();if(K===1){x.moveTo(sx-26,sy-20);x.lineTo(sx+26,sy-20);x.lineTo(sx,sy+30);x.closePath()}else{x.moveTo(sx-28,sy-20);x.lineTo(sx+28,sy-20);x.lineTo(sx,sy+20);x.closePath()}x.fill();x.stroke()};
+  if(t<1.5){const k=t/1.5;sub(X,30+k*(fit?110:85),'#ffa94d')}
+  else if(t<2.3){if(fit){sub(X,140,'#ffa94d');txt(x,'معقد الإنزيم ومادة التفاعل',X,24,14,'#e8590c')}else{const k=(t-1.5)/.8;sub(X+k*150,115-k*60,'#ffa94d');txt(x,K===1?'❌ لا يناسب الموقع الفعال':'❌ تغيّر شكل الموقع الفعال',X,24,15,'#c92a2a')}}
+  else if(fit){const k=Math.min(1,(t-2.3)/1);x.fillStyle='#69db7c';x.strokeStyle='#222';x.lineWidth=2;[[-1],[1]].forEach(([s])=>{x.beginPath();const sx=X+s*(14+k*170),sy=140-k*90;x.moveTo(sx-14,sy-20);x.lineTo(sx+14,sy-20);x.lineTo(sx+s*0,sy+20);x.closePath();x.fill();x.stroke()});txt(x,'النواتج: مالتوز',X,24,15,'#2b8a3e');
+   const cyc=Math.floor((performance.now()-t0)/4000);if(cyc!==last&&t>3){last=cyc;cnt++;$('lkOut').innerHTML='✅ الإنزيم <b>لم يتغير</b> بعد التفاعل ويُستخدم مرة أخرى! عدد التفاعلات: '+cnt}}
+  else $('lkOut').innerHTML=K===1?'🔐 كل إنزيم <b>متخصص</b>: الأميلاز يهضم النشا فقط، أما البروتين فيحتاج إنزيم بروتياز.':'🔥 الحرارة العالية <b>مسخت</b> الإنزيم: تغيّر شكل موقعه الفعال، فلا تناسبه مادة التفاعل أبدًا.'})})();
+(function(){const [c,x]=C2('enC');let K=0;const D=[['🌡️ الحرارة (أميلاز)','T'],['🧪 pH: الببسين (المعدة)',2],['🧪 pH: الأميلاز (الفم)',7],['🧪 pH: التربسين (الأمعاء)',8]];
+ const f=(v)=>{if(K===0){return v<=37?Math.pow(Math.max(v,0)/37,1.5):Math.max(0,1-Math.pow((v-37)/22,2))}const o=D[K][1];return Math.exp(-Math.pow((v-o)/1.4,2))};
+ chipsB('enK',D.map(d=>d[0]),0,i=>{K=i;const s=$('enV');if(i===0){s.min=0;s.max=80;s.value=37;$('enL').textContent='🌡️ درجة الحرارة'}else{s.min=0;s.max=14;s.step=.5;s.value=7;$('enL').textContent='🧪 درجة الحموضة pH'}draw()});
+ function draw(){const v=+$('enV').value,mx=K?14:80;$('enVv').textContent=K?v:v+'°س';x.clearRect(0,0,640,320);const X0=70,Y0=280,W=540,H=230;x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(X0,20);x.lineTo(X0,Y0);x.lineTo(X0+W,Y0);x.stroke();
+  txt(x,'سرعة التفاعل',X0+10,16,13,'#495057','left');txt(x,K?'pH':'الحرارة °س',X0+W-20,Y0+30,13,'#495057');for(let i=0;i<=mx;i+=K?2:10)txt(x,''+i,X0+i/mx*W,Y0+18,11,'#868e96');
+  x.strokeStyle=K?'#7048e8':'#e8590c';x.lineWidth=4;x.beginPath();for(let i=0;i<=200;i++){const vv=i/200*mx;x.lineTo(X0+vv/mx*W,Y0-f(vv)*H)}x.stroke();
+  const r=f(v);x.fillStyle='#c92a2a';x.beginPath();x.arc(X0+v/mx*W,Y0-r*H,10,0,7);x.fill();
+  let m;if(K===0)m=v<5?'🥶 بارد جدًا: الجزيئات بطيئة ⟸ الإنزيم شبه متوقف (لكنه لم يُمسخ).':v<33?'📈 كلما ارتفعت الحرارة زادت حركة الجزيئات وتصادمها ⟸ يزداد النشاط.':v<=41?'🎯 <b>الدرجة المثلى</b> (≈ 37°س): أعلى نشاط للإنزيم.':v<58?'📉 بدأ الإنزيم يُمسخ: يتغير شكل الموقع الفعال.':'🔥 الإنزيم <b>مُسخ</b> تمامًا ⟸ توقف التفاعل نهائيًا.';
+  else{const o=D[K][1];m=Math.abs(v-o)<1?'🎯 درجة الحموضة <b>المثلى</b> لهذا الإنزيم ≈ '+o+'.':'النشاط '+Math.round(r*100)+'% · الحموضة المثلى لهذا الإنزيم = '+o+(o<5?' (المعدة حمضية بسبب حمض الهيدروكلوريك)':o>7?' (الأمعاء قاعدية قليلًا)':'')}
+  $('enOut').innerHTML='النشاط ≈ <b>'+Math.round(r*100)+'%</b> · '+m}
+ $('enV').oninput=draw;draw()})();
+MCQP($('qe1'),bank([['الإنزيمات مواد:',['بروتينية تعمل كعوامل حفز حيوية','دهنية تخزن الطاقة','كربوهيدراتية','معدنية']],['بعد انتهاء التفاعل، الإنزيم:',['لا يتغير ويمكن استخدامه مرة أخرى','يُستهلك','يتحول إلى نواتج','يتحلل']],['الدرجة المثلى لعمل معظم الإنزيمات في جسم الإنسان:',['37°س','0°س','70°س','100°س']],['تفقد الإنزيمات نشاطها نهائيًا في الحرارة العالية لأنها:',['تُمسخ (يتغير شكل الموقع الفعال)','تتجمد','تتبخر','تتكاثر']],['يعمل الببسين في المعدة بأفضل نشاط عند وسط:',['حمضي','قاعدي','متعادل','لا يتأثر']],['نموذج القفل والمفتاح يفسر:',['تخصص الإنزيم','سرعة الانتشار','الأسموزية','البناء الضوئي']],['الإنزيم الذي يهضم النشا:',['الأميلاز','الببسين','الليباز','الكاتالاز']],['الإنزيم الذي يهضم الدهون:',['الليباز','الأميلاز','الببسين','السليولاز']],['الإنزيمات الهاضمة تحفز تفاعلات:',['التحلل المائي','الأكسدة فقط','البناء الضوئي','التخمر']],['لماذا لا تهضم الثدييات السليولوز؟',['لأنها لا تنتج إنزيم السليولاز','لأنه بروتين','لأنه يذوب في الماء','لأنه دهون']],['انخفاض الحرارة إلى 5°س يجعل الإنزيم:',['بطيئًا جدًا لكنه لم يُمسخ','ممسوخًا نهائيًا','أسرع','متحولًا إلى دهون']]]));
+
+/* ---------- الوحدة 5: الكشف عن الغذاء ---------- */
+(function(){const [c,x]=C2('ftC');const F=[['🍞 خبز',{s:1}],['🥔 بطاطس',{s:1}],['🍇 عصير عنب',{g:1}],['🥚 بياض بيض',{p:1}],['🫒 زيت زيتون',{f:1}],['🥛 حليب',{g:1,p:1,f:1}],['💧 ماء (ضابطة)',{}]];
+ const R=[['🟤 اليود','s','#1e1b4b','#e8590c','أزرق داكن (نشا)','بني مصفر (لا نشا)'],['🔵 بندكت + تسخين','g','#d9480f','#4dabf7','برتقالي محمر (سكر مختزل)','يبقى أزرق'],['🟣 بيوريت','p','#7048e8','#74c0fc','بنفسجي (بروتين)','يبقى أزرق'],['⚪ الإيثانول ثم الماء','f','#f1f3f5','#e7f5ff','مستحلب أبيض حليبي (دهون)','يبقى شفافًا']];
+ let fi=0,ri=0,anim0=0,done={};chipsB('ftF',F.map(f=>f[0]),0,i=>{fi=i;go_()});chipsB('ftR',R.map(r=>r[0]),0,i=>{ri=i;go_()});
+ function col(a,b,k){const h=s=>[1,3,5].map(i=>parseInt(s.slice(i,i+2),16)),A=h(a),B=h(b);return'rgb('+A.map((v,i)=>Math.round(v+(B[i]-v)*k)).join(',')+')'}
+ function go_(){anim0=performance.now();const pos=!!F[fi][1][R[ri][1]];done[fi+'_'+ri]=pos;tbl()}
+ anim('ftC',(x)=>{x.clearRect(0,0,640,320);const k=Math.min(1,(performance.now()-anim0)/1600),r=R[ri],pos=!!F[fi][1][r[1]];
+  const start=ri===0?'#c2410c':ri===1?'#4dabf7':ri===2?'#74c0fc':'#e7f5ff',end=pos?r[2]:r[3],fill=col(start,end,ri===0?k:pos?k:0);
+  x.fillStyle=fill;x.strokeStyle='#495057';x.lineWidth=4;x.beginPath();x.moveTo(280,40);x.lineTo(280,250);x.arc(320,250,40,Math.PI,0,true);x.lineTo(360,40);x.stroke();
+  x.save();x.beginPath();x.moveTo(282,120);x.lineTo(282,250);x.arc(320,250,38,Math.PI,0,true);x.lineTo(358,120);x.closePath();x.fillStyle=fill;x.fill();if(ri===3&&pos){x.globalAlpha=.6*k;for(let i=0;i<40;i++){x.fillStyle='#fff';x.beginPath();x.arc(290+(i*37)%60,130+(i*29)%150,5,0,7);x.fill()}}x.restore();
+  if(ri===1&&k<1){x.fillStyle='rgba(255,146,43,.9)';x.beginPath();x.moveTo(305,310);x.quadraticCurveTo(320,270+10*Math.sin(performance.now()/90),335,310);x.fill();txt(x,'🔥 تسخين في حمام مائي',470,300,14,'#e8590c')}
+  txt(x,F[fi][0],140,150,22);txt(x,r[0],520,150,18);txt(x,'+',210,150,26);
+  if(k>=1)$('ftOut').innerHTML=(pos?'✅ ':'⛔ ')+'النتيجة: <b>'+(pos?r[4]:r[5])+'</b>'+(fi===6?' · الماء أنبوب <b>ضابط</b> للمقارنة.':'')});
+ function tbl(){$('ftT').innerHTML='<table class="tbl"><tr><th>العينة</th>'+R.map(r=>'<th>'+r[0].split(' ')[1]+'</th>').join('')+'</tr>'+F.map((f,i)=>'<tr><td>'+f[0]+'</td>'+R.map((r,j)=>{const v=done[i+'_'+j];return'<td>'+(v===undefined?'·':v?'✅':'—')+'</td>'}).join('')+'</tr>').join('')+'</table>'}
+ go_()})();
+sortGame('nuP','nuC','nuOut',[['🍚 كربوهيدرات','طاقة','#f08c00'],['🍗 بروتينات','بناء','#c92a2a'],['🧈 دهون','طاقة مخزّنة','#e8a800']],[['🍞 خبز',0,''],['🍚 أرز',0,''],['🥔 بطاطس',0,''],['🍯 عسل',0,''],['🥚 بيض',1,''],['🍗 دجاج',1,''],['🫘 عدس',1,''],['🐟 سمك',1,''],['🧈 زبدة',2,''],['🫒 زيت زيتون',2,'']]);
+MCQP($('qn1'),bank([['الكاشف المستخدم للكشف عن النشا:',['محلول اليود','محلول بندكت','محلول بيوريت','الإيثانول']],['لون محلول اليود مع النشا:',['أزرق داكن','برتقالي محمر','بنفسجي','أبيض حليبي']],['يتحول محلول بندكت مع السكر المختزل بعد التسخين إلى:',['برتقالي محمر','أزرق داكن','بنفسجي','أخضر دائمًا']],['الكاشف الذي يعطي لونًا بنفسجيًا مع البروتين:',['بيوريت','اليود','بندكت','الماء']],['الكشف عن الدهون بالإيثانول ثم الماء يعطي:',['مستحلبًا أبيض حليبيًا','لونًا أزرق','لونًا بنفسجيًا','لا شيء دائمًا']],['الوظيفة الأساسية للبروتينات:',['بناء الخلايا وتجديدها ونمو الجسم','العزل الحراري فقط','إعطاء اللون','حمل الأكسجين فقط']],['المصدر الرئيسي للطاقة السريعة:',['الكربوهيدرات','الفيتامينات','الأملاح','الماء']],['تتكون البروتينات من وحدات تسمى:',['الأحماض الأمينية','الجلوكوز','الأحماض الدهنية فقط','الجليسرول فقط']],['يتحلل النشا عند هضمه إلى:',['جلوكوز','أحماض أمينية','أحماض دهنية','يوريا']],['لماذا نستخدم أنبوب ماء في تجارب الكشف؟',['أنبوب ضابط للمقارنة','لتسخين الكاشف','لأنه غذاء','لتغيير اللون']]]));
+
+/* ---------- الوحدة 5: الصحن المتوازن ---------- */
+(function(){const F=[['🍞 خبز',[3,1,0,0,1],800],['🍚 أرز',[3,1,0,0,0],750],['🍗 دجاج',[0,3,1,0,0],700],['🐟 سمك',[0,3,1,1,0],600],['🥚 بيضة',[0,2,1,1,0],320],['🥗 سلطة',[0,0,0,2,2],150],['🍊 برتقالة',[1,0,0,2,1],250],['🥛 حليب',[1,1,1,1,0],270],['🫘 فاصوليا',[2,2,0,1,2],500],['🍟 بطاطس مقلية',[2,0,2,0,1],1300],['🍰 كعكة',[2,0,2,0,0],1500],['🥤 مشروب غازي',[2,0,0,0,0],600]];
+ const NM=[['كربوهيدرات','#f08c00',4],['بروتينات','#c92a2a',3],['دهون','#e8a800',2],['فيتامينات وأملاح','#2b8a3e',3],['ألياف','#7f5539',2]];const sel=new Set();
+ $('plF').innerHTML=F.map((f,i)=>'<button data-i="'+i+'">'+f[0]+'</button>').join('');$('plF').querySelectorAll('button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;sel.has(i)?sel.delete(i):sel.add(i);b.classList.toggle('on');upd()});
+ function upd(){const T=[0,0,0,0,0];let E=0;sel.forEach(i=>{F[i][1].forEach((v,j)=>T[j]+=v);E+=F[i][2]});
+  $('plB').innerHTML=NM.map(([n,c,g],j)=>'<div><span>'+T[j]+'</span><i style="height:'+Math.min(100,T[j]/(g*1.6)*100)+'%;background:'+c+'"></i><span>'+n+'</span></div>').join('');
+  const miss=NM.filter(([n,c,g],j)=>T[j]<g).map(a=>a[0]),fat=T[2]>4;let m='⚡ الطاقة ≈ <b>'+E+' كيلوجول</b><br>';
+  if(!sel.size)m+='اختر أطعمة لوجبة الغداء…';else if(!miss.length&&!fat&&E<=3800){m+='🎉 <b>وجبة متوازنة!</b> فيها كل المواد المغذية بكميات مناسبة.';cheer()}else m+=(miss.length?'⚠️ ينقصها: '+miss.join('، ')+'. ':'')+(fat?'🍟 الدهون كثيرة جدًا! ':'')+(E>3800?'🔋 الطاقة أكثر من حاجة الوجبة، والزائد يُخزّن دهونًا. ':'');$('plOut').innerHTML=m}upd()})();
+flipCards('dfCards',[['🍋','الإسقربوط','نقص <b>فيتامين ج</b>: نزيف اللثة وبطء التئام الجروح. المصدر: الحمضيات كالليمون والبرتقال والخضار الطازجة.'],['🦴','الكساح','نقص <b>فيتامين د</b> أو الكالسيوم: لين العظام وتقوّس الساقين عند الأطفال. المصدر: أشعة الشمس، الحليب، السمك، صفار البيض.'],['🌾','البري بري','نقص <b>فيتامين ب1</b>: ضعف العضلات والأعصاب. المصدر: الحبوب الكاملة.'],['🍖','كواشيوركر','نقص <b>البروتين</b> عند الأطفال: انتفاخ البطن وضعف النمو.'],['🩸','فقر الدم (الأنيميا)','نقص <b>الحديد</b> اللازم للهيموجلوبين: تعب وشحوب. المصدر: الكبد، اللحوم الحمراء، البقول، السبانخ.'],['🦋','تضخم الغدة الدرقية','نقص <b>اليود</b> اللازم لهرمون الثيروكسين. المصدر: الملح المدعّم باليود، المأكولات البحرية.']]);
+MCQP($('qn2'),bank([['الطاقة الناتجة من حرق 1 جرام من الدهون تقريبًا:',['38 كيلوجول','16 كيلوجول','4 كيلوجول','100 كيلوجول']],['الطاقة الناتجة من حرق 1 جرام من الكربوهيدرات تقريبًا:',['16 كيلوجول','38 كيلوجول','1 كيلوجول','60 كيلوجول']],['نقص فيتامين (ج) يسبب:',['الإسقربوط','الكساح','فقر الدم','البري بري']],['نقص فيتامين (د) عند الأطفال يسبب:',['الكساح','الإسقربوط','كواشيوركر','تضخم الغدة الدرقية']],['مرض كواشيوركر سببه نقص:',['البروتين','الحديد','فيتامين ج','الألياف']],['نقص الحديد يسبب:',['فقر الدم','الكساح','الإسقربوط','السمنة']],['أهمية الألياف في الغذاء:',['تساعد حركة الطعام في الأمعاء وتمنع الإمساك','تمد الجسم بطاقة كبيرة','تبني العضلات','تنقل الأكسجين']],['النظام الغذائي المتوازن هو الذي:',['يحتوي كل المواد المغذية بالكميات المناسبة','يحتوي البروتين فقط','يخلو من الدهون تمامًا','يعتمد على الحلويات']],['تختلف حاجة الإنسان للطاقة حسب:',['العمر والجنس والنشاط','لون العينين','الطول فقط','فصيلة الدم']],['الطاقة الزائدة عن حاجة الجسم تُخزّن على صورة:',['دهون','فيتامينات','ماء','أملاح']]]));
+
+/* ---------- مراجعة 4-5 ---------- */
+chapterTest('rv2',[['الإنزيمات مواد:',['بروتينية','دهنية','نشوية']],['الدرجة المثلى لإنزيمات الإنسان:',['37°س','70°س','0°س']],['الحرارة العالية تجعل الإنزيم:',['ممسوخًا','أسرع دائمًا','دهونًا']],['الببسين يعمل في وسط:',['حمضي','قاعدي','متعادل']],['الأميلاز يهضم:',['النشا','البروتين','الدهون']],['كاشف النشا:',['اليود','بيوريت','بندكت']],['بيوريت مع البروتين يعطي:',['بنفسجي','أزرق داكن','برتقالي محمر']],['بندكت مع السكر المختزل بعد التسخين:',['برتقالي محمر','بنفسجي','أبيض']],['أكبر طاقة لكل جرام:',['الدهون','الكربوهيدرات','البروتين']],['نقص فيتامين ج:',['الإسقربوط','الكساح','فقر الدم']],['نقص البروتين عند الأطفال:',['كواشيوركر','الكساح','البري بري']],['تتكون البروتينات من:',['أحماض أمينية','جلوكوز','جليسرول']]]);
+
+/* ---------- الوحدة 6: رحلة اللقمة ---------- */
+(function(){const [c,x]=C2('dgC');let st=0,t0=performance.now();
+ const ST=[[320,40,'👄 الفم','الهضم الميكانيكي بالأسنان، والكيميائي: <b>الأميلاز اللعابي</b> يحلل النشا ← مالتوز. اللسان يكوّن <b>البلعة</b>.'],[320,130,'🔽 المريء','أنبوب عضلي ينقل البلعة بـ<b>الحركة الدودية</b> (انقباض وانبساط العضلات). لا يحدث فيه هضم.'],[400,185,'🫙 المعدة','تفرز <b>حمض الهيدروكلوريك</b> (يقتل البكتيريا ويهيّئ وسطًا حمضيًا) وإنزيم <b>الببسين</b> الذي يحلل البروتين ← عديدات ببتيد. جدارها العضلي يخلط الطعام فيصبح كيموسًا.'],
+  [330,250,'🌀 الاثنا عشر','تصب فيه <b>العصارة الصفراوية</b> من الكبد (تستحلب الدهون، وليست إنزيمًا) و<b>عصارة البنكرياس</b>: أميلاز، تربسين (بروتين)، ليباز (دهون ← أحماض دهنية وجليسرول).'],[320,320,'〰️ الأمعاء الدقيقة (اللفائفي)','يكتمل الهضم: المالتوز ← جلوكوز، والبروتين ← أحماض أمينية. ثم <b>تُمتص</b> المواد المهضومة عبر <b>الخملات</b> إلى الدم.'],[210,330,'🔄 الأمعاء الغليظة','يُمتص فيها <b>الماء</b> والأملاح من بقايا الطعام غير المهضوم (مثل الألياف).'],[320,415,'🚽 المستقيم وفتحة الشرج','تُخزّن الفضلات ثم تخرج: <b>التبرز (الإخراج)</b>.']];
+ const ORG={liver:[[250,180],'🟤 الكبد','يفرز <b>العصارة الصفراوية</b> التي تُخزّن في الحويصلة الصفراوية وتستحلب الدهون، ويخزن الجلوكوز الزائد على صورة جلايكوجين.'],pan:[[420,240],'🟡 البنكرياس','يفرز عصارة فيها <b>أميلاز وتربسين وليباز</b> تصب في الاثني عشر.'],gb:[[285,215],'🟢 الحويصلة الصفراوية','تخزن العصارة الصفراوية وتصبها في الاثني عشر.']};
+ c.addEventListener('pointerdown',e=>{const p=cposB(c,e);for(const k in ORG){const [[a,b],n,d]=ORG[k];if(Math.hypot(p.x-a,p.y-b)<32){$('dgI').innerHTML='<b>'+n+'</b><br>'+d;return}}const i=ST.findIndex(s=>Math.hypot(p.x-s[0],p.y-s[1])<40);if(i>=0){st=i;t0=performance.now();show()}});
+ function show(){$('dgI').innerHTML='<b>'+ST[st][2]+'</b><br>'+ST[st][3]}
+ $('dgN').onclick=()=>{st=(st+1)%ST.length;t0=performance.now();show();if(st===ST.length-1)cheer()};$('dgR').onclick=()=>{st=0;t0=performance.now();show()};
+ anim('dgC',(x)=>{x.clearRect(0,0,640,440);x.lineCap='round';
+  ell(x,320,40,46,26,'#ffc9c9','#c92a2a',3);x.strokeStyle='#ffa8a8';x.lineWidth=18;x.beginPath();x.moveTo(320,60);x.lineTo(320,160);x.stroke();
+  ell(x,250,180,70,40,'#a0522d','#6f3a1d',3,-.2);ell(x,285,215,14,10,'#69db7c','#2b8a3e',2);
+  x.fillStyle='#ffa8a8';x.strokeStyle='#c92a2a';x.lineWidth=3;x.beginPath();x.moveTo(320,160);x.bezierCurveTo(470,120,480,240,360,240);x.bezierCurveTo(330,240,330,210,350,200);x.bezierCurveTo(400,190,400,160,320,175);x.closePath();x.fill();x.stroke();
+  ell(x,420,240,46,13,'#ffe066','#e8a800',2,-.15);
+  x.strokeStyle='#d9480f';x.lineWidth=26;x.beginPath();x.moveTo(200,400);x.lineTo(200,270);x.lineTo(440,270);x.lineTo(440,380);x.lineTo(330,380);x.lineTo(320,425);x.stroke();
+  x.strokeStyle='#ffc078';x.lineWidth=12;x.beginPath();x.moveTo(340,240);x.lineTo(330,262);for(let i=0;i<5;i++){x.lineTo(240,290+i*16);x.lineTo(400,298+i*16)}x.stroke();x.lineCap='butt';
+  ['الكبد','البنكرياس'].forEach((n,i)=>txt(x,n,[200,480][i],[150,236][i],13,'#495057'));
+  const k=Math.min(1,(performance.now()-t0)/700),P=ST[st],Q=ST[Math.max(0,st-1)],bx=Q[0]+(P[0]-Q[0])*k,by=Q[1]+(P[1]-Q[1])*k;const r=Math.max(6,16-st*1.6);
+  x.fillStyle='#7048e8';x.beginPath();x.arc(bx,by,r,0,7);x.fill();x.strokeStyle='#fff';x.lineWidth=2;x.stroke();txt(x,P[2],540,40,16,'#7048e8')});show()})();
+choiceQs('dgQ',[['الأميلاز اللعابي يُفرز في ___ ويحلل ___',['الفم ، النشا إلى مالتوز','المعدة ، البروتين','الاثني عشر ، الدهون'],'يبدأ هضم النشا في الفم.'],['الببسين يُفرز في ___ ويحلل ___',['المعدة ، البروتين','الفم ، النشا','الكبد ، الدهون'],'يعمل في وسط حمضي.'],['الليباز يُفرز من ___ ويحلل ___',['البنكرياس ، الدهون إلى أحماض دهنية وجليسرول','المعدة ، النشا','الفم ، البروتين'],'يصب في الاثني عشر.'],['العصارة الصفراوية:',['تستحلب الدهون وليست إنزيمًا','تهضم البروتين','تحلل النشا'],'تحول الدهون إلى قطرات صغيرة فتزيد مساحتها للّيباز.'],['التربسين يُفرز من ___',['البنكرياس ويحلل البروتين','الفم ويحلل النشا','الكبد ويخزن الجلوكوز'],'يعمل في وسط قاعدي قليلًا.']]);
+MCQP($('qh1'),bank([['الترتيب الصحيح لمراحل التغذية:',['الابتلاع ← الهضم ← الامتصاص ← التمثل ← الإخراج','الهضم ← الابتلاع ← الإخراج ← الامتصاص','الامتصاص ← الهضم ← الابتلاع','التمثل ← الهضم ← الابتلاع']],['ينتقل الطعام في المريء بـ:',['الحركة الدودية','الانتشار','الجاذبية فقط','الأهداب']],['وظيفة حمض الهيدروكلوريك في المعدة:',['قتل البكتيريا وتهيئة وسط حمضي للببسين','هضم النشا','استحلاب الدهون','امتصاص الماء']],['يُمتص معظم الماء من بقايا الطعام في:',['الأمعاء الغليظة','المعدة','المريء','الفم']],['تُفرز العصارة الصفراوية من:',['الكبد','البنكرياس','المعدة','الأمعاء الغليظة']],['يتحلل البروتين في النهاية إلى:',['أحماض أمينية','جلوكوز','جليسرول','مالتوز']],['تتحلل الدهون إلى:',['أحماض دهنية وجليسرول','أحماض أمينية','جلوكوز','مالتوز']],['تقطيع الطعام بالأسنان مثال على:',['الهضم الميكانيكي','الهضم الكيميائي','الامتصاص','التمثل']],['يصب البنكرياس عصارته في:',['الاثني عشر','المعدة','المريء','الأمعاء الغليظة']]]));
+
+/* ---------- الوحدة 6: الخملات والأيض ---------- */
+(function(){const [c,x]=C2('vlC');let P=[];for(let i=0;i<26;i++)P.push({x:rnd(30,610),y:rnd(10,120),v:Math.random()});
+ anim('vlC',(x,c,t)=>{const n=+$('vlN').value;$('vlNv').textContent=n;x.clearRect(0,0,640,300);x.fillStyle='#fff5f5';x.fillRect(0,0,640,300);
+  const base=230,w=600/(n||1);x.fillStyle='#ffc9c9';x.strokeStyle='#c92a2a';x.lineWidth=3;x.beginPath();x.moveTo(20,300);x.lineTo(20,base);let per=0;
+  if(!n){x.lineTo(620,base);per=600}else for(let i=0;i<n;i++){const X0=20+i*w,h=140;x.lineTo(X0+w*.15,base);x.lineTo(X0+w*.15,base-h+w*.25);x.arc(X0+w*.5,base-h+w*.25,w*.35,Math.PI,0);x.lineTo(X0+w*.85,base);x.lineTo(X0+w,base);per+=w*.3+2*(h-w*.25)+Math.PI*w*.35}
+  x.lineTo(620,300);x.closePath();x.fill();x.stroke();
+  if(n)for(let i=0;i<n;i++){const X=20+i*w+w*.5;x.strokeStyle='#e03131';x.lineWidth=2;x.beginPath();x.moveTo(X-w*.18,base);x.lineTo(X-w*.18,base-110);x.moveTo(X+w*.18,base);x.lineTo(X+w*.18,base-110);x.stroke();x.strokeStyle='#f8f9fa';x.lineWidth=Math.max(2,w*.08);x.beginPath();x.moveTo(X,base+40);x.lineTo(X,base-100);x.stroke()}
+  P.forEach(p=>{p.y+=.6+p.v;const top=n?90:base-4;if(p.y>top){p.y=rnd(-20,10);p.x=rnd(30,610)}x.fillStyle=['#f08c00','#2b8a3e','#7048e8'][Math.floor(p.v*3)];x.beginPath();x.arc(p.x,p.y,4,0,7);x.fill()});
+  txt(x,'تجويف الأمعاء: جلوكوز 🟠 أحماض أمينية 🟢 أحماض دهنية 🟣',320,20,13,'#495057');
+  $('vlOut').innerHTML='📏 مساحة السطح الماصّة ≈ <b>'+(per/600).toFixed(1)+' ضعف</b> الجدار المستوي'+(n?' · الخط الأحمر: شعيرات دموية تمتص الجلوكوز والأحماض الأمينية · الأبيض: <b>الوعاء اللبني</b> يمتص الدهون':' · أضف خملات!')})})();
+sortGame('mbP','mbC','mbOut',[['🏗️ بناء','تكوين جزيئات كبيرة','#2b8a3e'],['🔨 هدم','تحليل وإطلاق طاقة','#c92a2a']],[['تكوين البروتين من الأحماض الأمينية',0,''],['تكوين الجلايكوجين من الجلوكوز في الكبد',0,''],['نمو العضلات',0,''],['البناء الضوئي',0,''],['تحليل الجلوكوز في التنفس الخلوي',1,''],['هضم النشا',1,''],['تحويل الأحماض الأمينية الزائدة إلى يوريا',1,'']]);
+MCQP($('qh2'),bank([['يحدث معظم امتصاص الغذاء المهضوم في:',['الأمعاء الدقيقة','المعدة','الأمعاء الغليظة','المريء']],['وظيفة الخملات:',['زيادة مساحة السطح للامتصاص','هضم البروتين','إفراز الصفراء','تخزين الفضلات']],['يمتص الوعاء اللبني في الخملة:',['الأحماض الدهنية والجليسرول','الجلوكوز فقط','الماء فقط','الأحماض الأمينية فقط']],['جدار الخملة رقيق (طبقة خلايا واحدة) لكي:',['تقصر مسافة الانتشار','يقوى الجدار','يُفرز الحمض','يتوقف الامتصاص']],['يخزن الكبد الجلوكوز الزائد على صورة:',['جلايكوجين','نشا','بروتين','يوريا']],['يتخلص الكبد من الأحماض الأمينية الزائدة بتكوين:',['اليوريا','الجلايكوجين','الصفراء فقط','الجلوكوز']],['التمثيل الغذائي (الأيض) هو:',['مجموع تفاعلات البناء والهدم في الجسم','الهضم فقط','التنفس فقط','الإخراج فقط']],['الهرمون الذي تفرزه الغدة الدرقية ويتحكم في معدل الأيض:',['الثيروكسين','الأنسولين','الأدرينالين','الببسين']]]));
+
+/* ---------- الوحدة 7: البناء الضوئي ---------- */
+(function(){const [c,x]=C2('psCv2');let B=[],acc=0,last=performance.now(),count=0,t0=performance.now();
+ anim('psCv2',(x)=>{const L=+$('psL').value,C=+$('psC').value,T=+$('psT').value;$('psLv').textContent=L;$('psCv').textContent=C;$('psTv').textContent=T+'°س';
+  const lf=L/10,cf=Math.min(1,.1+C/10),tf=T<=30?Math.max(0,T/30):Math.max(0,1-Math.pow((T-30)/16,2)),rate=Math.min(lf,cf)*tf;
+  const now=performance.now(),dt=(now-last)/1000;last=now;acc+=rate*6*dt;while(acc>=1){acc--;B.push({x:300+rnd(-30,40),y:220,r:rnd(3,6)});count++}
+  x.clearRect(0,0,640,340);x.fillStyle='rgba(255,236,153,'+(L/12)+')';x.beginPath();x.moveTo(40,20);x.lineTo(240,110);x.lineTo(240,190);x.lineTo(40,280);x.fill();EMB(x,'💡',40,150,50);
+  x.fillStyle='#e7f5ff';x.strokeStyle='#495057';x.lineWidth=3;x.beginPath();x.roundRect(240,60,200,260,10);x.fill();x.stroke();
+  x.strokeStyle='#2b8a3e';x.lineWidth=5;x.beginPath();x.moveTo(330,310);x.quadraticCurveTo(310,260,315,220);x.stroke();for(let i=0;i<6;i++){ell(x,315+(i%2?18:-18),300-i*16,16,6,'#40c057',null,0,i%2?.5:-.5)}
+  B.forEach(b=>{b.y-=1.6;b.x+=Math.sin(b.y/10)*.4;x.strokeStyle='#1971c2';x.lineWidth=1.5;x.beginPath();x.arc(b.x,b.y,b.r,0,7);x.stroke()});B=B.filter(b=>b.y>70);
+  txt(x,'🫧 الفقاعات (أكسجين)',540,60,15,'#1971c2');txt(x,'المعدل: '+(rate*60).toFixed(0)+' فقاعة/دقيقة',540,95,15,'#2b8a3e');txt(x,'العدد: '+count,540,125,14,'#495057');
+  const lim=tf<.55?'🌡️ <b>درجة الحرارة</b> هي العامل المحدد'+(T>40?' (الحرارة العالية مسخت الإنزيمات)':' (الجو بارد)'):lf<cf?'💡 <b>شدة الضوء</b> هي العامل المحدد: زدها!':cf<lf?'🫙 <b>ثاني أكسيد الكربون</b> هو العامل المحدد: زده!':'⚖️ الضوء وثاني أكسيد الكربون متوازنان';
+  $('psOut').innerHTML=(rate<.02?'😴 البناء الضوئي شبه متوقف · ':'')+lim})})();
+choiceQs('eqQ',[['ثاني أكسيد الكربون + ___ ⟵ جلوكوز + أكسجين',['ماء','نشا','نيتروجين'],'يمتص النبات الماء بالجذور.'],['ثاني أكسيد الكربون + ماء ⟵ ___ + أكسجين',['جلوكوز','بروتين','ثاني أكسيد الكربون'],'الجلوكوز يتحول بعدها إلى نشا للتخزين.'],['الشرطان فوق السهم: ضوء و ___',['يخضور (كلوروفيل)','أكسجين','نشا'],'اليخضور يمتص الطاقة الضوئية.'],['تتحول في البناء الضوئي الطاقة الضوئية إلى طاقة:',['كيميائية مخزّنة في الجلوكوز','حرارية فقط','صوتية'],'تُخزن في روابط الجلوكوز.'],['الأكسجين المنطلق في البناء الضوئي مصدره:',['انشطار جزيئات الماء','ثاني أكسيد الكربون','التربة'],'في مرحلة الاعتماد على الضوء.']]);
+MCQP($('qp1'),bank([['المادة الخضراء التي تمتص الضوء:',['اليخضور (الكلوروفيل)','الهيموجلوبين','السليولوز','النشا']],['يمتص اليخضور بشدة الضوء:',['الأحمر والأزرق','الأخضر فقط','الأصفر فقط','لا يمتص الضوء']],['تبدو الأوراق خضراء لأن اليخضور:',['يعكس الضوء الأخضر','يمتص الضوء الأخضر','يصنع اللون الأخضر','يخزن الماء']],['الغاز الذي ينطلق في البناء الضوئي:',['الأكسجين','ثاني أكسيد الكربون','النيتروجين','الهيدروجين']],['العامل المحدد هو العامل:',['الأقل توافرًا الذي يحد من سرعة التفاعل','الأكثر توافرًا','الذي لا يؤثر','الضوء دائمًا']],['يتوقف البناء الضوئي في الحرارة العالية جدًا لأن:',['الإنزيمات تُمسخ','الضوء يقل','الماء يزيد','اليخضور يزيد']],['ينتج في مرحلة عدم الاعتماد على الضوء:',['الجلوكوز','الأكسجين','الماء','الضوء']],['يخزن النبات الجلوكوز الزائد على صورة:',['نشا','جلايكوجين','دهون فقط','بروتين فقط']]]));
+
+/* ---------- الوحدة 7: الورقة والتغذية المعدنية ---------- */
+(function(){const [c,x]=C2('lfC');let hi=null;
+ const Lr=[['cut',20,32,'🛡️ طبقة الكيوتين (الأدمة)','طبقة شمعية شفافة تقلل فقد الماء وتسمح بمرور الضوء.'],['ue',32,62,'🧱 البشرة العليا','خلايا شفافة متراصة بلا بلاستيدات خضراء، تحمي الورقة ويمر منها الضوء.'],['pal',62,150,'🟩 النسيج العمادي','خلايا طويلة متراصة غنية جدًا بـ<b>البلاستيدات الخضراء</b>: أهم مكان للبناء الضوئي، قريبة من السطح لتستقبل أكبر قدر من الضوء.'],['spg',150,272,'🫧 النسيج الإسفنجي','خلايا مستديرة غير متراصة بينها <b>فراغات هوائية</b> لانتشار الغازات.'],['le',272,302,'🧱 البشرة السفلى','فيها معظم <b>الثغور</b>.']];
+ const vein=[320,205,34],stoma=[470,290,16];
+ function draw(){x.clearRect(0,0,640,340);x.fillStyle='#e3fafc';x.fillRect(20,20,600,12);x.fillStyle='#f8f9fa';x.fillRect(20,32,600,30);x.strokeStyle='#adb5bd';for(let X=20;X<620;X+=40){x.strokeRect(X,32,40,30)}
+  for(let X=24;X<616;X+=28){x.fillStyle='#b2f2bb';x.strokeStyle='#2b8a3e';x.lineWidth=1.5;x.beginPath();x.roundRect(X,64,24,84,10);x.fill();x.stroke();for(let k=0;k<5;k++){x.fillStyle='#2f9e44';x.beginPath();x.arc(X+12+(k%2?5:-5),76+k*15,3.5,0,7);x.fill()}}
+  for(let i=0;i<38;i++){const X=40+(i*67)%570,Y=165+((i*41)%95);if(Math.hypot(X-vein[0],Y-vein[1])<52)continue;ell(x,X,Y,19,15,'#d3f9d8','#2b8a3e',1.5);x.fillStyle='#2f9e44';x.beginPath();x.arc(X+5,Y-3,3,0,7);x.fill()}
+  ell(x,vein[0],vein[1],vein[2],vein[2],'#ffe8cc','#e8590c',3);ell(x,vein[0],vein[1]-10,18,10,'#1c7ed6');ell(x,vein[0],vein[1]+14,14,8,'#fab005');txt(x,'خشب',vein[0]+58,vein[1]-6,12,'#1c7ed6');txt(x,'لحاء',vein[0]+58,vein[1]+18,12,'#e8a800');
+  x.fillStyle='#f8f9fa';x.fillRect(20,272,600,30);x.strokeStyle='#adb5bd';for(let X=20;X<620;X+=40)x.strokeRect(X,272,40,30);x.fillStyle='#fff';x.fillRect(stoma[0]-8,272,16,30);ell(x,stoma[0]-14,287,9,15,'#8ce99a','#2b8a3e',2);ell(x,stoma[0]+14,287,9,15,'#8ce99a','#2b8a3e',2);txt(x,'ثغر',stoma[0],322,13,'#2b8a3e');
+  x.strokeStyle='#1c7ed6';x.lineWidth=2;x.setLineDash([4,4]);x.beginPath();x.moveTo(stoma[0],330);x.lineTo(stoma[0],250);x.stroke();x.setLineDash([]);txt(x,'CO₂ ⇡  O₂ ⇣',stoma[0]+80,322,12,'#1971c2');
+  if(hi){x.fillStyle='rgba(255,212,59,.35)';if(hi==='vein'){x.beginPath();x.arc(vein[0],vein[1],vein[2]+4,0,7);x.fill()}else if(hi==='stoma'){x.beginPath();x.arc(stoma[0],287,26,0,7);x.fill()}else{const L=Lr.find(l=>l[0]===hi);x.fillRect(20,L[1],600,L[2]-L[1])}}}
+ c.addEventListener('pointerdown',e=>{const p=cposB(c,e);let k,t,d;if(Math.hypot(p.x-vein[0],p.y-vein[1])<vein[2]+4){k='vein';t='🌿 العرق (الحزمة الوعائية)';d='<b>الخشب</b> ينقل الماء والأملاح إلى الورقة، و<b>اللحاء</b> ينقل الغذاء المصنوع (السكريات) إلى باقي أجزاء النبات.'}
+  else if(Math.hypot(p.x-stoma[0],p.y-287)<26){k='stoma';t='🚪 الثغر والخليتان الحارستان';d='فتحة يدخل منها ثاني أكسيد الكربون ويخرج الأكسجين وبخار الماء. تتحكم <b>الخليتان الحارستان</b> في فتحه وإغلاقه.'}
+  else{const L=Lr.find(l=>p.y>=l[1]&&p.y<l[2]);if(!L)return;[k,,,t,d]=L}hi=k;$('lfI').innerHTML='<b>'+t+'</b><br>'+d;draw()});draw()})();
+(function(){const [c,x]=C2('stC');function draw(){const v=+$('stV').value;$('stVv').textContent=v>6?'☀️':v>3?'⛅':'🌙';x.clearRect(0,0,640,220);x.fillStyle='#f8f9fa';x.fillRect(0,0,640,220);
+  const g=4+v*3.4;[-1,1].forEach(s=>{const X=320+s*(g+34);x.fillStyle=v>5?'#69db7c':'#b2f2bb';x.strokeStyle='#2b8a3e';x.lineWidth=3;x.beginPath();x.ellipse(X,110,34+v*.6,82,0,0,7);x.fill();x.stroke();x.fillStyle='#2f9e44';for(let k=0;k<5;k++){x.beginPath();x.arc(X+s*8,60+k*24,4,0,7);x.fill()}x.strokeStyle='#1b5e20';x.lineWidth=v>5?6:3;x.beginPath();x.ellipse(X-s*(28+v*.6),110,3,70,0,0,7);x.stroke()});
+  x.fillStyle='#fff';x.beginPath();x.ellipse(320,110,g,60,0,0,7);x.fill();
+  $('stOut').innerHTML=v>5?'☀️ نهار وماء كافٍ: يدخل الماء الخليتين الحارستين فتنتفخان، وجدارهما الداخلي السميك ينحني ⟸ <b>ينفتح الثغر</b> ليدخل ثاني أكسيد الكربون.':v>2?'⛅ الخليتان شبه منتفختين ⟸ الثغر نصف مفتوح.':'🌙 ليل أو عطش: تفقد الخليتان الماء فتصبحان <b>رخوتين</b> ⟸ <b>ينغلق الثغر</b> ويقل فقد بخار الماء.'}
+ $('stV').oninput=draw;draw()})();
+(function(){const [c,x]=C2('mnC');let K=0;const D=[['✅ محلول استنبات كامل',1,1,'نمو سليم: نبات طويل وأوراق خضراء داكنة.'],['❌ بدون نيتروجين (نترات)',.45,.35,'نمو ضعيف وقصير، والأوراق السفلى (الأقدم) <b>صفراء</b>: النترات لازمة لتكوين الأحماض الأمينية والبروتينات.'],['❌ بدون مغنيسيوم',.75,.5,'<b>اصفرار الأوراق</b> بين العروق: المغنيسيوم يدخل في تركيب <b>اليخضور</b>، فبدونه يقل البناء الضوئي.'],['💧 ماء مقطر فقط',.25,.2,'النبات صغير جدًا وضعيف لنقص كل العناصر الأساسية.']];
+ chipsB('mnK',D.map(d=>d[0]),0,i=>{K=i;draw()});
+ function draw(){const [n,h,g,m]=D[K];x.clearRect(0,0,640,300);x.fillStyle='#e7f5ff';x.strokeStyle='#495057';x.lineWidth=3;x.beginPath();x.roundRect(260,210,120,85,8);x.fill();x.stroke();txt(x,'محلول',320,262,13,'#1971c2');
+  x.strokeStyle='#c2a878';x.lineWidth=2;for(let i=0;i<7;i++){x.beginPath();x.moveTo(320,212);x.lineTo(285+i*11,285);x.stroke()}
+  const H=190*h,top=210-H;x.strokeStyle='#5c940d';x.lineWidth=6;x.beginPath();x.moveTo(320,210);x.lineTo(320,top);x.stroke();
+  const green=[Math.round(43+(230-43)*(1-g)),Math.round(138+(200-138)*(1-g)),Math.round(62*(g))];for(let i=0;i<5;i++){const Y=205-(i+.5)*H/5,s=i%2?1:-1,yellow=K===1&&i<2;x.fillStyle=yellow?'#fcc419':'rgb('+green.join(',')+')';x.beginPath();x.ellipse(320+s*(26+18*h),Y,26+16*h,7,s*-.4,0,7);x.fill();if(K===2){x.strokeStyle='#2b8a3e';x.lineWidth=1.5;x.beginPath();x.moveTo(320,Y);x.lineTo(320+s*(52+30*h),Y-s*0-10*s*.4);x.stroke()}}
+  txt(x,'🌽 نبات الذرة',520,40,16,'#495057');$('mnOut').innerHTML=m}draw()})();
+MCQP($('qp2'),bank([['أهم مكان للبناء الضوئي في الورقة:',['النسيج العمادي','البشرة العليا','طبقة الكيوتين','العرق']],['وظيفة الفراغات الهوائية في النسيج الإسفنجي:',['تسهيل انتشار الغازات','تخزين النشا','نقل الماء','حماية الورقة']],['يتحكم في فتح الثغر وإغلاقه:',['الخليتان الحارستان','اللحاء','الخشب','الكيوتين']],['ينقل الماء والأملاح إلى الورقة:',['الخشب','اللحاء','الثغر','النسيج الإسفنجي']],['ينقل اللحاء:',['الغذاء المصنوع (السكريات)','الماء فقط','الأكسجين','الضوء']],['يحتاج النبات النترات لتكوين:',['الأحماض الأمينية والبروتينات','اليخضور فقط','السليولوز','النشا']],['يدخل المغنيسيوم في تركيب:',['اليخضور (الكلوروفيل)','البروتين','النشا','الكيوتين']],['اصفرار الأوراق وضعف النمو قد يدل على نقص:',['النيتروجين','الأكسجين','الضوء الأحمر فقط','الكيوتين']],['طبقة الكيوتين الشمعية تقلل:',['فقد الماء','دخول الضوء','البناء الضوئي','النمو']],['ينغلق الثغر عندما تكون الخليتان الحارستان:',['رخوتين (فقدتا الماء)','منتفختين','مليئتين بالنشا','في الضوء']]]));
+
+/* ---------- مراجعة 6-7 ---------- */
+chapterTest('rv3',[['الإنزيم الذي يهضم البروتين في المعدة:',['الببسين','الأميلاز','الليباز']],['تُفرز العصارة الصفراوية من:',['الكبد','البنكرياس','المعدة']],['وظيفة العصارة الصفراوية:',['استحلاب الدهون','هضم النشا','قتل البكتيريا']],['يحدث معظم الامتصاص في:',['الأمعاء الدقيقة','الأمعاء الغليظة','المعدة']],['تزيد الخملات:',['مساحة سطح الامتصاص','سرعة البلع','حموضة المعدة']],['يُمتص الماء أساسًا في:',['الأمعاء الغليظة','المريء','الفم']],['ناتج البناء الضوئي:',['جلوكوز وأكسجين','ماء وثاني أكسيد الكربون','بروتين ونيتروجين']],['المادة التي تمتص الضوء:',['اليخضور','السليولوز','النشا']],['العامل المحدد هو العامل:',['الأقل توافرًا','الأكثر توافرًا','الثابت']],['أهم نسيج للبناء الضوئي:',['العمادي','البشرة','الكيوتين']],['يحتاج النبات المغنيسيوم لتكوين:',['اليخضور','البروتين','النشا']],['تُفتح الثغور عندما تكون الخليتان الحارستان:',['منتفختين','رخوتين','ميتتين']]]);
+
+</script>
+<script>window.NARR=["g1", "c1", "c2", "t1", "t2", "rv1", "e1", "n1", "n2", "rv2", "h1", "h2", "p1", "p2", "rv3"];window.AUDIO_BASE="audio-b10/";</script>
+<style>
+.fxbar{position:fixed;left:10px;bottom:10px;z-index:90;display:flex;gap:6px}
+.fxbar button{width:46px;height:46px;border-radius:50%;border:none;background:#1f2a44;color:#fff;font-size:1.3rem;box-shadow:0 4px 12px #0004;cursor:pointer}
+.say{border:2px solid #f08c2e;background:#fff7e8;color:#b35b00;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.9rem;margin:0 6px;vertical-align:middle;font-family:inherit}
+.say.on{background:#f08c2e;color:#fff;animation:pul 1s infinite}
+@keyframes pul{50%{transform:scale(1.06)}}
+.cfx{position:fixed;pointer-events:none;z-index:95;font-size:20px;animation:cf 1.1s ease-out forwards}
+@keyframes cf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+.pop{animation:popk .35s}
+@keyframes popk{50%{transform:scale(1.08)}}
+.shk{animation:shk .4s}
+@keyframes shk{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.stars{position:fixed;bottom:16px;left:66px;background:#1f2a44;color:#fff;border-radius:20px;padding:3px 14px;font-weight:900;z-index:91;font-family:inherit;transition:.3s}
+</style>
+<div class="fxbar"><button id="fxMute" title="الأصوات">🔊</button></div>
+<div class="stars" id="fxStars">⭐ 0</div>
+<script>
+(function(){let AC=null,mute=false,stars=0;try{mute=localStorage.getItem('lb_mute')==='1';stars=+localStorage.getItem('lb_stars_'+location.pathname)||0}catch(e){}
+ const mb=document.getElementById('fxMute');const sb=document.getElementById('fxStars');const upd=()=>{mb.textContent=mute?'🔇':'🔊';sb.textContent='⭐ '+stars};upd();
+ mb.onclick=()=>{mute=!mute;try{localStorage.setItem('lb_mute',mute?'1':'0')}catch(e){}upd();if(mute&&cur){cur.pause();cur=null;document.querySelectorAll('.say.on').forEach(b=>b.classList.remove('on'))}};
+ function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC}
+ function tone(f,t0,d,type,v){const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,a.currentTime+t0);g.gain.setValueAtTime(0,a.currentTime+t0);g.gain.linearRampToValueAtTime(v||.18,a.currentTime+t0+.015);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+t0+d);o.connect(g);g.connect(a.destination);o.start(a.currentTime+t0);o.stop(a.currentTime+t0+d+.05)}
+ const S={ok:()=>{tone(523,0,.15,'triangle');tone(659,.09,.15,'triangle');tone(784,.18,.3,'triangle')},no:()=>{tone(220,0,.18,'sawtooth',.08);tone(185,.12,.25,'sawtooth',.08)},tick:()=>tone(900,0,.04,'square',.03),win:()=>{[523,659,784,1046,784,1046].forEach((f,i)=>tone(f,i*.1,.22,'triangle'))},whoosh:()=>{const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.frequency.setValueAtTime(300,a.currentTime);o.frequency.exponentialRampToValueAtTime(1200,a.currentTime+.25);g.gain.setValueAtTime(.06,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.3);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.32)}};
+ window.FX=S;
+ function confetti(el,big){const r=el&&el.getBoundingClientRect?el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};const E=['⭐','✨','🎉','💚','🌟','🎊'];const n=big?26:9;
+  for(let i=0;i<n;i++){const s=document.createElement('div');s.className='cfx';s.textContent=E[i%E.length];s.style.left=(r.left+r.width/2)+'px';s.style.top=(r.top+r.height/2)+'px';const a=Math.random()*6.28,d=(big?160:70)+Math.random()*80;s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',(Math.sin(a)*d-40)+'px');s.style.setProperty('--r',(Math.random()*720-360)+'deg');document.body.appendChild(s);setTimeout(()=>s.remove(),1200)}}
+ let last=0,lastNo=0;function hit(el,good){const now=Date.now();if(good){if(now-lastNo<400||now-last<250)return;last=now;S.ok();confetti(el);stars++;try{localStorage.setItem('lb_stars_'+location.pathname,stars)}catch(e){}upd();sb.classList.add('pop');setTimeout(()=>sb.classList.remove('pop'),400);el.classList&&el.classList.add('pop');setTimeout(()=>el.classList&&el.classList.remove('pop'),400);
+   if(stars%10===0){S.win();confetti(sb,true)}}else{lastNo=now;S.no();el.classList&&el.classList.add('shk');setTimeout(()=>el.classList&&el.classList.remove('shk'),450)}}
+ new MutationObserver(ms=>{ms.forEach(m=>{const t=m.target;if(!(t instanceof Element))return;if(m.type==='attributes'){const was=(m.oldValue||'').split(/\s+/);const c=t.classList;if(c.contains('ok')&&!was.includes('ok')&&(t.matches('button,input,.fb,.opt')))hit(t,true);else if(c.contains('no')&&!was.includes('no')&&t.matches('button,input,.opt'))hit(t,false)}})}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class'],attributeOldValue:true});
+ document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&!b.classList.contains('say')&&b.id!=='fxMute')S.tick()},true);
+ document.addEventListener('input',e=>{if(e.target.type==='range'){const n=Date.now();if(!window._lt||n-window._lt>90){window._lt=n;tone(400+(+e.target.value-+e.target.min)/(+e.target.max-+e.target.min+.001)*600,0,.03,'sine',.03)}}},true);
+ /* narration */
+ let cur=null;const base=window.AUDIO_BASE||'audio/';
+ function addSay(){document.querySelectorAll('.page').forEach(p=>{if(!(window.NARR||[]).includes(p.id))return;const h=p.querySelector('h2');if(!h||h.querySelector('.say'))return;const b=document.createElement('button');b.className='say';b.textContent='🔊 اسمع';
+  b.onclick=()=>{if(cur){cur.pause();const was=b.classList.contains('on');document.querySelectorAll('.say.on').forEach(x=>x.classList.remove('on'));cur=null;if(was)return}if(mute){mute=false;upd()}const a=new Audio(base+p.id+'.mp3');cur=a;b.classList.add('on');b.textContent='⏸️ إيقاف';a.onended=a.onerror=()=>{b.classList.remove('on');b.textContent='🔊 اسمع';cur=null};a.play().catch(()=>{b.classList.remove('on');b.textContent='🔊 اسمع'})};h.appendChild(b)})}
+ addSay();document.querySelectorAll('#bar button,[data-go]').forEach(b=>b.addEventListener('click',()=>{S.whoosh();if(cur){cur.pause();cur=null;document.querySelectorAll('.say').forEach(x=>{x.classList.remove('on');x.textContent='🔊 اسمع'})}}));
+})();
+</script>
+
+</body>
+</html>
