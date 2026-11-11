@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>كيمياء الثاني الثانوي – الكتاب الحي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+html{color-scheme:light}button,input,select{font-family:inherit;color:#1f2a44}
+:root{--ink:#1f2a44;--tl:#0c8599;--tl2:#e3fafc;--or:#f08c2e;--gr:#2e9e5b;--rd:#d64545;--pu:#6b4fd8;--line:#e2e8ee;--soft:#6b7690}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Cairo',Tahoma,sans-serif;background:#e9eef6;color:var(--ink);line-height:1.85}
+.book{max-width:800px;margin:12px auto;background:#fff;border-radius:16px;box-shadow:0 10px 30px #0002;overflow:hidden}
+header{background:linear-gradient(135deg,#0b5563,#15aabf);color:#fff;padding:16px;text-align:center}
+header h1{margin:0;font-size:1.3rem;font-weight:900}header div{opacity:.9;font-size:.85rem}
+.bar{display:flex;gap:6px;padding:8px 10px;background:var(--tl2);border-bottom:2px solid #c9d8f0;position:sticky;top:0;z-index:5;overflow-x:auto}
+.bar button{flex:0 0 auto;border:2px solid var(--tl);background:#fff;color:#1b3f73;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.86rem}
+.bar button.on{background:var(--tl);color:#fff}
+.page{display:none;padding:14px 16px 40px;animation:in .35s}.page.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h2{color:#1b3f73;margin:4px 0 6px;font-size:1.35rem;line-height:1.5}
+.num{display:inline-block;background:var(--tl);color:#fff;border-radius:10px;padding:0 10px;margin-left:6px;font-size:1rem}
+.box{border:2px solid var(--line);border-radius:16px;padding:14px;margin:14px 0;background:#fff}
+.box h3{margin:0 0 6px;font-size:1.05rem;color:#1b3f73}
+.lab{border-style:dashed;border-color:#a9c3ea;background:#fbfcff}
+.idea{background:linear-gradient(135deg,#0b5563,#15aabf);color:#fff;border-radius:16px;padding:12px 16px;margin:10px 0;font-weight:800}
+.idea small{display:block;opacity:.85;font-weight:600}
+.life{background:#fff7e8;border-right:5px solid var(--or);border-radius:10px;padding:8px 12px;margin:10px 0}
+.law{background:#fff7e8;border:2px solid #f5c27a;border-radius:14px;padding:10px 14px;margin:10px 0;font-weight:800;text-align:center;font-size:1.05rem}
+.warn{background:#fdeeee;border-right:5px solid var(--rd);border-radius:10px;padding:8px 12px;margin:10px 0}
+.btn{border:2px solid var(--ink);background:#fff;border-radius:10px;padding:6px 14px;font-weight:800;cursor:pointer;font-size:.95rem}
+.btn.main{background:var(--tl);border-color:var(--tl);color:#fff}.btn.or{background:var(--or);border-color:var(--or);color:#2a1600}
+.btn.ok{background:#dff5e7;border-color:var(--gr)}.btn.no{background:#fde4e4;border-color:var(--rd)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;justify-content:center}
+.fb{font-weight:800;min-height:1.4em;text-align:center;margin-top:6px}.fb.ok{color:var(--gr)}.fb.no{color:var(--rd)}
+.prob{background:#f5f8fd;border-radius:14px;padding:10px;text-align:center;font-weight:700}
+.mx{font-size:1.2rem;font-weight:800;line-height:2.1}
+.sc{text-align:center;font-weight:900;background:var(--tl2);border-radius:12px;padding:8px}
+.steps{background:#f8f9fc;border-radius:12px;padding:8px 12px;margin-top:8px;display:none}
+.opt{display:block;width:100%;text-align:right;margin:5px 0}.opt.ok{background:#dff5e7;border-color:var(--gr)}.opt.no{background:#fde4e4;border-color:var(--rd)}
+input.cf{width:60px;height:42px;font-size:1.15rem;font-weight:900;text-align:center;border:3px solid #c9d8f0;border-radius:10px;direction:ltr;vertical-align:middle;margin:0 2px}
+input.cf.ok{border-color:var(--gr);background:#eefaf2}input.cf.no{border-color:var(--rd);background:#fdeeee}
+/* matrix */
+.M{display:inline-flex;align-items:stretch;vertical-align:middle;margin:2px 4px}
+.M .br{width:8px;border:3px solid var(--ink)}.M .br.r{border-left:none;border-radius:0 6px 6px 0}.M .br.l{border-right:none;border-radius:6px 0 0 6px}
+.M.det .br{width:0;border-width:0 0 0 3px;border-radius:0}.M.det .br.l{border-width:0 3px 0 0}
+.M .g{display:grid;direction:rtl;gap:2px 4px;padding:2px 4px}
+.M .c{min-width:36px;text-align:center;font-weight:900;font-size:1.1rem;padding:2px 4px;border-radius:8px;direction:ltr;transition:.25s}
+.M .c.h1{background:#ffe08a}.M .c.h2{background:#b9e4ff}.M .c.x{opacity:.18;text-decoration:line-through}.M .c.h3{background:#c8f0d2}
+.M input.c{width:48px;height:36px;border:2px solid #c9d8f0;border-radius:8px;background:#fff;font-family:inherit}
+.chap{border:2px solid var(--line);border-radius:14px;margin:8px 0;overflow:hidden}
+.chap>div:first-child{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;font-weight:800;background:#f8faff}
+.chap .cn{background:var(--tl);color:#fff;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;flex:0 0 auto}
+.chap .ls{display:none;padding:4px 12px 10px}.chap.open .ls{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px dashed var(--line);font-size:.95rem}
+.li .pg{margin-right:auto;color:var(--soft);font-size:.8rem}.li.ready{cursor:pointer;font-weight:800;color:#1b3f73}
+.tg{font-size:.72rem;border-radius:8px;padding:0 8px;font-weight:800}.tg.r{background:#e6f6ec;color:#1d7a3f}.tg.s{background:#f1f1f1;color:#999}
+table.t{border-collapse:collapse;width:100%;font-size:.92rem;margin:6px 0}table.t td,table.t th{border:1px solid #d6e1f2;padding:5px 8px}table.t th{background:var(--tl2)}
+.sl{display:flex;align-items:center;gap:8px;margin:4px 0}.sl label{min-width:90px;font-weight:800}.sl input{flex:1;accent-color:var(--tl)}
+footer{text-align:center;color:#999;font-size:.8rem;padding:10px 10px 70px}
+.rt{direction:ltr;unicode-bidi:isolate;display:inline-block}.wx,.bx{border:1px solid #dbe5f5;border-radius:12px;padding:8px 10px;margin:8px 0;background:#fbfcff}.wxq{font-weight:700;line-height:2}.wst{background:#fff;border-right:4px solid var(--tl);border-radius:8px;padding:4px 10px;margin:5px 0;animation:in .3s;line-height:2}.wst.fin{border-color:var(--gr);background:#eefaf2}.sn{display:inline-block;background:var(--tl);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:.8rem;margin-left:6px}.bh{background:#fff7e8;border-radius:8px;padding:6px 10px;margin:4px 0}.ans{font-weight:900;color:var(--gr);margin-top:4px}.exb{border-color:#a9c3ea}.M.det .br.r,.M.det .br.l{border:none;border-radius:0;width:0}.M.det .br.r{border-right:3px solid var(--ink)}.M.det .br.l{border-left:3px solid var(--ink)}.bkb{border-color:#f5c27a;background:#fffdf8}/*darkfix*/input,select,textarea,.cf,.M input.c{background-color:#fff !important;color:#1f2a44 !important;-webkit-text-fill-color:#1f2a44 !important;caret-color:#1f2a44}input.cf.ok{background-color:#eefaf2 !important}input.cf.no{background-color:#fdeeee !important}svg text{font-family:Cairo,Tahoma,Arial,sans-serif}
+canvas{touch-action:manipulation;max-width:100%;height:auto}
+.shk{animation:shk .4s}@keyframes shk{25%{transform:translateX(6px)}75%{transform:translateX(-6px)}}
+ol.steps{display:block;background:none}
+</style>
+</head>
+<body>
+<div class="book">
+<header><h1>⚗️ كيمياء الثاني الثانوي</h1><div>الكتاب الحي · معمل تفاعلي · الأكسدة والاختزال · التحليل الكهربائي · الطاقة · سرعة التفاعل · الأحماض والقواعد · الأملاح</div></header>
+<div class="bar" id="bar">
+  <button data-p="home" class="on">📚 الفهرس</button>
+  <button data-p="r1">1 الأكسدة والاختزال</button>
+  <button data-p="r2">1 العوامل المؤكسدة والمختزلة</button>
+  <button data-p="rv1">🏁 مراجعة 1</button>
+  <button data-p="x1">2 الموصلات والإلكتروليتات</button>
+  <button data-p="x2">2 التحليل الكهربائي</button>
+  <button data-p="x3">2 الطلاء بالكهرباء والخلايا</button>
+  <button data-p="rv2">🏁 مراجعة 2</button>
+  <button data-p="h1">3 طارد وماص للحرارة</button>
+  <button data-p="h2">3 الروابط وطاقة التنشيط</button>
+  <button data-p="s1">4 قياس سرعة التفاعل</button>
+  <button data-p="s2">4 العوامل المؤثرة والحفّازات</button>
+  <button data-p="rv3">🏁 مراجعة 3–4</button>
+  <button data-p="a1">5 الأحماض</button>
+  <button data-p="a2">5 الأدلة و pH</button>
+  <button data-p="a3">5 التعادل والمعايرة والأكاسيد</button>
+  <button data-p="t1">6 الذوبانية والترسيب</button>
+  <button data-p="t2">6 تحضير الأملاح</button>
+  <button data-p="rv4">🏁 مراجعة 5–6</button>
+</div>
+<style>
+.sl{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px 0;font-weight:800}
+.sl input[type=range]{width:200px;accent-color:var(--tl)}
+.pool{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.pool button{border:2px solid var(--line);border-radius:12px;background:#fff;padding:7px 11px;font-family:inherit;font-weight:800;cursor:pointer;font-size:.92rem}
+.pool button.sel{border-color:var(--tl);background:var(--tl2)}
+.pool button.ok{border-color:#2fb24c;background:#e6f7ea}.pool button.no{border-color:#e5484d;background:#fde8e8}
+.cat{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}
+.cat>div{border:2px dashed var(--line);border-radius:14px;padding:8px;min-height:70px;text-align:center;cursor:pointer}
+.cat>div b{display:block;margin-bottom:4px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.steps li{background:#fff;border:2px solid var(--line);border-radius:12px;padding:8px 12px;margin:6px 0;font-weight:800;cursor:pointer;display:flex;gap:8px;align-items:center}
+.steps li.ok{border-color:#2fb24c;background:#e6f7ea}.steps li b{min-width:26px;height:26px;border-radius:50%;background:var(--tl);color:#fff;display:grid;place-items:center;font-size:.85rem}
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0}
+.tools button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px 2px;font-family:inherit;font-weight:800;font-size:.72rem;cursor:pointer}
+.tools button svg{width:100%;height:58px;display:block}.tools button.sel{border-color:var(--tl);background:var(--tl2)}
+.hz{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.hz button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px;cursor:pointer;font-family:inherit;font-weight:800;font-size:.75rem}
+.hz button.sel{border-color:var(--tl);background:var(--tl2)}.hz button.ok{border-color:#2fb24c;background:#e6f7ea}
+.hz svg{width:64px;height:64px;display:block;margin:auto}
+.big2{font-size:1.5rem;font-weight:900;text-align:center;margin:6px 0}
+.matr{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:8px 0}
+.matr button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 2px;font-family:inherit;font-weight:800;font-size:.8rem;cursor:pointer}
+.matr button span{font-size:1.6rem;display:block}.matr button.sel{border-color:var(--tl);background:var(--tl2)}
+.ptab{display:grid;grid-template-columns:repeat(18,1fr);gap:2px;direction:ltr;margin:8px 0}
+.ptab div{aspect-ratio:1;border-radius:4px;font-size:.55rem;font-weight:900;display:grid;place-items:center;cursor:pointer;line-height:1}
+.ptab div.m{background:#ffd8a8}.ptab div.n{background:#b2f2bb}.ptab div.g{background:#a5d8ff}.ptab div.sel{outline:3px solid #e5484d}
+</style>
+<style>
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.chips button{border:2px solid var(--line);border-radius:20px;background:#fff;padding:6px 12px;font-family:inherit;font-weight:800;cursor:pointer}
+.chips button.on{border-color:var(--tl);background:var(--tl2)}
+.chips button:disabled{opacity:.4}
+.sl{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;margin:6px 0;font-weight:800}
+.sl input[type=range]{flex:1;min-width:140px;max-width:300px}
+.sl select{font-family:inherit;font-weight:800;font-size:.95rem;border:2px solid var(--tl);border-radius:10px;padding:4px 6px;max-width:100%}
+.tbl{width:100%;border-collapse:collapse;margin:8px 0;font-weight:800;text-align:center;background:#fff}.tbl td,.tbl th{border:2px solid var(--line);padding:6px}.tbl th{background:var(--tl2)}
+.big2{font-size:1.1rem;font-weight:900;text-align:center;color:var(--tl);margin:6px 0;line-height:1.9}
+.eq{direction:ltr;unicode-bidi:isolate;font-weight:900;display:inline-block}
+.lbl{display:inline-block;border-radius:8px;padding:1px 8px;font-weight:900;color:#fff}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}.card{border:2px solid var(--line);border-radius:14px;padding:10px;text-align:center;cursor:pointer;background:#fff;font-weight:800;min-height:80px}.card .big{font-size:1.8rem;display:block}.card .bk{display:none;font-weight:600;font-size:.88rem;color:#333}.card.flip{background:var(--tl2);border-color:var(--tl)}.card.flip .bk{display:block}.card.flip .fr{display:none}
+</style>
+
+<section class="page on" id="home">
+  <h2>فهرس الكتاب</h2>
+  <div class="idea">⚗️ أهلًا بك في معمل الكيمياء الحي!<small>هنا لا تقرأ عن التجربة… بل تجريها: اغمس الخارصين في كبريتات النحاس، اكشف المحلول المجهول، أوصل الدائرة وحلّل المحاليل بالكهرباء، اطلِ ملعقة بالفضة، اصنع بطارية من فلزين، راقب مقياس الحرارة يصعد ويهبط، سابق الزمن في تجربة «العلامة المختفية»، اصنع رغوة «معجون أسنان الفيل»، عاير الحمض قطرة قطرة، وكوّن رواسب ملونة… مع أسئلة لا تنتهي وشرح صوتي.</small></div>
+  <div id="toc"></div>
+</section>
+
+<!-- ================= الوحدة 1 ================= -->
+<section class="page" id="r1">
+  <div class="muted">الوحدة 1 · 1-1 و 2-1 · ص 9–13</div>
+  <h2><span class="num">1</span>الأكسدة والاختزال</h2>
+  <div class="idea">💡 <b>الأكسدة</b>: اكتساب أكسجين، أو فقد هيدروجين، أو <b>فقد إلكترونات</b>، أو زيادة عدد التأكسد. <b>الاختزال</b> عكسها تمامًا.<small>الأكسدة والاختزال يحدثان <b>معًا في نفس الوقت</b>، لذلك نسميها تفاعلات <b>الأخسدة</b> (اختزال وأكسدة). عدد تأكسد العنصر الحر = 0، والأكسجين غالبًا −2، والهيدروجين غالبًا +1، ومجموع أعداد التأكسد في المركب = 0.</small></div>
+  <div class="box lab"><h3>🧪 التجربة: اغمس الفلز في محلول كبريتات النحاس الأزرق</h3><div class="chips" id="znK"></div>
+    <canvas id="znC" class="cv" width="640" height="340"></canvas><div class="btns"><button class="btn main" id="znGo">⬇️ اغمس الشريط</button><button class="btn" id="znZ">🔬 كبّر: شاهد الإلكترونات</button></div><div class="fb" id="znOut"></div></div>
+  <div class="box lab"><h3>🧩 أكسدة أم اختزال؟</h3><div class="pool" id="orP"></div><div class="cat" id="orC"></div><div class="fb" id="orOut"></div></div>
+  <div class="box lab"><h3>🔢 لعبة عدد التأكسد</h3><div id="oxQ"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qr1"></div></div>
+</section>
+
+<section class="page" id="r2">
+  <div class="muted">الوحدة 1 · 2-1 · ص 13–17</div>
+  <h2><span class="num">1</span>العوامل المؤكسدة والمختزلة والكشف عنها</h2>
+  <div class="idea">💡 <b>العامل المؤكسد</b> يؤكسد غيره (وهو نفسه يُختزل). <b>العامل المختزل</b> يختزل غيره (وهو نفسه يتأكسد).<small><b>الكشف عن العامل المؤكسد</b>: نضيف محلول <b>يوديد البوتاسيوم</b> عديم اللون ⟸ يتحول إلى <b>بني</b> (يود). <b>الكشف عن العامل المختزل</b>: نضيف محلول <b>ثاني كرومات البوتاسيوم (VI) المحمّض</b> البرتقالي ⟸ يتحول إلى <b>أخضر</b>.</small></div>
+  <div class="box lab"><h3>🕵️ التجربة: اكشف المحلول</h3><div class="hint" style="text-align:center">اختر المحلول، ثم أضف الكاشف بالقطّارة</div><div class="chips" id="tsS"></div><div class="chips" id="tsR"></div>
+    <canvas id="tsC" class="cv" width="640" height="320"></canvas><div class="fb" id="tsOut"></div>
+    <div class="btns"><button class="btn main" id="tsM">🎲 تحدٍّ: محلول مجهول</button></div><div id="tsQ"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qr2"></div></div>
+</section>
+
+<section class="page" id="rv1">
+  <div class="muted">الوحدة 1 · مراجعة</div>
+  <h2>🏁 مراجعة: تفاعلات الأخسدة</h2>
+  <div class="sc" id="rv1Sc"></div><div id="rv1Q"></div><div class="btns"><button class="btn or" id="rv1New">🔄 اختبار جديد</button></div>
+</section>
+
+<!-- ================= الوحدة 2 ================= -->
+<section class="page" id="x1">
+  <div class="muted">الوحدة 2 · 1-2 إلى 3-2 · ص 19–22</div>
+  <h2><span class="num">2</span>الموصلات والإلكتروليتات</h2>
+  <div class="idea">💡 <b>الموصلات</b> (الفلزات والجرافيت) توصل الكهرباء بحركة <b>الإلكترونات</b> ولا تتغير كيميائيًا. <b>الإلكتروليتات</b> مركبات أيونية مصهورة أو ذائبة في الماء توصل الكهرباء بحركة <b>الأيونات</b> وتتحلل.<small>المركب الأيوني <b>الصلب</b> لا يوصل لأن أيوناته غير حرة الحركة. السكر والإيثانول والماء المقطر <b>لاإلكتروليتات</b>.</small></div>
+  <div class="box lab"><h3>💡 التجربة: هل يضيء المصباح؟</h3><div class="hint" style="text-align:center">ضع المادة في فجوة الدائرة</div><div class="chips" id="cdK"></div>
+    <canvas id="cdC" class="cv" width="640" height="320"></canvas><div class="fb" id="cdOut"></div><div id="cdT"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qx1"></div></div>
+</section>
+
+<section class="page" id="x2">
+  <div class="muted">الوحدة 2 · 4-2 إلى 8-2 · ص 23–27</div>
+  <h2><span class="num">2</span>التحليل الكهربائي</h2>
+  <div class="idea">💡 <b>التحليل الكهربائي</b>: تحلل الإلكتروليت بإمرار تيار كهربائي فيه. <b>الكاثود</b> (القطب السالب) يجذب الأيونات الموجبة (الكاتيونات) فتكتسب إلكترونات: <b>اختزال</b>. <b>الأنود</b> (القطب الموجب) يجذب الأيونات السالبة (الأنيونات) فتفقد إلكترونات: <b>أكسدة</b>.<small>في المحاليل المائية يتنافس أيونا الماء H⁺ و OH⁻. يعتمد الناتج على: موقع الأيون في سلسلة النشاط، <b>التركيز</b>، و<b>نوع الأقطاب</b>.</small></div>
+  <div class="box lab"><h3>🔋 التجربة: خلية التحليل الكهربائي</h3><div class="sl"><select id="elK"></select></div>
+    <canvas id="elC" class="cv" width="640" height="380"></canvas><div class="btns"><button class="btn main" id="elGo">🔌 أغلق المفتاح</button></div><div class="fb" id="elOut"></div></div>
+  <div class="box lab"><h3>🎯 توقّع النواتج</h3><div id="elQ"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qx2"></div></div>
+</section>
+
+<section class="page" id="x3">
+  <div class="muted">الوحدة 2 · 9-2 إلى 11-2 · ص 28–30</div>
+  <h2><span class="num">2</span>الطلاء بالكهرباء · الخلايا والنضائد</h2>
+  <div class="idea">💡 <b>الطلاء بالكهرباء</b>: الجسم المراد طلاؤه هو <b>الكاثود</b>، وفلز الطلاء هو <b>الأنود</b>، والإلكتروليت محلول ملح فلز الطلاء.<small><b>الخلية البسيطة</b> تحوّل الطاقة الكيميائية إلى كهربائية: فلزان مختلفان في إلكتروليت. الفلز <b>الأنشط</b> هو <b>القطب السالب</b> (يفقد إلكترونات)، وكلما تباعد الفلزان في سلسلة النشاط زاد الجهد. في <b>الخلية الجافة</b> علبة الخارصين هي القطب السالب.</small></div>
+  <div class="box lab"><h3>🥄 التجربة: اطلِ الملعقة</h3><div class="chips" id="plM"></div><div class="chips" id="plE"></div>
+    <canvas id="plC" class="cv" width="640" height="320"></canvas><div class="btns"><button class="btn main" id="plGo">🔌 شغّل التيار</button><button class="btn" id="plR">🔄 ملعقة جديدة</button></div><div class="fb" id="plOut"></div></div>
+  <div class="box lab"><h3>🍋 التجربة: اصنع بطاريتك</h3><div class="sl">القطب الأول <select id="clA"></select> القطب الثاني <select id="clB"></select></div>
+    <canvas id="clC" class="cv" width="640" height="320"></canvas><div class="fb" id="clOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qx3"></div></div>
+</section>
+
+<section class="page" id="rv2">
+  <div class="muted">الوحدة 2 · مراجعة</div>
+  <h2>🏁 مراجعة: الكهرباء والكيمياء</h2>
+  <div class="sc" id="rv2Sc"></div><div id="rv2Q"></div><div class="btns"><button class="btn or" id="rv2New">🔄 اختبار جديد</button></div>
+</section>
+
+<!-- ================= الوحدة 3 ================= -->
+<section class="page" id="h1">
+  <div class="muted">الوحدة 3 · 1-3، 3-3، 4-3 · ص 35–41</div>
+  <h2><span class="num">3</span>التفاعلات الطاردة والماصة للحرارة</h2>
+  <div class="idea">💡 <b>الطارد للحرارة</b>: يطلق حرارة إلى المحيط فترتفع درجة الحرارة، و <b>ΔH سالبة</b>. <b>الماص للحرارة</b>: يمتص حرارة من المحيط فتنخفض درجة الحرارة، و <b>ΔH موجبة</b>.<small>أمثلة طاردة: الاحتراق، التعادل، التنفس. أمثلة ماصة: البناء الضوئي، التحلل الحراري، ذوبان نترات الأمونيوم (الكمادة الباردة).</small></div>
+  <div class="box lab"><h3>🌡️ التجربة: المسعر (كوب البوليسترين)</h3><div class="sl"><select id="caK"></select></div>
+    <canvas id="caC" class="cv" width="640" height="340"></canvas><div class="btns"><button class="btn main" id="caGo">🧪 اخلط</button></div><div class="fb" id="caOut"></div></div>
+  <div class="box lab"><h3>🔥❄️ طارد أم ماص؟</h3><div class="pool" id="exP"></div><div class="cat" id="exC"></div><div class="fb" id="exOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qh1"></div></div>
+</section>
+
+<section class="page" id="h2">
+  <div class="muted">الوحدة 3 · 2-3 و 5-3 · ص 37–44</div>
+  <h2><span class="num">3</span>تكوين وكسر الروابط · طاقة التنشيط</h2>
+  <div class="idea">💡 <b>كسر الروابط يمتص طاقة</b>، و<b>تكوين الروابط يطلق طاقة</b>. ΔH = طاقة كسر روابط المتفاعلات − طاقة تكوين روابط النواتج.<small>إذا كانت الطاقة المنطلقة أكبر من الممتصة فالتفاعل طارد. <b>طاقة التنشيط</b>: أقل طاقة تلزم لبدء التفاعل (مثل عود الثقاب لإشعال الوقود).</small></div>
+  <div class="box lab"><h3>✂️ التجربة: اكسر ثم كوّن</h3><div class="sl"><select id="bdK"></select></div>
+    <canvas id="bdC" class="cv" width="640" height="320"></canvas><div class="btns"><button class="btn main" id="bdB">✂️ اكسر الروابط</button><button class="btn main" id="bdF" disabled>🔗 كوّن الروابط</button><button class="btn" id="bdR">🔄</button></div><div class="fb" id="bdOut"></div></div>
+  <div class="box lab"><h3>⛰️ مخطط الطاقة: تلّ التنشيط</h3><div class="chips" id="prK"></div><div class="sl">طاقة التنشيط <input type="range" id="prE" min="20" max="100" value="70"><b id="prEv"></b></div>
+    <canvas id="prC" class="cv" width="640" height="320"></canvas><div class="btns"><button class="btn main" id="prGo">⚽ ادفع الكرة</button></div><div class="fb" id="prOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qh2"></div></div>
+</section>
+
+<!-- ================= الوحدة 4 ================= -->
+<section class="page" id="s1">
+  <div class="muted">الوحدة 4 · 1-4 و 2-4 · ص 49–53</div>
+  <h2><span class="num">4</span>قياس سرعة التفاعل</h2>
+  <div class="idea">💡 <b>سرعة التفاعل</b>: مقدار التغير في كمية متفاعل أو ناتج في وحدة الزمن. نقيسها بتغيّر مرئي: <b>حجم غاز</b> متصاعد، أو <b>نقص الكتلة</b>، أو تعكّر المحلول.<small>في المنحنى: الميل الأشد = تفاعل أسرع. عندما يصبح المنحنى أفقيًا يكون التفاعل قد انتهى (نفد أحد المتفاعلات).</small></div>
+  <div class="box lab"><h3>💨 التجربة: الرخام وحمض الهيدروكلوريك</h3><div class="chips" id="rtS"></div>
+    <div class="sl">تركيز الحمض <input type="range" id="rtC0" min="0.5" max="2" step="0.5" value="1"><b id="rtC0v"></b></div><div class="sl">🌡️ الحرارة <input type="range" id="rtT" min="20" max="60" step="10" value="20"><b id="rtTv"></b></div>
+    <canvas id="rtC" class="cv" width="640" height="380"></canvas><div class="btns"><button class="btn main" id="rtGo">▶️ ابدأ التفاعل</button><button class="btn" id="rtClr">🧹 امسح المنحنيات</button></div><div class="fb" id="rtOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qs1"></div></div>
+</section>
+
+<section class="page" id="s2">
+  <div class="muted">الوحدة 4 · 3-4 و 4-4 · ص 54–60</div>
+  <h2><span class="num">4</span>العوامل المؤثرة في السرعة · عوامل الحفز والإنزيمات</h2>
+  <div class="idea">💡 تزداد السرعة بزيادة: <b>التركيز</b>، <b>درجة الحرارة</b>، <b>مساحة السطح</b> (تفتيت الصلب)، <b>الضغط</b> (للغازات)، وبوجود <b>عامل حفّاز</b>.<small>السبب: زيادة عدد <b>التصادمات الفعّالة</b> بين الجسيمات. <b>العامل الحفّاز</b> يسرّع التفاعل بخفض طاقة التنشيط ولا يُستهلك. <b>الإنزيمات</b> حفّازات حيوية.</small></div>
+  <div class="box lab"><h3>❌ لعبة: العلامة المختفية</h3><div class="hint" style="text-align:center">ثيوكبريتات الصوديوم + حمض ⟸ كبريت أصفر يعكّر المحلول. اضغط «اختفت!» لحظة اختفاء العلامة ✖</div>
+    <div class="sl">تركيز الثيوكبريتات <input type="range" id="crN" min="1" max="5" value="3"><b id="crNv"></b></div><div class="sl">🌡️ الحرارة <input type="range" id="crT" min="20" max="60" step="10" value="20"><b id="crTv"></b></div>
+    <canvas id="crC" class="cv" width="640" height="300"></canvas><div class="btns"><button class="btn main" id="crGo">🧪 أضف الحمض وابدأ الساعة</button><button class="btn or" id="crStop" disabled>✋ اختفت!</button></div><div id="crTb"></div><div class="fb" id="crOut"></div></div>
+  <div class="box lab"><h3>🐘 التجربة: معجون أسنان الفيل</h3><div class="hint" style="text-align:center">تحلل فوق أكسيد الهيدروجين: <span class="eq">2H₂O₂ → 2H₂O + O₂</span></div><div class="chips" id="hpK"></div>
+    <canvas id="hpC" class="cv" width="640" height="340"></canvas><div class="btns"><button class="btn main" id="hpGo">➕ أضف</button></div><div class="fb" id="hpOut"></div></div>
+  <div class="box lab"><h3>💥 لماذا؟ نظرية التصادم</h3><div class="sl">عدد الجسيمات (التركيز) <input type="range" id="coN" min="6" max="40" value="14"><b id="coNv"></b></div><div class="sl">السرعة (الحرارة) <input type="range" id="coV" min="1" max="6" value="2"><b id="coVv"></b></div>
+    <canvas id="coC" class="cv" width="640" height="260"></canvas><div class="fb" id="coOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qs2"></div></div>
+</section>
+
+<section class="page" id="rv3">
+  <div class="muted">الوحدتان 3–4 · مراجعة</div>
+  <h2>🏁 مراجعة: الطاقة وسرعة التفاعل</h2>
+  <div class="sc" id="rv3Sc"></div><div id="rv3Q"></div><div class="btns"><button class="btn or" id="rv3New">🔄 اختبار جديد</button></div>
+</section>
+
+<!-- ================= الوحدة 5 ================= -->
+<section class="page" id="a1">
+  <div class="muted">الوحدة 5 · 1-5 إلى 3-5 · ص 65–69</div>
+  <h2><span class="num">5</span>الأحماض: الخواص والتفاعلات</h2>
+  <div class="idea">💡 <b>الحمض</b> مادة تنتج أيونات الهيدروجين <b>H⁺</b> عند ذوبانها في <b>الماء</b>.<small>حمض + فلز نشط ⟵ ملح + هيدروجين · حمض + كربونات ⟵ ملح + ماء + ثاني أكسيد الكربون · حمض + قاعدة ⟵ ملح + ماء. <b>الحمض القوي</b> (HCl، H₂SO₄، HNO₃) يتأين <b>تمامًا</b>، و<b>الضعيف</b> (حمض الإيثانويك) يتأين <b>جزئيًا</b>. بدون ماء لا تظهر الخواص الحامضية.</small></div>
+  <div class="box lab"><h3>🧪 التجربة: طاولة الأحماض</h3><div class="chips" id="acA"></div><div class="chips" id="acR"></div>
+    <canvas id="acC" class="cv" width="640" height="340"></canvas><div class="btns"><button class="btn main" id="acGo">➕ أضف إلى الحمض</button><button class="btn" id="acT">🔥 اختبر الغاز</button></div><div class="fb" id="acOut"></div></div>
+  <div class="box lab"><h3>🔬 قوي أم ضعيف؟ انظر إلى الجزيئات</h3><div class="chips" id="ioK"></div><canvas id="ioC" class="cv" width="640" height="260"></canvas><div class="fb" id="ioOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qa1"></div></div>
+</section>
+
+<section class="page" id="a2">
+  <div class="muted">الوحدة 5 · 4-5 و 5-5 · ص 70–72</div>
+  <h2><span class="num">5</span>الأدلة والدالة pH</h2>
+  <div class="idea">💡 مقياس <b>pH</b> من 0 إلى 14: أقل من 7 <b>حمضي</b>، 7 <b>متعادل</b>، أكبر من 7 <b>قلوي</b>. كلما قلّ الرقم زادت قوة الحمض.<small><b>دوّار الشمس</b>: أحمر في الحمض وأزرق في القلوي. <b>الدليل العام</b>: ألوان الطيف من الأحمر (حمض قوي) إلى الأخضر (متعادل) إلى البنفسجي (قلوي قوي). <b>الفينولفثالين</b>: عديم اللون في الحمض ووردي في القلوي. <b>الميثيل البرتقالي</b>: أحمر في الحمض وأصفر في القلوي.</small></div>
+  <div class="box lab"><h3>🌈 التجربة: قطّر الدليل</h3><div class="chips" id="phI"></div><div class="sl"><select id="phS"></select></div>
+    <canvas id="phC" class="cv" width="640" height="320"></canvas><div class="fb" id="phOut"></div></div>
+  <div class="box lab"><h3>🎨 لعبة: خمّن الـ pH من اللون</h3><div id="phG"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qa2"></div></div>
+</section>
+
+<section class="page" id="a3">
+  <div class="muted">الوحدة 5 · 6-5 إلى 8-5 · ص 73–77</div>
+  <h2><span class="num">5</span>القواعد · التعادل والمعايرة · أنواع الأكاسيد</h2>
+  <div class="idea">💡 <b>القاعدة</b>: أكسيد أو هيدروكسيد فلز يتفاعل مع الحمض. <b>القلوي</b>: قاعدة تذوب في الماء وتنتج <b>OH⁻</b>. <b>التعادل</b>: <span class="eq">H⁺ + OH⁻ → H₂O</span><small>أكاسيد الفلزات <b>قاعدية</b>، وأكاسيد اللافلزات <b>حامضية</b>، وبعضها <b>متعادل</b> (CO، NO، H₂O)، وبعضها <b>أمفوتيري</b> يتفاعل مع الأحماض والقلويات (Al₂O₃، ZnO).</small></div>
+  <div class="box lab"><h3>💧 التجربة: المعايرة قطرة قطرة</h3><div class="hint" style="text-align:center">في الدورق 25 cm³ من حمض HCl مجهول التركيز + فينولفثالين. في السحاحة NaOH تركيزه 0.1 mol/dm³. توقف عند أول لون وردي ثابت!</div>
+    <canvas id="tiC" class="cv" width="640" height="400"></canvas><div class="btns"><button class="btn main" id="ti1">🚿 +1 cm³</button><button class="btn main" id="ti2">💧 قطرة (0.1)</button><button class="btn" id="tiR">🔄 حمض جديد</button></div><div class="fb" id="tiOut"></div><div id="tiQ"></div></div>
+  <div class="box lab"><h3>🧩 صنّف الأكاسيد</h3><div class="pool" id="oxP"></div><div class="cat" id="oxC"></div><div class="fb" id="oxOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qa3"></div></div>
+</section>
+
+<!-- ================= الوحدة 6 ================= -->
+<section class="page" id="t1">
+  <div class="muted">الوحدة 6 · 1-6، 2-6، 4-6 · ص 80–86</div>
+  <h2><span class="num">6</span>الأملاح: الذوبانية والترسيب</h2>
+  <div class="idea">💡 <b>الملح</b>: مركب ينتج عن استبدال هيدروجين الحمض بفلز (أو أمونيوم).<small>قواعد الذوبانية: كل أملاح <b>الصوديوم والبوتاسيوم والأمونيوم</b> وكل <b>النترات</b> ذوّابة · <b>الكلوريدات</b> ذوّابة عدا الفضة والرصاص · <b>الكبريتات</b> ذوّابة عدا الباريوم والرصاص (والكالسيوم قليل الذوبان) · <b>الكربونات</b> غير ذوّابة عدا الصوديوم والبوتاسيوم والأمونيوم. الملح غير الذوّاب يُحضّر بـ<b>الترسيب</b>.</small></div>
+  <div class="box lab"><h3>🎨 التجربة: اخلط محلولين</h3><div class="sl">المحلول الأول <select id="ppA"></select></div><div class="sl">المحلول الثاني <select id="ppB"></select></div>
+    <canvas id="ppC" class="cv" width="640" height="320"></canvas><div class="btns"><button class="btn main" id="ppGo">🧪 اسكب</button></div><div class="fb" id="ppOut"></div></div>
+  <div class="box lab"><h3>💧 يذوب أم لا؟</h3><div class="pool" id="soP"></div><div class="cat" id="soC"></div><div class="fb" id="soOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qt1"></div></div>
+</section>
+
+<section class="page" id="t2">
+  <div class="muted">الوحدة 6 · 3-6 و 4-6 · ص 83–87</div>
+  <h2><span class="num">6</span>تحضير الأملاح</h2>
+  <div class="idea">💡 اختيار الطريقة: ملح <b>غير ذوّاب</b> ⟸ <b>الترسيب</b>. ملح ذوّاب من أملاح <b>الصوديوم/البوتاسيوم/الأمونيوم</b> ⟸ <b>المعايرة</b> (حمض + قلوي). ملح <b>ذوّاب آخر</b> ⟸ حمض + <b>زيادة</b> من فلز أو أكسيد أو كربونات غير ذوّابة، ثم ترشيح وتبخير وتبلور.</small></div>
+  <div class="box lab"><h3>💎 التجربة: حضّر بلورات كبريتات النحاس الزرقاء</h3><div class="hint" style="text-align:center">نفّذ الخطوات بالترتيب الصحيح</div><div class="chips" id="spK"></div>
+    <canvas id="spC" class="cv" width="640" height="320"></canvas><div class="fb" id="spOut"></div><div class="btns"><button class="btn" id="spR">🔄 من جديد</button></div></div>
+  <div class="box lab"><h3>🧭 أي طريقة أختار؟</h3><div id="mtQ"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qt2"></div></div>
+</section>
+
+<section class="page" id="rv4">
+  <div class="muted">الوحدتان 5–6 · مراجعة</div>
+  <h2>🏁 مراجعة: الأحماض والقواعد والأملاح</h2>
+  <div class="sc" id="rv4Sc"></div><div id="rv4Q"></div><div class="btns"><button class="btn or" id="rv4New">🔄 اختبار جديد</button></div>
+</section>
+<footer>الكتاب الحي · مبني على كتاب الكيمياء للسنة الثانية من مرحلة التعليم الثانوي (القسم العلمي) 2025–2026 (مركز المناهج التعليمية والبحوث التربوية – ليبيا)</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const pages=[...document.querySelectorAll('.page')],nb=[...document.querySelectorAll('#bar button')];
+function go(id){pages.forEach(p=>p.classList.toggle('on',p.id===id));nb.forEach(b=>b.classList.toggle('on',b.dataset.p===id));window.scrollTo({top:0,behavior:'smooth'})}
+nb.forEach(b=>b.onclick=()=>go(b.dataset.p));
+(function(){const h=location.hash.slice(1);if(h&&$(h))go(h);addEventListener('hashchange',()=>{const x=location.hash.slice(1);if($(x))go(x)})})();
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),nz=(a,b)=>{let x;do{x=rnd(a,b)}while(!x);return x},pick=a=>a[rnd(0,a.length-1)];
+const ms=n=>n<0?'−'+(-n):String(n);const pr=n=>n<0?'('+ms(n)+')':String(n);
+const V='س';
+const parse=s=>{s=(s||'').trim().replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[−–—]/g,'-').replace(/\s/g,'');if(s===''||s==='+'||s==='-')return NaN;if(/^-?\d+\/\d+$/.test(s)){const[a,b]=s.split('/');return a/b}return Number(s)};
+function term(c,p,first,v){v=v||V;if(c===0)return'';const a=Math.abs(c);const cs=(a===1&&p>0)?'':String(a);const vs=p===0?'':(p===1?v:v+'<sup>'+p+'</sup>');const s=c<0?(first?'−':' − '):(first?'':' + ');return s+cs+vs}
+function poly(cs,v){let out='',f=true;cs.forEach(([c,p])=>{if(c){out+=term(c,p,f,v);f=false}});return out||'0'}
+/* matrix renderer: A 2D array, o:{det, cls(i,j)->class, inp:prefix} */
+function M(A,o){o=o||{};const r=A.length,c=A[0].length;let g='<div class="g" style="grid-template-columns:repeat('+c+',auto)">';
+ A.forEach((row,i)=>row.forEach((v,j)=>{const cl=o.cls?o.cls(i,j)||'':'';g+=o.inp?'<input class="c '+cl+'" data-i="'+i+'" data-j="'+j+'" data-m="'+o.inp+'" value="'+(v===''?'':ms(v))+'" inputmode="text">':'<div class="c '+cl+'" data-i="'+i+'" data-j="'+j+'">'+(typeof v==='number'?ms(Math.round(v*1000)/1000):v)+'</div>'}));
+ return '<span class="M'+(o.det?' det':'')+'"'+(o.id?' id="'+o.id+'"':'')+'><span class="br r"></span>'+g+'</div><span class="br l"></span></span>'}
+function readM(host,name,r,c){const A=Array.from({length:r},()=>Array(c).fill(0));host.querySelectorAll('input[data-m="'+name+'"]').forEach(x=>{const v=parse(x.value);A[+x.dataset.i][+x.dataset.j]=isNaN(v)?0:v});return A}
+const det2=a=>a[0][0]*a[1][1]-a[0][1]*a[1][0];
+const minor=(a,i,j)=>a.filter((_,r)=>r!==i).map(row=>row.filter((_,c)=>c!==j));
+const det3=a=>a[0][0]*det2(minor(a,0,0))-a[0][1]*det2(minor(a,0,1))+a[0][2]*det2(minor(a,0,2));
+const det=a=>a.length===2?det2(a):det3(a);
+const rM=(r,c,lo,hi)=>Array.from({length:r},()=>Array.from({length:c},()=>rnd(lo==null?-5:lo,hi==null?9:hi)));
+const mul=(A,B)=>A.map(row=>B[0].map((_,j)=>row.reduce((s,v,k)=>s+v*B[k][j],0)));
+const T=A=>A[0].map((_,j)=>A.map(r=>r[j]));
+const sub='₀₁₂₃₄₅₆₇₈₉';const ij=(i,j)=>''+sub[i]+sub[j];
+function mcq(host,q,opts,right,onAns){const d=document.createElement('div');d.className='box';d.style.margin='8px 0';d.innerHTML='<div style="font-weight:800">'+q+'</div>';let dn=false;const order=opts.map((o,i)=>i).sort(()=>Math.random()-.5);
+ order.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=opts[i];b.onclick=()=>{if(dn)return;dn=true;b.classList.add(i===right?'ok':'no');if(i!==right)[...d.querySelectorAll('.opt')][order.indexOf(right)].classList.add('ok');onAns&&onAns(i===right)};d.appendChild(b)});host.appendChild(d)}
+function MCQP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();g.o=g.o.filter((x,i)=>g.o.indexOf(x)===i);const ord=g.o.map((x,i)=>i).sort(()=>Math.random()-.5);let done=false;
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div>';const opts=document.createElement('div');box.appendChild(opts);const fb=document.createElement('div');fb.className='fb';const nx=document.createElement('div');nx.className='btns';box.appendChild(fb);box.appendChild(nx);
+  ord.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=g.o[i];b.onclick=()=>{if(done)return;done=true;const r=i===0;b.classList.add(r?'ok':'no');if(!r)[...opts.children][ord.indexOf(0)].classList.add('ok');dn++;if(r)ok++;sc.textContent='✔️ صحيح: '+ok+' من '+dn;fb.className='fb '+(r?'ok':'no');fb.innerHTML=(r?'🎉 صحيح! ':'❌ ليس صحيحًا. ')+(g.ex?'<div style="font-size:.95rem;color:var(--ink);font-weight:700">'+g.ex+'</div>':'');nx.innerHTML='<button class="btn or">سؤال جديد ⬅</button>';nx.firstChild.onclick=render};opts.appendChild(b)})}render()}
+/* matrix-answer practice: gen -> {q, ans(2D), steps[]} */
+function MatP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();let tries=0;const E=g.ans.map(r=>r.map(()=>''));
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div><div style="text-align:center;margin:8px 0">= '+M(E,{inp:'z'})+'</div><div class="btns"><button class="btn main" data-k="chk">✔️ تحقّق</button><button class="btn" data-k="help">💡 أرني الحل</button><button class="btn or" data-k="new">سؤال جديد ⬅</button></div><div class="fb"></div><div class="steps"></div>';
+  const ins=[...box.querySelectorAll('input.c')],fb=box.querySelector('.fb'),st=box.querySelector('.steps');const steps=()=>{st.style.display='block';st.innerHTML='<b>الحل:</b>'+g.steps.map(s=>'<div class="mx" style="font-size:1rem">'+s+'</div>').join('')};
+  box.querySelector('[data-k=chk]').onclick=()=>{let all=true,emp=false;ins.forEach(x=>{const v=parse(x.value);if(isNaN(v)){emp=true;all=false;return}const g2=Math.abs(v-g.ans[+x.dataset.i][+x.dataset.j])<.001;x.classList.remove('ok','no');x.classList.add(g2?'ok':'no');if(!g2)all=false});
+   if(emp&&!all){fb.className='fb';fb.textContent='املأ كل الخانات';return}tries++;if(tries===1){dn++;if(all)ok++;sc.textContent='✔️ صحيح من أول محاولة: '+ok+' من '+dn}fb.className='fb '+(all?'ok':'no');fb.textContent=all?'🎉 ممتاز!':'🤔 الخانات الحمراء غير صحيحة';if(all||tries>=2)steps();if(all)setTimeout(render,2400)};
+  box.querySelector('[data-k=help]').onclick=()=>{ins.forEach(x=>{x.value=ms(g.ans[+x.dataset.i][+x.dataset.j]);x.classList.add('ok')});steps()};box.querySelector('[data-k=new]').onclick=render}render()}
+
+
+const TOC=[['الوحدة 1: تفاعلات الأخسدة (اختزال وأكسدة)',9,[['1-1','الأكسدة والاختزال وعدد التأكسد',10,'r1'],['2-1','العوامل المؤكسدة والمختزلة والكشف عنها',11,'r2'],['','مراجعة الوحدة 1',16,'rv1']]],
+ ['الوحدة 2: الكهرباء والكيمياء',19,[['1-2 إلى 3-2','الموصلات والإلكتروليتات',20,'x1'],['4-2 إلى 8-2','التحليل الكهربائي',23,'x2'],['9-2 إلى 11-2','الطلاء بالكهرباء والخلايا والنضائد',28,'x3'],['','مراجعة الوحدة 2',32,'rv2']]],
+ ['الوحدة 3: الطاقة من المواد الكيميائية',35,[['1-3، 3-3، 4-3','التفاعلات الطاردة والماصة للحرارة',35,'h1'],['2-3 و 5-3','تكوين وكسر الروابط وطاقة التنشيط',37,'h2']]],
+ ['الوحدة 4: سرعة التفاعل',49,[['1-4 و 2-4','قياس سرعة التفاعل',49,'s1'],['3-4 و 4-4','العوامل المؤثرة وعوامل الحفز والإنزيمات',54,'s2'],['','مراجعة الوحدتين 3–4',62,'rv3']]],
+ ['الوحدة 5: الأحماض والقواعد',65,[['1-5 إلى 3-5','الأحماض: الخواص والتفاعلات',65,'a1'],['4-5 و 5-5','الأدلة والدالة pH',70,'a2'],['6-5 إلى 8-5','القواعد والتعادل والمعايرة وأنواع الأكاسيد',73,'a3']]],
+ ['الوحدة 6: الأملاح',80,[['1-6، 2-6، 4-6','الذوبانية والترسيب الأيوني',80,'t1'],['3-6','تحضير الأملاح',83,'t2'],['','مراجعة الوحدتين 5–6',88,'rv4']]]];
+(function(){const t=$('toc');TOC.forEach(([n,pg,ls],i)=>{const r=ls.filter(l=>l[3]).length;const d=document.createElement('div');d.className='chap'+(i===0?' open':'');
+ d.innerHTML='<div><span class="cn">'+(i+1)+'</span><span style="flex:1">'+n+'</span><span class="tg '+(r?'r':'s')+'">'+(r?'جاهز ✅':'قريبًا')+'</span></div><div class="ls">'+ls.map(l=>'<div class="li'+(l[3]?' ready" data-go="'+l[3]:'')+'"><span>'+(l[3]?'✅':'⏳')+'</span><span>'+(l[0]?'<b>'+l[0]+'</b> ':'')+l[1]+'</span><span class="pg">ص '+l[2]+'</span></div>').join('')+'</div>';
+ d.firstChild.onclick=()=>d.classList.toggle('open');t.appendChild(d)});t.querySelectorAll('[data-go]').forEach(x=>x.onclick=()=>go(x.dataset.go))})();
+
+/* ================= أمثلة الكتاب وتمارينه (عام) ================= */
+const QB=s=>s.replace(/ (?=(?:أ|ب|ج|د|هـ|و)\) )/g,'<br>').replace(/ (?=\((?:i|ii|iii|iv|1|2|3)\) )/g,'<br>');
+const FX=s=>s.replace(/(−?\d+(?:\.\d+)?)\/(\d+)/g,'<span class="rt">$1/$2</span>');
+function addSecs(pid,exs,bks){const pg=$(pid);if(!pg)return;const first=[...pg.querySelectorAll('.box')].find(b=>(b.querySelector('h3')||{}).textContent&&b.querySelector('h3').textContent.trim().startsWith('✏️'));
+ if(exs&&exs.length){const b=document.createElement('div');b.className='box exb';b.innerHTML='<h3>📖 أمثلة الكتاب محلولة خطوة بخطوة</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">اضغط «الخطوة التالية» وحاول أن تتوقع الخطوة قبل أن تظهر 🤔</p>';exs.forEach(e=>b.appendChild(wex(e)));first?pg.insertBefore(b,first):pg.appendChild(b)}
+ if(bks&&bks.length){const b=document.createElement('div');b.className='box bkb';b.innerHTML='<h3>📝 تمارين الكتاب مع الحلول</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">✍️ حلّ في دفترك أولًا، ثم اضغط «تلميح» إذا احتجت، و«الحل» لتتأكد.</p>';bks.forEach(e=>b.appendChild(bkx(e)));pg.appendChild(b)}}
+function wex(e){const d=document.createElement('div');d.className='wx';let k=0;
+ d.innerHTML='<div class="wxq"><b style="color:var(--tl)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="wxs"></div><div class="btns"><button class="btn main" data-a="n">▶️ الخطوة التالية</button><button class="btn" data-a="all">📜 الحل كاملًا</button><button class="btn" data-a="r">↺ من جديد</button></div>';
+ const S=d.querySelector('.wxs'),nb=d.querySelector('[data-a=n]');const add=()=>{if(k>=e.s.length)return;const x=document.createElement('div');x.className='wst';x.innerHTML='<span class="sn">'+(k+1)+'</span>'+FX(e.s[k]);S.appendChild(x);k++;if(k>=e.s.length){nb.textContent='✅ انتهى الحل';nb.disabled=true;try{S.lastChild.classList.add('fin')}catch(_){}}};
+ nb.onclick=add;d.querySelector('[data-a=all]').onclick=()=>{while(k<e.s.length)add()};d.querySelector('[data-a=r]').onclick=()=>{k=0;S.innerHTML='';nb.disabled=false;nb.textContent='▶️ الخطوة التالية'};return d}
+function bkx(e){const d=document.createElement('div');d.className='bx';
+ d.innerHTML='<div class="wxq"><b style="color:var(--or)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="btns" style="justify-content:flex-start"><button class="btn" data-a="h">💡 تلميح</button><button class="btn ok" data-a="s">✅ الحل</button></div><div class="bh" style="display:none"></div><div class="bs" style="display:none"></div>';
+ const H=d.querySelector('.bh'),S=d.querySelector('.bs');H.innerHTML='💡 '+FX(e.h);S.innerHTML=e.s.map(x=>'<div class="wst">'+FX(x)+'</div>').join('')+(e.a?'<div class="ans">🎯 الجواب: '+FX(e.a)+'</div>':'');
+ d.querySelector('[data-a=h]').onclick=()=>{H.style.display=H.style.display==='none'?'block':'none'};d.querySelector('[data-a=s]').onclick=()=>{S.style.display=S.style.display==='none'?'block':'none'};return d}
+
+
+const nf=(v,d)=>{d=d==null?3:d;const r=Math.round(v*10**d)/10**d;return ms(r)};
+/* ================= فيزياء: الوحدة 1 ================= */
+const sci=(v,d)=>{d=d==null?2:d;if(v===0)return'0';const e=Math.floor(Math.log10(Math.abs(v)));if(e>=-2&&e<=4)return nf(v,Math.max(0,d+1-Math.max(0,e)));const m=v/10**e;return '<span dir="ltr" style="unicode-bidi:isolate">'+(+m.toFixed(d))+' × 10<sup>'+e+'</sup></span>'};
+function cv(id){const c=$(id),x=c.getContext('2d');return{c,x,W:c.width,H:c.height}}
+const loops={};function loop(id,fn){if(loops[id])return;let last=performance.now();const st=()=>{const now=performance.now(),dt=Math.min(0.05,(now-last)/1000);last=now;const pg=$(id).closest('.page');if(pg.classList.contains('on'))fn(dt);loops[id]=requestAnimationFrame(st)};loops[id]=requestAnimationFrame(st)}
+function glow(x,X,Y,r,col){const g=x.createRadialGradient(X,Y,0,X,Y,r);g.addColorStop(0,col);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.beginPath();x.arc(X,Y,r,0,7);x.fill()}
+function chg(x,X,Y,q,r){r=r||10;x.fillStyle=q>0?'#ff6b6b':'#5ab0ff';x.beginPath();x.arc(X,Y,r,0,7);x.fill();x.fillStyle='#fff';x.font='bold '+(r*1.6)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(q>0?'+':'−',X,Y+1)}
+function label(x,t,X,Y,col,sz){x.fillStyle=col||'#fff';x.font='bold '+(sz||16)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(t,X,Y)}
+
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){this.rect(x,y,w,h)};
+/* ================= علوم الصف السابع – الجزء الأول والثاني ================= */
+const C2=id=>{const c=$(id);return [c,c.getContext('2d')]};
+const FONT=(s,w)=>(w||800)+' '+s+'px Cairo, Tahoma, Arial';
+const shake=el=>{el.classList.remove('shk');void el.offsetWidth;el.classList.add('shk')};
+const cheer=()=>{try{window.FX&&FX.ok()}catch(e){}};
+const N=s=>'<bdi'+(/[\u0600-\u06FF]/.test(s)?'':' dir="ltr"')+' style="font-weight:800">'+s+'</bdi>';
+const fx=(x,k)=>String(+(+x).toFixed(k==null?2:k));
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){r=Math.min(r||0,Math.abs(w)/2,Math.abs(h)/2);this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();return this};
+/* لعبة التصنيف العامة: اختر عنصرًا ثم بيتًا */
+function sortGame(poolId,catId,outId,cats,items,done){const P=$(poolId),Cc=$(catId);let sel=null,left=items.length;P.innerHTML='';Cc.innerHTML='';
+ shuf(items).forEach(([lab,k,why])=>{const b=document.createElement('button');b.innerHTML=lab;b.dataset.k=k;b.dataset.why=why||'';b.onclick=()=>{P.querySelectorAll('button').forEach(y=>y.classList.remove('sel'));b.classList.add('sel');sel=b};P.appendChild(b)});
+ cats.forEach(([n,s,c],i)=>{const d=document.createElement('div');d.style.borderColor=c;d.innerHTML='<b style="color:'+c+'">'+n+'</b>'+(s?'<small>'+s+'</small>':'')+'<div class="pool" style="margin:4px 0"></div>';
+  d.onclick=()=>{if(!sel)return;if(+sel.dataset.k===i){sel.classList.remove('sel');sel.classList.add('ok');sel.onclick=null;d.querySelector('.pool').appendChild(sel);$(outId).innerHTML='✅ صحيح! '+sel.dataset.why;sel=null;left--;if(!left){$(outId).innerHTML='🎉 أحسنت! رتّبت كل شيء.';cheer();done&&done()}}else{shake(d);$(outId).innerHTML='🤔 حاول مرة أخرى'}};Cc.appendChild(d)});$(outId).textContent=''}
+/* اختبار فصل من 12 سؤالًا */
+function chapterTest(pfx,G){let ok=0,dn=0;const host=$(pfx+'Q');function upd(){$(pfx+'Sc').textContent=dn<G.length?'أجبت عن '+dn+' من '+G.length+' · صحيح: '+ok:(ok>=G.length-1?'🌟 ممتاز! ':ok>=G.length-3?'👍 جيد جدًا! ':'💪 راجع الدروس. ')+'النتيجة: '+ok+' من '+G.length}
+ function make(){host.innerHTML='';ok=0;dn=0;shuf(G).forEach((g,i)=>{const [q,o]=typeof g==='function'?g():g;mcq(host,(i+1)+') '+q,o,0,r=>{dn++;if(r)ok++;upd();if(dn===G.length&&ok>=G.length-3)cheer()})});upd()}
+ $(pfx+'New').onclick=make;make()}
+const bank=(arr)=>()=>{const [q,o,ex]=pick(arr);return{q,o,ex:ex||''}};
+const vis=el=>{const p=el.closest('.page');return p&&p.classList.contains('on')};
+function anim(id,fn){const [c,x]=C2(id);let t0=performance.now();(function f(t){if(vis(c))fn(x,c,(t-t0)/1000);requestAnimationFrame(f)})(t0);return[c,x]}
+const flipCards=(id,arr)=>{const C=$(id);C.innerHTML=arr.map(([ic,t,b])=>'<div class="card"><div class="fr"><span class="big">'+ic+'</span>'+t+'</div><div class="bk"><b>'+t+':</b> '+b+'</div></div>').join('');C.querySelectorAll('.card').forEach(c=>c.onclick=()=>c.classList.toggle('flip'))};
+const TF=(s,t)=>[s,t?['✔️ صح','❌ خطأ']:['❌ خطأ','✔️ صح']];
+function txt(x,s,X,Y,sz,col,al){x.font=FONT(sz||16);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='rtl';x.fillText(s,X,Y)}
+function steps(id,outId,newId,S){let k=0;function mk(){k=0;const L=$(id);L.innerHTML='';shuf(S.map((s,i)=>[s,i])).forEach(([[a,b],i])=>{const li=document.createElement('li');li.innerHTML='<b>?</b><span>'+a+'<br><small style="color:var(--soft)">'+b+'</small></span>';li.onclick=()=>{if(li.classList.contains('ok'))return;if(i===k){li.classList.add('ok');li.querySelector('b').textContent=k+1;k++;$(outId).innerHTML='✅ صحيح!';if(k===S.length){$(outId).innerHTML='🎉 رتّبت الرحلة كاملة!';cheer()}}else{shake(li);$(outId).innerHTML='🤔 ليس هذا… ما الذي جاء قبله؟'}};L.appendChild(li)});$(outId).textContent=''}$(newId).onclick=mk;mk()}
+function choiceQs(host,Q,scId){const H=$(host);let i=0,ok=0;function show(){if(i>=Q.length){H.innerHTML='<div class="big2">🎉 '+ok+' من '+Q.length+'</div><div class="btns"><button class="btn" id="'+host+'R">🔄 من جديد</button></div>';$(host+'R').onclick=()=>{i=0;ok=0;show()};if(ok>=Q.length-1)cheer();return}
+ const [s,o,why]=Q[i];const ord=shuf(o.map((t,j)=>j));H.innerHTML='<div class="scn">'+s+'</div><div class="opts2">'+ord.map(j=>'<button data-j="'+j+'">'+o[j]+'</button>').join('')+'</div><div class="fb" id="'+host+'F"></div>';
+ let dn=0;H.querySelectorAll('[data-j]').forEach(b=>b.onclick=()=>{if(dn)return;dn=1;const j=+b.dataset.j;b.classList.add(j===0?'ok':'no');if(j)H.querySelector('[data-j="0"]').classList.add('ok');else ok++;$(host+'F').innerHTML=(j?'💡 ':'✅ ')+why+'<br><button class="btn main" style="margin-top:6px" id="'+host+'N">التالي ⬅️</button>';$(host+'N').onclick=()=>{i++;show()};if(scId)$(scId).textContent='✔️ '+ok+' / '+Q.length})}show()}
+
+/* ================= كيمياء الثاني الثانوي – الوحدات 1-3 ================= */
+const Q_=s=>'<span class="eq">'+s+'</span>';
+const EMC=(x,e,X,Y,sz)=>{x.font=(sz||40)+'px "Segoe UI Emoji","Noto Color Emoji",sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(e,X,Y);x.textBaseline='alphabetic'};
+function chipsC(id,arr,on,cb){const H=$(id);H.innerHTML=arr.map((t,i)=>'<button data-i="'+i+'"'+(i===on?' class="on"':'')+'>'+t+'</button>').join('');H.querySelectorAll('button').forEach(b=>b.onclick=()=>{H.querySelectorAll('button').forEach(y=>y.classList.toggle('on',y===b));cb(+b.dataset.i)})}
+function tL(x,s,X,Y,sz,col,al){x.font=FONT(sz||14);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='ltr';x.fillText(s,X,Y);x.direction='rtl'}
+const rd=(v,k)=>+(+v).toFixed(k==null?2:k);
+function mixC(a,b,k){k=Math.max(0,Math.min(1,k));const h=s=>[1,3,5].map(i=>parseInt(s.slice(i,i+2),16)),A=h(a),B=h(b);return'rgb('+A.map((v,i)=>Math.round(v+(B[i]-v)*k)).join(',')+')'}
+function bkr(x,X,Y,w,h,col,lv){lv=lv==null?.75:lv;x.fillStyle=col;x.fillRect(X+2,Y+h*(1-lv),w-4,h*lv-2);x.strokeStyle='#495057';x.lineWidth=3;x.beginPath();x.moveTo(X,Y);x.lineTo(X,Y+h);x.lineTo(X+w,Y+h);x.lineTo(X+w,Y);x.stroke()}
+function tubeC(x,X,Y,w,h,col,lv){lv=lv==null?.6:lv;x.save();x.beginPath();x.moveTo(X,Y);x.lineTo(X,Y+h-w/2);x.arc(X+w/2,Y+h-w/2,w/2,Math.PI,0,true);x.lineTo(X+w,Y);x.clip();x.fillStyle=col;x.fillRect(X,Y+h*(1-lv),w,h);x.restore();x.strokeStyle='#495057';x.lineWidth=3;x.beginPath();x.moveTo(X,Y);x.lineTo(X,Y+h-w/2);x.arc(X+w/2,Y+h-w/2,w/2,Math.PI,0,true);x.lineTo(X+w,Y);x.stroke()}
+const OPSC=(ok,bad)=>[ok,...shuf(bad.filter((b,i,a)=>b!==ok&&a.indexOf(b)===i)).slice(0,3)];
+const bubs=(x,X,Y,w,h,n,t,col)=>{x.strokeStyle=col||'#868e96';x.lineWidth=1.5;for(let i=0;i<n;i++){const ph=((t*.45+i*.137)%1);x.beginPath();x.arc(X+((i*53)%w),Y+h-ph*h,2+(i%3),0,7);x.stroke()}};
+
+/* ---------- 1: الفلز في كبريتات النحاس ---------- */
+(function(){const M=[['Zn خارصين','#adb5bd',1,'Zn','#e7f5ff','كبريتات الخارصين عديمة اللون'],['Mg ماغنسيوم','#dee2e6',1.7,'Mg','#e7f5ff','كبريتات الماغنسيوم عديمة اللون'],['Fe حديد','#868e96',.7,'Fe','#d3f9d8','كبريتات الحديد (II) خضراء باهتة'],['Ag فضة','#f1f3f5',0,'Ag','#4dabf7','']];let k=0,t0=null,zoom=0;
+ chipsC('znK',M.map(m=>m[0]),0,i=>{k=i;t0=null;$('znOut').textContent=''});$('znGo').onclick=()=>{t0=performance.now()};$('znZ').onclick=()=>{zoom=!zoom;$('znZ').textContent=zoom?'🔭 المنظر العادي':'🔬 كبّر: شاهد الإلكترونات'};
+ anim('znC',(x,c,t)=>{const m=M[k],el=t0?(performance.now()-t0)/1000:0,dip=Math.min(1,el/1),p=t0?Math.min(1,Math.max(0,el-1)/9*m[2]):0;x.clearRect(0,0,640,340);
+  const sol=mixC('#4dabf7',m[4],p);bkr(x,80,90,220,220,sol,.72);tL(x,'CuSO₄(aq)',190,330,13,'#1864ab');
+  const sy=20+dip*110;x.fillStyle=m[1];x.strokeStyle='#495057';x.lineWidth=2;x.fillRect(170,sy,40,170);x.strokeRect(170,sy,40,170);tL(x,m[3],190,sy+24,16,'#222');
+  if(p>0){x.fillStyle='rgba(176,96,48,'+Math.min(.95,p*1.3)+')';const top=Math.max(sy,152);x.fillRect(168,top,44,sy+170-top);for(let i=0;i<p*14;i++){x.beginPath();x.arc(150+(i*37)%80,300-(i%4)*5,4,0,7);x.fill()}}
+  if(zoom){x.fillStyle='#fff';x.strokeStyle='#d9480f';x.lineWidth=3;x.beginPath();x.roundRect(340,30,280,280,16);x.fill();x.stroke();txt(x,'🔬 على سطح الفلز',480,54,14,'#d9480f');
+   for(let i=0;i<5;i++){const Y=90+i*42;x.fillStyle=m[1];x.strokeStyle='#495057';x.lineWidth=1.5;x.beginPath();x.arc(380,Y,17,0,7);x.fill();x.stroke();tL(x,m[3],380,Y+5,12);
+    if(m[2]){const ph=(t*.5+i*.2)%1;x.fillStyle='#fab005';[0,1].forEach(j=>{x.beginPath();x.arc(400+ph*150,Y-6+j*12,4,0,7);x.fill()});tL(x,'e⁻',400+ph*150,Y-12,10,'#e67700');
+     x.fillStyle=ph>.85?'#b06030':'#4dabf7';x.beginPath();x.arc(575,Y,17,0,7);x.fill();x.stroke();tL(x,ph>.85?'Cu':'Cu²⁺',575,Y+5,11,'#fff')}
+    else{x.fillStyle='#4dabf7';x.beginPath();x.arc(575,Y,17,0,7);x.fill();tL(x,'Cu²⁺',575,Y+5,11,'#fff')}}}
+  if(t0)$('znOut').innerHTML=m[2]?'🟤 يترسب <b>نحاس بني محمر</b> على الشريط، ويبهت اللون الأزرق ('+m[5]+').<br><span class="lbl" style="background:#e03131">أكسدة</span> '+Q_(m[3]+' → '+m[3]+'²⁺ + 2e⁻')+' (فقد إلكترونات)<br><span class="lbl" style="background:#1971c2">اختزال</span> '+Q_('Cu²⁺ + 2e⁻ → Cu')+' (اكتساب إلكترونات)<br>'+m[3]+' عامل <b>مختزل</b>، و Cu²⁺ عامل <b>مؤكسد</b>.'+(p>=1?' ✅':''):'😴 لا يحدث تفاعل: الفضة <b>أقل نشاطًا</b> من النحاس فلا تستطيع إزاحته من محلوله.'})})();
+sortGame('orP','orC','orOut',[['🔴 أكسدة','','#e03131'],['🔵 اختزال','','#1971c2']],[['اكتساب أكسجين',0,''],['فقد هيدروجين',0,''],['فقد إلكترونات',0,''],['زيادة عدد التأكسد',0,''],['فقد أكسجين',1,''],['اكتساب هيدروجين',1,''],['اكتساب إلكترونات',1,''],['نقص عدد التأكسد',1,''],[Q_('Mg → Mg²⁺ + 2e⁻'),0,'فقد إلكترونين'],[Q_('Cl₂ + 2e⁻ → 2Cl⁻'),1,'اكتساب إلكترونين'],[Q_('Fe²⁺ → Fe³⁺ + e⁻'),0,'من +2 إلى +3'],[Q_('CuO → Cu'),1,'فقد أكسجين']]);
+MCQP($('oxQ'),()=>{const [f,e,v]=pick([['H₂O','O',-2],['MgO','Mg',2],['Fe₂O₃','Fe',3],['FeO','Fe',2],['CuSO₄','S',6],['K₂Cr₂O₇','Cr',6],['SO₂','S',4],['H₂SO₄','S',6],['NH₃','N',-3],['CO₂','C',4],['CO','C',2],['NaCl','Cl',-1],['Cl₂','Cl',0],['FeCl₃','Fe',3],['HNO₃','N',5],['KI','I',-1],['I₂','I',0],['CuO','Cu',2],['H₂S','S',-2],['Mg','Mg',0]]);const s=n=>n>0?'+'+n:n<0?'−'+(-n):'0';
+ return{q:'ما عدد تأكسد '+Q_(e)+' في '+Q_(f)+'؟',o:OPSC(Q_(s(v)),[Q_(s(v+1)),Q_(s(v-1)),Q_(s(-v||2)),Q_(s(v+2))]),ex:'مجموع أعداد التأكسد = صفر (O = −2 ، H = +1)'}});
+MCQP($('qr1'),bank([['في التفاعل '+Q_('2Mg + O₂ → 2MgO')+' الماغنسيوم:',['تأكسد (اكتسب أكسجين)','اختُزل','لم يتغير','عامل مؤكسد']],['في التفاعل '+Q_('CuO + H₂ → Cu + H₂O')+' أكسيد النحاس:',['اختُزل (فقد أكسجين)','تأكسد','لم يتغير','عامل مختزل']],['الأكسدة بدلالة الإلكترونات هي:',['فقد إلكترونات','اكتساب إلكترونات','فقد بروتونات','اكتساب نيوترونات']],['في '+Q_('Zn + Cu²⁺ → Zn²⁺ + Cu')+' الذي اختُزل هو:',[Q_('Cu²⁺'),Q_('Zn'),Q_('Zn²⁺'),Q_('Cu')]],['تسمى التفاعلات التي تحدث فيها الأكسدة والاختزال معًا:',['تفاعلات الأخسدة','تفاعلات التعادل','تفاعلات الترسيب','تفاعلات التحلل']],['عدد تأكسد أي عنصر حر (غير متحد):',['صفر','+1','−2','يساوي رقم مجموعته']],['إذا تغير عدد تأكسد الحديد من +2 إلى +3 فقد:',['تأكسد','اختُزل','تعادل','ترسب']],['هل يمكن أن تحدث أكسدة دون اختزال؟',['لا، يحدثان معًا دائمًا','نعم دائمًا','نعم في المحاليل','نعم مع الفلزات']]]));
+
+/* ---------- 1: الكشف عن المؤكسد والمختزل ---------- */
+(function(){const S=[['ماء الكلور Cl₂','ox','#f4fce3'],['فوق أكسيد الهيدروجين H₂O₂','ox','#f8f9fa'],['كبريتات الحديد (II) FeSO₄','red','#d3f9d8'],['محلول ثاني أكسيد الكبريت SO₂','red','#f8f9fa'],['ماء مقطر','none','#f8f9fa']],R=[['💧 يوديد البوتاسيوم KI (عديم اللون)','KI'],['🟠 ثاني كرومات البوتاسيوم المحمّض K₂Cr₂O₇','CR']];let s=0,r=null,t0=0,mys=null;
+ chipsC('tsS',S.map(a=>a[0]),0,i=>{s=i;r=null;mys=null;$('tsQ').innerHTML='';$('tsOut').textContent=''});chipsC('tsR',R.map(a=>a[0]),-1,i=>{r=i;t0=performance.now()});
+ $('tsM').onclick=()=>{mys=rnd(0,4);s=mys;r=null;$('tsS').querySelectorAll('button').forEach(b=>b.classList.remove('on'));$('tsR').querySelectorAll('button').forEach(b=>b.classList.remove('on'));$('tsOut').innerHTML='🕵️ محلول مجهول <b>X</b>… اختبره بالكاشفين ثم أجب';$('tsQ').innerHTML='';
+  mcq($('tsQ'),'ما نوع المحلول المجهول X؟',['عامل مؤكسد','عامل مختزل','ليس مؤكسدًا ولا مختزلًا'],['ox','red','none'].indexOf(S[mys][1]),ok=>{$('tsOut').innerHTML=(ok?'🎉 صحيح! ':'💡 ')+'المحلول كان: <b>'+S[mys][0]+'</b>';if(ok)cheer()})};
+ anim('tsC',(x)=>{x.clearRect(0,0,640,320);const el=r===null?0:(performance.now()-t0)/1000,ty=S[s][1];let col=mys!==null?'#f8f9fa':S[s][2],msg='';
+  if(r!==null){const k=Math.min(1,Math.max(0,el-.8)/2.5);if(r===0){col=ty==='ox'?mixC('#f8f9fa','#8d5524',k):col;msg=ty==='ox'?'🟤 تحوّل من عديم اللون إلى <b>بني</b> (تكوّن اليود I₂) ⟸ المحلول <b>عامل مؤكسد</b>: أكسد أيونات اليوديد '+Q_('2I⁻ → I₂ + 2e⁻'):'⚪ بقي عديم اللون ⟸ ليس عاملًا مؤكسدًا'}
+   else{col=el<.8?col:ty==='red'?mixC('#fd7e14','#2f9e44',k):'#fd7e14';msg=ty==='red'?'🟢 تحوّل من البرتقالي إلى <b>الأخضر</b> ⟸ المحلول <b>عامل مختزل</b>: اختزل الكروم من +6 إلى +3':'🟠 بقي برتقاليًا ⟸ ليس عاملًا مختزلًا'}
+   if(el<.8){x.fillStyle=r===0?'#dee2e6':'#fd7e14';x.beginPath();x.arc(320,70+el/.8*100,7,0,7);x.fill()}x.fillStyle='#495057';x.fillRect(312,10,16,50);x.fillStyle=r===0?'#f1f3f5':'#fd7e14';x.fillRect(314,30,12,30);
+   if(el>3.3&&mys===null)$('tsOut').innerHTML=msg;else if(el>3.3)$('tsOut').innerHTML=msg.split('⟸')[0]+'… ماذا تستنتج؟'}
+  tubeC(x,280,90,80,210,col,.62);x.fillStyle='#8d6e63';x.fillRect(200,300,240,14);tL(x,mys!==null?'X':S[s][0].split(' ').pop(),320,270,16,'#222')})})();
+MCQP($('qr2'),bank([['للكشف عن عامل مؤكسد نضيف:',['محلول يوديد البوتاسيوم','محلول ثاني كرومات البوتاسيوم المحمّض','ماء الجير','دوّار الشمس']],['عند إضافة يوديد البوتاسيوم إلى عامل مؤكسد يتحول اللون إلى:',['بني','أخضر','أزرق','وردي']],['للكشف عن عامل مختزل نضيف:',['ثاني كرومات البوتاسيوم (VI) المحمّض','يوديد البوتاسيوم','نترات الفضة','الفينولفثالين']],['يتحول ثاني كرومات البوتاسيوم المحمّض مع العامل المختزل من:',['البرتقالي إلى الأخضر','الأخضر إلى البرتقالي','عديم اللون إلى البني','الأزرق إلى الأحمر']],['العامل المؤكسد أثناء التفاعل:',['يُختزل','يتأكسد','لا يتغير','يتبخر']],['العامل المختزل هو المادة التي:',['تفقد إلكترونات','تكتسب إلكترونات','تكتسب هيدروجين فقط','لا تتفاعل']],['في '+Q_('Cl₂ + 2KI → 2KCl + I₂')+' العامل المؤكسد هو:',[Q_('Cl₂'),Q_('KI'),Q_('KCl'),Q_('I₂')]],['في '+Q_('Zn + CuSO₄ → ZnSO₄ + Cu')+' العامل المختزل هو:',[Q_('Zn'),Q_('CuSO₄'),Q_('Cu'),Q_('ZnSO₄')]]]));
+chapterTest('rv1',[['الأكسدة هي:',['فقد إلكترونات','اكتساب إلكترونات','فقد أكسجين']],['الاختزال هو:',['فقد أكسجين','اكتساب أكسجين','فقد هيدروجين']],['عدد تأكسد O في معظم مركباته:',['−2','+2','0']],['عدد تأكسد S في SO₂:',['+4','+2','−2']],['عدد تأكسد Fe في Fe₂O₃:',['+3','+2','+6']],['في Zn + Cu²⁺ → Zn²⁺ + Cu، الخارصين:',['تأكسد','اختُزل','لم يتغير']],['العامل المؤكسد:',['يُختزل','يتأكسد','لا يتغير']],['كاشف العامل المؤكسد:',['يوديد البوتاسيوم','ثاني كرومات البوتاسيوم','ماء الجير']],['KI مع عامل مؤكسد يعطي لونًا:',['بنيًا','أخضر','أزرق']],['ثاني كرومات البوتاسيوم المحمّض مع عامل مختزل:',['برتقالي ← أخضر','أخضر ← برتقالي','يبقى برتقاليًا']],['الفضة في محلول كبريتات النحاس:',['لا تتفاعل','ترسّب النحاس','تذوب بسرعة']],['الأكسدة والاختزال:',['يحدثان معًا','يحدث أحدهما فقط','لا علاقة بينهما']]]);
+
+/* ---------- 2: الموصلات ---------- */
+(function(){const M=[['🟤 نحاس','c','فلز: إلكترونات حرة'],['✏️ جرافيت','c','لافلز لكنه موصل (إلكترونات حرة)'],['🪵 خشب','n','لا إلكترونات حرة ولا أيونات'],['🧴 بلاستيك','n','عازل'],['🟡 كبريت','n','لافلز عازل'],['🧂 NaCl صلب','n','الأيونات مقيدة في الشبكة البلورية'],['🧂💧 محلول NaCl','e','الأيونات حرة الحركة في المحلول'],['🔥 NaCl مصهور','e','الأيونات حرة الحركة في المصهور'],['🍬 محلول السكر','n','جزيئات لا أيونات'],['💧 ماء مقطر','n','تأينه ضعيف جدًا'],['⚗️ حمض HCl مخفف','e','أيونات H⁺ و Cl⁻'],['🍶 إيثانول','n','مركب تساهمي']];let k=0;const done={};
+ chipsC('cdK',M.map(m=>m[0]),0,i=>{k=i;upd()});
+ function upd(){const [n,ty,why]=M[k];done[k]=1;$('cdOut').innerHTML=ty==='c'?'💡 يضيء! <b>موصل</b>: '+why+'، ولا يتغير كيميائيًا.':ty==='e'?'💡 يضيء! <b>إلكتروليت</b>: '+why+'، ويتحلل عند مرور التيار.':'🌑 لا يضيء: <b>'+(n.includes('محلول')||n.includes('ماء')||n.includes('إيثانول')?'لاإلكتروليت':'غير موصل')+'</b> · '+why;
+  $('cdT').innerHTML='<table class="tbl"><tr><th>المادة</th><th>النتيجة</th></tr>'+Object.keys(done).map(i=>'<tr><td>'+M[i][0]+'</td><td>'+({c:'موصل ⚡',e:'إلكتروليت 🔋',n:'لا يوصل ✖'})[M[i][1]]+'</td></tr>').join('')+'</table>'}
+ anim('cdC',(x,c,t)=>{const [n,ty]=M[k],on=ty!=='n',liq=/محلول|ماء|حمض|إيثانول|مصهور/.test(n);x.clearRect(0,0,640,320);x.strokeStyle='#495057';x.lineWidth=4;x.beginPath();x.moveTo(250,250);x.lineTo(100,250);x.lineTo(100,60);x.lineTo(540,60);x.lineTo(540,250);x.lineTo(390,250);x.stroke();
+  x.fillStyle='#343a40';x.fillRect(84,130,32,60);tL(x,'+',100,125,16,'#e03131');tL(x,'−',100,208,18,'#1971c2');
+  if(on){const g=x.createRadialGradient(320,60,5,320,60,70);g.addColorStop(0,'rgba(255,224,102,.95)');g.addColorStop(1,'rgba(255,224,102,0)');x.fillStyle=g;x.beginPath();x.arc(320,60,70,0,7);x.fill()}x.fillStyle=on?'#ffe066':'#dee2e6';x.strokeStyle='#495057';x.lineWidth=3;x.beginPath();x.arc(320,60,24,0,7);x.fill();x.stroke();
+  if(liq){bkr(x,230,170,180,130,n.includes('مصهور')?'#ffd8a8':'#e7f5ff',.7);x.fillStyle='#343a40';x.fillRect(262,150,10,120);x.fillRect(368,150,10,120);x.strokeStyle='#495057';x.lineWidth=4;x.beginPath();x.moveTo(250,250);x.lineTo(250,150);x.lineTo(267,150);x.moveTo(390,250);x.lineTo(390,150);x.lineTo(373,150);x.stroke();
+   if(ty==='e')for(let i=0;i<10;i++){const pos=i%2,ph=(t*.25+i*.1)%1;x.fillStyle=pos?'#e03131':'#1971c2';x.beginPath();x.arc(pos?285+ph*75:355-ph*75,225+((i*17)%50),6,0,7);x.fill();tL(x,pos?'+':'−',pos?285+ph*75:355-ph*75,229+((i*17)%50),10,'#fff')}
+   if(n.includes('مصهور'))EMC(x,'🔥',320,312,22)}
+  else{x.fillStyle=ty==='c'?'#b06030':'#ced4da';if(n.includes('جرافيت'))x.fillStyle='#343a40';if(n.includes('كبريت'))x.fillStyle='#ffe066';x.fillRect(250,238,140,24);x.strokeRect(250,238,140,24);if(ty==='c')for(let i=0;i<6;i++){const ph=(t*.6+i/6)%1;x.fillStyle='#fab005';x.beginPath();x.arc(255+ph*130,250,4,0,7);x.fill()}}});upd()})();
+MCQP($('qx1'),bank([['توصل الفلزات الكهرباء بسبب حركة:',['الإلكترونات الحرة','الأيونات','البروتونات','الجزيئات']],['توصل الإلكتروليتات الكهرباء بسبب حركة:',['الأيونات','الإلكترونات الحرة','الذرات المتعادلة','النيوترونات']],['كلوريد الصوديوم الصلب لا يوصل الكهرباء لأن:',['أيوناته غير حرة الحركة','ليس فيه أيونات','فيه إلكترونات حرة','مركب تساهمي']],['أي مما يلي لاإلكتروليت؟',['محلول السكر','محلول ملح الطعام','حمض الكبريتيك المخفف','مصهور بروميد الرصاص']],['اللافلز الذي يوصل الكهرباء:',['الجرافيت','الكبريت','اليود','الفوسفور']],['عند مرور التيار في الإلكتروليت فإنه:',['يتحلل كيميائيًا','لا يتغير','يتجمد','يتبخر فقط']],['أي مما يلي إلكتروليت؟',['مصهور كلوريد الصوديوم','الإيثانول','الماء المقطر','الخشب']]]));
+
+/* ---------- 2: التحليل الكهربائي ---------- */
+(function(){const E=[{n:'مصهور بروميد الرصاص (II) PbBr₂',ions:['Pb²⁺','Br⁻'],cat:'<b>رصاص</b> مصهور رمادي فضي',an:'غاز <b>البروم</b> البني المحمر',ce:'Pb²⁺ + 2e⁻ → Pb',ae:'2Br⁻ → Br₂ + 2e⁻',col:'#ffd8a8',anC:'#a0522d',dep:'#868e96',heat:1,gA:1},
+  {n:'محلول كلوريد الصوديوم المركز NaCl',ions:['Na⁺','Cl⁻','H⁺','OH⁻'],cat:'غاز <b>الهيدروجين</b>',an:'غاز <b>الكلور</b> الأصفر المخضر',ce:'2H⁺ + 2e⁻ → H₂',ae:'2Cl⁻ → Cl₂ + 2e⁻',col:'#e7f5ff',anC:'#a9e34b',gC:1,gA:1,note:'H⁺ أسهل اختزالًا من Na⁺، و Cl⁻ يتفرغ لأن تركيزه عالٍ. يتبقى في المحلول <b>هيدروكسيد الصوديوم</b>.'},
+  {n:'محلول حمض الكبريتيك المخفف H₂SO₄',ions:['H⁺','SO₄²⁻','OH⁻'],cat:'غاز <b>الهيدروجين</b> (حجمان)',an:'غاز <b>الأكسجين</b> (حجم واحد)',ce:'2H⁺ + 2e⁻ → H₂',ae:'4OH⁻ → 2H₂O + O₂ + 4e⁻',col:'#e7f5ff',gC:2,gA:1,note:'في الحقيقة يتحلل <b>الماء</b>: حجم الهيدروجين ضعف حجم الأكسجين.'},
+  {n:'محلول كبريتات النحاس (II) · أقطاب كربون',ions:['Cu²⁺','SO₄²⁻','H⁺','OH⁻'],cat:'<b>نحاس</b> بني محمر يترسب',an:'غاز <b>الأكسجين</b>',ce:'Cu²⁺ + 2e⁻ → Cu',ae:'4OH⁻ → 2H₂O + O₂ + 4e⁻',col:'#4dabf7',fade:1,dep:'#b06030',gA:1,note:'يبهت اللون الأزرق لأن أيونات Cu²⁺ تُستهلك.'},
+  {n:'محلول كبريتات النحاس (II) · أقطاب نحاس',ions:['Cu²⁺','SO₄²⁻','H⁺','OH⁻'],cat:'<b>نحاس</b> يترسب (يزداد سمك الكاثود)',an:'الأنود النحاسي <b>يذوب</b> (يقل سمكه)',ce:'Cu²⁺ + 2e⁻ → Cu',ae:'Cu → Cu²⁺ + 2e⁻',col:'#4dabf7',dep:'#b06030',dis:1,cu:1,note:'يبقى اللون الأزرق ثابتًا. هكذا <b>يُنقّى النحاس</b> صناعيًا.'}];
+ let k=0,t0=null;$('elK').innerHTML=E.map((e,i)=>'<option value="'+i+'">'+e.n+'</option>').join('');$('elK').onchange=()=>{k=+$('elK').value;t0=null;$('elOut').textContent='';$('elGo').textContent='🔌 أغلق المفتاح'};
+ $('elGo').onclick=()=>{t0=t0?null:performance.now();$('elGo').textContent=t0?'⏹️ افتح المفتاح':'🔌 أغلق المفتاح'};
+ const P=[];for(let i=0;i<16;i++)P.push({x:190+((i*61)%260),y:210+((i*37)%110)});
+ anim('elC',(x,c,t)=>{const e=E[k],el=t0?(performance.now()-t0)/1000:0,p=Math.min(1,el/12);x.clearRect(0,0,640,380);
+  x.strokeStyle='#495057';x.lineWidth=4;x.beginPath();x.moveTo(230,150);x.lineTo(230,50);x.lineTo(290,50);x.moveTo(350,50);x.lineTo(410,50);x.lineTo(410,150);x.stroke();x.fillStyle='#343a40';x.fillRect(290,34,60,32);tL(x,'+',280,44,16,'#e03131');tL(x,'−',362,44,18,'#1971c2');
+  bkr(x,160,160,320,190,e.fade?mixC(e.col,'#e7f5ff',p):e.col,.8);if(e.heat)EMC(x,'🔥',320,366,22);
+  const elc=e.cu?'#b06030':'#343a40',aw=e.dis?16-p*8:16,cw=16+(e.dep&&!e.heat?p*10:0);x.fillStyle=elc;x.fillRect(230-aw/2,120,aw,200);x.fillStyle=e.dep&&!e.heat?mixC(elc==='#343a40'?'#343a40':'#b06030',e.dep,Math.min(1,p*2)):elc;x.fillRect(410-cw/2,120,cw,200);
+  txt(x,'الأنود (+)',230,108,13,'#e03131');txt(x,'الكاثود (−)',410,108,13,'#1971c2');
+  if(e.heat&&p>0){x.fillStyle=e.dep;x.beginPath();x.ellipse(410,342,10+p*40,4+p*6,0,0,7);x.fill()}
+  P.forEach((q,i)=>{const lab=e.ions[i%e.ions.length],pos=lab.includes('⁺');if(t0){q.x+=(pos?1:-1)*.5+(Math.random()-.5);if(pos&&q.x>398)q.x=250+Math.random()*100;if(!pos&&q.x<242)q.x=290+Math.random()*100}x.fillStyle=pos?'#e03131':'#1971c2';x.beginPath();x.arc(q.x,q.y,11,0,7);x.fill();tL(x,lab,q.x,q.y+4,8,'#fff')});
+  if(t0){if(e.gC)bubs(x,396,170,28,150,6*e.gC,t,'#495057');if(e.gA)bubs(x,216,170,28,150,6,t,e.anC||'#495057');
+   if(e.gC){x.fillStyle='rgba(134,142,150,.25)';x.fillRect(396,160-p*45*e.gC,28,p*45*e.gC);tL(x,rd(p*20*e.gC,0)+' cm³',452,150-p*20,12,'#495057')}
+   if(e.gA){x.fillStyle=e.anC?e.anC+'aa':'rgba(134,142,150,.25)';x.fillRect(216,160-p*45,28,p*45);tL(x,e.heat?'Br₂':rd(p*20,0)+' cm³',188,150-p*20,12,'#495057')}
+   $('elOut').innerHTML='<span class="lbl" style="background:#1971c2">الكاثود (اختزال)</span> '+e.cat+': '+Q_(e.ce)+'<br><span class="lbl" style="background:#e03131">الأنود (أكسدة)</span> '+e.an+': '+Q_(e.ae)+(e.note?'<br>💡 '+e.note:'')}
+  else txt(x,'الأيونات تتحرك عشوائيًا… أغلق المفتاح',320,24,14,'#495057')})})();
+choiceQs('elQ',[['التحليل الكهربائي لمصهور بروميد الرصاص (II): الناتج عند الكاثود هو',['الرصاص','البروم','الهيدروجين'],'الكاتيون Pb²⁺ ينجذب للكاثود ويُختزل.'],['التحليل الكهربائي لمحلول كلوريد الصوديوم المركز: الناتج عند الأنود هو',['الكلور','الأكسجين','الصوديوم'],'تركيز Cl⁻ عالٍ فيتفرغ بدل OH⁻.'],['التحليل الكهربائي لمحلول كلوريد الصوديوم: الناتج عند الكاثود هو',['الهيدروجين','الصوديوم','الكلور'],'الصوديوم نشط جدًا، فيتفرغ H⁺ بدلًا منه.'],['التحليل الكهربائي لحمض الكبريتيك المخفف: نسبة حجم الهيدروجين إلى الأكسجين',['2 : 1','1 : 2','1 : 1'],'كما في تركيب الماء H₂O.'],['التحليل الكهربائي لكبريتات النحاس بأقطاب نحاس: الأنود',['يذوب ويقل وزنه','يزداد وزنه','يتصاعد عنده أكسجين'],'Cu → Cu²⁺ + 2e⁻'],['لماذا لا يتحلل بروميد الرصاص الصلب كهربائيًا؟',['لأن أيوناته غير حرة الحركة','لأنه تساهمي','لأنه فلز'],'يجب صهره أولًا.']]);
+MCQP($('qx2'),bank([['الكاثود هو القطب:',['السالب، وتحدث عنده عملية اختزال','الموجب، وتحدث عنده أكسدة','السالب، وتحدث عنده أكسدة','الموجب، وتحدث عنده اختزال']],['تتجه الكاتيونات (الأيونات الموجبة) نحو:',['الكاثود','الأنود','قاع الإناء','لا تتحرك']],['عند الأنود تحدث عملية:',['أكسدة (فقد إلكترونات)','اختزال','تعادل','ترسيب دائمًا']],['المحلول المتبقي بعد التحليل الكهربائي للماء المالح المركز:',['هيدروكسيد الصوديوم','حمض الهيدروكلوريك','كلوريد الصوديوم فقط','ماء نقي']],['من العوامل المؤثرة في نواتج التحليل الكهربائي:',['تركيز الإلكتروليت ونوع الأقطاب','لون الإناء','حجم البطارية فقط','شكل الأقطاب فقط']],['يُستخدم التحليل الكهربائي صناعيًا في:',['استخلاص الألومنيوم وتنقية النحاس','صنع الخبز','تقطير النفط','صهر الحديد في الفرن العالي']],[Q_('2Br⁻ → Br₂ + 2e⁻')+' تحدث عند:',['الأنود','الكاثود','القطبين معًا','خارج الخلية']]]));
+
+/* ---------- 2: الطلاء والخلايا ---------- */
+(function(){const M=[['🥈 فضة','#f1f3f5','نترات الفضة','Ag⁺ + e⁻ → Ag'],['🥇 ذهب','#fcc419','محلول ملح الذهب','Au³⁺ + 3e⁻ → Au'],['🟤 نحاس','#b06030','كبريتات النحاس (II)','Cu²⁺ + 2e⁻ → Cu'],['⚙️ نيكل','#ced4da','كبريتات النيكل','Ni²⁺ + 2e⁻ → Ni']];let m=0,ok=1,t0=null,base=0;
+ chipsC('plM',M.map(a=>a[0]),0,i=>{m=i;t0=null;base=0});chipsC('plE',['الملعقة = الكاثود (−)','الملعقة = الأنود (+)'],0,i=>{ok=i===0;t0=null;base=0});$('plGo').onclick=()=>{t0=performance.now()};$('plR').onclick=()=>{t0=null;base=0;$('plOut').textContent=''};
+ anim('plC',(x,c,t)=>{const p=Math.min(1,base+(t0?(performance.now()-t0)/1000/7:0)),[n,col,sol,eq]=M[m];x.clearRect(0,0,640,320);bkr(x,140,110,360,190,m===2?'#74c0fc':'#e7f5ff',.8);
+  x.strokeStyle='#495057';x.lineWidth=4;x.beginPath();x.moveTo(230,120);x.lineTo(230,40);x.lineTo(290,40);x.moveTo(350,40);x.lineTo(410,40);x.lineTo(410,120);x.stroke();x.fillStyle='#343a40';x.fillRect(290,24,60,32);tL(x,'+',280,34,16,'#e03131');tL(x,'−',362,34,18,'#1971c2');
+  const sx=ok?410:230,bx=ok?230:410,sc=ok?mixC('#868e96',col==='#f1f3f5'?'#ffffff':col,p):'#868e96',thin=ok?1:1-p*.5;
+  x.fillStyle=sc;x.strokeStyle='#495057';x.lineWidth=2;x.fillRect(sx-5*thin,100,10*thin,110);x.beginPath();x.ellipse(sx,240,26*thin,38*thin,0,0,7);x.fill();x.stroke();if(ok&&p>.5){x.fillStyle='rgba(255,255,255,.7)';x.beginPath();x.ellipse(sx-8,226,5,12,.4,0,7);x.fill()}
+  const bw=ok?30*(1-p*.5):30+p*10;x.fillStyle=col;x.fillRect(bx-bw/2,100,bw,180);x.strokeRect(bx-bw/2,100,bw,180);txt(x,ok?'قضيب '+n.split(' ')[1]+' (أنود)':'قضيب (كاثود)',bx,92,12,'#495057');txt(x,'🥄 الملعقة',sx,300,12,'#495057');
+  if(t0&&p<1)for(let i=0;i<8;i++){const ph=(t*.3+i/8)%1;x.fillStyle='#e03131';x.beginPath();x.arc(ok?250+ph*135:390-ph*135,180+((i*23)%90),5,0,7);x.fill()}
+  if(t0)$('plOut').innerHTML=ok?(p<1?'⏳ جارٍ الطلاء… '+Math.round(p*100)+'%':'✨ <b>ملعقة مطلية بـ'+n.split(' ')[1]+'!</b> ')+'<br>عند الملعقة (الكاثود): '+Q_(eq)+' · القضيب (الأنود) يذوب ليعوّض الأيونات · الإلكتروليت: '+sol:'❌ خطأ! جعلت الملعقة أنودًا فبدأت <b>تتآكل</b> بدل أن تُطلى. الجسم المراد طلاؤه يجب أن يكون <b>الكاثود</b>.';if(t0&&p>=1&&ok&&!base){base=1;cheer()}})})();
+(function(){const M=[['Mg ماغنسيوم',-2.37,'#dee2e6'],['Zn خارصين',-.76,'#adb5bd'],['Fe حديد',-.44,'#868e96'],['Cu نحاس',.34,'#b06030'],['Ag فضة',.8,'#f1f3f5']];['clA','clB'].forEach((id,j)=>{$(id).innerHTML=M.map((m,i)=>'<option value="'+i+'">'+m[0]+'</option>').join('');$(id).value=j?3:1;$(id).onchange=upd});
+ function upd(){const a=M[+$('clA').value],b=M[+$('clB').value],V=Math.abs(a[1]-b[1]);$('clOut').innerHTML=V===0?'😴 الفلزان متماثلان ⟸ الجهد = صفر. نحتاج فلزين <b>مختلفين</b>.':'🔋 الجهد ≈ <b>'+rd(V,2)+' V</b> · القطب <b>السالب</b>: '+(a[1]<b[1]?a:b)[0]+' (الأنشط: يتأكسد ويعطي الإلكترونات) · القطب الموجب: '+(a[1]<b[1]?b:a)[0]+'<br>💡 كلما تباعد الفلزان في سلسلة النشاط زاد الجهد.'}
+ anim('clC',(x,c,t)=>{const a=M[+$('clA').value],b=M[+$('clB').value],V=Math.abs(a[1]-b[1]),dir=a[1]<b[1]?1:-1;x.clearRect(0,0,640,320);bkr(x,170,140,300,160,'#fff9db',.8);txt(x,'🍋 إلكتروليت (عصير ليمون / حمض مخفف)',320,316,12,'#495057');
+  [[240,a],[400,b]].forEach(([X,m])=>{x.fillStyle=m[2];x.strokeStyle='#495057';x.lineWidth=2;x.fillRect(X-12,100,24,180);x.strokeRect(X-12,100,24,180);tL(x,m[0].split(' ')[0],X,125,14)});
+  x.strokeStyle='#495057';x.lineWidth=3;x.beginPath();x.moveTo(240,100);x.lineTo(240,50);x.lineTo(285,50);x.moveTo(355,50);x.lineTo(400,50);x.lineTo(400,100);x.stroke();x.fillStyle='#fff';x.beginPath();x.arc(320,50,36,0,7);x.fill();x.stroke();tL(x,rd(V,2)+' V',320,56,15,'#d9480f');
+  if(V>0)for(let i=0;i<4;i++){const ph=(t*.5+i/4)%1,u=dir>0?ph:1-ph;const X=u<.25?240:u>.75?400:240+(u-.25)*320,Y=u<.25?100-u*200:u>.75?50+(u-.75)*200:50;if(Math.abs(X-320)<36&&Y===50)continue;x.fillStyle='#fab005';x.beginPath();x.arc(X,Y,5,0,7);x.fill()}
+  if(V>0)txt(x,'e⁻ ⟵ اتجاه الإلكترونات من الأنشط إلى الأقل نشاطًا',320,14,12,'#e67700')});upd()})();
+MCQP($('qx3'),bank([['عند طلاء ملعقة حديدية بالفضة تكون الملعقة:',['الكاثود','الأنود','الإلكتروليت','خارج الدائرة']],['عند الطلاء بالفضة يكون الأنود مصنوعًا من:',['الفضة','الحديد','الكربون','النحاس']],['الإلكتروليت المناسب للطلاء بالنحاس:',['محلول كبريتات النحاس (II)','ماء مقطر','محلول السكر','زيت']],['في الخلية البسيطة، القطب السالب هو الفلز:',['الأكثر نشاطًا','الأقل نشاطًا','الأثقل','الأغلى']],['تحوّل الخلية الكهروكيميائية الطاقة:',['الكيميائية إلى كهربائية','الكهربائية إلى كيميائية','الحرارية إلى ضوئية','الحركية إلى كيميائية']],['في الخلية الجافة، القطب السالب هو:',['علبة الخارصين','قضيب الكربون','العجينة','الغطاء البلاستيكي']],['أي زوج يعطي أكبر جهد؟',['ماغنسيوم ونحاس','خارصين وحديد','حديد ونحاس','نحاس ونحاس']],['من فوائد الطلاء بالكهرباء:',['الحماية من التآكل وتحسين المظهر','زيادة الوزن فقط','جعل الجسم عازلًا','تغيير شكل الجسم']]]));
+chapterTest('rv2',[['الفلزات توصل الكهرباء بحركة:',['الإلكترونات','الأيونات','الذرات']],['الإلكتروليتات توصل بحركة:',['الأيونات','الإلكترونات الحرة','الجزيئات']],['NaCl الصلب:',['لا يوصل','يوصل','يوصل جزئيًا']],['الكاثود هو القطب:',['السالب','الموجب','المتعادل']],['عند الأنود تحدث:',['أكسدة','اختزال','تعادل']],['ناتج الكاثود في مصهور PbBr₂:',['الرصاص','البروم','الهيدروجين']],['ناتج الأنود في محلول NaCl المركز:',['الكلور','الأكسجين','الصوديوم']],['تحليل حمض الكبريتيك المخفف يعطي H₂ : O₂ بنسبة:',['2 : 1','1 : 1','1 : 2']],['في الطلاء، الجسم المراد طلاؤه هو:',['الكاثود','الأنود','الإلكتروليت']],['في الخلية البسيطة القطب السالب:',['الفلز الأنشط','الفلز الأقل نشاطًا','الكربون دائمًا']],['تنقية النحاس: الأنود هو',['النحاس غير النقي','النحاس النقي','الكربون']],['الخلية الجافة تحوّل الطاقة الكيميائية إلى:',['كهربائية','حرارية فقط','ضوئية فقط']]]);
+
+/* ---------- 3: المسعر ---------- */
+(function(){const R=[['حمض HCl + هيدروكسيد الصوديوم NaOH (تعادل)',7,'HCl + NaOH → NaCl + H₂O'],['شريط ماغنسيوم + حمض HCl',22,'Mg + 2HCl → MgCl₂ + H₂'],['أكسيد الكالسيوم (الجير الحي) + ماء',30,'CaO + H₂O → Ca(OH)₂'],['ذوبان نترات الأمونيوم في الماء (الكمادة الباردة)',-9,'NH₄NO₃(s) → NH₄⁺(aq) + NO₃⁻(aq)'],['بيكربونات الصوديوم + حمض الستريك',-7,'NaHCO₃ + حمض → ملح + H₂O + CO₂'],['ذوبان كلوريد الأمونيوم في الماء',-5,'NH₄Cl(s) → NH₄⁺(aq) + Cl⁻(aq)']];let k=0,t0=null;
+ $('caK').innerHTML=R.map((r,i)=>'<option value="'+i+'">'+r[0]+'</option>').join('');$('caK').onchange=()=>{k=+$('caK').value;t0=null;$('caOut').textContent=''};$('caGo').onclick=()=>{t0=performance.now()};
+ anim('caC',(x,c,t)=>{const [n,dT,eq]=R[k],p=t0?Math.min(1,(performance.now()-t0)/1000/4):0,T=25+dT*p,ex=dT>0;x.clearRect(0,0,640,340);
+  x.fillStyle='#f8f9fa';x.strokeStyle='#adb5bd';x.lineWidth=4;x.beginPath();x.moveTo(60,130);x.lineTo(80,310);x.lineTo(220,310);x.lineTo(240,130);x.closePath();x.fill();x.stroke();x.fillStyle=t0?mixC('#e7f5ff',ex?'#ffc9c9':'#a5d8ff',p):'#e7f5ff';x.beginPath();x.moveTo(72,190);x.lineTo(84,304);x.lineTo(216,304);x.lineTo(228,190);x.closePath();x.fill();
+  if(t0&&p<1)bubs(x,90,200,120,100,10,t);x.fillStyle='#fff';x.strokeStyle='#495057';x.lineWidth=2;x.fillRect(160,20,14,250);x.strokeRect(160,20,14,250);const mh=(T-5)/55*230;x.fillStyle='#e03131';x.fillRect(163,268-mh,8,mh);x.beginPath();x.arc(167,274,10,0,7);x.fill();tL(x,rd(T,1)+' °C',215,60,18,ex?'#e03131':'#1971c2');
+  const X0=330,W=280,rl=ex?110:230,pl=ex?230:110;x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(X0,30);x.lineTo(X0,300);x.lineTo(X0+W,300);x.stroke();txt(x,'الطاقة',X0+24,24,12,'#495057');
+  x.lineWidth=4;x.strokeStyle='#495057';x.beginPath();x.moveTo(X0+20,rl);x.lineTo(X0+110,rl);x.stroke();txt(x,'المتفاعلات',X0+65,rl-8,13);if(p>0){x.globalAlpha=p;x.beginPath();x.moveTo(X0+170,pl);x.lineTo(X0+260,pl);x.stroke();txt(x,'النواتج',X0+215,pl-8,13);
+   x.strokeStyle=ex?'#e03131':'#1971c2';x.lineWidth=3;x.beginPath();x.moveTo(X0+140,rl);x.lineTo(X0+140,pl);x.stroke();x.fillStyle=x.strokeStyle;x.beginPath();x.moveTo(X0+140,pl);x.lineTo(X0+132,pl+(ex?-14:14));x.lineTo(X0+148,pl+(ex?-14:14));x.fill();tL(x,'ΔH '+(ex?'< 0':'> 0'),X0+140,170,14,x.fillStyle);x.globalAlpha=1}
+  if(t0)$('caOut').innerHTML=(ex?'🔥 ارتفعت الحرارة '+dT+'°: تفاعل <b>طارد للحرارة</b>، انتقلت الطاقة من المواد إلى المحيط، و ΔH <b>سالبة</b>.':'❄️ انخفضت الحرارة '+(-dT)+'°: تغيّر <b>ماص للحرارة</b>، سحب الطاقة من المحيط، و ΔH <b>موجبة</b>.')+'<br>'+Q_(eq)})})();
+sortGame('exP','exC','exOut',[['🔥 طارد للحرارة','ΔH سالبة','#e03131'],['❄️ ماص للحرارة','ΔH موجبة','#1971c2']],[['احتراق الغاز الطبيعي',0,''],['تعادل حمض وقلوي',0,''],['التنفس الخلوي',0,''],['صدأ الحديد',0,''],['إطفاء الجير الحي بالماء',0,''],['البناء الضوئي',1,'يمتص طاقة الضوء'],['التحلل الحراري لكربونات الكالسيوم',1,'يحتاج تسخينًا مستمرًا'],['ذوبان نترات الأمونيوم',1,'الكمادة الباردة'],['التحليل الكهربائي للماء',1,'يمتص طاقة كهربائية']]);
+MCQP($('qh1'),bank([['في التفاعل الطارد للحرارة، درجة حرارة المحيط:',['ترتفع','تنخفض','لا تتغير','تصبح صفرًا']],['إشارة ΔH للتفاعل الماص للحرارة:',['موجبة','سالبة','صفر','لا إشارة لها']],['في التفاعل الطارد، طاقة النواتج مقارنة بالمتفاعلات:',['أقل','أكبر','مساوية','غير محددة']],['أي مما يلي تفاعل ماص للحرارة؟',['البناء الضوئي','الاحتراق','التعادل','التنفس']],['الكمادة الباردة الفورية تعتمد على:',['ذوبان ماص للحرارة مثل نترات الأمونيوم','احتراق','تعادل','تفاعل طارد']],['احتراق الوقود تفاعل:',['طارد للحرارة','ماص للحرارة','متعادل حراريًا','ماص ثم طارد']],['ΔH = −890 kJ تعني أن التفاعل:',['يطلق 890 kJ','يمتص 890 kJ','لا يحدث','متوازن']]]));
+
+/* ---------- 3: الروابط وطاقة التنشيط ---------- */
+(function(){const R=[{n:'H₂ + Cl₂ → 2HCl',at:['H','H','Cl','Cl'],rg:[[0,1],[2,3]],pg:[[0,2],[1,3]],br:[['H–H',436,1],['Cl–Cl',242,1]],fm:[['H–Cl',431,2]]},{n:'2H₂ + O₂ → 2H₂O',at:['H','H','H','H','O','O'],rg:[[0,1],[2,3],[4,5]],pg:[[0,4,1],[2,5,3]],br:[['H–H',436,2],['O=O',498,1]],fm:[['O–H',464,4]]},
+  {n:'N₂ + 3H₂ → 2NH₃',at:['N','N','H','H','H','H','H','H'],rg:[[0,1],[2,3],[4,5],[6,7]],pg:[[2,0,3,4],[5,1,6,7]],br:[['N≡N',945,1],['H–H',436,3]],fm:[['N–H',391,6]]},{n:'CH₄ + 2O₂ → CO₂ + 2H₂O',at:['C','H','H','H','H','O','O','O','O'],rg:[[1,2,0,3,4],[5,6],[7,8]],pg:[[5,0,6],[1,7,2],[3,8,4]],br:[['C–H',413,4],['O=O',498,2]],fm:[['C=O',805,2],['O–H',464,4]]}];
+ const CL={H:'#f8f9fa',Cl:'#8ce99a',O:'#ff8787',N:'#74c0fc',C:'#495057'};let k=0,st=0,t0=0;$('bdK').innerHTML=R.map((r,i)=>'<option value="'+i+'">'+r.n+'</option>').join('');
+ const sum=a=>a.reduce((s,b)=>s+b[1]*b[2],0);function pos(r,s){const n=r.at.length,P=[];if(s===1){r.at.forEach((a,i)=>P[i]=[60+i*(520/(n-1||1)),90]);return P}const G=s===0?r.rg:r.pg,gw=560/G.length;G.forEach((g,gi)=>g.forEach((ai,j)=>P[ai]=[40+gw*gi+gw/2+(j-(g.length-1)/2)*30,90]));return P}
+ function set(s){st=s;t0=performance.now();$('bdB').disabled=s!==0;$('bdF').disabled=s!==1;const r=R[k],a=sum(r.br),b=sum(r.fm);
+  $('bdOut').innerHTML=s===0?'المتفاعلات: '+Q_(r.n.split('→')[0])+' · اضغط «اكسر الروابط»':s===1?'✂️ كسر الروابط <b>يمتص</b> طاقة: '+r.br.map(v=>v[2]+' × '+v[0]+' ('+v[1]+')').join(' + ')+' = <b>'+a+' kJ</b>':'🔗 تكوين الروابط <b>يطلق</b> طاقة: '+r.fm.map(v=>v[2]+' × '+v[0]+' ('+v[1]+')').join(' + ')+' = <b>'+b+' kJ</b><br>'+Q_('ΔH = '+a+' − '+b+' = '+(a-b<0?'−'+(b-a):'+'+(a-b))+' kJ')+' ⟸ '+(a<b?'🔥 <b>طارد للحرارة</b> (المنطلق أكبر من الممتص)':'❄️ ماص للحرارة');if(s===2)cheer()}
+ $('bdK').onchange=()=>{k=+$('bdK').value;set(0)};$('bdB').onclick=()=>set(1);$('bdF').onclick=()=>set(2);$('bdR').onclick=()=>set(0);
+ anim('bdC',(x)=>{const r=R[k],p=Math.min(1,(performance.now()-t0)/700),A=pos(r,Math.max(0,st-1)),B=pos(r,st),a=sum(r.br),b=sum(r.fm),mx=Math.max(a,b);x.clearRect(0,0,640,320);
+  r.at.forEach((s,i)=>{const X=st?A[i][0]+(B[i][0]-A[i][0])*p:B[i][0],Y=90;x.fillStyle=CL[s];x.strokeStyle='#495057';x.lineWidth=2;x.beginPath();x.arc(X,Y,s==='H'?13:18,0,7);x.fill();x.stroke();tL(x,s,X,Y+5,12,s==='C'?'#fff':'#222')});
+  txt(x,st===0?'المتفاعلات':st===1?'ذرات منفصلة':'النواتج',320,40,15,'#495057');
+  const base=290,H=140;x.fillStyle='#e03131';const h1=st>=1?(st===1?p:1)*a/mx*H:0;x.fillRect(200,base-h1,80,h1);x.fillStyle='#1971c2';const h2=st>=2?p*b/mx*H:0;x.fillRect(360,base-h2,80,h2);txt(x,'طاقة ممتصة',240,310,12,'#e03131');txt(x,'طاقة منطلقة',400,310,12,'#1971c2');if(h1>12)tL(x,a+' kJ',240,base-h1-6,13,'#e03131');if(h2>12)tL(x,b+' kJ',400,base-h2-6,13,'#1971c2')});set(0)})();
+(function(){let K=0,ball=null;const cat=()=>K>=2,exo=()=>K%2===0;chipsC('prK',['🔥 طارد','❄️ ماص','🔥 طارد + حفّاز','❄️ ماص + حفّاز'],0,i=>{K=i;ball=null;$('prOut').textContent=''});
+ $('prGo').onclick=()=>{ball={t0:performance.now(),E:rnd(25,105)}};
+ anim('prC',(x)=>{const Ea=+$('prE').value,ea=cat()?Ea*.5:Ea;$('prEv').textContent=Ea+' kJ';x.clearRect(0,0,640,320);const X0=60,W=540,r=exo()?170:240,pr=exo()?250:150,pk=r-ea*1.4;
+  const Y=u=>{if(u<.25)return r;if(u>.75)return pr;const v=(u-.25)/.5;return v<.5?r+(pk-r)*Math.sin(v*Math.PI):pr+(pk-pr)*Math.sin(v*Math.PI)};
+  x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(X0,20);x.lineTo(X0,300);x.lineTo(X0+W,300);x.stroke();txt(x,'الطاقة',X0+24,18,12,'#495057');txt(x,'سير التفاعل ⟵',X0+W-50,316,12,'#495057');
+  if(cat()){x.setLineDash([6,5]);x.strokeStyle='#adb5bd';x.lineWidth=2;x.beginPath();for(let u=0;u<=1;u+=.01){const v=(u-.25)/.5,pk0=r-Ea*1.4,y=u<.25?r:u>.75?pr:v<.5?r+(pk0-r)*Math.sin(v*Math.PI):pr+(pk0-pr)*Math.sin(v*Math.PI);x.lineTo(X0+u*W,y)}x.stroke();x.setLineDash([])}
+  x.strokeStyle=cat()?'#2f9e44':'#d9480f';x.lineWidth=4;x.beginPath();for(let u=0;u<=1;u+=.01)x.lineTo(X0+u*W,Y(u));x.stroke();txt(x,'المتفاعلات',X0+70,r-10,13);txt(x,'النواتج',X0+W-60,pr-10,13);
+  x.strokeStyle='#7048e8';x.lineWidth=2;x.beginPath();x.moveTo(X0+W/2,r);x.lineTo(X0+W/2,pk);x.stroke();txt(x,'طاقة التنشيط'+(cat()?' (أقل مع الحفّاز)':''),X0+W/2+90,(r+pk)/2,12,'#7048e8');
+  if(ball){const el=(performance.now()-ball.t0)/1000,pass=ball.E>=ea;let u=Math.min(1,el/3);if(!pass){const top=.25+.2*Math.min(1,ball.E/ea);u=el<1.5?.05+(top-.05)*el/1.5:Math.max(.05,top-(top-.05)*(el-1.5)/1.5)}x.fillStyle='#fab005';x.beginPath();x.arc(X0+u*W,Y(u)-12,11,0,7);x.fill();
+   if(el>3){$('prOut').innerHTML=pass?'✅ طاقة التصادم '+ball.E+' kJ ≥ طاقة التنشيط '+rd(ea,0)+' kJ ⟸ <b>تصادم فعّال</b>، تكوّنت النواتج!':'↩️ طاقة التصادم '+ball.E+' kJ أقل من طاقة التنشيط '+rd(ea,0)+' kJ ⟸ ترتد الجسيمات دون تفاعل. '+(cat()?'':'جرّب العامل الحفّاز!');if(pass&&!ball.d){ball.d=1;cheer()}}}})})();
+MCQP($('qh2'),()=>{const t=rnd(0,1);if(t===0){const [n,a,b]=pick([['H₂ + Cl₂ → 2HCl',678,862],['2H₂ + O₂ → 2H₂O',1370,1856],['N₂ + 3H₂ → 2NH₃',2253,2346]]);return{q:'في التفاعل '+Q_(n)+': طاقة كسر الروابط '+a+' kJ وطاقة تكوين الروابط '+b+' kJ. قيمة ΔH:',o:OPSC(Q_('−'+(b-a)+' kJ'),[Q_('+'+(b-a)+' kJ'),Q_('−'+(a+b)+' kJ'),Q_('+'+(a+b)+' kJ')]),ex:'ΔH = الممتص − المنطلق'}}
+ return bank([['كسر الروابط الكيميائية عملية:',['ماصة للطاقة','طاردة للطاقة','لا تحتاج طاقة','تطلق ضوءًا']],['تكوين الروابط الكيميائية عملية:',['طاردة للطاقة','ماصة للطاقة','متعادلة','ماصة دائمًا']],['يكون التفاعل طاردًا للحرارة إذا كانت الطاقة المنطلقة من تكوين الروابط:',['أكبر من الممتصة في الكسر','أقل من الممتصة','مساوية لها','صفرًا']],['طاقة التنشيط هي:',['أقل طاقة لازمة لبدء التفاعل','الطاقة الناتجة من التفاعل','طاقة النواتج','الفرق بين المتفاعلات والنواتج']],['العامل الحفّاز:',['يخفض طاقة التنشيط','يرفع طاقة التنشيط','يغيّر ΔH','يُستهلك في التفاعل']],['من مزايا الهيدروجين كوقود:',['ناتج احتراقه ماء فقط','ينتج ثاني أكسيد الكربون','ينتج سناجًا','غير قابل للاشتعال']]])()});
+
+/* ================= كيمياء الثاني الثانوي – الوحدات 4-6 ================= */
+/* ---------- 4: الرخام والحمض ---------- */
+(function(){const SZ=[['🪨 قطع كبيرة',1],['🪨 قطع صغيرة',2.2],['⚪ مسحوق',5]],COL=['#1971c2','#e03131','#2f9e44','#7048e8'];let sz=0,runs=[],cur=null;chipsC('rtS',SZ.map(s=>s[0]),0,i=>{sz=i});
+ const V=(k,t)=>60*(1-Math.exp(-k*t));
+ $('rtGo').onclick=()=>{const c=+$('rtC0').value,T=+$('rtT').value,k=.035*SZ[sz][1]*c*Math.pow(2,(T-20)/10);if(runs.length>=4)runs.shift();cur={k,lab:SZ[sz][0].split(' ').slice(1).join(' ')+' · '+c+' M · '+T+'°',t0:performance.now(),col:COL[runs.length%4]};runs.push(cur)};
+ $('rtClr').onclick=()=>{runs=[];cur=null;$('rtOut').textContent=''};
+ anim('rtC',(x,c,t)=>{$('rtC0v').textContent=$('rtC0').value+' mol/dm³';$('rtTv').textContent=$('rtT').value+'°C';x.clearRect(0,0,640,380);const ts=cur?Math.min(90,(performance.now()-cur.t0)/1000*9):0,v=cur?V(cur.k,ts):0;
+  x.fillStyle='#e7f5ff';x.strokeStyle='#495057';x.lineWidth=3;x.beginPath();x.moveTo(50,60);x.lineTo(50,90);x.lineTo(20,150);x.lineTo(110,150);x.lineTo(80,90);x.lineTo(80,60);x.stroke();x.fillRect(26,120,78,28);x.fillStyle='#adb5bd';for(let i=0;i<(sz===2?16:sz===1?8:4);i++){x.beginPath();x.arc(34+(i*19)%64,144-(i%2)*4,sz===2?2:sz===1?4:7,0,7);x.fill()}
+  if(cur&&v<59)bubs(x,30,100,70,45,Math.min(14,2+cur.k*30),t);x.strokeStyle='#495057';x.lineWidth=3;x.beginPath();x.moveTo(65,60);x.lineTo(65,30);x.lineTo(150,30);x.stroke();x.strokeRect(150,18,150,24);x.fillStyle='rgba(134,142,150,.3)';x.fillRect(152,20,v/60*120,20);x.fillStyle='#495057';x.fillRect(150+v/60*120,14,6,32);x.fillRect(156+v/60*120,28,60,4);tL(x,'CO₂: '+rd(v,0)+' cm³',400,36,15,'#d9480f');
+  const X0=150,Y0=350,W=450,H=250;x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(X0,Y0-H);x.lineTo(X0,Y0);x.lineTo(X0+W,Y0);x.stroke();for(let i=0;i<=90;i+=15)tL(x,''+i,X0+i/90*W,Y0+16,11,'#868e96');for(let j=0;j<=60;j+=20)tL(x,''+j,X0-14,Y0-j/60*H+4,11,'#868e96');txt(x,'الزمن (s)',X0+W-30,Y0+28,12,'#495057');txt(x,'حجم الغاز (cm³)',X0+60,Y0-H-6,12,'#495057');
+  runs.forEach((r,i)=>{const tm=r===cur?ts:90;x.strokeStyle=r.col;x.lineWidth=3;x.beginPath();for(let q=0;q<=tm;q+=1)x.lineTo(X0+q/90*W,Y0-V(r.k,q)/60*H);x.stroke();txt(x,r.lab,X0+W-10,Y0-H+18+i*18,11,r.col,'right')});
+  if(cur)$('rtOut').innerHTML='⏱️ زمن انتهاء التفاعل تقريبًا: <b>'+rd(3/cur.k,0)+' s</b> · كل المنحنيات تصل للحجم نفسه (60 cm³) لأن كتلة الرخام واحدة والحمض فائض، لكن <b>الأشد ميلًا هو الأسرع</b>. غيّر عاملًا واحدًا فقط وقارن!'})})();
+MCQP($('qs1'),bank([['يمكن قياس سرعة تفاعل الرخام مع الحمض بقياس:',['حجم غاز CO₂ المتصاعد مع الزمن','لون الرخام','كتلة الحمض فقط قبل التفاعل','درجة غليان الماء']],['في منحنى حجم الغاز–الزمن، الميل الأشد يدل على:',['تفاعل أسرع','تفاعل أبطأ','توقف التفاعل','تفاعل ماص']],['عندما يصبح المنحنى أفقيًا يكون:',['التفاعل قد انتهى','التفاعل في أقصى سرعة','الغاز قد تسرب','الحمض قد تبخر']],['تنقص كتلة دورق تفاعل الرخام مع الحمض لأن:',['غاز CO₂ يغادر الدورق','الماء يتجمد','الرخام يتبخر','الحمض يختفي']],['استخدام مسحوق الرخام بدل القطع يجعل التفاعل:',['أسرع لزيادة مساحة السطح','أبطأ','لا يتغير','يتوقف']],['سرعة التفاعل هي:',['التغير في كمية مادة في وحدة الزمن','كمية الناتج النهائية','درجة الحرارة النهائية','كتلة المتفاعلات']],['صدأ الحديد مثال على تفاعل:',['بطيء','سريع جدًا','انفجاري','لحظي']]]));
+
+/* ---------- 4: العلامة المختفية ---------- */
+(function(){let run=null;const rows=[];const tt=(n,T)=>120/n/Math.pow(2,(T-20)/10);
+ $('crGo').onclick=()=>{const n=+$('crN').value,T=+$('crT').value;run={n,T,t0:performance.now(),true:tt(n,T)};$('crStop').disabled=false;$('crOut').textContent='👀 راقب العلامة…'};
+ $('crStop').onclick=()=>{if(!run)return;const el=(performance.now()-run.t0)/1000*6,d=el-run.true;rows.push([run.n,run.T,rd(el,0),rd(1000/el,1)]);$('crStop').disabled=true;
+  $('crTb').innerHTML='<table class="tbl"><tr><th>التركيز</th><th>الحرارة</th><th>الزمن (s)</th><th>السرعة ∝ 1000/t</th></tr>'+rows.slice(-6).map(r=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'°C</td><td>'+r[2]+'</td><td>'+r[3]+'</td></tr>').join('')+'</table>';
+  $('crOut').innerHTML=(Math.abs(d)<run.true*.15?'🎯 توقيت ممتاز! ':d<0?'⏱️ تسرّعت قليلًا (العلامة كانت ما زالت ظاهرة). ':'🐢 تأخرت قليلًا. ')+'الزمن الحقيقي ≈ '+rd(run.true,0)+' s. '+(rows.length>1?'قارن الجدول: تركيز أعلى أو حرارة أعلى ⟸ زمن أقصر ⟸ <b>تفاعل أسرع</b>.':'غيّر التركيز أو الحرارة وأعد التجربة.');if(Math.abs(d)<run.true*.15)cheer();run=null};
+ anim('crC',(x)=>{$('crNv').textContent=$('crN').value+' / 5';$('crTv').textContent=$('crT').value+'°C';x.clearRect(0,0,640,300);const el=run?(performance.now()-run.t0)/1000*6:0,op=run?Math.min(1,el/run.true):0;
+  x.fillStyle='#fff';x.strokeStyle='#adb5bd';x.lineWidth=2;x.fillRect(160,40,320,240);x.strokeRect(160,40,320,240);x.strokeStyle='#222';x.lineWidth=14;x.beginPath();x.moveTo(260,100);x.lineTo(380,220);x.moveTo(380,100);x.lineTo(260,220);x.stroke();
+  x.fillStyle='rgba(250,220,90,'+Math.min(.985,Math.pow(op,1.3))+')';x.beginPath();x.arc(320,160,115,0,7);x.fill();x.strokeStyle='#495057';x.lineWidth=5;x.beginPath();x.arc(320,160,115,0,7);x.stroke();
+  tL(x,'⏱ '+rd(el,0)+' s',560,60,18,'#d9480f');txt(x,'منظر من أعلى الدورق',320,26,12,'#495057')})})();
+(function(){const K=[['🚫 بدون حفّاز',.02,0],['⚫ أكسيد المنجنيز (IV)',1,0],['🥩 قطعة كبد (إنزيم الكاتالاز)',.8,0],['🐘 MnO₂ + صابون سائل',1,1]];let k=0,t0=null;chipsC('hpK',K.map(a=>a[0]),0,i=>{k=i;t0=null;$('hpOut').textContent=''});$('hpGo').onclick=()=>{t0=performance.now()};
+ anim('hpC',(x,c,t)=>{const [n,r,soap]=K[k],el=t0?(performance.now()-t0)/1000:0,p=Math.min(1,el/5*r);x.clearRect(0,0,640,340);x.fillStyle='#e7f5ff';x.fillRect(272,170,96,150);x.strokeStyle='#495057';x.lineWidth=3;x.strokeRect(270,80,100,240);tL(x,'H₂O₂',320,300,14,'#1864ab');
+  if(t0&&k===1||t0&&k===3){x.fillStyle='#222';for(let i=0;i<10;i++){x.beginPath();x.arc(285+(i*29)%70,316-(i%3)*3,3,0,7);x.fill()}}if(t0&&k===2)EMC(x,'🥩',320,306,24);
+  if(t0){if(soap){x.fillStyle='#fff3bf';x.strokeStyle='#fab005';x.lineWidth=2;const h=p*230;for(let i=0;i<60*p;i++){const a=i*2.4,rr=18+((i*13)%18);x.beginPath();x.arc(320+Math.sin(a)*(30+p*(i%7)*14),170-h*((i%20)/20)+Math.cos(a)*8,rr,0,7);x.fill();x.stroke()}}else bubs(x,276,172,88,146,Math.round(2+r*26),t,'#1971c2')}
+  if(t0&&el>1.5)$('hpOut').innerHTML=k===0?'🐌 فقاعات قليلة جدًا: التحلل بطيء جدًا بدون عامل حفّاز.':k===3?'🐘 <b>رغوة هائلة!</b> الأكسجين المتصاعد بسرعة يُحبس في فقاعات الصابون. العامل الحفّاز MnO₂ بقي كما هو في النهاية.':'💨 أكسجين غزير! '+(k===1?'<b>أكسيد المنجنيز (IV)</b> عامل حفّاز: سرّع التحلل ولم يُستهلك (كتلته ثابتة).':'<b>الكاتالاز</b> إنزيم (حفّاز حيوي بروتيني) في الكبد يحلل فوق أكسيد الهيدروجين.')+' اختبار الغاز: يُشعل عود ثقاب متوهجًا ✨'})})();
+(function(){let P=[],hits=[],N0=0;function mk(n){P=[];for(let i=0;i<n;i++)P.push({x:30+Math.random()*580,y:20+Math.random()*220,a:Math.random()*7,k:i%2})}
+ anim('coC',(x)=>{const n=+$('coN').value,v=+$('coV').value;$('coNv').textContent=n;$('coVv').textContent=['','بارد','','دافئ','','','ساخن'][v]||v;if(n!==N0){mk(n);N0=n}x.clearRect(0,0,640,260);x.strokeStyle='#adb5bd';x.lineWidth=2;x.strokeRect(10,10,620,240);const now=performance.now();
+  P.forEach(p=>{p.x+=Math.cos(p.a)*v*1.2;p.y+=Math.sin(p.a)*v*1.2;if(p.x<20||p.x>620){p.a=Math.PI-p.a;p.x=Math.max(20,Math.min(620,p.x))}if(p.y<20||p.y>240){p.a=-p.a;p.y=Math.max(20,Math.min(240,p.y))}});
+  for(let i=0;i<P.length;i++)for(let j=i+1;j<P.length;j++){const a=P[i],b=P[j];if(a.k!==b.k&&Math.hypot(a.x-b.x,a.y-b.y)<16){const t=a.a;a.a=b.a;b.a=t;a.x+=Math.cos(a.a)*6;a.y+=Math.sin(a.a)*6;hits.push([now,a.x,a.y,v>=3])}}
+  hits=hits.filter(h=>now-h[0]<2000);hits.filter(h=>now-h[0]<300).forEach(h=>{x.fillStyle=h[3]?'rgba(255,146,43,.7)':'rgba(173,181,189,.6)';x.beginPath();x.arc(h[1],h[2],18,0,7);x.fill()});
+  P.forEach(p=>{x.fillStyle=p.k?'#1971c2':'#e03131';x.beginPath();x.arc(p.x,p.y,8,0,7);x.fill()});const eff=hits.filter(h=>h[3]).length;
+  $('coOut').innerHTML='💥 تصادمات في آخر ثانيتين: <b>'+hits.length+'</b> · الفعّالة منها (طاقتها كافية) 🟠: <b>'+eff+'</b><br>زيادة التركيز ⟸ تصادمات أكثر · زيادة الحرارة ⟸ تصادمات أكثر <b>وأقوى</b>'})})();
+MCQP($('qs2'),bank([['رفع درجة الحرارة يزيد سرعة التفاعل لأن الجسيمات:',['تتحرك أسرع فتزداد التصادمات الفعّالة','تصبح أكبر','تقل طاقتها','تتوقف']],['زيادة تركيز المتفاعلات تزيد السرعة بسبب:',['زيادة عدد التصادمات','نقص طاقة التنشيط','زيادة حجم الجسيمات','نقص الحرارة']],['العامل الحفّاز مادة:',['تزيد سرعة التفاعل ولا تُستهلك','تُستهلك في التفاعل','تبطئ التفاعل دائمًا','تغيّر النواتج']],['العامل الحفّاز لتحلل فوق أكسيد الهيدروجين:',['أكسيد المنجنيز (IV)','كلوريد الصوديوم','الماء','السكر']],['الإنزيمات هي:',['عوامل حفز حيوية بروتينية','أحماض قوية','فلزات','أملاح']],['في تجربة ثيوكبريتات الصوديوم مع الحمض تختفي العلامة بسبب تكوّن:',['راسب الكبريت الأصفر','غاز الهيدروجين','بلورات الملح','الماء']],['تفتيت المادة الصلبة يزيد السرعة لأنه يزيد:',['مساحة السطح المعرضة للتفاعل','الكتلة','التركيز','الحرارة']],['يُحفظ الطعام في الثلاجة لأن التبريد:',['يبطئ تفاعلات الفساد','يسرّع التفاعلات','يزيد التركيز','يعمل كحفّاز']],['زيادة الضغط تزيد سرعة التفاعلات بين:',['الغازات','المواد الصلبة فقط','السوائل فقط','لا تؤثر أبدًا']]]));
+chapterTest('rv3',[['ΔH للتفاعل الطارد:',['سالبة','موجبة','صفر']],['كسر الروابط:',['يمتص طاقة','يطلق طاقة','لا يتأثر']],['البناء الضوئي تفاعل:',['ماص للحرارة','طارد للحرارة','متعادل']],['التعادل تفاعل:',['طارد للحرارة','ماص للحرارة','لا حراري']],['طاقة التنشيط هي أقل طاقة لـ:',['بدء التفاعل','إنهاء التفاعل','تبريد النواتج']],['العامل الحفّاز يخفض:',['طاقة التنشيط','ΔH','كمية النواتج']],['الميل الأشد في منحنى الغاز–الزمن:',['تفاعل أسرع','تفاعل أبطأ','تفاعل منتهٍ']],['المسحوق أسرع تفاعلًا من القطع بسبب:',['مساحة السطح','الكتلة','اللون']],['رفع الحرارة 10° تقريبًا:',['يزيد السرعة','ينقص السرعة','لا يؤثر']],['حفّاز تحلل H₂O₂:',['MnO₂','NaCl','H₂O']],['الإنزيمات:',['حفّازات حيوية','أحماض','غازات']],['يحدث التفاعل عند التصادم إذا كانت الطاقة:',['≥ طاقة التنشيط','< طاقة التنشيط','صفرًا']]]);
+
+/* ---------- 5: طاولة الأحماض ---------- */
+(function(){const A=[['HCl الهيدروكلوريك',1,'كلوريد','HCl'],['H₂SO₄ الكبريتيك',1,'كبريتات','H₂SO₄'],['CH₃COOH الإيثانويك (ضعيف)',.22,'إيثانوات','CH₃COOH']],R=[['🩶 شريط ماغنسيوم','الماغنسيوم','H',1,'فلز نشط'],['⚙️ حبيبات خارصين','الخارصين','H',.5,'فلز'],['🟤 برادة نحاس','النحاس','0',0,'فلز غير نشط'],['🪨 كربونات الكالسيوم','الكالسيوم','C',.8,'كربونات'],['⚫ أكسيد النحاس (II)','النحاس (II)','B',0,'قاعدة غير ذوّابة'],['🧴 هيدروكسيد الصوديوم','الصوديوم','N',0,'قلوي']];let a=0,r=0,t0=null,test=null;
+ chipsC('acA',A.map(v=>v[0]),0,i=>{a=i;t0=null;test=null});chipsC('acR',R.map(v=>v[0]),0,i=>{r=i;t0=null;test=null;$('acOut').textContent=''});$('acGo').onclick=()=>{t0=performance.now();test=null};
+ $('acT').onclick=()=>{if(!t0){$('acOut').innerHTML='أضف المادة إلى الحمض أولًا!';return}test=performance.now()};
+ anim('acC',(x,c,t)=>{const ac=A[a],re=R[r],el=t0?(performance.now()-t0)/1000:0,g=re[2],rate=re[3]*ac[1];x.clearRect(0,0,640,340);
+  let col='#fff9db';if(t0&&g==='B')col=mixC('#fff9db','#4dabf7',Math.min(1,el/5*ac[1]));if(t0&&g==='N')col=mixC('#fff9db','#ffe3e3',Math.min(1,el/3));bkr(x,220,110,200,200,col,.7);tL(x,ac[3],320,330,14,'#495057');
+  if(t0){const X=320,Y=296;if(g==='H'||g==='0'){x.fillStyle=r===0?'#ced4da':r===1?'#868e96':'#b06030';x.fillRect(X-40,Y,80,8)}if(g==='C'){x.fillStyle='#f1f3f5';x.strokeStyle='#adb5bd';[-24,0,24].forEach(d=>{x.beginPath();x.arc(X+d,Y+2,10*Math.max(.3,1-el/14),0,7);x.fill();x.stroke()})}if(g==='B'){x.fillStyle='#222';for(let i=0;i<12*Math.max(.2,1-el/7*ac[1]);i++){x.beginPath();x.arc(250+(i*31)%140,302-(i%3)*3,3,0,7);x.fill()}EMC(x,'🔥',320,326,18)}
+   if(rate>0)bubs(x,240,170,160,130,Math.round(3+rate*22),t)}
+  if(test){const te=(performance.now()-test)/1000;if(te<2.5){EMC(x,g==='C'?'🧪':'🔥',470,80,36);if(g==='H'&&te>.6){x.fillStyle='#e03131';x.font=FONT(30,900);x.textAlign='center';x.fillText('💥 فرقعة!',500,140)}if(g==='C'){tubeC(x,520,100,36,110,mixC('#e7f5ff','#f1f3f5',Math.min(1,te)),.6);txt(x,'ماء الجير يتعكر',540,236,12,'#495057')}}}
+  if(t0){const salt=ac[2]+' '+re[1];let m;if(g==='0')m='😴 لا تفاعل: النحاس فلز غير نشط، لا يزيح الهيدروجين من الأحماض المخففة.';else if(g==='H')m='🫧 حمض + فلز ⟵ ملح (<b>'+salt+'</b>) + غاز <b>الهيدروجين</b>'+(ac[1]<1?' · الفقاعات أبطأ لأن الحمض <b>ضعيف</b> (أيونات H⁺ قليلة)':'');else if(g==='C')m='🫧 حمض + كربونات ⟵ ملح (<b>'+salt+'</b>) + ماء + غاز <b>ثاني أكسيد الكربون</b>'+(a===1?' · (مع حمض الكبريتيك يتوقف التفاعل سريعًا لتكوّن كبريتات الكالسيوم قليلة الذوبان)':'');else if(g==='B')m='🔵 حمض + قاعدة ⟵ ملح + ماء: يذوب الأكسيد الأسود ويتكوّن محلول <b>'+salt+'</b> الأزرق (مع التسخين). لا غاز.';else m='🌡️ حمض + قلوي ⟵ ملح (<b>'+salt+'</b>) + ماء: <b>تعادل</b> طارد للحرارة. لا غاز ولا تغيّر ظاهر، لذلك نحتاج دليلًا!';
+   if(test)m+='<br>'+(g==='H'?'🔥 اختبار الغاز: عود مشتعل ⟸ <b>فرقعة</b> ⟸ هيدروجين.':g==='C'?'🧪 اختبار الغاز: يعكّر <b>ماء الجير</b> ⟸ ثاني أكسيد الكربون.':'🚫 لا يوجد غاز لاختباره.');$('acOut').innerHTML=m}})})();
+(function(){let k=0;const P=[];for(let i=0;i<20;i++)P.push({x:50+((i*97)%540),y:40+((i*61)%180),ph:Math.random()*7});chipsC('ioK',['💪 حمض قوي HCl','🤏 حمض ضعيف CH₃COOH'],0,i=>{k=i;upd()});
+ function upd(){$('ioOut').innerHTML=k===0?'كل الجزيئات العشرين تأينت: <b>تأين تام</b> ⟸ 20 أيون H⁺ ⟸ pH منخفض جدًا، توصيل قوي، تفاعل سريع.':'جزيئان فقط من عشرين تأينا: <b>تأين جزئي</b> ⟸ أيونات H⁺ قليلة ⟸ pH أعلى (3–4)، توصيل ضعيف، تفاعل أبطأ.'}
+ anim('ioC',(x,c,t)=>{x.clearRect(0,0,640,260);x.fillStyle='#e7f5ff';x.fillRect(0,0,640,260);P.forEach((p,i)=>{const X=p.x+Math.sin(t*1.3+p.ph)*8,Y=p.y+Math.cos(t*1.1+p.ph)*8,ion=k===0||i<2;
+  if(ion){x.fillStyle='#e03131';x.beginPath();x.arc(X-18,Y-10+Math.sin(t*2+i)*5,7,0,7);x.fill();tL(x,'H⁺',X-18,Y-20,9,'#e03131');x.fillStyle=k?'#2f9e44':'#51cf66';x.beginPath();x.arc(X+14,Y+8,k?15:12,0,7);x.fill();tL(x,k?'A⁻':'Cl⁻',X+14,Y+12,9,'#fff')}
+  else{x.fillStyle='#2f9e44';x.beginPath();x.arc(X,Y,15,0,7);x.fill();x.fillStyle='#e03131';x.beginPath();x.arc(X-17,Y,7,0,7);x.fill();tL(x,'HA',X,Y+4,9,'#fff')}})});upd()})();
+MCQP($('qa1'),bank([['الأيون المسؤول عن الخواص الحامضية:',[Q_('H⁺'),Q_('OH⁻'),Q_('Na⁺'),Q_('Cl⁻')]],['حمض + فلز نشط ⟵',['ملح + هيدروجين','ملح + ماء','ملح + ماء + ثاني أكسيد الكربون','قاعدة + أكسجين']],['حمض + كربونات ⟵',['ملح + ماء + ثاني أكسيد الكربون','ملح + هيدروجين','ملح فقط','ماء فقط']],['اختبار غاز الهيدروجين:',['يحدث فرقعة مع عود مشتعل','يعكر ماء الجير','يشعل عودًا متوهجًا','يبيّض ورقة دوار الشمس']],['اختبار غاز ثاني أكسيد الكربون:',['يعكر ماء الجير','فرقعة','يشعل عودًا متوهجًا','لونه بني']],['الحمض القوي هو الذي:',['يتأين تمامًا في الماء','يتأين جزئيًا','لا يذوب في الماء','تركيزه عالٍ دائمًا']],['مثال على حمض ضعيف:',['حمض الإيثانويك','حمض الهيدروكلوريك','حمض الكبريتيك','حمض النيتريك']],['لا تظهر خواص الحمض إلا في وجود:',['الماء','الزيت','الهواء','الضوء']],['ملح ينتج من تفاعل الماغنسيوم مع حمض الكبريتيك:',['كبريتات الماغنسيوم','كلوريد الماغنسيوم','نترات الماغنسيوم','أكسيد الماغنسيوم']],['أي فلز لا يتفاعل مع حمض الهيدروكلوريك المخفف؟',['النحاس','الماغنسيوم','الخارصين','الحديد']]]));
+
+/* ---------- 5: الأدلة و pH ---------- */
+const UNI=['#e03131','#e8590c','#f76707','#f59f00','#fcc419','#d8f5a2','#94d82d','#40c057','#20c997','#22b8cf','#339af0','#4263eb','#5f3dc4','#7048e8','#862e9c'];
+const INDC=[['🌈 الدليل العام',p=>UNI[Math.round(p)]],['🔵 دوّار الشمس',p=>p<6.5?'#e03131':p<=7.5?'#9c36b5':'#1c7ed6'],['🟠 الميثيل البرتقالي',p=>p<3.2?'#e03131':p<4.4?'#fd7e14':'#fcc419'],['🌸 الفينولفثالين',p=>p<8.3?'#f8f9fa':'#f06595']];
+const SUBS=[['حمض المعدة (HCl)',1],['عصير الليمون',2],['الخل',3],['عصير الطماطم',4],['القهوة',5],['ماء المطر',5.6],['الحليب',6.5],['الماء المقطر',7],['الدم',7.4],['ماء البحر',8],['صودا الخبز',9],['الصابون',10],['محلول الأمونيا',11],['المبيّض',12.5],['منظف المصارف (NaOH)',14]];
+(function(){let ind=0,t0=performance.now();chipsC('phI',INDC.map(i=>i[0]),0,i=>{ind=i;t0=performance.now()});$('phS').innerHTML=SUBS.map((s,i)=>'<option value="'+i+'">'+s[0]+'</option>').join('');$('phS').value=1;$('phS').onchange=()=>{t0=performance.now()};
+ anim('phC',(x)=>{const [n,p]=SUBS[+$('phS').value],el=(performance.now()-t0)/1000,k=Math.min(1,Math.max(0,el-.7)/1.2),col=INDC[ind][1](p);x.clearRect(0,0,640,320);bkr(x,60,100,180,170,k>0?col:'#f8f9fa',.7);if(el<.7){x.fillStyle='#868e96';x.beginPath();x.arc(150,40+el/.7*110,7,0,7);x.fill()}x.fillStyle='#495057';x.fillRect(143,0,14,40);txt(x,n,150,296,14);
+  const X0=290,W=320;UNI.forEach((c,i)=>{x.fillStyle=c;x.fillRect(X0+i*W/15,120,W/15+1,46);tL(x,''+i,X0+i*W/15+W/30,186,11,'#495057')});txt(x,'حمضي ⟵',X0+50,108,12,'#e03131');txt(x,'متعادل',X0+W/2,108,12,'#2f9e44');txt(x,'⟶ قلوي',X0+W-50,108,12,'#5f3dc4');
+  if(k>=1){const mx=X0+(p+.5)*W/15;x.fillStyle='#222';x.beginPath();x.moveTo(mx,116);x.lineTo(mx-9,96);x.lineTo(mx+9,96);x.fill();tL(x,'pH = '+p,mx,88,15);
+   $('phOut').innerHTML=n+': pH = <b>'+p+'</b> ⟸ '+(p<3?'حمضي قوي':p<7?'حمضي ضعيف':p===7?'متعادل':p<=10?'قلوي ضعيف':'قلوي قوي')+' · لون '+INDC[ind][0].slice(2)+': <span class="lbl" style="background:'+col+';color:'+(col==='#f8f9fa'||col==='#fcc419'||col==='#d8f5a2'?'#222':'#fff')+'">'+(col==='#f8f9fa'?'عديم اللون':'هذا اللون')+'</span>'+(ind&&((ind===3&&p<8.3)||(ind===2&&p>4.4&&p<9))?'<br>⚠️ هذا الدليل لا يميّز هنا بدقة: الدليل العام أفضل لمعرفة قيمة pH.':'')}})})();
+MCQP($('phG'),()=>{const [n,p]=pick(SUBS),c=UNI[Math.round(p)];const rng=p<3?'0–2 (حمضي قوي)':p<7?'3–6 (حمضي ضعيف)':p<7.5?'7 (متعادل)':p<=10?'8–10 (قلوي ضعيف)':'11–14 (قلوي قوي)';
+ return{q:'أضفنا الدليل العام إلى محلول فصار لونه: <span style="display:inline-block;width:70px;height:28px;border-radius:8px;vertical-align:middle;border:2px solid #495057;background:'+c+'"></span><br>ما pH التقريبي؟',o:OPSC(rng,['0–2 (حمضي قوي)','3–6 (حمضي ضعيف)','7 (متعادل)','8–10 (قلوي ضعيف)','11–14 (قلوي قوي)']),ex:'كان المحلول: '+n+' (pH = '+p+')'}});
+MCQP($('qa2'),bank([['محلول pH له يساوي 2 يكون:',['حمضيًا قويًا','قلويًا قويًا','متعادلًا','قلويًا ضعيفًا']],['محلول pH له يساوي 7 يكون:',['متعادلًا','حمضيًا','قلويًا','حمضيًا قويًا']],['لون دوّار الشمس في المحلول الحمضي:',['أحمر','أزرق','أخضر','عديم اللون']],['لون دوّار الشمس في المحلول القلوي:',['أزرق','أحمر','أصفر','وردي']],['لون الفينولفثالين في المحلول القلوي:',['وردي','عديم اللون','أزرق','أصفر']],['لون الدليل العام في محلول متعادل:',['أخضر','أحمر','بنفسجي','برتقالي']],['كلما قلّت قيمة pH:',['زاد تركيز أيونات H⁺','زاد تركيز OH⁻','أصبح المحلول متعادلًا','قلّت الحموضة']],['لون الميثيل البرتقالي في الحمض:',['أحمر','أصفر','أزرق','أخضر']],['أي المحاليل الآتية أكثر قلوية؟',['pH = 13','pH = 8','pH = 7','pH = 1']],['يُعالَج حموضة التربة بإضافة:',['الجير (هيدروكسيد الكالسيوم)','حمض الكبريتيك','ملح الطعام','السكر']]]));
+
+/* ---------- 5: المعايرة ---------- */
+(function(){let ca,veq,v,pts,done;const pH=V=>{const nH=25*ca,nO=.1*V,tot=25+V;if(Math.abs(nH-nO)<1e-9)return 7;return nH>nO?-Math.log10((nH-nO)/tot):14+Math.log10((nO-nH)/tot)};
+ function reset(){ca=pick([.06,.08,.1,.12,.14]);veq=Math.round(250*ca/.1);v=0;pts=[[0,pH(0)]];done=0;$('tiOut').innerHTML='ابدأ بإضافة NaOH بسرعة، ثم قطرة قطرة عند الاقتراب…';$('tiQ').innerHTML='';[$('ti1'),$('ti2')].forEach(b=>b.disabled=false)}
+ function add(d){if(done)return;v+=d;if(v>500)v=500;pts.push([v/10,pH(v/10)]);const over=v-veq;
+  if(over>0){done=1;[$('ti1'),$('ti2')].forEach(b=>b.disabled=true);if(over<=2){$('tiOut').innerHTML='🎉 <b>نقطة النهاية!</b> ظهر اللون الوردي الثابت عند حجم NaOH = <b>'+(v/10).toFixed(1)+' cm³</b>. الآن احسب:';cheer();
+    const f=c=>Q_(c.toFixed(2)+' mol/dm³');mcq($('tiQ'),'تركيز الحمض = (0.1 × '+(veq/10).toFixed(1)+') ÷ 25 = ؟',OPSC(f(ca),[f(ca+.02),f(ca*2),f(ca/2),f(.1)]),0,ok=>{$('tiOut').innerHTML=(ok?'🏆 ممتاز! ':'💡 ')+'عدد مولات NaOH = عدد مولات HCl ⟸ '+Q_('C = (0.1 × '+(veq/10).toFixed(1)+') / 25 = '+ca.toFixed(2)+' mol/dm³')})}
+   else $('tiOut').innerHTML='🌸 تجاوزت نقطة النهاية بـ '+(over/10).toFixed(1)+' cm³ (اللون وردي غامق). اضغط «حمض جديد» وأعد المحاولة، وأضف <b>قطرة قطرة</b> عندما يبدأ اللون الوردي بالظهور والاختفاء.'}
+  else if(veq-v<=15)$('tiOut').innerHTML='⚠️ يظهر لون وردي ثم <b>يختفي بالرج</b>… اقتربت! أضف قطرة قطرة.';else $('tiOut').innerHTML='الحجم المضاف: '+(v/10).toFixed(1)+' cm³ · المحلول عديم اللون'}
+ $('ti1').onclick=()=>add(10);$('ti2').onclick=()=>add(1);$('tiR').onclick=reset;
+ anim('tiC',(x,c,t)=>{x.clearRect(0,0,640,400);const V=v/10,p=pH(V),near=!done&&veq-v<=15&&v>0;
+  x.fillStyle='#495057';x.fillRect(60,20,8,360);x.fillRect(40,380,160,10);x.fillStyle='#f1f3f5';x.strokeStyle='#495057';x.lineWidth=2;x.fillRect(120,20,22,230);x.strokeRect(120,20,22,230);x.fillStyle='#d0ebff';x.fillRect(122,22+V/50*226,18,226-V/50*226);for(let i=0;i<=50;i+=10){tL(x,''+i,108,26+i/50*226,9,'#868e96')}x.fillStyle='#495057';x.fillRect(128,250,6,22);tL(x,V.toFixed(1)+' cm³',180,60,14,'#1971c2');
+  const col=v>veq?mixC('#f783ac','#e64980',Math.min(1,(v-veq)/20)):near&&Math.sin(t*5)>.5?'#fcc2d7':'#f8f9fa';x.fillStyle=col;x.strokeStyle='#495057';x.lineWidth=3;x.beginPath();x.moveTo(118,290);x.lineTo(144,290);x.lineTo(144,315);x.lineTo(185,375);x.lineTo(77,375);x.lineTo(118,315);x.closePath();x.fill();x.stroke();
+  const X0=290,Y0=360,W=310,H=290;x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(X0,Y0-H);x.lineTo(X0,Y0);x.lineTo(X0+W,Y0);x.stroke();for(let i=0;i<=50;i+=10)tL(x,''+i,X0+i/50*W,Y0+16,11,'#868e96');for(let j=0;j<=14;j+=2)tL(x,''+j,X0-12,Y0-j/14*H+4,11,'#868e96');txt(x,'pH',X0+14,Y0-H-6,13,'#495057');txt(x,'حجم NaOH (cm³)',X0+W-50,Y0+30,12,'#495057');
+  x.strokeStyle='#e64980';x.lineWidth=3;x.beginPath();pts.forEach(q=>x.lineTo(X0+q[0]/50*W,Y0-q[1]/14*H));x.stroke();x.fillStyle='#e64980';x.beginPath();x.arc(X0+V/50*W,Y0-p/14*H,5,0,7);x.fill();tL(x,'pH ≈ '+rd(p,1),X0+W-40,Y0-H+16,14,'#e64980')});reset()})();
+sortGame('oxP','oxC','oxOut',[['🧱 قاعدية','أكاسيد فلزات','#1971c2'],['🍋 حامضية','أكاسيد لافلزات','#e03131'],['⚪ متعادلة','','#868e96'],['🔁 أمفوتيرية','تتفاعل مع الحمض والقلوي','#7048e8']],[[Q_('Na₂O'),0,''],[Q_('CaO'),0,''],[Q_('CuO'),0,''],[Q_('MgO'),0,''],[Q_('CO₂'),1,''],[Q_('SO₂'),1,''],[Q_('P₄O₁₀'),1,''],[Q_('CO'),2,''],[Q_('NO'),2,''],[Q_('H₂O'),2,''],[Q_('Al₂O₃'),3,''],[Q_('ZnO'),3,'']]);
+MCQP($('qa3'),()=>{if(rnd(0,2)===0){const ca=pick([.05,.1,.2]),V=pick([10,20,25]),cb=pick([.1,.2]);const vb=rd(ca*V/cb,1);return{q:'عُودل '+Q_(V+' cm³')+' من HCl تركيزه '+Q_(ca+' mol/dm³')+' بمحلول NaOH تركيزه '+Q_(cb+' mol/dm³')+'. حجم NaOH اللازم:',o:OPSC(Q_(vb+' cm³'),[Q_(rd(vb*2,1)+' cm³'),Q_(rd(vb/2,1)+' cm³'),Q_(V+5+' cm³'),Q_(rd(vb+10,1)+' cm³')]),ex:'Ca Va = Cb Vb (نسبة 1 : 1)'}}
+ return bank([['المعادلة الأيونية للتعادل:',[Q_('H⁺ + OH⁻ → H₂O'),Q_('Na⁺ + Cl⁻ → NaCl'),Q_('H₂ + O₂ → H₂O'),Q_('H⁺ + Cl⁻ → HCl')]],['القلوي هو:',['قاعدة تذوب في الماء','أي أكسيد فلز','حمض ضعيف','ملح متعادل']],['قلوي + ملح أمونيوم بالتسخين ⟵ ملح + ماء + غاز:',['الأمونيا','الهيدروجين','الأكسجين','الكلور']],['أكسيد أمفوتيري:',[Q_('Al₂O₃'),Q_('CaO'),Q_('SO₂'),Q_('CO')]],['أكسيد متعادل:',[Q_('CO'),Q_('CO₂'),Q_('Na₂O'),Q_('ZnO')]],['أكاسيد اللافلزات غالبًا:',['حامضية','قاعدية','أمفوتيرية','متعادلة دائمًا']],['الأداة المستخدمة لإضافة المحلول بدقة في المعايرة:',['السحاحة','المخبار المدرج','الكأس','القمع']],['الأيون المسؤول عن الخواص القلوية:',[Q_('OH⁻'),Q_('H⁺'),Q_('Cl⁻'),Q_('Na⁺')]]])()});
+
+/* ---------- 6: الترسيب ---------- */
+(function(){const CA=[['نترات الفضة AgNO₃','Ag⁺','#f8f9fa'],['كلوريد الباريوم BaCl₂','Ba²⁺','#f8f9fa'],['نترات الرصاص (II) Pb(NO₃)₂','Pb²⁺','#f8f9fa'],['كبريتات النحاس (II) CuSO₄','Cu²⁺','#74c0fc'],['كلوريد الحديد (III) FeCl₃','Fe³⁺','#ffe066'],['كلوريد الكالسيوم CaCl₂','Ca²⁺','#f8f9fa'],['نترات الصوديوم NaNO₃','Na⁺','#f8f9fa']],AN=[['كلوريد الصوديوم NaCl','Cl⁻'],['كبريتات الصوديوم Na₂SO₄','SO₄²⁻'],['يوديد البوتاسيوم KI','I⁻'],['هيدروكسيد الصوديوم NaOH','OH⁻'],['كربونات الصوديوم Na₂CO₃','CO₃²⁻']];
+ const T={'Ag⁺Cl⁻':['#f8f9fa','كلوريد الفضة','AgCl','أبيض'],'Ag⁺I⁻':['#ffec99','يوديد الفضة','AgI','أصفر باهت'],'Ag⁺OH⁻':['#7f5539','أكسيد الفضة','Ag₂O','بني'],'Ag⁺CO₃²⁻':['#fff9db','كربونات الفضة','Ag₂CO₃','أصفر باهت'],'Ba²⁺SO₄²⁻':['#f8f9fa','كبريتات الباريوم','BaSO₄','أبيض'],'Ba²⁺CO₃²⁻':['#f8f9fa','كربونات الباريوم','BaCO₃','أبيض'],
+  'Pb²⁺Cl⁻':['#f8f9fa','كلوريد الرصاص (II)','PbCl₂','أبيض'],'Pb²⁺SO₄²⁻':['#f8f9fa','كبريتات الرصاص (II)','PbSO₄','أبيض'],'Pb²⁺I⁻':['#fcc419','يوديد الرصاص (II)','PbI₂','أصفر ذهبي'],'Pb²⁺OH⁻':['#f8f9fa','هيدروكسيد الرصاص (II)','Pb(OH)₂','أبيض'],'Pb²⁺CO₃²⁻':['#f8f9fa','كربونات الرصاص (II)','PbCO₃','أبيض'],
+  'Cu²⁺OH⁻':['#339af0','هيدروكسيد النحاس (II)','Cu(OH)₂','أزرق'],'Cu²⁺CO₃²⁻':['#38d9a9','كربونات النحاس (II)','CuCO₃','أخضر مزرق'],'Fe³⁺OH⁻':['#a0522d','هيدروكسيد الحديد (III)','Fe(OH)₃','بني محمر'],'Ca²⁺CO₃²⁻':['#f8f9fa','كربونات الكالسيوم','CaCO₃','أبيض'],'Ca²⁺SO₄²⁻':['#f8f9fa','كبريتات الكالسيوم (قليلة الذوبان)','CaSO₄','أبيض خفيف'],'Ca²⁺OH⁻':['#f8f9fa','هيدروكسيد الكالسيوم (قليل الذوبان)','Ca(OH)₂','أبيض خفيف']};
+ const SP={'Cu²⁺I⁻':1,'Fe³⁺I⁻':1,'Fe³⁺CO₃²⁻':1};let t0=null;$('ppA').innerHTML=CA.map((c,i)=>'<option value="'+i+'">'+c[0]+'</option>').join('');$('ppB').innerHTML=AN.map((c,i)=>'<option value="'+i+'">'+c[0]+'</option>').join('');$('ppB').value=2;$('ppA').value=2;
+ ['ppA','ppB'].forEach(i=>$(i).onchange=()=>{t0=null;$('ppOut').textContent=''});$('ppGo').onclick=()=>{t0=performance.now()};
+ anim('ppC',(x)=>{const a=CA[+$('ppA').value],b=AN[+$('ppB').value],key=a[1]+b[1],pr=T[key],el=t0?(performance.now()-t0)/1000:0,k=Math.min(1,Math.max(0,el-.8)/2.5);x.clearRect(0,0,640,320);
+  if(!t0){tubeC(x,120,60,60,170,a[2],.6);tubeC(x,460,60,60,170,'#f8f9fa',.6);tL(x,a[1],150,260,16);tL(x,b[1],490,260,16)}
+  bkr(x,230,120,180,180,a[2],t0?.75:.4);if(t0&&el<.9){x.fillStyle='#e7f5ff';x.fillRect(312,40,16,90)}
+  if(t0&&pr){x.fillStyle=pr[0];x.strokeStyle='#868e96';x.lineWidth=1;for(let i=0;i<70*k;i++){const sy=Math.min(292-(i%6)*5,170+((i*29)%60)+Math.max(0,el-1.5-(i%10)*.15)*26);x.beginPath();x.arc(240+(i*43)%160,sy,4,0,7);x.fill();x.stroke()}}
+  if(t0&&el>1.2)$('ppOut').innerHTML=pr?'⬇️ تكوّن راسب <b>'+pr[3]+'</b> من <b>'+pr[1]+'</b> (ملح غير ذوّاب)<br>المعادلة الأيونية: '+Q_(a[1]+'(aq) + '+b[1]+'(aq) → '+pr[2]+'(s)')+'<br>الأيونات الأخرى تبقى في المحلول (أيونات متفرجة).':SP[key]?'⚠️ هنا يحدث تفاعل آخر أكثر تعقيدًا (ليس ترسيبًا بسيطًا)، وهو خارج هذا الدرس. جرّب زوجًا آخر.':'💧 لا يتكوّن راسب: كل الأملاح الممكنة <b>ذوّابة</b>، فتبقى الأيونات كلها في المحلول.'})})();
+sortGame('soP','soC','soOut',[['💧 ذوّاب','','#1971c2'],['🪨 غير ذوّاب','','#868e96']],[['كلوريد الصوديوم',0,'كل أملاح الصوديوم ذوّابة'],['نترات الرصاص (II)',0,'كل النترات ذوّابة'],['كبريتات الأمونيوم',0,'كل أملاح الأمونيوم ذوّابة'],['كربونات البوتاسيوم',0,'أملاح البوتاسيوم ذوّابة'],['كبريتات النحاس (II)',0,''],['كلوريد الفضة',1,'استثناء الكلوريدات'],['كبريتات الباريوم',1,'استثناء الكبريتات'],['كربونات الكالسيوم',1,'معظم الكربونات غير ذوّابة'],['كلوريد الرصاص (II)',1,'استثناء الكلوريدات'],['كربونات النحاس (II)',1,'']]);
+MCQP($('qt1'),bank([['أي ملح غير ذوّاب في الماء؟',['كبريتات الباريوم','نترات الباريوم','كلوريد الصوديوم','كبريتات البوتاسيوم']],['كل أملاح ______ ذوّابة في الماء.',['النترات','الكربونات','الكبريتات','الكلوريدات']],['الراسب المتكوّن عند خلط نترات الفضة مع كلوريد الصوديوم:',['كلوريد الفضة الأبيض','نترات الصوديوم','كلوريد الصوديوم','الفضة']],['لون راسب يوديد الرصاص (II):',['أصفر','أبيض','أزرق','بني']],['الكلوريدات كلها ذوّابة عدا كلوريدي:',['الفضة والرصاص','الصوديوم والبوتاسيوم','الكالسيوم والماغنسيوم','الأمونيوم والنحاس']],['الملح ينتج من استبدال ______ الحمض بفلز.',['هيدروجين','أكسجين','كلور','كبريت']],['المعادلة الأيونية لترسيب كبريتات الباريوم:',[Q_('Ba²⁺ + SO₄²⁻ → BaSO₄'),Q_('Ba + S → BaS'),Q_('Na⁺ + Cl⁻ → NaCl'),Q_('H⁺ + OH⁻ → H₂O')]],['لون راسب هيدروكسيد النحاس (II):',['أزرق','أبيض','أصفر','بني محمر']],['ملح حمض النيتريك يسمى:',['نترات','كلوريد','كبريتات','كربونات']]]));
+
+/* ---------- 6: تحضير الأملاح ---------- */
+(function(){const S=['🔥 سخّن حمض الكبريتيك المخفف','⚫ أضف أكسيد النحاس (II) مع التحريك حتى يبقى زائد منه','🔻 رشّح لإزالة الأكسيد الزائد','♨️ بخّر الرشيح حتى التشبع','❄️ اتركه يبرد لتتكوّن البلورات ثم جففها'],WHY=['التسخين يسرّع التفاعل.','الزيادة تضمن أن <b>كل الحمض</b> قد تفاعل: '+Q_('CuO + H₂SO₄ → CuSO₄ + H₂O'),'الراسب الأسود يبقى على ورقة الترشيح، والرشيح الأزرق هو محلول كبريتات النحاس.','نبخّر جزءًا من الماء فقط، لا حتى الجفاف.','تتكوّن بلورات <b>كبريتات النحاس (II) المائية</b> الزرقاء 💎'];let st=0;
+ function mk(){st=0;const ord=shuf([0,1,2,3,4]);$('spK').innerHTML=ord.map(i=>'<button data-i="'+i+'">'+S[i]+'</button>').join('');$('spK').querySelectorAll('button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(i===st){b.classList.add('on');b.disabled=true;$('spOut').innerHTML='✅ الخطوة '+(st+1)+': '+WHY[st];st++;if(st===5)cheer()}else{shake(b);$('spOut').innerHTML='🤔 ليس الآن… ما الخطوة التي تسبقها؟'}});$('spOut').textContent=''}
+ $('spR').onclick=mk;
+ anim('spC',(x,c,t)=>{x.clearRect(0,0,640,320);if(st<=2){bkr(x,90,110,180,170,st>=2?'#4dabf7':st===1?'#f8f9fa':'#f8f9fa',.65);if(st>=1)EMC(x,'🔥',180,302,24);if(st>=1&&st<3)bubs(x,100,170,160,100,4,t);if(st>=2){x.fillStyle='#222';for(let i=0;i<14;i++){x.beginPath();x.arc(105+(i*23)%150,274-(i%3)*3,3,0,7);x.fill()}}tL(x,st>=2?'CuSO₄ + CuO زائد':'H₂SO₄',180,96,13,'#495057')}
+  if(st>=3){x.strokeStyle='#495057';x.lineWidth=3;x.beginPath();x.moveTo(110,60);x.lineTo(180,150);x.lineTo(250,60);x.stroke();x.fillStyle='#222';x.beginPath();x.moveTo(140,100);x.lineTo(180,148);x.lineTo(220,100);x.fill();x.strokeRect(174,150,12,40);bkr(x,120,190,120,100,'#4dabf7',.55);txt(x,'الراسب: CuO الزائد',180,50,12,'#222')}
+  if(st>=4){x.fillStyle='#4dabf7';x.strokeStyle='#495057';x.lineWidth=3;x.beginPath();x.ellipse(460,220,100,34,0,0,Math.PI);x.fill();x.stroke();x.beginPath();x.moveTo(360,220);x.lineTo(560,220);x.stroke();if(st===4){EMC(x,'🔥',460,280,26);for(let i=0;i<5;i++){const ph=(t*.4+i/5)%1;x.strokeStyle='rgba(134,142,150,'+(1-ph)+')';x.beginPath();x.arc(400+i*30,200-ph*90,8,0,7);x.stroke()}}}
+  if(st>=5){x.fillStyle='#1c7ed6';x.strokeStyle='#1864ab';x.lineWidth=2;for(let i=0;i<9;i++){const X=400+(i*37)%120,Y=228+(i%3)*6;x.beginPath();x.moveTo(X,Y-12);x.lineTo(X+10,Y);x.lineTo(X,Y+12);x.lineTo(X-10,Y);x.closePath();x.fill();x.stroke()}txt(x,'💎 بلورات CuSO₄·5H₂O',460,180,14,'#1864ab')}
+  if(st===0)txt(x,'اختر الخطوة الأولى 👆',460,160,16,'#495057')});mk()})();
+MCQP($('mtQ'),()=>{const [n,m]=pick([['كلوريد الصوديوم',1],['نترات البوتاسيوم',1],['كبريتات الأمونيوم',1],['كبريتات النحاس (II)',2],['كلوريد الخارصين',2],['نترات الماغنسيوم',2],['كبريتات الحديد (II)',2],['كبريتات الباريوم',0],['كلوريد الفضة',0],['يوديد الرصاص (II)',0],['كربونات الكالسيوم',0]]);const O=['الترسيب: خلط محلولين ثم ترشيح الراسب وغسله','المعايرة: حمض + قلوي بوجود دليل','حمض + زيادة من فلز/أكسيد/كربونات ثم ترشيح وتبلور'];
+ return{q:'ما أنسب طريقة لتحضير <b>'+n+'</b>؟',o:[O[m],...O.filter((_,i)=>i!==m)],ex:m===0?'ملح غير ذوّاب ⟸ ترسيب':m===1?'ملح صوديوم/بوتاسيوم/أمونيوم ذوّاب ⟸ معايرة':'ملح ذوّاب آخر ⟸ حمض + مادة غير ذوّابة زائدة'}});
+MCQP($('qt2'),bank([['عند تحضير ملح ذوّاب من حمض وأكسيد فلز نضيف الأكسيد بزيادة لكي:',['نضمن تفاعل كل الحمض','نلوّن المحلول','نرفع الحرارة','نمنع التبلور']],['نتخلص من الأكسيد الزائد بـ:',['الترشيح','التبخير','التقطير','المعايرة']],['نحصل على بلورات الملح من محلوله بـ:',['التبخير ثم التبريد (التبلور)','الترشيح فقط','إضافة حمض','التسخين حتى الاحتراق']],['يُحضّر كلوريد الصوديوم من حمض الهيدروكلوريك وهيدروكسيد الصوديوم بـ:',['المعايرة','الترسيب','التحليل الكهربائي','التقطير']],['لتحضير كبريتات الباريوم نخلط:',['كلوريد الباريوم + كبريتات الصوديوم','الباريوم + الكبريت','أكسيد الباريوم + ماء','كربونات الباريوم + ماء']],['بعد ترشيح الراسب في طريقة الترسيب يجب:',['غسله بالماء المقطر ثم تجفيفه','تبخيره','إذابته في حمض','تسخينه حتى ينصهر']],['لا نستخدم فلز الصوديوم مع الحمض لتحضير أملاحه لأن التفاعل:',['عنيف وخطر','بطيء جدًا','لا يحدث','ماص للحرارة']],['الحمض المستخدم لتحضير الكلوريدات:',['حمض الهيدروكلوريك','حمض الكبريتيك','حمض النيتريك','حمض الإيثانويك']]]));
+chapterTest('rv4',[['الحمض ينتج في الماء أيونات:',['H⁺','OH⁻','Na⁺']],['حمض + كربونات يعطي غاز:',['CO₂','H₂','O₂']],['الحمض القوي:',['يتأين تمامًا','يتأين جزئيًا','لا يتأين']],['pH = 13:',['قلوي قوي','حمضي قوي','متعادل']],['دوّار الشمس في الحمض:',['أحمر','أزرق','أخضر']],['الفينولفثالين في القلوي:',['وردي','عديم اللون','أصفر']],['H⁺ + OH⁻ →',['H₂O','H₂','O₂']],['أكسيد أمفوتيري:',['ZnO','CaO','CO₂']],['كل أملاح النترات:',['ذوّابة','غير ذوّابة','ملونة']],['ملح غير ذوّاب:',['AgCl','NaCl','KNO₃']],['يُحضّر الملح غير الذوّاب بـ:',['الترسيب','المعايرة','التبخير']],['تُحضّر أملاح الصوديوم الذوّابة بـ:',['المعايرة','الترسيب','حمض + فلز']]]);
+
+</script>
+<script>window.NARR=["r1", "r2", "rv1", "x1", "x2", "x3", "rv2", "h1", "h2", "s1", "s2", "rv3", "a1", "a2", "a3", "t1", "t2", "rv4"];window.AUDIO_BASE="audio-c11/";</script>
+<style>
+.fxbar{position:fixed;left:10px;bottom:10px;z-index:90;display:flex;gap:6px}
+.fxbar button{width:46px;height:46px;border-radius:50%;border:none;background:#1f2a44;color:#fff;font-size:1.3rem;box-shadow:0 4px 12px #0004;cursor:pointer}
+.say{border:2px solid #f08c2e;background:#fff7e8;color:#b35b00;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.9rem;margin:0 6px;vertical-align:middle;font-family:inherit}
+.say.on{background:#f08c2e;color:#fff;animation:pul 1s infinite}
+@keyframes pul{50%{transform:scale(1.06)}}
+.cfx{position:fixed;pointer-events:none;z-index:95;font-size:20px;animation:cf 1.1s ease-out forwards}
+@keyframes cf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+.pop{animation:popk .35s}
+@keyframes popk{50%{transform:scale(1.08)}}
+.shk{animation:shk .4s}
+@keyframes shk{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.stars{position:fixed;bottom:16px;left:66px;background:#1f2a44;color:#fff;border-radius:20px;padding:3px 14px;font-weight:900;z-index:91;font-family:inherit;transition:.3s}
+</style>
+<div class="fxbar"><button id="fxMute" title="الأصوات">🔊</button></div>
+<div class="stars" id="fxStars">⭐ 0</div>
+<script>
+(function(){let AC=null,mute=false,stars=0;try{mute=localStorage.getItem('lb_mute')==='1';stars=+localStorage.getItem('lb_stars_'+location.pathname)||0}catch(e){}
+ const mb=document.getElementById('fxMute');const sb=document.getElementById('fxStars');const upd=()=>{mb.textContent=mute?'🔇':'🔊';sb.textContent='⭐ '+stars};upd();
+ mb.onclick=()=>{mute=!mute;try{localStorage.setItem('lb_mute',mute?'1':'0')}catch(e){}upd();if(mute&&cur){cur.pause();cur=null;document.querySelectorAll('.say.on').forEach(b=>b.classList.remove('on'))}};
+ function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC}
+ function tone(f,t0,d,type,v){const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,a.currentTime+t0);g.gain.setValueAtTime(0,a.currentTime+t0);g.gain.linearRampToValueAtTime(v||.18,a.currentTime+t0+.015);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+t0+d);o.connect(g);g.connect(a.destination);o.start(a.currentTime+t0);o.stop(a.currentTime+t0+d+.05)}
+ const S={ok:()=>{tone(523,0,.15,'triangle');tone(659,.09,.15,'triangle');tone(784,.18,.3,'triangle')},no:()=>{tone(220,0,.18,'sawtooth',.08);tone(185,.12,.25,'sawtooth',.08)},tick:()=>tone(900,0,.04,'square',.03),win:()=>{[523,659,784,1046,784,1046].forEach((f,i)=>tone(f,i*.1,.22,'triangle'))},whoosh:()=>{const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.frequency.setValueAtTime(300,a.currentTime);o.frequency.exponentialRampToValueAtTime(1200,a.currentTime+.25);g.gain.setValueAtTime(.06,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.3);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.32)}};
+ window.FX=S;
+ function confetti(el,big){const r=el&&el.getBoundingClientRect?el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};const E=['⭐','✨','🎉','💚','🌟','🎊'];const n=big?26:9;
+  for(let i=0;i<n;i++){const s=document.createElement('div');s.className='cfx';s.textContent=E[i%E.length];s.style.left=(r.left+r.width/2)+'px';s.style.top=(r.top+r.height/2)+'px';const a=Math.random()*6.28,d=(big?160:70)+Math.random()*80;s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',(Math.sin(a)*d-40)+'px');s.style.setProperty('--r',(Math.random()*720-360)+'deg');document.body.appendChild(s);setTimeout(()=>s.remove(),1200)}}
+ let last=0,lastNo=0;function hit(el,good){const now=Date.now();if(good){if(now-lastNo<400||now-last<250)return;last=now;S.ok();confetti(el);stars++;try{localStorage.setItem('lb_stars_'+location.pathname,stars)}catch(e){}upd();sb.classList.add('pop');setTimeout(()=>sb.classList.remove('pop'),400);el.classList&&el.classList.add('pop');setTimeout(()=>el.classList&&el.classList.remove('pop'),400);
+   if(stars%10===0){S.win();confetti(sb,true)}}else{lastNo=now;S.no();el.classList&&el.classList.add('shk');setTimeout(()=>el.classList&&el.classList.remove('shk'),450)}}
+ new MutationObserver(ms=>{ms.forEach(m=>{const t=m.target;if(!(t instanceof Element))return;if(m.type==='attributes'){const was=(m.oldValue||'').split(/\s+/);const c=t.classList;if(c.contains('ok')&&!was.includes('ok')&&(t.matches('button,input,.fb,.opt')))hit(t,true);else if(c.contains('no')&&!was.includes('no')&&t.matches('button,input,.opt'))hit(t,false)}})}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class'],attributeOldValue:true});
+ document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&!b.classList.contains('say')&&b.id!=='fxMute')S.tick()},true);
+ document.addEventListener('input',e=>{if(e.target.type==='range'){const n=Date.now();if(!window._lt||n-window._lt>90){window._lt=n;tone(400+(+e.target.value-+e.target.min)/(+e.target.max-+e.target.min+.001)*600,0,.03,'sine',.03)}}},true);
+ /* narration */
+ let cur=null;const base=window.AUDIO_BASE||'audio/';
+ function addSay(){document.querySelectorAll('.page').forEach(p=>{if(!(window.NARR||[]).includes(p.id))return;const h=p.querySelector('h2');if(!h||h.querySelector('.say'))return;const b=document.createElement('button');b.className='say';b.textContent='🔊 اسمع';
+  b.onclick=()=>{if(cur){cur.pause();const was=b.classList.contains('on');document.querySelectorAll('.say.on').forEach(x=>x.classList.remove('on'));cur=null;if(was)return}if(mute){mute=false;upd()}const a=new Audio(base+p.id+'.mp3');cur=a;b.classList.add('on');b.textContent='⏸️ إيقاف';a.onended=a.onerror=()=>{b.classList.remove('on');b.textContent='🔊 اسمع';cur=null};a.play().catch(()=>{b.classList.remove('on');b.textContent='🔊 اسمع'})};h.appendChild(b)})}
+ addSay();document.querySelectorAll('#bar button,[data-go]').forEach(b=>b.addEventListener('click',()=>{S.whoosh();if(cur){cur.pause();cur=null;document.querySelectorAll('.say').forEach(x=>{x.classList.remove('on');x.textContent='🔊 اسمع'})}}));
+})();
+</script>
+
+</body>
+</html>
