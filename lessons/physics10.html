@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>فيزياء الأول الثانوي – الكتاب الحي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+html{color-scheme:light}button,input,select{font-family:inherit;color:#1f2a44}
+:root{--ink:#1f2a44;--tl:#d9480f;--tl2:#fff4e6;--or:#f08c2e;--gr:#2e9e5b;--rd:#d64545;--pu:#6b4fd8;--line:#e2e8ee;--soft:#6b7690}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Cairo',Tahoma,sans-serif;background:#e9eef6;color:var(--ink);line-height:1.85}
+.book{max-width:800px;margin:12px auto;background:#fff;border-radius:16px;box-shadow:0 10px 30px #0002;overflow:hidden}
+header{background:linear-gradient(135deg,#a63d00,#f76707);color:#fff;padding:16px;text-align:center}
+header h1{margin:0;font-size:1.3rem;font-weight:900}header div{opacity:.9;font-size:.85rem}
+.bar{display:flex;gap:6px;padding:8px 10px;background:var(--tl2);border-bottom:2px solid #c9d8f0;position:sticky;top:0;z-index:5;overflow-x:auto}
+.bar button{flex:0 0 auto;border:2px solid var(--tl);background:#fff;color:#1b3f73;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.86rem}
+.bar button.on{background:var(--tl);color:#fff}
+.page{display:none;padding:14px 16px 40px;animation:in .35s}.page.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h2{color:#1b3f73;margin:4px 0 6px;font-size:1.35rem;line-height:1.5}
+.num{display:inline-block;background:var(--tl);color:#fff;border-radius:10px;padding:0 10px;margin-left:6px;font-size:1rem}
+.box{border:2px solid var(--line);border-radius:16px;padding:14px;margin:14px 0;background:#fff}
+.box h3{margin:0 0 6px;font-size:1.05rem;color:#1b3f73}
+.lab{border-style:dashed;border-color:#a9c3ea;background:#fbfcff}
+.idea{background:linear-gradient(135deg,#a63d00,#f76707);color:#fff;border-radius:16px;padding:12px 16px;margin:10px 0;font-weight:800}
+.idea small{display:block;opacity:.85;font-weight:600}
+.life{background:#fff7e8;border-right:5px solid var(--or);border-radius:10px;padding:8px 12px;margin:10px 0}
+.law{background:#fff7e8;border:2px solid #f5c27a;border-radius:14px;padding:10px 14px;margin:10px 0;font-weight:800;text-align:center;font-size:1.05rem}
+.warn{background:#fdeeee;border-right:5px solid var(--rd);border-radius:10px;padding:8px 12px;margin:10px 0}
+.btn{border:2px solid var(--ink);background:#fff;border-radius:10px;padding:6px 14px;font-weight:800;cursor:pointer;font-size:.95rem}
+.btn.main{background:var(--tl);border-color:var(--tl);color:#fff}.btn.or{background:var(--or);border-color:var(--or);color:#2a1600}
+.btn.ok{background:#dff5e7;border-color:var(--gr)}.btn.no{background:#fde4e4;border-color:var(--rd)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;justify-content:center}
+.fb{font-weight:800;min-height:1.4em;text-align:center;margin-top:6px}.fb.ok{color:var(--gr)}.fb.no{color:var(--rd)}
+.prob{background:#f5f8fd;border-radius:14px;padding:10px;text-align:center;font-weight:700}
+.mx{font-size:1.2rem;font-weight:800;line-height:2.1}
+.sc{text-align:center;font-weight:900;background:var(--tl2);border-radius:12px;padding:8px}
+.steps{background:#f8f9fc;border-radius:12px;padding:8px 12px;margin-top:8px;display:none}
+.opt{display:block;width:100%;text-align:right;margin:5px 0}.opt.ok{background:#dff5e7;border-color:var(--gr)}.opt.no{background:#fde4e4;border-color:var(--rd)}
+input.cf{width:60px;height:42px;font-size:1.15rem;font-weight:900;text-align:center;border:3px solid #c9d8f0;border-radius:10px;direction:ltr;vertical-align:middle;margin:0 2px}
+input.cf.ok{border-color:var(--gr);background:#eefaf2}input.cf.no{border-color:var(--rd);background:#fdeeee}
+/* matrix */
+.M{display:inline-flex;align-items:stretch;vertical-align:middle;margin:2px 4px}
+.M .br{width:8px;border:3px solid var(--ink)}.M .br.r{border-left:none;border-radius:0 6px 6px 0}.M .br.l{border-right:none;border-radius:6px 0 0 6px}
+.M.det .br{width:0;border-width:0 0 0 3px;border-radius:0}.M.det .br.l{border-width:0 3px 0 0}
+.M .g{display:grid;direction:rtl;gap:2px 4px;padding:2px 4px}
+.M .c{min-width:36px;text-align:center;font-weight:900;font-size:1.1rem;padding:2px 4px;border-radius:8px;direction:ltr;transition:.25s}
+.M .c.h1{background:#ffe08a}.M .c.h2{background:#b9e4ff}.M .c.x{opacity:.18;text-decoration:line-through}.M .c.h3{background:#c8f0d2}
+.M input.c{width:48px;height:36px;border:2px solid #c9d8f0;border-radius:8px;background:#fff;font-family:inherit}
+.chap{border:2px solid var(--line);border-radius:14px;margin:8px 0;overflow:hidden}
+.chap>div:first-child{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;font-weight:800;background:#f8faff}
+.chap .cn{background:var(--tl);color:#fff;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;flex:0 0 auto}
+.chap .ls{display:none;padding:4px 12px 10px}.chap.open .ls{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px dashed var(--line);font-size:.95rem}
+.li .pg{margin-right:auto;color:var(--soft);font-size:.8rem}.li.ready{cursor:pointer;font-weight:800;color:#1b3f73}
+.tg{font-size:.72rem;border-radius:8px;padding:0 8px;font-weight:800}.tg.r{background:#e6f6ec;color:#1d7a3f}.tg.s{background:#f1f1f1;color:#999}
+table.t{border-collapse:collapse;width:100%;font-size:.92rem;margin:6px 0}table.t td,table.t th{border:1px solid #d6e1f2;padding:5px 8px}table.t th{background:var(--tl2)}
+.sl{display:flex;align-items:center;gap:8px;margin:4px 0}.sl label{min-width:90px;font-weight:800}.sl input{flex:1;accent-color:var(--tl)}
+footer{text-align:center;color:#999;font-size:.8rem;padding:10px 10px 70px}
+.rt{direction:ltr;unicode-bidi:isolate;display:inline-block}.wx,.bx{border:1px solid #dbe5f5;border-radius:12px;padding:8px 10px;margin:8px 0;background:#fbfcff}.wxq{font-weight:700;line-height:2}.wst{background:#fff;border-right:4px solid var(--tl);border-radius:8px;padding:4px 10px;margin:5px 0;animation:in .3s;line-height:2}.wst.fin{border-color:var(--gr);background:#eefaf2}.sn{display:inline-block;background:var(--tl);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:.8rem;margin-left:6px}.bh{background:#fff7e8;border-radius:8px;padding:6px 10px;margin:4px 0}.ans{font-weight:900;color:var(--gr);margin-top:4px}.exb{border-color:#a9c3ea}.M.det .br.r,.M.det .br.l{border:none;border-radius:0;width:0}.M.det .br.r{border-right:3px solid var(--ink)}.M.det .br.l{border-left:3px solid var(--ink)}.bkb{border-color:#f5c27a;background:#fffdf8}/*darkfix*/input,select,textarea,.cf,.M input.c{background-color:#fff !important;color:#1f2a44 !important;-webkit-text-fill-color:#1f2a44 !important;caret-color:#1f2a44}input.cf.ok{background-color:#eefaf2 !important}input.cf.no{background-color:#fdeeee !important}svg text{font-family:Cairo,Tahoma,Arial,sans-serif}
+canvas{touch-action:manipulation;max-width:100%;height:auto}
+.shk{animation:shk .4s}@keyframes shk{25%{transform:translateX(6px)}75%{transform:translateX(-6px)}}
+ol.steps{display:block;background:none}
+</style>
+</head>
+<body>
+<div class="book">
+<header><h1>⚛️ فيزياء الأول الثانوي</h1><div>الكتاب الحي · القياس · الحركة · القوى · الكثافة · العزوم · الطاقة · الضغط</div></header>
+<div class="bar" id="bar">
+  <button data-p="home" class="on">📚 الفهرس</button>
+  <button data-p="m1">1 الكميات والوحدات والبوادئ</button>
+  <button data-p="m2">1 قياس الطول والزمن</button>
+  <button data-p="k1">2 الإزاحة والسرعة</button>
+  <button data-p="k2">2 العجلة (التسارع)</button>
+  <button data-p="k3">2 السقوط الحر ومقاومة الهواء</button>
+  <button data-p="rv1">🏁 مراجعة 1–2</button>
+  <button data-p="f1">3 الكميات القياسية والمتجهة</button>
+  <button data-p="f2">3 قوانين نيوتن</button>
+  <button data-p="w1">4 الكتلة والوزن</button>
+  <button data-p="w2">4 الكثافة</button>
+  <button data-p="rv2">🏁 مراجعة 3–4</button>
+  <button data-p="t1">5 العزوم</button>
+  <button data-p="t2">5 مركز الثقل والثبات</button>
+  <button data-p="e1">6 الشغل والطاقة</button>
+  <button data-p="e2">6 القدرة</button>
+  <button data-p="rv3">🏁 مراجعة 5–6</button>
+  <button data-p="p1">7 الضغط والضغط في السوائل</button>
+  <button data-p="p2">7 المكبس والبارومتر والمانومتر</button>
+  <button data-p="rv4">🏁 مراجعة 7</button>
+</div>
+<style>
+.sl{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px 0;font-weight:800}
+.sl input[type=range]{width:200px;accent-color:var(--tl)}
+.pool{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.pool button{border:2px solid var(--line);border-radius:12px;background:#fff;padding:7px 11px;font-family:inherit;font-weight:800;cursor:pointer;font-size:.92rem}
+.pool button.sel{border-color:var(--tl);background:var(--tl2)}
+.pool button.ok{border-color:#2fb24c;background:#e6f7ea}.pool button.no{border-color:#e5484d;background:#fde8e8}
+.cat{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}
+.cat>div{border:2px dashed var(--line);border-radius:14px;padding:8px;min-height:70px;text-align:center;cursor:pointer}
+.cat>div b{display:block;margin-bottom:4px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.steps li{background:#fff;border:2px solid var(--line);border-radius:12px;padding:8px 12px;margin:6px 0;font-weight:800;cursor:pointer;display:flex;gap:8px;align-items:center}
+.steps li.ok{border-color:#2fb24c;background:#e6f7ea}.steps li b{min-width:26px;height:26px;border-radius:50%;background:var(--tl);color:#fff;display:grid;place-items:center;font-size:.85rem}
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0}
+.tools button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px 2px;font-family:inherit;font-weight:800;font-size:.72rem;cursor:pointer}
+.tools button svg{width:100%;height:58px;display:block}.tools button.sel{border-color:var(--tl);background:var(--tl2)}
+.hz{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.hz button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px;cursor:pointer;font-family:inherit;font-weight:800;font-size:.75rem}
+.hz button.sel{border-color:var(--tl);background:var(--tl2)}.hz button.ok{border-color:#2fb24c;background:#e6f7ea}
+.hz svg{width:64px;height:64px;display:block;margin:auto}
+.big2{font-size:1.5rem;font-weight:900;text-align:center;margin:6px 0}
+.matr{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:8px 0}
+.matr button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 2px;font-family:inherit;font-weight:800;font-size:.8rem;cursor:pointer}
+.matr button span{font-size:1.6rem;display:block}.matr button.sel{border-color:var(--tl);background:var(--tl2)}
+.ptab{display:grid;grid-template-columns:repeat(18,1fr);gap:2px;direction:ltr;margin:8px 0}
+.ptab div{aspect-ratio:1;border-radius:4px;font-size:.55rem;font-weight:900;display:grid;place-items:center;cursor:pointer;line-height:1}
+.ptab div.m{background:#ffd8a8}.ptab div.n{background:#b2f2bb}.ptab div.g{background:#a5d8ff}.ptab div.sel{outline:3px solid #e5484d}
+</style>
+<style>
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.chips button{border:2px solid var(--line);border-radius:20px;background:#fff;padding:6px 12px;font-family:inherit;font-weight:800;cursor:pointer}
+.chips button.on{border-color:var(--tl);background:var(--tl2)}
+.sl{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;margin:6px 0;font-weight:800}
+.sl input[type=range]{flex:1;min-width:140px;max-width:300px}
+.sl select,.sl input[type=number]{font-family:inherit;font-weight:800;font-size:1rem;border:2px solid var(--line);border-radius:10px;padding:3px 6px}
+.sl input[type=number]{width:90px;text-align:center}
+.tbl{width:100%;border-collapse:collapse;margin:8px 0;font-weight:800;text-align:center;background:#fff}.tbl td,.tbl th{border:2px solid var(--line);padding:6px}.tbl th{background:var(--tl2)}
+.big2{font-size:1.2rem;font-weight:900;text-align:center;color:var(--tl);margin:6px 0;line-height:1.9}
+.eq{direction:ltr;unicode-bidi:isolate;font-weight:900;display:inline-block}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}.card{border:2px solid var(--line);border-radius:14px;padding:10px;text-align:center;cursor:pointer;background:#fff;font-weight:800;min-height:80px}.card .big{font-size:1.8rem;display:block}.card .bk{display:none;font-weight:600;font-size:.88rem;color:#333}.card.flip{background:var(--tl2);border-color:var(--tl)}.card.flip .bk{display:block}.card.flip .fr{display:none}
+</style>
+
+<section class="page on" id="home">
+  <h2>فهرس الكتاب</h2>
+  <div class="idea">⚛️ أهلًا بك في فيزياء الأول الثانوي الحي!<small>اقرأ القدمة ذات الورنية والميكرومتر، وأرجح البندول، وارسم منحنيات الحركة بسيارتك، وأسقط الريشة والكرة مع الهواء وبدونه، واجمع القوى بالمتجهات، وزِن نفسك على القمر، واحسب الكثافة بالغمر، ووازن الأرجوحة بالعزوم، وأطلق الكرة على المنحدر لترى تحولات الطاقة، وارفع سيارة بمكبس هيدروليكي… مع أسئلة لا تنتهي وشرح صوتي.</small></div>
+  <div id="toc"></div>
+</section>
+
+<!-- ================= الوحدة 1 ================= -->
+<section class="page" id="m1">
+  <div class="muted">الوحدة 1 · 1-1 و 2-1 · ص 7–9</div>
+  <h2><span class="num">1</span>الكميات الفيزيائية ووحدات النظام الدولي</h2>
+  <div class="idea">💡 كل كمية فيزيائية = <b>مقدار عددي + وحدة</b>. الكميات الأساسية السبع: الكتلة (kg)، الطول (m)، الزمن (s)، شدة التيار (A)، درجة الحرارة (K)، كمية المادة (mol)، الشدة الضوئية (cd).<small>البوادئ: ميكرو µ = 10<sup>−6</sup> · مللي m = 10<sup>−3</sup> · سنتي c = 10<sup>−2</sup> · ديسي d = 10<sup>−1</sup> · كيلو k = 10<sup>3</sup> · ميجا M = 10<sup>6</sup></small></div>
+  <div class="box lab"><h3>🃏 الكميات الأساسية السبع</h3><div class="hint" style="text-align:center">اضغط البطاقة لتعرف وحدتها ورمزها</div><div class="cards" id="bqCards"></div></div>
+  <div class="box lab"><h3>🔁 المختبر: محوّل البوادئ</h3>
+    <div class="sl"><input type="number" id="pxV" value="2.5" step="any"> <select id="pxF"></select> ⟵ إلى ⟵ <select id="pxT"></select> <select id="pxU"><option value="m">متر m</option><option value="g">جرام g</option><option value="s">ثانية s</option><option value="W">واط W</option></select></div>
+    <canvas id="pxC" class="cv" width="640" height="200"></canvas><div class="big2" id="pxOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qm1"></div></div>
+</section>
+
+<section class="page" id="m2">
+  <div class="muted">الوحدة 1 · 3-1 و 4-1 · ص 10–17</div>
+  <h2><span class="num">1</span>قياس الطول والزمن</h2>
+  <div class="idea">💡 <b>المسطرة المترية</b> دقتها 0.1 cm · <b>القدمة ذات الورنية</b> دقتها <b>0.01 cm</b> · <b>الميكرومتر</b> دقته <b>0.01 mm</b>.<small>قراءة الورنية = قراءة التدريج الرئيسي قبل صفر الورنية + (رقم خط الورنية المنطبق × 0.01 cm). <b>الزمن الدوري τ</b> للبندول: زمن ذبذبة كاملة. نقيس زمن 20 ذبذبة ونقسم لتقليل الخطأ. τ يزداد بزيادة طول الخيط، ولا يعتمد على سعة الذبذبة الصغيرة.</small></div>
+  <div class="box lab"><h3>📏 المختبر: اقرأ القدمة ذات الورنية</h3><canvas id="vnC" class="cv" width="640" height="230"></canvas><div id="vnQ"></div><div class="btns"><button class="btn" id="vnH">💡 أرني الخط المنطبق</button><button class="btn main" id="vnN">🔄 جسم آخر</button></div><div class="fb" id="vnOut"></div></div>
+  <div class="box lab"><h3>🔩 المختبر: اقرأ الميكرومتر</h3><canvas id="mcC" class="cv" width="640" height="230"></canvas><div id="mcQ"></div><div class="btns"><button class="btn main" id="mcN">🔄 سلك آخر</button></div><div class="fb" id="mcOut"></div></div>
+  <div class="box lab"><h3>🕰️ المختبر: البندول البسيط</h3><div class="sl">طول الخيط L <input type="range" id="pdL" min="20" max="120" value="60"><b id="pdLv"></b></div><div class="sl">السعة <input type="range" id="pdA" min="5" max="20" value="10"><b id="pdAv"></b></div>
+    <canvas id="pdC" class="cv" width="640" height="300"></canvas><div class="btns"><button class="btn main" id="pdT">⏱️ قِس زمن 20 ذبذبة</button></div><div id="pdTb"></div><div class="fb" id="pdOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qm2"></div></div>
+</section>
+
+<!-- ================= الوحدة 2 ================= -->
+<section class="page" id="k1">
+  <div class="muted">الوحدة 2 · 1-2 إلى 3-2 · ص 23–27</div>
+  <h2><span class="num">2</span>المسافة والإزاحة · السرعة · منحنى الإزاحة والزمن</h2>
+  <div class="idea">💡 <b>المسافة</b>: طول المسار الكلي (قياسية). <b>الإزاحة</b>: المسافة في اتجاه محدد من نقطة البداية (متجهة).<small><b>السرعة القياسية</b> = المسافة ÷ الزمن · <b>السرعة الاتجاهية</b> = الإزاحة ÷ الزمن (m s<sup>−1</sup>). في منحنى الإزاحة–الزمن: <b>الميل = السرعة الاتجاهية</b> · خط أفقي = الجسم ساكن · ميل سالب = يعود للخلف.</small></div>
+  <div class="box lab"><h3>🚗 المختبر: ارسم رحلتك</h3><div class="hint" style="text-align:center">أضف مراحل للرحلة (كل مرحلة ثانيتان)، ثم شغّل</div><div class="chips" id="trK"></div>
+    <canvas id="trC" class="cv" width="640" height="380"></canvas><div class="btns"><button class="btn main" id="trGo">▶️ شغّل</button><button class="btn" id="trClr">🧹 امسح</button></div><div class="fb" id="trOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qk1"></div></div>
+</section>
+
+<section class="page" id="k2">
+  <div class="muted">الوحدة 2 · 4-2 و 5-2 · ص 28–32</div>
+  <h2><span class="num">2</span>العجلة (التسارع) · منحنى السرعة والزمن</h2>
+  <div class="idea">💡 <b>العجلة</b> = معدل تغيّر السرعة الاتجاهية: <span class="eq">a = (v − u) / t</span> ووحدتها m s<sup>−2</sup>.<small>في منحنى السرعة–الزمن: <b>الميل = العجلة</b> · <b>المساحة تحت المنحنى = الإزاحة</b> · عجلة سالبة = تباطؤ.</small></div>
+  <div class="box lab"><h3>🏎️ المختبر: دوّاسة الوقود</h3><div class="sl">السرعة الابتدائية u <input type="range" id="acU" min="0" max="10" value="2"><b id="acUv"></b></div><div class="sl">العجلة a <input type="range" id="acA" min="-2" max="3" step="0.5" value="1.5"><b id="acAv"></b></div>
+    <canvas id="acC" class="cv" width="640" height="380"></canvas><div class="btns"><button class="btn main" id="acGo">▶️ انطلق 6 ثوانٍ</button></div><div class="fb" id="acOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qk2"></div></div>
+</section>
+
+<section class="page" id="k3">
+  <div class="muted">الوحدة 2 · 6-2 و 7-2 · ص 33–35</div>
+  <h2><span class="num">2</span>السقوط الحر · مقاومة الهواء</h2>
+  <div class="idea">💡 في غياب مقاومة الهواء تسقط كل الأجسام بنفس العجلة: <span class="eq">g ≈ 9.8 m s<sup>−2</sup></span> مهما اختلفت كتلتها.<small><b>مقاومة الهواء</b> تعارض الحركة وتزداد بزيادة السرعة ومساحة الجسم. عندما تتساوى مع الوزن تصبح القوة المحصلة صفرًا ويسقط الجسم بـ<b>سرعة نهائية ثابتة</b>.</small></div>
+  <div class="box lab"><h3>🪶 المختبر: برج الإسقاط</h3><div class="chips" id="ffK"></div><div class="chips" id="ffA"></div>
+    <canvas id="ffC" class="cv" width="640" height="400"></canvas><div class="btns"><button class="btn main" id="ffGo">⬇️ أسقط</button></div><div class="fb" id="ffOut"></div></div>
+  <div class="box lab"><h3>🥚 لعبة: أنقذ البيضة!</h3><div class="hint" style="text-align:center">تسقط البيضة من سطح عمارة ارتفاعها 30 m. اختر حجم المظلة: البيضة تنكسر إذا وصلت الأرض بسرعة أكبر من 5 m/s… لكن المظلة الكبيرة جدًا تحملها الرياح بعيدًا!</div>
+    <div class="sl">🪂 مساحة المظلة <input type="range" id="egA" min="0" max="10" value="2"><b id="egAv"></b></div><canvas id="egC" class="cv" width="640" height="360"></canvas><div class="btns"><button class="btn main" id="egGo">🥚 أسقط البيضة</button></div><div class="fb" id="egOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qk3"></div></div>
+</section>
+
+<section class="page" id="rv1">
+  <div class="muted">الوحدتان 1–2 · مراجعة</div>
+  <h2>🏁 مراجعة: القياس والحركة</h2>
+  <div class="sc" id="rv1Sc"></div><div id="rv1Q"></div><div class="btns"><button class="btn or" id="rv1New">🔄 اختبار جديد</button></div>
+</section>
+
+<!-- ================= الوحدة 3 ================= -->
+<section class="page" id="f1">
+  <div class="muted">الوحدة 3 · 1-3 و 2-3 · ص 42–46</div>
+  <h2><span class="num">3</span>طبيعة القوة · الكميات القياسية والمتجهة</h2>
+  <div class="idea">💡 <b>القوة</b> دفع أو سحب، ووحدتها النيوتن (N). <b>الكمية القياسية</b> لها مقدار فقط (الكتلة، الزمن، المسافة، الطاقة). <b>الكمية المتجهة</b> لها مقدار واتجاه (القوة، الإزاحة، السرعة الاتجاهية، العجلة).<small>محصلة قوتين في نفس الاتجاه = مجموعهما، وفي اتجاهين متعاكسين = الفرق بينهما، وبينهما زاوية ⟸ نستخدم <b>متوازي الأضلاع</b>.</small></div>
+  <div class="box lab"><h3>🏹 المختبر: متوازي أضلاع القوى</h3><div class="sl">F<sub>1</sub> <input type="range" id="vcA" min="1" max="10" value="6"><b id="vcAv"></b> F<sub>2</sub> <input type="range" id="vcB" min="1" max="10" value="4"><b id="vcBv"></b></div><div class="sl">الزاوية بينهما <input type="range" id="vcT" min="0" max="180" step="5" value="60"><b id="vcTv"></b></div>
+    <canvas id="vcC" class="cv" width="640" height="340"></canvas><div class="big2" id="vcOut"></div></div>
+  <div class="box lab"><h3>🧩 قياسية أم متجهة؟</h3><div class="pool" id="svP"></div><div class="cat" id="svC"></div><div class="fb" id="svOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qf1"></div></div>
+</section>
+
+<section class="page" id="f2">
+  <div class="muted">الوحدة 3 · 3-3 إلى 5-3 · ص 47–53</div>
+  <h2><span class="num">3</span>قوانين نيوتن · القوى المتوازنة وغير المتوازنة</h2>
+  <div class="idea">💡 <b>القانون الأول</b>: يبقى الجسم ساكنًا أو متحركًا بسرعة ثابتة في خط مستقيم ما لم تؤثر عليه قوة محصلة. <b>الثاني</b>: <span class="eq">F = ma</span> (1 N = 1 kg m s<sup>−2</sup>). <b>الثالث</b>: لكل فعل ردّ فعل مساوٍ له في المقدار ومضاد في الاتجاه.<small>القوى <b>المتوازنة</b>: محصلتها صفر ⟸ لا تغيّر في الحركة. <b>غير المتوازنة</b> ⟸ عجلة في اتجاه المحصلة.</small></div>
+  <div class="box lab"><h3>🛒 المختبر: ادفع العربة</h3><div class="sl">القوة F <input type="range" id="nwF" min="0" max="60" step="5" value="20"><b id="nwFv"></b></div><div class="sl">الكتلة m <input type="range" id="nwM" min="1" max="20" value="5"><b id="nwMv"></b></div><div class="sl">الاحتكاك <input type="range" id="nwR" min="0" max="30" step="5" value="0"><b id="nwRv"></b></div>
+    <canvas id="nwC" class="cv" width="640" height="240"></canvas><div class="btns"><button class="btn main" id="nwGo">▶️ ادفع</button></div><div class="big2" id="nwOut"></div></div>
+  <div class="box lab"><h3>🪢 شدّ الحبل: متوازنة أم لا؟</h3><div class="sl">الفريق الأيمن <input type="range" id="twR" min="100" max="800" step="50" value="400"><b id="twRv"></b></div><div class="sl">الفريق الأيسر <input type="range" id="twL" min="100" max="800" step="50" value="400"><b id="twLv"></b></div><canvas id="twC" class="cv" width="640" height="200"></canvas><div class="fb" id="twOut"></div></div>
+  <div class="box lab"><h3>🚀 الفعل وردّ الفعل</h3><div id="n3Q"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qf2"></div></div>
+</section>
+
+<!-- ================= الوحدة 4 ================= -->
+<section class="page" id="w1">
+  <div class="muted">الوحدة 4 · 1-4 · ص 59–62</div>
+  <h2><span class="num">4</span>القصور الذاتي · الكتلة والوزن</h2>
+  <div class="idea">💡 <b>الكتلة</b>: كمية المادة في الجسم، وهي مقياس <b>لقصوره الذاتي</b> (ممانعته لتغيير حركته)، ولا تتغير من مكان لآخر (kg). <b>الوزن</b>: قوة جذب الأرض للجسم: <span class="eq">W = mg</span> (N).<small>تقاس الكتلة بالميزان ذي الكفتين (يقارن كتلتين)، ويقاس الوزن بالميزان الزنبركي. على القمر الوزن أقل، والكتلة نفسها!</small></div>
+  <div class="box lab"><h3>🪐 المختبر: زِن نفسك في الفضاء</h3><div class="sl">الكتلة m <input type="range" id="plM" min="10" max="120" value="60"><b id="plMv"></b></div><div class="chips" id="plK"></div>
+    <canvas id="plC" class="cv" width="640" height="300"></canvas><div class="big2" id="plOut"></div></div>
+  <div class="box lab"><h3>🧠 القصور الذاتي من حولنا</h3><div id="inQ"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qw1"></div></div>
+</section>
+
+<section class="page" id="w2">
+  <div class="muted">الوحدة 4 · 2-4 · ص 63–65</div>
+  <h2><span class="num">4</span>قياس الكثافة</h2>
+  <div class="idea">💡 <b>الكثافة</b> = الكتلة ÷ الحجم: <span class="eq">ρ = m / V</span> ووحدتها kg m<sup>−3</sup> أو g cm<sup>−3</sup> (1 g cm<sup>−3</sup> = 1000 kg m<sup>−3</sup>).<small>حجم الجسم غير المنتظم نقيسه بـ<b>الإزاحة</b> في المخبار المدرج. الجسم الأقل كثافة من الماء (1 g cm<sup>−3</sup>) يطفو.</small></div>
+  <div class="box lab"><h3>⚖️ المختبر: الميزان والمخبار</h3><div class="chips" id="dnK"></div>
+    <canvas id="dnC" class="cv" width="640" height="320"></canvas><div class="btns"><button class="btn main" id="dnGo">⬇️ اغمر في المخبار</button></div><div class="big2" id="dnOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qw2"></div></div>
+</section>
+
+<section class="page" id="rv2">
+  <div class="muted">الوحدتان 3–4 · مراجعة</div>
+  <h2>🏁 مراجعة: القوى والكتلة والوزن والكثافة</h2>
+  <div class="sc" id="rv2Sc"></div><div id="rv2Q"></div><div class="btns"><button class="btn or" id="rv2New">🔄 اختبار جديد</button></div>
+</section>
+
+<!-- ================= الوحدة 5 ================= -->
+<section class="page" id="t1">
+  <div class="muted">الوحدة 5 · 1-5 · ص 70–73</div>
+  <h2><span class="num">5</span>العزوم ومبدأ العزوم</h2>
+  <div class="idea">💡 <b>عزم القوة</b> = القوة × البعد العمودي عن محور الدوران: <span class="eq">M = F × d</span> ووحدته N m.<small><b>مبدأ العزوم</b>: إذا كان الجسم متزنًا فإن مجموع العزوم في اتجاه عقارب الساعة = مجموع العزوم عكس عقارب الساعة. لذلك يُصنع مقبض الباب بعيدًا عن المفصلات!</small></div>
+  <div class="box lab"><h3>⚖️ المختبر: وازن الأرجوحة</h3>
+    <div class="sl">الأيمن: القوة <input type="range" id="ssF1" min="100" max="800" step="50" value="400"><b id="ssF1v"></b> البعد <input type="range" id="ssD1" min="0.5" max="3" step="0.5" value="1.5"><b id="ssD1v"></b></div>
+    <div class="sl">الأيسر: القوة <input type="range" id="ssF2" min="100" max="800" step="50" value="300"><b id="ssF2v"></b> البعد <input type="range" id="ssD2" min="0.5" max="3" step="0.5" value="1.5"><b id="ssD2v"></b></div>
+    <canvas id="ssC" class="cv" width="640" height="300"></canvas><div class="btns"><button class="btn main" id="ssCh">🎯 تحدٍّ: وازنها بتحريك البعد الأيسر فقط</button></div><div class="big2" id="ssOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qt1"></div></div>
+</section>
+
+<section class="page" id="t2">
+  <div class="muted">الوحدة 5 · 2-5 · ص 74–78</div>
+  <h2><span class="num">5</span>مركز الثقل والثبات</h2>
+  <div class="idea">💡 <b>مركز الثقل</b>: النقطة التي يبدو أن وزن الجسم كله يعمل من خلالها. للأجسام المنتظمة يقع في مركزها الهندسي، وقد يقع خارج الجسم (الحلقة).<small>يظل الجسم ثابتًا ما دام الخط الرأسي المار بمركز ثقله يقع <b>داخل قاعدته</b>. يزداد الثبات بـ<b>خفض مركز الثقل</b> و<b>توسيع القاعدة</b>.</small></div>
+  <div class="box lab"><h3>📦 المختبر: هل ينقلب؟</h3><div class="sl">عرض القاعدة <input type="range" id="tpB" min="40" max="200" step="10" value="120"><b id="tpBv"></b></div><div class="sl">ارتفاع مركز الثقل <input type="range" id="tpH" min="30" max="160" step="10" value="90"><b id="tpHv"></b></div><div class="sl">زاوية الإمالة <input type="range" id="tpA" min="0" max="60" value="10"><b id="tpAv"></b></div>
+    <canvas id="tpC" class="cv" width="640" height="320"></canvas><div class="fb" id="tpOut"></div></div>
+  <div class="box lab"><h3>🎯 أين مركز الثقل؟</h3><div id="cgQ"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qt2"></div></div>
+</section>
+
+<!-- ================= الوحدة 6 ================= -->
+<section class="page" id="e1">
+  <div class="muted">الوحدة 6 · 1-6 و 2-6 · ص 84–92</div>
+  <h2><span class="num">6</span>الشغل والطاقة</h2>
+  <div class="idea">💡 <b>الشغل</b> = القوة × المسافة في اتجاهها: <span class="eq">W = Fs</span> (1 J = 1 N m). <b>الطاقة الحركية</b>: <span class="eq">E<sub>k</sub> = ½mv²</span> · <b>طاقة الوضع (الكامنة) الجاذبة</b>: <span class="eq">E<sub>p</sub> = mgh</span><small><b>قانون حفظ الطاقة</b>: الطاقة لا تفنى ولا تُستحدث من العدم، بل تتحول من صورة إلى أخرى، والطاقة الكلية ثابتة.</small></div>
+  <div class="box lab"><h3>🎢 المختبر: الكرة على المسار</h3><div class="sl">الارتفاع h <input type="range" id="rcH" min="1" max="10" value="5"><b id="rcHv"></b></div><div class="sl">الكتلة m <input type="range" id="rcM" min="1" max="10" value="4"><b id="rcMv"></b></div><div class="chips" id="rcF"></div>
+    <canvas id="rcC" class="cv" width="640" height="360"></canvas><div class="btns"><button class="btn main" id="rcGo">▶️ أطلق الكرة</button></div><div class="fb" id="rcOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qe1"></div></div>
+</section>
+
+<section class="page" id="e2">
+  <div class="muted">الوحدة 6 · 3-6 · ص 93–95</div>
+  <h2><span class="num">6</span>القدرة</h2>
+  <div class="idea">💡 <b>القدرة</b> = معدل بذل الشغل أو تحويل الطاقة: <span class="eq">P = W / t = E / t</span> ووحدتها الواط (1 W = 1 J s<sup>−1</sup>).<small>من يصعد الدرج أسرع يبذل الشغل نفسه لكن بقدرة أكبر. ومن العلاقة <span class="eq">E = Pt</span> نحسب الطاقة التي يستهلكها جهاز كهربائي.</small></div>
+  <div class="box lab"><h3>🏃 المختبر: سباق الدرج</h3>
+    <div class="sl">🔵 وزن أحمد <input type="range" id="stW1" min="300" max="900" step="50" value="500"><b id="stW1v"></b> الزمن <input type="range" id="stT1" min="2" max="12" value="5"><b id="stT1v"></b></div>
+    <div class="sl">🟠 وزن منى <input type="range" id="stW2" min="300" max="900" step="50" value="450"><b id="stW2v"></b> الزمن <input type="range" id="stT2" min="2" max="12" value="4"><b id="stT2v"></b></div>
+    <div class="sl">ارتفاع الدرج <input type="range" id="stH" min="2" max="10" value="3"><b id="stHv"></b></div>
+    <canvas id="stC" class="cv" width="640" height="320"></canvas><div class="btns"><button class="btn main" id="stGo">🏁 ابدأ السباق</button></div><div class="fb" id="stOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qe2"></div></div>
+</section>
+
+<section class="page" id="rv3">
+  <div class="muted">الوحدتان 5–6 · مراجعة</div>
+  <h2>🏁 مراجعة: العزوم والطاقة والقدرة</h2>
+  <div class="sc" id="rv3Sc"></div><div id="rv3Q"></div><div class="btns"><button class="btn or" id="rv3New">🔄 اختبار جديد</button></div>
+</section>
+
+<!-- ================= الوحدة 7 ================= -->
+<section class="page" id="p1">
+  <div class="muted">الوحدة 7 · 1-7 إلى 4-7 · ص 101–105</div>
+  <h2><span class="num">7</span>الضغط · الضغط في السوائل</h2>
+  <div class="idea">💡 <b>الضغط</b> = القوة العمودية ÷ المساحة: <span class="eq">p = F / A</span> ووحدته الباسكال (1 Pa = 1 N m<sup>−2</sup>).<small><b>الضغط في السوائل</b>: <span class="eq">p = hρg</span>: يزداد بزيادة العمق وكثافة السائل، ويؤثر في جميع الاتجاهات، ولا يعتمد على شكل الإناء.</small></div>
+  <div class="box lab"><h3>🧱 المختبر: الطوبة على الرمل</h3><div class="chips" id="brK"></div><canvas id="brC" class="cv" width="640" height="260"></canvas><div class="big2" id="brOut"></div></div>
+  <div class="box lab"><h3>🚰 المختبر: ثقوب الخزان</h3><div class="chips" id="lqK"></div><div class="sl">العمق h <input type="range" id="lqH" min="0" max="10" step="0.5" value="5"><b id="lqHv"></b></div>
+    <canvas id="lqC" class="cv" width="640" height="340"></canvas><div class="big2" id="lqOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qp1"></div></div>
+</section>
+
+<section class="page" id="p2">
+  <div class="muted">الوحدة 7 · 5-7 إلى 8-7 · ص 106–111</div>
+  <h2><span class="num">7</span>المكبس الهيدروليكي · البارومتر · المانومتر</h2>
+  <div class="idea">💡 ينتقل الضغط في السائل المحصور بالتساوي إلى كل أجزائه: <span class="eq">F<sub>X</sub> / A<sub>X</sub> = F<sub>Y</sub> / A<sub>Y</sub></span>، لذلك ترفع قوة صغيرة سيارة ثقيلة!<small><b>الضغط الجوي</b> ≈ 1.013 × 10<sup>5</sup> Pa = <b>760 mmHg</b>، ويقل كلما ارتفعنا. يقيسه <b>البارومتر الزئبقي</b>. أما <b>المانومتر</b> فيقيس ضغط الغاز: <span class="eq">p<sub>gas</sub> = p<sub>atm</sub> + hρg</span></small></div>
+  <div class="box lab"><h3>🚙 المختبر: المكبس الهيدروليكي</h3><div class="sl">القوة F<sub>X</sub> <input type="range" id="hyF" min="10" max="200" step="10" value="50"><b id="hyFv"></b></div><div class="sl">مساحة الكبير A<sub>Y</sub> ÷ الصغير A<sub>X</sub> <input type="range" id="hyR" min="2" max="50" value="20"><b id="hyRv"></b></div>
+    <canvas id="hyC" class="cv" width="640" height="280"></canvas><div class="big2" id="hyOut"></div></div>
+  <div class="box lab"><h3>🏔️ المختبر: البارومتر على الجبل</h3><div class="sl">الارتفاع عن سطح البحر <input type="range" id="baH" min="0" max="8800" step="200" value="0"><b id="baHv"></b></div><canvas id="baC" class="cv" width="640" height="320"></canvas><div class="fb" id="baOut"></div></div>
+  <div class="box lab"><h3>🎈 المختبر: المانومتر</h3><div class="sl">ضغط الغاز (kPa) <input type="range" id="maP" min="90" max="112" step="1" value="105"><b id="maPv"></b></div><canvas id="maC" class="cv" width="640" height="300"></canvas><div class="fb" id="maOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qp2"></div></div>
+</section>
+
+<section class="page" id="rv4">
+  <div class="muted">الوحدة 7 · مراجعة</div>
+  <h2>🏁 مراجعة: الضغط</h2>
+  <div class="sc" id="rv4Sc"></div><div id="rv4Q"></div><div class="btns"><button class="btn or" id="rv4New">🔄 اختبار جديد</button></div>
+</section>
+<footer>الكتاب الحي · مبني على كتاب الفيزياء للسنة الأولى من مرحلة التعليم الثانوي 2025–2026 (مركز المناهج التعليمية والبحوث التربوية – ليبيا)</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const pages=[...document.querySelectorAll('.page')],nb=[...document.querySelectorAll('#bar button')];
+function go(id){pages.forEach(p=>p.classList.toggle('on',p.id===id));nb.forEach(b=>b.classList.toggle('on',b.dataset.p===id));window.scrollTo({top:0,behavior:'smooth'})}
+nb.forEach(b=>b.onclick=()=>go(b.dataset.p));
+(function(){const h=location.hash.slice(1);if(h&&$(h))go(h);addEventListener('hashchange',()=>{const x=location.hash.slice(1);if($(x))go(x)})})();
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),nz=(a,b)=>{let x;do{x=rnd(a,b)}while(!x);return x},pick=a=>a[rnd(0,a.length-1)];
+const ms=n=>n<0?'−'+(-n):String(n);const pr=n=>n<0?'('+ms(n)+')':String(n);
+const V='س';
+const parse=s=>{s=(s||'').trim().replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[−–—]/g,'-').replace(/\s/g,'');if(s===''||s==='+'||s==='-')return NaN;if(/^-?\d+\/\d+$/.test(s)){const[a,b]=s.split('/');return a/b}return Number(s)};
+function term(c,p,first,v){v=v||V;if(c===0)return'';const a=Math.abs(c);const cs=(a===1&&p>0)?'':String(a);const vs=p===0?'':(p===1?v:v+'<sup>'+p+'</sup>');const s=c<0?(first?'−':' − '):(first?'':' + ');return s+cs+vs}
+function poly(cs,v){let out='',f=true;cs.forEach(([c,p])=>{if(c){out+=term(c,p,f,v);f=false}});return out||'0'}
+/* matrix renderer: A 2D array, o:{det, cls(i,j)->class, inp:prefix} */
+function M(A,o){o=o||{};const r=A.length,c=A[0].length;let g='<div class="g" style="grid-template-columns:repeat('+c+',auto)">';
+ A.forEach((row,i)=>row.forEach((v,j)=>{const cl=o.cls?o.cls(i,j)||'':'';g+=o.inp?'<input class="c '+cl+'" data-i="'+i+'" data-j="'+j+'" data-m="'+o.inp+'" value="'+(v===''?'':ms(v))+'" inputmode="text">':'<div class="c '+cl+'" data-i="'+i+'" data-j="'+j+'">'+(typeof v==='number'?ms(Math.round(v*1000)/1000):v)+'</div>'}));
+ return '<span class="M'+(o.det?' det':'')+'"'+(o.id?' id="'+o.id+'"':'')+'><span class="br r"></span>'+g+'</div><span class="br l"></span></span>'}
+function readM(host,name,r,c){const A=Array.from({length:r},()=>Array(c).fill(0));host.querySelectorAll('input[data-m="'+name+'"]').forEach(x=>{const v=parse(x.value);A[+x.dataset.i][+x.dataset.j]=isNaN(v)?0:v});return A}
+const det2=a=>a[0][0]*a[1][1]-a[0][1]*a[1][0];
+const minor=(a,i,j)=>a.filter((_,r)=>r!==i).map(row=>row.filter((_,c)=>c!==j));
+const det3=a=>a[0][0]*det2(minor(a,0,0))-a[0][1]*det2(minor(a,0,1))+a[0][2]*det2(minor(a,0,2));
+const det=a=>a.length===2?det2(a):det3(a);
+const rM=(r,c,lo,hi)=>Array.from({length:r},()=>Array.from({length:c},()=>rnd(lo==null?-5:lo,hi==null?9:hi)));
+const mul=(A,B)=>A.map(row=>B[0].map((_,j)=>row.reduce((s,v,k)=>s+v*B[k][j],0)));
+const T=A=>A[0].map((_,j)=>A.map(r=>r[j]));
+const sub='₀₁₂₃₄₅₆₇₈₉';const ij=(i,j)=>''+sub[i]+sub[j];
+function mcq(host,q,opts,right,onAns){const d=document.createElement('div');d.className='box';d.style.margin='8px 0';d.innerHTML='<div style="font-weight:800">'+q+'</div>';let dn=false;const order=opts.map((o,i)=>i).sort(()=>Math.random()-.5);
+ order.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=opts[i];b.onclick=()=>{if(dn)return;dn=true;b.classList.add(i===right?'ok':'no');if(i!==right)[...d.querySelectorAll('.opt')][order.indexOf(right)].classList.add('ok');onAns&&onAns(i===right)};d.appendChild(b)});host.appendChild(d)}
+function MCQP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();g.o=g.o.filter((x,i)=>g.o.indexOf(x)===i);const ord=g.o.map((x,i)=>i).sort(()=>Math.random()-.5);let done=false;
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div>';const opts=document.createElement('div');box.appendChild(opts);const fb=document.createElement('div');fb.className='fb';const nx=document.createElement('div');nx.className='btns';box.appendChild(fb);box.appendChild(nx);
+  ord.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=g.o[i];b.onclick=()=>{if(done)return;done=true;const r=i===0;b.classList.add(r?'ok':'no');if(!r)[...opts.children][ord.indexOf(0)].classList.add('ok');dn++;if(r)ok++;sc.textContent='✔️ صحيح: '+ok+' من '+dn;fb.className='fb '+(r?'ok':'no');fb.innerHTML=(r?'🎉 صحيح! ':'❌ ليس صحيحًا. ')+(g.ex?'<div style="font-size:.95rem;color:var(--ink);font-weight:700">'+g.ex+'</div>':'');nx.innerHTML='<button class="btn or">سؤال جديد ⬅</button>';nx.firstChild.onclick=render};opts.appendChild(b)})}render()}
+/* matrix-answer practice: gen -> {q, ans(2D), steps[]} */
+function MatP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();let tries=0;const E=g.ans.map(r=>r.map(()=>''));
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div><div style="text-align:center;margin:8px 0">= '+M(E,{inp:'z'})+'</div><div class="btns"><button class="btn main" data-k="chk">✔️ تحقّق</button><button class="btn" data-k="help">💡 أرني الحل</button><button class="btn or" data-k="new">سؤال جديد ⬅</button></div><div class="fb"></div><div class="steps"></div>';
+  const ins=[...box.querySelectorAll('input.c')],fb=box.querySelector('.fb'),st=box.querySelector('.steps');const steps=()=>{st.style.display='block';st.innerHTML='<b>الحل:</b>'+g.steps.map(s=>'<div class="mx" style="font-size:1rem">'+s+'</div>').join('')};
+  box.querySelector('[data-k=chk]').onclick=()=>{let all=true,emp=false;ins.forEach(x=>{const v=parse(x.value);if(isNaN(v)){emp=true;all=false;return}const g2=Math.abs(v-g.ans[+x.dataset.i][+x.dataset.j])<.001;x.classList.remove('ok','no');x.classList.add(g2?'ok':'no');if(!g2)all=false});
+   if(emp&&!all){fb.className='fb';fb.textContent='املأ كل الخانات';return}tries++;if(tries===1){dn++;if(all)ok++;sc.textContent='✔️ صحيح من أول محاولة: '+ok+' من '+dn}fb.className='fb '+(all?'ok':'no');fb.textContent=all?'🎉 ممتاز!':'🤔 الخانات الحمراء غير صحيحة';if(all||tries>=2)steps();if(all)setTimeout(render,2400)};
+  box.querySelector('[data-k=help]').onclick=()=>{ins.forEach(x=>{x.value=ms(g.ans[+x.dataset.i][+x.dataset.j]);x.classList.add('ok')});steps()};box.querySelector('[data-k=new]').onclick=render}render()}
+
+
+const TOC=[['الوحدة 1: قياس الكميات الفيزيائية',7,[['1-1 و 2-1','الكميات ووحدات النظام الدولي والبوادئ',8,'m1'],['3-1 و 4-1','قياس الطول والزمن (الورنية، الميكرومتر، البندول)',10,'m2']]],
+ ['الوحدة 2: السرعة والعجلة',22,[['1-2 إلى 3-2','المسافة والإزاحة والسرعة ومنحنى الإزاحة',23,'k1'],['4-2 و 5-2','العجلة ومنحنى السرعة',28,'k2'],['6-2 و 7-2','السقوط الحر ومقاومة الهواء',33,'k3'],['','مراجعة الوحدتين 1–2',38,'rv1']]],
+ ['الوحدة 3: القوى',41,[['1-3 و 2-3','الكميات القياسية والمتجهة والمحصلة',42,'f1'],['3-3 إلى 5-3','قوانين نيوتن والقوى المتوازنة',47,'f2']]],
+ ['الوحدة 4: الكتلة والوزن والكثافة',58,[['1-4','القصور الذاتي والكتلة والوزن',59,'w1'],['2-4','قياس الكثافة',63,'w2'],['','مراجعة الوحدتين 3–4',68,'rv2']]],
+ ['الوحدة 5: التأثير الدوار للقوى',69,[['1-5','العزوم',70,'t1'],['2-5','مركز الثقل والثبات',74,'t2']]],
+ ['الوحدة 6: الشغل والطاقة والقدرة',83,[['1-6 و 2-6','الشغل والطاقة',84,'e1'],['3-6','القدرة',93,'e2'],['','مراجعة الوحدتين 5–6',98,'rv3']]],
+ ['الوحدة 7: الضغط',100,[['1-7 إلى 4-7','الضغط والضغط في السوائل',101,'p1'],['5-7 إلى 8-7','المكبس الهيدروليكي والبارومتر والمانومتر',106,'p2'],['','مراجعة الوحدة 7',114,'rv4']]]];
+(function(){const t=$('toc');TOC.forEach(([n,pg,ls],i)=>{const r=ls.filter(l=>l[3]).length;const d=document.createElement('div');d.className='chap'+(i===0?' open':'');
+ d.innerHTML='<div><span class="cn">'+(i+1)+'</span><span style="flex:1">'+n+'</span><span class="tg '+(r?'r':'s')+'">'+(r?'جاهز ✅':'قريبًا')+'</span></div><div class="ls">'+ls.map(l=>'<div class="li'+(l[3]?' ready" data-go="'+l[3]:'')+'"><span>'+(l[3]?'✅':'⏳')+'</span><span>'+(l[0]?'<b>'+l[0]+'</b> ':'')+l[1]+'</span><span class="pg">ص '+l[2]+'</span></div>').join('')+'</div>';
+ d.firstChild.onclick=()=>d.classList.toggle('open');t.appendChild(d)});t.querySelectorAll('[data-go]').forEach(x=>x.onclick=()=>go(x.dataset.go))})();
+
+/* ================= أمثلة الكتاب وتمارينه (عام) ================= */
+const QB=s=>s.replace(/ (?=(?:أ|ب|ج|د|هـ|و)\) )/g,'<br>').replace(/ (?=\((?:i|ii|iii|iv|1|2|3)\) )/g,'<br>');
+const FX=s=>s.replace(/(−?\d+(?:\.\d+)?)\/(\d+)/g,'<span class="rt">$1/$2</span>');
+function addSecs(pid,exs,bks){const pg=$(pid);if(!pg)return;const first=[...pg.querySelectorAll('.box')].find(b=>(b.querySelector('h3')||{}).textContent&&b.querySelector('h3').textContent.trim().startsWith('✏️'));
+ if(exs&&exs.length){const b=document.createElement('div');b.className='box exb';b.innerHTML='<h3>📖 أمثلة الكتاب محلولة خطوة بخطوة</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">اضغط «الخطوة التالية» وحاول أن تتوقع الخطوة قبل أن تظهر 🤔</p>';exs.forEach(e=>b.appendChild(wex(e)));first?pg.insertBefore(b,first):pg.appendChild(b)}
+ if(bks&&bks.length){const b=document.createElement('div');b.className='box bkb';b.innerHTML='<h3>📝 تمارين الكتاب مع الحلول</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">✍️ حلّ في دفترك أولًا، ثم اضغط «تلميح» إذا احتجت، و«الحل» لتتأكد.</p>';bks.forEach(e=>b.appendChild(bkx(e)));pg.appendChild(b)}}
+function wex(e){const d=document.createElement('div');d.className='wx';let k=0;
+ d.innerHTML='<div class="wxq"><b style="color:var(--tl)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="wxs"></div><div class="btns"><button class="btn main" data-a="n">▶️ الخطوة التالية</button><button class="btn" data-a="all">📜 الحل كاملًا</button><button class="btn" data-a="r">↺ من جديد</button></div>';
+ const S=d.querySelector('.wxs'),nb=d.querySelector('[data-a=n]');const add=()=>{if(k>=e.s.length)return;const x=document.createElement('div');x.className='wst';x.innerHTML='<span class="sn">'+(k+1)+'</span>'+FX(e.s[k]);S.appendChild(x);k++;if(k>=e.s.length){nb.textContent='✅ انتهى الحل';nb.disabled=true;try{S.lastChild.classList.add('fin')}catch(_){}}};
+ nb.onclick=add;d.querySelector('[data-a=all]').onclick=()=>{while(k<e.s.length)add()};d.querySelector('[data-a=r]').onclick=()=>{k=0;S.innerHTML='';nb.disabled=false;nb.textContent='▶️ الخطوة التالية'};return d}
+function bkx(e){const d=document.createElement('div');d.className='bx';
+ d.innerHTML='<div class="wxq"><b style="color:var(--or)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="btns" style="justify-content:flex-start"><button class="btn" data-a="h">💡 تلميح</button><button class="btn ok" data-a="s">✅ الحل</button></div><div class="bh" style="display:none"></div><div class="bs" style="display:none"></div>';
+ const H=d.querySelector('.bh'),S=d.querySelector('.bs');H.innerHTML='💡 '+FX(e.h);S.innerHTML=e.s.map(x=>'<div class="wst">'+FX(x)+'</div>').join('')+(e.a?'<div class="ans">🎯 الجواب: '+FX(e.a)+'</div>':'');
+ d.querySelector('[data-a=h]').onclick=()=>{H.style.display=H.style.display==='none'?'block':'none'};d.querySelector('[data-a=s]').onclick=()=>{S.style.display=S.style.display==='none'?'block':'none'};return d}
+
+
+const nf=(v,d)=>{d=d==null?3:d;const r=Math.round(v*10**d)/10**d;return ms(r)};
+/* ================= فيزياء: الوحدة 1 ================= */
+const sci=(v,d)=>{d=d==null?2:d;if(v===0)return'0';const e=Math.floor(Math.log10(Math.abs(v)));if(e>=-2&&e<=4)return nf(v,Math.max(0,d+1-Math.max(0,e)));const m=v/10**e;return '<span dir="ltr" style="unicode-bidi:isolate">'+(+m.toFixed(d))+' × 10<sup>'+e+'</sup></span>'};
+function cv(id){const c=$(id),x=c.getContext('2d');return{c,x,W:c.width,H:c.height}}
+const loops={};function loop(id,fn){if(loops[id])return;let last=performance.now();const st=()=>{const now=performance.now(),dt=Math.min(0.05,(now-last)/1000);last=now;const pg=$(id).closest('.page');if(pg.classList.contains('on'))fn(dt);loops[id]=requestAnimationFrame(st)};loops[id]=requestAnimationFrame(st)}
+function glow(x,X,Y,r,col){const g=x.createRadialGradient(X,Y,0,X,Y,r);g.addColorStop(0,col);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.beginPath();x.arc(X,Y,r,0,7);x.fill()}
+function chg(x,X,Y,q,r){r=r||10;x.fillStyle=q>0?'#ff6b6b':'#5ab0ff';x.beginPath();x.arc(X,Y,r,0,7);x.fill();x.fillStyle='#fff';x.font='bold '+(r*1.6)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(q>0?'+':'−',X,Y+1)}
+function label(x,t,X,Y,col,sz){x.fillStyle=col||'#fff';x.font='bold '+(sz||16)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(t,X,Y)}
+
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){this.rect(x,y,w,h)};
+/* ================= علوم الصف السابع – الجزء الأول والثاني ================= */
+const C2=id=>{const c=$(id);return [c,c.getContext('2d')]};
+const FONT=(s,w)=>(w||800)+' '+s+'px Cairo, Tahoma, Arial';
+const shake=el=>{el.classList.remove('shk');void el.offsetWidth;el.classList.add('shk')};
+const cheer=()=>{try{window.FX&&FX.ok()}catch(e){}};
+const N=s=>'<bdi'+(/[\u0600-\u06FF]/.test(s)?'':' dir="ltr"')+' style="font-weight:800">'+s+'</bdi>';
+const fx=(x,k)=>String(+(+x).toFixed(k==null?2:k));
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){r=Math.min(r||0,Math.abs(w)/2,Math.abs(h)/2);this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();return this};
+/* لعبة التصنيف العامة: اختر عنصرًا ثم بيتًا */
+function sortGame(poolId,catId,outId,cats,items,done){const P=$(poolId),Cc=$(catId);let sel=null,left=items.length;P.innerHTML='';Cc.innerHTML='';
+ shuf(items).forEach(([lab,k,why])=>{const b=document.createElement('button');b.innerHTML=lab;b.dataset.k=k;b.dataset.why=why||'';b.onclick=()=>{P.querySelectorAll('button').forEach(y=>y.classList.remove('sel'));b.classList.add('sel');sel=b};P.appendChild(b)});
+ cats.forEach(([n,s,c],i)=>{const d=document.createElement('div');d.style.borderColor=c;d.innerHTML='<b style="color:'+c+'">'+n+'</b>'+(s?'<small>'+s+'</small>':'')+'<div class="pool" style="margin:4px 0"></div>';
+  d.onclick=()=>{if(!sel)return;if(+sel.dataset.k===i){sel.classList.remove('sel');sel.classList.add('ok');sel.onclick=null;d.querySelector('.pool').appendChild(sel);$(outId).innerHTML='✅ صحيح! '+sel.dataset.why;sel=null;left--;if(!left){$(outId).innerHTML='🎉 أحسنت! رتّبت كل شيء.';cheer();done&&done()}}else{shake(d);$(outId).innerHTML='🤔 حاول مرة أخرى'}};Cc.appendChild(d)});$(outId).textContent=''}
+/* اختبار فصل من 12 سؤالًا */
+function chapterTest(pfx,G){let ok=0,dn=0;const host=$(pfx+'Q');function upd(){$(pfx+'Sc').textContent=dn<G.length?'أجبت عن '+dn+' من '+G.length+' · صحيح: '+ok:(ok>=G.length-1?'🌟 ممتاز! ':ok>=G.length-3?'👍 جيد جدًا! ':'💪 راجع الدروس. ')+'النتيجة: '+ok+' من '+G.length}
+ function make(){host.innerHTML='';ok=0;dn=0;shuf(G).forEach((g,i)=>{const [q,o]=typeof g==='function'?g():g;mcq(host,(i+1)+') '+q,o,0,r=>{dn++;if(r)ok++;upd();if(dn===G.length&&ok>=G.length-3)cheer()})});upd()}
+ $(pfx+'New').onclick=make;make()}
+const bank=(arr)=>()=>{const [q,o,ex]=pick(arr);return{q,o,ex:ex||''}};
+const vis=el=>{const p=el.closest('.page');return p&&p.classList.contains('on')};
+function anim(id,fn){const [c,x]=C2(id);let t0=performance.now();(function f(t){if(vis(c))fn(x,c,(t-t0)/1000);requestAnimationFrame(f)})(t0);return[c,x]}
+const flipCards=(id,arr)=>{const C=$(id);C.innerHTML=arr.map(([ic,t,b])=>'<div class="card"><div class="fr"><span class="big">'+ic+'</span>'+t+'</div><div class="bk"><b>'+t+':</b> '+b+'</div></div>').join('');C.querySelectorAll('.card').forEach(c=>c.onclick=()=>c.classList.toggle('flip'))};
+const TF=(s,t)=>[s,t?['✔️ صح','❌ خطأ']:['❌ خطأ','✔️ صح']];
+function txt(x,s,X,Y,sz,col,al){x.font=FONT(sz||16);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='rtl';x.fillText(s,X,Y)}
+function steps(id,outId,newId,S){let k=0;function mk(){k=0;const L=$(id);L.innerHTML='';shuf(S.map((s,i)=>[s,i])).forEach(([[a,b],i])=>{const li=document.createElement('li');li.innerHTML='<b>?</b><span>'+a+'<br><small style="color:var(--soft)">'+b+'</small></span>';li.onclick=()=>{if(li.classList.contains('ok'))return;if(i===k){li.classList.add('ok');li.querySelector('b').textContent=k+1;k++;$(outId).innerHTML='✅ صحيح!';if(k===S.length){$(outId).innerHTML='🎉 رتّبت الرحلة كاملة!';cheer()}}else{shake(li);$(outId).innerHTML='🤔 ليس هذا… ما الذي جاء قبله؟'}};L.appendChild(li)});$(outId).textContent=''}$(newId).onclick=mk;mk()}
+function choiceQs(host,Q,scId){const H=$(host);let i=0,ok=0;function show(){if(i>=Q.length){H.innerHTML='<div class="big2">🎉 '+ok+' من '+Q.length+'</div><div class="btns"><button class="btn" id="'+host+'R">🔄 من جديد</button></div>';$(host+'R').onclick=()=>{i=0;ok=0;show()};if(ok>=Q.length-1)cheer();return}
+ const [s,o,why]=Q[i];const ord=shuf(o.map((t,j)=>j));H.innerHTML='<div class="scn">'+s+'</div><div class="opts2">'+ord.map(j=>'<button data-j="'+j+'">'+o[j]+'</button>').join('')+'</div><div class="fb" id="'+host+'F"></div>';
+ let dn=0;H.querySelectorAll('[data-j]').forEach(b=>b.onclick=()=>{if(dn)return;dn=1;const j=+b.dataset.j;b.classList.add(j===0?'ok':'no');if(j)H.querySelector('[data-j="0"]').classList.add('ok');else ok++;$(host+'F').innerHTML=(j?'💡 ':'✅ ')+why+'<br><button class="btn main" style="margin-top:6px" id="'+host+'N">التالي ⬅️</button>';$(host+'N').onclick=()=>{i++;show()};if(scId)$(scId).textContent='✔️ '+ok+' / '+Q.length})}show()}
+
+/* ================= فيزياء الأول الثانوي ================= */
+const Q_=s=>'<span class="eq">'+s+'</span>';
+const cposP=(c,e)=>{const r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}};
+const EMP=(x,e,X,Y,sz)=>{x.font=(sz||40)+'px "Segoe UI Emoji","Noto Color Emoji",sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(e,X,Y);x.textBaseline='alphabetic'};
+const chipsP=(id,arr,on,cb)=>{const H=$(id);H.innerHTML=arr.map((t,i)=>'<button data-i="'+i+'"'+(i===on?' class="on"':'')+'>'+t+'</button>').join('');H.querySelectorAll('button').forEach(b=>b.onclick=()=>{H.querySelectorAll('button').forEach(y=>y.classList.toggle('on',y===b));cb(+b.dataset.i)})};
+function tL(x,s,X,Y,sz,col,al){x.font=FONT(sz||14);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='ltr';x.fillText(s,X,Y);x.direction='rtl'}
+const rd=(v,k)=>+(+v).toFixed(k==null?2:k);
+const arrow=(x,x1,y1,x2,y2,col,w)=>{x.strokeStyle=col;x.fillStyle=col;x.lineWidth=w||4;x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke();const a=Math.atan2(y2-y1,x2-x1),h=12+(w||4);x.beginPath();x.moveTo(x2,y2);x.lineTo(x2-h*Math.cos(a-.4),y2-h*Math.sin(a-.4));x.lineTo(x2-h*Math.cos(a+.4),y2-h*Math.sin(a+.4));x.closePath();x.fill()};
+function axes(x,X0,Y0,W,H,xl,yl,xm,ym){x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(X0,Y0-H);x.lineTo(X0,Y0);x.lineTo(X0+W,Y0);x.stroke();tL(x,yl,X0+4,Y0-H-6,13,'#495057','left');tL(x,xl,X0+W,Y0+30,13,'#495057','right');
+ for(let i=0;i<=xm[0];i+=xm[1])tL(x,''+i,X0+i/xm[0]*W,Y0+16,11,'#868e96');for(let j=ym[2]||0;j<=ym[0];j+=ym[1])tL(x,''+j,X0-14,Y0-(j-(ym[2]||0))/(ym[0]-(ym[2]||0))*H+4,11,'#868e96')}
+
+/* ---------- 1-1 الكميات والبوادئ ---------- */
+flipCards('bqCards',[['⚖️','الكتلة','الوحدة: الكيلوجرام · الرمز <b>kg</b>'],['📏','الطول','الوحدة: المتر · الرمز <b>m</b>'],['⏱️','الزمن','الوحدة: الثانية · الرمز <b>s</b>'],['⚡','شدة التيار','الوحدة: الأمبير · الرمز <b>A</b>'],['🌡️','درجة الحرارة','الوحدة: الكلفن · الرمز <b>K</b>'],['🧪','كمية المادة','الوحدة: المول · الرمز <b>mol</b>'],['💡','الشدة الضوئية','الوحدة: الشمعة (كانديلا) · الرمز <b>cd</b>'],['➗','الكميات المشتقة','تُشتق من الأساسية، مثل السرعة m s<sup>−1</sup> والقوة N = kg m s<sup>−2</sup>']]);
+(function(){const P=[['ميجا M',6,'M'],['كيلو k',3,'k'],['— (الوحدة)',0,''],['ديسي d',-1,'d'],['سنتي c',-2,'c'],['مللي m',-3,'m'],['ميكرو µ',-6,'µ']];const [c,x]=C2('pxC');
+ $('pxF').innerHTML=$('pxT').innerHTML=P.map((p,i)=>'<option value="'+i+'">'+p[0]+'</option>').join('');$('pxF').value=1;$('pxT').value=2;
+ function fmt(v){if(v===0)return'0';const e=Math.floor(Math.log10(Math.abs(v)));if(e>=-3&&e<=6)return''+rd(v,Math.max(0,4-e));return rd(v/10**e,3)+' × 10^'+e}
+ function upd(){const v=+$('pxV').value,f=P[+$('pxF').value],t=P[+$('pxT').value],u=$('pxU').value,r=v*10**(f[1]-t[1]);
+  $('pxOut').innerHTML=Q_(v+' '+f[2]+u+' = '+fmt(r).replace(/\^(-?\d+)/,'<sup>$1</sup>')+' '+t[2]+u);
+  x.clearRect(0,0,640,200);P.slice().reverse().forEach((p,i)=>{const X=40+i*92,on=p===f||p===t;x.fillStyle=p===f?'#ffd8a8':p===t?'#d0ebff':'#f8f9fa';x.strokeStyle=on?'#d9480f':'#ced4da';x.lineWidth=on?3:1.5;x.beginPath();x.roundRect(X-38,60,76,70,10);x.fill();x.stroke();tL(x,(p[2]||'·')+u,X,96,20,'#222');tL(x,'10^'+p[1],X,120,12,'#868e96')});
+  const i1=6-+$('pxF').value,i2=6-+$('pxT').value;if(i1!==i2){arrow(x,40+i1*92,150,40+i2*92,150,'#d9480f',3);txt(x,(f[1]-t[1]>0?'× ':'÷ ')+'10^'+Math.abs(f[1]-t[1]),(80+(i1+i2)*92)/2,180,14,'#d9480f')}
+  txt(x,'⟵ أصغر · أكبر ⟶',320,30,14,'#495057')}
+ ['pxV','pxF','pxT','pxU'].forEach(i=>$(i).oninput=$(i).onchange=upd);upd()})();
+MCQP($('qm1'),()=>{const t=rnd(0,2);if(t===0){const v=pick([2.5,4,7,12,0.6]);return{q:'حوّل '+Q_(v+' km')+' إلى متر:',o:OPS_P(Q_(rd(v*1000)+' m'),[Q_(rd(v*100)+' m'),Q_(rd(v/1000,4)+' m'),Q_(rd(v*10)+' m')]),ex:'كيلو = 10³'}}
+ if(t===1){const v=pick([350,25,1200,8]);return{q:'حوّل '+Q_(v+' mm')+' إلى متر:',o:OPS_P(Q_(rd(v/1000,4)+' m'),[Q_(rd(v/100,3)+' m'),Q_(v*1000+' m'),Q_(rd(v/10,2)+' m')]),ex:'مللي = 10⁻³'}}
+ return bank([['وحدة الكتلة في النظام الدولي:',['الكيلوجرام kg','الجرام g','النيوتن N','الطن']],['أي مما يلي كمية أساسية؟',['شدة التيار','السرعة','القوة','المساحة']],['البادئة ميكرو µ تعني:',['10⁻⁶','10⁻³','10⁶','10⁻²']],['البادئة ميجا M تعني:',['10⁶','10³','10⁻⁶','10⁹']],['وحدة درجة الحرارة في النظام الدولي:',['الكلفن K','السيلزيوس','الفهرنهايت','الجول']],['تتكون كل كمية فيزيائية من:',['مقدار عددي ووحدة','وحدة فقط','رقم فقط','اتجاه فقط']]])()});
+function OPS_P(ok,bad){return[ok,...shuf(bad.filter(b=>b!==ok)).slice(0,3)]}
+
+/* ---------- 3-1 الورنية والميكرومتر والبندول ---------- */
+(function(){const [c,x]=C2('vnC');let L,hint=0;const PX=46;
+ function make(){L=rnd(105,480)/100;hint=0;draw();const ok=L.toFixed(2),o=[ok,(L+.1).toFixed(2),(Math.floor(L*10)/10).toFixed(2),(L+.05).toFixed(2)].filter((v,i,a)=>a.indexOf(v)===i);
+  $('vnQ').innerHTML='';mcq($('vnQ'),'ما قراءة القدمة؟ (بالسنتيمتر)',o.map(v=>Q_(v+' cm')),0,r=>{$('vnOut').innerHTML=(r?'🎉 صحيح! ':'💡 ')+'التدريج الرئيسي = '+(Math.floor(L*10)/10).toFixed(1)+' cm، والخط المنطبق رقم '+Math.round((L*10-Math.floor(L*10))*10)+' ⟸ '+L.toFixed(2)+' cm';if(r)cheer();hint=1;draw()})}
+ function draw(){x.clearRect(0,0,640,230);const X0=40,mm=PX/10*1;x.fillStyle='#dee2e6';x.fillRect(X0-30,40,600,60);x.fillStyle='#868e96';x.fillRect(X0-30,40,30,150);
+  for(let i=0;i<=55;i++){const X=X0+i*PX/10*1.0*1;const h=i%10===0?28:i%5===0?20:12;x.strokeStyle='#222';x.lineWidth=1.3;x.beginPath();x.moveTo(X,100);x.lineTo(X,100-h);x.stroke();if(i%10===0)tL(x,''+i/10,X,60,13)}
+  const V0=X0+L*PX;x.fillStyle='#ffe8cc';x.fillRect(V0,100,200,50);x.fillStyle='#adb5bd';x.fillRect(V0-14,100,14,90);
+  x.fillStyle='rgba(116,192,252,.5)';x.fillRect(X0,150,V0-X0-14,30);txt(x,'الجسم',(X0+V0)/2,172,13,'#1864ab');
+  const k=Math.round((L*10-Math.floor(L*10))*10);for(let j=0;j<=10;j++){const X=V0+j*.9*PX/10*1;x.strokeStyle=hint&&j===k?'#e03131':'#222';x.lineWidth=hint&&j===k?3:1.3;x.beginPath();x.moveTo(X,100);x.lineTo(X,100+(j%5===0?22:14));x.stroke();if(j%5===0)tL(x,''+j,X,136,11,'#495057')}
+  tL(x,'cm',600,60,13,'#495057');txt(x,'التدريج الرئيسي',560,30,12,'#495057');txt(x,'الورنية',V0+60,160,12,'#d9480f')}
+ $('vnN').onclick=()=>{$('vnOut').textContent='';make()};$('vnH').onclick=()=>{hint=1;draw()};make()})();
+(function(){const [c,x]=C2('mcC');let D;
+ function make(){D=rnd(150,1450)/100;draw();const ok=D.toFixed(2),o=[ok,(D+.5).toFixed(2),(D-.1).toFixed(2),(D+.05).toFixed(2)].filter((v,i,a)=>a.indexOf(v)===i&&+v>0);$('mcQ').innerHTML='';
+  mcq($('mcQ'),'ما قطر السلك؟ (بالمللي متر)',o.map(v=>Q_(v+' mm')),0,r=>{const s=Math.floor(D*2)/2;$('mcOut').innerHTML=(r?'🎉 صحيح! ':'💡 ')+'التدريج الثابت = '+s.toFixed(1)+' mm + التدريج المتحرك '+Math.round((D-s)*100)+' × 0.01 = '+D.toFixed(2)+' mm';if(r)cheer()})}
+ function draw(){x.clearRect(0,0,640,230);const X0=60,PX=26,s=Math.floor(D*2)/2,th=Math.round((D-s)*100);x.fillStyle='#adb5bd';x.fillRect(20,90,40,50);x.fillStyle='#ced4da';x.fillRect(X0,105,X0+s*PX+10-X0,20);
+  x.fillStyle='#fab005';x.fillRect(X0-20,95,20,40);
+  for(let i=0;i<=Math.floor(s*2);i++){const X=X0+i*PX/2;x.strokeStyle='#222';x.lineWidth=1.5;x.beginPath();if(i%2===0){x.moveTo(X,115);x.lineTo(X,100);if(i%10===0)tL(x,''+i/2,X,95,12)}else{x.moveTo(X,115);x.lineTo(X,128)}x.stroke()}
+  x.strokeStyle='#222';x.beginPath();x.moveTo(X0,115);x.lineTo(X0+s*PX,115);x.stroke();
+  const TX=X0+s*PX+4;x.fillStyle='#e9ecef';x.strokeStyle='#495057';x.lineWidth=2;x.beginPath();x.roundRect(TX,60,90,110,8);x.fill();x.stroke();
+  for(let k=-6;k<=6;k++){const v=(th+k+50)%50,Y=115-k*8;x.strokeStyle=k===0?'#e03131':'#222';x.lineWidth=k===0?2.5:1.3;x.beginPath();x.moveTo(TX,Y);x.lineTo(TX+(v%5===0?22:12),Y);x.stroke();if(v%5===0)tL(x,''+v,TX+36,Y+4,11,k===0?'#e03131':'#495057')}
+  x.fillStyle='#868e96';x.fillRect(TX+90,95,120,40);txt(x,'التدريج الثابت (0.5 mm)',X0+100,180,13,'#495057');txt(x,'التدريج المتحرك (50 قسمًا × 0.01 mm)',TX+70,200,13,'#495057')}
+ $('mcN').onclick=()=>{$('mcOut').textContent='';make()};make()})();
+(function(){const [c,x]=C2('pdC');const rows=[];
+ anim('pdC',(x,c,t)=>{const L=+$('pdL').value,A=+$('pdA').value;$('pdLv').textContent=L+' cm';$('pdAv').textContent=A+'°';x.clearRect(0,0,640,300);const T=2*Math.PI*Math.sqrt(L/100/9.8),th=A*Math.PI/180*Math.cos(2*Math.PI*t/T);
+  x.fillStyle='#495057';x.fillRect(220,10,200,10);const R=L*2.1,X=320+R*Math.sin(th),Y=20+R*Math.cos(th);x.strokeStyle='#222';x.lineWidth=2;x.beginPath();x.moveTo(320,20);x.lineTo(X,Y);x.stroke();x.fillStyle='#d9480f';x.beginPath();x.arc(X,Y,14,0,7);x.fill();
+  x.setLineDash([4,4]);x.strokeStyle='#adb5bd';x.beginPath();x.moveTo(320,20);x.lineTo(320,20+R+20);x.stroke();x.setLineDash([]);tL(x,'τ ≈ '+T.toFixed(2)+' s',540,60,16,'#d9480f')});
+ $('pdT').onclick=()=>{const L=+$('pdL').value,A=+$('pdA').value,T=2*Math.PI*Math.sqrt(L/100/9.8),t20=rd(20*T+(Math.random()-.5)*.3,2);rows.push([L,A,t20,rd(t20/20,3)]);
+  $('pdTb').innerHTML='<table class="tbl"><tr><th>L (cm)</th><th>السعة</th><th>زمن 20 ذبذبة (s)</th><th>τ (s)</th></tr>'+rows.slice(-6).map(r=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'°</td><td>'+r[2]+'</td><td>'+r[3]+'</td></tr>').join('')+'</table>';
+  const ls=new Set(rows.map(r=>r[0])),as=new Set(rows.map(r=>r[1]));$('pdOut').innerHTML=ls.size>1&&as.size>1?'🎯 لاحظ: τ يزداد بزيادة <b>طول الخيط</b>، ولا يتغير تقريبًا عند تغيير <b>السعة</b>.':'غيّر الطول مرة، ثم السعة مرة، وقارن τ…'}})();
+MCQP($('qm2'),bank([['دقة القدمة ذات الورنية:',[Q_('0.01 cm'),Q_('0.1 cm'),Q_('1 mm'),Q_('0.001 mm')]],['دقة الميكرومتر:',[Q_('0.01 mm'),Q_('0.1 mm'),Q_('1 mm'),Q_('0.1 cm')]],['أنسب أداة لقياس قطر سلك رفيع:',['الميكرومتر','المسطرة المترية','الشريط المتري','الساعة']],['الزمن الدوري للبندول هو زمن:',['ذبذبة كاملة واحدة','نصف ذبذبة','20 ذبذبة','حتى يتوقف']],['نقيس زمن 20 ذبذبة ونقسم على 20 لكي:',['نقلل الخطأ في القياس','نزيد السعة','نغير الطول','نوفر الوقت']],['يزداد الزمن الدوري للبندول البسيط بزيادة:',['طول الخيط','كتلة الثقل','السعة الصغيرة','لون الخيط']],['أداة لقياس الأقطار الداخلية للأنابيب:',['القدمة ذات الورنية','الميكرومتر','المسطرة','الميزان']]]));
+
+/* ---------- 2-1 الرحلة ومنحنى الإزاحة ---------- */
+(function(){const [c,x]=C2('trC');const K=[['🐢 تقدّم ببطء',1],['🐇 تقدّم بسرعة',3],['🛑 توقّف',0],['↩️ ارجع',-2]];let seg=[],t0=null;
+ chipsP('trK',K.map(k=>k[0]),-1,i=>{if(seg.length<6){seg.push(K[i][1]);t0=null;draw(1e9)}});
+ function pos(t){let s=0,d=0;for(let i=0;i<seg.length;i++){const dt=Math.max(0,Math.min(2,t-2*i));s+=seg[i]*dt;d+=Math.abs(seg[i])*dt}return[s,d]}
+ function draw(t){const T=seg.length*2,tt=Math.min(t,T);x.clearRect(0,0,640,380);
+  x.fillStyle='#e9ecef';x.fillRect(20,20,600,40);for(let m=-2;m<=16;m+=2){tL(x,''+m,60+m*30,80,11,'#868e96')}const [s,d]=pos(tt);EMP(x,'🚗',60+s*30,38,30);
+  const X0=70,Y0=340,W=520,H=220;axes(x,X0,Y0,W,H,'t (s)','s (m)',[12,2],[16,4,-4]);const sy=v=>Y0-(v+4)/20*H;x.strokeStyle='#ced4da';x.beginPath();x.moveTo(X0,sy(0));x.lineTo(X0+W,sy(0));x.stroke();
+  x.strokeStyle='#d9480f';x.lineWidth=3.5;x.beginPath();for(let q=0;q<=tt;q+=.05){x.lineTo(X0+q/12*W,sy(pos(q)[0]))}x.stroke();
+  if(seg.length)$('trOut').innerHTML='المراحل: '+seg.map(v=>v>0?'+'+v:v).join(' ، ')+' (m/s)<br>📏 <b>المسافة</b> = '+rd(d,1)+' m · ➡️ <b>الإزاحة</b> = '+rd(s,1)+' m'+(tt>=T?'<br>⏱️ متوسط السرعة القياسية = '+rd(d/T,2)+' m/s · متوسط السرعة الاتجاهية = '+rd(s/T,2)+' m/s':'');else $('trOut').textContent='أضف مراحل…'}
+ $('trGo').onclick=()=>{t0=performance.now()};$('trClr').onclick=()=>{seg=[];t0=null;draw(0)};
+ anim('trC',()=>{if(t0!==null)draw((performance.now()-t0)/1000*1.5)});draw(0)})();
+MCQP($('qk1'),()=>{const t=rnd(0,2);if(t===0){const d=pick([100,200,400,1500]),s=pick([10,20,25,50]);return{q:'قطع عدّاء '+Q_(d+' m')+' في '+Q_(s+' s')+'. متوسط سرعته:',o:OPS_P(Q_(rd(d/s)+' m s⁻¹'),[Q_(d*s+' m s⁻¹'),Q_(rd(s/d,3)+' m s⁻¹'),Q_(rd(d/s/2)+' m s⁻¹')]),ex:'السرعة = المسافة ÷ الزمن'}}
+ if(t===1){const a=rnd(3,9),b=rnd(1,a-1);return{q:'مشى أحمد '+N(a)+' m شرقًا ثم '+N(b)+' m غربًا. المسافة والإزاحة:',o:OPS_P('المسافة '+N(a+b)+' m ، الإزاحة '+N(a-b)+' m شرقًا',['المسافة '+N(a-b)+' m ، الإزاحة '+N(a+b)+' m','كلاهما '+N(a+b)+' m','كلاهما '+N(a-b)+' m']),ex:'الإزاحة من نقطة البداية'}}
+ return bank([['ميل منحنى الإزاحة–الزمن يمثل:',['السرعة الاتجاهية','العجلة','المسافة','الكتلة']],['خط أفقي في منحنى الإزاحة–الزمن يعني أن الجسم:',['ساكن','يتسارع','يتحرك بسرعة ثابتة','يعود للخلف']],['الإزاحة كمية:',['متجهة','قياسية','ليس لها وحدة','زمنية']],['وحدة السرعة في النظام الدولي:',[Q_('m s⁻¹'),Q_('km h⁻¹'),Q_('m s⁻²'),Q_('N')]]])()});
+
+/* ---------- 4-2 و 5-2 العجلة ---------- */
+(function(){const [c,x]=C2('acC');let t0=null;
+ function draw(t){const u=+$('acU').value,a=+$('acA').value;$('acUv').textContent=u+' m/s';$('acAv').textContent=a+' m/s²';x.clearRect(0,0,640,380);
+  const v=q=>Math.max(0,u+a*q),T=Math.min(t,6),s=q=>{let r=0;for(let z=0;z<q;z+=.02)r+=v(z)*.02;return r};x.fillStyle='#e9ecef';x.fillRect(20,20,600,36);EMP(x,'🏎️',40+Math.min(560,s(T)*7),38,28);
+  const X0=70,Y0=340,W=520,H=230;axes(x,X0,Y0,W,H,'t (s)','v (m/s)',[6,1],[20,5]);const py=q=>Y0-Math.min(20,q)/20*H;
+  x.fillStyle='rgba(217,72,15,.15)';x.beginPath();x.moveTo(X0,Y0);for(let q=0;q<=T;q+=.05)x.lineTo(X0+q/6*W,py(v(q)));x.lineTo(X0+T/6*W,Y0);x.closePath();x.fill();
+  x.strokeStyle='#d9480f';x.lineWidth=3.5;x.beginPath();for(let q=0;q<=T;q+=.05)x.lineTo(X0+q/6*W,py(v(q)));x.stroke();txt(x,'المساحة = الإزاحة',X0+W*.6,Y0-20,13,'#d9480f');
+  $('acOut').innerHTML=Q_('v = u + at = '+u+' + ('+a+')('+rd(T,1)+') = '+rd(v(T),1)+' m s⁻¹')+'<br>الميل = العجلة = '+N(''+a)+' m s⁻² '+(a<0?'(تباطؤ)':a===0?'(سرعة ثابتة)':'(تسارع)')+' · الإزاحة = المساحة ≈ '+rd(s(T),1)+' m'}
+ $('acGo').onclick=()=>{t0=performance.now()};['acU','acA'].forEach(i=>$(i).oninput=()=>{t0=null;draw(6)});anim('acC',()=>{if(t0!==null)draw((performance.now()-t0)/1000*1.2)});draw(6)})();
+MCQP($('qk2'),()=>{const t=rnd(0,2),u=rnd(1,10),a=rnd(2,5),tm=rnd(3,8);if(t===0)return{q:'سيارة سرعتها '+Q_(u+' m s⁻¹')+' تسارعت بعجلة '+Q_(a+' m s⁻²')+' لمدة '+Q_(tm+' s')+'. سرعتها النهائية:',o:OPS_P(Q_(u+a*tm+' m s⁻¹'),[Q_(u*a*tm+' m s⁻¹'),Q_(a*tm+' m s⁻¹'),Q_(u+a+tm+' m s⁻¹')]),ex:'v = u + at'};
+ if(t===1){const v=u+a*tm;return{q:'زادت سرعة جسم من '+Q_(u+' m s⁻¹')+' إلى '+Q_(v+' m s⁻¹')+' في '+Q_(tm+' s')+'. العجلة:',o:OPS_P(Q_(a+' m s⁻²'),[Q_(rd(v/tm)+' m s⁻²'),Q_(v-u+' m s⁻²'),Q_(rd((v+u)/tm)+' m s⁻²')]),ex:'a = (v − u) / t'}}
+ return bank([['المساحة تحت منحنى السرعة–الزمن تمثل:',['الإزاحة','العجلة','السرعة','القوة']],['ميل منحنى السرعة–الزمن يمثل:',['العجلة','الإزاحة','الزمن','الكتلة']],['وحدة العجلة:',[Q_('m s⁻²'),Q_('m s⁻¹'),Q_('m'),Q_('N')]],['العجلة السالبة تعني أن الجسم:',['يتباطأ','يتسارع','ساكن','يعود للخلف دائمًا']]])()});
+
+/* ---------- 6-2 و 7-2 السقوط ---------- */
+(function(){const [c,x]=C2('ffC');const O=[['⚫ كرة حديد',5,.002],['📄 ورقة',.005,.02],['🪶 ريشة',.002,.03],['🪂 مظلي',80,.35]];let K=[0,2],air=1,run=null;
+ chipsP('ffK',['⚫ كرة حديد + 🪶 ريشة','⚫ كرة حديد + 📄 ورقة','🪂 مظلي وحده'],0,i=>{K=[[0,2],[0,1],[3]][i];run=null;draw(0,[])});chipsP('ffA',['🌍 مع الهواء','🌙 بدون هواء (فراغ)'],0,i=>{air=i===0;run=null;draw(0,[])});
+ function sim(o){const [n,m,k]=O[o];let y=0,v=0,vs=[];for(let t=0;t<=8;t+=.02){const R=air?k*v*v*(o===3?1:60):0,a=9.8-R/m;v+=a*.02;y+=v*.02;vs.push([t,v,y,R])}return vs}
+ function draw(t,S){x.clearRect(0,0,640,400);x.fillStyle='#e7f5ff';x.fillRect(20,10,240,380);const H=150;
+  S.forEach((s,i)=>{const p=s.find(q=>q[0]>=t)||s[s.length-1],y=Math.min(H,p[2]);EMP(x,O[K[i]][0].split(' ')[0],90+i*100,30+y/H*340,30)});
+  const X0=320,Y0=370,W=290,H2=320;axes(x,X0,Y0,W,H2,'t (s)','v (m/s)',[8,2],[60,10]);
+  S.forEach((s,i)=>{x.strokeStyle=['#d9480f','#1971c2'][i];x.lineWidth=3;x.beginPath();s.filter(q=>q[0]<=t).forEach(q=>x.lineTo(X0+q[0]/8*W,Y0-Math.min(60,q[1])/60*H2));x.stroke()})}
+ $('ffGo').onclick=()=>{const S=K.map(sim);run={t0:performance.now(),S}};
+ anim('ffC',()=>{if(!run)return;const t=Math.min(8,(performance.now()-run.t0)/1000*1.6);draw(t,run.S);if(t>=8)return;
+  const S=run.S,hit=S.map(s=>{const q=s.find(z=>z[2]>=150);return q?q[0]:null});let m;
+  if(!air)m='🌙 بدون هواء: تسقط كل الأجسام بنفس العجلة g = 9.8 m s⁻² وتصل معًا!';else if(K[0]===3)m='🪂 تزداد مقاومة الهواء مع السرعة حتى تساوي الوزن ⟸ <b>سرعة نهائية ثابتة</b> ≈ '+rd(S[0][S[0].length-1][1],1)+' m/s (الخط يصبح أفقيًا).';else m='🌍 مقاومة الهواء أثرها كبير على '+O[K[1]][0]+' (خفيف ومساحته كبيرة) فتصل سرعته النهائية بسرعة، أما الكرة فتكاد تسقط سقوطًا حرًا.';$('ffOut').innerHTML=m});draw(0,[])})();
+(function(){const [c,x]=C2('egC');let run=null,score=0,tries=0;
+ function sim(A){const m=.06,k=.0012+A*.0045,H=30;let y=0,v=0,t=0,P=[];while(y<H&&t<20){const a=9.8-k*v*v/m;v+=a*.01;y+=v*.01;t+=.01;P.push([t,y,v])}return{P,v,t,drift:A*A*1.6}}
+ function draw(s,k){const A=+$('egA').value;$('egAv').textContent=A+' m²';x.clearRect(0,0,640,360);x.fillStyle='#e7f5ff';x.fillRect(0,0,640,360);x.fillStyle='#868e96';x.fillRect(40,40,110,300);for(let i=0;i<8;i++)for(let j=0;j<3;j++){x.fillStyle='#ffe066';x.fillRect(52+j*34,52+i*36,22,20)}
+  x.fillStyle='#69db7c';x.fillRect(0,340,640,20);EMP(x,'🧺',500,328,40);
+  const p=s?s.P[Math.min(k,s.P.length-1)]:[0,0,0],X=170+(s?Math.min(s.drift,60)*p[1]/30*4:0),Y=40+p[1]/30*285;if(A>0){x.fillStyle='rgba(224,49,49,.85)';x.beginPath();x.arc(X,Y-26,10+A*5,Math.PI,0);x.fill();x.strokeStyle='#495057';x.lineWidth=1;x.beginPath();x.moveTo(X-10-A*5,Y-26);x.lineTo(X,Y-6);x.lineTo(X+10+A*5,Y-26);x.stroke()}
+  const done=s&&k>=s.P.length-1,crack=done&&s.v>5;EMP(x,crack?'🍳':'🥚',X,Y,26);tL(x,'v = '+rd(p[2],1)+' m/s',X+70,Y,14,p[2]>5?'#e03131':'#2b8a3e');tL(x,'⭐ '+score+' / '+tries,580,30,16,'#d9480f')}
+ $('egA').oninput=()=>{run=null;draw()};$('egGo').onclick=()=>{run={s:sim(+$('egA').value),t0:performance.now()}};
+ anim('egC',()=>{if(!run)return;const k=Math.floor((performance.now()-run.t0)/1000/.01*1.1);draw(run.s,k);if(k>=run.s.P.length-1&&!run.done){run.done=1;tries++;const v=run.s.v,dr=run.s.drift;
+  if(v>5)$('egOut').innerHTML='🍳 انكسرت! وصلت بسرعة '+rd(v,1)+' m/s. المظلة صغيرة: مقاومة الهواء لم تكفِ لخفض السرعة النهائية. كبّرها!';
+  else if(dr>60){$('egOut').innerHTML='🌬️ نجت البيضة (السرعة '+rd(v,1)+' m/s) لكن المظلة الضخمة حملتها الرياح بعيدًا عن السلة! جرّب أصغر قليلًا.'}
+  else{score++;$('egOut').innerHTML='🎉 أنقذتها! سرعة الهبوط '+rd(v,1)+' m/s في '+rd(run.s.t,1)+' s. مقاومة الهواء تساوت مع الوزن مبكرًا ⟸ سرعة نهائية صغيرة.';cheer()}}});draw()})();
+MCQP($('qk3'),bank([['عجلة السقوط الحر قرب سطح الأرض تقريبًا:',[Q_('9.8 m s⁻²'),Q_('98 m s⁻²'),Q_('1.6 m s⁻²'),Q_('0 m s⁻²')]],['في الفراغ، كرة حديد وريشة تسقطان من الارتفاع نفسه:',['تصلان معًا','الكرة أولًا','الريشة أولًا','لا تسقطان']],['تزداد مقاومة الهواء بزيادة:',['سرعة الجسم ومساحته','كتلة الجسم فقط','لون الجسم','زمن السقوط فقط']],['يصل المظلي إلى السرعة النهائية عندما:',['تتساوى مقاومة الهواء مع وزنه','يختفي وزنه','تنعدم مقاومة الهواء','تزداد العجلة']],['عند السرعة النهائية تكون القوة المحصلة على الجسم:',['صفرًا','أكبر ما يمكن','مساوية للوزن مرتين','سالبة دائمًا']],['يُفتح المظلة لكي:',['تزيد مقاومة الهواء فتقل السرعة النهائية','يزيد الوزن','تقل الكتلة','يزيد التسارع']]]));
+
+chapterTest('rv1',[['وحدة الطول في النظام الدولي:',['المتر','السنتيمتر','الكيلومتر']],['البادئة كيلو k تعني:',['10³','10⁻³','10⁶']],['دقة الميكرومتر:',['0.01 mm','0.1 mm','1 mm']],['يزداد الزمن الدوري للبندول بزيادة:',['طوله','كتلته','سعته الصغيرة']],['الإزاحة كمية:',['متجهة','قياسية','بلا وحدة']],['ميل منحنى الإزاحة–الزمن:',['السرعة الاتجاهية','العجلة','الإزاحة']],['المساحة تحت منحنى السرعة–الزمن:',['الإزاحة','العجلة','الزمن']],['سيارة من السكون بعجلة 2 m s⁻² لمدة 5 s. سرعتها:',['10 m s⁻¹','7 m s⁻¹','2.5 m s⁻¹']],['وحدة العجلة:',['m s⁻²','m s⁻¹','N']],['في الفراغ تسقط الأجسام:',['بنفس العجلة','الثقيل أسرع','الخفيف أسرع']],['g تقريبًا:',['9.8 m s⁻²','98 m s⁻²','0.98 m s⁻²']],['عند السرعة النهائية: مقاومة الهواء ',['تساوي الوزن','أكبر من الوزن','صفر']]]);
+
+/* ---------- 3 القوى والمتجهات ---------- */
+(function(){const [c,x]=C2('vcC');function draw(){const a=+$('vcA').value,b=+$('vcB').value,th=+$('vcT').value;$('vcAv').textContent=a+' N';$('vcBv').textContent=b+' N';$('vcTv').textContent=th+'°';x.clearRect(0,0,640,340);
+  const O={x:170,y:260},k=24,r=th*Math.PI/180,A={x:O.x+a*k,y:O.y},B={x:O.x+b*k*Math.cos(r),y:O.y-b*k*Math.sin(r)},R={x:A.x+B.x-O.x,y:A.y+B.y-O.y};
+  x.setLineDash([6,5]);x.strokeStyle='#adb5bd';x.lineWidth=2;x.beginPath();x.moveTo(A.x,A.y);x.lineTo(R.x,R.y);x.lineTo(B.x,B.y);x.stroke();x.setLineDash([]);
+  arrow(x,O.x,O.y,A.x,A.y,'#1971c2',5);arrow(x,O.x,O.y,B.x,B.y,'#2b8a3e',5);arrow(x,O.x,O.y,R.x,R.y,'#d9480f',6);
+  const Rm=Math.sqrt(a*a+b*b+2*a*b*Math.cos(r)),ang=Math.atan2(b*Math.sin(r),a+b*Math.cos(r))*180/Math.PI;tL(x,'F1',A.x+16,A.y+18,15,'#1971c2');tL(x,'F2',B.x-8,B.y-10,15,'#2b8a3e');tL(x,'R',R.x+14,R.y-8,16,'#d9480f');
+  $('vcOut').innerHTML='المحصلة R ≈ <b>'+rd(Rm,1)+' N</b> بزاوية '+rd(ang,0)+'° مع F<sub>1</sub>'+(th===0?' (في نفس الاتجاه: '+a+' + '+b+')':th===180?' (متعاكستان: '+a+' − '+b+')':th===90?' (متعامدتان: √('+a+'² + '+b+'²))':'')}
+ ['vcA','vcB','vcT'].forEach(i=>$(i).oninput=draw);draw()})();
+sortGame('svP','svC','svOut',[['📏 قياسية','مقدار فقط','#1971c2'],['🏹 متجهة','مقدار واتجاه','#d9480f']],[['الكتلة',0,''],['الزمن',0,''],['المسافة',0,''],['الطاقة',0,''],['درجة الحرارة',0,''],['القوة',1,''],['الإزاحة',1,''],['السرعة الاتجاهية',1,''],['العجلة',1,''],['الوزن',1,'الوزن قوة اتجاهها نحو مركز الأرض.']]);
+MCQP($('qf1'),()=>{const t=rnd(0,1),a=rnd(3,12),b=rnd(1,a-1);if(t===0)return pick([{q:'قوتان '+N(a)+' N و '+N(b)+' N في الاتجاه نفسه. المحصلة:',o:OPS_P(N(a+b)+' N',[N(a-b)+' N',N(a*b)+' N',N(rd(Math.sqrt(a*a+b*b),1))+' N']),ex:'نجمع'},{q:'قوتان '+N(a)+' N و '+N(b)+' N في اتجاهين متعاكسين. المحصلة:',o:OPS_P(N(a-b)+' N في اتجاه '+N(a)+' N',[N(a+b)+' N',N(a-b)+' N في اتجاه '+N(b)+' N','صفر']),ex:'نطرح'}]);
+ const [p,q,r]=pick([[3,4,5],[6,8,10],[5,12,13],[9,12,15]]);return{q:'قوتان متعامدتان '+N(p)+' N و '+N(q)+' N. المحصلة:',o:OPS_P(N(r)+' N',[N(p+q)+' N',N(q-p)+' N',N(r*r)+' N']),ex:'فيثاغورس'}});
+
+(function(){const [c,x]=C2('nwC');let t0=null;
+ function draw(t){const F=+$('nwF').value,m=+$('nwM').value,f=+$('nwR').value;$('nwFv').textContent=F+' N';$('nwMv').textContent=m+' kg';$('nwRv').textContent=f+' N';const net=Math.max(0,F-f),a=net/m,s=.5*a*t*t;x.clearRect(0,0,640,240);x.fillStyle='#dee2e6';x.fillRect(0,190,640,50);
+  const X=60+Math.min(480,s*20);x.fillStyle='#ffd8a8';x.strokeStyle='#d9480f';x.lineWidth=3;x.beginPath();x.roundRect(X,110,90+m*2,70,8);x.fill();x.stroke();tL(x,m+' kg',X+45+m,152,16);[X+18,X+72+m*2].forEach(cx=>{x.fillStyle='#343a40';x.beginPath();x.arc(cx,186,10,0,7);x.fill()});
+  if(F)arrow(x,X-70,140,X-4,140,'#1971c2',3+F/12);if(f)arrow(x,X+90+m*2+70,165,X+94+m*2,165,'#e03131',2+f/10);tL(x,'F = '+F+' N',X-40,120,13,'#1971c2');if(f)tL(x,'f = '+f+' N',X+130+m*2,155,13,'#e03131');
+  $('nwOut').innerHTML=Q_('a = F_net / m = ('+F+' − '+f+') / '+m+' = '+rd(a,2)+' m s⁻²')+(net===0?'<br>⚖️ القوى متوازنة ⟸ لا تتحرك العربة (أو تبقى بسرعة ثابتة)':'')}
+ $('nwGo').onclick=()=>{t0=performance.now()};['nwF','nwM','nwR'].forEach(i=>$(i).oninput=()=>{t0=null;draw(0)});anim('nwC',()=>{if(t0!==null)draw(Math.min(5,(performance.now()-t0)/1000))});draw(0)})();
+(function(){const [c,x]=C2('twC');function draw(){const R=+$('twR').value,L=+$('twL').value;$('twRv').textContent=R+' N';$('twLv').textContent=L+' N';x.clearRect(0,0,640,200);const d=Math.max(-120,Math.min(120,(R-L)/4));
+  x.strokeStyle='#8d6e63';x.lineWidth=6;x.beginPath();x.moveTo(80+d,110);x.lineTo(560+d,110);x.stroke();x.fillStyle='#e03131';x.fillRect(316+d,96,8,28);x.strokeStyle='#adb5bd';x.lineWidth=2;x.setLineDash([5,5]);x.beginPath();x.moveTo(320,60);x.lineTo(320,170);x.stroke();x.setLineDash([]);
+  EMP(x,'🧍🧍',540+d,110,40);EMP(x,'🧍🧍',100+d,110,40);arrow(x,520+d,60,520+d+R/8,60,'#1971c2',4);arrow(x,120+d,60,120+d-L/8,60,'#d9480f',4);
+  const n=R-L;$('twOut').innerHTML=n===0?'⚖️ <b>قوى متوازنة</b>: المحصلة = صفر ⟸ لا يتحرك الحبل.':'⚡ <b>قوى غير متوازنة</b>: المحصلة = '+Math.abs(n)+' N نحو '+(n>0?'اليمين':'اليسار')+' ⟸ يتحرك الحبل بعجلة في اتجاهها.'}
+ ['twR','twL'].forEach(i=>$(i).oninput=draw);draw()})();
+choiceQs('n3Q',[['🚀 الصاروخ يدفع الغازات للأسفل، فإن الغازات:',['تدفع الصاروخ للأعلى بقوة مساوية','لا تؤثر عليه','تسحبه للأسفل'],'الفعل وردّ الفعل متساويان ومتضادان.'],['🏊 السبّاح يدفع الماء للخلف بيديه، فيتحرك:',['للأمام','للخلف','لا يتحرك'],'الماء يدفعه للأمام (ردّ الفعل).'],['📚 كتاب على طاولة: وزنه يدفع الطاولة للأسفل، والطاولة:',['تدفعه للأعلى بقوة مساوية (رد الفعل العمودي)','لا تؤثر عليه','تدفعه للأسفل'],'قوة الاتصال العمودية R = W.'],['🔫 عند إطلاق رصاصة، البندقية:',['ترتد للخلف','تتقدم للأمام','لا تتحرك'],'الارتداد ردّ فعل.'],['قوتا الفعل وردّ الفعل تؤثران على:',['جسمين مختلفين','الجسم نفسه','لا يؤثران'],'لذلك لا تلغي إحداهما الأخرى.']]);
+MCQP($('qf2'),()=>{const t=rnd(0,1);if(t===0){const m=rnd(2,20),a=rnd(1,6);return{q:'قوة محصلة تؤثر على جسم كتلته '+Q_(m+' kg')+' فتكسبه عجلة '+Q_(a+' m s⁻²')+'. مقدار القوة:',o:OPS_P(Q_(m*a+' N'),[Q_(m+a+' N'),Q_(rd(m/a)+' N'),Q_(rd(a/m,2)+' N')]),ex:'F = ma'}}
+ return bank([['ينص القانون الأول لنيوتن على أن الجسم يبقى على حالته ما لم:',['تؤثر عليه قوة محصلة','تتغير كتلته','يتغير لونه','يمر الزمن']],['1 N يساوي:',[Q_('1 kg m s⁻²'),Q_('1 kg m s⁻¹'),Q_('1 kg m'),Q_('1 J')]],['القوى المتوازنة تجعل الجسم:',['ساكنًا أو متحركًا بسرعة ثابتة','يتسارع','يتباطأ دائمًا','يدور']],['تكون عجلة الجسم في اتجاه:',['القوة المحصلة','الحركة الأصلية دائمًا','عكس القوة','الأسفل دائمًا']],['إذا تضاعفت القوة المحصلة على جسم، فإن عجلته:',['تتضاعف','تقل للنصف','لا تتغير','تصبح صفرًا']]])()});
+
+/* ---------- 4 الكتلة والوزن والكثافة ---------- */
+(function(){const P=[['🌍 الأرض',9.8],['🌙 القمر',1.6],['🔴 المريخ',3.7],['🪐 المشتري',24.8],['🛰️ الفضاء البعيد',0]];let k=0;const [c,x]=C2('plC');chipsP('plK',P.map(p=>p[0]),0,i=>{k=i;draw()});
+ function draw(){const m=+$('plM').value,g=P[k][1],W=m*g;$('plMv').textContent=m+' kg';x.clearRect(0,0,640,300);
+  x.fillStyle='#495057';x.fillRect(150,20,20,30);x.strokeStyle='#868e96';x.lineWidth=3;x.beginPath();for(let i=0;i<14;i++)x.lineTo(160+(i%2?14:-14),50+i*(4+W/100));x.stroke();const yb=50+14*(4+W/100);EMP(x,'🧑‍🚀',160,yb+30,50);tL(x,rd(W,1)+' N',160,290,18,'#d9480f');txt(x,'الميزان الزنبركي (الوزن)',160,15,12,'#495057');
+  x.fillStyle='#495057';x.fillRect(470,90,8,150);x.fillRect(380,90,190,8);[[400,m],[550,m]].forEach(([X])=>{x.strokeStyle='#495057';x.lineWidth=2;x.beginPath();x.moveTo(X,98);x.lineTo(X,160);x.stroke();x.fillStyle='#ced4da';x.fillRect(X-40,160,80,10)});EMP(x,'🧑‍🚀',400,140,30);tL(x,m+' kg',550,150,16,'#1971c2');tL(x,m+' kg',474,270,18,'#1971c2');txt(x,'الميزان ذو الكفتين (الكتلة)',474,80,12,'#495057');
+  $('plOut').innerHTML=P[k][0]+': '+Q_('W = mg = '+m+' × '+g+' = '+rd(W,1)+' N')+'<br>الكتلة تبقى <b>'+m+' kg</b> في كل مكان!'}
+ $('plM').oninput=draw;draw()})();
+choiceQs('inQ',[['🚌 عندما يتوقف الحافلة فجأة يندفع الركاب للأمام بسبب:',['القصور الذاتي','الوزن','الاحتكاك'],'أجسامهم تحاول البقاء متحركة.'],['🔒 حزام الأمان في السيارة يحمي من أثر:',['القصور الذاتي','الضغط الجوي','الطفو'],'يمنع اندفاع الجسم للأمام.'],['🚚 الشاحنة المحملة أصعب في التوقف من الفارغة لأن:',['كتلتها أكبر فقصورها الذاتي أكبر','وزنها أقل','سرعتها أقل'],'الكتلة مقياس للقصور الذاتي.'],['🍽️ سحب مفرش الطاولة بسرعة دون أن تسقط الأطباق مثال على:',['القصور الذاتي','العزم','الضغط'],'الأطباق تبقى ساكنة.']]);
+MCQP($('qw1'),()=>{const t=rnd(0,1),m=rnd(2,90);if(t===0)return{q:'وزن جسم كتلته '+Q_(m+' kg')+' على الأرض (g = 10 N kg⁻¹):',o:OPS_P(Q_(m*10+' N'),[Q_(m+' N'),Q_(rd(m/10,1)+' N'),Q_(m*100+' N')]),ex:'W = mg'};
+ return bank([['كتلة رائد فضاء 70 kg على الأرض، كتلته على القمر:',['70 kg','11.2 kg','700 kg','0 kg']],['يقاس الوزن بـ:',['الميزان الزنبركي','الميزان ذي الكفتين','المسطرة','الميكرومتر']],['وحدة الوزن:',['النيوتن N','الكيلوجرام kg','الجول J','الباسكال Pa']],['الكتلة مقياس لـ:',['القصور الذاتي للجسم','وزنه فقط','حجمه','سرعته']],['الوزن هو:',['قوة جذب الأرض للجسم','كمية المادة','حجم الجسم','كثافة الجسم']]])()});
+(function(){const O=[['🔩 حديد',79,10],['🪵 خشب',12,20],['🥫 ألومنيوم',27,10],['🍾 فلين',5,20],['🪨 حجر',50,20],['🥇 ذهب',193,10]];let k=0,dip=0;const [c,x]=C2('dnC');chipsP('dnK',O.map(o=>o[0]),0,i=>{k=i;dip=0;draw()});
+ function draw(){const [n,m,V]=O[k],rho=m/V,fl=rho<1;x.clearRect(0,0,640,320);
+  x.fillStyle='#495057';x.fillRect(60,220,160,16);x.fillStyle='#e9ecef';x.fillRect(80,200,120,20);tL(x,m+' g',140,265,18,'#d9480f');txt(x,'الميزان',140,295,13,'#495057');if(!dip)EMP(x,n.split(' ')[0],140,180,40);
+  const X=420,base=60,W=90;x.strokeStyle='#495057';x.lineWidth=3;x.strokeRect(X-W/2,40,W,250);const lv0=50,lv=dip?(fl?lv0+V*.5*rho:lv0+V):lv0,py=v=>290-v*2.2;
+  x.fillStyle='rgba(116,192,252,.6)';x.fillRect(X-W/2+2,py(lv),W-4,290-py(lv));for(let v=0;v<=100;v+=10){x.strokeStyle='#495057';x.lineWidth=1;x.beginPath();x.moveTo(X+W/2,py(v));x.lineTo(X+W/2+10,py(v));x.stroke();tL(x,''+v,X+W/2+26,py(v)+4,10,'#868e96')}tL(x,'cm³',X+W/2+30,30,12,'#495057');
+  if(dip)EMP(x,n.split(' ')[0],X,fl?py(lv)-4:270,34);
+  $('dnOut').innerHTML=dip?'الحجم = '+lv+' − '+lv0+' = '+V+' cm³'+(fl?' (يطفو! دفعناه بإبرة ليُغمر تمامًا)':'')+'<br>'+Q_('ρ = m / V = '+m+' / '+V+' = '+rd(rho,2)+' g cm⁻³ = '+rd(rho*1000,0)+' kg m⁻³')+'<br>'+(fl?'🛟 كثافته أقل من الماء ⟸ يطفو':'⚓ كثافته أكبر من الماء ⟸ يغوص'):'الكتلة = '+m+' g · اضغط «اغمر» لقياس الحجم بالإزاحة'}
+ $('dnGo').onclick=()=>{dip=1;draw()};draw()})();
+MCQP($('qw2'),()=>{const t=rnd(0,1),m=pick([20,54,79,120,270]),V=pick([10,20,5]);if(t===0)return{q:'جسم كتلته '+Q_(m+' g')+' وحجمه '+Q_(V+' cm³')+'. كثافته:',o:OPS_P(Q_(rd(m/V,2)+' g cm⁻³'),[Q_(m*V+' g cm⁻³'),Q_(rd(V/m,3)+' g cm⁻³'),Q_(m+V+' g cm⁻³')]),ex:'ρ = m / V'};
+ return bank([['كثافة الماء تقريبًا:',[Q_('1000 kg m⁻³'),Q_('1 kg m⁻³'),Q_('100 kg m⁻³'),Q_('13600 kg m⁻³')]],['يقاس حجم حجر غير منتظم بـ:',['الإزاحة في المخبار المدرج','المسطرة فقط','الميزان','الميكرومتر']],['جسم كثافته 0.8 g cm⁻³ يوضع في الماء:',['يطفو','يغوص','يذوب','ينفجر']],['1 g cm⁻³ يساوي:',[Q_('1000 kg m⁻³'),Q_('1 kg m⁻³'),Q_('100 kg m⁻³'),Q_('10 kg m⁻³')]]])()});
+
+chapterTest('rv2',[['أي الكميات متجهة؟',['القوة','الكتلة','الطاقة']],['قوتان 8 N و 3 N متعاكستان. المحصلة:',['5 N','11 N','24 N']],['قوتان متعامدتان 6 N و 8 N. المحصلة:',['10 N','14 N','2 N']],['F = ',['ma','m/a','a/m']],['جسم 4 kg بعجلة 3 m s⁻². القوة:',['12 N','7 N','1.3 N']],['لكل فعل ردّ فعل:',['مساوٍ ومضاد','أكبر منه','في نفس الاتجاه']],['القوى المتوازنة محصلتها:',['صفر','أكبر ما يمكن','تساوي الوزن']],['الكتلة على القمر مقارنة بالأرض:',['نفسها','أقل','أكبر']],['وزن جسم 5 kg (g = 10):',['50 N','5 N','0.5 N']],['يقاس الوزن بـ:',['الميزان الزنبركي','ذي الكفتين','المخبار']],['ρ = ',['m/V','V/m','mV']],['جسم أقل كثافة من الماء:',['يطفو','يغوص','يذوب']]]);
+
+/* ---------- 5 العزوم والثبات ---------- */
+(function(){const [c,x]=C2('ssC');function draw(){const F1=+$('ssF1').value,d1=+$('ssD1').value,F2=+$('ssF2').value,d2=+$('ssD2').value;['ssF1','ssF2'].forEach(i=>$(i+'v').textContent=$(i).value+' N');['ssD1','ssD2'].forEach(i=>$(i+'v').textContent=$(i).value+' m');
+  const M1=F1*d1,M2=F2*d2,ang=Math.max(-.25,Math.min(.25,(M2-M1)/2000));x.clearRect(0,0,640,300);x.fillStyle='#495057';x.beginPath();x.moveTo(320,200);x.lineTo(290,270);x.lineTo(350,270);x.closePath();x.fill();x.fillStyle='#868e96';x.fillRect(0,270,640,30);
+  x.save();x.translate(320,200);x.rotate(ang);x.fillStyle='#d9a066';x.fillRect(-300,-10,600,16);for(let m=-3;m<=3;m++){tL(x,''+Math.abs(m),m*95,24,11,'#495057')}
+  [[d1,F1,'#1971c2'],[-d2,F2,'#d9480f']].forEach(([d,F,col])=>{const X=d*95,s=20+F/25;x.fillStyle=col;x.fillRect(X-s/2,-10-s,s,s);tL(x,F+'N',X,-14-s,12,col)});x.restore();
+  const bal=Math.abs(M1-M2)<1e-6;$('ssOut').innerHTML='↻ عزم الأيمن = '+F1+' × '+d1+' = <b>'+M1+' N m</b> · ↺ عزم الأيسر = '+F2+' × '+d2+' = <b>'+M2+' N m</b><br>'+(bal?'⚖️ <b>متزنة!</b> مجموع العزوم مع عقارب الساعة = مجموعها عكسها':M1>M2?'⬇️ تميل يمينًا':'⬇️ تميل يسارًا');if(bal)cheer()}
+ ['ssF1','ssD1','ssF2','ssD2'].forEach(i=>$(i).oninput=draw);
+ $('ssCh').onclick=()=>{let F1,d1,F2,d2;do{F1=pick([200,300,400,600,800]);d1=pick([.5,1,1.5,2,2.5,3]);F2=pick([200,300,400,600,800]);d2=F1*d1/F2}while(F1===F2||d2<.5||d2>3||Math.abs(d2*2-Math.round(d2*2))>1e-9);
+  $('ssF1').value=F1;$('ssD1').value=d1;$('ssF2').value=F2;$('ssD2').value=d2===.5?3:.5;draw();$('ssOut').innerHTML+='<br>🎯 حرّك <b>بُعد الأيسر</b> فقط حتى تتزن الأرجوحة!'};draw()})();
+MCQP($('qt1'),()=>{const t=rnd(0,1),F=pick([10,20,25,40,50]),d=pick([.2,.5,1.5,2,3]);if(t===0)return{q:'قوة '+Q_(F+' N')+' تؤثر على بعد عمودي '+Q_(d+' m')+' من محور الدوران. العزم:',o:OPS_P(Q_(rd(F*d,1)+' N m'),[Q_(rd(F/d,1)+' N m'),Q_(F+d+' N m'),Q_(rd(F*d*2,1)+' N m')]),ex:'M = F × d'};
+ let W1,d1,W2;do{W1=pick([300,400,600]);d1=pick([1,1.5,2]);W2=pick([200,300,400,500])}while(W1===W2);return{q:'طفل وزنه '+W1+' N يجلس على بعد '+d1+' m من محور أرجوحة. على أي بعد يجلس طفل وزنه '+W2+' N في الجهة الأخرى لتتزن؟',o:OPS_P(Q_(rd(W1*d1/W2,2)+' m'),[Q_(rd(W2*d1/W1,2)+' m'),Q_(d1+' m'),Q_(rd(W1*d1/W2+.5,2)+' m'),Q_(rd(W1*d1/W2*2,2)+' m')]),ex:'W1 d1 = W2 d2'}});
+(function(){const [c,x]=C2('tpC');function draw(){const b=+$('tpB').value,h=+$('tpH').value,A=+$('tpA').value;$('tpBv').textContent=b;$('tpHv').textContent=h;$('tpAv').textContent=A+'°';x.clearRect(0,0,640,320);x.fillStyle='#868e96';x.fillRect(0,290,640,30);
+  const crit=Math.atan((b/2)/h)*180/Math.PI,fall=A>crit,ang=(fall?Math.min(90,A+25):A)*Math.PI/180,P={x:320+b/2,y:290};x.save();x.translate(P.x,P.y);x.rotate(-ang);x.fillStyle=fall?'#ffc9c9':'#ffe8cc';x.strokeStyle=fall?'#e03131':'#d9480f';x.lineWidth=3;x.fillRect(-b,-2*h,b,2*h);x.strokeRect(-b,-2*h,b,2*h);
+  x.fillStyle='#1971c2';x.beginPath();x.arc(-b/2,-h,8,0,7);x.fill();x.restore();const G={x:P.x+(-b/2)*Math.cos(ang)-(-h)*Math.sin(ang)*-1,y:P.y-(-b/2)*Math.sin(-ang)};
+  const gx=P.x+(-b/2)*Math.cos(-ang)-(-h)*Math.sin(-ang),gy=P.y+(-b/2)*Math.sin(-ang)+(-h)*Math.cos(-ang);arrow(x,gx,gy,gx,Math.min(300,gy+120),'#1971c2',3);
+  x.fillStyle='#e03131';x.beginPath();x.arc(P.x,P.y,6,0,7);x.fill();
+  $('tpOut').innerHTML=fall?'💥 <b>انقلب!</b> خط عمل الوزن (السهم الأزرق) وقع <b>خارج القاعدة</b> فأحدث عزمًا يقلبه. الزاوية الحرجة ≈ '+rd(crit,0)+'°':'✅ ثابت: خط عمل الوزن يقع داخل القاعدة، فيعيده عزم الوزن. الزاوية الحرجة ≈ '+rd(crit,0)+'° · وسّع القاعدة أو اخفض مركز الثقل لتزيدها!'}
+ ['tpB','tpH','tpA'].forEach(i=>$(i).oninput=draw);draw()})();
+choiceQs('cgQ',[['أين مركز ثقل حلقة منتظمة؟',['في مركزها (خارج مادة الحلقة)','على حافتها','لا يوجد لها مركز ثقل'],'مركز الثقل قد يقع خارج الجسم.'],['لتعيين مركز ثقل صفيحة غير منتظمة نستخدم:',['الخيط الرأسي (الشاقول) من عدة ثقوب','الميكرومتر','المخبار المدرج'],'نقطة تقاطع الخطوط = مركز الثقل.'],['تُصمم سيارات السباق منخفضة وعريضة لكي:',['يزداد ثباتها','يزداد وزنها','تقل سرعتها'],'مركز ثقل منخفض وقاعدة عريضة.'],['حافلة ذات طابقين يُحمَّل الركاب في الطابق السفلي أولًا لكي:',['ينخفض مركز ثقلها','يرتفع مركز ثقلها','تقل كتلتها'],'كلما انخفض مركز الثقل زاد الثبات.']]);
+MCQP($('qt2'),bank([['يزداد ثبات الجسم عندما:',['ينخفض مركز ثقله وتتسع قاعدته','يرتفع مركز ثقله','تضيق قاعدته','يزداد طوله']],['ينقلب الجسم عندما يقع خط عمل وزنه:',['خارج قاعدته','داخل قاعدته','على مركز القاعدة','فوقه']],['مركز ثقل مكعب منتظم يقع في:',['مركزه الهندسي','أحد أركانه','قاعدته','خارجه دائمًا']],['مبدأ العزوم: عند الاتزان مجموع العزوم مع عقارب الساعة:',['يساوي مجموعها عكس عقارب الساعة','أكبر','أصغر','صفر دائمًا']],['وحدة العزم:',[Q_('N m'),Q_('N'),Q_('J s'),Q_('Pa')]]]));
+
+/* ---------- 6 الطاقة والقدرة ---------- */
+(function(){const [c,x]=C2('rcC');let fr=0,t0=null;chipsP('rcF',['🧊 بدون احتكاك','🧱 مع احتكاك'],0,i=>{fr=i;t0=null;draw(0)});
+ const g=10,X0=60,W=520,TOP=60,BOT=300;const yAt=(u,h)=>BOT-(h/10*(BOT-TOP))*Math.pow((u-.5)*2,2);
+ function draw(t){const h=+$('rcH').value,m=+$('rcM').value;$('rcHv').textContent=h+' m';$('rcMv').textContent=m+' kg';x.clearRect(0,0,640,360);
+  x.strokeStyle='#495057';x.lineWidth=4;x.beginPath();for(let u=0;u<=1;u+=.01)x.lineTo(X0+u*W,yAt(u,10));x.stroke();
+  const E=m*g*h,loss=fr?.12:0,w=Math.sqrt(2*g*Math.max(h,.1))/12,amp=Math.pow(1-loss,t*w/Math.PI),u=.5-.5*Math.sqrt(h/10)*amp*Math.cos(t*w*2.2);const hh=10*Math.pow((u-.5)*2,2),Ep=m*g*hh,Et=E*Math.pow(1-loss,t*w/Math.PI*1.2),Ek=Math.max(0,Et-Ep);
+  x.fillStyle='#d9480f';x.beginPath();x.arc(X0+u*W,yAt(u,10)-12,12,0,7);x.fill();
+  const bx=X0+W+20,bars=[['Ep',Ep,'#1971c2'],['Ek',Ek,'#2b8a3e'],['حرارة',E-Et,'#e03131']];bars.forEach(([n,v,col],i)=>{const H=v/(m*g*10)*200;x.fillStyle=col;x.fillRect(bx-60+i*22,320-H,18,H);tL(x,n,bx-51+i*22,340,9,col)});
+  $('rcOut').innerHTML='الطاقة الكلية = mgh = '+m+' × 10 × '+h+' = <b>'+E+' J</b> · E<sub>p</sub> ≈ '+rd(Ep,0)+' J · E<sub>k</sub> ≈ '+rd(Ek,0)+' J<br>السرعة القصوى في القاع = √(2gh) ≈ '+rd(Math.sqrt(2*g*h),1)+' m/s '+(fr?'· 🔥 الاحتكاك يحوّل جزءًا من الطاقة إلى <b>حرارة</b>، لكن الطاقة الكلية لم تفنَ!':'· 🔁 تتحول الطاقة بين وضع وحركة، ومجموعهما ثابت')}
+ $('rcGo').onclick=()=>{t0=performance.now()};['rcH','rcM'].forEach(i=>$(i).oninput=()=>{t0=null;draw(0)});anim('rcC',()=>{if(t0!==null)draw((performance.now()-t0)/1000)});draw(0)})();
+MCQP($('qe1'),()=>{const t=rnd(0,2);if(t===0){const F=pick([10,20,30,50]),s=pick([2,5,8,10]);return{q:'قوة '+Q_(F+' N')+' تحرك جسمًا '+Q_(s+' m')+' في اتجاهها. الشغل:',o:OPS_P(Q_(F*s+' J'),[Q_(F+s+' J'),Q_(rd(F/s,1)+' J'),Q_(F*s*2+' J')]),ex:'W = Fs'}}
+ if(t===1){const m=pick([2,4,10]),v=pick([2,3,5,10]);return{q:'الطاقة الحركية لجسم كتلته '+Q_(m+' kg')+' وسرعته '+Q_(v+' m s⁻¹')+':',o:OPS_P(Q_(m*v*v/2+' J'),[Q_(m*v+' J'),Q_(m*v*v+' J'),Q_(m*v/2+' J')]),ex:'Ek = ½mv²'}}
+ const m=pick([2,5,8]),h=pick([3,5,10]);return{q:'طاقة الوضع لجسم كتلته '+Q_(m+' kg')+' على ارتفاع '+Q_(h+' m')+' (g = 10):',o:OPS_P(Q_(m*10*h+' J'),[Q_(m*h+' J'),Q_(m*10+h+' J'),Q_(m*h/2+' J')]),ex:'Ep = mgh'}});
+(function(){const [c,x]=C2('stC');let t0=null;function draw(t){const W1=+$('stW1').value,T1=+$('stT1').value,W2=+$('stW2').value,T2=+$('stT2').value,H=+$('stH').value;['stW1','stW2'].forEach(i=>$(i+'v').textContent=$(i).value+' N');['stT1','stT2'].forEach(i=>$(i+'v').textContent=$(i).value+' s');$('stHv').textContent=H+' m';
+  x.clearRect(0,0,640,320);const n=10;for(let i=0;i<n;i++){x.fillStyle='#ced4da';x.fillRect(80+i*44,290-(i+1)*24,44,(i+1)*24)}
+  [[T1,'🧍‍♂️',0],[T2,'🧍‍♀️',1]].forEach(([T,e,j])=>{const k=Math.min(1,t/T),i=Math.min(n-1,Math.floor(k*n));EMP(x,e,100+i*44+j*16,290-(i+1)*24-22,30)});
+  const P1=W1*H/T1,P2=W2*H/T2;$('stOut').innerHTML='🔵 أحمد: W = '+W1+' × '+H+' = '+W1*H+' J ⟸ P = '+W1*H+' ÷ '+T1+' = <b>'+rd(P1,0)+' W</b><br>🟠 منى: W = '+W2+' × '+H+' = '+W2*H+' J ⟸ P = '+W2*H+' ÷ '+T2+' = <b>'+rd(P2,0)+' W</b><br>'+(Math.abs(P1-P2)<1?'⚖️ القدرتان متساويتان!':'🏆 الأكبر قدرة: '+(P1>P2?'أحمد':'منى')+(((P1>P2)!==(T1<T2))?' (رغم أنه لم يصل أولًا!)':''))}
+ $('stGo').onclick=()=>{t0=performance.now()};['stW1','stT1','stW2','stT2','stH'].forEach(i=>$(i).oninput=()=>{t0=null;draw(99)});anim('stC',()=>{if(t0!==null)draw((performance.now()-t0)/1000)});draw(99)})();
+MCQP($('qe2'),()=>{const t=rnd(0,1);if(t===0){const W=pick([400,450,600]),h=pick([2,3,5]),s=pick([2,4,5]);return{q:'شخص وزنه '+Q_(W+' N')+' يصعد درجًا ارتفاعه '+Q_(h+' m')+' في '+Q_(s+' s')+'. قدرته:',o:OPS_P(Q_(rd(W*h/s,0)+' W'),[Q_(W*h+' W'),Q_(rd(W/s,0)+' W'),Q_(W*h*s+' W')]),ex:'P = Wh / t'}}
+ const P=pick([250,1000,2000]),mn=pick([2,5,10]);return{q:'سخان قدرته '+Q_(P+' W')+' يعمل '+N(mn)+' دقائق. الطاقة المستهلكة:',o:OPS_P(Q_(P*mn*60+' J'),[Q_(P*mn+' J'),Q_(rd(P/mn/60,1)+' J'),Q_(P*60+' J')]),ex:'E = Pt (الزمن بالثواني)'}});
+
+chapterTest('rv3',[['M = ',['F × d','F ÷ d','F + d']],['قوة 20 N على بعد 0.5 m. العزم:',['10 N m','40 N m','20.5 N m']],['عند الاتزان: عزوم مع عقارب الساعة ',['= عزوم عكسها','> عزوم عكسها','= صفر دائمًا']],['يزداد الثبات بـ:',['خفض مركز الثقل','رفع مركز الثقل','تضييق القاعدة']],['ينقلب الجسم إذا وقع خط عمل وزنه:',['خارج القاعدة','داخل القاعدة','في المنتصف']],['W = ',['Fs','F/s','mv']],['وحدة الشغل:',['الجول J','الواط W','النيوتن N']],['Ek = ',['½mv²','mgh','mv']],['جسم 2 kg على ارتفاع 5 m (g = 10). Ep:',['100 J','10 J','50 J']],['الطاقة لا تفنى ولا تُستحدث:',['قانون حفظ الطاقة','قانون نيوتن الأول','مبدأ العزوم']],['1 W = ',['1 J s⁻¹','1 N m','1 J s']],['شغل 600 J في 3 s. القدرة:',['200 W','1800 W','603 W']]]);
+
+/* ---------- 7 الضغط ---------- */
+(function(){const B=[['🧱 مستلقية (20×10 cm)',.02],['🧱 على جنبها (20×5 cm)',.01],['🧱 واقفة (10×5 cm)',.005]];let k=0;const W=20;const [c,x]=C2('brC');chipsP('brK',B.map(b=>b[0]),0,i=>{k=i;draw()});
+ function draw(){const A=B[k][1],p=W/A;x.clearRect(0,0,640,260);x.fillStyle='#f4d58d';x.fillRect(0,150,640,110);const dims=[[200,50],[200,25],[50,100]][k],sink=p/4000*40;
+  x.fillStyle='#e8590c';x.strokeStyle='#a63d00';x.lineWidth=2;x.fillRect(320-dims[0]/2,150-dims[1]-15+sink,dims[0],dims[1]+15);x.strokeRect(320-dims[0]/2,150-dims[1]-15+sink,dims[0],dims[1]+15);x.fillStyle='#d6b46b';x.fillRect(320-dims[0]/2,150,dims[0],sink);
+  arrow(x,320,20,320,150-dims[1]-20+sink,'#1971c2',4);tL(x,'F = 20 N',380,40,14,'#1971c2');$('brOut').innerHTML=Q_('p = F / A = 20 / '+A+' = '+rd(p,0)+' Pa')+'<br>'+(k===2?'⬇️ أصغر مساحة ⟸ أكبر ضغط ⟸ تغوص أكثر (مثل المسمار المدبب)':k===0?'⬆️ أكبر مساحة ⟸ أقل ضغط (مثل أحذية الثلج وإطارات الجرارات العريضة)':'')}draw()})();
+(function(){const L=[['💧 ماء',1000,'rgba(116,192,252,.6)'],['🛢️ زيت',800,'rgba(250,176,5,.5)'],['☿ زئبق',13600,'rgba(173,181,189,.8)']];let k=0;const [c,x]=C2('lqC');chipsP('lqK',L.map(l=>l[0]),0,i=>{k=i});
+ anim('lqC',(x,c,t)=>{const h=+$('lqH').value,[n,rho,col]=L[k];$('lqHv').textContent=h+' m';x.clearRect(0,0,640,340);const X=120,Y0=40,H=260;x.fillStyle=col;x.fillRect(X,Y0,160,H);x.strokeStyle='#495057';x.lineWidth=3;x.strokeRect(X,Y0,160,H);
+  [2,5,8].forEach(d=>{const y=Y0+d/10*H,v=Math.sqrt(2*9.8*d)*(1000/rho)**0?1:1,len=20+Math.sqrt(d)*40*(rho/1000)**.15;x.strokeStyle=col.replace(/[\d.]+\)$/,'1)');x.lineWidth=4;x.beginPath();x.moveTo(X+160,y);for(let s=0;s<=1;s+=.05)x.lineTo(X+160+s*len*2,y+s*s*80+Math.sin(t*8+s*6)*1.2);x.stroke();tL(x,d+' m',X-24,y+4,12,'#495057')});
+  const y=Y0+h/10*H;x.fillStyle='#d9480f';x.beginPath();x.arc(X+80,y,9,0,7);x.fill();x.strokeStyle='#d9480f';x.setLineDash([4,4]);x.beginPath();x.moveTo(X,y);x.lineTo(X+160,y);x.stroke();x.setLineDash([]);
+  const p=h*rho*9.8;$('lqOut').innerHTML=Q_('p = hρg = '+h+' × '+rho+' × 9.8 = '+rd(p,0)+' Pa')+'<br>💦 الماء يندفع أبعد من الثقب الأعمق ⟸ الضغط يزداد بالعمق'})})();
+MCQP($('qp1'),()=>{const t=rnd(0,1);if(t===0){const F=pick([100,500,600,1200]),A=pick([.5,2,4,.2]);return{q:'قوة '+Q_(F+' N')+' تؤثر عموديًا على مساحة '+Q_(A+' m²')+'. الضغط:',o:OPS_P(Q_(rd(F/A,0)+' Pa'),[Q_(rd(F*A,0)+' Pa'),Q_(rd(A/F,4)+' Pa'),Q_(F+A+' Pa')]),ex:'p = F / A'}}
+ const h=pick([2,5,10,20]);return{q:'الضغط الناتج عن الماء على عمق '+Q_(h+' m')+' (ρ = 1000 kg m⁻³ ، g = 10):',o:OPS_P(Q_(h*10000+' Pa'),[Q_(h*1000+' Pa'),Q_(h*100+' Pa'),Q_(rd(10000/h,0)+' Pa')]),ex:'p = hρg'}});
+
+(function(){const [c,x]=C2('hyC');function draw(){const F=+$('hyF').value,r=+$('hyR').value;$('hyFv').textContent=F+' N';$('hyRv').textContent='× '+r;const Fy=F*r,lift=Math.min(40,F/5);x.clearRect(0,0,640,280);
+  x.fillStyle='rgba(116,192,252,.6)';x.fillRect(80,150,480,90);x.fillRect(100,80+lift*.8,50,80);x.fillRect(380,90-lift*.2,160,70);x.strokeStyle='#495057';x.lineWidth=3;x.strokeRect(80,150,480,90);
+  x.fillStyle='#495057';x.fillRect(96,70+lift*.8,58,14);x.fillRect(376,80-lift*.2,168,14);arrow(x,125,10,125,64+lift*.8,'#1971c2',3);EMP(x,'🚙',460,48-lift*.2,60);
+  tL(x,'FX = '+F+' N',125,8+14,13,'#1971c2');tL(x,'FY = '+Fy+' N',460,130,14,'#d9480f');
+  $('hyOut').innerHTML='الضغط متساوٍ: '+Q_('FY = FX × (AY / AX) = '+F+' × '+r+' = '+Fy+' N')+(Fy>=12000?'<br>🎉 يكفي لرفع سيارة وزنها 12 000 N!':'')}
+ ['hyF','hyR'].forEach(i=>$(i).oninput=draw);draw()})();
+(function(){const [c,x]=C2('baC');function draw(){const H=+$('baH').value,mm=760*Math.exp(-H/8400);$('baHv').textContent=H+' m';x.clearRect(0,0,640,320);
+  x.fillStyle='#e7f5ff';x.fillRect(0,0,640,320);x.fillStyle='#adb5bd';x.beginPath();x.moveTo(380,320);x.lineTo(520,60);x.lineTo(640,320);x.fill();const my=310-H/8800*240;EMP(x,'🧗',380+(H/8800)*140,my-6,26);
+  x.strokeStyle='#495057';x.lineWidth=3;x.strokeRect(150,30,30,260);x.fillStyle='#ced4da';x.fillRect(110,270,110,30);const ch=mm/800*240;x.fillStyle='#868e96';x.fillRect(152,290-ch,26,ch);x.fillStyle='#fff';x.fillRect(152,32,26,256-ch);txt(x,'فراغ',165,52,11,'#495057');
+  tL(x,Math.round(mm)+' mmHg',90,290-ch+4,14,'#d9480f');$('baOut').innerHTML='📉 ارتفاع عمود الزئبق ≈ <b>'+Math.round(mm)+' mmHg</b> ≈ '+rd(mm/760*101.3,1)+' kPa'+(H===0?' (الضغط الجوي المعياري عند سطح البحر)':' · كلما صعدنا قل الهواء فوقنا ⟸ قل الضغط')}
+ $('baH').oninput=draw;draw()})();
+(function(){const [c,x]=C2('maC');function draw(){const p=+$('maP').value,atm=101.3,dh=(p-atm)*1000/(1000*9.8)*100;$('maPv').textContent=p+' kPa';x.clearRect(0,0,640,300);
+  x.fillStyle='#fff3bf';x.beginPath();x.arc(120,150,60,0,7);x.fill();x.strokeStyle='#e8a800';x.lineWidth=3;x.stroke();txt(x,'غاز',120,156,16,'#a67c00');x.strokeStyle='#495057';x.lineWidth=4;x.beginPath();x.moveTo(180,150);x.lineTo(300,150);x.stroke();
+  const base=180,s=Math.max(-90,Math.min(90,dh*2.4));x.fillStyle='rgba(116,192,252,.8)';x.fillRect(300,base+s,30,260-base-s);x.fillRect(420,base-s,30,260-base+s);x.fillRect(300,240,150,30);x.strokeStyle='#495057';x.lineWidth=3;x.strokeRect(300,40,30,230);x.strokeRect(420,40,30,230);
+  x.setLineDash([4,4]);x.beginPath();x.moveTo(290,base+s);x.lineTo(470,base+s);x.moveTo(410,base-s);x.lineTo(470,base-s);x.stroke();x.setLineDash([]);tL(x,'h = '+Math.abs(rd(dh,1))+' cm',540,base,14,'#d9480f');
+  $('maOut').innerHTML=Math.abs(p-atm)<.5?'⚖️ ضغط الغاز = الضغط الجوي ⟸ مستويا الماء متساويان':(p>atm?'⬆️ ضغط الغاز أكبر من الجوي: ':'⬇️ ضغط الغاز أقل من الجوي: ')+Q_('p_gas = p_atm '+(p>atm?'+':'−')+' hρg')}
+ $('maP').oninput=draw;draw()})();
+MCQP($('qp2'),()=>{const t=rnd(0,1);if(t===0){const F=pick([10,15,20,50]),r=pick([10,20,40,100]);return{q:'في مكبس هيدروليكي مساحة المكبس الكبير '+N(r)+' أضعاف الصغير. قوة '+Q_(F+' N')+' على الصغير تنتج على الكبير:',o:OPS_P(Q_(F*r+' N'),[Q_(F+' N'),Q_(rd(F/r,2)+' N'),Q_(F+r+' N')]),ex:'FY = FX × AY / AX'}}
+ return bank([['الضغط الجوي المعياري يعادل عمود زئبق ارتفاعه:',['760 mm','76 mm','7600 mm','100 mm']],['يقل الضغط الجوي كلما:',['ارتفعنا عن سطح البحر','نزلنا تحت سطح البحر','ازدادت الحرارة دائمًا','زادت كثافة الهواء']],['جهاز قياس الضغط الجوي:',['البارومتر','المانومتر','الميكرومتر','الأميتر']],['جهاز قياس ضغط غاز محبوس:',['المانومتر','البارومتر','الدينامومتر','الترمومتر']],['تعمل المكابس الهيدروليكية على مبدأ:',['انتقال الضغط بالتساوي في السائل المحصور','الطفو','العزوم','حفظ الكتلة']],['المساحة فوق عمود الزئبق في البارومتر:',['فراغ','هواء','ماء','زئبق']]])()});
+
+chapterTest('rv4',[['p = ',['F/A','FA','A/F']],['وحدة الضغط:',['الباسكال Pa','الجول J','الواط W']],['1 Pa = ',['1 N m⁻²','1 N m','1 J s⁻¹']],['قوة 100 N على 2 m². الضغط:',['50 Pa','200 Pa','102 Pa']],['المسمار المدبب يخترق الخشب بسهولة لأن:',['مساحته صغيرة فالضغط كبير','قوته أكبر','وزنه كبير']],['ضغط السائل = ',['hρg','h/ρg','ρ/hg']],['يزداد ضغط السائل بزيادة:',['العمق','مساحة الإناء','شكل الإناء']],['الضغط الجوي المعياري:',['760 mmHg','76 mmHg','1 mmHg']],['يقل الضغط الجوي على قمم الجبال لأن:',['الهواء فوقها أقل','الحرارة أعلى','الجاذبية صفر']],['البارومتر يقيس:',['الضغط الجوي','ضغط الغاز المحبوس','الكثافة']],['في المكبس الهيدروليكي الضغط على المكبسين:',['متساوٍ','أكبر على الكبير','أكبر على الصغير']],['المانومتر يقيس:',['ضغط الغاز','الضغط الجوي فقط','العزم']]]);
+
+</script>
+<script>window.NARR=["m1", "m2", "k1", "k2", "k3", "rv1", "f1", "f2", "w1", "w2", "rv2", "t1", "t2", "e1", "e2", "rv3", "p1", "p2", "rv4"];window.AUDIO_BASE="audio-f10/";</script>
+<style>
+.fxbar{position:fixed;left:10px;bottom:10px;z-index:90;display:flex;gap:6px}
+.fxbar button{width:46px;height:46px;border-radius:50%;border:none;background:#1f2a44;color:#fff;font-size:1.3rem;box-shadow:0 4px 12px #0004;cursor:pointer}
+.say{border:2px solid #f08c2e;background:#fff7e8;color:#b35b00;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.9rem;margin:0 6px;vertical-align:middle;font-family:inherit}
+.say.on{background:#f08c2e;color:#fff;animation:pul 1s infinite}
+@keyframes pul{50%{transform:scale(1.06)}}
+.cfx{position:fixed;pointer-events:none;z-index:95;font-size:20px;animation:cf 1.1s ease-out forwards}
+@keyframes cf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+.pop{animation:popk .35s}
+@keyframes popk{50%{transform:scale(1.08)}}
+.shk{animation:shk .4s}
+@keyframes shk{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.stars{position:fixed;bottom:16px;left:66px;background:#1f2a44;color:#fff;border-radius:20px;padding:3px 14px;font-weight:900;z-index:91;font-family:inherit;transition:.3s}
+</style>
+<div class="fxbar"><button id="fxMute" title="الأصوات">🔊</button></div>
+<div class="stars" id="fxStars">⭐ 0</div>
+<script>
+(function(){let AC=null,mute=false,stars=0;try{mute=localStorage.getItem('lb_mute')==='1';stars=+localStorage.getItem('lb_stars_'+location.pathname)||0}catch(e){}
+ const mb=document.getElementById('fxMute');const sb=document.getElementById('fxStars');const upd=()=>{mb.textContent=mute?'🔇':'🔊';sb.textContent='⭐ '+stars};upd();
+ mb.onclick=()=>{mute=!mute;try{localStorage.setItem('lb_mute',mute?'1':'0')}catch(e){}upd();if(mute&&cur){cur.pause();cur=null;document.querySelectorAll('.say.on').forEach(b=>b.classList.remove('on'))}};
+ function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC}
+ function tone(f,t0,d,type,v){const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,a.currentTime+t0);g.gain.setValueAtTime(0,a.currentTime+t0);g.gain.linearRampToValueAtTime(v||.18,a.currentTime+t0+.015);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+t0+d);o.connect(g);g.connect(a.destination);o.start(a.currentTime+t0);o.stop(a.currentTime+t0+d+.05)}
+ const S={ok:()=>{tone(523,0,.15,'triangle');tone(659,.09,.15,'triangle');tone(784,.18,.3,'triangle')},no:()=>{tone(220,0,.18,'sawtooth',.08);tone(185,.12,.25,'sawtooth',.08)},tick:()=>tone(900,0,.04,'square',.03),win:()=>{[523,659,784,1046,784,1046].forEach((f,i)=>tone(f,i*.1,.22,'triangle'))},whoosh:()=>{const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.frequency.setValueAtTime(300,a.currentTime);o.frequency.exponentialRampToValueAtTime(1200,a.currentTime+.25);g.gain.setValueAtTime(.06,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.3);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.32)}};
+ window.FX=S;
+ function confetti(el,big){const r=el&&el.getBoundingClientRect?el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};const E=['⭐','✨','🎉','💚','🌟','🎊'];const n=big?26:9;
+  for(let i=0;i<n;i++){const s=document.createElement('div');s.className='cfx';s.textContent=E[i%E.length];s.style.left=(r.left+r.width/2)+'px';s.style.top=(r.top+r.height/2)+'px';const a=Math.random()*6.28,d=(big?160:70)+Math.random()*80;s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',(Math.sin(a)*d-40)+'px');s.style.setProperty('--r',(Math.random()*720-360)+'deg');document.body.appendChild(s);setTimeout(()=>s.remove(),1200)}}
+ let last=0,lastNo=0;function hit(el,good){const now=Date.now();if(good){if(now-lastNo<400||now-last<250)return;last=now;S.ok();confetti(el);stars++;try{localStorage.setItem('lb_stars_'+location.pathname,stars)}catch(e){}upd();sb.classList.add('pop');setTimeout(()=>sb.classList.remove('pop'),400);el.classList&&el.classList.add('pop');setTimeout(()=>el.classList&&el.classList.remove('pop'),400);
+   if(stars%10===0){S.win();confetti(sb,true)}}else{lastNo=now;S.no();el.classList&&el.classList.add('shk');setTimeout(()=>el.classList&&el.classList.remove('shk'),450)}}
+ new MutationObserver(ms=>{ms.forEach(m=>{const t=m.target;if(!(t instanceof Element))return;if(m.type==='attributes'){const was=(m.oldValue||'').split(/\s+/);const c=t.classList;if(c.contains('ok')&&!was.includes('ok')&&(t.matches('button,input,.fb,.opt')))hit(t,true);else if(c.contains('no')&&!was.includes('no')&&t.matches('button,input,.opt'))hit(t,false)}})}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class'],attributeOldValue:true});
+ document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&!b.classList.contains('say')&&b.id!=='fxMute')S.tick()},true);
+ document.addEventListener('input',e=>{if(e.target.type==='range'){const n=Date.now();if(!window._lt||n-window._lt>90){window._lt=n;tone(400+(+e.target.value-+e.target.min)/(+e.target.max-+e.target.min+.001)*600,0,.03,'sine',.03)}}},true);
+ /* narration */
+ let cur=null;const base=window.AUDIO_BASE||'audio/';
+ function addSay(){document.querySelectorAll('.page').forEach(p=>{if(!(window.NARR||[]).includes(p.id))return;const h=p.querySelector('h2');if(!h||h.querySelector('.say'))return;const b=document.createElement('button');b.className='say';b.textContent='🔊 اسمع';
+  b.onclick=()=>{if(cur){cur.pause();const was=b.classList.contains('on');document.querySelectorAll('.say.on').forEach(x=>x.classList.remove('on'));cur=null;if(was)return}if(mute){mute=false;upd()}const a=new Audio(base+p.id+'.mp3');cur=a;b.classList.add('on');b.textContent='⏸️ إيقاف';a.onended=a.onerror=()=>{b.classList.remove('on');b.textContent='🔊 اسمع';cur=null};a.play().catch(()=>{b.classList.remove('on');b.textContent='🔊 اسمع'})};h.appendChild(b)})}
+ addSay();document.querySelectorAll('#bar button,[data-go]').forEach(b=>b.addEventListener('click',()=>{S.whoosh();if(cur){cur.pause();cur=null;document.querySelectorAll('.say').forEach(x=>{x.classList.remove('on');x.textContent='🔊 اسمع'})}}));
+})();
+</script>
+
+</body>
+</html>
