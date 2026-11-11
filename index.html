@@ -859,7 +859,7 @@ $('auGo').onclick=async()=>{const b=$('auGo'),ph=normPhone($('auPhone').value),p
 
 /* ============ تغيير الصف ============ */
 let selG=null;
-function renderSetup(){selG=S.user&&S.user.grade;gradeList($('gList'),selG,g=>selG=g);const b=subOf(S.user);if(b.until>Date.now()&&b.grade)msg('fMsg','⚠️ اشتراكك لصف '+GN(b.grade)+' فقط. إذا غيّرت صفك ترى الدروس المجانية فقط في الصف الجديد.');else msg('fMsg','')}
+function renderSetup(){selG=S.user&&S.user.grade;gradeList($('gList'),selG,g=>selG=g);const b=subOf(S.user);if(b.until>Date.now()&&b.grade)msg('fMsg','⚠️ اشتراكك خاص بـ«'+GN(b.grade)+'» فقط. إذا غيّرت صفك ترى الدروس المجانية فقط في الصف الجديد.');else msg('fMsg','')}
 $('fGo').onclick=async()=>{if(!selG)return msg('fMsg','اختر الصف');const b=$('fGo');busy(b,1);
  const r=await rpc('lb_set_grade',{p_token:S.tok,p_grade:selG});busy(b,0);if(r.err)return msg('fMsg',r.err);
  S.user.grade=selG;S.student=S.user;store();show('home')};
@@ -878,7 +878,7 @@ function points(stt){return Object.values(stt||S.stats).reduce((a,x)=>a+x.ok*10,
 function streak(){let n=0,d=new Date();const set=new Set(S.days);for(;;){const k=d.toISOString().slice(0,10);if(set.has(k)){n++;d=new Date(d-DAY)}else break}return n}
 function subjProg(s,stt){stt=stt||S.stats;const L=subLessons(s);if(!L.length)return 0;return Math.round(L.filter(l=>stt[l.id]&&stt[l.id].opened).length/L.length*100)}
 function planBox(el,w){const sb=subOf(who());el.className='plan'+(active()?'':' exp');const og=otherGrade();
- el.innerHTML=og?'<b>🔒 الاشتراك لصف '+esc(GN(og))+'</b><div>'+(w==='p'?'اشتراك ابنك لصف '+esc(GN(og))+' فقط.':'اشتراكك لصف '+esc(GN(og))+' فقط. ارجع لصفك من «تغيير الصف» لتفتح كتبك، أو راسل الإدارة لنقل الاشتراك.')+'</div>':active()?'<b>✅ '+esc(sb.plan)+'</b> · باقي '+daysLeft()+' يوم'+(sb.plan==='تجربة مجانية'?'<button class="btn" style="background:#fff;color:#22867f;margin-top:8px;width:100%" data-pay>اشترك الآن</button>':'')
+ el.innerHTML=og?'<b>🔒 الاشتراك خاص بـ«'+esc(GN(og))+'»</b><div>'+(w==='p'?'اشتراك ابنك خاص بـ«'+esc(GN(og))+'» فقط.':'اشتراكك خاص بـ«'+esc(GN(og))+'» فقط. ارجع لصفك من «تغيير الصف» لتفتح كتبك، أو راسل الإدارة لنقل الاشتراك.')+'</div>':active()?'<b>✅ '+esc(sb.plan)+'</b> · باقي '+daysLeft()+' يوم'+(sb.plan==='تجربة مجانية'?'<button class="btn" style="background:#fff;color:#22867f;margin-top:8px;width:100%" data-pay>اشترك الآن</button>':'')
   :'<b>🔒 '+(sb.until?'انتهى الاشتراك':'غير مشترك')+'</b><div>'+(w==='p'?'ابنك يرى الدروس المجانية فقط':'عندك 5 دروس مجانية في كل مادة، وللباقي اشترك')+'</div><button class="btn" style="background:#fff;color:#b33636;margin-top:8px;width:100%" data-pay>اشترك الآن</button>';
  const pp=payOf(who());if(pp)el.innerHTML+=payBadge(pp);el.querySelectorAll('[data-pay]').forEach(b=>b.onclick=openPay)}
 function renderHome(){if(role()!=='student'){home();return}const g=grade(),h=new Date().getHours();
@@ -1081,7 +1081,7 @@ async function loadUsers(){const L=$('uList');L.innerHTML='<div class="muted">�
   +'<div class="m">'+(u.role==='parent'?'ولي أمر':esc(GN(u.grade)))+(u.role==='student'?' · '+(act?'✅ '+esc(sb.plan)+(sb.grade?' ['+esc(GN(sb.grade))+']':'')+' حتى '+fmtD(sb.until):'🔒 غير مشترك'):'')+' · أجهزة: '+u.devices+'</div>'
   +'<div class="m">سُجّل '+fmtD(Date.parse(u.created))+(u.last_seen?' · آخر دخول '+fmtD(Date.parse(u.last_seen)):'')+'</div>'
   +'<div class="b">'+(u.role==='student'&&act?'<button data-mv="'+u.id+'" data-nm="'+esc(u.name)+'" data-g="'+esc(sb.grade||'')+'">🎓 نقل الاشتراك لصف آخر</button>':'')+'<button data-rs="'+u.phone+'" data-nm="'+esc(u.name)+'">🔁 إعادة تعيين الأجهزة / كلمة المرور</button><a target="_blank" rel="noopener" href="https://wa.me/218'+u.phone+'">واتساب</a></div></div>'}).join('');
- L.querySelectorAll('[data-mv]').forEach(b=>b.onclick=()=>ask('🎓 نقل اشتراك: '+b.dataset.nm,'<p class="muted">الاشتراك الحالي لصف '+esc(GN(b.dataset.g))+'. اختر الصف الجديد (يتغير صف الطالب أيضًا):</p><select id="mvG" class="fldin">'+GRADES.filter(g=>g.ready).map(g=>'<option value="'+g.id+'"'+(g.id===b.dataset.g?' selected':'')+'>'+g.name+'</option>').join('')+'</select>','نقل',
+ L.querySelectorAll('[data-mv]').forEach(b=>b.onclick=()=>ask('🎓 نقل اشتراك: '+b.dataset.nm,'<p class="muted">الاشتراك الحالي: «'+esc(GN(b.dataset.g))+'». اختر الصف الجديد (يتغير صف الطالب أيضًا):</p><select id="mvG" class="fldin">'+GRADES.filter(g=>g.ready).map(g=>'<option value="'+g.id+'"'+(g.id===b.dataset.g?' selected':'')+'>'+g.name+'</option>').join('')+'</select>','نقل',
   async()=>{const r2=await rpc('lb_admin_sub_grade',{p_token:S.tok,p_account:+b.dataset.mv,p_grade:$('mvG').value});if(r2.err)return r2.err;toast('✅ تم نقل الاشتراك');loadUsers()}));
  L.querySelectorAll('[data-rs]').forEach(b=>b.onclick=()=>ask('🔁 إعادة تعيين: '+b.dataset.nm,
   '<p class="muted">سيُسجَّل خروجه من كل الأجهزة، ويستطيع الدخول من جهاز جديد. اكتب كلمة مرور جديدة إذا نسيها، أو اتركها فارغة.</p><div class="fld"><label>كلمة مرور جديدة (اختياري)</label><input id="rsP"></div>','تنفيذ',
