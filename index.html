@@ -418,7 +418,7 @@ const CONFIG={
  iban:'LY27024003010148774020301',
  whatsapp:'218911605647'   // رقم واتساب الشركة بالصيغة الدولية بدون +
 };
-const PLANS=[{id:'T6',g:'g6',t:'الفصل الأول – كل كتب الصف السادس',d:120,p:40},{id:'T7',g:'g7',t:'الفصل الأول – كل كتب الصف السابع',d:120,p:50},{id:'T8',g:'g8',t:'الفصل الأول – كل كتب الصف الثامن',d:120,p:25},{id:'T9',g:'g9',t:'الفصل الأول – كل كتب الصف التاسع',d:120,p:40},{id:'T5',g:'g5',t:'الفصل الأول – كل كتب الصف الخامس',d:120,p:40},{id:'T10',g:'s1',t:'الفصل الأول – كل كتب الأول الثانوي',d:120,p:60},{id:'T11',g:'s2',t:'الفصل الأول – كل كتب الثاني الثانوي',d:120,p:30},{id:'T12',g:'s3',t:'الفصل الأول – كل كتب الثالث الثانوي',d:120,p:90}];
+const PLANS=[{id:'T6',g:'g6',t:'الفصل الأول – كل كتب الصف السادس',d:120,p:30,o:40},{id:'T7',g:'g7',t:'الفصل الأول – كل كتب الصف السابع',d:120,p:45,o:60},{id:'T8',g:'g8',t:'الفصل الأول – كل كتب الصف الثامن',d:120,p:15,o:20},{id:'T9',g:'g9',t:'الفصل الأول – كل كتب الصف التاسع',d:120,p:70,o:90},{id:'T5',g:'g5',t:'الفصل الأول – كل كتب الصف الخامس',d:120,p:30,o:40},{id:'T10',g:'s1',t:'الفصل الأول – كل كتب الأول الثانوي',d:120,p:50,o:70},{id:'T11',g:'s2',t:'الفصل الأول – كل كتب الثاني الثانوي',d:120,p:50,o:70},{id:'T12',g:'s3',t:'الفصل الأول – كل كتب الثالث الثانوي',d:120,p:75,o:100}];
 
 /* ============ المحتوى ============ */
 const L9=[
@@ -891,10 +891,12 @@ $('pRefresh').onclick=()=>{loadKids();toast('جارٍ التحديث…')};
 let selPlan='T7';
 function cpRow(label,val){return'<div><span>'+label+'</span><span style="display:flex;gap:6px;align-items:center"><b>'+val+'</b>'+(val&&!val.startsWith('[')?'<button class="cp" data-cp="'+val+'">نسخ</button>':'')+'</span></div>'}
 function refNo(){const w=who();return'LB'+(w?w.phone.slice(-4):'0000')+selPlan}
-function renderPay(){const gp=PLANS.filter(p=>p.g===grade().id);if(!gp.some(p=>p.id===selPlan))selPlan=(gp[0]||PLANS[0]).id;$('plans').innerHTML=(gp.length?gp:PLANS).map(p=>'<div class="pl'+(p.id===selPlan?' sel':'')+'" data-pl="'+p.id+'"><b>'+p.t+'<small style="display:block;font-weight:600;opacity:.75">حتى نهاية الفصل الأول · وكل كتاب جديد يُضاف لصفك يُفتح لك مجانًا</small></b><span class="pr">'+p.p+' د.ل</span></div>').join('');
+let SIB=false;function payAmt(){const pl=PLANS.find(p=>p.id===selPlan);return SIB?Math.round(pl.p*0.7):pl.p}
+function renderPay(){const gp=PLANS.filter(p=>p.g===grade().id);if(!gp.some(p=>p.id===selPlan))selPlan=(gp[0]||PLANS[0]).id;$('plans').innerHTML=(gp.length?gp:PLANS).map(p=>'<div class="pl'+(p.id===selPlan?' sel':'')+'" data-pl="'+p.id+'"><b>'+p.t+'<small style="display:block;font-weight:600;opacity:.75">حتى نهاية الفصل الأول · وكل كتاب جديد يُضاف لصفك يُفتح لك مجانًا</small></b><span class="pr">'+(p.o?'<s style="display:block;font-size:.8rem;opacity:.6">'+p.o+' د.ل</s>':'')+p.p+' د.ل'+(p.o?'<small style="display:block;font-size:.7rem;background:#e03131;color:#fff;border-radius:8px;padding:1px 6px;margin-top:2px">🎉 سعر الافتتاح</small>':'')+'</span></div>').join('');
  $('plans').querySelectorAll('[data-pl]').forEach(x=>x.onclick=()=>{selPlan=x.dataset.pl;renderPay()});
  const pl=PLANS.find(p=>p.id===selPlan);
- const ok_=v=>v&&!v.startsWith('[');$('bank').innerHTML=(ok_(CONFIG.bank)?cpRow('المصرف',CONFIG.bank):'')+(ok_(CONFIG.accountName)?cpRow('اسم الحساب',CONFIG.accountName):'')+(ok_(CONFIG.account)?cpRow('رقم الحساب',CONFIG.account):'')+(CONFIG.iban?cpRow('رقم الآيبان IBAN',CONFIG.iban):'')+'<div><span>المبلغ</span><b style="color:var(--or);font-size:1.2rem">'+pl.p+' د.ل</b></div>';
+ const ok_=v=>v&&!v.startsWith('[');$('bank').innerHTML=(ok_(CONFIG.bank)?cpRow('المصرف',CONFIG.bank):'')+(ok_(CONFIG.accountName)?cpRow('اسم الحساب',CONFIG.accountName):'')+(ok_(CONFIG.account)?cpRow('رقم الحساب',CONFIG.account):'')+(CONFIG.iban?cpRow('رقم الآيبان IBAN',CONFIG.iban):'')+'<div><span>المبلغ</span><b style="color:var(--or);font-size:1.2rem">'+payAmt()+' د.ل</b></div><label style="display:flex;gap:8px;align-items:center;font-weight:800;margin-top:6px;cursor:pointer"><input type="checkbox" id="sibChk"'+(SIB?' checked':'')+'> 👨‍👩‍👧 عندي ابن آخر مشترك معكم (خصم 30٪)</label>';
+ $('sibChk').onchange=e=>{SIB=e.target.checked;renderPay()};
  $('bank').querySelectorAll('[data-cp]').forEach(b=>b.onclick=()=>copy(b.dataset.cp));
  $('ref').textContent=refNo();const ok=/^\d{11,13}$/.test(CONFIG.whatsapp);$('waBtn').href=ok?'https://wa.me/'+CONFIG.whatsapp+'?text='+encodeURIComponent(waMsg()):'#';$('waBtn').onclick=e=>{if(!ok){e.preventDefault();toast('رقم واتساب الشركة لم يُضبط بعد')}};$('waNum').textContent=ok?'أو أرسل على الرقم: +'+CONFIG.whatsapp:'';
  const par=role()==='parent';$('codeIn').style.display=par?'none':'';$('codeGo').style.display=par?'none':'';$('codeHint').textContent=par?'سيصلك كود مثل KH-XXXX-XXXX. أعطه لابنك ليدخله من حسابه (اشترك الآن ← أدخل الكود).':'سيصلك كود مثل KH-XXXX-XXXX، اكتبه هنا.'}
@@ -908,7 +910,7 @@ $('rcGo').onclick=async()=>{if(!rcData)return msg('rcMsg','اختر صورة ا�
  const r=await rpc('lb_pay_submit',{p_token:S.tok,p_plan_id:selPlan,p_receipt:rcData,p_note:$('rcNote').value,p_child:role()==='parent'&&kid()?kid().id:null});busy(b,0);
  if(r.err)return msg('rcMsg','❌ '+r.err);toast('✅ وصل طلبك، سنراجعه ونفعّل الاشتراك');await loadPays();payView()};
 $('payClose').onclick=()=>$('pay').classList.remove('on');
-function waMsg(){const pl=PLANS.find(p=>p.id===selPlan),g=grade(),w=who();return 'السلام عليكم، أرسلت تحويل اشتراك الكتاب الحي.\nاسم الطالب: '+w.name+'\nهاتف الطالب: 0'+w.phone+'\nالصف: '+g.name+'\nالباقة: '+pl.t+'\nالمبلغ: '+pl.p+' د.ل\nرقم المرجع: '+refNo()+'\n(أرفق صورة الإيصال)'}
+function waMsg(){const pl=PLANS.find(p=>p.id===selPlan),g=grade(),w=who();return 'السلام عليكم، أرسلت تحويل اشتراك الكتاب الحي.\nاسم الطالب: '+w.name+'\nهاتف الطالب: 0'+w.phone+'\nالصف: '+g.name+'\nالباقة: '+pl.t+'\nالمبلغ: '+payAmt()+' د.ل'+(SIB?' (بعد خصم الإخوة 30٪ – اسم الأخ المشترك: ......)':'')+'\nرقم المرجع: '+refNo()+'\n(أرفق صورة الإيصال)'}
 $('codeGo').onclick=async()=>{const b=$('codeGo'),c=$('codeIn').value.trim();if(c.length<8)return msg('codeMsg','اكتب الكود كاملًا: KH-XXXX-XXXX');
  busy(b,1);const r=await rpc('lb_redeem',{p_token:S.tok,p_code:c});busy(b,0);if(r.err)return msg('codeMsg','❌ '+r.err);
  setUser(r);msg('codeMsg','🎉 تم التفعيل! اشتراكك فعّال حتى '+fmtD(r.user.sub&&r.user.sub.until),true);
