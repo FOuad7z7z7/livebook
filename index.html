@@ -283,31 +283,7 @@ input:focus,select:focus{outline:none;border-color:var(--roy2)!important;box-sha
 <script>(function(){var s=document.getElementById('splash');var seen=false;try{seen=sessionStorage.getItem('lbSplash')}catch(e){}
 if(seen){s.remove();return}try{sessionStorage.setItem('lbSplash','1')}catch(e){}
 
-/* موسيقى الافتتاح: تُولَّد بالمتصفح (بلا ملفات) */
-function lbJingle(ctx){var t0=ctx.currentTime+.05,M=ctx.createGain();M.gain.value=.55;
- var comp=ctx.createDynamicsCompressor();M.connect(comp);comp.connect(ctx.destination);
- var rv=ctx.createConvolver(),len=ctx.sampleRate*2.2,ir=ctx.createBuffer(2,len,ctx.sampleRate);for(var c=0;c<2;c++){var d=ir.getChannelData(c);for(var i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3)}rv.buffer=ir;var wet=ctx.createGain();wet.gain.value=.35;rv.connect(wet);wet.connect(M);
- function out(n){n.connect(M);n.connect(rv)}
- /* حفيف فتح الصفحات */
- var nb=ctx.createBuffer(1,ctx.sampleRate*.7,ctx.sampleRate),nd=nb.getChannelData(0);for(var i=0;i<nd.length;i++)nd[i]=Math.random()*2-1;
- var ns=ctx.createBufferSource();ns.buffer=nb;var bp=ctx.createBiquadFilter();bp.type='bandpass';bp.Q.value=.8;bp.frequency.setValueAtTime(600,t0);bp.frequency.exponentialRampToValueAtTime(5000,t0+.6);
- var ng=ctx.createGain();ng.gain.setValueAtTime(0,t0);ng.gain.linearRampToValueAtTime(.18,t0+.15);ng.gain.exponentialRampToValueAtTime(.001,t0+.7);ns.connect(bp);bp.connect(ng);out(ng);ns.start(t0);
- /* جرس */
- function bell(f,t,v,dur){[1,2.01,3.02].forEach(function(h,k){var o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=f*h;var a=v/(k*2.2+1);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(a,t+.012);g.gain.exponentialRampToValueAtTime(.0005,t+dur/(k+1));o.connect(g);out(g);o.start(t);o.stop(t+dur+.1)})}
- /* صعود النور: تتابع نغمات */
- [523.25,659.25,783.99,1046.5,1318.5].forEach(function(f,i){bell(f,t0+.55+i*.11,.16,1.6)});
- /* لمعان النجوم */
- [2093,2637,3136,2349,2794].forEach(function(f,i){bell(f,t0+1.35+i*.13+Math.random()*.05,.05,.7)});
- /* الكورد الدافئ مع ظهور الاسم */
- [261.63,329.63,392,493.88,587.33].forEach(function(f,i){var o=ctx.createOscillator(),o2=ctx.createOscillator(),g=ctx.createGain(),lp=ctx.createBiquadFilter();o.type='triangle';o2.type='sine';o.frequency.value=f;o2.frequency.value=f*1.003;lp.type='lowpass';lp.frequency.value=2200;
-  var t=t0+1.25;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.07,t+.35);g.gain.setValueAtTime(.07,t+1.2);g.gain.exponentialRampToValueAtTime(.0005,t+2.4);o.connect(lp);o2.connect(lp);lp.connect(g);out(g);o.start(t);o2.start(t);o.stop(t+2.5);o2.stop(t+2.5)});
- bell(1046.5,t0+1.3,.12,2.4)}
-var LBM=false;try{LBM=localStorage.getItem('lbMute')==='1'}catch(e){}
-var mb=document.createElement('button');mb.textContent=LBM?'🔇':'🔊';mb.setAttribute('aria-label','الصوت');mb.style.cssText='position:absolute;top:calc(14px + env(safe-area-inset-top));left:14px;background:rgba(255,255,255,.15);border:0;color:#fff;border-radius:50%;width:42px;height:42px;font-size:1.2rem;z-index:2;cursor:pointer';s.appendChild(mb);
-var AC=null,played=false;function playJ(){if(LBM||played)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();var go=function(){if(played||AC.state!=='running')return;played=true;lbJingle(AC)};if(AC.state==='suspended')AC.resume().then(go).catch(function(){});else go()}catch(e){}}
-mb.addEventListener('click',function(e){e.stopPropagation();LBM=!LBM;mb.textContent=LBM?'🔇':'🔊';try{localStorage.setItem('lbMute',LBM?'1':'0')}catch(e){}if(!LBM)playJ();else if(AC)AC.close()});
-playJ();
-function bye(){if(!s.parentNode)return;s.classList.add('out');setTimeout(function(){s.remove()},650)}s.addEventListener('click',function(){if(!played&&!LBM){playJ();return}bye()});setTimeout(bye,3300)})();</script>
+function bye(){if(!s.parentNode)return;s.classList.add('out');setTimeout(function(){s.remove()},650)}s.addEventListener('click',bye);setTimeout(bye,3300)})();</script>
 <div class="app">
 
 <!-- WELCOME -->
