@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>الأحياء – الثالث الثانوي – الكتاب الحي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+html{color-scheme:light}button,input,select{font-family:inherit;color:#1f2a44}
+:root{--ink:#1f2a44;--tl:#087f5b;--tl2:#e6fcf5;--or:#f08c2e;--gr:#2e9e5b;--rd:#d64545;--pu:#6b4fd8;--line:#e2e8ee;--soft:#6b7690}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Cairo',Tahoma,sans-serif;background:#e9eef6;color:var(--ink);line-height:1.85}
+.book{max-width:800px;margin:12px auto;background:#fff;border-radius:16px;box-shadow:0 10px 30px #0002;overflow:hidden}
+header{background:linear-gradient(135deg,#0b4f3c,#12b886);color:#fff;padding:16px;text-align:center}
+header h1{margin:0;font-size:1.3rem;font-weight:900}header div{opacity:.9;font-size:.85rem}
+.bar{display:flex;gap:6px;padding:8px 10px;background:var(--tl2);border-bottom:2px solid #c9d8f0;position:sticky;top:0;z-index:5;overflow-x:auto}
+.bar button{flex:0 0 auto;border:2px solid var(--tl);background:#fff;color:#1b3f73;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.86rem}
+.bar button.on{background:var(--tl);color:#fff}
+.page{display:none;padding:14px 16px 40px;animation:in .35s}.page.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h2{color:#1b3f73;margin:4px 0 6px;font-size:1.35rem;line-height:1.5}
+.num{display:inline-block;background:var(--tl);color:#fff;border-radius:10px;padding:0 10px;margin-left:6px;font-size:1rem}
+.box{border:2px solid var(--line);border-radius:16px;padding:14px;margin:14px 0;background:#fff}
+.box h3{margin:0 0 6px;font-size:1.05rem;color:#1b3f73}
+.lab{border-style:dashed;border-color:#a9c3ea;background:#fbfcff}
+.idea{background:linear-gradient(135deg,#0b4f3c,#12b886);color:#fff;border-radius:16px;padding:12px 16px;margin:10px 0;font-weight:800}
+.idea small{display:block;opacity:.85;font-weight:600}
+.life{background:#fff7e8;border-right:5px solid var(--or);border-radius:10px;padding:8px 12px;margin:10px 0}
+.law{background:#fff7e8;border:2px solid #f5c27a;border-radius:14px;padding:10px 14px;margin:10px 0;font-weight:800;text-align:center;font-size:1.05rem}
+.warn{background:#fdeeee;border-right:5px solid var(--rd);border-radius:10px;padding:8px 12px;margin:10px 0}
+.btn{border:2px solid var(--ink);background:#fff;border-radius:10px;padding:6px 14px;font-weight:800;cursor:pointer;font-size:.95rem}
+.btn.main{background:var(--tl);border-color:var(--tl);color:#fff}.btn.or{background:var(--or);border-color:var(--or);color:#2a1600}
+.btn.ok{background:#dff5e7;border-color:var(--gr)}.btn.no{background:#fde4e4;border-color:var(--rd)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;justify-content:center}
+.fb{font-weight:800;min-height:1.4em;text-align:center;margin-top:6px}.fb.ok{color:var(--gr)}.fb.no{color:var(--rd)}
+.prob{background:#f5f8fd;border-radius:14px;padding:10px;text-align:center;font-weight:700}
+.mx{font-size:1.2rem;font-weight:800;line-height:2.1}
+.sc{text-align:center;font-weight:900;background:var(--tl2);border-radius:12px;padding:8px}
+.steps{background:#f8f9fc;border-radius:12px;padding:8px 12px;margin-top:8px;display:none}
+.opt{display:block;width:100%;text-align:right;margin:5px 0}.opt.ok{background:#dff5e7;border-color:var(--gr)}.opt.no{background:#fde4e4;border-color:var(--rd)}
+input.cf{width:60px;height:42px;font-size:1.15rem;font-weight:900;text-align:center;border:3px solid #c9d8f0;border-radius:10px;direction:ltr;vertical-align:middle;margin:0 2px}
+input.cf.ok{border-color:var(--gr);background:#eefaf2}input.cf.no{border-color:var(--rd);background:#fdeeee}
+/* matrix */
+.M{display:inline-flex;align-items:stretch;vertical-align:middle;margin:2px 4px}
+.M .br{width:8px;border:3px solid var(--ink)}.M .br.r{border-left:none;border-radius:0 6px 6px 0}.M .br.l{border-right:none;border-radius:6px 0 0 6px}
+.M.det .br{width:0;border-width:0 0 0 3px;border-radius:0}.M.det .br.l{border-width:0 3px 0 0}
+.M .g{display:grid;direction:rtl;gap:2px 4px;padding:2px 4px}
+.M .c{min-width:36px;text-align:center;font-weight:900;font-size:1.1rem;padding:2px 4px;border-radius:8px;direction:ltr;transition:.25s}
+.M .c.h1{background:#ffe08a}.M .c.h2{background:#b9e4ff}.M .c.x{opacity:.18;text-decoration:line-through}.M .c.h3{background:#c8f0d2}
+.M input.c{width:48px;height:36px;border:2px solid #c9d8f0;border-radius:8px;background:#fff;font-family:inherit}
+.chap{border:2px solid var(--line);border-radius:14px;margin:8px 0;overflow:hidden}
+.chap>div:first-child{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;font-weight:800;background:#f8faff}
+.chap .cn{background:var(--tl);color:#fff;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;flex:0 0 auto}
+.chap .ls{display:none;padding:4px 12px 10px}.chap.open .ls{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px dashed var(--line);font-size:.95rem}
+.li .pg{margin-right:auto;color:var(--soft);font-size:.8rem}.li.ready{cursor:pointer;font-weight:800;color:#1b3f73}
+.tg{font-size:.72rem;border-radius:8px;padding:0 8px;font-weight:800}.tg.r{background:#e6f6ec;color:#1d7a3f}.tg.s{background:#f1f1f1;color:#999}
+table.t{border-collapse:collapse;width:100%;font-size:.92rem;margin:6px 0}table.t td,table.t th{border:1px solid #d6e1f2;padding:5px 8px}table.t th{background:var(--tl2)}
+.sl{display:flex;align-items:center;gap:8px;margin:4px 0}.sl label{min-width:90px;font-weight:800}.sl input{flex:1;accent-color:var(--tl)}
+footer{text-align:center;color:#999;font-size:.8rem;padding:10px 10px 70px}
+.rt{direction:ltr;unicode-bidi:isolate;display:inline-block}.wx,.bx{border:1px solid #dbe5f5;border-radius:12px;padding:8px 10px;margin:8px 0;background:#fbfcff}.wxq{font-weight:700;line-height:2}.wst{background:#fff;border-right:4px solid var(--tl);border-radius:8px;padding:4px 10px;margin:5px 0;animation:in .3s;line-height:2}.wst.fin{border-color:var(--gr);background:#eefaf2}.sn{display:inline-block;background:var(--tl);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:.8rem;margin-left:6px}.bh{background:#fff7e8;border-radius:8px;padding:6px 10px;margin:4px 0}.ans{font-weight:900;color:var(--gr);margin-top:4px}.exb{border-color:#a9c3ea}.M.det .br.r,.M.det .br.l{border:none;border-radius:0;width:0}.M.det .br.r{border-right:3px solid var(--ink)}.M.det .br.l{border-left:3px solid var(--ink)}.bkb{border-color:#f5c27a;background:#fffdf8}/*darkfix*/input,select,textarea,.cf,.M input.c{background-color:#fff !important;color:#1f2a44 !important;-webkit-text-fill-color:#1f2a44 !important;caret-color:#1f2a44}input.cf.ok{background-color:#eefaf2 !important}input.cf.no{background-color:#fdeeee !important}svg text{font-family:Cairo,Tahoma,Arial,sans-serif}
+canvas{touch-action:manipulation;max-width:100%;height:auto}
+.shk{animation:shk .4s}@keyframes shk{25%{transform:translateX(6px)}75%{transform:translateX(-6px)}}
+ol.steps{display:block;background:none}
+</style>
+</head>
+<body>
+<div class="book">
+<header><h1>🧬 الأحياء – الثالث الثانوي</h1><div>الكتاب الحي · الكائنات الدقيقة · البيئة · التكاثر · الوراثة والهندسة الوراثية</div></header>
+<div class="bar" id="bar">
+  <button data-p="home" class="on">📚 الفهرس</button>
+  <button data-p="u1">1 الكائنات الدقيقة</button>
+  <button data-p="u2">1 التحلل والتقانة الحيوية</button>
+  <button data-p="rv1">🏁 مراجعة 1</button>
+  <button data-p="u3">2 المنظومة البيئية</button>
+  <button data-p="u4">2 دوران المواد والتطفل</button>
+  <button data-p="rv2">🏁 مراجعة 2</button>
+  <button data-p="u5">3 إزالة الغابات والتلوث</button>
+  <button data-p="u6">3 حفظ الموارد الطبيعية</button>
+  <button data-p="rv3">🏁 مراجعة 3</button>
+  <button data-p="u7">4 التكاثر في النباتات</button>
+  <button data-p="u8">4 البذور والإنبات</button>
+  <button data-p="rv4">🏁 مراجعة 4</button>
+  <button data-p="u9">5 التكاثر في الإنسان</button>
+  <button data-p="u10">5 الأمراض المنقولة والوقاية</button>
+  <button data-p="rv5">🏁 مراجعة 5</button>
+  <button data-p="u11">6 وراثة مندل</button>
+  <button data-p="u12">6 الأليلات المتعددة والتغاير</button>
+  <button data-p="u13">6 الانتخاب والهندسة الوراثية</button>
+  <button data-p="rv6">🏁 مراجعة 6</button>
+</div>
+<style>
+.sl{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px 0;font-weight:800}
+.sl input[type=range]{width:200px;accent-color:var(--tl)}
+.pool{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.pool button{border:2px solid var(--line);border-radius:12px;background:#fff;padding:7px 11px;font-family:inherit;font-weight:800;cursor:pointer;font-size:.92rem}
+.pool button.sel{border-color:var(--tl);background:var(--tl2)}
+.pool button.ok{border-color:#2fb24c;background:#e6f7ea}.pool button.no{border-color:#e5484d;background:#fde8e8}
+.cat{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}
+.cat>div{border:2px dashed var(--line);border-radius:14px;padding:8px;min-height:70px;text-align:center;cursor:pointer}
+.cat>div b{display:block;margin-bottom:4px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.steps li{background:#fff;border:2px solid var(--line);border-radius:12px;padding:8px 12px;margin:6px 0;font-weight:800;cursor:pointer;display:flex;gap:8px;align-items:center}
+.steps li.ok{border-color:#2fb24c;background:#e6f7ea}.steps li b{min-width:26px;height:26px;border-radius:50%;background:var(--tl);color:#fff;display:grid;place-items:center;font-size:.85rem}
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0}
+.tools button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px 2px;font-family:inherit;font-weight:800;font-size:.72rem;cursor:pointer}
+.tools button svg{width:100%;height:58px;display:block}.tools button.sel{border-color:var(--tl);background:var(--tl2)}
+.hz{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.hz button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px;cursor:pointer;font-family:inherit;font-weight:800;font-size:.75rem}
+.hz button.sel{border-color:var(--tl);background:var(--tl2)}.hz button.ok{border-color:#2fb24c;background:#e6f7ea}
+.hz svg{width:64px;height:64px;display:block;margin:auto}
+.big2{font-size:1.5rem;font-weight:900;text-align:center;margin:6px 0}
+.matr{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:8px 0}
+.matr button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 2px;font-family:inherit;font-weight:800;font-size:.8rem;cursor:pointer}
+.matr button span{font-size:1.6rem;display:block}.matr button.sel{border-color:var(--tl);background:var(--tl2)}
+.ptab{display:grid;grid-template-columns:repeat(18,1fr);gap:2px;direction:ltr;margin:8px 0}
+.ptab div{aspect-ratio:1;border-radius:4px;font-size:.55rem;font-weight:900;display:grid;place-items:center;cursor:pointer;line-height:1}
+.ptab div.m{background:#ffd8a8}.ptab div.n{background:#b2f2bb}.ptab div.g{background:#a5d8ff}.ptab div.sel{outline:3px solid #e5484d}
+</style>
+<style>
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.chips button{border:2px solid var(--line);border-radius:20px;background:#fff;padding:6px 12px;font-family:inherit;font-weight:800;cursor:pointer}
+.chips button.on{border-color:var(--tl);background:var(--tl2)}
+.sl{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;margin:6px 0;font-weight:800}
+.sl input[type=range]{flex:1;min-width:130px;max-width:300px}
+.sl select{font-family:inherit;font-weight:800;font-size:1rem;border:2px solid var(--tl);border-radius:10px;padding:4px 6px;max-width:100%}
+.tbl{width:100%;border-collapse:collapse;margin:8px 0;font-weight:800;text-align:center;background:#fff}.tbl td,.tbl th{border:2px solid var(--line);padding:5px}.tbl th{background:var(--tl2)}
+.big2{font-size:1.12rem;font-weight:900;text-align:center;color:var(--tl);margin:6px 0;line-height:1.9}
+.eq{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:"Cambria Math","Times New Roman",serif;font-weight:700;background:#fff;border:1.5px solid var(--line);border-radius:8px;padding:0 6px;color:#1b1b1b}
+.mis{background:linear-gradient(135deg,#0b4f3c,#0ca678);color:#fff;border-radius:18px;padding:12px 14px;margin:10px 0;box-shadow:0 6px 18px rgba(8,126,139,.25)}
+.mis h4{margin:0 0 6px;font-size:1.05rem}.mis .g{display:flex;align-items:center;gap:8px;font-weight:800;padding:4px 0;opacity:.85;transition:.3s}
+.mis .g i{font-style:normal;width:26px;height:26px;border-radius:50%;border:2px solid #fff;display:inline-flex;align-items:center;justify-content:center;flex:none;font-size:.9rem}
+.mis .g.ok{opacity:1}.mis .g.ok i{background:#ffd43b;border-color:#ffd43b;color:#0b3954;animation:pop .4s}
+.mis .pr{height:8px;background:rgba(255,255,255,.25);border-radius:6px;margin-top:6px;overflow:hidden}.mis .pr b{display:block;height:100%;background:#ffd43b;width:0;transition:width .5s}
+.lab canvas{background:#fff;border-radius:14px}
+.hud{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;font-weight:900;margin:6px 0}.hud span{background:#fff;border:2px solid var(--line);border-radius:12px;padding:3px 10px}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:#0b3954;color:#ffd43b;font-weight:900;padding:10px 18px;border-radius:30px;z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.25);animation:pop .4s}
+</style>
+
+<style>
+.srt{background:#fff;border:2px solid var(--line);border-radius:18px;padding:12px;text-align:center}
+.srt .card{font-size:1.15rem;font-weight:900;min-height:56px;display:flex;align-items:center;justify-content:center;padding:8px;border-radius:14px;background:var(--tl2);margin-bottom:10px;animation:pop .35s}
+.srt .bins{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.srt .bins button{flex:1;min-width:96px;font-family:inherit;font-weight:900;font-size:1rem;border:2px solid var(--tl);background:#fff;border-radius:14px;padding:10px 6px;cursor:pointer}
+.srt .bins button.ok{background:#d3f9d8;border-color:#2f9e44}.srt .bins button.no{background:#ffe3e3;border-color:#e03131}
+.srt .st{margin-top:8px;font-weight:800;color:#495057}
+.tg{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}.tg button{border:2px dashed #adb5bd;border-radius:14px;background:#fff;padding:7px 12px;font-family:inherit;font-weight:800;cursor:pointer;opacity:.75}
+.tg button.on{border-style:solid;border-color:var(--tl);background:var(--tl2);opacity:1}
+.stepsB{display:flex;flex-direction:column;gap:6px}.stepsB button{text-align:right;font-family:inherit;font-weight:800;border:2px solid var(--line);border-radius:12px;background:#fff;padding:9px 12px;cursor:pointer}.stepsB button.ok{background:#d3f9d8;border-color:#2f9e44;pointer-events:none}
+.eq.ar{direction:rtl}
+.info{background:#fff9db;border:2px solid #ffe066;border-radius:14px;padding:8px 12px;font-weight:700;margin:6px 0;min-height:30px;text-align:center}
+table.tbl td{font-weight:700}
+</style>
+<section class="page on" id="home">
+  <h2>فهرس الكتاب</h2>
+  <div class="idea">🧬 أهلًا بك في مختبر الأحياء الحي!<small>هنا تكبّر حتى ترى الفيروس، وتنفخ بالون الخميرة، وتبني سلاسل الغذاء، وتنقذ النهر من التلوث، وتلقّح الأزهار بالنحلة، وتزرع بازلاء مندل، وتصطاد الفراشات كطائر جائع، وتصنع الإنسولين بالهندسة الوراثية… وفي كل درس <b>مهمات</b> 🎯 تملأ شريط إنجازك ⭐</small></div>
+  <div class="hud" id="allStars"></div>
+  <div id="toc"></div>
+</section>
+
+<section class="page" id="u1">
+  <div class="muted">الوحدة الأولى · ص 9–13</div>
+  <h2><span class="num">1</span>الكائنات الدقيقة: الفيروسات والبكتيريا والفطريات</h2>
+  <div class="idea">💡 <b>الفيروس</b>: حمض نووي واحد داخل غلاف بروتيني، لا يُرى إلا بالمجهر الإلكتروني، طفيلي دائمًا ويتكاثر داخل الخلية الحاضنة فقط، ولا تؤثر فيه المضادات الحيوية. <b>البكتيريا</b>: وحيدة الخلية، كروموسوم دائري واحد، بلا نواة حقيقية، وتقتلها المضادات الحيوية. <b>الفطريات</b>: وحيدة الخلية أو عديدة الخلايا، جدارها من الكيتين، رِمّية أو طفيلية.<small>أثبت <b>لويس باستير</b> بدوارقه ذات العنق S خطأ نظرية <b>التوالد الذاتي</b>.</small></div>
+  <div class="mis" id="mis_u1"></div>
+  <div class="box lab"><h3>🔬 المختبر: المكبّر العجيب</h3><div class="hint" style="text-align:center">حرّك شريط التكبير من العين المجردة حتى المجهر الإلكتروني… متى يظهر الفيروس؟</div>
+    <div class="sl">🔎 التكبير <input type="range" id="zmZ" min="0" max="600" value="180"><b id="zmZv"></b></div>
+    <canvas id="zmC" class="cv" width="640" height="360"></canvas><div class="big2" id="zmOut"></div></div>
+  <div class="box lab"><h3>⚗️ المختبر: دوارق باستير</h3><div class="hint" style="text-align:center">الغبار والميكروبات تتساقط من الهواء… أي الدوارق يبقى مرقه صافيًا؟</div>
+    <div class="chips" id="pfK"></div>
+    <canvas id="pfC" class="cv" width="640" height="320"></canvas><div class="btns"><button class="btn main" id="pfGo">⏩ مرّر 30 يومًا</button><button class="btn or" id="pfR">↺</button></div><div class="big2" id="pfOut"></div></div>
+  <div class="box lab"><h3>🗂️ لعبة: صنّف الخاصية</h3><div id="mcS"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qu1"></div></div>
+</section>
+
+<section class="page" id="u2">
+  <div class="muted">الوحدة الأولى · ص 14–20</div>
+  <h2><span class="num">1</span>دور الكائنات الدقيقة في التحلل والتقانة الحيوية</h2>
+  <div class="idea">💡 <b>التقانة الحيوية</b>: استخدام العمليات الحيوية في الكائنات الدقيقة لصناعة مواد (مثل البنسلين) أو تقديم خدمات للإنسان. تتنفس <b>الخميرة</b> لاهوائيًا (تخمّر): <span class="eq ar">جلوكوز ← كحول إيثيلي + CO₂ + طاقة</span><small><b>أجهزة التخمر</b>: إنتاج كائنات دقيقة ومنتجاتها على نطاق واسع، بسرعة، ودون اختلاطها بكائنات أخرى، وبربح كبير. البكتيريا والفطريات <b>محللات</b> تعيد المواد إلى الطبيعة.</small></div>
+  <div class="mis" id="mis_u2"></div>
+  <div class="box lab"><h3>🎈 المختبر: بالون الخميرة</h3><div class="hint" style="text-align:center">خميرة + سكر + ماء دافئ… وثاني أكسيد الكربون ينفخ البالون! جرّب درجات حرارة مختلفة</div>
+    <div class="sl">🌡️ الحرارة <input type="range" id="ysT" min="0" max="80" value="20"><b id="ysTv"></b> 🍬 السكر <input type="range" id="ysS" min="0" max="5" value="3"><b id="ysSv"></b></div>
+    <canvas id="ysC" class="cv" width="640" height="340"></canvas><div class="btns"><button class="btn main" id="ysGo">▶️ ابدأ التجربة</button><button class="btn or" id="ysR">↺ خميرة جديدة</button></div><div class="big2" id="ysOut"></div></div>
+  <div class="box lab"><h3>🏭 المختبر: مخمّر البنسلين</h3><div class="hint" style="text-align:center">أنت مدير المصنع! حافظ على الظروف المثلى لفطر البنسليوم وأضف الغذاء عند نفاده</div>
+    <div class="sl">🌡️ <input type="range" id="fmT" min="10" max="45" value="35"><b id="fmTv"></b> pH <input type="range" id="fmP" min="3" max="9" step="0.5" value="4"><b id="fmPv"></b></div>
+    <div class="sl">💨 التهوية (أكسجين) <input type="range" id="fmO" min="0" max="100" value="20"><b id="fmOv"></b></div>
+    <canvas id="fmC" class="cv" width="640" height="340"></canvas><div class="btns"><button class="btn main" id="fmGo">▶️ شغّل المخمّر</button><button class="btn" id="fmF">🍞 أضف غذاء</button><button class="btn or" id="fmR">↺</button></div><div class="big2" id="fmOut"></div></div>
+  <div class="box lab"><h3>🧀 لعبة: من صنع هذا؟</h3><div id="prS"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qu2"></div></div>
+</section>
+
+<section class="page" id="rv1"><div class="muted">الوحدة الأولى · مراجعة</div><h2>🏁 مراجعة: الكائنات الدقيقة والتقانة الحيوية</h2><div class="sc" id="rv1Sc"></div><div id="rv1Q"></div><div class="btns"><button class="btn or" id="rv1New">🔄 اختبار جديد</button></div></section>
+
+<section class="page" id="u3">
+  <div class="muted">الوحدة الثانية · ص 23–35</div>
+  <h2><span class="num">2</span>علم البيئة والمنظومة البيئية</h2>
+  <div class="idea">💡 <b>علم البيئة</b>: دراسة العلاقات بين الكائنات الحية وبيئتها. <b>الموطن</b>: المكان الذي يعيش فيه الكائن · <b>الموضع البيئي</b>: دوره ووظيفته · <b>السكان (العشيرة)</b>: أفراد النوع نفسه · <b>المجتمع</b>: سكان من نباتات وحيوانات تعيش معًا.<small>المنظومة البيئية = كائنات <b>منتجة</b> + <b>مستهلكة</b> + <b>محللة</b> + بيئة غير حية (ضوء، ماء، أكسجين، حرارة، ملوحة، pH). في كل مستوى غذائي يُفقد معظم الطاقة (≈ 90%) كحرارة أثناء التنفس وفي الفضلات، لذا تكون السلاسل قصيرة.</small></div>
+  <div class="mis" id="mis_u3"></div>
+  <div class="box lab"><h3>🔗 المختبر: ابنِ السلسلة الغذائية</h3><div class="hint" style="text-align:center">ابدأ بكائن منتج، ثم اختر من يأكله… وهكذا</div>
+    <div class="chips" id="fcK"></div><canvas id="fcC" class="cv" width="640" height="260"></canvas><div class="btns"><button class="btn or" id="fcR">↺ سلسلة جديدة</button></div><div class="big2" id="fcOut"></div></div>
+  <div class="box lab"><h3>🔺 المختبر: هرم الطاقة</h3><div class="sl">☀️ طاقة المنتجات (ك جول) <input type="range" id="epE" min="1000" max="100000" step="1000" value="10000"><b id="epEv"></b></div><div class="sl">عدد المستويات <input type="range" id="epN" min="2" max="5" value="4"><b id="epNv"></b></div>
+    <canvas id="epC" class="cv" width="640" height="340"></canvas><div class="big2" id="epOut"></div><div id="epQ"></div></div>
+  <div class="box lab"><h3>🐇🦊 المختبر: الغابة الحية</h3><div class="hint" style="text-align:center">الأرانب تأكل العشب، والثعالب تأكل الأرانب. اختر أعداد البداية وشاهد التوازن… أو الانهيار!</div>
+    <div class="sl">🐇 أرانب <input type="range" id="lvR" min="10" max="250" value="120"><b id="lvRv"></b> 🦊 ثعالب <input type="range" id="lvF" min="0" max="60" value="15"><b id="lvFv"></b></div>
+    <canvas id="lvC" class="cv" width="640" height="380"></canvas><div class="btns"><button class="btn main" id="lvGo">▶️ شغّل 30 سنة</button><button class="btn" id="lvH">🔫 صيد جائر للثعالب</button><button class="btn or" id="lvRs">↺</button></div><div class="big2" id="lvOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qu3"></div></div>
+</section>
+
+<section class="page" id="u4">
+  <div class="muted">الوحدة الثانية · ص 36–43</div>
+  <h2><span class="num">2</span>دوران المواد في الطبيعة والتطفل</h2>
+  <div class="idea">💡 <b>دورة الكربون</b>: عمليات يُزال بها CO₂ من الجو (البناء الضوئي) ثم يعود إليه (التنفس، التحلل، الاحتراق).<small><b>التطفل</b>: يعيش الطفيل على جسم العائل ويؤذيه. <b>الملاريا</b> يسببها حيوان أولي اسمه <b>البلازموديوم</b>، يحتاج عائلين: الإنسان وأنثى بعوضة <b>الأنوفيليس</b> (الناقل). المكافحة: علاج المصابين، أدوية وقائية للمسافرين، القضاء على أماكن تكاثر البعوض.</small></div>
+  <div class="mis" id="mis_u4"></div>
+  <div class="box lab"><h3>🔄 المختبر: رحلة ذرة الكربون</h3><div class="hint" style="text-align:center">أنت ذرة كربون! اختر العملية التي تنقلك إلى مكان جديد</div>
+    <canvas id="ccC" class="cv" width="640" height="380"></canvas><div class="chips" id="ccK"></div><div class="big2" id="ccOut"></div></div>
+  <div class="box lab"><h3>🌍 المختبر: ميزان ثاني أكسيد الكربون</h3><div class="sl">🌳 الغابات <input type="range" id="cbT" min="0" max="100" value="30"><b id="cbTv"></b> 🏭 حرق الوقود <input type="range" id="cbF" min="0" max="100" value="70"><b id="cbFv"></b></div>
+    <canvas id="cbC" class="cv" width="640" height="260"></canvas><div class="big2" id="cbOut"></div></div>
+  <div class="box lab"><h3>🦟 المختبر: أنقذ القرية من الملاريا</h3><div class="hint" style="text-align:center">فعّل وسائل المكافحة وشاهد عدد المصابين</div>
+    <div class="tg" id="mlK"></div><canvas id="mlC" class="cv" width="640" height="360"></canvas><div class="btns"><button class="btn or" id="mlR">↺ تفشٍّ جديد</button></div><div class="big2" id="mlOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qu4"></div></div>
+</section>
+
+<section class="page" id="rv2"><div class="muted">الوحدة الثانية · مراجعة</div><h2>🏁 مراجعة: علم البيئة</h2><div class="sc" id="rv2Sc"></div><div id="rv2Q"></div><div class="btns"><button class="btn or" id="rv2New">🔄 اختبار جديد</button></div></section>
+
+<section class="page" id="u5">
+  <div class="muted">الوحدة الثالثة · ص 44–53</div>
+  <h2><span class="num">3</span>إزالة الغابات والتلوث</h2>
+  <div class="idea">💡 <b>إزالة الغابات</b> (للزراعة، والبناء، والرعي، والخشب، والحطب) تسبب: انجراف التربة، والفيضانات، وفقد المواطن البيئية والأنواع، وتغيرات مناخية، واضطراب توازن O₂ و CO₂.<small><b>تلوث الماء</b>: صرف صحي غير معالج، وفضلات، وإفراط في الأسمدة والمبيدات. الأسمدة تسبب <b>ازدهار الطحالب</b> ثم موتها، فتستهلك البكتيريا المحللة الأكسجين فتموت الأسماك. <b>تلوث الهواء</b>: حرق الوقود الأحفوري وعوادم السيارات وحرق القمامة.</small></div>
+  <div class="mis" id="mis_u5"></div>
+  <div class="box lab"><h3>🌳 المختبر: الغابة والمطر</h3><div class="sl">🪓 نسبة الغابة المُزالة <input type="range" id="dfP" min="0" max="100" value="10"><b id="dfPv"></b></div>
+    <canvas id="dfC" class="cv" width="640" height="340"></canvas><div class="btns"><button class="btn main" id="dfGo">🌧️ أمطري!</button></div><div class="big2" id="dfOut"></div></div>
+  <div class="box lab"><h3>🐟 المختبر: النهر المريض</h3><div class="sl">🧪 الأسمدة <input type="range" id="rvF" min="0" max="100" value="10"><b id="rvFv"></b> 🚽 الصرف الصحي <input type="range" id="rvS" min="0" max="100" value="5"><b id="rvSv"></b></div>
+    <canvas id="rvC" class="cv" width="640" height="340"></canvas><div class="big2" id="rvOut"></div></div>
+  <div class="box lab"><h3>🔥 المختبر: الاحتباس الحراري</h3><div class="sl">CO₂ (جزء في المليون) <input type="range" id="ghC" min="280" max="800" step="10" value="420"><b id="ghCv"></b></div>
+    <canvas id="ghCv2" class="cv" width="640" height="300"></canvas><div class="big2" id="ghOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qu5"></div></div>
+</section>
+
+<section class="page" id="u6">
+  <div class="muted">الوحدة الثالثة · ص 54–58</div>
+  <h2><span class="num">3</span>حفظ الموارد الطبيعية</h2>
+  <div class="idea">💡 نحمي البيئة ونحفظها ونثريها لاستمرار حياة الإنسان وجودتها. إجراءات الحفظ: تقليل التلوث بالتعليم وسنّ القوانين، والتحكم في النمو السكاني، وحفظ الموارد، و<b>إعادة التدوير</b>، واستعادة الأحياء البرية المهددة بالانقراض بإعادة التأهيل.<small>إعادة التدوير تحفظ الموارد غير المتجددة، وتخفف مشكلة الفضلات والتلوث، وتوفر الطاقة والأموال.</small></div>
+  <div class="mis" id="mis_u6"></div>
+  <div class="box lab"><h3>♻️ لعبة: فرز المخلفات</h3><div class="hint" style="text-align:center">اضغط الحاوية المناسبة لكل مخلّف يظهر</div>
+    <canvas id="rcC" class="cv" width="640" height="360"></canvas><div class="big2" id="rcOut"></div></div>
+  <div class="box lab"><h3>🦌 المختبر: أنقذ غزال الريم</h3><div class="hint" style="text-align:center">الغزلان مهددة بالانقراض بسبب الصيد وفقد الموطن. اختر إجراءات الحماية وشاهد 30 سنة</div>
+    <div class="tg" id="gzK"></div><canvas id="gzC" class="cv" width="640" height="300"></canvas><div class="btns"><button class="btn main" id="gzGo">▶️ شغّل 30 سنة</button></div><div class="big2" id="gzOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qu6"></div></div>
+</section>
+
+<section class="page" id="rv3"><div class="muted">الوحدة الثالثة · مراجعة</div><h2>🏁 مراجعة: تأثيرات النشاط الإنساني</h2><div class="sc" id="rv3Sc"></div><div id="rv3Q"></div><div class="btns"><button class="btn or" id="rv3New">🔄 اختبار جديد</button></div></section>
+
+<section class="page" id="u7">
+  <div class="muted">الوحدة الرابعة · ص 60–76</div>
+  <h2><span class="num">4</span>التكاثر اللاجنسي والجنسي في النباتات الزهرية</h2>
+  <div class="idea">💡 <b>اللاجنسي</b>: والد واحد، بلا اندماج أمشاج، والذرية متماثلة (درنات، أبصال، ريزومات، كورمات، تعقيل، ترقيد، تطعيم، زراعة أنسجة). <b>الجنسي</b>: اندماج مشيجين لتكوين زيجوت، وتوجد اختلافات في النسل.<small><b>التلقيح</b>: انتقال حبوب اللقاح من المتك إلى الميسم (ذاتي: الزهرة نفسها أو النبات نفسه · خلطي: نبات آخر من النوع نفسه). <b>الإخصاب المزدوج</b>: مشيج ذكري + البويضة ← زيجوت، ومشيج ذكري آخر + النواة المحددة ← نواة إندوسبيرمية.</small></div>
+  <div class="mis" id="mis_u7"></div>
+  <div class="box lab"><h3>🌸 المختبر: شرّح الزهرة</h3><div class="chips" id="flK"></div><canvas id="flC" class="cv" width="640" height="420"></canvas><div class="info" id="flOut"></div></div>
+  <div class="box lab"><h3>🐝 المختبر: النحلة الملقّحة</h3><div class="hint" style="text-align:center">اضغط على الأزهار لتطير النحلة إليها وتنقل حبوب اللقاح</div>
+    <canvas id="bnC" class="cv" width="640" height="320"></canvas><div class="btns"><button class="btn or" id="bnR">↺</button></div><div class="big2" id="bnOut"></div></div>
+  <div class="box lab"><h3>🔬 المختبر: الإخصاب المزدوج</h3><canvas id="dbC" class="cv" width="640" height="400"></canvas><div class="btns"><button class="btn main" id="dbGo">▶️ الخطوة التالية</button><button class="btn or" id="dbR">↺</button></div><div class="info" id="dbOut"></div></div>
+  <div class="box lab"><h3>🥔 التكاثر الخضري</h3><div class="chips" id="vgK"></div><div class="info" id="vgOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qu7"></div></div>
+</section>
+
+<section class="page" id="u8">
+  <div class="muted">الوحدة الرابعة · ص 77–79</div>
+  <h2><span class="num">4</span>البذور: الكمون والإنبات</h2>
+  <div class="idea">💡 تمر بذور كثيرة بفترة <b>كمون</b> لا تنبت فيها مهما كانت الظروف، وتكون جافة قليلة النشاط. يحتاج الإنبات إلى <b>الماء</b> و<b>الأكسجين</b> و<b>درجة حرارة مناسبة</b>. أول خطوة: امتصاص البذرة للماء.<small>تهضم الإنزيمات الغذاء المخزن إلى مواد بسيطة ذائبة تنتقل إلى الريشة والجذير: <span class="eq ar">نشا ←(أميليز) مالتوز ←(مالتاز) جلوكوز</span> · <span class="eq ar">دهون ←(ليباز) أحماض دهنية + جليسرول</span> · <span class="eq ar">بروتينات ←(بروتيز) أحماض أمينية</span></small></div>
+  <div class="mis" id="mis_u8"></div>
+  <div class="box lab"><h3>🌱 المختبر: تجربة الإنبات</h3><div class="hint" style="text-align:center">اختر ما تعطيه للبذور، ثم ازرع وانتظر 7 أيام</div>
+    <div class="tg" id="gmK"></div><canvas id="gmC" class="cv" width="640" height="300"></canvas><div class="btns"><button class="btn main" id="gmGo">🌱 ازرع وانتظر</button></div><div id="gmLog"></div><div class="big2" id="gmOut"></div></div>
+  <div class="box lab"><h3>✂️ المختبر: مقصّات الإنزيمات</h3><div class="hint" style="text-align:center">اختر الغذاء المخزن، ثم اختر الإنزيم المناسب لتقطيعه</div>
+    <div class="chips" id="enF"></div><canvas id="enC" class="cv" width="640" height="220"></canvas><div class="chips" id="enK"></div><div class="big2" id="enOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qu8"></div></div>
+</section>
+
+<section class="page" id="rv4"><div class="muted">الوحدة الرابعة · مراجعة</div><h2>🏁 مراجعة: التكاثر في النباتات</h2><div class="sc" id="rv4Sc"></div><div id="rv4Q"></div><div class="btns"><button class="btn or" id="rv4New">🔄 اختبار جديد</button></div></section>
+
+<section class="page" id="u9">
+  <div class="muted">الوحدة الخامسة · ص 82–93</div>
+  <h2><span class="num">5</span>التكاثر في الإنسان والتحكم الهرموني</h2>
+  <div class="idea">💡 تنتج <b>الخصيتان</b> الحيوانات المنوية وهرمون التستوستيرون، وينتج <b>المبيضان</b> البويضات وهرموني الأستروجين والبروجستيرون. <b>الانقسام الميوزي</b> يُنتج أمشاجًا بنصف عدد الكروموسومات: <span class="eq">46 → 23</span> ثم الإخصاب: <span class="eq">23 + 23 = 46</span><small>تتحكم هرمونات الفص الأمامي للغدة النخامية (FSH و LH) في المبيض. FSH ينمّي الحويصلة، والأستروجين يعيد بناء بطانة الرحم، وعند اليوم 14 تقريبًا تتمزق <b>حويصلة جراف</b> وتطلق البويضة (التبويض)، ثم يحافظ البروجستيرون على البطانة سميكة. يحدث الإخصاب عادة في قناة فالوب.</small></div>
+  <div class="mis" id="mis_u9"></div>
+  <div class="box lab"><h3>📅 المختبر: دورة الـ 28 يومًا</h3><div class="sl">اليوم <input type="range" id="cyD" min="1" max="28" value="3"><b id="cyDv"></b></div>
+    <canvas id="cyC" class="cv" width="640" height="440"></canvas><div class="btns"><button class="btn main" id="cyGo">▶️ شغّل الدورة</button></div><div class="big2" id="cyOut"></div><div id="cyQ"></div></div>
+  <div class="box lab"><h3>🧬 المختبر: عدد الكروموسومات وتحديد الجنس</h3><canvas id="mzC" class="cv" width="640" height="300"></canvas><div class="btns"><button class="btn main" id="mz1">👶 إخصاب واحد</button><button class="btn" id="mz100">⏩ 100 إخصاب</button><button class="btn or" id="mzR">↺</button></div><div class="big2" id="mzOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qu9"></div></div>
+</section>
+
+<section class="page" id="u10">
+  <div class="muted">الوحدة الخامسة · ص 94–95</div>
+  <h2><span class="num">5</span>الأمراض المنقولة والوقاية منها</h2>
+  <div class="idea">💡 <b>السيلان</b>: بكتيريا غير متحركة على شكل حبة الفول · <b>الزهري</b>: بكتيريا لولبية حلزونية، ويمر بثلاث مراحل، ويُعالج في كل مراحله إذا عولج مبكرًا · <b>الإيدز</b>: يسببه فيروس HIV الذي يهاجم جهاز المناعة، ولا يوجد له علاج معروف حتى الآن.<small>ينتقل الإيدز عن طريق الاتصال الجنسي بمصاب، ومشاركة الحقن والأدوات الملوثة بالدم، ونقل الدم الملوث، ومن الأم المصابة إلى الجنين. <b>ولا</b> ينتقل بمقاعد المراحيض أو مقابض الأبواب أو السعال أو أحواض السباحة أو البعوض. الوقاية: الالتزام بإطار الزواج، وعدم مشاركة الأدوات الحادة، وتعقيم الإبر.</small></div>
+  <div class="mis" id="mis_u10"></div>
+  <div class="box lab"><h3>🛡️ لعبة: حقيقة أم خرافة؟</h3><div class="hint" style="text-align:center">هل ينتقل فيروس الإيدز بهذه الطريقة؟</div><div id="mfS"></div></div>
+  <div class="box lab"><h3>🦠 لعبة: من المسبب؟</h3><div id="stS"></div></div>
+  <div class="box lab"><h3>💊 المختبر: هل يعمل المضاد الحيوي؟</h3><div class="chips" id="abK"></div><canvas id="abC" class="cv" width="640" height="260"></canvas><div class="btns"><button class="btn main" id="abGo">💊 أعطِ المضاد الحيوي</button></div><div class="big2" id="abOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qu10"></div></div>
+</section>
+
+<section class="page" id="rv5"><div class="muted">الوحدة الخامسة · مراجعة</div><h2>🏁 مراجعة: التكاثر في الإنسان</h2><div class="sc" id="rv5Sc"></div><div id="rv5Q"></div><div class="btns"><button class="btn or" id="rv5New">🔄 اختبار جديد</button></div></section>
+
+<section class="page" id="u11">
+  <div class="muted">الوحدة السادسة · ص 98–107</div>
+  <h2><span class="num">6</span>الوراثة أحادية الهجين: تجارب مندل</h2>
+  <div class="idea">💡 <b>الجين</b>: عامل وراثي على موقع معين في الكروموسوم · <b>الأليلات</b>: أشكال مختلفة للجين نفسه (T طويل سائد، t قصير متنحٍ). <b>متماثل اللاقحة</b>: TT أو tt · <b>متغاير اللاقحة</b>: Tt. <b>النمط الجيني</b>: التركيب الجيني · <b>النمط الظاهري</b>: الصفة المرئية.<small><b>قانون مندل الأول (الانعزال)</b>: ينفصل زوج الأليلات أثناء تكوين الأمشاج فيدخل أليل واحد فقط في كل مشيج. Tt × Tt ← <span class="eq ar">3 طويل : 1 قصير</span> · <b>التلقيح الاختباري</b>: تهجين فرد مجهول مع متنحٍّ متماثل tt لمعرفة نمطه الجيني.</small></div>
+  <div class="mis" id="mis_u11"></div>
+  <div class="box lab"><h3>🌿 المختبر: حديقة مندل</h3><div class="sl">الأب ♂</div><div class="chips" id="mdA"></div><div class="sl">الأم ♀</div><div class="chips" id="mdB"></div>
+    <canvas id="mdC" class="cv" width="640" height="460"></canvas><div class="btns"><button class="btn main" id="mdGo">🌱 ازرع 400 بذرة</button></div><div class="big2" id="mdOut"></div></div>
+  <div class="box lab"><h3>🕵️ المختبر: النبتة المجهولة</h3><div class="hint" style="text-align:center">نبتة طويلة لا نعرف نمطها الجيني: TT أم Tt؟ اختر نبتة تهجّنها معها، ثم احكم</div>
+    <div class="chips" id="tcK"></div><canvas id="tcC" class="cv" width="640" height="220"></canvas><div class="btns"><button class="btn main" id="tcGo">🌱 هجّن واحصل على 20 نبتة</button><button class="btn or" id="tcR">↺ نبتة مجهولة جديدة</button></div><div id="tcA"></div><div class="big2" id="tcOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qu11"></div></div>
+</section>
+
+<section class="page" id="u12">
+  <div class="muted">الوحدة السادسة · ص 108–113</div>
+  <h2><span class="num">6</span>الأليلات المتعددة والطفرات والتغاير</h2>
+  <div class="idea">💡 <b>الأليلات المتعددة</b>: للجين أكثر من أليلين، مثل فصائل الدم ABO: الأليلان Iᴬ و Iᴮ سائدان معًا (سيادة مشتركة) و i متنحٍ. <b>السيادة غير الكاملة</b>: الهجين وسط بين الأبوين (أحمر × أبيض ← وردي في نبات نوار العشية).<small><b>الطفرة</b>: تغير مفاجئ في جين أو كروموسوم، وتُورث إذا حدثت في خلايا الأمشاج. <b>التغاير غير المتصل</b>: أنماط قليلة واضحة، جينات قليلة، لا يتأثر بالبيئة (لف اللسان، فصائل الدم). <b>التغاير المتصل</b>: طيف متدرج، جينات كثيرة لها تأثير إضافي، ويتأثر بالبيئة (الطول، الوزن، لون الجلد).</small></div>
+  <div class="mis" id="mis_u12"></div>
+  <div class="box lab"><h3>🩸 المختبر: وراثة فصائل الدم</h3><div class="sl">الأب ♂</div><div class="chips" id="bgA"></div><div class="sl">الأم ♀</div><div class="chips" id="bgB"></div>
+    <canvas id="bgC" class="cv" width="640" height="320"></canvas><div class="big2" id="bgOut"></div>
+    <h3>🔎 لغز المستشفى</h3><div id="bgQ"></div></div>
+  <div class="box lab"><h3>🌺 المختبر: نوار العشية</h3><div class="chips" id="icK"></div><canvas id="icC" class="cv" width="640" height="300"></canvas><div class="big2" id="icOut"></div></div>
+  <div class="box lab"><h3>📊 المختبر: متصل أم غير متصل؟</h3><div class="chips" id="vrK"></div><div class="sl" id="vrSl">🍎 جودة التغذية (البيئة) <input type="range" id="vrE" min="0" max="100" value="50"><b id="vrEv"></b></div>
+    <canvas id="vrC" class="cv" width="640" height="300"></canvas><div class="big2" id="vrOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qu12"></div></div>
+</section>
+
+<section class="page" id="u13">
+  <div class="muted">الوحدة السادسة · ص 114–123</div>
+  <h2><span class="num">6</span>الانتخاب الطبيعي والهندسة الوراثية</h2>
+  <div class="idea">💡 <b>الانتخاب الطبيعي</b>: تختار الطبيعة الأفراد الأكثر قدرة على التنافس ومقاومة المرض والتكيف لتعيش وتتكاثر. مثال: <b>فراشة بستون</b> في بريطانيا؛ بعد الثورة الصناعية غطّى السناج جذوع الأشجار فاختفت الفراشة الفاتحة وانتشرت السوداء (الميلانية). <b>الانتخاب الاصطناعي</b>: يختار الإنسان الصفات المرغوبة.<small><b>الهندسة الوراثية</b>: تقطيع DNA كائن إلى قطع فيها الجين المطلوب ونقلها إلى كائن آخر. تُستخدم <b>البلازميدات</b> (DNA بكتيري دائري) نواقلَ. يُنتج <b>الإنسولين البشري</b> تجاريًا ببكتيريا مهندسة وراثيًا في أوعية التخمير.</small></div>
+  <div class="mis" id="mis_u13"></div>
+  <div class="box lab"><h3>🦋 المختبر: أنت الطائر الجائع!</h3><div class="hint" style="text-align:center">اصطد الفراشات بالضغط عليها قبل انتهاء الوقت… الناجون يتكاثرون في الجيل التالي</div>
+    <div class="chips" id="mtK"></div><canvas id="mtC" class="cv" width="640" height="420"></canvas><div class="btns"><button class="btn main" id="mtGo">🐦 ابدأ جيلًا جديدًا</button><button class="btn or" id="mtR">↺</button></div><div class="big2" id="mtOut"></div></div>
+  <div class="box lab"><h3>💉 المختبر: مصنع الإنسولين</h3><div class="hint" style="text-align:center">رتّب خطوات الهندسة الوراثية بالترتيب الصحيح</div>
+    <canvas id="geC" class="cv" width="640" height="300"></canvas><div class="stepsB" id="geK"></div><div class="big2" id="geOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qu13"></div></div>
+</section>
+
+<section class="page" id="rv6"><div class="muted">الوحدة السادسة · مراجعة</div><h2>🏁 مراجعة: الوراثة</h2><div class="sc" id="rv6Sc"></div><div id="rv6Q"></div><div class="btns"><button class="btn or" id="rv6New">🔄 اختبار جديد</button></div></section>
+<footer>الكتاب الحي · مبني على كتاب الأحياء للسنة الثالثة بمرحلة التعليم الثانوي – القسم العلمي 2025–2026 (مركز المناهج التعليمية والبحوث التربوية – ليبيا)</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const pages=[...document.querySelectorAll('.page')],nb=[...document.querySelectorAll('#bar button')];
+function go(id){pages.forEach(p=>p.classList.toggle('on',p.id===id));nb.forEach(b=>b.classList.toggle('on',b.dataset.p===id));window.scrollTo({top:0,behavior:'smooth'})}
+nb.forEach(b=>b.onclick=()=>go(b.dataset.p));
+(function(){const h=location.hash.slice(1);if(h&&$(h))go(h);addEventListener('hashchange',()=>{const x=location.hash.slice(1);if($(x))go(x)})})();
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),nz=(a,b)=>{let x;do{x=rnd(a,b)}while(!x);return x},pick=a=>a[rnd(0,a.length-1)];
+const ms=n=>n<0?'−'+(-n):String(n);const pr=n=>n<0?'('+ms(n)+')':String(n);
+const V='س';
+const parse=s=>{s=(s||'').trim().replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[−–—]/g,'-').replace(/\s/g,'');if(s===''||s==='+'||s==='-')return NaN;if(/^-?\d+\/\d+$/.test(s)){const[a,b]=s.split('/');return a/b}return Number(s)};
+function term(c,p,first,v){v=v||V;if(c===0)return'';const a=Math.abs(c);const cs=(a===1&&p>0)?'':String(a);const vs=p===0?'':(p===1?v:v+'<sup>'+p+'</sup>');const s=c<0?(first?'−':' − '):(first?'':' + ');return s+cs+vs}
+function poly(cs,v){let out='',f=true;cs.forEach(([c,p])=>{if(c){out+=term(c,p,f,v);f=false}});return out||'0'}
+/* matrix renderer: A 2D array, o:{det, cls(i,j)->class, inp:prefix} */
+function M(A,o){o=o||{};const r=A.length,c=A[0].length;let g='<div class="g" style="grid-template-columns:repeat('+c+',auto)">';
+ A.forEach((row,i)=>row.forEach((v,j)=>{const cl=o.cls?o.cls(i,j)||'':'';g+=o.inp?'<input class="c '+cl+'" data-i="'+i+'" data-j="'+j+'" data-m="'+o.inp+'" value="'+(v===''?'':ms(v))+'" inputmode="text">':'<div class="c '+cl+'" data-i="'+i+'" data-j="'+j+'">'+(typeof v==='number'?ms(Math.round(v*1000)/1000):v)+'</div>'}));
+ return '<span class="M'+(o.det?' det':'')+'"'+(o.id?' id="'+o.id+'"':'')+'><span class="br r"></span>'+g+'</div><span class="br l"></span></span>'}
+function readM(host,name,r,c){const A=Array.from({length:r},()=>Array(c).fill(0));host.querySelectorAll('input[data-m="'+name+'"]').forEach(x=>{const v=parse(x.value);A[+x.dataset.i][+x.dataset.j]=isNaN(v)?0:v});return A}
+const det2=a=>a[0][0]*a[1][1]-a[0][1]*a[1][0];
+const minor=(a,i,j)=>a.filter((_,r)=>r!==i).map(row=>row.filter((_,c)=>c!==j));
+const det3=a=>a[0][0]*det2(minor(a,0,0))-a[0][1]*det2(minor(a,0,1))+a[0][2]*det2(minor(a,0,2));
+const det=a=>a.length===2?det2(a):det3(a);
+const rM=(r,c,lo,hi)=>Array.from({length:r},()=>Array.from({length:c},()=>rnd(lo==null?-5:lo,hi==null?9:hi)));
+const mul=(A,B)=>A.map(row=>B[0].map((_,j)=>row.reduce((s,v,k)=>s+v*B[k][j],0)));
+const T=A=>A[0].map((_,j)=>A.map(r=>r[j]));
+const sub='₀₁₂₃₄₅₆₇₈₉';const ij=(i,j)=>''+sub[i]+sub[j];
+function mcq(host,q,opts,right,onAns){const d=document.createElement('div');d.className='box';d.style.margin='8px 0';d.innerHTML='<div style="font-weight:800">'+q+'</div>';let dn=false;const order=opts.map((o,i)=>i).sort(()=>Math.random()-.5);
+ order.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=opts[i];b.onclick=()=>{if(dn)return;dn=true;b.classList.add(i===right?'ok':'no');if(i!==right)[...d.querySelectorAll('.opt')][order.indexOf(right)].classList.add('ok');onAns&&onAns(i===right)};d.appendChild(b)});host.appendChild(d)}
+function MCQP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();g.o=g.o.filter((x,i)=>g.o.indexOf(x)===i);const ord=g.o.map((x,i)=>i).sort(()=>Math.random()-.5);let done=false;
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div>';const opts=document.createElement('div');box.appendChild(opts);const fb=document.createElement('div');fb.className='fb';const nx=document.createElement('div');nx.className='btns';box.appendChild(fb);box.appendChild(nx);
+  ord.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=g.o[i];b.onclick=()=>{if(done)return;done=true;const r=i===0;b.classList.add(r?'ok':'no');if(!r)[...opts.children][ord.indexOf(0)].classList.add('ok');dn++;if(r)ok++;sc.textContent='✔️ صحيح: '+ok+' من '+dn;fb.className='fb '+(r?'ok':'no');fb.innerHTML=(r?'🎉 صحيح! ':'❌ ليس صحيحًا. ')+(g.ex?'<div style="font-size:.95rem;color:var(--ink);font-weight:700">'+g.ex+'</div>':'');nx.innerHTML='<button class="btn or">سؤال جديد ⬅</button>';nx.firstChild.onclick=render};opts.appendChild(b)})}render()}
+/* matrix-answer practice: gen -> {q, ans(2D), steps[]} */
+function MatP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();let tries=0;const E=g.ans.map(r=>r.map(()=>''));
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div><div style="text-align:center;margin:8px 0">= '+M(E,{inp:'z'})+'</div><div class="btns"><button class="btn main" data-k="chk">✔️ تحقّق</button><button class="btn" data-k="help">💡 أرني الحل</button><button class="btn or" data-k="new">سؤال جديد ⬅</button></div><div class="fb"></div><div class="steps"></div>';
+  const ins=[...box.querySelectorAll('input.c')],fb=box.querySelector('.fb'),st=box.querySelector('.steps');const steps=()=>{st.style.display='block';st.innerHTML='<b>الحل:</b>'+g.steps.map(s=>'<div class="mx" style="font-size:1rem">'+s+'</div>').join('')};
+  box.querySelector('[data-k=chk]').onclick=()=>{let all=true,emp=false;ins.forEach(x=>{const v=parse(x.value);if(isNaN(v)){emp=true;all=false;return}const g2=Math.abs(v-g.ans[+x.dataset.i][+x.dataset.j])<.001;x.classList.remove('ok','no');x.classList.add(g2?'ok':'no');if(!g2)all=false});
+   if(emp&&!all){fb.className='fb';fb.textContent='املأ كل الخانات';return}tries++;if(tries===1){dn++;if(all)ok++;sc.textContent='✔️ صحيح من أول محاولة: '+ok+' من '+dn}fb.className='fb '+(all?'ok':'no');fb.textContent=all?'🎉 ممتاز!':'🤔 الخانات الحمراء غير صحيحة';if(all||tries>=2)steps();if(all)setTimeout(render,2400)};
+  box.querySelector('[data-k=help]').onclick=()=>{ins.forEach(x=>{x.value=ms(g.ans[+x.dataset.i][+x.dataset.j]);x.classList.add('ok')});steps()};box.querySelector('[data-k=new]').onclick=render}render()}
+
+
+const TOC=[['الوحدة الأولى: الكائنات الدقيقة والتقانة الحيوية',9,[['','الكائنات الدقيقة: الفيروسات والبكتيريا والفطريات',9,'u1'],['','التحلل والتقانة الحيوية',14,'u2'],['','مراجعة الوحدة الأولى',21,'rv1']]],
+ ['الوحدة الثانية: علم البيئة',23,[['','علم البيئة والمنظومة البيئية',23,'u3'],['','دوران المواد في الطبيعة والتطفل',36,'u4'],['','مراجعة الوحدة الثانية',43,'rv2']]],
+ ['الوحدة الثالثة: تأثيرات النشاط الإنساني',44,[['','إزالة الغابات والتلوث',45,'u5'],['','حفظ الموارد الطبيعية',54,'u6'],['','مراجعة الوحدة الثالثة',59,'rv3']]],
+ ['الوحدة الرابعة: التكاثر في النباتات',60,[['','التكاثر اللاجنسي والجنسي في النباتات الزهرية',61,'u7'],['','البذور: الكمون والإنبات',77,'u8'],['','مراجعة الوحدة الرابعة',80,'rv4']]],
+ ['الوحدة الخامسة: التكاثر الجنسي في الحيوانات',82,[['','التكاثر في الإنسان والتحكم الهرموني',83,'u9'],['','الأمراض المنقولة والوقاية',94,'u10'],['','مراجعة الوحدة الخامسة',96,'rv5']]],
+ ['الوحدة السادسة: الوراثة',98,[['','الوراثة أحادية الهجين: تجارب مندل',99,'u11'],['','الأليلات المتعددة والطفرات والتغاير',108,'u12'],['','الانتخاب والهندسة الوراثية',114,'u13'],['','مراجعة الوحدة السادسة',124,'rv6']]]];
+(function(){const t=$('toc');TOC.forEach(([n,pg,ls],i)=>{const r=ls.filter(l=>l[3]).length;const d=document.createElement('div');d.className='chap'+(i===0?' open':'');
+ d.innerHTML='<div><span class="cn">'+(i+1)+'</span><span style="flex:1">'+n+'</span><span class="tg '+(r?'r':'s')+'">'+(r?'جاهز ✅':'قريبًا')+'</span></div><div class="ls">'+ls.map(l=>'<div class="li'+(l[3]?' ready" data-go="'+l[3]:'')+'"><span>'+(l[3]?'✅':'⏳')+'</span><span>'+(l[0]?'<b>'+l[0]+'</b> ':'')+l[1]+'</span><span class="pg">ص '+l[2]+'</span></div>').join('')+'</div>';
+ d.firstChild.onclick=()=>d.classList.toggle('open');t.appendChild(d)});t.querySelectorAll('[data-go]').forEach(x=>x.onclick=()=>go(x.dataset.go))})();
+
+/* ================= أمثلة الكتاب وتمارينه (عام) ================= */
+const QB=s=>s.replace(/ (?=(?:أ|ب|ج|د|هـ|و)\) )/g,'<br>').replace(/ (?=\((?:i|ii|iii|iv|1|2|3)\) )/g,'<br>');
+const FX=s=>s.replace(/(−?\d+(?:\.\d+)?)\/(\d+)/g,'<span class="rt">$1/$2</span>');
+function addSecs(pid,exs,bks){const pg=$(pid);if(!pg)return;const first=[...pg.querySelectorAll('.box')].find(b=>(b.querySelector('h3')||{}).textContent&&b.querySelector('h3').textContent.trim().startsWith('✏️'));
+ if(exs&&exs.length){const b=document.createElement('div');b.className='box exb';b.innerHTML='<h3>📖 أمثلة الكتاب محلولة خطوة بخطوة</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">اضغط «الخطوة التالية» وحاول أن تتوقع الخطوة قبل أن تظهر 🤔</p>';exs.forEach(e=>b.appendChild(wex(e)));first?pg.insertBefore(b,first):pg.appendChild(b)}
+ if(bks&&bks.length){const b=document.createElement('div');b.className='box bkb';b.innerHTML='<h3>📝 تمارين الكتاب مع الحلول</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">✍️ حلّ في دفترك أولًا، ثم اضغط «تلميح» إذا احتجت، و«الحل» لتتأكد.</p>';bks.forEach(e=>b.appendChild(bkx(e)));pg.appendChild(b)}}
+function wex(e){const d=document.createElement('div');d.className='wx';let k=0;
+ d.innerHTML='<div class="wxq"><b style="color:var(--tl)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="wxs"></div><div class="btns"><button class="btn main" data-a="n">▶️ الخطوة التالية</button><button class="btn" data-a="all">📜 الحل كاملًا</button><button class="btn" data-a="r">↺ من جديد</button></div>';
+ const S=d.querySelector('.wxs'),nb=d.querySelector('[data-a=n]');const add=()=>{if(k>=e.s.length)return;const x=document.createElement('div');x.className='wst';x.innerHTML='<span class="sn">'+(k+1)+'</span>'+FX(e.s[k]);S.appendChild(x);k++;if(k>=e.s.length){nb.textContent='✅ انتهى الحل';nb.disabled=true;try{S.lastChild.classList.add('fin')}catch(_){}}};
+ nb.onclick=add;d.querySelector('[data-a=all]').onclick=()=>{while(k<e.s.length)add()};d.querySelector('[data-a=r]').onclick=()=>{k=0;S.innerHTML='';nb.disabled=false;nb.textContent='▶️ الخطوة التالية'};return d}
+function bkx(e){const d=document.createElement('div');d.className='bx';
+ d.innerHTML='<div class="wxq"><b style="color:var(--or)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="btns" style="justify-content:flex-start"><button class="btn" data-a="h">💡 تلميح</button><button class="btn ok" data-a="s">✅ الحل</button></div><div class="bh" style="display:none"></div><div class="bs" style="display:none"></div>';
+ const H=d.querySelector('.bh'),S=d.querySelector('.bs');H.innerHTML='💡 '+FX(e.h);S.innerHTML=e.s.map(x=>'<div class="wst">'+FX(x)+'</div>').join('')+(e.a?'<div class="ans">🎯 الجواب: '+FX(e.a)+'</div>':'');
+ d.querySelector('[data-a=h]').onclick=()=>{H.style.display=H.style.display==='none'?'block':'none'};d.querySelector('[data-a=s]').onclick=()=>{S.style.display=S.style.display==='none'?'block':'none'};return d}
+
+
+const nf=(v,d)=>{d=d==null?3:d;const r=Math.round(v*10**d)/10**d;return ms(r)};
+/* ================= فيزياء: الوحدة 1 ================= */
+const sci=(v,d)=>{d=d==null?2:d;if(v===0)return'0';const e=Math.floor(Math.log10(Math.abs(v)));if(e>=-2&&e<=4)return nf(v,Math.max(0,d+1-Math.max(0,e)));const m=v/10**e;return '<span dir="ltr" style="unicode-bidi:isolate">'+(+m.toFixed(d))+' × 10<sup>'+e+'</sup></span>'};
+function cv(id){const c=$(id),x=c.getContext('2d');return{c,x,W:c.width,H:c.height}}
+const loops={};function loop(id,fn){if(loops[id])return;let last=performance.now();const st=()=>{const now=performance.now(),dt=Math.min(0.05,(now-last)/1000);last=now;const pg=$(id).closest('.page');if(pg.classList.contains('on'))fn(dt);loops[id]=requestAnimationFrame(st)};loops[id]=requestAnimationFrame(st)}
+function glow(x,X,Y,r,col){const g=x.createRadialGradient(X,Y,0,X,Y,r);g.addColorStop(0,col);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.beginPath();x.arc(X,Y,r,0,7);x.fill()}
+function chg(x,X,Y,q,r){r=r||10;x.fillStyle=q>0?'#ff6b6b':'#5ab0ff';x.beginPath();x.arc(X,Y,r,0,7);x.fill();x.fillStyle='#fff';x.font='bold '+(r*1.6)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(q>0?'+':'−',X,Y+1)}
+function label(x,t,X,Y,col,sz){x.fillStyle=col||'#fff';x.font='bold '+(sz||16)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(t,X,Y)}
+
+
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){r=Math.min(r||0,Math.abs(w)/2,Math.abs(h)/2);this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();return this};
+/* ================= الصف السابع – الوحدة 1 ================= */
+/* عرض الرياضيات من اليمين لليسار كما في الكتاب: X('1 + 2 − 3 × 4') */
+const SN=n=>n<0?'−'+(-n):''+n;               // نص عدد بإشارة
+const PN=n=>n<0?'('+SN(n)+')':SN(n);          // عدد سالب بين قوسين
+function xnum(s,i){let j=i;while(j<s.length&&/[0-9.□\u0307]/.test(s[j]))j++;const v=s.slice(i,j);
+ if(s[j]==='_'&&/[0-9□]/.test(s[j+1]||'')){let a=j+1,b=a;while(/[0-9□]/.test(s[b]||''))b++;if(s[b]==='/'){let c=b+1,e=c;while(/[0-9□]/.test(s[e]||''))e++;return[{k:'f',w:v,n:s.slice(a,b),d:s.slice(c,e)},e]}}
+ if(s[j]==='/'&&/[0-9□]/.test(s[j+1]||'')){let c=j+1,e=c;while(/[0-9□]/.test(s[e]||''))e++;return[{k:'f',n:v,d:s.slice(c,e)},e]}
+ let sup='';while(j<s.length&&/[²³⁴]/.test(s[j])){sup+=s[j];j++}return[{k:'n',v,sup},j]}
+function xtok(s){const t=[];let i=0;s=String(s);
+ while(i<s.length){const c=s[i];
+  if(c===' '){i++;continue}
+  const prev=t.length?t[t.length-1]:null;const unaryOK=!prev||(prev.k==='op'||prev.v==='('||prev.v==='['||prev.v===',');
+  if((c==='−'||c==='+')&&unaryOK&&/[0-9]/.test(s[i+1]||'')){if(c==='+'&&!(prev&&prev.v==='(')){t.push({k:'op',v:c});i++;continue}let [tk,j]=xnum(s,i+1);if(/[\u0621-\u064A]/.test(s[j]||'')){let e=j;while(e<s.length&&/[\u0621-\u064A\u0640\u200C²³]/.test(s[e]))e++;tk={k:'t',c:tk,v:s.slice(j,e)};j=e}tk.sg=c;t.push(tk);i=j;continue}
+  if(/[0-9□]/.test(c)){let [tk,j]=xnum(s,i);if(/[\u0621-\u064A]/.test(s[j]||'')){let e=j;while(e<s.length&&/[\u0621-\u064A\u0640\u200C²³]/.test(s[e]))e++;tk={k:'t',c:tk,v:s.slice(j,e),sg:tk.sg};j=e}t.push(tk);i=j;continue}
+  if('+−×÷=<>≠≤≥'.includes(c)){t.push({k:'op',v:c});i++;continue}
+  if('()[]'.includes(c)){t.push({k:'b',v:c});i++;continue}
+  let j=i;while(j<s.length&&!' +−×÷=<>≠()[]'.includes(s[j])&&!/[0-9□]/.test(s[j]))j++;if(j===i)j=i+1;t.push({k:'w',v:s.slice(i,j)});i=j}
+ return t}
+const FRH=(n,d)=>'<span class="fr"><span>'+n+'</span><span>'+d+'</span></span>';
+function xspan(tok,cls){if(tok.k==='t'){const cc=tok.c.k==='f'?FRH(tok.c.n,tok.c.d):tok.c.v;return '<span class="xt'+(cls||'')+'"><span style="display:inline-flex;direction:rtl;align-items:center;gap:1px">'+(tok.sg==='−'?'<i style="font-style:normal">−</i>':'')+'<span style="direction:ltr">'+cc+'</span><span>'+tok.v+'</span></span></span>'}let num;if(tok.k==='f'){const f=FRH(tok.n,tok.d);num=tok.w?'<span class="mxn">'+tok.w+f+'</span>':f}
+ else if(tok.k==='n')num='<span style="direction:ltr;unicode-bidi:isolate">'+tok.v+(tok.sup||'')+'</span>';
+ else return '<span class="xt'+(cls||'')+'">'+tok.v+'</span>';
+ return '<span class="xt'+(cls||'')+'">'+(tok.sg&&tok.sg!=='+'?'<span class="xs">'+num+'<i>'+tok.sg+'</i></span>':tok.sg==='+'?'<span class="xs">'+num+'<i>+</i></span>':num)+'</span>'}
+const X=(s,hi)=>'<span class="x">'+xtok(s).map((t,i)=>xspan(t,hi&&i>=hi[0]&&i<=hi[1]?' hi':'')).join('')+'</span>';
+(function(){const st=document.createElement('style');st.textContent='.x{display:inline-flex;direction:rtl;gap:.28em;align-items:center;flex-wrap:wrap;font-weight:800;unicode-bidi:isolate;vertical-align:baseline}.x .xs{display:inline-flex;direction:ltr;flex-direction:row-reverse}.x .xs i{font-style:normal}.x .xt{transition:.25s;border-radius:6px;padding:0 1px}.x .xt.hi{background:#ffd54f;box-shadow:0 0 0 3px #ffd54f}';document.head.appendChild(st);
+ document.querySelectorAll('.e').forEach(e=>{e.innerHTML=X(e.textContent);e.classList.remove('e')})})();
+/* ================= علوم الصف السابع – الجزء الأول والثاني ================= */
+const C2=id=>{const c=$(id);return [c,c.getContext('2d')]};
+const FONT=(s,w)=>(w||800)+' '+s+'px Cairo, Tahoma, Arial';
+const shake=el=>{el.classList.remove('shk');void el.offsetWidth;el.classList.add('shk')};
+const cheer=()=>{try{window.FX&&FX.ok()}catch(e){}};
+const N=s=>'<bdi'+(/[\u0600-\u06FF]/.test(s)?'':' dir="ltr"')+' style="font-weight:800">'+s+'</bdi>';
+const fx=(x,k)=>String(+(+x).toFixed(k==null?2:k));
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){r=Math.min(r||0,Math.abs(w)/2,Math.abs(h)/2);this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();return this};
+/* لعبة التصنيف العامة: اختر عنصرًا ثم بيتًا */
+function sortGame(poolId,catId,outId,cats,items,done){const P=$(poolId),Cc=$(catId);let sel=null,left=items.length;P.innerHTML='';Cc.innerHTML='';
+ shuf(items).forEach(([lab,k,why])=>{const b=document.createElement('button');b.innerHTML=lab;b.dataset.k=k;b.dataset.why=why||'';b.onclick=()=>{P.querySelectorAll('button').forEach(y=>y.classList.remove('sel'));b.classList.add('sel');sel=b};P.appendChild(b)});
+ cats.forEach(([n,s,c],i)=>{const d=document.createElement('div');d.style.borderColor=c;d.innerHTML='<b style="color:'+c+'">'+n+'</b>'+(s?'<small>'+s+'</small>':'')+'<div class="pool" style="margin:4px 0"></div>';
+  d.onclick=()=>{if(!sel)return;if(+sel.dataset.k===i){sel.classList.remove('sel');sel.classList.add('ok');sel.onclick=null;d.querySelector('.pool').appendChild(sel);$(outId).innerHTML='✅ صحيح! '+sel.dataset.why;sel=null;left--;if(!left){$(outId).innerHTML='🎉 أحسنت! رتّبت كل شيء.';cheer();done&&done()}}else{shake(d);$(outId).innerHTML='🤔 حاول مرة أخرى'}};Cc.appendChild(d)});$(outId).textContent=''}
+/* اختبار فصل من 12 سؤالًا */
+function chapterTest(pfx,G){let ok=0,dn=0;const host=$(pfx+'Q');function upd(){$(pfx+'Sc').textContent=dn<G.length?'أجبت عن '+dn+' من '+G.length+' · صحيح: '+ok:(ok>=G.length-1?'🌟 ممتاز! ':ok>=G.length-3?'👍 جيد جدًا! ':'💪 راجع الدروس. ')+'النتيجة: '+ok+' من '+G.length}
+ function make(){host.innerHTML='';ok=0;dn=0;shuf(G).forEach((g,i)=>{const [q,o]=typeof g==='function'?g():g;mcq(host,(i+1)+') '+q,o,0,r=>{dn++;if(r)ok++;upd();if(dn===G.length&&ok>=G.length-3)cheer()})});upd()}
+ $(pfx+'New').onclick=make;make()}
+const bank=(arr)=>()=>{const [q,o,ex]=pick(arr);return{q,o,ex:ex||''}};
+const vis=el=>{const p=el.closest('.page');return p&&p.classList.contains('on')};
+function anim(id,fn){const [c,x]=C2(id);let t0=performance.now();(function f(t){if(vis(c))fn(x,c,(t-t0)/1000);requestAnimationFrame(f)})(t0);return[c,x]}
+const flipCards=(id,arr)=>{const C=$(id);C.innerHTML=arr.map(([ic,t,b])=>'<div class="card"><div class="fr"><span class="big">'+ic+'</span>'+t+'</div><div class="bk"><b>'+t+':</b> '+b+'</div></div>').join('');C.querySelectorAll('.card').forEach(c=>c.onclick=()=>c.classList.toggle('flip'))};
+const TF=(s,t)=>[s,t?['✔️ صح','❌ خطأ']:['❌ خطأ','✔️ صح']];
+function txt(x,s,X,Y,sz,col,al){x.font=FONT(sz||16);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='rtl';x.fillText(s,X,Y)}
+function steps(id,outId,newId,S){let k=0;function mk(){k=0;const L=$(id);L.innerHTML='';shuf(S.map((s,i)=>[s,i])).forEach(([[a,b],i])=>{const li=document.createElement('li');li.innerHTML='<b>?</b><span>'+a+'<br><small style="color:var(--soft)">'+b+'</small></span>';li.onclick=()=>{if(li.classList.contains('ok'))return;if(i===k){li.classList.add('ok');li.querySelector('b').textContent=k+1;k++;$(outId).innerHTML='✅ صحيح!';if(k===S.length){$(outId).innerHTML='🎉 رتّبت الرحلة كاملة!';cheer()}}else{shake(li);$(outId).innerHTML='🤔 ليس هذا… ما الذي جاء قبله؟'}};L.appendChild(li)});$(outId).textContent=''}$(newId).onclick=mk;mk()}
+function choiceQs(host,Q,scId){const H=$(host);let i=0,ok=0;function show(){if(i>=Q.length){H.innerHTML='<div class="big2">🎉 '+ok+' من '+Q.length+'</div><div class="btns"><button class="btn" id="'+host+'R">🔄 من جديد</button></div>';$(host+'R').onclick=()=>{i=0;ok=0;show()};if(ok>=Q.length-1)cheer();return}
+ const [s,o,why]=Q[i];const ord=shuf(o.map((t,j)=>j));H.innerHTML='<div class="scn">'+s+'</div><div class="opts2">'+ord.map(j=>'<button data-j="'+j+'">'+o[j]+'</button>').join('')+'</div><div class="fb" id="'+host+'F"></div>';
+ let dn=0;H.querySelectorAll('[data-j]').forEach(b=>b.onclick=()=>{if(dn)return;dn=1;const j=+b.dataset.j;b.classList.add(j===0?'ok':'no');if(j)H.querySelector('[data-j="0"]').classList.add('ok');else ok++;$(host+'F').innerHTML=(j?'💡 ':'✅ ')+why+'<br><button class="btn main" style="margin-top:6px" id="'+host+'N">التالي ⬅️</button>';$(host+'N').onclick=()=>{i++;show()};if(scId)$(scId).textContent='✔️ '+ok+' / '+Q.length})}show()}
+const gcd=(a,b)=>b?gcd(b,a%b):Math.abs(a);
+
+/* ================= الأحياء – الثالث الثانوي ================= */
+const r1=v=>Math.round(v*10)/10,r2=v=>Math.round(v*100)/100,sn=v=>v<0?'−'+(-v):''+v,EQ=s=>'<span class="eq">'+s+'</span>';
+const cpos=(c,e)=>{const r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}};
+function tL(x,s,X,Y,sz,col,al){x.font=FONT(sz||14);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='ltr';x.fillText(s,X,Y);x.direction='rtl'}
+function tA(x,s,X,Y,sz,col,al){x.font=FONT(sz||14);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='rtl';x.fillText(s,X,Y)}
+function EMJ(x,e,X,Y,sz){x.font=(sz||40)+'px "Segoe UI Emoji","Noto Color Emoji",sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(e,X,Y);x.textBaseline='alphabetic'}
+function RR(x,X,Y,W,H,r){x.beginPath();x.moveTo(X+r,Y);x.arcTo(X+W,Y,X+W,Y+H,r);x.arcTo(X+W,Y+H,X,Y+H,r);x.arcTo(X,Y+H,X,Y,r);x.arcTo(X,Y,X+W,Y,r);x.closePath()}
+function ARW(x,x1,y1,x2,y2,col,w){x.strokeStyle=col;x.fillStyle=col;x.lineWidth=w||4;x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke();const a=Math.atan2(y2-y1,x2-x1),h=10+(w||4)*1.5;x.beginPath();x.moveTo(x2+Math.cos(a)*2,y2+Math.sin(a)*2);x.lineTo(x2-h*Math.cos(a-.42),y2-h*Math.sin(a-.42));x.lineTo(x2-h*Math.cos(a+.42),y2-h*Math.sin(a+.42));x.closePath();x.fill()}
+function chipsP(id,arr,on,cb){const H=$(id);H.innerHTML=arr.map((t,i)=>'<button data-i="'+i+'"'+(i===on?' class="on"':'')+'>'+t+'</button>').join('');H.querySelectorAll('button').forEach(b=>b.onclick=()=>{H.querySelectorAll('button').forEach(y=>y.classList.toggle('on',y===b));cb(+b.dataset.i)})}
+const OPSP=(ok,bad)=>[ok,...shuf(bad.filter((b,i,a)=>String(b)!==String(ok)&&a.indexOf(b)===i)).slice(0,3)];
+const lerp=(a,b,k)=>a+(b-a)*k,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+/* لون حراري: من الأزرق البارد إلى الأحمر المتوهج */
+function heatCol(t){t=clamp(t,0,1);const st=[[59,91,219],[34,184,207],[255,212,59],[247,103,7],[224,49,49]],k=t*(st.length-1),i=Math.min(st.length-2,Math.floor(k)),f=k-i;const c=st[i].map((v,j)=>Math.round(lerp(v,st[i+1][j],f)));return 'rgb('+c+')'}
+function toast(s){const d=document.createElement('div');d.className='toast';d.innerHTML=s;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+/* ---------- نظام المهمات ---------- */
+const MS={};let MSAVE={};try{MSAVE=JSON.parse(localStorage.getItem('b12mis')||'{}')}catch(e){}
+function MIS(pid,goals){MS[pid]={g:goals,d:new Set(MSAVE[pid]||[])};misR(pid)}
+function misR(pid){const m=MS[pid],H=$('mis_'+pid);if(!H)return;H.innerHTML='<h4>🎯 مهمات الدرس ('+m.d.size+' / '+m.g.length+')</h4>'+m.g.map((g,i)=>'<div class="g'+(m.d.has(i)?' ok':'')+'"><i>'+(m.d.has(i)?'★':i+1)+'</i>'+g+'</div>').join('')+'<div class="pr"><b style="width:'+(100*m.d.size/m.g.length)+'%"></b></div>';starsAll()}
+function done(pid,i){const m=MS[pid];if(!m||m.d.has(i))return;m.d.add(i);MSAVE[pid]=[...m.d];try{localStorage.setItem('b12mis',JSON.stringify(MSAVE))}catch(e){}misR(pid);cheer();toast('⭐ مهمة منجزة: '+m.g[i]+(m.d.size===m.g.length?' · 🏆 أكملت الدرس!':''))}
+function starsAll(){const H=$('allStars');if(!H)return;let a=0,b=0;for(const k in MS){a+=MS[k].d.size;b+=MS[k].g.length}H.innerHTML='<span>⭐ إنجازاتك: '+a+' / '+b+'</span>'}
+/* مهمة: عدد إجابات صحيحة في تدريب */
+function qGoal(host,pid,i,n){let c=0;$(host).addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;setTimeout(()=>{if(b.classList.contains('ok')&&++c>=n)done(pid,i)},0)})}
+/* ترمومتر زجاجي */
+function therm(x,X,Y0,Y1,t,mn,mx,col,lab){const k=clamp((t-mn)/(mx-mn),0,1),top=Y1-(Y1-Y0)*k;x.fillStyle='rgba(233,236,239,.9)';RR(x,X-9,Y0-12,18,Y1-Y0+14,9);x.fill();x.strokeStyle='#adb5bd';x.lineWidth=2;x.stroke();
+ x.beginPath();x.arc(X,Y1+14,16,0,7);x.fillStyle=col;x.fill();x.strokeStyle='#adb5bd';x.stroke();x.fillStyle=col;x.fillRect(X-4,top,8,Y1-top+8);x.fillStyle='rgba(255,255,255,.5)';x.fillRect(X-6,Y0-6,3,Y1-Y0);
+ if(lab)lab.forEach(([v,s])=>{const y=Y1-(Y1-Y0)*(v-mn)/(mx-mn);x.strokeStyle='#495057';x.lineWidth=1.5;x.beginPath();x.moveTo(X+10,y);x.lineTo(X+18,y);x.stroke();tL(x,s,X+22,y+4,11,'#495057','left')})}
+
+
+const rnorm=()=>{let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)};
+/* ================= أدوات عامة لكتاب الأحياء ================= */
+const EQA=s=>'<span class="eq ar">'+s+'</span>';
+function SORT(hostId,items,cats,cb){const H=$(hostId);let ok=0,n=0,cur=null,bag=[];const next=()=>{if(!bag.length)bag=shuf(items.slice());cur=bag.pop();
+  H.innerHTML='<div class="srt"><div class="card">'+cur[0]+'</div><div class="bins">'+cats.map((c,i)=>'<button data-i="'+i+'">'+c+'</button>').join('')+'</div><div class="st">✔️ صحيح: '+ok+' من '+n+'</div></div>';
+  H.querySelectorAll('.bins button').forEach(b=>b.onclick=()=>{if(H.dataset.lock)return;H.dataset.lock=1;n++;const right=+b.dataset.i===cur[1];
+   if(right){b.classList.add('ok');ok++;cheer();cb&&cb(ok)}else{b.classList.add('no');shake(b);H.querySelectorAll('.bins button')[cur[1]].classList.add('ok')}
+   setTimeout(()=>{delete H.dataset.lock;next()},right?650:1500)})};next()}
+function TOG(id,arr,cb){const H=$(id),st=arr.map(()=>false);H.innerHTML=arr.map((t,i)=>'<button data-i="'+i+'">'+t+'</button>').join('');H.querySelectorAll('button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;st[i]=!st[i];b.classList.toggle('on',st[i]);cb&&cb(st)});return st}
+const onTap=(c,f)=>c.addEventListener('pointerdown',e=>f(cpos(c,e)));
+function graph(x,X0,Y0,W,H,series,mx,lab){x.strokeStyle='#adb5bd';x.lineWidth=1.5;x.beginPath();x.moveTo(X0,Y0-H);x.lineTo(X0,Y0);x.lineTo(X0+W,Y0);x.stroke();
+ series.forEach(([arr,col,len])=>{if(!arr.length)return;x.strokeStyle=col;x.lineWidth=3;x.beginPath();arr.forEach((v,i)=>{const X=X0+i/(len-1)*W,Y=Y0-clamp(v/mx,0,1)*H;i?x.lineTo(X,Y):x.moveTo(X,Y)});x.stroke()});if(lab)tA(x,lab,X0+W/2,Y0+16,11,'#868e96')}
+
+/* ================= 1-1 الكائنات الدقيقة ================= */
+MIS('u1',['كبّر حتى ترى الفيروس بالمجهر الإلكتروني','أثبت خطأ التوالد الذاتي بدورق باستير','صنّف 6 خصائص بشكل صحيح']);
+(function(){const [c,x]=C2('zmC');const sw=(s)=>s;
+ function virus(X,Y,r){x.strokeStyle='#862e9c';x.lineWidth=Math.max(1,r*.06);for(let i=0;i<12;i++){const a=i*Math.PI/6;x.beginPath();x.moveTo(X+Math.cos(a)*r,Y+Math.sin(a)*r);x.lineTo(X+Math.cos(a)*r*1.35,Y+Math.sin(a)*r*1.35);x.stroke();x.fillStyle='#da77f2';x.beginPath();x.arc(X+Math.cos(a)*r*1.38,Y+Math.sin(a)*r*1.38,r*.09,0,7);x.fill()}
+  x.fillStyle='#be4bdb';x.beginPath();for(let i=0;i<6;i++){const a=i*Math.PI/3+Math.PI/6;x.lineTo(X+Math.cos(a)*r,Y+Math.sin(a)*r)}x.closePath();x.fill();x.stroke();if(r>25){x.strokeStyle='#ffd43b';x.lineWidth=r*.05;x.beginPath();for(let k=0;k<30;k++){const a=k*.7,rr=r*.55*(k/30);k?x.lineTo(X+Math.cos(a)*rr,Y+Math.sin(a)*rr):x.moveTo(X,Y)}x.stroke()}}
+ function bact(X,Y,L,t){const W=L*.42;x.strokeStyle='#2b8a3e';x.lineWidth=Math.max(1,L*.03);x.beginPath();for(let k=0;k<=30;k++){const xx=X+L/2+k*L*.04,yy=Y+Math.sin(k*.6+t*6)*W*.3;k?x.lineTo(xx,yy):x.moveTo(xx,yy)}x.stroke();
+  x.fillStyle='#8ce99a';RR(x,X-L/2,Y-W/2,L,W,W/2);x.fill();x.stroke();if(L>40){x.strokeStyle='#d6336c';x.lineWidth=L*.02;x.beginPath();x.ellipse(X,Y,L*.22,W*.22,0,0,7);x.stroke()}}
+ function yeast(X,Y,r){x.fillStyle='#ffc078';x.strokeStyle='#d9480f';x.lineWidth=Math.max(1,r*.05);x.beginPath();x.ellipse(X,Y,r,r*.8,0,0,7);x.fill();x.stroke();x.beginPath();x.ellipse(X+r*.95,Y-r*.6,r*.35,r*.3,0,0,7);x.fill();x.stroke();if(r>15){x.fillStyle='#e8590c';x.beginPath();x.arc(X-r*.2,Y,r*.25,0,7);x.fill()}}
+ function cell(X,Y,r){x.fillStyle='#ffdeeb';x.strokeStyle='#c2255c';x.lineWidth=Math.max(1,r*.03);x.beginPath();x.arc(X,Y,r,0,7);x.fill();x.stroke();x.fillStyle='#9c36b5';x.beginPath();x.arc(X+r*.1,Y-r*.05,r*.3,0,7);x.fill()}
+ function hair(X,w){x.fillStyle='#a0522d';x.fillRect(X-w/2,0,w,360);if(w>30){x.strokeStyle='rgba(255,255,255,.35)';x.lineWidth=2;for(let y=-40;y<400;y+=w*.25){x.beginPath();x.moveTo(X-w/2,y+w*.2);x.lineTo(X+w/2,y);x.stroke()}}}
+ const OB=[['فيروس',0,.1],['بكتيريا',1.5,2],['خلية خميرة (فطر)',7,6],['خلية بشرية',25,25],['شعرة',90,80]];
+ anim('zmC',(x,c,t)=>{const z=+$('zmZ').value,M=Math.pow(10,z/100),s=M/250,sx=X=>160+X*s;$('zmZv').textContent='×'+(M<10?r1(M):Math.round(M).toLocaleString('en'));
+  const ins=M<10?['👁️ العين المجردة / عدسة','#495057']:M<=1500?['🔬 المجهر الضوئي','#1971c2']:['⚡ المجهر الإلكتروني','#ae3ec9'];
+  x.fillStyle=M>1500?'#212529':'#f8f9fa';x.fillRect(0,0,640,360);
+  const vis=OB.map(([n,X,sz])=>sz*s);
+  if(vis[4]>.5)hair(sx(90),vis[4]);if(vis[3]>.5)cell(sx(25),180,vis[3]/2);if(vis[2]>.5)yeast(sx(7),190,vis[2]/2);if(vis[1]>.5)bact(sx(1.5),200,vis[1],t);
+  const vOK=M>1500;if(vis[0]>.5){if(vOK)virus(sx(0),180,vis[0]/2);else{x.fillStyle='rgba(134,142,150,.5)';x.beginPath();x.arc(sx(0),180,Math.max(2,vis[0]/2),0,7);x.fill()}}
+  /* مسطرة القياس */
+  const tgt=120/s,p=Math.pow(10,Math.floor(Math.log10(tgt))),L=[1,2,5].map(k=>k*p).filter(v=>v<=tgt).pop()||p,Lp=L*s,lab=L>=1000?L/1000+' مم':L>=1?L+' ميكرومتر':Math.round(L*1000)+' نانومتر';
+  x.fillStyle=M>1500?'#fff':'#212529';x.fillRect(480,330,Lp,5);tA(x,lab,480+Lp/2,322,13,M>1500?'#fff':'#212529');tA(x,ins[0],520,30,16,M>1500?'#ffd43b':ins[1]);
+  const seen=OB.filter((o,i)=>vis[i]>=6&&(i>0||vOK)&&sx(o[1])-vis[i]/2<640).map(o=>o[0]);
+  if(vOK&&vis[0]>=8)done('u1',0);
+  $('zmOut').innerHTML='ترى الآن: '+(seen.length?seen.join(' · '):'لا شيء… كبّر أكثر')+(!vOK&&vis[0]>=6?'<br>⚠️ الفيروس أصغر من قدرة المجهر الضوئي على التمييز: نحتاج <b>المجهر الإلكتروني</b>':'')+'<br><small>الفيروس ≈ 0.1 ميكرومتر · البكتيريا ≈ 2 · الخميرة ≈ 6 · الخلية البشرية ≈ 25 · الشعرة ≈ 80</small>'})})();
+(function(){const [c,x]=C2('pfC');let K=0,day=0,run=0,P=[],trap=[],m=0;const res={};
+ chipsP('pfK',['🍶 دورق عادي','〰️ دورق باستير (عنق ملتوٍ)','💥 العنق الملتوي مكسور'],0,i=>{K=i;reset()});
+ const reset=()=>{day=0;run=0;P=[];trap=[];m=0};$('pfGo').onclick=()=>{if(day>=30)reset();run=1};$('pfR').onclick=reset;
+ const open=()=>K===0?[320,40]:K===1?[480,62]:[320,128];
+ anim('pfC',(x,c,t)=>{x.clearRect(0,0,640,320);const [ox,oy]=open();
+  if(run){day=Math.min(30,day+.06);if(Math.random()<.35)P.push({x:ox+(Math.random()-.5)*60,y:-5,vx:0});if(m>0)m=Math.min(400,m*1.035+.02);if(day>=30){run=0;res[K]=m>40?'c':'k';if(res[1]==='k'&&(res[0]==='c'||res[2]==='c'))done('u1',1)}}
+  const tb=clamp(m/120,0,1);
+  x.save();x.beginPath();x.arc(320,230,68,0,7);x.clip();x.fillStyle='rgb('+[255,243,191].map((v,i)=>Math.round(lerp(v,[150,140,95][i],tb)))+')';x.fillRect(240,210,160,100);if(tb>.2)for(let i=0;i<tb*40;i++){x.fillStyle='rgba(80,70,40,.5)';x.beginPath();x.arc(260+((i*53)%120),220+((i*37)%80),2,0,7);x.fill()}x.restore();
+  x.strokeStyle='#495057';x.lineWidth=4;x.beginPath();x.arc(320,230,70,-Math.PI/2+.17,-Math.PI/2-.17+Math.PI*2,false);x.stroke();
+  x.lineWidth=4;x.beginPath();if(K===0){x.moveTo(308,168);x.lineTo(308,40);x.moveTo(332,168);x.lineTo(332,40)}else if(K===1){x.moveTo(308,168);x.bezierCurveTo(300,90,380,60,410,120);x.bezierCurveTo(430,160,460,140,468,62);x.moveTo(332,168);x.bezierCurveTo(330,110,375,95,395,130);x.bezierCurveTo(420,185,480,170,492,62)}else{x.moveTo(308,168);x.lineTo(308,128);x.moveTo(332,168);x.lineTo(332,128);x.strokeStyle='#868e96';x.lineWidth=2;x.beginPath();x.moveTo(300,128);x.lineTo(310,120);x.lineTo(318,130);x.lineTo(326,118);x.lineTo(340,128);x.strokeStyle='#495057'}x.stroke();
+  if(K===1){trap.forEach(p=>{x.fillStyle='#868e96';x.beginPath();x.arc(p[0],p[1],2.5,0,7);x.fill()});x.fillStyle='rgba(116,192,252,.6)';x.beginPath();x.ellipse(440,150,14,5,0,0,7);x.fill()}
+  P=P.filter(p=>{p.y+=2.2;p.x+=(ox-p.x)*.06;x.fillStyle='#868e96';x.beginPath();x.arc(p.x,p.y,2.5,0,7);x.fill();if(K===1&&p.y>=148&&p.y<200){trap.push([430+Math.random()*20,146+Math.random()*6]);if(trap.length>150)trap.shift();return false}
+   if(p.y>220){m+=1;return false}if(K===1&&p.y>62){p.x=lerp(p.x,440,.15)}return true});
+  EMJ(x,'🦠',560,100,26);tA(x,'غبار وميكروبات الهواء',560,135,12,'#868e96');tA(x,'اليوم '+Math.floor(day),100,40,18,'#212529');if(tb>.7)EMJ(x,'🤢',320,230,36);
+  const st=tb>.5?'🟤 المرق أصبح عكرًا ورائحته كريهة: نمت فيه الميكروبات':tb>.05?'⚠️ بدأت الميكروبات تنمو':'✨ المرق صافٍ';
+  $('pfOut').innerHTML=st+'<br><small>'+(K===1?'الميكروبات أثقل من الهواء فتستقر في انحناء العنق S ولا تصل إلى المرق ⟸ الحياة لا تنشأ ذاتيًا من مادة غير حية':K===0?'العنق المستقيم يسمح بسقوط الميكروبات من الهواء مباشرة في المرق':'كسر العنق سمح للميكروبات بالوصول للمرق ⟸ الميكروبات تأتي من الهواء، لا تتولد ذاتيًا')+'</small>'})})();
+SORT('mcS',[['يُرى فقط بالمجهر الإلكتروني',0],['حمض نووي واحد داخل غلاف بروتيني',0],['يتكاثر فقط داخل خلية حاضنة',0],['لا تؤثر فيه المضادات الحيوية',0],['ليس له بروتوبلازم',0],['كروموسوم دائري واحد ولا توجد نواة حقيقية',1],['قد تكون لها أسواط للحركة',1],['تقضي عليها المضادات الحيوية',1],['تُستخدم في صناعة الزبادي',1],['تُستخدم في معالجة مياه الصرف الصحي',1],['جدارها مكوّن من الكيتين',2],['منها الخميرة المستخدمة في الخبز',2],['منها العفن الذي ينتج البنسلين',2],['قد تكون عديدة الخلايا',2]],['🦠 فيروس','🧫 بكتيريا','🍄 فطريات'],k=>{if(k>=6)done('u1',2)});
+MCQP($('qu1'),bank([['الفيروسات لا تُرى إلا بالمجهر:',['الإلكتروني','الضوئي','العين المجردة','العدسة المكبرة']],['يتكون الفيروس من:',['حمض نووي محاط بغلاف بروتيني','خلية بها نواة','جدار من الكيتين','بروتوبلازم وغشاء']],['المضادات الحيوية تقضي على:',['البكتيريا','الفيروسات','كل الكائنات الدقيقة','الفطريات والفيروسات']],['جدار الخلية في الفطريات يتكون من:',['الكيتين','السليلوز','البروتين فقط','الدهون']],['البكتيريا لها:',['كروموسوم دائري واحد بلا غشاء نووي','نواة حقيقية','عدة كروموسومات خطية','غلاف بروتيني فقط']],['أثبت باستير خطأ نظرية:',['التوالد الذاتي','الانتخاب الطبيعي','الوراثة','الخلية']],['الفيروس دائمًا:',['طفيلي','رمّي','ذاتي التغذية','مُنتج']],['ميزة العنق S في دورق باستير:',['يحبس الغبار والميكروبات قبل وصولها للمرق','يمنع دخول الهواء تمامًا','يسخّن المرق','يزيد التبخر']]]));
+
+/* ================= 1-2 التحلل والتقانة الحيوية ================= */
+MIS('u2',['انفخ البالون كاملًا عند الحرارة المثلى','ارفع الحرارة فوق 60° واكتشف ماذا يحدث للخميرة','أنتج 100 وحدة بنسلين في المخمّر']);
+(function(){const [c,x]=C2('ysC');let V=0,alive=1,run=0,lt=0,hist=[];
+ const tf=T=>T>=60?0:Math.exp(-(((T-37)/13)**2)),sf=S=>Math.min(1,S/3);
+ $('ysGo').onclick=()=>run=1;$('ysR').onclick=()=>{V=0;alive=1;run=0;hist=[]};
+ anim('ysC',(x,c,t)=>{const T=+$('ysT').value,S=+$('ysS').value;$('ysTv').textContent=T+'°';$('ysSv').textContent=S+' ملاعق';const dt=Math.min(.05,t-lt);lt=t;
+  if(run&&T>=60&&alive){alive=0;done('u2',1);toast('☠️ الحرارة العالية قتلت الخميرة (دنّت إنزيماتها)')}
+  const rate=alive?tf(T)*sf(S):0,cap=Math.min(1,S/3);if(run){V=Math.min(cap,V+rate*dt*.12);if(Math.floor(t*10)!==Math.floor((t-dt)*10)){hist.push(V);if(hist.length>120)hist.shift()}}
+  if(run&&rate>.9&&V>=.97)done('u2',0);
+  x.clearRect(0,0,640,340);x.fillStyle=heatCol(T/80);x.globalAlpha=.25;RR(x,40,170,230,150,16);x.fill();x.globalAlpha=1;tA(x,'حوض ماء '+T+'°',155,335,12,'#495057');
+  x.fillStyle='rgba(233,236,239,.6)';x.strokeStyle='#868e96';x.lineWidth=3;RR(x,110,150,90,150,14);x.fill();x.stroke();x.fillRect(138,120,34,32);x.strokeRect(138,120,34,32);
+  x.fillStyle=alive?'#ffe8cc':'#ced4da';RR(x,112,210,86,88,12);x.fill();
+  for(let i=0;i<Math.round(rate*14);i++){const yy=295-((t*60+i*37)%85);x.fillStyle='rgba(255,255,255,.8)';x.beginPath();x.arc(120+((i*29)%70),yy,3,0,7);x.fill()}
+  const r=18+V*70;x.fillStyle=alive?'#ff6b6b':'#adb5bd';x.beginPath();x.ellipse(155,118-r,r*.85,r,0,0,7);x.fill();x.fillStyle='rgba(255,255,255,.35)';x.beginPath();x.ellipse(155-r*.35,118-r*1.35,r*.18,r*.28,-.4,0,7);x.fill();
+  if(!alive)EMJ(x,'☠️',155,255,30);
+  tA(x,'حجم CO₂ في البالون',470,30,13,'#495057');graph(x,330,300,280,240,[[hist,'#e03131',120]],1,'الزمن ⟵');
+  x.fillStyle='#e9ecef';RR(x,330,40,280,12,6);x.fill();x.fillStyle='#2f9e44';RR(x,330,40,280*rate,12,6);x.fill();tA(x,'نشاط الخميرة '+Math.round(rate*100)+'%',470,70,12,'#2f9e44');
+  $('ysOut').innerHTML=EQA('جلوكوز ← كحول إيثيلي + CO₂ + طاقة')+'<br>'+(!alive?'☠️ الخميرة ماتت: الحرارة العالية تُتلف إنزيماتها':S===0?'لا يوجد سكر… الخميرة بلا غذاء!':T<10?'🥶 بارد جدًا: الإنزيمات بطيئة':T>=30&&T<=44?'🔥 حرارة مثلى تقريبًا: تخمّر سريع':'تخمّر متوسط السرعة')})})();
+(function(){const [c,x]=C2('fmC');let run=0,food=60,B=5,P=0,ang=0,lt=0;
+ $('fmGo').onclick=()=>run=1;$('fmF').onclick=()=>{food=Math.min(100,food+40);toast('🍞 أضفت غذاءً (سكريات وأملاح)')};$('fmR').onclick=()=>{run=0;food=60;B=5;P=0};
+ anim('fmC',(x,c,t)=>{const T=+$('fmT').value,pH=+$('fmP').value,O=+$('fmO').value;$('fmTv').textContent=T+'°';$('fmPv').textContent=pH;$('fmOv').textContent=O+'%';const dt=Math.min(.05,t-lt);lt=t;
+  const ft=Math.exp(-(((T-25)/5)**2)),fp=Math.exp(-(((pH-6.5)/1.3)**2)),fo=clamp(O/80,0,1),q=ft*fp*fo,fd=food>0?1:0;
+  if(run){B=clamp(B+dt*.6*q*fd*B*(1-B/100),0,100);food=Math.max(0,food-dt*(.4+B*.03)*(.3+q));P=Math.min(100,P+dt*B/100*q*fd*3.2);ang+=dt*6;if(P>=100)done('u2',2)}
+  x.clearRect(0,0,640,340);x.fillStyle='#ced4da';RR(x,60,40,200,270,30);x.fill();x.strokeStyle='#868e96';x.lineWidth=3;x.stroke();
+  x.fillStyle='rgb('+[255,236,153].map((v,i)=>Math.round(lerp(v,[64,145,108][i],B/100)))+')';RR(x,75,110,170,185,20);x.fill();
+  for(let k=0;k<B/6;k++){x.strokeStyle='rgba(43,138,62,.6)';x.lineWidth=2;const X=90+((k*41)%140),Y=130+((k*67)%150);x.beginPath();x.moveTo(X,Y);x.quadraticCurveTo(X+10,Y-12,X+22,Y+2);x.stroke()}
+  x.strokeStyle='#495057';x.lineWidth=5;x.beginPath();x.moveTo(160,20);x.lineTo(160,250);x.stroke();for(let i=0;i<2;i++){const a=ang+i*Math.PI;x.beginPath();x.moveTo(160,250);x.lineTo(160+Math.cos(a)*45,250+Math.sin(a)*8);x.stroke()}
+  if(O>10)for(let i=0;i<O/8;i++){const yy=290-((t*80+i*23)%170);x.fillStyle='rgba(255,255,255,.85)';x.beginPath();x.arc(100+((i*37)%120),yy,3,0,7);x.fill()}
+  tA(x,'🍄 فطر البنسليوم',160,330,13,'#2b8a3e');
+  const G=[['🌡️ الحرارة',ft,'المثلى ≈ 25°'],['🧪 pH',fp,'المثلى ≈ 6.5'],['💨 الأكسجين',fo,'هوائي: يحتاج تهوية'],['🍞 الغذاء',food/100,'']];
+  G.forEach(([n,v,h],i)=>{const Y=50+i*55;tA(x,n,560,Y,14,'#212529','right');x.fillStyle='#e9ecef';RR(x,300,Y+8,260,12,6);x.fill();x.fillStyle=v>.75?'#2f9e44':v>.4?'#f59f00':'#e03131';RR(x,300,Y+8,260*clamp(v,0,1),12,6);x.fill();if(h)tA(x,h,300,Y,11,'#868e96','left')});
+  tA(x,'💊 البنسلين: '+Math.floor(P)+' / 100',430,290,20,'#5f3dc4');x.fillStyle='#e5dbff';RR(x,300,300,260,14,7);x.fill();x.fillStyle='#7048e8';RR(x,300,300,2.6*P,14,7);x.fill();
+  const tip=[];if(ft<.75)tip.push(T>25?'خفّض الحرارة':'ارفع الحرارة');if(fp<.75)tip.push(pH>6.5?'خفّض pH':'ارفع pH');if(fo<.75)tip.push('زد التهوية');if(food<5)tip.push('أضف غذاءً!');
+  $('fmOut').innerHTML=(tip.length?'⚙️ '+tip.join(' · '):'✅ ظروف مثلى!')+'<br><small>يُعقَّم المخمّر بالبخار قبل البدء حتى لا تختلط الكائنات الدقيقة بكائنات أخرى</small>'})})();
+SORT('prS',[['🥛 الزبادي',0],['🍞 انتفاخ عجين الخبز',1],['💊 البنسلين',1],['🚰 معالجة مياه الصرف الصحي',0],['🍷 الكحول الإيثيلي',1],['💉 الإنسولين البشري (هندسة وراثية)',0]],['🧫 بكتيريا','🍄 فطريات (خميرة أو عفن)']);
+MCQP($('qu2'),bank([['التقانة الحيوية هي:',['استخدام العمليات الحيوية في الكائنات الدقيقة لصناعة مواد أو تقديم خدمات','دراسة البيئة','زراعة النباتات','صناعة الآلات']],['الغاز الناتج من تخمر الخميرة:',['ثاني أكسيد الكربون','الأكسجين','النيتروجين','الهيدروجين']],['البنسلين يُنتج من:',['فطر','بكتيريا','فيروس','طحلب']],['من مميزات أجهزة التخمر:',['إنتاج سريع على نطاق واسع دون اختلاط بكائنات أخرى','بطء الإنتاج','الحاجة لكائنات كثيرة مختلطة','قلة الربح']],['الحرارة العالية جدًا تقتل الخميرة لأنها:',['تُتلف إنزيماتها','تزيد السكر','تزيد الأكسجين','تبرّد الماء']],['الكائنات المحللة:',['تعيد المواد العضوية الميتة إلى الطبيعة','تصنع غذاءها بالبناء الضوئي','تأكل الحيوانات الحية','لا تحتاج غذاءً']],['تُستخدم البكتيريا في صناعة:',['الزبادي','الخبز','البنسلين','الكحول']]]));
+chapterTest('rv1',[['الفيروس يتكاثر:',['داخل خلية حاضنة فقط','خارج الخلايا','بالانقسام الثنائي']],['المضاد الحيوي يؤثر في:',['البكتيريا','الفيروسات','كلاهما']],['جدار الفطريات:',['كيتين','سليلوز','بروتين']],['البكتيريا بلا:',['نواة حقيقية','كروموسوم','غشاء خلوي']],['أثبت باستير خطأ:',['التوالد الذاتي','الانتخاب','الخلية']],['تخمر الخميرة ينتج:',['كحول + CO₂','أكسجين + ماء','نشا']],['البنسلين من:',['فطر','بكتيريا','فيروس']],['الزبادي من:',['بكتيريا','خميرة','فيروس']],['الخبز ينتفخ بفعل:',['الخميرة','البكتيريا','الفيروس']],['أجهزة التخمر تُعقَّم:',['لمنع اختلاط كائنات أخرى','لتسخين الغذاء','لزيادة الأكسجين']],['يُرى الفيروس بـ:',['المجهر الإلكتروني','المجهر الضوئي','العين']],['الخميرة من:',['الفطريات','البكتيريا','الفيروسات']]]);
+
+/* ================= 2-1 المنظومة البيئية ================= */
+MIS('u3',['ابنِ سلسلة غذائية من 4 حلقات أو أكثر','احسب الطاقة في هرم الطاقة مرتين صحيحًا','حافظ على الأرانب والثعالب أحياء 30 سنة']);
+(function(){const [c,x]=C2('fcC');const O={g:['🌾','حشائش',1],l:['🌳','شجرة',1],r:['🐇','أرنب'],h:['🦗','جرادة'],cc:['🐛','يرقة'],f:['🐸','ضفدع'],b:['🐦','عصفور'],s:['🐍','ثعبان'],xx:['🦊','ثعلب'],e:['🦅','نسر'],m:['🍄','فطر']};
+ const EAT={g:['r','h','cc'],l:['cc','h'],r:['xx','e','s'],h:['f','b'],cc:['b','f'],f:['s'],b:['s','e'],s:['e'],xx:[],e:[]};const keys=Object.keys(O);let ch=[],tt=0;
+ chipsP('fcK',keys.map(k=>O[k][0]+' '+O[k][1]),-1,i=>{const k=keys[i];if(k==='m'){toast('🍄 الفطر <b>محلل</b>: يتغذى على كل الكائنات الميتة ويعيد المواد للتربة');return}
+  if(!ch.length){if(!O[k][2]){toast('ابدأ بكائن <b>منتج</b> يصنع غذاءه بالبناء الضوئي 🌱');shake($('fcC'));return}ch=[k];tt=performance.now();return}
+  const last=ch[ch.length-1];if(ch.length>=5){toast('السلسلة طويلة بما يكفي! معظم الطاقة فُقدت');return}if(!EAT[last].includes(k)){toast(O[k][1]+' لا يأكل '+O[last][1]);shake($('fcC'));return}ch.push(k);tt=performance.now();cheer();if(ch.length>=4)done('u3',0)});
+ $('fcR').onclick=()=>ch=[];
+ const R=['منتج','مستهلك أولي','مستهلك ثانوي','مستهلك ثالث','مستهلك رابع'];
+ anim('fcC',(x,c,t)=>{x.clearRect(0,0,640,260);EMJ(x,'☀️',40,110,40);const n=ch.length,gap=Math.min(130,520/Math.max(n,1));
+  ch.forEach((k,i)=>{const X=110+i*gap,k2=i===n-1?Math.min(1,(performance.now()-tt)/400):1,Y=110+Math.sin(t*3+i)*4;EMJ(x,O[k][0],X,Y,46*k2);tA(x,O[k][1],X,Y+44,13,'#212529');tA(x,R[i],X,Y+62,11,i?'#e8590c':'#2f9e44');
+   if(i)ARW(x,X-gap+28,Y,X-30,Y,'#fab005',3)});if(n)ARW(x,62,110,82,110,'#fab005',3);
+  if(n){const E=[1000,100,10,1,.1];ch.forEach((k,i)=>tL(x,E[i]+' kJ',110+i*gap,30,12,'#868e96'))}
+  if(!n)tA(x,'اختر كائنًا منتجًا للبداية 👇',340,120,16,'#868e96');
+  $('fcOut').innerHTML=n?'السهم يعني: <b>تنتقل الطاقة إلى</b> · '+ch.map(k=>O[k][1]).join(' ← ')+(n>1?'<br>'+O[ch[n-1]][1]+' يأكل: '+EAT[ch[n-1]].map(k=>O[k][0]).join(' ')||'':'')+(EAT[ch[n-1]]&&!EAT[ch[n-1]].length?'<br>🏁 مستهلك أعلى: لا يوجد من يأكله هنا':''):''})})();
+(function(){const [c,x]=C2('epC');anim('epC',(x,c,t)=>{const E=+$('epE').value,N=+$('epN').value;$('epEv').textContent=E.toLocaleString('en');$('epNv').textContent=N;x.clearRect(0,0,640,340);
+  const L=['🌾 المنتجات','🐇 مستهلك أولي','🦊 مستهلك ثانوي','🦅 مستهلك ثالث','🐉 مستهلك رابع'],col=['#69db7c','#ffd43b','#ffa94d','#ff8787','#da77f2'];
+  for(let i=0;i<N;i++){const w=520*Math.pow(.62,i),h=52,Y=300-i*(h+6);x.fillStyle=col[i];RR(x,320-w/2,Y-h,w,h,8);x.fill();tA(x,L[i],320,Y-h/2+2,14,'#212529');tL(x,(E*Math.pow(.1,i)).toLocaleString('en',{maximumFractionDigits:2})+' kJ',320,Y-8,13,'#212529');
+   if(i<N-1){const a=(t*.8+i*.3)%1;x.globalAlpha=1-a;EMJ(x,'🔥',320+w/2+20+a*30,Y-h/2-a*20,20);x.globalAlpha=1}}
+  tA(x,'🔥 حوالي 90% تُفقد حرارةً وفضلاتٍ في كل مستوى',320,22,14,'#c92a2a');
+  $('epOut').innerHTML='طاقة المستوى '+N+': '+EQ(E.toLocaleString('en')+' × 0.1'+(N-1>1?'^'+(N-1):'')+' = '+(E*Math.pow(.1,N-1)).toLocaleString('en',{maximumFractionDigits:3})+' kJ')+'<br><small>لهذا السبب السلاسل الغذائية قصيرة عادة</small>'})})();
+MCQP($('epQ'),()=>{const E=pick([1000,2000,5000,10000,20000,50000]),k=rnd(1,3),nm=['المستهلك الأولي','المستهلك الثانوي','المستهلك الثالث'][k-1],v=E*Math.pow(.1,k);return{q:'طاقة المنتجات '+E.toLocaleString('en')+' ك جول. كم يصل تقريبًا إلى '+nm+'؟',o:OPSP(v.toLocaleString('en')+' kJ',[(E*Math.pow(.1,k+1)).toLocaleString('en')+' kJ',(E*Math.pow(.1,Math.max(0,k-1))).toLocaleString('en')+' kJ',(E*.9).toLocaleString('en')+' kJ']),ex:'10% فقط تنتقل لكل مستوى'}});qGoal('epQ','u3',1,2);
+(function(){const [c,x]=C2('lvC');let R,F,yr,run,H=[],G=[];const pos=[...Array(40)].map(()=>[30+Math.random()*580,30+Math.random()*130]);
+ const reset=()=>{R=+$('lvR').value;F=+$('lvF').value;yr=0;run=0;H=[];G=[]};['lvR','lvF'].forEach(i=>$(i).oninput=()=>{$(i+'v').textContent=$(i).value;reset()});$('lvRv').textContent=120;$('lvFv').textContent=15;reset();
+ $('lvGo').onclick=()=>{if(yr>=30)reset();run=1};$('lvH').onclick=()=>{F*=.15;toast('🔫 الصيد الجائر قضى على معظم الثعالب')};$('lvRs').onclick=reset;
+ anim('lvC',(x,c,t)=>{if(run)for(let k=0;k<3;k++){const dt=.02;const dR=.8*R*(1-R/300)-.02*R*F,dF=.004*R*F-.4*F;R=Math.max(0,R+dt*dR);F=Math.max(0,F+dt*dF);if(F<.5)F=0;if(R<.5)R=0;yr+=dt;if(Math.round(yr*50)%5===0){H.push(R);G.push(F)}if(yr>=30){run=0;if(R>=1&&F>=1)done('u3',2);break}}
+  x.clearRect(0,0,640,380);x.fillStyle='#d3f9d8';RR(x,10,10,620,170,14);x.fill();const grass=clamp(1-R/320,.15,1);for(let i=0;i<70;i++){x.strokeStyle='rgba(47,158,68,'+grass+')';x.lineWidth=2;const X=15+i*8.8;x.beginPath();x.moveTo(X,178);x.lineTo(X+3,178-14*grass-Math.sin(t*2+i)*2);x.stroke()}
+  for(let i=0;i<Math.min(30,Math.round(R/8));i++)EMJ(x,'🐇',pos[i][0]+Math.sin(t*3+i)*3,pos[i][1],20);for(let i=0;i<Math.min(15,Math.round(F/2));i++)EMJ(x,'🦊',pos[39-i][0],pos[39-i][1],24);
+  graph(x,50,355,560,150,[[H,'#868e96',300],[G.map(v=>v*5),'#e8590c',300]],320,'السنوات ⟵ 30');tA(x,'🐇 أرانب',120,200,12,'#868e96');tA(x,'🦊 ثعالب (×5)',210,200,12,'#e8590c');
+  $('lvOut').innerHTML='السنة '+Math.floor(yr)+' · 🐇 '+Math.round(R)+' · 🦊 '+Math.round(F)+'<br><small>'+(F===0&&R>200?'بدون مفترسات يزداد الأرانب حتى ينفد العشب':F===0?'انقرضت الثعالب!':R===0?'انقرضت الأرانب… فتموت الثعالب جوعًا':'تتذبذب الأعداد: زيادة الأرانب ← زيادة الثعالب ← نقص الأرانب ← نقص الثعالب')+'</small>'})})();
+MCQP($('qu3'),bank([['المكان الذي يعيش فيه الكائن الحي:',['الموطن البيئي','الموضع البيئي','المجتمع','السكان']],['الدور الذي يقوم به الكائن في موطنه:',['الموضع البيئي','الموطن','العشيرة','السلسلة']],['مجموعة أفراد من النوع نفسه:',['السكان (العشيرة)','المجتمع','المنظومة البيئية','الموطن']],['الكائنات المنتجة هي:',['النباتات الخضراء','آكلات الأعشاب','الفطريات','آكلات اللحوم']],['السلاسل الغذائية قصيرة عادة لأن:',['معظم الطاقة تُفقد في كل مستوى','الكائنات قليلة','النباتات لا تنمو','الشمس ضعيفة']],['شبكة الغذاء:',['سلسلتان غذائيتان أو أكثر مرتبطة','سلسلة واحدة طويلة','مجموعة نباتات','مجموعة محللات']],['من عوامل البيئة غير الحية:',['الضوء والحرارة والملوحة','الأرانب','البكتيريا','الحشائش']],['تحصل الكائنات المستهلكة على طاقتها من:',['الكائنات التي تتغذى عليها','الشمس مباشرة','التربة فقط','الهواء']]]));
+
+/* ================= 2-2 دوران المواد والتطفل ================= */
+MIS('u4',['انتقل بذرة الكربون عبر 4 عمليات مختلفة','اخفض CO₂ في الجو إلى أقل من 350','اقضِ على الملاريا في القرية']);
+(function(){const [c,x]=C2('ccC');const ND={A:['☁️','الغلاف الجوي (CO₂)',320,55],P:['🌳','النباتات',110,210],N:['🐄','الحيوانات',300,320],D:['🍂','كائنات ميتة وفضلات',520,320],F:['⛽','وقود أحفوري',540,175]};
+ const MV={A:[['🌿 البناء الضوئي','P']],P:[['😮‍💨 التنفس','A'],['🍴 التغذية (يأكلها حيوان)','N'],['🥀 الموت','D']],N:[['😮‍💨 التنفس','A'],['🥀 الموت والفضلات','D']],D:[['🍄 التحلل بالمحللات','A'],['⏳ التحجر (ملايين السنين)','F']],F:[['🔥 الاحتراق','A']]};
+ let cur='A',from=null,k=1,seen=new Set();const set=()=>chipsP('ccK',MV[cur].map(m=>m[0]),-1,i=>{const [n,to]=MV[cur][i];from=cur;cur=to;k=0;seen.add(n.replace(/^\S+\s/,'').split(' (')[0].replace('والفضلات','').trim());if(seen.size>=4)done('u4',0);set()});set();
+ anim('ccC',(x,c,t)=>{x.clearRect(0,0,640,380);Object.values(MV).forEach(()=>{});
+  for(const a in MV)MV[a].forEach(([n,b])=>{const A=ND[a],B=ND[b];x.strokeStyle='rgba(173,181,189,.45)';x.lineWidth=2;x.setLineDash([5,5]);x.beginPath();x.moveTo(A[2],A[3]);x.lineTo(B[2],B[3]);x.stroke();x.setLineDash([])});
+  for(const a in ND){const [e,n,X,Y]=ND[a],on=a===cur;if(on){x.fillStyle='rgba(255,212,59,.35)';x.beginPath();x.arc(X,Y,48+Math.sin(t*4)*3,0,7);x.fill()}EMJ(x,e,X,Y-6,46);tA(x,n,X,Y+38,13,'#212529')}
+  k=Math.min(1,k+.02);const A=from?ND[from]:ND[cur],B=ND[cur],px=lerp(A[2],B[2],k),py=lerp(A[3],B[3],k)-Math.sin(k*Math.PI)*40;x.fillStyle='#212529';x.beginPath();x.arc(px+28,py-30,13,0,7);x.fill();tL(x,'C',px+28,py-25,14,'#fff');
+  $('ccOut').innerHTML='أنت الآن في: <b>'+ND[cur][1]+'</b> · عمليات جرّبتها: '+seen.size+(seen.size?' ('+[...seen].join('، ')+')':'')})})();
+(function(){const [c,x]=C2('cbC');let ppm=420,H=[];anim('cbC',(x,c,t)=>{const T=+$('cbT').value,F=+$('cbF').value;$('cbTv').textContent=T+'%';$('cbFv').textContent=F+'%';ppm=clamp(ppm+(F-T)*.004,280,700);if(Math.floor(t*20)!==Math.floor((t-.017)*20)){H.push(ppm);if(H.length>200)H.shift()}if(ppm<350)done('u4',1);
+  x.clearRect(0,0,640,260);graph(x,40,230,400,190,[[H.map(v=>v-260),'#e03131',200]],460,'الزمن ⟵');tL(x,'280',30,230,10,'#868e96','right');tL(x,'720',30,48,10,'#868e96','right');
+  for(let i=0;i<Math.round(T/12);i++)EMJ(x,'🌳',470+(i%4)*38,60+Math.floor(i/4)*40,28);for(let i=0;i<Math.round(F/25);i++)EMJ(x,'🏭',480+i*36,220,28);
+  $('cbOut').innerHTML='CO₂ في الجو: '+Math.round(ppm)+' جزء في المليون '+(F>T?'📈 يزداد':F<T?'📉 يتناقص':'⏸️ ثابت')+'<br><small>الأشجار تمتص CO₂ بالبناء الضوئي، وحرق الوقود يطلقه</small>'})})();
+(function(){const [c,x]=C2('mlC');let ppl=[],H=[],acc=0,lt=0,started=0;const st=TOG('mlK',['🛏️ ناموسيات','💧 تجفيف المستنقعات','💊 علاج المصابين','🧳 دواء وقائي للمسافرين'],()=>{});
+ const reset=()=>{ppl=[...Array(60)].map((_,i)=>({inf:i<12}));H=[];started=1};reset();$('mlR').onclick=reset;
+ anim('mlC',(x,c,t)=>{const dt=Math.min(.05,t-lt);lt=t;acc+=dt;const Mf=st[1]?.25:1;let I=ppl.filter(p=>p.inf).length;
+  if(acc>.25){acc=0;const p=.6*Mf*(st[0]?.3:1)*(st[3]?.5:1)*I/60,rec=st[2]?.25:.04;ppl.forEach(q=>{if(q.inf){if(Math.random()<rec)q.inf=false}else if(Math.random()<p)q.inf=true});I=ppl.filter(p=>p.inf).length;H.push(I);if(H.length>160)H.shift();if(I===0&&started)done('u4',2)}
+  x.clearRect(0,0,640,360);if(!st[1]){x.fillStyle='rgba(116,192,252,.5)';x.beginPath();x.ellipse(520,300,100,40,0,0,7);x.fill();tA(x,'مستنقع (تكاثر البعوض)',520,305,12,'#1864ab')}
+  ppl.forEach((p,i)=>{const X=30+(i%12)*34,Y=40+Math.floor(i/12)*44;EMJ(x,p.inf?'🤒':'🙂',X,Y,26);if(st[0]){x.strokeStyle='rgba(134,142,150,.5)';x.lineWidth=1;x.strokeRect(X-15,Y-16,30,32)}});
+  for(let i=0;i<Math.round(20*Mf);i++)EMJ(x,'🦟',450+((i*47+t*40)%170),40+((i*71+Math.sin(t*3+i)*20)%200),16);
+  graph(x,30,350,380,90,[[H,'#e03131',160]],60,'');tA(x,'عدد المصابين',220,250,12,'#e03131');
+  $('mlOut').innerHTML='🤒 المصابون: '+I+' من 60'+(I===0?' · 🎉 قضيت على الملاريا!':'')+'<br><small>البلازموديوم ينتقل من شخص مصاب إلى سليم عبر لدغة أنثى بعوضة الأنوفيليس</small>'})})();
+MCQP($('qu4'),bank([['العملية التي تزيل CO₂ من الجو:',['البناء الضوئي','التنفس','الاحتراق','التحلل']],['تعيد CO₂ إلى الجو كل العمليات التالية ما عدا:',['البناء الضوئي','التنفس','الاحتراق','التحلل']],['مسبب الملاريا:',['البلازموديوم (حيوان أولي)','بكتيريا','فيروس','فطر']],['ناقل الملاريا:',['أنثى بعوضة الأنوفيليس','ذكر البعوض','الذبابة المنزلية','القمل']],['الطفيل:',['يعيش على جسم العائل ويؤذيه عادة','ينفع العائل دائمًا','يصنع غذاءه بنفسه','لا يحتاج عائلًا']],['طفيل الملاريا يحتاج إلى عائلين هما:',['الإنسان والبعوضة','الإنسان والقط','البعوضة والذبابة','الإنسان فقط']],['من طرق مكافحة الملاريا:',['القضاء على أماكن تكاثر البعوض','زيادة المستنقعات','ترك المصابين بلا علاج','قطع الأشجار']],['يتكون الوقود الأحفوري من:',['بقايا كائنات ميتة عبر ملايين السنين','ثاني أكسيد الكربون مباشرة','الصخور البركانية','ماء البحر']]]));
+chapterTest('rv2',[['الموطن البيئي:',['مكان عيش الكائن','دوره','نوعه']],['المنتجات:',['النباتات الخضراء','آكلات اللحوم','المحللات']],['تنتقل للمستوى التالي:',['≈10% من الطاقة','≈90%','100%']],['المحللات:',['تجزّئ المادة العضوية الميتة','تصنع غذاءها','تأكل النباتات الحية']],['شبكة الغذاء:',['سلاسل مترابطة','سلسلة واحدة','نوع واحد']],['البناء الضوئي:',['يزيل CO₂ من الجو','يطلق CO₂','لا علاقة له بالكربون']],['الاحتراق:',['يطلق CO₂','يمتص CO₂','ينتج نشا']],['مسبب الملاريا:',['البلازموديوم','البعوضة','بكتيريا']],['ناقل الملاريا:',['أنثى الأنوفيليس','الذبابة','الفأر']],['السكان (العشيرة):',['أفراد النوع نفسه','أنواع مختلفة','البيئة غير الحية']],['المجتمع:',['سكان نباتات وحيوانات معًا','نوع واحد','الماء والتربة']],['التطفل يضر:',['العائل','الطفيل','كليهما دائمًا']]]);
+
+/* ================= 3-1 إزالة الغابات والتلوث ================= */
+MIS('u5',['شاهد الفيضان: أزل أكثر من 70% من الغابة ثم أمطري','أنقذ النهر: أعد الأكسجين فوق 6 بعد أن ينخفض تحت 3','اخفض CO₂ إلى 350 بعد أن يتجاوز 600']);
+(function(){const [c,x]=C2('dfC');let rain=0,lev=.2,er=0,lt=0,drops=[];const tr=[...Array(30)].map((_,i)=>[30+i*13+Math.random()*6,0]);
+ $('dfGo').onclick=()=>rain=6;
+ anim('dfC',(x,c,t)=>{const P=+$('dfP').value;$('dfPv').textContent=P+'%';const dt=Math.min(.05,t-lt);lt=t;const inf=.15+.7*(1-P/100),run=1-inf;
+  if(rain>0){rain-=dt;lev=Math.min(1.5,lev+run*dt*.28);er=Math.min(1,er+run*P/100*dt*.2);for(let i=0;i<6;i++)drops.push([Math.random()*640,0])}else{lev=Math.max(.2,lev-dt*.04);er=Math.max(0,er-dt*.02)}
+  if(lev>1&&P>70)done('u5',0);
+  x.clearRect(0,0,640,340);x.fillStyle=rain>0?'#adb5bd':'#d0ebff';x.fillRect(0,0,640,340);
+  const hy=X=>90+X*.32;x.fillStyle='#8d6e63';x.beginPath();x.moveTo(0,340);x.lineTo(0,hy(0));x.lineTo(430,hy(430));x.lineTo(430,340);x.fill();x.fillStyle='rgba(76,175,80,'+(1-P/100*.8)+')';x.beginPath();x.moveTo(0,hy(0));x.lineTo(430,hy(430));x.lineTo(430,hy(430)+10);x.lineTo(0,hy(0)+10);x.fill();
+  const keep=Math.round(30*(1-P/100));tr.forEach(([X],i)=>{if(i<keep)EMJ(x,'🌳',X,hy(X)-16,30);else EMJ(x,'🪵',X,hy(X)-4,14)});
+  const wl=330-lev*120;x.fillStyle=er>.3?'rgba(161,110,60,.85)':'rgba(51,154,240,.8)';x.fillRect(430,wl,210,340-wl);if(lev>1){x.fillRect(300,wl,140,340-wl);EMJ(x,'🏠',600,wl-6,30);tA(x,'🌊 فيضان!',540,60,20,'#c92a2a')}else EMJ(x,'🏠',600,190,30);
+  for(let i=0;i<er*40;i++){x.fillStyle='#795548';x.beginPath();x.arc(200+((i*61+t*80)%230),hy(200+((i*61+t*80)%230))+4,3,0,7);x.fill()}
+  drops=drops.filter(d=>{d[1]+=9;x.strokeStyle='rgba(25,113,194,.6)';x.lineWidth=1.5;x.beginPath();x.moveTo(d[0],d[1]);x.lineTo(d[0]-2,d[1]+8);x.stroke();return d[1]<340&&!(d[0]<430&&d[1]>hy(d[0]))});
+  $('dfOut').innerHTML='💧 يتسرب إلى التربة: '+Math.round(inf*100)+'% · 🌊 جريان سطحي: '+Math.round(run*100)+'%<br>'+(P>70?'⚠️ انجراف التربة + فيضانات + فقد المواطن البيئية + زيادة CO₂':P>30?'بدأ انجراف التربة يزداد':'🌳 جذور الأشجار تمسك التربة وتمتص الماء')})})();
+(function(){const [c,x]=C2('rvC');let A=.05,O2=9,fish=12,crisis=0,lt=0;
+ anim('rvC',(x,c,t)=>{const F=+$('rvF').value,S=+$('rvS').value;$('rvFv').textContent=F+'%';$('rvSv').textContent=S+'%';const dt=Math.min(.05,t-lt);lt=t;const Nn=clamp((F+S*.6)/100,0,1);
+  A=lerp(A,Nn,dt*.25);const tgt=clamp(9.5-7*Math.max(0,A-.15)/.85-3*S/100,0,10);O2=lerp(O2,tgt,dt*.3);if(O2<3){crisis=1;if(Math.random()<dt*1.2)fish=Math.max(0,fish-1)}else if(O2>5&&fish<12&&Math.random()<dt*.5)fish++;
+  if(crisis&&O2>6)done('u5',1);
+  x.clearRect(0,0,640,340);x.fillStyle='#d3f9d8';x.fillRect(0,0,640,60);EMJ(x,'🌾',60,40,30);EMJ(x,'🚜',140,38,30);if(F>40)for(let i=0;i<5;i++)EMJ(x,'🧪',200+i*20,30+Math.sin(t*3+i)*5,16);if(S>30)EMJ(x,'🚽',560,35,28);
+  const g=Math.round(lerp(154,170,A)),col='rgb('+Math.round(lerp(51,90,A))+','+Math.round(lerp(154,150,A))+','+Math.round(lerp(240,60,A))+')';x.fillStyle=col;x.fillRect(0,60,640,280);
+  for(let i=0;i<A*60;i++){x.fillStyle='rgba(55,120,30,.7)';x.beginPath();x.ellipse((i*53)%640,66+((i*7)%14),14,5,0,0,7);x.fill()}
+  for(let i=0;i<12;i++){const X=(i*57+t*30*(i%2?1:-1)+2000)%680-20,Y=130+(i*37)%160;if(i<fish){x.save();x.translate(X,Y);if(i%2)x.scale(-1,1);EMJ(x,'🐟',0,0,26);x.restore()}else{x.save();x.translate((i*57)%600+20,78);x.rotate(Math.PI);EMJ(x,'🐟',0,0,22);x.restore()}}
+  for(let i=0;i<O2*3;i++){x.fillStyle='rgba(255,255,255,.7)';x.beginPath();x.arc((i*97)%640,330-((t*40+i*31)%250),2.5,0,7);x.fill()}
+  x.fillStyle='rgba(255,255,255,.85)';RR(x,440,250,190,80,12);x.fill();tA(x,'الأكسجين المذاب',535,272,13,'#212529');x.fillStyle='#e9ecef';RR(x,455,282,160,14,7);x.fill();x.fillStyle=O2>6?'#2f9e44':O2>3?'#f59f00':'#e03131';RR(x,455,282,16*O2,14,7);x.fill();tL(x,r1(O2)+' mg/L',535,318,14,'#212529');
+  $('rvOut').innerHTML=(A>.5?'🟢 ازدهار الطحالب ← تموت ← البكتيريا المحللة تستهلك الأكسجين ← تختنق الأسماك 💀':A>.25?'⚠️ الطحالب تتكاثر بسبب المغذيات':'💙 نهر صحي')+'<br>🐟 الأسماك الحية: '+fish+' / 12'})})();
+(function(){const [c,x]=C2('ghCv2');let hi=0;anim('ghCv2',(x,c,t)=>{const C=+$('ghC').value;$('ghCv').textContent=C;if(C>=600)hi=1;if(hi&&C<=350)done('u5',2);const T=14+3*Math.log2(C/280),k=(C-280)/520;
+  x.clearRect(0,0,640,300);x.fillStyle='#0b1d3a';x.fillRect(0,0,640,300);EMJ(x,'☀️',60,50,50);x.fillStyle='rgba(255,146,43,'+(.12+k*.45)+')';x.fillRect(0,95,640,45);tA(x,'غازات الدفيئة (CO₂)',540,122,13,'#ffd8a8');
+  x.fillStyle='#2b8a3e';x.beginPath();x.ellipse(320,420,420,170,0,0,7);x.fill();x.fillStyle='#1971c2';x.beginPath();x.ellipse(160,300,120,40,0,0,7);x.fill();
+  for(let i=0;i<4;i++){const ph=(t*.6+i*.25)%1;x.globalAlpha=1-ph*.3;ARW(x,100+i*20,70,lerp(100+i*20,250+i*30,ph),lerp(70,255,ph),'#ffd43b',3)}
+  for(let i=0;i<5;i++){const ph=(t*.5+i*.2)%1,X=330+i*50,esc=i>=Math.round(k*5);x.globalAlpha=1;if(esc||ph<.5)ARW(x,X,255,X+20*ph,lerp(255,esc?20:120,Math.min(1,ph*(esc?1:2))),'#ff6b6b',3);else ARW(x,X+10,120,X+20,lerp(120,250,(ph-.5)*2),'#ff6b6b',3)}x.globalAlpha=1;
+  therm(x,600,170,260,T,12,22,heatCol((T-12)/10));tL(x,r1(T)+'°',560,165,16,'#fff');
+  $('ghOut').innerHTML='متوسط حرارة الأرض التقريبي: '+r1(T)+'° · الأشعة الحرارية المحبوسة: '+Math.round(20+k*80)+'%<br><small>كلما زاد CO₂ (من حرق الوقود الأحفوري وإزالة الغابات) احتُبست حرارة أكثر</small>'})})();
+MCQP($('qu5'),bank([['من نتائج إزالة الغابات:',['انجراف التربة والفيضانات','زيادة الأكسجين','زيادة التنوع','منع الفيضانات']],['من أسباب إزالة الغابات:',['توفير أرض للزراعة والرعي والبناء','تنقية الهواء','زيادة الأمطار','حماية الطيور']],['الإفراط في الأسمدة في الأنهار يسبب:',['ازدهار الطحالب ثم نقص الأكسجين','زيادة الأسماك','صفاء الماء','انخفاض الحرارة']],['يموت السمك في الماء الملوث بالأسمدة لأن:',['البكتيريا المحللة تستهلك الأكسجين','الماء يصبح باردًا','الطحالب تأكله','الضوء يزداد']],['من أسباب تلوث الهواء:',['حرق الوقود الأحفوري وعوادم السيارات','زراعة الأشجار','إعادة التدوير','الطاقة الشمسية']],['التلوث هو:',['إضافة مواد ضارة إلى البيئة','زيادة النباتات','إعادة التدوير','حفظ الموارد']],['زيادة CO₂ في الجو تؤدي إلى:',['احتباس حرارة أكثر','تبريد الأرض','زيادة الأوزون','نقص الحرارة']]]));
+
+/* ================= 3-2 حفظ الموارد ================= */
+MIS('u6',['افرز 10 مخلفات بشكل صحيح','اجمع 50 نقطة توفير بإعادة التدوير','أنقذ الغزلان: أكثر من 100 غزال بعد 30 سنة']);
+(function(){const [c,x]=C2('rcC');const BIN=[['📄','ورق'],['🧴','بلاستيك'],['🍾','زجاج'],['🥫','معادن'],['🌱','عضوي (سماد)']],PTS=[2,2,2,4,1],IT=[['📰','جريدة',0],['📦','كرتون',0],['🧻','أوراق مستعملة',0],['🧴','علبة شامبو',1],['🥤','كوب بلاستيك',1],['🛍️','كيس بلاستيك',1],['🍾','زجاجة',2],['🫙','برطمان',2],['🥫','علبة معدنية',3],['🔩','مسامير',3],['🍌','قشر موز',4],['🍎','بقايا تفاح',4],['🥚','قشر بيض',4]];
+ let it=null,y=0,ok=0,n=0,pts=0,fb=null;const nx=()=>{it=pick(IT);y=40};nx();
+ onTap(c,p=>{if(p.y<250||!it)return;const b=Math.floor(p.x/128);if(b<0||b>4)return;n++;if(b===it[2]){ok++;pts+=PTS[b];cheer();fb=['✅ '+it[1]+' ← '+BIN[b][1],'#2f9e44',performance.now()];if(ok>=10)done('u6',0);if(pts>=50)done('u6',1);nx()}else{fb=['❌ '+it[1]+' مكانه: '+BIN[it[2]][1],'#e03131',performance.now()];shake(c)}});
+ anim('rcC',(x,c,t)=>{x.clearRect(0,0,640,360);x.fillStyle='#f1f3f5';x.fillRect(0,0,640,360);y=Math.min(215,y+.6);if(it){EMJ(x,it[0],320,y,54);tA(x,it[1],320,y+42,15,'#212529')}
+  BIN.forEach(([e,nm],i)=>{const X=i*128;x.fillStyle=['#74c0fc','#ffd43b','#69db7c','#adb5bd','#a9744f'][i];RR(x,X+8,262,112,90,14);x.fill();EMJ(x,e,X+64,295,32);tA(x,nm,X+64,340,13,'#212529')});
+  if(fb&&performance.now()-fb[2]<1600)tA(x,fb[0],320,30,17,fb[1]);
+  $('rcOut').innerHTML='✔️ فرز صحيح: '+ok+' · ♻️ نقاط التوفير: '+pts+'<br><small>إعادة التدوير تحفظ الموارد غير المتجددة وتوفر الطاقة والمال وتقلل التلوث</small>'})})();
+(function(){const [c,x]=C2('gzC');const st=TOG('gzK',['🚫 منع الصيد','🏞️ محمية طبيعية','🍼 الإكثار في الأسر وإعادة الإطلاق']);let H=[40],yr=0,run=0,acc=0;
+ $('gzGo').onclick=()=>{H=[40];yr=0;run=1};
+ anim('gzC',(x,c,t)=>{if(run){acc+=.017;if(acc>.2){acc=0;const N=H[H.length-1],r=.15*(st[1]?1.3:1),K=st[1]?400:150,h=st[0]?.02:.25;H.push(Math.max(0,N+r*N*(1-N/K)-h*N+(st[2]?8:0)));yr++;if(yr>=30){run=0;if(H[H.length-1]>100)done('u6',2)}}}
+  x.clearRect(0,0,640,300);x.fillStyle=st[1]?'#d3f9d8':'#fff3bf';RR(x,10,10,620,110,14);x.fill();const N=H[H.length-1];for(let i=0;i<Math.min(24,Math.round(N/8));i++)EMJ(x,'🦌',40+(i%12)*48,45+Math.floor(i/12)*45+Math.sin(t*2+i)*3,30);if(!st[0])EMJ(x,'🔫',600,40,24);
+  graph(x,50,285,560,140,[[H,'#e8590c',31]],Math.max(150,...H),'السنوات ⟵ 30');
+  $('gzOut').innerHTML='السنة '+yr+' · 🦌 '+Math.round(N)+' غزال'+(N<5&&yr>5?' · ⚠️ على حافة الانقراض!':'')})})();
+MCQP($('qu6'),bank([['إعادة التدوير:',['تحفظ الموارد وتوفر الطاقة وتقلل التلوث','تزيد الفضلات','تستهلك موارد أكثر','لا فائدة منها']],['من إجراءات حفظ الموارد الطبيعية:',['تقليل التلوث بالتعليم وسنّ القوانين','قطع الغابات','الصيد الجائر','رمي النفايات في البحر']],['استعادة الأحياء البرية المهددة تكون بـ:',['إعادة التأهيل','الصيد','إزالة الموطن','التلوث']],['قشر الموز يوضع في حاوية:',['المخلفات العضوية (سماد)','الزجاج','المعادن','البلاستيك']],['المحميات الطبيعية تحمي الأنواع لأنها:',['تحافظ على موطنها البيئي','تزيد الصيد','تزيل الأشجار','تلوث الماء']]]));
+chapterTest('rv3',[['إزالة الغابات تسبب:',['انجراف التربة','زيادة الأكسجين','منع الفيضان']],['الأسمدة في النهر تسبب:',['ازدهار الطحالب','زيادة الأسماك','تبريد الماء']],['نقص الأكسجين في النهر بسبب:',['البكتيريا المحللة','الأسماك','الضوء']],['حرق الوقود الأحفوري يلوث:',['الهواء','التربة فقط','لا شيء']],['زيادة CO₂:',['احتباس حراري','تبريد','لا أثر']],['إعادة التدوير:',['توفر الطاقة والمال','تزيد التلوث','تستهلك الموارد']],['التلوث:',['إضافة مواد ضارة للبيئة','حماية البيئة','زراعة الأشجار']],['من أسباب تلوث الماء:',['الصرف الصحي غير المعالج','زراعة الأشجار','المحميات']],['المبيدات قد تجعل الآفات:',['مقاومة لها','تختفي للأبد دائمًا','أكبر حجمًا']],['جذور الأشجار:',['تمسك التربة','تسبب الانجراف','تمنع المطر']],['حفظ الأنواع المهددة:',['إعادة التأهيل والمحميات','الصيد','قطع الأشجار']],['تلوث الهواء طبيعيًا من:',['الثورانات البركانية','الأشجار','الأنهار']]]);
+
+/* ================= 4-1 التكاثر في النباتات ================= */
+MIS('u7',['استكشف 8 أجزاء من الزهرة','حقّق تلقيحًا خلطيًا بالنحلة','شاهد الإخصاب المزدوج حتى النهاية']);
+(function(){const [c,x]=C2('flC');const PT=[['البذيرة',320,268,10,'تحتوي كل بذيرة على بويضة واحدة، وتصبح بذرة بعد الإخصاب'],['الميسم',320,92,16,'يستقبل حبوب اللقاح، وهو لزج عادة'],['المتك',258,128,16,'ينتج حبوب اللقاح (الأمشاج الذكرية)'],['الخيط',268,190,12,'يحمل المتك. الخيط + المتك = السداة (العضو الذكري)'],['القلم',320,170,12,'أنبوب يصل الميسم بالمبيض، وينمو فيه أنبوب اللقاح'],['المبيض',320,255,30,'يحتوي البذيرات، ويصبح ثمرة بعد الإخصاب. الميسم + القلم + المبيض = المدقة (المتاع)'],['السبلات',245,305,20,'أوراق خضراء تحمي الزهرة وهي برعم'],['البتلات',175,190,40,'ملونة عادة لجذب الحشرات للتلقيح'],['التخت',320,312,16,'الجزء المنتفخ من نهاية العنق تُحمل عليه أجزاء الزهرة'],['العنق',320,370,16,'ساق الزهرة']];
+ let mode=0,sel=-1,tgt=0,seen=new Set();chipsP('flK',['🔍 استكشف','🎯 تحدَّ: أين …؟'],0,i=>{mode=i;tgt=rnd(0,PT.length-1);sel=-1;msg()});
+ const msg=()=>{$('flOut').innerHTML=mode?'🎯 اضغط على: <b>'+PT[tgt][0]+'</b>':sel<0?'اضغط على أي جزء من الزهرة':'<b>'+PT[sel][0]+'</b>: '+PT[sel][4]};msg();
+ onTap(c,p=>{let h=-1;for(let i=0;i<PT.length;i++){const [n,X,Y,r]=PT[i];if(Math.hypot(p.x-X,p.y-Y)<r+8||(i===7&&Math.hypot(p.x-465,p.y-190)<48)||(i===6&&Math.hypot(p.x-395,p.y-305)<28)||(i===2&&Math.hypot(p.x-382,p.y-128)<24)||(i===3&&Math.hypot(p.x-372,p.y-190)<18)){h=i;break}}if(h<0)return;
+  if(mode){if(h===tgt){cheer();sel=h;seen.add(h);toast('✅ '+PT[h][0]);tgt=rnd(0,PT.length-1)}else{shake(c);toast('هذا '+PT[h][0])}}else{sel=h;seen.add(h)}if(seen.size>=8)done('u7',0);msg()});
+ anim('flC',(x,c,t)=>{x.clearRect(0,0,640,420);const on=n=>sel>=0&&PT[sel][0]===n,gl=n=>{if(on(n)){x.shadowColor='#fab005';x.shadowBlur=22}else x.shadowBlur=0};
+  gl('العنق');x.strokeStyle='#2b8a3e';x.lineWidth=12;x.beginPath();x.moveTo(320,415);x.lineTo(320,318);x.stroke();
+  gl('السبلات');x.fillStyle='#51cf66';[[-1,245],[1,395]].forEach(([s,X])=>{x.beginPath();x.ellipse(X,300,40,14,s*.5,0,7);x.fill()});
+  gl('التخت');x.fillStyle='#94d82d';x.beginPath();x.ellipse(320,308,48,16,0,0,7);x.fill();
+  gl('البتلات');x.fillStyle='#f783ac';[[-1,175],[1,465]].forEach(([s,X])=>{x.beginPath();x.moveTo(320-s*40,300);x.bezierCurveTo(X-s*10,300,X-s*80,190,X,110);x.bezierCurveTo(X+s*40,170,X+s*10,260,320-s*20,300);x.fill()});
+  gl('المبيض');x.fillStyle='#b2f2bb';x.strokeStyle='#2f9e44';x.lineWidth=3;x.beginPath();x.ellipse(320,262,40,40,0,0,7);x.fill();x.stroke();
+  gl('البذيرة');x.fillStyle='#fff3bf';x.strokeStyle='#f08c00';x.lineWidth=2;[[305,252],[335,252],[305,278],[335,278]].forEach(([X,Y])=>{x.beginPath();x.ellipse(X,Y,9,11,0,0,7);x.fill();x.stroke()});
+  gl('القلم');x.strokeStyle='#69db7c';x.lineWidth=10;x.beginPath();x.moveTo(320,224);x.lineTo(320,104);x.stroke();
+  gl('الميسم');x.fillStyle='#fab005';x.beginPath();x.ellipse(320,94,20,11,0,0,7);x.fill();
+  [[-1,258],[1,382]].forEach(([s,X])=>{gl('الخيط');x.strokeStyle='#ffe066';x.lineWidth=5;x.beginPath();x.moveTo(320+s*28,290);x.quadraticCurveTo(320+s*50,210,X,140);x.stroke();gl('المتك');x.fillStyle='#e67700';x.beginPath();x.ellipse(X,128,12,17,0,0,7);x.fill();x.fillStyle='#ffd43b';for(let i=0;i<5;i++){x.beginPath();x.arc(X+Math.sin(t*2+i)*14,112-i*4-((t*10+i*7)%10),2,0,7);x.fill()}});x.shadowBlur=0;
+  if(!mode)PT.forEach(([n,X,Y],i)=>{if(seen.has(i)){x.fillStyle='#2f9e44';x.beginPath();x.arc(X+14,Y-12,5,0,7);x.fill()}});
+  tA(x,'تم استكشاف '+seen.size+' / '+PT.length,560,410,12,'#868e96')})})();
+(function(){const [c,x]=C2('bnC');const FL=[[90,140,0,'#f783ac'],[175,200,0,'#f783ac'],[460,140,1,'#9775fa'],[550,200,1,'#9775fa']];let bee=[320,60],tg=null,carry=null,dep=FL.map(()=>[]),last='';
+ $('bnR').onclick=()=>{carry=null;dep=FL.map(()=>[]);last=''};
+ onTap(c,p=>{FL.forEach((f,i)=>{if(Math.hypot(p.x-f[0],p.y-f[1])<40)tg=i})});
+ anim('bnC',(x,c,t)=>{x.clearRect(0,0,640,320);x.fillStyle='#d3f9d8';x.fillRect(0,280,640,40);[[132,'A'],[505,'B']].forEach(([X,l])=>{x.strokeStyle='#2b8a3e';x.lineWidth=7;x.beginPath();x.moveTo(X,300);x.lineTo(X,170);x.stroke();tA(x,'النبات '+l,X,312,13,'#2b8a3e')});
+  FL.forEach(([X,Y,pl,col],i)=>{x.strokeStyle='#2b8a3e';x.lineWidth=4;x.beginPath();x.moveTo(pl?505:132,Y+40);x.lineTo(X,Y+10);x.stroke();for(let k=0;k<6;k++){const a=k*Math.PI/3+t*.2;x.fillStyle=col;x.beginPath();x.ellipse(X+Math.cos(a)*20,Y+Math.sin(a)*20,15,9,a,0,7);x.fill()}x.fillStyle='#fab005';x.beginPath();x.arc(X,Y,10,0,7);x.fill();dep[i].forEach((d,j)=>{x.fillStyle=d;x.beginPath();x.arc(X-6+(j%4)*4,Y-3+Math.floor(j/4)*4,2.2,0,7);x.fill()})});
+  if(tg!==null){const f=FL[tg];bee[0]=lerp(bee[0],f[0],.08);bee[1]=lerp(bee[1],f[1]-18,.08);if(Math.hypot(bee[0]-f[0],bee[1]-f[1]+18)<3){if(carry){dep[tg].push(carry[1]);last=carry[0]===tg?'🌼 تلقيح ذاتي (الزهرة نفسها)':FL[carry[0]][2]===f[2]?'🌼 تلقيح ذاتي (زهرة أخرى على النبات نفسه)':'🌸🐝🌸 تلقيح خلطي! (من نبات إلى نبات آخر من النوع نفسه)';if(FL[carry[0]][2]!==f[2]){done('u7',1);cheer()}}carry=[tg,f[2]?'#5f3dc4':'#c2255c'];tg=null}}
+  else{bee[0]+=Math.sin(t*3)*.6;bee[1]+=Math.cos(t*4)*.4}
+  EMJ(x,'🐝',bee[0],bee[1]+Math.sin(t*20)*1.5,30);if(carry){x.fillStyle=carry[1];for(let k=0;k<4;k++){x.beginPath();x.arc(bee[0]-6+k*4,bee[1]+12,2.4,0,7);x.fill()}}
+  $('bnOut').innerHTML=(last||'اضغط زهرة لتجمع النحلة حبوب لقاحها، ثم زهرة أخرى لتنقلها إلى ميسمها')+'<br><small>التلقيح الخلطي ينتج تنوعًا أكثر وذرية أكثر صحة</small>'})})();
+(function(){const [c,x]=C2('dbC');const CAP=['حبة اللقاح تستقر على الميسم الناضج','تنبت حبة اللقاح وتكوّن أنبوب لقاح','ينمو أنبوب اللقاح لأسفل عبر القلم نحو البذيرة','يدخل الأنبوب البذيرة من النقير ويطلق مشيجين ذكريين','مشيج ذكري + البويضة ← زيجوت (يصبح الجنين)','المشيج الذكري الآخر + النواة المحددة ← نواة إندوسبيرمية (غذاء الجنين)','🎉 البذيرة تصبح بذرة، والمبيض يصبح ثمرة'];let s=0,k=1;
+ const sh=()=>$('dbOut').innerHTML='<b>الخطوة '+(s+1)+' / 7:</b> '+CAP[s];sh();$('dbGo').onclick=()=>{if(s<6){s++;k=0;sh();if(s===6)done('u7',2)}};$('dbR').onclick=()=>{s=0;k=1;sh()};
+ anim('dbC',(x,c,t)=>{k=Math.min(1,k+.012);x.clearRect(0,0,640,400);
+  x.fillStyle='#d8f5a2';x.strokeStyle='#5c940d';x.lineWidth=3;x.beginPath();x.moveTo(300,50);x.lineTo(300,230);x.bezierCurveTo(200,240,190,380,320,385);x.bezierCurveTo(450,380,440,240,340,230);x.lineTo(340,50);x.closePath();x.fill();x.stroke();
+  x.fillStyle='#fab005';x.beginPath();x.ellipse(320,45,46,16,0,0,7);x.fill();tA(x,'الميسم',420,40,12,'#495057');tA(x,'القلم',380,140,12,'#495057');tA(x,'المبيض',470,300,12,'#495057');
+  if(s<6){x.fillStyle='#fff3bf';x.strokeStyle='#f08c00';x.beginPath();x.ellipse(320,300,62,72,0,0,7);x.fill();x.stroke();x.fillStyle='#d8f5a2';x.fillRect(312,362,16,12);tA(x,'النقير',372,380,11,'#f08c00');tA(x,'البذيرة',410,250,12,'#f08c00')}
+  const egg=[320,345],pol=[[310,290],[330,290]];
+  if(s<4){x.fillStyle='#ff8787';x.beginPath();x.arc(...egg,11,0,7);x.fill();tA(x,'البويضة',255,350,11,'#c92a2a')}
+  if(s<5&&s<6){x.fillStyle='#4dabf7';pol.forEach(p=>{x.beginPath();x.arc(...p,6,0,7);x.fill()});tA(x,'النواة المحددة',230,292,11,'#1971c2')}
+  if(s>=0&&s<6){x.fillStyle='#ffd43b';x.strokeStyle='#e67700';x.beginPath();x.arc(320,30,12,0,7);x.fill();x.stroke()}
+  const ty=s===1?lerp(30,90,k):s===2?lerp(90,330,k):s>=3?370:30;if(s>=1&&s<6){x.strokeStyle='#e67700';x.lineWidth=4;x.beginPath();x.moveTo(320,30);if(ty<=230)x.lineTo(320,ty);else{x.lineTo(320,230);x.quadraticCurveTo(250,300,290,ty>360?372:ty);x.lineTo(320,ty>360?372:ty)}x.stroke()}
+  const g1=s===3?[lerp(320,322,k),lerp(372,360,k)]:s===4?[lerp(322,egg[0],k),lerp(360,egg[1],k)]:null,g2=s===3?[lerp(320,318,k),lerp(372,362,k)]:s===4?[318,362]:s===5?[lerp(318,320,k),lerp(362,290,k)]:null;
+  [g1,g2].forEach(g=>{if(g){x.fillStyle='#7048e8';x.beginPath();x.arc(g[0],g[1],5,0,7);x.fill()}});
+  if(s>=4&&s<6){const z=s===4?k:1;x.fillStyle='#e03131';x.beginPath();x.arc(...egg,11+z*4,0,7);x.fill();tA(x,'زيجوت',255,350,12,'#c92a2a')}
+  if(s===5){x.fillStyle='rgba(51,154,240,'+(.3+k*.5)+')';x.beginPath();x.arc(320,290,8+k*12,0,7);x.fill();if(k>.9)tA(x,'نواة إندوسبيرمية',225,292,11,'#1971c2')}
+  if(s===6){EMJ(x,'🫘',320,300,90*k);EMJ(x,'🍎',520,120,60*k);ARW(x,420,250,490,160,'#2f9e44',3)}})})();
+(function(){const V=[['🥔 الدرنات (البطاطس)','طبيعي: ساق أرضية منتفخة بالغذاء، لها براعم (عيون) تنمو كل منها نباتًا جديدًا'],['🧅 الأبصال (البصل)','طبيعي: ساق قصيرة تحيط بها أوراق لحمية مخزنة للغذاء'],['🫚 الريزومات (الزنجبيل)','طبيعي: ساق أرضية تنمو أفقيًا تحت التربة وتعطي نباتات جديدة'],['🌷 الكورمات','طبيعي: ساق أرضية قائمة منتفخة بالغذاء، مثل القلقاس'],['✂️ التعقيل','اصطناعي: قطع جزء من الساق وزراعته فينمو جذورًا ونباتًا جديدًا'],['🌿 الترقيد','اصطناعي: ثني فرع ودفنه في التربة وهو متصل بالأم حتى يُكوّن جذورًا'],['🍊 التطعيم بالقلم والبرعمي','اصطناعي: تركيب جزء من نبات مرغوب (الطُّعم) على نبات آخر (الأصل)'],['🧫 زراعة الأنسجة','اصطناعي: تنمية خلايا قليلة في وسط غذائي معقم لإنتاج آلاف النباتات المتماثلة']];
+ chipsP('vgK',V.map(v=>v[0]),0,i=>$('vgOut').innerHTML=V[i][1]+' · <b>الذرية متماثلة لأبيها</b>');$('vgOut').innerHTML=V[0][1]})();
+MCQP($('qu7'),bank([['التلقيح هو انتقال حبوب اللقاح من:',['المتك إلى الميسم','الميسم إلى المتك','المبيض إلى القلم','البتلة إلى السبلة']],['في التكاثر اللاجنسي:',['والد واحد والذرية متماثلة','والدان واندماج أمشاج','تنوع كبير في النسل','يحتاج تلقيحًا']],['ينتج حبوب اللقاح:',['المتك','الميسم','المبيض','القلم']],['يصبح المبيض بعد الإخصاب:',['ثمرة','بذرة','زهرة','ورقة']],['تصبح البذيرة بعد الإخصاب:',['بذرة','ثمرة','ساقًا','جذرًا']],['المشيج الذكري الثاني يندمج مع النواة المحددة لتكوين:',['نواة إندوسبيرمية','زيجوت','حبة لقاح','بويضة']],['النخيل نبات:',['ثنائي المسكن','أحادي المسكن','خنثى','لا زهري']],['الذرة نبات:',['أحادي المسكن','ثنائي المسكن','لا جنسي','بلا أزهار']],['من طرق التكاثر الخضري الاصطناعية:',['التطعيم','الدرنات','الأبصال','الريزومات']],['المدقة (المتاع) تتكون من:',['الميسم والقلم والمبيض','المتك والخيط','السبلات والبتلات','العنق والتخت']]]));
+
+/* ================= 4-2 الإنبات ================= */
+MIS('u8',['اكتشف الشروط الثلاثة: أفشل الإنبات بنقص كل شرط وحده','أثبت أن الضوء ليس شرطًا للإنبات','حلّل النشا حتى الجلوكوز بالإنزيمات']);
+(function(){const [c,x]=C2('gmC');const st=TOG('gmK',['💧 ماء','💨 أكسجين (هواء)','🌡️ دفء مناسب','💡 ضوء']);let k=1,res=null,cfg=[1,1,1,1];const fail=new Set(),log=[];
+ $('gmGo').onclick=()=>{cfg=st.slice();k=0;res=cfg[0]&&cfg[1]&&cfg[2];const miss=[0,1,2].filter(i=>!cfg[i]);if(!res&&miss.length===1)fail.add(miss[0]);if(fail.size>=3)done('u8',0);if(res&&!cfg[3])done('u8',1);
+  log.unshift('<tr><td>'+['💧','💨','🌡️','💡'].map((e,i)=>cfg[i]?e:'—').join(' ')+'</td><td>'+(res?'🌱 أنبتت':'❌ لم تنبت')+'</td></tr>');$('gmLog').innerHTML='<table class="tbl"><tr><th>الشروط</th><th>النتيجة</th></tr>'+log.slice(0,5).join('')+'</table>'};
+ anim('gmC',(x,c,t)=>{k=Math.min(1,k+.006);const d=Math.floor(k*7);x.clearRect(0,0,640,300);x.fillStyle=cfg[3]?'#fff9db':'#343a40';x.fillRect(0,0,640,300);
+  x.fillStyle=cfg[0]?'#a5d8ff':'#e9ecef';RR(x,120,180,400,60,30);x.fill();x.strokeStyle='#868e96';x.lineWidth=3;x.stroke();if(!cfg[1]){x.strokeStyle='#495057';x.lineWidth=4;x.strokeRect(110,90,420,160);tA(x,'وعاء محكم (بلا هواء)',320,84,13,cfg[3]?'#495057':'#dee2e6')}if(!cfg[2])EMJ(x,'❄️',560,60,34);
+  for(let i=0;i<4;i++){const X=180+i*95,Y=205,g=res?k:0;x.fillStyle='#c08a4a';x.beginPath();x.ellipse(X,Y,16,11,0,0,7);x.fill();if(g>.15){x.strokeStyle='#f8f0e3';x.lineWidth=4;x.beginPath();x.moveTo(X,Y+6);x.quadraticCurveTo(X+6,Y+20,X-2,Y+12+g*40);x.stroke()}if(g>.4){x.strokeStyle='#40c057';x.lineWidth=4;x.beginPath();x.moveTo(X,Y-8);x.lineTo(X,Y-8-(g-.4)*120);x.stroke();x.fillStyle='#69db7c';x.beginPath();x.ellipse(X-10,Y-8-(g-.4)*120,10,5,-.5,0,7);x.ellipse(X+10,Y-8-(g-.4)*120,10,5,.5,0,7);x.fill()}}
+  tA(x,'اليوم '+d,60,30,16,cfg[3]?'#212529':'#fff');
+  $('gmOut').innerHTML=k<1?'⏳ ننتظر…':res?'🌱 الإنبات تم: ظهر <b>الجذير</b> أولًا ثم <b>الريشة</b>'+(cfg[3]?'':' — حتى في الظلام!'):'❌ لم تنبت: ينقصها '+['الماء','الأكسجين','الدفء'].filter((_,i)=>!cfg[i]).join(' و ')})})();
+(function(){const [c,x]=C2('enC');let F=0,stg=0,k=1;const FD=[['🍞 نشا','#ffd43b'],['🧈 دهون','#ffa94d'],['🥩 بروتين','#ff8787']],EN=['أميليز','مالتاز','ليباز','بروتيز'];
+ chipsP('enF',FD.map(f=>f[0]),0,i=>{F=i;stg=0;k=1});
+ chipsP('enK',EN.map(e=>'✂️ '+e),-1,i=>{const ok=(F===0&&stg===0&&i===0)||(F===0&&stg===1&&i===1)||(F===1&&stg===0&&i===2)||(F===2&&stg===0&&i===3);if(ok){stg++;k=0;cheer();if(F===0&&stg===2)done('u8',2)}else{shake(c);toast((F===0&&stg===2)||(F>0&&stg>0)?'تم الهضم بالكامل ✅':'الإنزيم <b>متخصص</b>: '+EN[i]+' لا يعمل على هذه المادة')}});
+ anim('enC',(x,c,t)=>{k=Math.min(1,k+.03);x.clearRect(0,0,640,220);const sp=s=>lerp(0,s,k);
+  if(F===0){const gap=stg===0?0:stg===1?sp(30):30,gap2=stg===2?sp(20):0;for(let i=0;i<8;i++){const pair=Math.floor(i/2),X=110+i*50+pair*gap+i*gap2*.5;x.fillStyle='#ffd43b';x.strokeStyle='#e67700';x.lineWidth=2;x.beginPath();x.arc(X,100+(stg===2?Math.sin(t*3+i)*8*k:0),17,0,7);x.fill();x.stroke();tL(x,'G',X,106+(stg===2?Math.sin(t*3+i)*8*k:0),13,'#e67700');if(i<7&&!(stg>=1&&i%2===1)&&!(stg===2)){x.strokeStyle='#e67700';x.beginPath();x.moveTo(X+17,100);x.lineTo(X+33,100);x.stroke()}}
+   tA(x,['نشا (سلسلة طويلة من الجلوكوز)','مالتوز (وحدتان مرتبطتان)','جلوكوز ✓ بسيط وذائب'][stg],320,170,15,'#212529')}
+  else if(F===1){const s=stg?sp(60):0;x.fillStyle='#74c0fc';RR(x,170-s,60,40,90,8);x.fill();tA(x,'جليسرول',190-s,165,12,'#1971c2');for(let i=0;i<3;i++){const Y=70+i*30;x.strokeStyle='#ffa94d';x.lineWidth=8;x.beginPath();x.moveTo(210+s,Y+5);for(let j=0;j<8;j++)x.lineTo(230+s*(1+i*.3)+j*28,Y+5+(j%2?8:-8));x.stroke()}tA(x,stg?'جليسرول + 3 أحماض دهنية ✓':'دهون',400,190,15,'#212529')}
+  else{const cols=['#ff8787','#748ffc','#63e6be','#ffd43b','#da77f2','#ff922b','#69db7c','#4dabf7'];for(let i=0;i<8;i++){const X=110+i*(50+(stg?sp(14):0)),Y=100+(stg?Math.sin(t*3+i)*10*k:0);x.fillStyle=cols[i];x.beginPath();x.arc(X,Y,16,0,7);x.fill();if(!stg&&i<7){x.strokeStyle='#495057';x.lineWidth=2;x.beginPath();x.moveTo(X+16,100);x.lineTo(X+34,100);x.stroke()}}tA(x,stg?'أحماض أمينية ✓':'بروتين (سلسلة أحماض أمينية)',320,170,15,'#212529')}
+  $('enOut').innerHTML=F===0?EQA('نشا ←(أميليز) مالتوز ←(مالتاز) جلوكوز'):F===1?EQA('دهون ←(ليباز) أحماض دهنية + جليسرول'):EQA('بروتينات ←(بروتيز) أحماض أمينية')})})();
+MCQP($('qu8'),bank([['شروط الإنبات:',['الماء والأكسجين ودرجة الحرارة المناسبة','الضوء والتربة فقط','الضوء فقط','السماد والضوء']],['أول خطوة في الإنبات:',['امتصاص البذرة للماء','ظهور الأوراق','البناء الضوئي','تكوين الأزهار']],['يظهر أولًا عند الإنبات:',['الجذير','الريشة','الأوراق','الزهرة']],['الإنزيم الذي يحلل النشا إلى مالتوز:',['الأميليز','الليباز','البروتيز','المالتاز']],['الليباز يحلل الدهون إلى:',['أحماض دهنية وجليسرول','جلوكوز','أحماض أمينية','مالتوز']],['الكمون يساعد البذور على:',['البقاء في الظروف غير الملائمة','النمو السريع','البناء الضوئي','جذب الحشرات']],['البذور الكامنة تكون:',['جافة وقليلة النشاط','رطبة ونشطة جدًا','خضراء','بلا غذاء']]]));
+chapterTest('rv4',[['التكاثر اللاجنسي يحتاج:',['والدًا واحدًا','والدين','أمشاجًا']],['التلقيح من:',['المتك إلى الميسم','الميسم إلى المتك','المبيض للقلم']],['التلقيح الخلطي ينتج:',['تنوعًا أكثر','ذرية متماثلة','لا بذور']],['المبيض يصبح:',['ثمرة','بذرة','زهرة']],['مشيج + بويضة:',['زيجوت','إندوسبيرم','حبة لقاح']],['المتك ينتج:',['حبوب اللقاح','البويضات','الرحيق']],['البطاطس تتكاثر بـ:',['الدرنات','الأبصال','الريزومات']],['البصل يتكاثر بـ:',['الأبصال','الدرنات','الكورمات']],['شروط الإنبات:',['ماء وأكسجين ودفء','ضوء فقط','تربة فقط']],['الأميليز يحلل:',['النشا','الدهون','البروتين']],['النخيل:',['ثنائي المسكن','أحادي المسكن','خنثى']],['الإخصاب المزدوج في:',['النباتات الزهرية','البكتيريا','الفطريات']]]);
+
+/* ================= 5-1 التكاثر في الإنسان ================= */
+MIS('u9',['حدّد يوم التبويض على الدورة','أجب عن سؤالين صحيحين عن هرمونات الدورة','أجب عن 3 أسئلة تدريب صحيحة']);
+(function(){const [c,x]=C2('cyC');let play=0,acc=0;const g=(d,m,s)=>Math.exp(-(((d-m)/s)**2));
+ const H=[['FSH','#1971c2',d=>.25+.25*g(d,3,4)+.45*g(d,13.5,1.1)],['LH','#ae3ec9',d=>.1+.85*g(d,13.6,.9)],['الأستروجين','#e8590c',d=>.12+.62*g(d,12.3,2.6)+.3*g(d,21,3.5)],['البروجستيرون','#2f9e44',d=>.06+.75*g(d,21,3.6)]];
+ const lin=d=>d<=5?lerp(.65,.2,(d-1)/4):d<=14?lerp(.2,.7,(d-5)/9):d<=22?lerp(.7,1,(d-14)/8):d<=26?1:lerp(1,.7,(d-26)/2);
+ $('cyGo').onclick=()=>{play=!play;$('cyGo').textContent=play?'⏸️ إيقاف':'▶️ شغّل الدورة'};
+ anim('cyC',(x,c,t)=>{if(play){acc+=.017;if(acc>.35){acc=0;$('cyD').value=(+$('cyD').value%28)+1}}const d=+$('cyD').value;$('cyDv').textContent=d;if(d===14)done('u9',0);
+  x.clearRect(0,0,640,440);const X0=40,W=560,Y0=190,HH=160,px=v=>X0+(v-1)/27*W;
+  x.fillStyle='rgba(255,201,201,.5)';x.fillRect(px(1),Y0-HH,px(5)-px(1),HH);x.fillStyle='rgba(178,242,187,.45)';x.fillRect(px(10),Y0-HH,px(17)-px(10),HH);tA(x,'الطمث',px(3),Y0-HH-6,11,'#c92a2a');tA(x,'فترة الخصوبة',px(13.5),Y0-HH-6,11,'#2b8a3e');
+  H.forEach(([n,col,f],i)=>{x.strokeStyle=col;x.lineWidth=3;x.beginPath();for(let v=1;v<=28;v+=.25){const Y=Y0-f(v)*HH*.95;v===1?x.moveTo(px(v),Y):x.lineTo(px(v),Y)}x.stroke();tA(x,'● '+n,600-i*110,14,12,col,'right')});
+  x.strokeStyle='#343a40';x.lineWidth=1.5;x.beginPath();x.moveTo(X0,Y0);x.lineTo(X0+W,Y0);x.stroke();[1,7,14,21,28].forEach(v=>tL(x,''+v,px(v),Y0+14,11,'#495057'));
+  x.strokeStyle='#212529';x.setLineDash([4,4]);x.beginPath();x.moveTo(px(d),Y0-HH);x.lineTo(px(d),Y0);x.stroke();x.setLineDash([]);
+  /* المبيض */
+  x.fillStyle='#ffe3e3';x.beginPath();x.ellipse(150,315,90,60,0,0,7);x.fill();tA(x,'المبيض',150,395,13,'#c2255c');
+  if(d<14){const r=6+d*1.5;x.fillStyle='#fff';x.strokeStyle='#f08c00';x.lineWidth=2;x.beginPath();x.arc(150,315,r,0,7);x.fill();x.stroke();x.fillStyle='#ff8787';x.beginPath();x.arc(150-r*.3,315,Math.min(7,r*.35),0,7);x.fill();tA(x,d>=10?'حويصلة جراف':'حويصلة نامية',150,260,12,'#f08c00')}
+  else if(d===14){x.fillStyle='#ff8787';x.beginPath();x.arc(150+(t*30%60)+30,300-(t*20%40),7,0,7);x.fill();tA(x,'💥 التبويض! انطلقت البويضة',150,255,13,'#c92a2a')}
+  else{const r=d<=24?24:24-(d-24)*5;x.fillStyle='#ffd43b';x.beginPath();x.arc(150,315,Math.max(5,r),0,7);x.fill();tA(x,'الجسم الأصفر (يفرز البروجستيرون)',150,255,12,'#e67700')}
+  /* بطانة الرحم */
+  const L=lin(d);x.fillStyle='#ffc9c9';RR(x,330,280,260,20+L*70,10);x.fill();for(let i=0;i<L*14;i++){x.strokeStyle='#e03131';x.lineWidth=2;x.beginPath();const X=345+i*17;x.moveTo(X,285);x.quadraticCurveTo(X+6,285+L*30,X,285+L*60);x.stroke()}tA(x,'بطانة الرحم',460,420,13,'#c92a2a');if(d<=5)for(let i=0;i<5;i++)EMJ(x,'🩸',350+i*50,285+20+L*70+((t*30+i*9)%20),14);
+  const ph=d<=5?'🩸 الطمث: تتهدم بطانة الرحم':d<14?'🌱 FSH ينمّي الحويصلة، والأستروجين يعيد بناء البطانة':d===14?'🥚 التبويض: ذروة LH تمزق حويصلة جراف':'🟡 البروجستيرون يحافظ على البطانة سميكة استعدادًا للغرس';
+  $('cyOut').innerHTML='اليوم '+d+' · '+ph})})();
+MCQP($('cyQ'),()=>bank([['أي هرمون يرتفع كثيرًا بعد التبويض (الأيام 15–24)؟',['البروجستيرون','FSH','LH','التستوستيرون']],['الهرمون الذي يحفز نمو الحويصلات في المبيض:',['FSH','البروجستيرون','الإنسولين','الأدرينالين']],['يحدث التبويض تقريبًا في اليوم:',['14','1','5','28']],['الهرمون الذي يعيد بناء بطانة الرحم بعد الطمث:',['الأستروجين','LH','التستوستيرون','الإنسولين']],['يفرز الجسم الأصفر هرمون:',['البروجستيرون','FSH','LH','الأستروجين فقط']],['تفرز FSH و LH من:',['الفص الأمامي للغدة النخامية','المبيض','الرحم','الكبد']]])());qGoal('cyQ','u9',1,2);
+(function(){const [c,x]=C2('mzC');let b=0,g=0,last=null,k=1;const one=()=>{const y=Math.random()<.5;y?b++:g++;return y};
+ $('mz1').onclick=()=>{last=one();k=0};$('mz100').onclick=()=>{for(let i=0;i<100;i++)one();k=1;last=null};$('mzR').onclick=()=>{b=g=0;last=null};
+ anim('mzC',(x,c,t)=>{k=Math.min(1,k+.012);x.clearRect(0,0,640,300);const cellD=(X,Y,r,n,col,l)=>{x.fillStyle=col;x.beginPath();x.arc(X,Y,r,0,7);x.fill();tL(x,n,X,Y+6,r*.55,'#212529');tA(x,l,X,Y+r+16,12,'#495057')};
+  cellD(90,70,34,'46','#d0ebff','خلية جسمية للأب XY');cellD(550,70,34,'46','#ffdeeb','خلية جسمية للأم XX');ARW(x,90,112,150,160,'#868e96',2);ARW(x,550,112,490,160,'#868e96',2);tA(x,'انقسام ميوزي (اختزالي)',320,40,13,'#5f3dc4');
+  const sy=last===null?null:last;const sx=lerp(170,300,k),ex=470;cellD(ex,185,26,'23','#ffdeeb','بويضة (X)');x.fillStyle='#d0ebff';x.beginPath();x.ellipse(sx,185,14,10,0,0,7);x.fill();x.strokeStyle='#1971c2';x.lineWidth=2;x.beginPath();x.moveTo(sx-14,185);for(let i=0;i<6;i++)x.lineTo(sx-14-i*7,185+Math.sin(t*12+i)*5);x.stroke();tL(x,sy===null?'23':sy?'Y':'X',sx,190,12,'#1864ab');tA(x,'حيوان منوي 23',170,225,12,'#495057');
+  if(k>=1&&sy!==null){cellD(320,185,30,'46','#fff3bf','زيجوت '+(sy?'XY':'XX'));EMJ(x,sy?'👦':'👧',320,265,34)}
+  const n=b+g;$('mzOut').innerHTML=EQ('23 + 23 = 46')+'<br>👦 ذكور: '+b+' · 👧 إناث: '+g+(n?' · نسبة الذكور: '+Math.round(b/n*100)+'%':'')+'<br><small>جنس المولود يحدده الحيوان المنوي: يحمل X أو Y، والبويضة تحمل X دائمًا</small>'})})();
+MCQP($('qu9'),bank([['عدد الكروموسومات في الحيوان المنوي للإنسان:',['23','46','92','22']],['يحدث الإخصاب عادة في:',['قناة فالوب','الرحم','المبيض','المهبل']],['الانقسام الذي ينتج الأمشاج:',['الميوزي (الاختزالي)','الميتوزي','الثنائي','التبرعم']],['تنتج الخصيتان:',['الحيوانات المنوية والتستوستيرون','البويضات','الأستروجين','البروجستيرون']],['خلية الأنثى الجسمية تحتوي على كروموسومين:',['XX','XY','YY','X فقط']],['يحدد جنس المولود:',['الحيوان المنوي (X أو Y)','البويضة','الرحم','عمر الأم']],['حويصلة جراف هي:',['حويصلة ناضجة تحتوي بويضة','جزء من الرحم','هرمون','خلية منوية']],['عدد البويضات التي يطلقها المبيض عادة كل شهر:',['واحدة','عشرة','مئة','لا شيء']]]));qGoal('qu9','u9',2,3);
+
+/* ================= 5-2 الأمراض المنقولة ================= */
+MIS('u10',['أجب عن 8 بطاقات «حقيقة أم خرافة» صحيحة','حدّد مسبب 5 أمراض صحيحًا','جرّب المضاد الحيوي على البكتيريا والفيروس']);
+SORT('mfS',[['الاتصال الجنسي بشخص مصاب',0],['مشاركة الحقن والإبر',0],['نقل دم ملوث',0],['من الأم المصابة إلى جنينها',0],['مشاركة موس الحلاقة الملوث بالدم',0],['لدغة البعوض',1],['مقاعد المراحيض',1],['مقابض الأبواب',1],['السعال والعطس',1],['أحواض السباحة',1],['المصافحة',1]],['✅ ينتقل بها','❌ لا ينتقل بها'],k=>{if(k>=8)done('u10',0)});
+SORT('stS',[['السيلان',0],['الزهري',0],['الإيدز (HIV)',1],['الإنفلونزا',1],['السل',0],['الزكام',1]],['🧫 بكتيريا','🦠 فيروس'],k=>{if(k>=5)done('u10',1)});
+(function(){const [c,x]=C2('abC');let K=0,k=-1;const tried=new Set();const P=[...Array(30)].map(()=>[40+Math.random()*560,30+Math.random()*190,Math.random()*6]);
+ chipsP('abK',['🧫 مريض بالسيلان (بكتيريا)','🦠 مريض بالإيدز (فيروس)'],0,i=>{K=i;k=-1});$('abGo').onclick=()=>{k=0;tried.add(K);if(tried.size>=2)done('u10',2)};
+ anim('abC',(x,c,t)=>{x.clearRect(0,0,640,260);x.fillStyle='#fff5f5';RR(x,10,10,620,240,16);x.fill();if(k>=0)k=Math.min(1,k+.01);
+  P.forEach(([X,Y,a],i)=>{if(K===0){const s=k<0?1:1-k;if(s<=0)return;x.save();x.translate(X+Math.sin(t*2+a)*5,Y);x.rotate(a+t*.3);x.globalAlpha=s;x.fillStyle='#8ce99a';x.strokeStyle='#2b8a3e';x.lineWidth=2;RR(x,-14*s,-6*s,28*s,12*s,6*s);x.fill();x.stroke();x.restore();x.globalAlpha=1}
+   else{if(i%3===0){x.fillStyle='rgba(255,201,201,.8)';x.beginPath();x.arc(X,Y,22,0,7);x.fill()}EMJ(x,'🦠',X+(i%3===0?0:Math.sin(t+a)*4),Y,i%3===0?14:18)}});
+  if(k>=0)for(let i=0;i<12;i++)EMJ(x,'💊',(i*53+t*60)%640,20+((i*41)%220),16);
+  $('abOut').innerHTML=k<0?'اضغط لإعطاء المضاد الحيوي':K===0?(k<1?'⏳ المضاد الحيوي يهاجم جدر البكتيريا…':'✅ قُضي على البكتيريا: يُعالج السيلان والزهري بالمضادات الحيوية إذا عولجا مبكرًا'):'❌ لا أثر! الفيروس يختبئ ويتكاثر داخل خلايا العائل، والمضادات الحيوية لا تؤثر في الفيروسات. لا يوجد علاج معروف للإيدز حتى الآن، والوقاية هي الأساس'})})();
+MCQP($('qu10'),bank([['يسبب السيلان:',['بكتيريا على شكل حبة الفول','فيروس','فطر','حيوان أولي']],['يسبب الزهري:',['بكتيريا لولبية','فيروس','فطر','طفيل']],['يسبب الإيدز:',['فيروس HIV','بكتيريا','فطر','البعوض']],['لا ينتقل الإيدز عن طريق:',['البعوض والسعال ومقابض الأبواب','نقل الدم الملوث','مشاركة الإبر','من الأم إلى الجنين']],['من طرق الوقاية من الأمراض المنقولة:',['الالتزام بإطار الزواج وعدم مشاركة الأدوات الحادة','مشاركة الإبر','ترك العلاج','استخدام أدوات الغير']],['المضادات الحيوية لا تعالج الإيدز لأنه:',['مرض فيروسي','مرض بكتيري','مرض وراثي','نقص غذائي']],['يُعالج الزهري:',['في جميع مراحله إذا عولج فورًا','لا يُعالج أبدًا','بالمضاد الفيروسي فقط','بالتطعيم بعد الإصابة']]]));
+chapterTest('rv5',[['الحيوان المنوي يحمل:',['23 كروموسومًا','46','92']],['الزيجوت يحمل:',['46','23','92']],['الإخصاب في:',['قناة فالوب','المبيض','الرحم']],['FSH من:',['الغدة النخامية','المبيض','الرحم']],['التبويض نحو اليوم:',['14','1','28']],['البروجستيرون يفرزه:',['الجسم الأصفر','الخصية','النخامية']],['الذكر:',['XY','XX','YY']],['جنس المولود يحدده:',['الحيوان المنوي','البويضة','الرحم']],['الإيدز سببه:',['فيروس','بكتيريا','فطر']],['السيلان سببه:',['بكتيريا','فيروس','بعوضة']],['الإيدز لا ينتقل بـ:',['البعوض','نقل الدم الملوث','الإبر']],['التستوستيرون من:',['الخصيتين','المبيضين','النخامية']]]);
+
+/* ================= 6-1 وراثة مندل ================= */
+MIS('u11',['احصل على النسبة 3 : 1 بتهجين Tt × Tt','اكشف النبتة المجهولة بالتلقيح الاختباري','أجب عن 3 أسئلة تدريب صحيحة']);
+function plant(x,X,Y,tall,s){s=s||1;x.strokeStyle='#2f9e44';x.lineWidth=2.5*s;x.beginPath();x.moveTo(X,Y);x.lineTo(X,Y-(tall?40:16)*s);x.stroke();x.fillStyle='#51cf66';for(let i=0;i<(tall?3:1);i++){const yy=Y-(8+i*12)*s;x.beginPath();x.ellipse(X-5*s,yy,5*s,2.5*s,-.5,0,7);x.ellipse(X+5*s,yy-4*s,5*s,2.5*s,.5,0,7);x.fill()}x.fillStyle='#f8f9fa';x.beginPath();x.arc(X,Y-(tall?42:18)*s,3*s,0,7);x.fill()}
+(function(){const [c,x]=C2('mdC');const G=['TT','Tt','tt'];let A=1,B=1,field=null,k=1;chipsP('mdA',G,1,i=>{A=i;field=null});chipsP('mdB',G,1,i=>{B=i;field=null});
+ $('mdGo').onclick=()=>{const a=G[A],b=G[B];field=[...Array(400)].map(()=>{const g=pick([...a])+pick([...b]);return g.includes('T')});k=0;if(A===1&&B===1)done('u11',0)};
+ anim('mdC',(x,c,t)=>{k=Math.min(1,k+.01);x.clearRect(0,0,640,460);const a=G[A],b=G[B],X0=230,Y0=40,S=70;
+  tA(x,'أمشاج الأم ♀',X0+S,Y0-14,12,'#c2255c');tA(x,'أمشاج الأب ♂',X0-40,Y0+S+6,12,'#1971c2','center');
+  [...b].forEach((g,i)=>{x.fillStyle='#ffdeeb';x.beginPath();x.arc(X0+S/2+i*S,Y0+12,14,0,7);x.fill();tL(x,g,X0+S/2+i*S,Y0+17,15,'#c2255c')});
+  [...a].forEach((g,j)=>{x.fillStyle='#d0ebff';x.beginPath();x.arc(X0-22,Y0+30+S/2+j*S,14,0,7);x.fill();tL(x,g,X0-22,Y0+35+S/2+j*S,15,'#1971c2')});
+  for(let j=0;j<2;j++)for(let i=0;i<2;i++){const g=[a[j],b[i]].sort().join(''),T=g.includes('T'),X=X0+i*S,Y=Y0+30+j*S;x.fillStyle=T?'#d3f9d8':'#fff3bf';x.strokeStyle='#868e96';x.lineWidth=2;x.fillRect(X,Y,S,S);x.strokeRect(X,Y,S,S);tL(x,g,X+20,Y+40,15,'#212529');plant(x,X+50,Y+62,T,.95)}
+  if(field){const n=Math.floor(k*400);let tl=0,sh=0;for(let i=0;i<n;i++){const X=40+(i%40)*14.3,Y=240+Math.floor(i/40)*21;plant(x,X,Y+18,field[i],.42);field[i]?tl++:sh++}
+   $('mdOut').innerHTML='🌿 طويلة: '+tl+' · 🌱 قصيرة: '+sh+(sh?' · النسبة ≈ '+r1(tl/sh)+' : 1':'')+'<br>'+EQ(a+' × '+b)+(A===1&&B===1?' ⟸ المتوقع 3 : 1 (قانون مندل الأول: الانعزال)':'')}else $('mdOut').innerHTML=EQ(a+' × '+b)+' ← اضغط «ازرع» لترى النسل'})})();
+(function(){const [c,x]=C2('tcC');let H,M=2,kids=null;const reset=()=>{H=pick(['TT','Tt']);kids=null;$('tcA').innerHTML='';$('tcOut').innerHTML='🌿 نبتة طويلة مجهولة: ? ?'};reset();
+ chipsP('tcK',['× TT (طويلة نقية)','× Tt (طويلة هجينة)','× tt (قصيرة متنحية)'],2,i=>M=i);$('tcR').onclick=reset;
+ $('tcGo').onclick=()=>{const m=['TT','Tt','tt'][M];kids=[...Array(20)].map(()=>(pick([...H])+pick([...m])).includes('T'));const sh=kids.filter(v=>!v).length;
+  $('tcA').innerHTML='<div class="btns"><button class="btn" data-g="TT">النبتة المجهولة TT</button><button class="btn" data-g="Tt">النبتة المجهولة Tt</button></div>';
+  $('tcA').querySelectorAll('button').forEach(b=>b.onclick=()=>{if(b.dataset.g===H){b.classList.add('ok');cheer();if(M===2)done('u11',1);$('tcOut').innerHTML='✅ صحيح! النمط الجيني '+H+(M===2?' · التلقيح الاختباري مع tt يكشف الأليل المتنحي المختبئ':' · لكن التهجين مع tt هو الاختبار الحاسم')}else{shake(b);$('tcOut').innerHTML=M===2?'❌ انظر للنسل: ظهور أي نبتة قصيرة يعني أن المجهولة تحمل t':'⚠️ هذا التهجين غير حاسم. جرّب التهجين مع tt'}});
+  $('tcOut').innerHTML='النسل: 🌿 '+(20-sh)+' طويلة · 🌱 '+sh+' قصيرة'};
+ anim('tcC',(x,c,t)=>{x.clearRect(0,0,640,220);plant(x,80,110,true,1.6);tL(x,'? ?',80,140,18,'#e8590c');tA(x,'×',150,80,26,'#495057');plant(x,210,110,M<2,1.6);tL(x,['TT','Tt','tt'][M],210,140,16,'#1971c2');
+  if(kids)kids.forEach((v,i)=>plant(x,300+(i%10)*32,95+Math.floor(i/10)*95,v,1.1))})})();
+MCQP($('qu11'),()=>{const t=rnd(0,2);if(t===0){const P=pick([['Tt','Tt','3 طويلة : 1 قصيرة'],['TT','tt','كلها طويلة (Tt)'],['Tt','tt','1 طويلة : 1 قصيرة'],['tt','tt','كلها قصيرة']]);return{q:'نتيجة التهجين '+P[0]+' × '+P[1]+':',o:OPSP(P[2],['3 طويلة : 1 قصيرة','كلها طويلة (Tt)','1 طويلة : 1 قصيرة','كلها قصيرة','1 : 2 : 1 في النمط الظاهري']),ex:'ارسم مربع بانيت'}}
+ return bank([['النمط الجيني Tt يوصف بأنه:',['متغاير اللاقحة','متماثل اللاقحة','متنحٍ','نقي']],['الأليل المتنحي يظهر أثره فقط عندما يكون:',['متماثل اللاقحة (tt)','متغاير اللاقحة','مع أليل سائد','في الأمشاج']],['ينص قانون مندل الأول على:',['انعزال الأليلين عند تكوين الأمشاج','اندماج الصفات','سيادة كل الصفات','عدم توريث الصفات']],['التلقيح الاختباري يكون مع فرد:',['متنحٍ متماثل اللاقحة','سائد متماثل','متغاير','من نوع آخر']],['النمط الظاهري هو:',['الصفة المرئية','التركيب الجيني','عدد الكروموسومات','نوع الأمشاج']],['الأليلات هي:',['أشكال مختلفة للجين نفسه','كروموسومات جنسية','أمشاج','خلايا']]])()});qGoal('qu11','u11',2,3);
+
+/* ================= 6-2 الأليلات المتعددة والتغاير ================= */
+MIS('u12',['حلّ لغزين من ألغاز فصائل الدم','احصل على أزهار وردية من أبوين غير ورديين','قارن تغايرًا متصلًا بتغاير غير متصل']);
+const BG=[['IᴬIᴬ','AA'],['Iᴬi','Ao'],['IᴮIᴮ','BB'],['Iᴮi','Bo'],['IᴬIᴮ','AB'],['ii','oo']],phen=g=>g.includes('A')&&g.includes('B')?'AB':g.includes('A')?'A':g.includes('B')?'B':'O',alS=a=>a==='o'?'i':'I'+(a==='A'?'ᴬ':'ᴮ'),BCOL={A:'#e03131',B:'#1971c2',AB:'#ae3ec9',O:'#f08c00'};
+const kidsOf=(a,b)=>{const r=[];for(const p of a)for(const q of b)r.push(phen(p+q));return r};
+(function(){const [c,x]=C2('bgC');let A=1,B=3;chipsP('bgA',BG.map(g=>g[0]+' ('+phen(g[1])+')'),1,i=>A=i);chipsP('bgB',BG.map(g=>g[0]+' ('+phen(g[1])+')'),3,i=>B=i);
+ anim('bgC',(x,c,t)=>{x.clearRect(0,0,640,320);const a=BG[A][1],b=BG[B][1],X0=200,Y0=30,S=90;
+  [...b].forEach((g,i)=>{x.fillStyle='#ffdeeb';x.beginPath();x.arc(X0+S/2+i*S,Y0+12,17,0,7);x.fill();tL(x,alS(g),X0+S/2+i*S,Y0+18,15,'#c2255c')});
+  [...a].forEach((g,j)=>{x.fillStyle='#d0ebff';x.beginPath();x.arc(X0-26,Y0+36+S/2+j*S,17,0,7);x.fill();tL(x,alS(g),X0-26,Y0+42+S/2+j*S,15,'#1971c2')});
+  for(let j=0;j<2;j++)for(let i=0;i<2;i++){const g=a[j]+b[i],p=phen(g),X=X0+i*S,Y=Y0+36+j*S;x.fillStyle='#fff';x.strokeStyle='#868e96';x.lineWidth=2;x.fillRect(X,Y,S,S);x.strokeRect(X,Y,S,S);x.fillStyle=BCOL[p];x.beginPath();x.moveTo(X+S/2,Y+14+Math.sin(t*3+i+j)*2);x.bezierCurveTo(X+S/2+22,Y+44,X+S/2+14,Y+62,X+S/2,Y+62);x.bezierCurveTo(X+S/2-14,Y+62,X+S/2-22,Y+44,X+S/2,Y+14);x.fill();tL(x,p,X+S/2,Y+54,14,'#fff');tL(x,alS(g[0])+alS(g[1]),X+S/2,Y+80,11,'#495057')}
+  const K=kidsOf(a,b),cnt={};K.forEach(p=>cnt[p]=(cnt[p]||0)+1);
+  $('bgOut').innerHTML='فصائل الأبناء الممكنة: '+Object.entries(cnt).map(([p,n])=>'<b style="color:'+BCOL[p]+'">'+p+'</b> '+n*25+'%').join(' · ')+'<br><small>Iᴬ و Iᴮ سائدان معًا (سيادة مشتركة) ⟸ AB، و i متنحٍ ⟸ O تحتاج ii</small>'})})();
+MCQP($('bgQ'),()=>{const pairs=[];for(let i=0;i<6;i++)for(let j=i;j<6;j++)pairs.push([i,j]);const P=pick(['A','B','AB','O']),good=pairs.filter(([i,j])=>kidsOf(BG[i][1],BG[j][1]).includes(P)),bad=pairs.filter(([i,j])=>!kidsOf(BG[i][1],BG[j][1]).includes(P));
+ const nm=([i,j])=>BG[i][0]+' × '+BG[j][0];if(!bad.length)return{q:'الفصيلة O تحتاج:',o:['ii','IᴬIᴮ','IᴬIᴬ','IᴮIᴮ'],ex:'O متنحية'};const g=pick(good);return{q:'🏥 طفل فصيلة دمه <b style="color:'+BCOL[P]+'">'+P+'</b>. أي زوجين يمكن أن يكونا والديه؟',o:OPSP(nm(g),shuf(bad).slice(0,6).map(nm)),ex:'ارسم مربع بانيت لكل زوج'}});qGoal('bgQ','u12',0,2);
+(function(){const [c,x]=C2('icC');const CR=[['RR','WW'],['RW','RW'],['RW','WW'],['RR','RW']];let K=1;const col={RR:'#e03131',RW:'#f783ac',WR:'#f783ac',WW:'#f8f9fa'};
+ chipsP('icK',['🔴 RR × ⚪ WW','🌸 RW × 🌸 RW','🌸 RW × ⚪ WW','🔴 RR × 🌸 RW'],1,i=>{K=i;if(i===0)done('u12',1)});
+ anim('icC',(x,c,t)=>{x.clearRect(0,0,640,300);const [a,b]=CR[K],kids=[];for(let r=0;r<4;r++)kids.push(a[r>>1]+b[r&1]);const fl=[];for(let i=0;i<16;i++)fl.push(kids[i%4]);
+  const fw=(X,Y,g,s)=>{x.strokeStyle='#2f9e44';x.lineWidth=3;x.beginPath();x.moveTo(X,Y+30*s);x.lineTo(X,Y);x.stroke();for(let k=0;k<5;k++){const an=k*1.2566+t*.3;x.fillStyle=col[g];x.strokeStyle='#ced4da';x.lineWidth=1;x.beginPath();x.ellipse(X+Math.cos(an)*9*s,Y+Math.sin(an)*9*s,8*s,5*s,an,0,7);x.fill();x.stroke()}x.fillStyle='#fab005';x.beginPath();x.arc(X,Y,4*s,0,7);x.fill()};
+  fw(90,60,a,1.6);tL(x,a,90,130,15,'#212529');tA(x,'×',160,70,26,'#495057');fw(230,60,b,1.6);tL(x,b,230,130,15,'#212529');
+  fl.forEach((g,i)=>fw(330+(i%8)*38,60+Math.floor(i/8)*110,g,1));
+  const cnt={};kids.forEach(g=>{const p=g==='RR'?'أحمر':g==='WW'?'أبيض':'وردي';cnt[p]=(cnt[p]||0)+1});$('icOut').innerHTML='النسل: '+Object.entries(cnt).map(([p,n])=>p+' '+n*25+'%').join(' · ')+'<br><small>سيادة غير كاملة: الهجين RW وسط بين الأبوين (وردي)</small>'})})();
+(function(){const [c,x]=C2('vrC');let K=0;const seen=new Set([0]);const Z=[...Array(200)].map(()=>rnorm());chipsP('vrK',['📏 طول 200 طالب','👅 القدرة على لف اللسان','🩸 فصائل الدم ABO'],0,i=>{K=i;seen.add(i);$('vrSl').style.display=i?'none':'flex';if(seen.has(0)&&seen.size>=2)done('u12',2)});
+ anim('vrC',(x,c,t)=>{const E=+$('vrE').value;$('vrEv').textContent=E+'%';x.clearRect(0,0,640,300);const X0=50,W=560,Y0=260,HH=210;
+  if(K===0){const m=160+(E-50)*.16,B=Array(20).fill(0);Z.forEach(z=>{const h=m+z*8,b=Math.floor((h-135)/2.5);if(b>=0&&b<20)B[b]++});const mx=Math.max(...B,1);B.forEach((v,i)=>{const h=v/mx*HH*.9;x.fillStyle='#74c0fc';x.fillRect(X0+i*W/20+2,Y0-h,W/20-4,h)});for(let v=140;v<=185;v+=10)tL(x,v+'',X0+(v-135)/50*W,Y0+16,11,'#495057');tA(x,'الطول (سم)',X0+W/2,Y0+34,12,'#495057');
+   $('vrOut').innerHTML='📏 <b>تغاير متصل</b>: طيف متدرج من النقيض إلى النقيض، تتحكم فيه جينات كثيرة ذات تأثير إضافي، ويتأثر بالبيئة (حرّك شريط التغذية!)'}
+  else{const D=K===1?[['يستطيع',65,'#69db7c'],['لا يستطيع',35,'#ff8787']]:[['O',40,BCOL.O],['A',30,BCOL.A],['B',20,BCOL.B],['AB',10,BCOL.AB]];const bw=W/D.length;D.forEach(([n,v,cl],i)=>{const h=v/70*HH;x.fillStyle=cl;RR(x,X0+i*bw+bw*.2,Y0-h,bw*.6,h,8);x.fill();tA(x,n,X0+i*bw+bw/2,Y0+18,14,'#212529');tL(x,v+'%',X0+i*bw+bw/2,Y0-h-8,13,'#495057')});tA(x,'(نسب توضيحية تقريبية)',X0+W/2,Y0+38,11,'#868e96');
+   $('vrOut').innerHTML='👅 <b>تغاير غير متصل</b>: أنماط قليلة واضحة لا وسط بينها، تتحكم فيه جينات قليلة، ولا يتأثر بالبيئة'}})})();
+MCQP($('qu12'),bank([['فصائل الدم ABO مثال على:',['الأليلات المتعددة','التغاير المتصل','الطفرة','التكاثر اللاجنسي']],['الشخص ذو الفصيلة O نمطه الجيني:',['ii','Iᴬi','IᴬIᴮ','IᴮIᴮ']],['أحمر RR × أبيض WW في نوار العشية يعطي:',['كلها وردية','كلها حمراء','3 حمراء : 1 بيضاء','كلها بيضاء']],['الطفرة:',['تغير مفاجئ في جين أو كروموسوم','نوع من التلقيح','انقسام عادي','هرمون']],['تُورث الطفرة إذا حدثت في:',['خلايا الأمشاج','خلايا الجلد','خلايا العضلات','الدم']],['من أمثلة التغاير المتصل:',['طول الإنسان','لف اللسان','فصائل الدم','أجنحة الدروسوفيلا']],['التغاير المتصل تتحكم فيه:',['جينات كثيرة ذات تأثير إضافي','جين واحد','البيئة فقط','الأمشاج فقط']],['الفصيلة AB تنتج عن:',['سيادة مشتركة بين Iᴬ و Iᴮ','سيادة تامة لـ Iᴬ','أليل متنحٍ','طفرة']]]));
+
+/* ================= 6-3 الانتخاب والهندسة الوراثية ================= */
+MIS('u13',['اصطد 15 فراشة كطائر جائع','اجعل نسبة الفراشات السوداء أكثر من 70% على اللحاء الداكن','أنتج الإنسولين بالهندسة الوراثية']);
+(function(){const [c,x]=C2('mtC');let K=1,p=.2,M=[],run=0,t0=0,eat=0,tot=0,hist=[.2];const spot=[...Array(80)].map(()=>[Math.random()*640,Math.random()*420,4+Math.random()*16]);
+ chipsP('mtK',['🌳 قبل الثورة الصناعية (لحاء فاتح بالأشنة)','🏭 بعد التلوث (لحاء داكن بالسناج)'],1,i=>{K=i;run=0;M=[]});
+ const gen=()=>{M=[...Array(24)].map(()=>({x:30+Math.random()*580,y:30+Math.random()*360,d:Math.random()<p,a:Math.random()*6,alive:1}));run=1;eat=0;t0=performance.now()};
+ const end=()=>{run=0;const s=M.filter(m=>m.alive);if(s.length){p=clamp(s.filter(m=>m.d).length/s.length,.02,.98)}hist.push(p);if(hist.length>12)hist.shift();if(K===1&&p>.7)done('u13',1)};
+ $('mtGo').onclick=gen;$('mtR').onclick=()=>{p=.2;hist=[.2];run=0;M=[]};
+ onTap(c,q=>{if(!run)return;for(const m of M)if(m.alive&&Math.hypot(q.x-m.x,q.y-m.y)<20){m.alive=0;eat++;tot++;cheer();if(tot>=15)done('u13',0);if(eat>=12)end();break}});
+ anim('mtC',(x,c,t)=>{x.clearRect(0,0,640,420);x.fillStyle=K?'#3b3b3b':'#ced4da';x.fillRect(0,0,640,420);spot.forEach(([X,Y,r])=>{x.fillStyle=K?'rgba(20,20,20,.6)':'rgba(220,235,210,.75)';x.beginPath();x.arc(X,Y,r,0,7);x.fill()});
+  for(let i=0;i<8;i++){x.strokeStyle=K?'rgba(0,0,0,.4)':'rgba(134,142,150,.4)';x.lineWidth=3;x.beginPath();x.moveTo(i*85,0);x.bezierCurveTo(i*85+20,140,i*85-20,280,i*85+10,420);x.stroke()}
+  const left=run?Math.max(0,12-(performance.now()-t0)/1000):0;if(run&&left<=0)end();
+  M.forEach(m=>{if(!m.alive)return;const f=Math.abs(Math.sin(t*2+m.a))*.3+.7;x.save();x.translate(m.x,m.y);x.fillStyle=m.d?'#2b2b2b':'#e9ecef';x.strokeStyle=m.d?'#1a1a1a':'#adb5bd';x.lineWidth=1;[-1,1].forEach(s=>{x.beginPath();x.moveTo(0,0);x.lineTo(s*16*f,-10);x.lineTo(s*14*f,8);x.closePath();x.fill();x.stroke()});if(!m.d){x.fillStyle='rgba(73,80,87,.5)';[-1,1].forEach(s=>{x.beginPath();x.arc(s*8*f,-2,2,0,7);x.fill()})}x.fillStyle='#495057';x.fillRect(-1.5,-8,3,16);x.restore()});
+  if(run)tA(x,'⏱️ '+Math.ceil(left)+' ث · اصطدت: '+eat,560,24,15,'#ffd43b');else{x.fillStyle='rgba(0,0,0,.45)';RR(x,170,170,300,60,14);x.fill();tA(x,'اضغط «ابدأ جيلًا جديدًا» 🐦',320,207,16,'#fff')}
+  x.fillStyle='rgba(255,255,255,.85)';RR(x,10,330,200,80,10);x.fill();tA(x,'% السوداء عبر الأجيال',110,348,11,'#212529');hist.forEach((v,i)=>{x.fillStyle='#343a40';x.fillRect(20+i*15,400-v*45,11,v*45)});
+  $('mtOut').innerHTML='الفراشات السوداء: '+Math.round(p*100)+'% · الفاتحة: '+Math.round((1-p)*100)+'% · مجموع ما اصطدته: '+tot+'<br><small>الفراشات المتنكرة على لون اللحاء تنجو وتتكاثر ⟸ انتخاب طبيعي</small>'})})();
+(function(){const [c,x]=C2('geC');const ST=['✂️ استخلص جين الإنسولين من خلية بشرية بإنزيم القطع','⭕ اقطع البلازميد البكتيري بإنزيم القطع نفسه','🔗 اربط الجين بالبلازميد بإنزيم الربط','🦠 أدخل البلازميد المعاد تركيبه إلى البكتيريا','🏭 نمِّ البكتيريا في وعاء التخمير في ظروف مثالية','💉 استخلص الإنسولين ونقِّه'];let s=0,k=1;
+ const H=$('geK');const ord=shuf(ST.map((_,i)=>i));H.innerHTML=ord.map(i=>'<button data-i="'+i+'">'+ST[i]+'</button>').join('');
+ H.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(+b.dataset.i===s){b.classList.add('ok');b.textContent=(s+1)+') '+b.textContent;s++;k=0;cheer();if(s===6)done('u13',2)}else{shake(b);toast('ليست الخطوة التالية… فكّر: ماذا نحتاج أولًا؟')}});
+ anim('geC',(x,c,t)=>{k=Math.min(1,k+.02);x.clearRect(0,0,640,300);
+  x.fillStyle='#ffdeeb';x.beginPath();x.arc(90,90,60,0,7);x.fill();x.fillStyle='#e599f7';x.beginPath();x.arc(90,90,24,0,7);x.fill();tA(x,'خلية بشرية',90,170,12,'#495057');
+  x.strokeStyle='#5f3dc4';x.lineWidth=4;x.beginPath();for(let i=0;i<40;i++){x.lineTo(70+i,90+Math.sin(i*.5+t)*6)}x.stroke();
+  const gx=s>=1?lerp(90,250,s===1?k:1):90,gy=s>=1?lerp(90,95,s===1?k:1):90;if(s>=1&&s<3){x.strokeStyle='#e03131';x.lineWidth=7;x.beginPath();x.moveTo(gx-14,gy);x.lineTo(gx+14,gy);x.stroke();tA(x,'جين الإنسولين',gx,gy-14,11,'#e03131')}
+  const PX=380,PY=95;if(s<4){x.strokeStyle='#2f9e44';x.lineWidth=7;x.beginPath();const gap=s>=2?.5:0;x.arc(PX,PY,40,gap,Math.PI*2-gap*0);x.stroke();if(s>=3){x.strokeStyle='#e03131';x.beginPath();x.arc(PX,PY,40,0,.5);x.stroke()}tA(x,s>=3?'بلازميد معاد التركيب':'بلازميد',PX,PY+62,12,'#2f9e44');if(s===2){ARW(x,265,95,330,100,'#868e96',2)}}
+  if(s>=4){const n=s>=5?Math.round(lerp(1,14,s===5?k:1)):1;if(s>=5){x.fillStyle='#ced4da';RR(x,300,20,180,230,20);x.fill();x.fillStyle='#fff3bf';RR(x,312,70,156,168,14);x.fill();tA(x,'وعاء التخمير',390,270,12,'#495057')}
+   for(let i=0;i<n;i++){const X=s>=5?330+(i%5)*30:PX,Y=s>=5?95+Math.floor(i/5)*50:PY;x.fillStyle='#8ce99a';x.strokeStyle='#2b8a3e';x.lineWidth=2;RR(x,X-14,Y-8,28,16,8);x.fill();x.stroke();x.strokeStyle='#e03131';x.lineWidth=2;x.beginPath();x.arc(X,Y,4,0,7);x.stroke()}}
+  if(s>=6)for(let i=0;i<3;i++)EMJ(x,'💉',540+i*30,140+Math.sin(t*3+i)*5,34*k);
+  $('geOut').innerHTML=s<6?'الخطوة '+(s+1)+' من 6':'🎉 أنتجت الإنسولين البشري لمرضى السكري! البكتيريا أصبحت <b>كائنًا محورًا جينيًا</b>'})})();
+MCQP($('qu13'),bank([['الانتخاب الطبيعي:',['بقاء الأفراد الأكثر تكيفًا وتكاثرها','اختيار الإنسان للصفات','الطفرة فقط','الهندسة الوراثية']],['انتشرت فراشة بستون السوداء بعد الثورة الصناعية لأن:',['السناج غطى الأشجار فأصبحت متنكرة','الطيور تحب الفاتحة فقط','السوداء أكبر حجمًا','الأشنة زادت']],['الانتخاب الاصطناعي:',['يختار فيه الإنسان الصفات المرغوبة','تقوم به الطبيعة','يحدث بالطفرة فقط','لا يغير الصفات']],['البلازميد هو:',['DNA بكتيري دائري','بروتين','إنزيم','فيروس']],['يُستخدم لقطع DNA في الهندسة الوراثية:',['إنزيم القطع','إنزيم الربط','الأميليز','الليباز']],['الكائن الذي يكتسب جينًا من مصدر خارجي:',['كائن محوّر جينيًا','كائن نقي','طفرة طبيعية','هجين طبيعي']],['يُنتج الإنسولين البشري تجاريًا باستخدام:',['بكتيريا مهندسة وراثيًا','الخميرة البرية فقط','الفيروسات','النباتات الطبيعية']],['من مخاوف الهندسة الوراثية:',['تعريض الإنسان والبيئة للخطر دون إجراءات سلامة حيوية','زيادة الأمراض دائمًا','إلغاء الوراثة','وقف الطفرات']]]));
+chapterTest('rv6',[['Tt:',['متغاير اللاقحة','متماثل','متنحٍ']],['Tt × Tt:',['3 : 1','1 : 1','كلها طويلة']],['التلقيح الاختباري مع:',['tt','TT','Tt']],['الفصيلة O:',['ii','IᴬIᴮ','Iᴬi']],['IᴬIᴮ:',['AB','A','O']],['RR × WW (سيادة غير كاملة):',['وردي','أحمر','أبيض']],['الطول تغاير:',['متصل','غير متصل','غير وراثي']],['لف اللسان تغاير:',['غير متصل','متصل','بيئي']],['الطفرة تورث في:',['الأمشاج','الجلد','العضلات']],['البلازميد:',['DNA بكتيري دائري','بروتين','دهون']],['فراشة بستون مثال على:',['الانتخاب الطبيعي','الهندسة الوراثية','الطفرة الصناعية']],['الإنسولين التجاري من:',['بكتيريا مهندسة وراثيًا','بنكرياس صناعي','فيروس']]]);
+
+</script>
+<script>window.NARR=["u1", "u2", "rv1", "u3", "u4", "rv2", "u5", "u6", "rv3", "u7", "u8", "rv4", "u9", "u10", "rv5", "u11", "u12", "u13", "rv6"];window.AUDIO_BASE="audio-b12/";</script>
+<style>
+.fxbar{position:fixed;left:10px;bottom:10px;z-index:90;display:flex;gap:6px}
+.fxbar button{width:46px;height:46px;border-radius:50%;border:none;background:#1f2a44;color:#fff;font-size:1.3rem;box-shadow:0 4px 12px #0004;cursor:pointer}
+.say{border:2px solid #f08c2e;background:#fff7e8;color:#b35b00;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.9rem;margin:0 6px;vertical-align:middle;font-family:inherit}
+.say.on{background:#f08c2e;color:#fff;animation:pul 1s infinite}
+@keyframes pul{50%{transform:scale(1.06)}}
+.cfx{position:fixed;pointer-events:none;z-index:95;font-size:20px;animation:cf 1.1s ease-out forwards}
+@keyframes cf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+.pop{animation:popk .35s}
+@keyframes popk{50%{transform:scale(1.08)}}
+.shk{animation:shk .4s}
+@keyframes shk{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.stars{position:fixed;bottom:16px;left:66px;background:#1f2a44;color:#fff;border-radius:20px;padding:3px 14px;font-weight:900;z-index:91;font-family:inherit;transition:.3s}
+</style>
+<div class="fxbar"><button id="fxMute" title="الأصوات">🔊</button></div>
+<div class="stars" id="fxStars">⭐ 0</div>
+<script>
+(function(){let AC=null,mute=false,stars=0;try{mute=localStorage.getItem('lb_mute')==='1';stars=+localStorage.getItem('lb_stars_'+location.pathname)||0}catch(e){}
+ const mb=document.getElementById('fxMute');const sb=document.getElementById('fxStars');const upd=()=>{mb.textContent=mute?'🔇':'🔊';sb.textContent='⭐ '+stars};upd();
+ mb.onclick=()=>{mute=!mute;try{localStorage.setItem('lb_mute',mute?'1':'0')}catch(e){}upd();if(mute&&cur){cur.pause();cur=null;document.querySelectorAll('.say.on').forEach(b=>b.classList.remove('on'))}};
+ function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC}
+ function tone(f,t0,d,type,v){const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,a.currentTime+t0);g.gain.setValueAtTime(0,a.currentTime+t0);g.gain.linearRampToValueAtTime(v||.18,a.currentTime+t0+.015);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+t0+d);o.connect(g);g.connect(a.destination);o.start(a.currentTime+t0);o.stop(a.currentTime+t0+d+.05)}
+ const S={ok:()=>{tone(523,0,.15,'triangle');tone(659,.09,.15,'triangle');tone(784,.18,.3,'triangle')},no:()=>{tone(220,0,.18,'sawtooth',.08);tone(185,.12,.25,'sawtooth',.08)},tick:()=>tone(900,0,.04,'square',.03),win:()=>{[523,659,784,1046,784,1046].forEach((f,i)=>tone(f,i*.1,.22,'triangle'))},whoosh:()=>{const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.frequency.setValueAtTime(300,a.currentTime);o.frequency.exponentialRampToValueAtTime(1200,a.currentTime+.25);g.gain.setValueAtTime(.06,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.3);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.32)}};
+ window.FX=S;
+ function confetti(el,big){const r=el&&el.getBoundingClientRect?el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};const E=['⭐','✨','🎉','💚','🌟','🎊'];const n=big?26:9;
+  for(let i=0;i<n;i++){const s=document.createElement('div');s.className='cfx';s.textContent=E[i%E.length];s.style.left=(r.left+r.width/2)+'px';s.style.top=(r.top+r.height/2)+'px';const a=Math.random()*6.28,d=(big?160:70)+Math.random()*80;s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',(Math.sin(a)*d-40)+'px');s.style.setProperty('--r',(Math.random()*720-360)+'deg');document.body.appendChild(s);setTimeout(()=>s.remove(),1200)}}
+ let last=0,lastNo=0;function hit(el,good){const now=Date.now();if(good){if(now-lastNo<400||now-last<250)return;last=now;S.ok();confetti(el);stars++;try{localStorage.setItem('lb_stars_'+location.pathname,stars)}catch(e){}upd();sb.classList.add('pop');setTimeout(()=>sb.classList.remove('pop'),400);el.classList&&el.classList.add('pop');setTimeout(()=>el.classList&&el.classList.remove('pop'),400);
+   if(stars%10===0){S.win();confetti(sb,true)}}else{lastNo=now;S.no();el.classList&&el.classList.add('shk');setTimeout(()=>el.classList&&el.classList.remove('shk'),450)}}
+ new MutationObserver(ms=>{ms.forEach(m=>{const t=m.target;if(!(t instanceof Element))return;if(m.type==='attributes'){const was=(m.oldValue||'').split(/\s+/);const c=t.classList;if(c.contains('ok')&&!was.includes('ok')&&(t.matches('button,input,.fb,.opt')))hit(t,true);else if(c.contains('no')&&!was.includes('no')&&t.matches('button,input,.opt'))hit(t,false)}})}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class'],attributeOldValue:true});
+ document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&!b.classList.contains('say')&&b.id!=='fxMute')S.tick()},true);
+ document.addEventListener('input',e=>{if(e.target.type==='range'){const n=Date.now();if(!window._lt||n-window._lt>90){window._lt=n;tone(400+(+e.target.value-+e.target.min)/(+e.target.max-+e.target.min+.001)*600,0,.03,'sine',.03)}}},true);
+ /* narration */
+ let cur=null;const base=window.AUDIO_BASE||'audio/';
+ function addSay(){document.querySelectorAll('.page').forEach(p=>{if(!(window.NARR||[]).includes(p.id))return;const h=p.querySelector('h2');if(!h||h.querySelector('.say'))return;const b=document.createElement('button');b.className='say';b.textContent='🔊 اسمع';
+  b.onclick=()=>{if(cur){cur.pause();const was=b.classList.contains('on');document.querySelectorAll('.say.on').forEach(x=>x.classList.remove('on'));cur=null;if(was)return}if(mute){mute=false;upd()}const a=new Audio(base+p.id+'.mp3');cur=a;b.classList.add('on');b.textContent='⏸️ إيقاف';a.onended=a.onerror=()=>{b.classList.remove('on');b.textContent='🔊 اسمع';cur=null};a.play().catch(()=>{b.classList.remove('on');b.textContent='🔊 اسمع'})};h.appendChild(b)})}
+ addSay();document.querySelectorAll('#bar button,[data-go]').forEach(b=>b.addEventListener('click',()=>{S.whoosh();if(cur){cur.pause();cur=null;document.querySelectorAll('.say').forEach(x=>{x.classList.remove('on');x.textContent='🔊 اسمع'})}}));
+})();
+</script>
+
+</body>
+</html>
