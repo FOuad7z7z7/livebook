@@ -340,6 +340,7 @@ function bye(){if(!s.parentNode)return;s.classList.add('out');setTimeout(functio
     </div>
     <div id="hParent"><span id="hParentT"></span><button class="btn ink" id="hBack" style="padding:6px 10px;font-size:.85rem">↩ رجوع لولي الأمر</button></div>
     <div class="plan" id="hPlan" style="margin-bottom:10px"></div>
+    <div class="offc" id="hOff"></div>
     <div id="feat"></div>
     <h2>موادي</h2>
     <div class="subs" id="subs"></div>
@@ -806,7 +807,8 @@ const subLessons=s=>(s.chapters||[]).flatMap(c=>c.lessons);
 const SB='https://jrhzqgapywgdblujyrns.supabase.co',SBK='sb_publishable_n9JJmOFTn7ODIWtByxhwag_qgWFa7ro';
 const PREVIEW=/claude/i.test(location.hostname);
 const NET_ERR='تعذّر الاتصال بالإنترنت، تأكد من الشبكة وحاول مرة أخرى';
-async function rpc(fn,args,keep){let r;
+async function rpc(fn,args,keep){const r0=await rpc0(fn,args,keep);if(r0&&!r0.err&&S.tok){S.sync=Date.now();store()}return r0}
+async function rpc0(fn,args,keep){let r;
  try{r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',keepalive:!!keep,headers:{apikey:SBK,'Content-Type':'application/json'},body:JSON.stringify(args||{})})}
  catch(e){return{err:PREVIEW?'هذه نسخة معاينة داخل Claude ولا تتصل بالخادم. افتح التطبيق من رابط Netlify لإنشاء حساب.':NET_ERR,net:1}}
  let j=null;try{j=await r.json()}catch(e){}
@@ -822,6 +824,7 @@ const devId=(()=>{let d=null;try{d=localStorage.getItem('lb_dev')}catch(e){}
 const KEY='livebook_v2',DAY=864e5;
 function fresh(){return{tok:null,user:null,student:null,sub:{until:0,plan:''},stats:{},days:[],log:[],kids:[],kid:0}}
 let S;try{S=Object.assign(fresh(),JSON.parse(localStorage.getItem(KEY))||{})}catch(e){S=fresh()}
+if(!S.sync){S.sync=Date.now();try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 let dirty=false;
 function save(){dirty=true;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 function store(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
@@ -833,7 +836,8 @@ const kid=()=>S.kids[S.kid]||S.kids[0]||null;
 const who=()=>role()==='parent'?kid():S.user;           // الطالب المعني
 const subOf=u=>(u&&u.sub)||{until:0,plan:''};
 const subOk=u=>{const b=subOf(u);return b.until>Date.now()&&(!b.grade||!u||b.grade===u.grade)};
-const active=()=>subOk(who());
+const stale=()=>Date.now()-(S.sync||0)>7*DAY;
+const active=()=>subOk(who())&&!stale();
 const otherGrade=()=>{const u=who(),b=subOf(u);return b.until>Date.now()&&b.grade&&u&&b.grade!==u.grade?b.grade:null};
 const daysLeft=()=>Math.max(0,Math.ceil((subOf(who()).until-Date.now())/DAY));
 function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),2600)}
@@ -940,11 +944,11 @@ document.querySelectorAll('[data-pw]').forEach(b=>b.onclick=()=>ask('🔑 تغي
 function points(stt){return Object.values(stt||S.stats).reduce((a,x)=>a+x.ok*10,0)+(stt?0:(S.xp||0))}
 function streak(){let n=0,d=new Date();const set=new Set(S.days);for(;;){const k=d.toISOString().slice(0,10);if(set.has(k)){n++;d=new Date(d-DAY)}else break}return n}
 function subjProg(s,stt){stt=stt||S.stats;const L=subLessons(s);if(!L.length)return 0;return Math.round(L.filter(l=>stt[l.id]&&stt[l.id].opened).length/L.length*100)}
-function planBox(el,w){const sb=subOf(who());el.className='plan'+(active()?'':' exp');const og=otherGrade();
+function planBox(el,w){const sb=subOf(who());if(subOk(who())&&stale()){el.className='plan exp';el.innerHTML='<b>📶 اتصل بالإنترنت مرة واحدة</b><div>للتأكد من الاشتراك (مرة كل أسبوع). بعدها تعمل الكتب بدون إنترنت.</div>';return}el.className='plan'+(active()?'':' exp');const og=otherGrade();
  el.innerHTML=og?'<b>🔒 الاشتراك خاص بـ«'+esc(GN(og))+'»</b><div>'+(w==='p'?'اشتراك ابنك خاص بـ«'+esc(GN(og))+'» فقط.':'اشتراكك خاص بـ«'+esc(GN(og))+'» فقط. ارجع لصفك من «تغيير الصف» لتفتح كتبك، أو راسل الإدارة لنقل الاشتراك.')+'</div>':active()?'<b>✅ '+esc(sb.plan)+'</b> · باقي '+daysLeft()+' يوم'+(sb.plan==='تجربة مجانية'?'<button class="btn" style="background:#fff;color:#22867f;margin-top:8px;width:100%" data-pay>اشترك الآن</button>':'')
   :'<b>🔒 '+(sb.until?'انتهى الاشتراك':'غير مشترك')+'</b><div>'+(w==='p'?'ابنك يرى الدروس المجانية فقط':'عندك 5 دروس مجانية في كل مادة، وللباقي اشترك')+'</div><button class="btn" style="background:#fff;color:#b33636;margin-top:8px;width:100%" data-pay>اشترك الآن</button>';
  const pp=payOf(who());if(pp)el.innerHTML+=payBadge(pp);el.querySelectorAll('[data-pay]').forEach(b=>b.onclick=openPay)}
-function renderHome(){if(role()!=='student'){home();return}const g=grade(),h=new Date().getHours();
+function renderHome(){if(role()!=='student'){home();return}setTimeout(()=>window.offRender&&offRender(),0);const g=grade(),h=new Date().getHours();
  $('hGreet').textContent=h<12?'صباح الخير ☀️':'مساء الخير 🌙';$('hName').textContent='أهلًا '+S.user.name+'!';
  $('hGrade').textContent=g.icon+' '+g.name;$('hPts').textContent='⭐ '+points()+' نقطة';$('hStreak').textContent='🔥 '+streak()+' يوم';
  planBox($('hPlan'),'s');{const pp=parentSaved();$('hParent').classList.toggle('on',!!pp);if(pp)$('hParentT').textContent='👨‍👩‍👧 حساب '+S.user.name}
@@ -1051,7 +1055,7 @@ function renderPay(){const gp=PLANS.filter(p=>p.g===grade().id);if(!gp.some(p=>p
  $('bank').querySelectorAll('[data-cp]').forEach(b=>b.onclick=()=>copy(b.dataset.cp));
  $('ref').textContent=refNo();const ok=/^\d{11,13}$/.test(CONFIG.whatsapp);$('waBtn').href=ok?'https://wa.me/'+CONFIG.whatsapp+'?text='+encodeURIComponent(waMsg()):'#';$('waBtn').onclick=e=>{if(!ok){e.preventDefault();toast('رقم واتساب الشركة لم يُضبط بعد')}};$('waNum').textContent=ok?'أو أرسل على الرقم: +'+CONFIG.whatsapp:'';
  const par=role()==='parent';$('codeIn').style.display=par?'none':'';$('codeGo').style.display=par?'none':'';$('codeHint').textContent=par?'عند قبول التحويل يُفعَّل اشتراك ابنك تلقائيًا ✅. هذه الخانة لأكواد المدارس والعروض فقط: أعطِ الكود لابنك ليدخله من حسابه.':'سيصلك كود مثل KH-XXXX-XXXX، اكتبه هنا.'}
-function openPay(){if(!who()){toast('أضف ابنك أولًا من لوحة ولي الأمر');return}renderPay();$('pay').classList.add('on');msg('codeMsg','');$('codeIn').value='';rcData=null;$('rcLbl').classList.remove('has');$('rcTxt').textContent='📷 اختر صورة الإيصال';$('rcNote').value='';msg('rcMsg','');payView()}
+function openPay(){if(subOk(who())&&stale()){toast('📶 اتصل بالإنترنت مرة واحدة للتأكد من اشتراكك');refresh();return}if(!who()){toast('أضف ابنك أولًا من لوحة ولي الأمر');return}renderPay();$('pay').classList.add('on');msg('codeMsg','');$('codeIn').value='';rcData=null;$('rcLbl').classList.remove('has');$('rcTxt').textContent='📷 اختر صورة الإيصال';$('rcNote').value='';msg('rcMsg','');payView()}
 function payView(){const pp=payOf(who()),pend=pp&&pp.status==='pending';$('payForm').style.display=pend?'none':'';$('payPend').innerHTML=(pp?payBadge(pp,1):'')+(pend?'<div class="muted" style="font-size:.85rem;margin:6px 0">✅ وصلنا إيصالك وسنفعّل الاشتراك بعد مراجعته. أرسلت صورة خاطئة أو اخترت باقة غير صحيحة؟</div><button class="btn w" id="payCancel">🔄 إلغاء الطلب وإرسال إيصال جديد</button>':'');
  if(pend)$('payCancel').onclick=()=>ask('🔄 إلغاء الطلب','سيُلغى طلبك الحالي وتستطيع رفع إيصال جديد. متأكد؟','نعم، ألغِ',async()=>{const r=await rpc('lb_pay_cancel',{p_token:S.tok,p_child:role()==='parent'&&kid()?kid().id:null});if(r.err)return toast(r.err);toast('تم الإلغاء، ارفع الإيصال الجديد');await loadPays();payView()})}
 let rcData=null;
@@ -1183,8 +1187,47 @@ function doInstall(){if(dp){const p=dp;dp=null;p.prompt();return}ask('📲 تث�
 $('install').onclick=doInstall;
 setTimeout(()=>{if(isApp())return;let last=0;try{last=+localStorage.getItem('lb_instAsk')||0}catch(e){}if(Date.now()-last<864e5)return;try{localStorage.setItem('lb_instAsk',Date.now())}catch(e){}
  ask('📲 ثبّت «الكتاب الحي» على هاتفك','<div style="text-align:center"><img src="icon-192.png" style="width:84px;border-radius:20px;box-shadow:0 8px 24px rgba(0,0,0,.2)"><p style="font-weight:800;margin:10px 0 4px">افتحه بلمسة من شاشتك الرئيسية مثل أي تطبيق، ويعمل أسرع وبملء الشاشة ✨</p><p class="muted">مجاني ولا يأخذ مساحة تُذكر</p></div>'+(dp?'':installHelp()),dp?'📲 ثبّت الآن':null,dp?()=>{doInstall()}:null)},4200);
-if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 <script src="fun.js"></script>
+<style>.offc{margin:0 0 10px}.offc .card{display:flex;gap:12px;align-items:center;padding:12px 14px;border:2px solid #d0ebff;background:#f1f8ff}.offc .ic{font-size:1.9rem}.offc b{color:var(--ink)}.offc .muted{font-size:.82rem}.offc .btn{white-space:nowrap;padding:9px 12px;font-size:.92rem}.offc .pg{height:8px;border-radius:6px;background:#dbe4ff;margin-top:6px;overflow:hidden}.offc .pg i{display:block;height:100%;background:linear-gradient(90deg,#4dabf7,#1971c2);width:0;transition:width .3s}.offc.done .card{border-color:#b2f2bb;background:#ebfbee}</style>
+<script>
+/* ============ التنزيل للعمل بدون إنترنت ============ */
+(function(){
+const OC='livebook-offline',OK='lb_off';let MAN=null,busyDl=false;
+const okSt=()=>{try{return JSON.parse(localStorage.getItem(OK)||'{}')}catch(e){return{}}};
+const setSt=o=>{try{localStorage.setItem(OK,JSON.stringify(o))}catch(e){}};
+const books=g=>{const set=new Set();(g.subjects||[]).filter(s=>!s.soon).forEach(s=>(s.chapters||[]).forEach(c=>(c.lessons||[]).forEach(l=>{const f=(l.f||'').split('#')[0];if(f)set.add(f)})));set.add('qb-'+g.id);return[...set]};
+async function man(){if(MAN)return MAN;try{const r=await fetch('lessons/offline.json',{cache:'no-cache'});MAN=await r.json()}catch(e){const c=await caches.match('lessons/offline.json');if(c)MAN=await c.json()}return MAN}
+async function wipe(){try{await caches.delete(OC)}catch(e){}setSt({})}
+// عند انتهاء الاشتراك: يُحذف التنزيل تلقائيًا
+if(S.user&&S.user.role==='student'&&!subOk(S.user)&&okSt().g)wipe();
+window.offRender=async function(){const el=$('hOff');if(!el)return;if(!('caches' in window)||role()!=='student'||!active()){el.innerHTML='';return}
+ const g=grade(),st=okSt(),M=await man();if(!M){el.innerHTML='';return}
+ const B=books(g).filter(b=>M[b]),mb=B.reduce((a,b)=>a+M[b].mb,0),ver=B.map(b=>M[b].v).join('');
+ const has=st.g===g.id,upd=has&&st.v!==ver;el.className='offc'+(has&&!upd?' done':'');
+ if(busyDl)return;
+ el.innerHTML=has&&!upd?'<div class="card"><div class="ic">✅</div><div style="flex:1"><b>كتبك محفوظة على الجوال</b><div class="muted">تعمل بدون إنترنت · اتصل مرة كل أسبوع للتأكد من الاشتراك</div></div><button class="btn ghost" id="offDel" style="background:#fff">🗑️</button></div>'
+  :'<div class="card"><div class="ic">📥</div><div style="flex:1"><b>'+(upd?'تحديث جديد لكتبك':'ادرس بدون إنترنت')+'</b><div class="muted" id="offT">'+(upd?'نزّل التحديث ليبقى كل شيء يعمل بدون إنترنت':'نزّل كتب صفّك مع الصوت مرة واحدة')+' · حوالي '+Math.max(1,Math.round(mb))+' ميغا</div><div class="pg" id="offP" style="display:none"><i></i></div></div><button class="btn or" id="offGo">⬇️ '+(upd?'حدّث':'نزّل')+'</button></div>';
+ const d=$('offDel');if(d)d.onclick=()=>ask('🗑️ حذف الكتب المحفوظة','ستُحذف الكتب من ذاكرة الجوال (تقدّمك لا يُحذف). تستطيع تنزيلها مرة أخرى في أي وقت.','نعم، احذف',async()=>{await wipe();toast('تم الحذف');offRender()});
+ const go=$('offGo');if(go)go.onclick=()=>dl(g,B,M,ver,mb)};
+async function dl(g,B,M,ver,mb){if(!navigator.onLine)return toast('📶 تحتاج إنترنت للتنزيل');busyDl=true;
+ try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
+ const go=$('offGo'),P=$('offP'),T=$('offT');go.disabled=true;P.style.display='block';
+ const core=['./','index.html','fun.js','manifest.json','icon-192.png','icon-512.png','logo.svg','lessons/offline.json'];
+ let F=[...core];B.forEach(b=>F.push(...M[b].files));F=[...new Set(F)];
+ const c=await caches.open(OC);let n=0,bad=0;const fonts=new Set();
+ const tf=(u,o)=>{const ac=new AbortController(),t=setTimeout(()=>ac.abort(),15000);return fetch(u,Object.assign({signal:ac.signal},o)).finally(()=>clearTimeout(t))};
+ async function one(u){try{const ext=/^https?:/.test(u);let r=await tf(u,ext?{mode:'cors'}:{cache:'no-cache'}).catch(()=>null);
+   if(ext&&(!r||!r.ok))r=await tf(u,{mode:'no-cors'}).catch(()=>null);
+   if(r&&(r.ok||r.type==='opaque')){if(/fonts\.googleapis/.test(u)&&r.ok){const t=await r.clone().text();(t.match(/url\((https:[^)]+)\)/g)||[]).forEach(x=>fonts.add(x.slice(4,-1)))}await c.put(u,r)}else if(!/^https?:/.test(u))bad++}catch(e){if(!/^https?:/.test(u))bad++}
+  n++;P.firstChild.style.width=Math.round(n/F.length*100)+'%';T.textContent='⏳ جارٍ التنزيل… '+Math.round(n/F.length*100)+'% · لا تغلق التطبيق'}
+ const Q=F.slice();await Promise.all([0,1,2,3,4,5].map(async()=>{while(Q.length)await one(Q.shift())}));
+ const FF=[...fonts];F.push(...FF);await Promise.all([0,1,2].map(async()=>{while(FF.length)await one(FF.shift())}));
+ busyDl=false;
+ if(bad>F.length*.03){toast('⚠️ لم يكتمل التنزيل، تأكد من الإنترنت وحاول مرة أخرى');offRender();return}
+ setSt({g:g.id,v:ver,t:Date.now()});offRender();toast('🎉 تم! كتبك تعمل الآن بدون إنترنت');try{cheerP()}catch(e){}}
+})();
+</script>
 </body>
 </html>
