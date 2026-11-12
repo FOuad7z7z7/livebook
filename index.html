@@ -360,22 +360,29 @@ function bye(){if(!s.parentNode)return;s.classList.add('out');setTimeout(functio
 </section>
 
 <!-- PARENT -->
+<style>.pHero{background:linear-gradient(160deg,#fff,#EEF1FF)}.pStatus{margin:12px 0 10px;padding:10px 12px;border-radius:14px;font-weight:800;font-size:1.02rem;line-height:1.5}.pStatus.g{background:#e6fcf5;color:#087f5b}.pStatus.y{background:#fff9db;color:#946200}.pStatus.r{background:#fff0f0;color:#c92a2a}.pTipC{background:#EEF1FF}.pTipC b{color:var(--ink)}.pTipC div{margin-top:4px;font-size:1.02rem}.pBig{font-size:1.15rem;padding:16px;margin:4px 0 10px}.pMore{margin:12px 0}.pMore>summary{cursor:pointer;list-style:none;background:#fff;border:2px solid #e3e7f5;border-radius:16px;padding:14px;font-weight:800;color:var(--ink);text-align:center}.pMore>summary::-webkit-details-marker{display:none}.pMore>summary small{display:block;font-weight:600;color:#868e96;font-size:.8rem;margin-top:2px}.pMore[open]>summary{border-color:var(--or);margin-bottom:8px}</style>
 <section class="scr" id="s-parent">
   <div class="top"><div class="logo"><i class="lg"><img src="icon-192.png" alt=""></i>لوحة ولي الأمر</div><button class="ghost" data-out>خروج</button></div>
   <div class="wrap">
     <div class="muted" id="pHello"></div>
     <div class="kids" id="pKids"></div>
     <div id="pBody">
-      <div class="card" style="display:flex;align-items:center;gap:12px"><div style="font-size:2.4rem"><img class="stu" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 120 120%22%3E%3Cpath d=%22M22 120c2-22 18-34 38-34s36 12 38 34z%22 fill=%22%232329C9%22/%3E%3Cpath d=%22M48 86l12 16 12-16z%22 fill=%22%23fff%22/%3E%3Cpath d=%22M57 92h6l2 22h-10z%22 fill=%22%23e8475f%22/%3E%3Crect x=%2252%22 y=%2274%22 width=%2216%22 height=%2216%22 rx=%226%22 fill=%22%23f2c39b%22/%3E%3Cellipse cx=%2260%22 cy=%2258%22 rx=%2224%22 ry=%2226%22 fill=%22%23f6cfa8%22/%3E%3Cellipse cx=%2235%22 cy=%2260%22 rx=%224.5%22 ry=%227%22 fill=%22%23f2c39b%22/%3E%3Cellipse cx=%2285%22 cy=%2260%22 rx=%224.5%22 ry=%227%22 fill=%22%23f2c39b%22/%3E%3Cpath d=%22M36 52c0-16 10-24 24-24s24 8 24 24c-6-6-14-8-24-8s-18 2-24 8z%22 fill=%22%233b2516%22/%3E%3Cellipse cx=%2251%22 cy=%2260%22 rx=%223%22 ry=%223.6%22 fill=%22%232b1a10%22/%3E%3Cellipse cx=%2269%22 cy=%2260%22 rx=%223%22 ry=%223.6%22 fill=%22%232b1a10%22/%3E%3Ccircle cx=%2252%22 cy=%2259%22 r=%221%22 fill=%22%23fff%22/%3E%3Ccircle cx=%2270%22 cy=%2259%22 r=%221%22 fill=%22%23fff%22/%3E%3Cpath d=%22M46 52q5-3 10 0M64 52q5-3 10 0%22 stroke=%22%233b2516%22 stroke-width=%222.4%22 fill=%22none%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M51 71q9 8 18 0%22 stroke=%22%23b5533c%22 stroke-width=%222.6%22 fill=%22none%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%2245%22 cy=%2268%22 r=%223.5%22 fill=%22%23f4a3a0%22 opacity=%22.55%22/%3E%3Ccircle cx=%2275%22 cy=%2268%22 r=%223.5%22 fill=%22%23f4a3a0%22 opacity=%22.55%22/%3E%3Cpath d=%22M38 38q22-10 44 0v8q-22-8-44 0z%22 fill=%22%2316183d%22/%3E%3Cpath d=%22M60 14l42 16-42 16-42-16z%22 fill=%22%231f2257%22/%3E%3Cpath d=%22M60 18l34 12-34 12-34-12z%22 fill=%22%232a2e75%22/%3E%3Ccircle cx=%2260%22 cy=%2230%22 r=%223%22 fill=%22%23ffc83d%22/%3E%3Cpath d=%22M60 30q24 2 30 4v18%22 stroke=%22%23ffc83d%22 stroke-width=%222.4%22 fill=%22none%22/%3E%3Cpath d=%22M87 50h6l1 10h-8z%22 fill=%22%23ffc83d%22/%3E%3C/svg%3E" alt="طالب"></div><div style="flex:1"><b style="color:var(--ink);font-size:1.15rem" id="pChild"></b><div class="muted" id="pGrade"></div><div class="muted" id="pSeen" style="font-size:.8rem"></div></div></div>
-      <div class="kidAct"><button class="btn or" id="pOpen">📖 افتح كتبه هنا</button><button class="btn" id="pLogin">📲 دخوله من جواله</button></div>
+      <div class="card pHero">
+        <div style="display:flex;align-items:center;gap:12px"><div style="font-size:2.4rem"><img class="stu" src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 120 120%22%3E%3Cpath d=%22M22 120c2-22 18-34 38-34s36 12 38 34z%22 fill=%22%232329C9%22/%3E%3Cpath d=%22M48 86l12 16 12-16z%22 fill=%22%23fff%22/%3E%3Cpath d=%22M57 92h6l2 22h-10z%22 fill=%22%23e8475f%22/%3E%3Crect x=%2252%22 y=%2274%22 width=%2216%22 height=%2216%22 rx=%226%22 fill=%22%23f2c39b%22/%3E%3Cellipse cx=%2260%22 cy=%2258%22 rx=%2224%22 ry=%2226%22 fill=%22%23f6cfa8%22/%3E%3Cellipse cx=%2235%22 cy=%2260%22 rx=%224.5%22 ry=%227%22 fill=%22%23f2c39b%22/%3E%3Cellipse cx=%2285%22 cy=%2260%22 rx=%224.5%22 ry=%227%22 fill=%22%23f2c39b%22/%3E%3Cpath d=%22M36 52c0-16 10-24 24-24s24 8 24 24c-6-6-14-8-24-8s-18 2-24 8z%22 fill=%22%233b2516%22/%3E%3Cellipse cx=%2251%22 cy=%2260%22 rx=%223%22 ry=%223.6%22 fill=%22%232b1a10%22/%3E%3Cellipse cx=%2269%22 cy=%2260%22 rx=%223%22 ry=%223.6%22 fill=%22%232b1a10%22/%3E%3Ccircle cx=%2252%22 cy=%2259%22 r=%221%22 fill=%22%23fff%22/%3E%3Ccircle cx=%2270%22 cy=%2259%22 r=%221%22 fill=%22%23fff%22/%3E%3Cpath d=%22M46 52q5-3 10 0M64 52q5-3 10 0%22 stroke=%22%233b2516%22 stroke-width=%222.4%22 fill=%22none%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M51 71q9 8 18 0%22 stroke=%22%23b5533c%22 stroke-width=%222.6%22 fill=%22none%22 stroke-linecap=%22round%22/%3E%3Ccircle cx=%2245%22 cy=%2268%22 r=%223.5%22 fill=%22%23f4a3a0%22 opacity=%22.55%22/%3E%3Ccircle cx=%2275%22 cy=%2268%22 r=%223.5%22 fill=%22%23f4a3a0%22 opacity=%22.55%22/%3E%3Cpath d=%22M38 38q22-10 44 0v8q-22-8-44 0z%22 fill=%22%2316183d%22/%3E%3Cpath d=%22M60 14l42 16-42 16-42-16z%22 fill=%22%231f2257%22/%3E%3Cpath d=%22M60 18l34 12-34 12-34-12z%22 fill=%22%232a2e75%22/%3E%3Ccircle cx=%2260%22 cy=%2230%22 r=%223%22 fill=%22%23ffc83d%22/%3E%3Cpath d=%22M60 30q24 2 30 4v18%22 stroke=%22%23ffc83d%22 stroke-width=%222.4%22 fill=%22none%22/%3E%3Cpath d=%22M87 50h6l1 10h-8z%22 fill=%22%23ffc83d%22/%3E%3C/svg%3E" alt="طالب"></div><div style="flex:1"><b style="color:var(--ink);font-size:1.2rem" id="pChild"></b><div class="muted" id="pGrade"></div><div class="muted" id="pSeen" style="font-size:.8rem"></div></div></div>
+        <div class="pStatus" id="pStatus"></div>
+        <div class="stat3"><div class="st3"><b id="pWk">0</b><span>دروس هذا الأسبوع</span></div><div class="st3"><b id="pMin">0</b><span>دقيقة تعلّم</span></div><div class="st3"><b id="pAcc">–</b><span>إجاباته الصحيحة</span></div></div>
+        <span id="pOk" style="display:none"></span>
+      </div>
+      <div class="card pTipC"><b>💡 ماذا تفعل اليوم؟</b><div id="pTip"></div></div>
+      <button class="btn or w pBig" id="pOpen">📖 افتح كتبه هنا</button>
       <div class="plan" id="pPlan"></div>
-      <h2>📊 التقرير</h2>
-      <div class="stat3"><div class="st3"><b id="pMin">0</b><span>دقيقة تعلّم</span></div><div class="st3"><b id="pOk">0</b><span>إجابة صحيحة</span></div><div class="st3"><b id="pAcc">–</b><span>نسبة الدقة</span></div></div>
-      <div class="card"><b style="color:var(--ink)">التقدم في المواد</b><div id="pSubj"></div></div>
-      <div class="card"><b style="color:var(--ink)">🔎 تحتاج متابعة</b><div id="pWeak"></div></div>
-      <div class="card"><b style="color:var(--ink)">🕒 آخر نشاط</b><div id="pAct"></div></div>
-      <div class="card" style="background:#EEF1FF"><b style="color:var(--ink)">💡 نصيحة لك</b><div id="pTip" style="margin-top:4px"></div></div>
+      <details class="pMore"><summary>📊 التقرير المفصّل <small>المواد · الدروس الضعيفة · الأسبوع · المكافأة</small></summary>
+        <div class="card"><b style="color:var(--ink)">📚 التقدم في المواد</b><div id="pSubj"></div></div>
+        <div class="card"><b style="color:var(--ink)">🔎 دروس تحتاج إعادة</b><div id="pWeak"></div></div>
+        <div class="card"><b style="color:var(--ink)">🕒 آخر ما درسه</b><div id="pAct"></div></div>
+      </details>
     </div>
+    <details class="pMore" id="pSet"><summary id="pSetT">⚙️ إضافة ابن وإعدادات الحساب</summary>
     <div class="card addKid" id="pAddCard"><b style="color:var(--ink);font-size:1.1rem" id="pAddT">➕ أضف ابنك</b>
       <p class="muted" style="margin:4px 0" id="pAddP">اكتب اسمه واختر صفّه، وسننشئ له حسابًا مربوطًا بك فورًا. لا يحتاج جوالًا خاصًا!</p>
       <div id="pAddBody"><div class="fld"><label>اسم ابنك</label><input id="pAddName" placeholder="مثال: أحمد"></div>
@@ -389,7 +396,8 @@ function bye(){if(!s.parentNode)return;s.classList.add('out');setTimeout(functio
       <div class="row"><input class="code" id="pLinkIn" inputmode="numeric" maxlength="6" placeholder="000000" style="flex:2"><button class="btn ink" id="pLinkGo" style="flex:1">ربط</button></div>
       <div id="pLinkMsg" class="msg"></div>
     </div>
-    <div class="tools"><button class="ghost" id="pRefresh">🔄 تحديث</button><button class="ghost" data-pw>🔑 كلمة المرور</button></div>
+    <div class="tools"><button class="ghost" id="pLogin">📲 دخوله من جواله</button><button class="ghost" id="pRefresh">🔄 تحديث</button><button class="ghost" data-pw>🔑 كلمة المرور</button></div>
+    </details>
   </div>
 </section>
 
@@ -992,20 +1000,22 @@ function renderParent(noFetch){if(role()!=='parent'){home();return}
  $('pHello').textContent='أهلًا '+S.user.name+' 👋';
  const K=$('pKids');K.innerHTML=S.kids.length>1?S.kids.map((k,i)=>'<button data-k="'+i+'" class="'+(i===S.kid?'on':'')+'">'+STU+' '+esc(k.name)+'</button>').join(''):'';
  K.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{S.kid=+b.dataset.k;store();renderParent(true)});
- const k=kid();$('pBody').style.display=k?'block':'none';$('pLinkT').textContent=k?'🔗 ربط حساب ابن آخر':'🔗 اربط حساب ابنك';renderAdd(k);
+ const k=kid();$('pBody').style.display=k?'block':'none';$('pSet').open=!k;$('pSetT').textContent=k?'⚙️ إضافة ابن آخر وإعدادات الحساب':'➕ ابدأ هنا: أضف ابنك';$('pLinkT').textContent=k?'🔗 ربط حساب ابن آخر':'🔗 اربط حساب ابنك';renderAdd(k);
  if(!noFetch)loadKids();window.funParent&&funParent(k);if(!k)return;
  const P=k.progress||{},SS=P.stats||{},LG=P.log||[];const g=grade();
  $('pChild').textContent=k.name;$('pGrade').textContent=g.name+(g.sub?' · '+g.sub:'');$('pSeen').textContent='آخر دخول: '+(k.last_seen?new Date(k.last_seen).toLocaleString('ar-LY',{dateStyle:'medium',timeStyle:'short'}):'—');
  planBox($('pPlan'),'p');
  const V=Object.values(SS);const ok=V.reduce((a,x)=>a+(x.ok||0),0),no=V.reduce((a,x)=>a+(x.no||0),0),sec=V.reduce((a,x)=>a+(x.sec||0),0);
  $('pMin').textContent=Math.round(sec/60);$('pOk').textContent=ok;$('pAcc').textContent=ok+no?Math.round(ok/(ok+no)*100)+'%':'–';
+ const wk=new Set(LG.filter(x=>ALL[x.id]&&Date.now()-x.t<7*864e5).map(x=>x.id)).size,acc=ok+no?ok/(ok+no):1;$('pWk').textContent=wk;
+ const st=$('pStatus');if(!wk){st.className='pStatus r';st.textContent='🔴 لم يدرس '+k.name+' هذا الأسبوع. شجّعه يبدأ اليوم ولو بدرس واحد.'}else if(acc<.6){st.className='pStatus y';st.textContent='🟡 '+k.name+' يدرس 👍 لكن بعض الدروس تحتاج إعادة.'}else{st.className='pStatus g';st.textContent='🟢 ممتاز! '+k.name+' يدرس بانتظام وإجاباته جيدة.'}
  $('pSubj').innerHTML=(g.subjects||[]).filter(s=>!s.soon).map(s=>{const sp=subjProg(s,SS);return'<div class="sbj"><span class="n">'+s.icon+' '+s.name+'</span><div class="bar" style="--c:'+s.c+'"><i style="width:'+sp+'%"></i></div><span class="p">'+sp+'%</span></div>'}).join('');
  const weak=Object.entries(SS).filter(([k2,v])=>ALL[k2]&&v.ok+v.no>=3&&v.ok/(v.ok+v.no)<.6);
  $('pWeak').innerHTML=weak.length?weak.map(([k2,v])=>'<div class="warn"><b>'+ALL[k2].t+'</b><br><span class="muted">الدقة '+Math.round(v.ok/(v.ok+v.no)*100)+'% – اقترح عليه إعادة الدرس</span></div>').join(''):'<div class="muted">لا توجد دروس ضعيفة حتى الآن 👍</div>';
  const a=$('pAct');a.innerHTML=LG.length?'':'<div class="muted">لم يبدأ بعد.</div>';
  LG.filter(x=>ALL[x.id]).slice(0,6).forEach(x=>{a.innerHTML+='<div class="act"><span>'+ALL[x.id].sub.icon+' '+ALL[x.id].t+'</span><span class="muted">'+fmtD(x.t)+'</span></div>'});
  const tips=['اسأله عن تجربة شاهدها اليوم، واطلب منه أن يشرحها لك. الشرح يثبّت الفهم.','خصّص 20 دقيقة يوميًا بدل ساعة مرة في الأسبوع.','امدحه على المحاولة لا على الدرجة فقط.'];
- $('pTip').textContent=weak.length?'ركّز معه على "'+ALL[weak[0][0]].t+'" حتى تتجاوز الدقة 70%.':tips[new Date().getDate()%tips.length]}
+ $('pTip').textContent=weak.length?'اطلب منه إعادة درس «'+ALL[weak[0][0]].t+'» حتى تصبح إجاباته الصحيحة أكثر من 70%.':tips[new Date().getDate()%tips.length]}
 $('pLinkGo').onclick=async()=>{const c=normPhone($('pLinkIn').value).slice(-6);if(c.length!==6)return msg('pLinkMsg','اكتب الرقم المكوّن من 6 خانات');
  const b=$('pLinkGo');busy(b,1);const r=await rpc('lb_link_child',{p_token:S.tok,p_code:c});busy(b,0);if(r.err)return msg('pLinkMsg',r.err);
  msg('pLinkMsg','✅ تم ربط '+r.child,true);$('pLinkIn').value='';await loadKids();S.kid=Math.max(0,S.kids.findIndex(k=>k.name===r.child));store();renderParent(true)};
