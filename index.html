@@ -479,7 +479,7 @@ const CONFIG={
  iban:'LY27024003010148774020301',
  whatsapp:'218911605647'   // رقم واتساب الشركة بالصيغة الدولية بدون +
 };
-const PLANS=[{id:'T6',g:'g6',t:'الفصل الأول – كل كتب الصف السادس',d:120,p:30,o:40},{id:'T7',g:'g7',t:'الفصل الأول – كل كتب الصف السابع',d:120,p:45,o:60},{id:'T8',g:'g8',t:'الفصل الأول – كل كتب الصف الثامن',d:120,p:45,o:60},{id:'T9',g:'g9',t:'الفصل الأول – كل كتب الصف التاسع',d:120,p:30,o:40},{id:'T5',g:'g5',t:'الفصل الأول – كل كتب الصف الخامس',d:120,p:45,o:60},{id:'T10',g:'s1',t:'الفصل الأول – كل كتب الأول الثانوي',d:120,p:65,o:90},{id:'T11',g:'s2',t:'الفصل الأول – كل كتب الثاني الثانوي',d:120,p:65,o:90},{id:'T12',g:'s3',t:'الفصل الأول – كل كتب الثالث الثانوي',d:120,p:80,o:110}];
+const PLANS=[{id:'T6',g:'g6',t:'الفصل الأول – كل كتب الصف السادس',d:120,p:30,o:40},{id:'T7',g:'g7',t:'الفصل الأول – كل كتب الصف السابع',d:120,p:45,o:60},{id:'T8',g:'g8',t:'الفصل الأول – كل كتب الصف الثامن',d:120,p:45,o:60},{id:'T9',g:'g9',t:'الفصل الأول – كل كتب الصف التاسع',d:120,p:45,o:60},{id:'T5',g:'g5',t:'الفصل الأول – كل كتب الصف الخامس',d:120,p:45,o:60},{id:'T10',g:'s1',t:'الفصل الأول – كل كتب الأول الثانوي',d:120,p:65,o:90},{id:'T11',g:'s2',t:'الفصل الأول – كل كتب الثاني الثانوي',d:120,p:65,o:90},{id:'T12',g:'s3',t:'الفصل الأول – كل كتب الثالث الثانوي',d:120,p:80,o:110}];
 
 /* ============ المحتوى ============ */
 const L9=[
@@ -543,6 +543,15 @@ const L9=[
 const mk=(arr,ch)=>arr.map(x=>({id:x[0],t:x[1],f:x[2],free:!!x[3],star:!!x[4],ch}));
 const GRADES=[
  {id:'g9',name:'الصف التاسع',sub:'الشهادة الإعدادية',icon:'🎓',ready:1,subjects:[
+  {id:'eng9',name:'الإنجليزي',icon:'🇬🇧',c:'#0c8599',chapters:[
+   {n:1,t:'Describing Things · وصف الأشياء',lessons:mk([['en70','📚 فهرس كتاب الإنجليزي','lessons/english9.html#home',1],['en01','1 At the Mall 🛍️ (صمّم مولك والساعة الناطقة)','lessons/english9.html#a1',1,1],['en02','1 Car of the Year 🚗 (صمّم سيارتك)','lessons/english9.html#a2',0,1],['en03','1 What do they look like? 🧑 (ارسم صديقك)','lessons/english9.html#a3',0,1],['en1r','🏁 Unit 1 Review','lessons/english9.html#rv1']],1)},
+   {n:2,t:'Spare Time Activities · وقت الفراغ',lessons:mk([['en04','2 Hobbies & Suggestions ❤️ (مقياس الحب)','lessons/english9.html#b1',0,1],['en05','2 Books, Films & Invitations 🎬','lessons/english9.html#b2',0,1],['en2r','🏁 Unit 2 Review','lessons/english9.html#rv2']],2)},
+   {n:3,t:'Our World · عالمنا',lessons:mk([['en06','3 Creatures & Comparisons ⚖️ (ميزان المقارنة)','lessons/english9.html#c1',0,1],['en07','3 If … & Wildlife 🦅 (سباق الصقر)','lessons/english9.html#c2',0,1],['en3r','🏁 Unit 3 Review','lessons/english9.html#rv3']],3)},
+   {n:4,t:'Fun with English 1 · تحدٍّ',lessons:mk([['en4r','🏆 Fun with English 1 · The Challenge','lessons/english9.html#ry1']],4)},
+   {n:5,t:'The Media · الإعلام',lessons:mk([['en08','5 Sports & the News 📰 (قصة الولد والكلب)','lessons/english9.html#d1',0,1],['en09','5 Buying, Planning & Surveys 📊','lessons/english9.html#d2',0,1],['en5r','🏁 Unit 5 Review','lessons/english9.html#rv5']],5)},
+   {n:6,t:'Jobs and Careers · المهن',lessons:mk([['en10','6 Jobs & Future Plans 👷','lessons/english9.html#f1',0,1],['en11','6 Articles & Directions 🗺️ (إلى المكتبة)','lessons/english9.html#f2',0,1],['en6r','🏁 Unit 6 Review','lessons/english9.html#rv6']],6)},
+   {n:7,t:'Other Countries · دول أخرى',lessons:mk([['en12','7 Countries & Travel 🎁','lessons/english9.html#h1',0,1],['en13','7 Apologies · Libya & Sudan 🌍','lessons/english9.html#h2',0,1],['en7r','🏁 Unit 7 Review','lessons/english9.html#rv7']],7)},
+   {n:8,t:'Fun with English 2 · التحدي الأخير',lessons:mk([['en8r','🏆 Fun with English 2 · The Final Challenge','lessons/english9.html#ry2']],8)}]},
   {id:'math9',name:'الرياضيات',icon:'📐',c:'#1a9aa5',chapters:L9.map(([n,t,ls])=>({n,t,lessons:mk(ls,n)}))},
   {id:'sci9',name:'العلوم',icon:'🔬',c:'#2e9e5b',chapters:[
    {n:1,t:'الضوء',lessons:mk([['s90','📚 فهرس كتاب العلوم','lessons/science9.html#home',1],
@@ -582,7 +591,7 @@ const GRADES=[
     ['s96r','🏁 أسئلة المراجعة: علم البيئة','lessons/science9.html#brev']],6)},{n:7,t:'الفصل الثاني (ج2) · دورات المواد',lessons:mk([['s971','4-1 و 4-2 إعادة التدوير ودورة الكربون','lessons/science9.html#d1',1,1],
     ['s973','4-3 دورة النيتروجين','lessons/science9.html#d2'],
     ['s974','4-4 دور المخلوقات المحللة','lessons/science9.html#d3'],
-    ['s97r','🏁 أسئلة المراجعة: الدورات','lessons/science9.html#drev']],7)}]},{id:'eng9',name:'الإنجليزي',icon:'🇬🇧',c:'#2a8fd6',soon:1},
+    ['s97r','🏁 أسئلة المراجعة: الدورات','lessons/science9.html#drev']],7)}]},
   {id:'ara9',name:'اللغة العربية',icon:'📜',c:'#b8742e',soon:1},{id:'isl9',name:'التربية الإسلامية',icon:'🕌',c:'#7a5cc7',soon:1},{id:'soc9',name:'الاجتماعيات',icon:'🗺️',c:'#c75c7a',soon:1}]},
  {id:'s1',name:'الأول الثانوي',sub:'التعليم الثانوي',icon:'📘',ready:1,subjects:[
   {id:'chem10',name:'الكيمياء',icon:'⚗️',c:'#2b8a3e',chapters:[

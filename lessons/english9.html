@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>English – الصف التاسع – الكتاب الحي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+html{color-scheme:light}button,input,select{font-family:inherit;color:#1f2a44}
+:root{--ink:#1f2a44;--tl:#0c8599;--tl2:#e3fafc;--or:#f08c2e;--gr:#2e9e5b;--rd:#d64545;--pu:#6b4fd8;--line:#e2e8ee;--soft:#6b7690}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Cairo',Tahoma,sans-serif;background:#e9eef6;color:var(--ink);line-height:1.85}
+.book{max-width:800px;margin:12px auto;background:#fff;border-radius:16px;box-shadow:0 10px 30px #0002;overflow:hidden}
+header{background:linear-gradient(135deg,#0b5563,#15aabf);color:#fff;padding:16px;text-align:center}
+header h1{margin:0;font-size:1.3rem;font-weight:900}header div{opacity:.9;font-size:.85rem}
+.bar{display:flex;gap:6px;padding:8px 10px;background:var(--tl2);border-bottom:2px solid #c9d8f0;position:sticky;top:0;z-index:5;overflow-x:auto}
+.bar button{flex:0 0 auto;border:2px solid var(--tl);background:#fff;color:#1b3f73;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.86rem}
+.bar button.on{background:var(--tl);color:#fff}
+.page{display:none;padding:14px 16px 40px;animation:in .35s}.page.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h2{color:#1b3f73;margin:4px 0 6px;font-size:1.35rem;line-height:1.5}
+.num{display:inline-block;background:var(--tl);color:#fff;border-radius:10px;padding:0 10px;margin-left:6px;font-size:1rem}
+.box{border:2px solid var(--line);border-radius:16px;padding:14px;margin:14px 0;background:#fff}
+.box h3{margin:0 0 6px;font-size:1.05rem;color:#1b3f73}
+.lab{border-style:dashed;border-color:#a9c3ea;background:#fbfcff}
+.idea{background:linear-gradient(135deg,#0b5563,#15aabf);color:#fff;border-radius:16px;padding:12px 16px;margin:10px 0;font-weight:800}
+.idea small{display:block;opacity:.85;font-weight:600}
+.life{background:#fff7e8;border-right:5px solid var(--or);border-radius:10px;padding:8px 12px;margin:10px 0}
+.law{background:#fff7e8;border:2px solid #f5c27a;border-radius:14px;padding:10px 14px;margin:10px 0;font-weight:800;text-align:center;font-size:1.05rem}
+.warn{background:#fdeeee;border-right:5px solid var(--rd);border-radius:10px;padding:8px 12px;margin:10px 0}
+.btn{border:2px solid var(--ink);background:#fff;border-radius:10px;padding:6px 14px;font-weight:800;cursor:pointer;font-size:.95rem}
+.btn.main{background:var(--tl);border-color:var(--tl);color:#fff}.btn.or{background:var(--or);border-color:var(--or);color:#2a1600}
+.btn.ok{background:#dff5e7;border-color:var(--gr)}.btn.no{background:#fde4e4;border-color:var(--rd)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;justify-content:center}
+.fb{font-weight:800;min-height:1.4em;text-align:center;margin-top:6px}.fb.ok{color:var(--gr)}.fb.no{color:var(--rd)}
+.prob{background:#f5f8fd;border-radius:14px;padding:10px;text-align:center;font-weight:700}
+.mx{font-size:1.2rem;font-weight:800;line-height:2.1}
+.sc{text-align:center;font-weight:900;background:var(--tl2);border-radius:12px;padding:8px}
+.steps{background:#f8f9fc;border-radius:12px;padding:8px 12px;margin-top:8px;display:none}
+.opt{display:block;width:100%;text-align:right;margin:5px 0}.opt.ok{background:#dff5e7;border-color:var(--gr)}.opt.no{background:#fde4e4;border-color:var(--rd)}
+input.cf{width:60px;height:42px;font-size:1.15rem;font-weight:900;text-align:center;border:3px solid #c9d8f0;border-radius:10px;direction:ltr;vertical-align:middle;margin:0 2px}
+input.cf.ok{border-color:var(--gr);background:#eefaf2}input.cf.no{border-color:var(--rd);background:#fdeeee}
+/* matrix */
+.M{display:inline-flex;align-items:stretch;vertical-align:middle;margin:2px 4px}
+.M .br{width:8px;border:3px solid var(--ink)}.M .br.r{border-left:none;border-radius:0 6px 6px 0}.M .br.l{border-right:none;border-radius:6px 0 0 6px}
+.M.det .br{width:0;border-width:0 0 0 3px;border-radius:0}.M.det .br.l{border-width:0 3px 0 0}
+.M .g{display:grid;direction:rtl;gap:2px 4px;padding:2px 4px}
+.M .c{min-width:36px;text-align:center;font-weight:900;font-size:1.1rem;padding:2px 4px;border-radius:8px;direction:ltr;transition:.25s}
+.M .c.h1{background:#ffe08a}.M .c.h2{background:#b9e4ff}.M .c.x{opacity:.18;text-decoration:line-through}.M .c.h3{background:#c8f0d2}
+.M input.c{width:48px;height:36px;border:2px solid #c9d8f0;border-radius:8px;background:#fff;font-family:inherit}
+.chap{border:2px solid var(--line);border-radius:14px;margin:8px 0;overflow:hidden}
+.chap>div:first-child{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;font-weight:800;background:#f8faff}
+.chap .cn{background:var(--tl);color:#fff;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;flex:0 0 auto}
+.chap .ls{display:none;padding:4px 12px 10px}.chap.open .ls{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px dashed var(--line);font-size:.95rem}
+.li .pg{margin-right:auto;color:var(--soft);font-size:.8rem}.li.ready{cursor:pointer;font-weight:800;color:#1b3f73}
+.tg{font-size:.72rem;border-radius:8px;padding:0 8px;font-weight:800}.tg.r{background:#e6f6ec;color:#1d7a3f}.tg.s{background:#f1f1f1;color:#999}
+table.t{border-collapse:collapse;width:100%;font-size:.92rem;margin:6px 0}table.t td,table.t th{border:1px solid #d6e1f2;padding:5px 8px}table.t th{background:var(--tl2)}
+.sl{display:flex;align-items:center;gap:8px;margin:4px 0}.sl label{min-width:90px;font-weight:800}.sl input{flex:1;accent-color:var(--tl)}
+footer{text-align:center;color:#999;font-size:.8rem;padding:10px 10px 70px}
+.rt{direction:ltr;unicode-bidi:isolate;display:inline-block}.wx,.bx{border:1px solid #dbe5f5;border-radius:12px;padding:8px 10px;margin:8px 0;background:#fbfcff}.wxq{font-weight:700;line-height:2}.wst{background:#fff;border-right:4px solid var(--tl);border-radius:8px;padding:4px 10px;margin:5px 0;animation:in .3s;line-height:2}.wst.fin{border-color:var(--gr);background:#eefaf2}.sn{display:inline-block;background:var(--tl);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:.8rem;margin-left:6px}.bh{background:#fff7e8;border-radius:8px;padding:6px 10px;margin:4px 0}.ans{font-weight:900;color:var(--gr);margin-top:4px}.exb{border-color:#a9c3ea}.M.det .br.r,.M.det .br.l{border:none;border-radius:0;width:0}.M.det .br.r{border-right:3px solid var(--ink)}.M.det .br.l{border-left:3px solid var(--ink)}.bkb{border-color:#f5c27a;background:#fffdf8}/*darkfix*/input,select,textarea,.cf,.M input.c{background-color:#fff !important;color:#1f2a44 !important;-webkit-text-fill-color:#1f2a44 !important;caret-color:#1f2a44}input.cf.ok{background-color:#eefaf2 !important}input.cf.no{background-color:#fdeeee !important}svg text{font-family:Cairo,Tahoma,Arial,sans-serif}
+canvas{touch-action:manipulation;max-width:100%;height:auto}
+.shk{animation:shk .4s}@keyframes shk{25%{transform:translateX(6px)}75%{transform:translateX(-6px)}}
+ol.steps{display:block;background:none}
+</style>
+</head>
+<body>
+<div class="book">
+<header><h1>🇬🇧 English – الصف التاسع</h1><div>الكتاب الحي · English for Libya Preparatory 3 · استمع وتكلم والعب</div></header>
+<div class="bar" id="bar">
+      <button data-p="home" class="on">📚 الفهرس</button>
+  <button data-p="a1">1 <bdi>At the Mall</bdi></button>
+  <button data-p="a2">1 <bdi>Car of the Year</bdi></button>
+  <button data-p="a3">1 <bdi>Describing People</bdi></button>
+  <button data-p="rv1">🏁 <bdi>Review 1</bdi></button>
+  <button data-p="b1">2 <bdi>Hobbies</bdi></button>
+  <button data-p="b2">2 <bdi>Books &amp; Films</bdi></button>
+  <button data-p="rv2">🏁 <bdi>Review 2</bdi></button>
+  <button data-p="c1">3 <bdi>Comparisons</bdi></button>
+  <button data-p="c2">3 <bdi>If …</bdi></button>
+  <button data-p="rv3">🏁 <bdi>Review 3</bdi></button>
+  <button data-p="ry1">4 <bdi>Fun with English 1</bdi></button>
+  <button data-p="d1">5 <bdi>Sports &amp; News</bdi></button>
+  <button data-p="d2">5 <bdi>Plans &amp; Surveys</bdi></button>
+  <button data-p="rv5">🏁 <bdi>Review 5</bdi></button>
+  <button data-p="f1">6 <bdi>Jobs</bdi></button>
+  <button data-p="f2">6 <bdi>Directions</bdi></button>
+  <button data-p="rv6">🏁 <bdi>Review 6</bdi></button>
+  <button data-p="h1">7 <bdi>Travel</bdi></button>
+  <button data-p="h2">7 <bdi>Libya &amp; Sudan</bdi></button>
+  <button data-p="rv7">🏁 <bdi>Review 7</bdi></button>
+  <button data-p="ry2">8 <bdi>Fun with English 2</bdi></button>
+</div>
+<style>
+.sl{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px 0;font-weight:800}
+.sl input[type=range]{width:200px;accent-color:var(--tl)}
+.pool{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.pool button{border:2px solid var(--line);border-radius:12px;background:#fff;padding:7px 11px;font-family:inherit;font-weight:800;cursor:pointer;font-size:.92rem}
+.pool button.sel{border-color:var(--tl);background:var(--tl2)}
+.pool button.ok{border-color:#2fb24c;background:#e6f7ea}.pool button.no{border-color:#e5484d;background:#fde8e8}
+.cat{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}
+.cat>div{border:2px dashed var(--line);border-radius:14px;padding:8px;min-height:70px;text-align:center;cursor:pointer}
+.cat>div b{display:block;margin-bottom:4px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.steps li{background:#fff;border:2px solid var(--line);border-radius:12px;padding:8px 12px;margin:6px 0;font-weight:800;cursor:pointer;display:flex;gap:8px;align-items:center}
+.steps li.ok{border-color:#2fb24c;background:#e6f7ea}.steps li b{min-width:26px;height:26px;border-radius:50%;background:var(--tl);color:#fff;display:grid;place-items:center;font-size:.85rem}
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0}
+.tools button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px 2px;font-family:inherit;font-weight:800;font-size:.72rem;cursor:pointer}
+.tools button svg{width:100%;height:58px;display:block}.tools button.sel{border-color:var(--tl);background:var(--tl2)}
+.hz{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.hz button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px;cursor:pointer;font-family:inherit;font-weight:800;font-size:.75rem}
+.hz button.sel{border-color:var(--tl);background:var(--tl2)}.hz button.ok{border-color:#2fb24c;background:#e6f7ea}
+.hz svg{width:64px;height:64px;display:block;margin:auto}
+.big2{font-size:1.5rem;font-weight:900;text-align:center;margin:6px 0}
+.matr{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:8px 0}
+.matr button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 2px;font-family:inherit;font-weight:800;font-size:.8rem;cursor:pointer}
+.matr button span{font-size:1.6rem;display:block}.matr button.sel{border-color:var(--tl);background:var(--tl2)}
+.ptab{display:grid;grid-template-columns:repeat(18,1fr);gap:2px;direction:ltr;margin:8px 0}
+.ptab div{aspect-ratio:1;border-radius:4px;font-size:.55rem;font-weight:900;display:grid;place-items:center;cursor:pointer;line-height:1}
+.ptab div.m{background:#ffd8a8}.ptab div.n{background:#b2f2bb}.ptab div.g{background:#a5d8ff}.ptab div.sel{outline:3px solid #e5484d}
+</style>
+<style>
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.chips button{border:2px solid var(--line);border-radius:20px;background:#fff;padding:6px 12px;font-family:inherit;font-weight:800;cursor:pointer}
+.chips button.on{border-color:var(--tl);background:var(--tl2)}
+.sl{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;margin:6px 0;font-weight:800}
+.sl input[type=range]{flex:1;min-width:130px;max-width:300px}
+.sl select{font-family:inherit;font-weight:800;font-size:1rem;border:2px solid var(--tl);border-radius:10px;padding:4px 6px;max-width:100%}
+.tbl{width:100%;border-collapse:collapse;margin:8px 0;font-weight:800;text-align:center;background:#fff}.tbl td,.tbl th{border:2px solid var(--line);padding:5px}.tbl th{background:var(--tl2)}
+.big2{font-size:1.12rem;font-weight:900;text-align:center;color:var(--tl);margin:6px 0;line-height:1.9}
+.eq{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:"Cambria Math","Times New Roman",serif;font-weight:700;background:#fff;border:1.5px solid var(--line);border-radius:8px;padding:0 6px;color:#1b1b1b}
+.mis{background:linear-gradient(135deg,#0b4f3c,#0ca678);color:#fff;border-radius:18px;padding:12px 14px;margin:10px 0;box-shadow:0 6px 18px rgba(8,126,139,.25)}
+.mis h4{margin:0 0 6px;font-size:1.05rem}.mis .g{display:flex;align-items:center;gap:8px;font-weight:800;padding:4px 0;opacity:.85;transition:.3s}
+.mis .g i{font-style:normal;width:26px;height:26px;border-radius:50%;border:2px solid #fff;display:inline-flex;align-items:center;justify-content:center;flex:none;font-size:.9rem}
+.mis .g.ok{opacity:1}.mis .g.ok i{background:#ffd43b;border-color:#ffd43b;color:#0b3954;animation:pop .4s}
+.mis .pr{height:8px;background:rgba(255,255,255,.25);border-radius:6px;margin-top:6px;overflow:hidden}.mis .pr b{display:block;height:100%;background:#ffd43b;width:0;transition:width .5s}
+.lab canvas{background:#fff;border-radius:14px}
+.hud{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;font-weight:900;margin:6px 0}.hud span{background:#fff;border:2px solid var(--line);border-radius:12px;padding:3px 10px}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:#0b3954;color:#ffd43b;font-weight:900;padding:10px 18px;border-radius:30px;z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.25);animation:pop .4s}
+</style>
+
+<style>
+.en{direction:ltr;unicode-bidi:isolate;font-family:"Segoe UI",Roboto,Arial,sans-serif;font-weight:800}
+.say{cursor:pointer;background:#fff3bf;border:2px solid #ffe066;border-radius:12px;padding:2px 9px;display:inline-block;margin:2px;direction:ltr;unicode-bidi:isolate;font-family:"Segoe UI",Roboto,Arial,sans-serif;font-weight:800;color:#212529}
+.say:active{transform:scale(.96)}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:8px}
+.fc{background:#fff;border:2px solid var(--line);border-radius:16px;padding:8px 4px;text-align:center;cursor:pointer;transition:.2s;user-select:none}
+.fc i{display:block;font-style:normal;font-size:2.4rem;line-height:1.25}.fc b{display:block;direction:ltr;font-family:"Segoe UI",Roboto,Arial,sans-serif;font-size:1.02rem}.fc small{display:block;color:#868e96;min-height:1.2em;font-weight:700}
+.fc.h{border-color:var(--tl);background:var(--tl2)}.fc.pl{animation:pop .35s}
+.bld{background:#fff;border:2px solid var(--line);border-radius:18px;padding:12px;text-align:center}
+.bld .ar{color:#495057;font-weight:700;margin-bottom:6px}.bld .line{min-height:52px;border:2px dashed var(--tl);border-radius:14px;padding:6px;direction:ltr;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;margin-bottom:8px}
+.bld .pool{direction:ltr;display:flex;flex-wrap:wrap;gap:6px;justify-content:center}.bld .w{font-family:"Segoe UI",Roboto,Arial,sans-serif;font-weight:800;font-size:1.05rem;border:2px solid var(--line);background:#fff;border-radius:12px;padding:6px 11px;cursor:pointer}
+.bld .line .w{background:var(--tl2);border-color:var(--tl)}.bld .st{margin-top:8px;font-weight:800;color:#495057}
+.lis{background:#fff;border:2px solid var(--line);border-radius:18px;padding:12px;text-align:center}.lis .play{font-size:1.4rem;font-weight:900;border:none;border-radius:50px;background:var(--tl);color:#fff;padding:12px 26px;cursor:pointer;font-family:inherit}
+.lis .ops{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}.lis .ops button{font-size:1.05rem;border:2px solid var(--line);background:#fff;border-radius:14px;padding:10px 4px;cursor:pointer;font-family:"Segoe UI",Roboto,Arial,sans-serif;font-weight:800}
+.lis .ops button i{display:block;font-style:normal;font-size:2rem}.lis .ops button.ok{background:#d3f9d8;border-color:#2f9e44}.lis .ops button.no{background:#ffe3e3;border-color:#e03131}
+.srt{background:#fff;border:2px solid var(--line);border-radius:18px;padding:12px;text-align:center}
+.srt .card{font-size:1.15rem;font-weight:900;min-height:56px;display:flex;align-items:center;justify-content:center;padding:8px;border-radius:14px;background:var(--tl2);margin-bottom:10px;animation:pop .35s}
+.srt .bins{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.srt .bins button{flex:1;min-width:90px;font-family:inherit;font-weight:900;font-size:1rem;border:2px solid var(--tl);background:#fff;border-radius:14px;padding:10px 6px;cursor:pointer}
+.srt .bins button.ok{background:#d3f9d8;border-color:#2f9e44}.srt .bins button.no{background:#ffe3e3;border-color:#e03131}.srt .st{margin-top:8px;font-weight:800;color:#495057}
+.stepsB{display:flex;flex-direction:column;gap:6px}.stepsB button{text-align:center;font-family:"Segoe UI",Roboto,Arial,sans-serif;font-weight:800;border:2px solid var(--line);border-radius:12px;background:#fff;padding:9px 12px;cursor:pointer;direction:ltr}.stepsB button.ok{background:#d3f9d8;border-color:#2f9e44;pointer-events:none}
+.read{direction:ltr;text-align:left;background:#fff;border:2px solid var(--line);border-radius:16px;padding:12px 14px;font-family:"Segoe UI",Roboto,Arial,sans-serif;font-size:1.05rem;line-height:1.9}
+.read .say{background:none;border:none;padding:0 1px;margin:0;font-weight:600}.read .say:hover,.read .say.on{background:#fff3bf}
+.info{background:#fff9db;border:2px solid #ffe066;border-radius:14px;padding:8px 12px;font-weight:700;margin:6px 0;min-height:30px;text-align:center}
+.tbl td,.tbl th{direction:ltr}
+</style>
+<section class="page on" id="home">
+  <h2>فهرس الكتاب</h2>
+  <div class="idea">🇬🇧 أهلًا بك في كتاب English for Libya – Preparatory 3 الحي!<small>كل كلمة أو جملة عليها 🔊 اضغط عليها لتسمع نطقها بصوت إنجليزي حقيقي. هنا تصمم مولًا وسيارة العام، وترسم صديقك وتصفه، وتقارن الحيوانات، وتطلق الصقر، وتقود السيارة إلى المكتبة، وتقارن ليبيا بالسودان… وفي كل درس <b>مهمات</b> 🎯 تملأ شريط إنجازك ⭐</small></div>
+  <div class="hud" id="allStars"></div>
+  <div id="toc"></div>
+</section>
+<section class="page" id="a1">
+  <div class="muted">Unit 1 · Describing Things · ص 8–10</div>
+  <h2><span class="num">1</span><span class="en">At the Mall</span> · في المركز التجاري والوقت</h2>
+  <div class="idea">💡 نصف المكان بـ <b class="en">There is / There are</b> و <b class="en">It has</b>: <span class="say" data-say="There&#x27;s an information desk and there are lots of clothes shops.">🔊 There&#x27;s an information desk and there are lots of clothes shops.</span><small>المستمر في الحاضر والماضي: <span class="say" data-say="I&#x27;m waiting in a queue.">🔊 I&#x27;m waiting in a queue.</span> <span class="say" data-say="What were you doing? I was queuing to buy an ice cream.">🔊 What were you doing? I was queuing to buy an ice cream.</span></small></div>
+  <div class="mis" id="mis_a1"></div>
+  <div class="box lab"><h3>🛍️ بطاقات: أشياء في المول</h3><div id="mlF"></div></div>
+  <div class="box lab"><h3>🏬 المختبر: صمّم مولك وصِفه</h3><div class="chips" id="mlK"></div><canvas id="mlC" class="cv" width="640" height="280"></canvas><div class="big2" id="mlOut"></div></div>
+  <div class="box lab"><h3>🕰️ المختبر: الساعة الرقمية الناطقة</h3><canvas id="ckC" class="cv" width="640" height="230"></canvas><div class="chips" id="ckK"></div><div class="big2" id="ckOut"></div></div>
+  <div class="box lab"><h3>🧩 رتّب الجملة</h3><div id="ba1"></div></div>
+</section>
+
+<section class="page" id="a2">
+  <div class="muted">Unit 1 · Describing Things · ص 11–14</div>
+  <h2><span class="num">1</span><span class="en">Car of the Year &amp; Adverts</span> · السيارة والإعلانات والتعليل</h2>
+  <div class="idea">💡 نذكر الغرض بـ <b class="en">so you can</b> و <b class="en">to help you</b>: <span class="say" data-say="It has disc brakes to help you stop quickly.">🔊 It has disc brakes to help you stop quickly.</span><small>الكلمات المركبة: <b class="en">windproof = wind + proof</b> · <b class="en">disc brakes</b> · <span class="say" data-say="The car has a CD player so you can listen to music.">🔊 The car has a CD player so you can listen to music.</span></small></div>
+  <div class="mis" id="mis_a2"></div>
+  <div class="box lab"><h3>🚗 بطاقات: مزايا السيارة</h3><div id="crF"></div></div>
+  <div class="box lab"><h3>🔧 المختبر: صمّم سيارة العام</h3><div class="chips" id="crK"></div><canvas id="crC" class="cv" width="640" height="260"></canvas><div class="big2" id="crOut"></div></div>
+  <div class="box lab"><h3>🪥 المختبر: قارن فرش الأسنان</h3><div id="tbT"></div><div id="tbQ"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qa2"></div></div>
+</section>
+
+<section class="page" id="a3">
+  <div class="muted">Unit 1 · Describing Things · ص 15–19</div>
+  <h2><span class="num">1</span><span class="en">What do they look like?</span> · وصف الأشخاص</h2>
+  <div class="idea">💡 المظهر: <span class="say" data-say="She&#x27;s got curly brown hair and dark brown eyes.">🔊 She&#x27;s got curly brown hair and dark brown eyes.</span> · الشخصية: <span class="say" data-say="He&#x27;s really kind and talkative.">🔊 He&#x27;s really kind and talkative.</span><small>ترتيب الصفات: رأي ← حجم ← عمر ← شكل ← لون ← أصل ← مادة: <span class="say" data-say="She has beautiful, curly, black hair.">🔊 She has beautiful, curly, black hair.</span></small></div>
+  <div class="mis" id="mis_a3"></div>
+  <div class="box lab"><h3>🧑 المختبر: ارسم صديقك ووصفه</h3><div class="sl">💇 الشعر</div><div class="chips" id="pfH"></div><div class="sl">🎨 اللون</div><div class="chips" id="pfC"></div><div class="sl">👀 العينان</div><div class="chips" id="pfE"></div><div class="sl">📏 الطول</div><div class="chips" id="pfT"></div><canvas id="pfC2" class="cv" width="640" height="260"></canvas><div class="btns"><button class="btn main" id="pfGo">🔊 صِف صديقي</button></div><div class="big2" id="pfOut"></div></div>
+  <div class="box lab"><h3>😊 بطاقات: صفات الشخصية</h3><div id="chF"></div></div>
+  <div class="box lab"><h3>🎧 من هو؟</h3><div id="chL"></div></div>
+  <div class="box"><h3>✏️ تدرّب: ترتيب الصفات</h3><div id="qa3"></div></div>
+</section>
+
+<section class="page" id="rv1"><div class="muted">Unit 1 · Describing Things · مراجعة</div><h2>🏁 <span class="en">Unit 1 Review: Describing Things</span></h2><div class="sc" id="rv1Sc"></div><div id="rv1Q"></div><div class="btns"><button class="btn or" id="rv1New">🔄 اختبار جديد</button></div></section>
+
+<section class="page" id="b1">
+  <div class="muted">Unit 2 · Spare Time Activities · ص 22–23 و 30</div>
+  <h2><span class="num">2</span><span class="en">Hobbies &amp; Suggestions</span> · الهوايات والاقتراحات</h2>
+  <div class="idea">💡 نعبّر عن الحب والكره بالفعل + ing: <span class="say" data-say="I enjoy swimming but I don&#x27;t like fishing.">🔊 I enjoy swimming but I don&#x27;t like fishing.</span><small>الاقتراح: <span class="say" data-say="Why not go to the beach?">🔊 Why not go to the beach?</span> <span class="say" data-say="How about going to the park?">🔊 How about going to the park?</span> <span class="say" data-say="I&#x27;d rather go to the cinema.">🔊 I&#x27;d rather go to the cinema.</span></small></div>
+  <div class="mis" id="mis_b1"></div>
+  <div class="box lab"><h3>🎣 بطاقات: الهوايات</h3><div id="hbF"></div></div>
+  <div class="box lab"><h3>❤️ المختبر: مقياس الحب والكره</h3><div class="chips" id="lkA"></div><canvas id="lkC" class="cv" width="640" height="240"></canvas><div class="chips" id="lkV"></div><div class="big2" id="lkOut"></div></div>
+  <div class="box lab"><h3>🗣️ حوار: أين نذهب بعد الظهر؟</h3><div id="sgD"></div></div>
+  <div class="box lab"><h3>🧩 رتّب الجملة</h3><div id="bb1"></div></div>
+</section>
+
+<section class="page" id="b2">
+  <div class="muted">Unit 2 · Spare Time Activities · ص 24–29</div>
+  <h2><span class="num">2</span><span class="en">Books, Films &amp; Invitations</span> · الكتب والأفلام والدعوات</h2>
+  <div class="idea">💡 أسئلة الحاضر والماضي: <span class="say" data-say="What character do you play?">🔊 What character do you play?</span> <span class="say" data-say="How did you get the part?">🔊 How did you get the part?</span><small>عن فيلم: <span class="say" data-say="It&#x27;s called Lion of the Desert. It was released in 1981.">🔊 It&#x27;s called Lion of the Desert. It was released in 1981.</span></small></div>
+  <div class="mis" id="mis_b2"></div>
+  <div class="box lab"><h3>📚 لعبة: ما نوع القصة؟</h3><div id="stS"></div></div>
+  <div class="box lab"><h3>🎬 ملف فيلم: Lion of the Desert</h3><div id="ffR"></div><div class="btns"><button class="btn main" id="ffGo">🔊 اقرأ لي</button></div><div id="ffQ"></div></div>
+  <div class="box lab"><h3>🎟️ حوار: دعوة إلى حفل التخرج</h3><div id="ivD"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qb2"></div></div>
+</section>
+
+<section class="page" id="rv2"><div class="muted">Unit 2 · Spare Time Activities · مراجعة</div><h2>🏁 <span class="en">Unit 2 Review: Spare Time</span></h2><div class="sc" id="rv2Sc"></div><div id="rv2Q"></div><div class="btns"><button class="btn or" id="rv2New">🔄 اختبار جديد</button></div></section>
+
+<section class="page" id="c1">
+  <div class="muted">Unit 3 · Our World · ص 36–41</div>
+  <h2><span class="num">3</span><span class="en">Creatures &amp; Comparisons</span> · الحيوانات والمقارنة</h2>
+  <div class="idea">💡 المقارنة: <span class="say" data-say="A bear is bigger than a wolf.">🔊 A bear is bigger than a wolf.</span> <span class="say" data-say="A wolf is not as big as a bear.">🔊 A wolf is not as big as a bear.</span><small>التفضيل: <b class="en">cold → colder → the coldest</b> · <b class="en">useful → more useful → the most useful</b></small></div>
+  <div class="mis" id="mis_c1"></div>
+  <div class="box lab"><h3>🦅 بطاقات: حيوانات عالمنا</h3><div id="anF"></div></div>
+  <div class="box lab"><h3>⚖️ المختبر: ميزان المقارنة</h3><div class="sl">🐾 الحيوان الأول</div><div class="chips" id="cmA"></div><div class="sl">🐾 الحيوان الثاني</div><div class="chips" id="cmB"></div><div class="sl">📏 الصفة</div><div class="chips" id="cmP"></div><canvas id="cmC" class="cv" width="640" height="260"></canvas><div class="big2" id="cmOut"></div></div>
+  <div class="box lab"><h3>🏞️ لعبة: أين يعيش؟</h3><div id="hbS"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qc1"></div></div>
+</section>
+
+<section class="page" id="c2">
+  <div class="muted">Unit 3 · Our World · ص 38–45</div>
+  <h2><span class="num">3</span><span class="en">If … &amp; Wildlife</span> · الشرط والحياة البرية</h2>
+  <div class="idea">💡 الشرط الأول (محتمل): <span class="say" data-say="If the population increases, we will need more food.">🔊 If the population increases, we will need more food.</span><small>الشرط الثاني (خيالي): <span class="say" data-say="If we didn&#x27;t have any spiders, we would have more mosquitoes.">🔊 If we didn&#x27;t have any spiders, we would have more mosquitoes.</span> · <span class="say" data-say="Several species of birds can be seen.">🔊 Several species of birds can be seen.</span></small></div>
+  <div class="mis" id="mis_c2"></div>
+  <div class="box lab"><h3>🦅 المختبر: سباق الصقر 240 كم/س</h3><canvas id="fcC" class="cv" width="640" height="260"></canvas><div class="btns"><button class="btn main" id="fcGo">🦅 أطلق الصقر</button></div><div class="big2" id="fcOut"></div></div>
+  <div class="box lab"><h3>🔮 المختبر: ماذا لو…؟</h3><div class="chips" id="ifK"></div><canvas id="ifC" class="cv" width="640" height="220"></canvas><div class="big2" id="ifOut"></div></div>
+  <div class="box lab"><h3>🧩 رتّب جملة الشرط</h3><div id="bc2"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qc2"></div></div>
+</section>
+
+<section class="page" id="rv3"><div class="muted">Unit 3 · Our World · مراجعة</div><h2>🏁 <span class="en">Unit 3 Review: Our World</span></h2><div class="sc" id="rv3Sc"></div><div id="rv3Q"></div><div class="btns"><button class="btn or" id="rv3New">🔄 اختبار جديد</button></div></section>
+
+<section class="page" id="ry1">
+  <div class="muted">Unit 4 · Fun with English 1 · ص 50–57</div>
+  <h2><span class="num">4</span><span class="en">Fun with English 1</span> · تحدٍّ 🏆</h2>
+  <div class="idea">🎧 نصيحة الاستماع: لا تحتاج لفهم كل كلمة! استمع إلى الكلمات العالية البطيئة والمعلومات المكررة. ثم تحدَّ نفسك في الوحدات 1 و2 و3.</div>
+  <div class="box lab"><h3>🎧 استمع واختر</h3><div id="f1L"></div></div>
+  <div class="sc" id="ry1Sc"></div><div id="ry1Q"></div><div class="btns"><button class="btn or" id="ry1New">🔄 تحدٍّ جديد</button></div>
+</section>
+
+<section class="page" id="d1">
+  <div class="muted">Unit 5 · The Media · ص 58–62</div>
+  <h2><span class="num">5</span><span class="en">Sports &amp; the News</span> · الرياضة والصحف</h2>
+  <div class="idea">💡 الماضي المستمر للخلفية والماضي البسيط للحدث: <span class="say" data-say="It was raining when Fuad joined a new club.">🔊 It was raining when Fuad joined a new club.</span><small><span class="say" data-say="Nadia was playing in the park. A dog chased her.">🔊 Nadia was playing in the park. A dog chased her.</span> · <b class="en">the</b> قبل بعض الدول: <b class="en">the UK, the UAE, the USA</b></small></div>
+  <div class="mis" id="mis_d1"></div>
+  <div class="box lab"><h3>⚽ بطاقات: الرياضات وأدواتها</h3><div id="spF"></div></div>
+  <div class="box lab"><h3>📰 لعبة: في أي قسم من الجريدة؟</h3><div id="nwS"></div></div>
+  <div class="box lab"><h3>🐕 المختبر: قصة «الولد ينقذ الطفلة»</h3><canvas id="stC" class="cv" width="640" height="260"></canvas><div class="chips" id="stK"></div><div class="big2" id="stOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qd1"></div></div>
+</section>
+
+<section class="page" id="d2">
+  <div class="muted">Unit 5 · The Media · ص 63–68</div>
+  <h2><span class="num">5</span><span class="en">Buying, Planning &amp; Surveys</span> · البيع والمستقبل والاستطلاع</h2>
+  <div class="idea">💡 المستقبل المؤكد بـ <b class="en">will</b>: <span class="say" data-say="The Science activities will start at nine fifteen.">🔊 The Science activities will start at nine fifteen.</span><small>نتائج الاستطلاع: <span class="say" data-say="Most people like reading cartoons.">🔊 Most people like reading cartoons.</span> <span class="say" data-say="A few people like fashion.">🔊 A few people like fashion.</span></small></div>
+  <div class="mis" id="mis_d2"></div>
+  <div class="box lab"><h3>🚲 حوار: دراجة للبيع</h3><div id="bkD"></div></div>
+  <div class="box lab"><h3>📅 المختبر: أسبوع أنشطة المدرسة</h3><div id="wkT"></div><div id="wkQ"></div></div>
+  <div class="box lab"><h3>📊 المختبر: استطلاع الصف</h3><div class="chips" id="svK"></div><canvas id="svC" class="cv" width="640" height="240"></canvas><div class="btns"><button class="btn main" id="svGo">🔊 اقرأ النتائج</button></div><div class="big2" id="svOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qd2"></div></div>
+</section>
+
+<section class="page" id="rv5"><div class="muted">Unit 5 · The Media · مراجعة</div><h2>🏁 <span class="en">Unit 5 Review: The Media</span></h2><div class="sc" id="rv5Sc"></div><div id="rv5Q"></div><div class="btns"><button class="btn or" id="rv5New">🔄 اختبار جديد</button></div></section>
+
+<section class="page" id="f1">
+  <div class="muted">Unit 6 · Jobs and Careers · ص 72–75</div>
+  <h2><span class="num">6</span><span class="en">Jobs &amp; Future Plans</span> · المهن و going to و who/which</h2>
+  <div class="idea">💡 نعرّف بـ <b class="en">who</b> للأشخاص و <b class="en">which / that</b> للأشياء: <span class="say" data-say="A mechanic is someone who repairs cars and vans.">🔊 A mechanic is someone who repairs cars and vans.</span><small><b class="en">going to</b> = خطة: <span class="say" data-say="I&#x27;m going to be a vet.">🔊 I&#x27;m going to be a vet.</span> · <b class="en">will</b> = أمر مؤكد: <span class="say" data-say="It will take a long time.">🔊 It will take a long time.</span></small></div>
+  <div class="mis" id="mis_f1"></div>
+  <div class="box lab"><h3>👷 بطاقات: المهن وأماكن العمل</h3><div id="jwF"></div></div>
+  <div class="box lab"><h3>🕵️ لعبة: Who am I?</h3><div id="jwL"></div></div>
+  <div class="box lab"><h3>🏫 المختبر: مدرسة المستقبل</h3><div id="sfR"></div><div class="btns"><button class="btn main" id="sfGo">🔊 اقرأ لي</button></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qf1"></div></div>
+</section>
+
+<section class="page" id="f2">
+  <div class="muted">Unit 6 · Jobs and Careers · ص 76–81</div>
+  <h2><span class="num">6</span><span class="en">Articles &amp; Directions</span> · أدوات التعريف والاتجاهات</h2>
+  <div class="idea">💡 <b class="en">a/an</b> لشيء عام · <b class="en">the</b> لشيء معروف أو فريد: <span class="say" data-say="The sun is shining.">🔊 The sun is shining.</span><small>بلا أداة: المواد والأماكن: <span class="say" data-say="I&#x27;m good at maths.">🔊 I&#x27;m good at maths.</span> · الاتجاهات: <span class="say" data-say="Turn left at the lights.">🔊 Turn left at the lights.</span></small></div>
+  <div class="mis" id="mis_f2"></div>
+  <div class="box lab"><h3>🗂️ لعبة: a / an / the / —</h3><div id="arS"></div></div>
+  <div class="box lab"><h3>🗺️ المختبر: إلى المكتبة!</h3><canvas id="mpC" class="cv" width="640" height="300"></canvas><div class="chips" id="mpK"></div><div class="big2" id="mpOut"></div></div>
+  <div class="box lab"><h3>💬 مدونة منى: ماذا أفعل بعد المدرسة؟</h3><div id="mnL"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qf2"></div></div>
+</section>
+
+<section class="page" id="rv6"><div class="muted">Unit 6 · Jobs and Careers · مراجعة</div><h2>🏁 <span class="en">Unit 6 Review: Jobs and Careers</span></h2><div class="sc" id="rv6Sc"></div><div id="rv6Q"></div><div class="btns"><button class="btn or" id="rv6New">🔄 اختبار جديد</button></div></section>
+
+<section class="page" id="h1">
+  <div class="muted">Unit 7 · Other Countries · ص 84–87</div>
+  <h2><span class="num">7</span><span class="en">Countries &amp; Travel</span> · الدول والسفر وظروف الحال</h2>
+  <div class="idea">💡 ظرف الحال: كيف؟ أين؟ متى؟ والترتيب: كيف ← أين ← متى: <span class="say" data-say="My friend sang very well at the concert last night.">🔊 My friend sang very well at the concert last night.</span><small><span class="say" data-say="People in Holland often ride bicycles.">🔊 People in Holland often ride bicycles.</span> · <span class="say" data-say="They crossed the desert on foot.">🔊 They crossed the desert on foot.</span></small></div>
+  <div class="mis" id="mis_h1"></div>
+  <div class="box lab"><h3>🎁 لعبة: من أين التذكار؟</h3><div id="svL"></div></div>
+  <div class="box lab"><h3>🚌 بطاقات: وسائل التنقل</h3><div id="trF"></div></div>
+  <div class="box lab"><h3>🗂️ لعبة: How? Where? When?</h3><div id="adS"></div></div>
+  <div class="box lab"><h3>🧩 رتّب الجملة</h3><div id="bh1"></div></div>
+</section>
+
+<section class="page" id="h2">
+  <div class="muted">Unit 7 · Other Countries · ص 88–93</div>
+  <h2><span class="num">7</span><span class="en">Apologies &amp; Two African Countries</span> · الاعتذار وليبيا والسودان</h2>
+  <div class="idea">💡 الاعتذار والرد: <span class="say" data-say="I&#x27;m so sorry. I just knocked your bag on the floor.">🔊 I&#x27;m so sorry. I just knocked your bag on the floor.</span> <span class="say" data-say="Don&#x27;t mention it.">🔊 Don&#x27;t mention it.</span><small>المبني للمجهول: <span class="say" data-say="Cotton and sugar are grown in Sudan.">🔊 Cotton and sugar are grown in Sudan.</span> <span class="say" data-say="Leptis Magna was built about two thousand years ago.">🔊 Leptis Magna was built about two thousand years ago.</span></small></div>
+  <div class="mis" id="mis_h2"></div>
+  <div class="box lab"><h3>🙏 حوار: ماذا تقول؟</h3><div id="apL"></div></div>
+  <div class="box lab"><h3>🌍 المختبر: ليبيا والسودان</h3><div class="chips" id="cfK"></div><canvas id="cfC" class="cv" width="640" height="300"></canvas><div class="big2" id="cfOut"></div></div>
+  <div class="box lab"><h3>☕ قصة: Life is Like a Cup of Coffee</h3><div id="cpR"></div><div class="btns"><button class="btn main" id="cpGo">🔊 اقرأ لي</button></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qh2"></div></div>
+</section>
+
+<section class="page" id="rv7"><div class="muted">Unit 7 · Other Countries · مراجعة</div><h2>🏁 <span class="en">Unit 7 Review: Other Countries</span></h2><div class="sc" id="rv7Sc"></div><div id="rv7Q"></div><div class="btns"><button class="btn or" id="rv7New">🔄 اختبار جديد</button></div></section>
+
+<section class="page" id="ry2">
+  <div class="muted">Unit 8 · Fun with English 2 · ص 96–103</div>
+  <h2><span class="num">8</span><span class="en">Fun with English 2</span> · تحدٍّ 🏆</h2>
+  <div class="idea">🏆 التحدي الأخير للوحدات 5 و6 و7. أحسنت في كل الكتاب! 🎉</div>
+  <div class="box lab"><h3>🎧 استمع واختر</h3><div id="f2L"></div></div>
+  <div class="sc" id="ry2Sc"></div><div id="ry2Q"></div><div class="btns"><button class="btn or" id="ry2New">🔄 تحدٍّ جديد</button></div>
+</section>
+<footer>الكتاب الحي · مبني على كتاب English for Libya – Preparatory 3 Course Book (مركز المناهج التعليمية والبحوث التربوية – ليبيا)</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const pages=[...document.querySelectorAll('.page')],nb=[...document.querySelectorAll('#bar button')];
+function go(id){pages.forEach(p=>p.classList.toggle('on',p.id===id));nb.forEach(b=>b.classList.toggle('on',b.dataset.p===id));window.scrollTo({top:0,behavior:'smooth'})}
+nb.forEach(b=>b.onclick=()=>go(b.dataset.p));
+(function(){const h=location.hash.slice(1);if(h&&$(h))go(h);addEventListener('hashchange',()=>{const x=location.hash.slice(1);if($(x))go(x)})})();
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),nz=(a,b)=>{let x;do{x=rnd(a,b)}while(!x);return x},pick=a=>a[rnd(0,a.length-1)];
+const ms=n=>n<0?'−'+(-n):String(n);const pr=n=>n<0?'('+ms(n)+')':String(n);
+const V='س';
+const parse=s=>{s=(s||'').trim().replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[−–—]/g,'-').replace(/\s/g,'');if(s===''||s==='+'||s==='-')return NaN;if(/^-?\d+\/\d+$/.test(s)){const[a,b]=s.split('/');return a/b}return Number(s)};
+function term(c,p,first,v){v=v||V;if(c===0)return'';const a=Math.abs(c);const cs=(a===1&&p>0)?'':String(a);const vs=p===0?'':(p===1?v:v+'<sup>'+p+'</sup>');const s=c<0?(first?'−':' − '):(first?'':' + ');return s+cs+vs}
+function poly(cs,v){let out='',f=true;cs.forEach(([c,p])=>{if(c){out+=term(c,p,f,v);f=false}});return out||'0'}
+/* matrix renderer: A 2D array, o:{det, cls(i,j)->class, inp:prefix} */
+function M(A,o){o=o||{};const r=A.length,c=A[0].length;let g='<div class="g" style="grid-template-columns:repeat('+c+',auto)">';
+ A.forEach((row,i)=>row.forEach((v,j)=>{const cl=o.cls?o.cls(i,j)||'':'';g+=o.inp?'<input class="c '+cl+'" data-i="'+i+'" data-j="'+j+'" data-m="'+o.inp+'" value="'+(v===''?'':ms(v))+'" inputmode="text">':'<div class="c '+cl+'" data-i="'+i+'" data-j="'+j+'">'+(typeof v==='number'?ms(Math.round(v*1000)/1000):v)+'</div>'}));
+ return '<span class="M'+(o.det?' det':'')+'"'+(o.id?' id="'+o.id+'"':'')+'><span class="br r"></span>'+g+'</div><span class="br l"></span></span>'}
+function readM(host,name,r,c){const A=Array.from({length:r},()=>Array(c).fill(0));host.querySelectorAll('input[data-m="'+name+'"]').forEach(x=>{const v=parse(x.value);A[+x.dataset.i][+x.dataset.j]=isNaN(v)?0:v});return A}
+const det2=a=>a[0][0]*a[1][1]-a[0][1]*a[1][0];
+const minor=(a,i,j)=>a.filter((_,r)=>r!==i).map(row=>row.filter((_,c)=>c!==j));
+const det3=a=>a[0][0]*det2(minor(a,0,0))-a[0][1]*det2(minor(a,0,1))+a[0][2]*det2(minor(a,0,2));
+const det=a=>a.length===2?det2(a):det3(a);
+const rM=(r,c,lo,hi)=>Array.from({length:r},()=>Array.from({length:c},()=>rnd(lo==null?-5:lo,hi==null?9:hi)));
+const mul=(A,B)=>A.map(row=>B[0].map((_,j)=>row.reduce((s,v,k)=>s+v*B[k][j],0)));
+const T=A=>A[0].map((_,j)=>A.map(r=>r[j]));
+const sub='₀₁₂₃₄₅₆₇₈₉';const ij=(i,j)=>''+sub[i]+sub[j];
+function mcq(host,q,opts,right,onAns){const d=document.createElement('div');d.className='box';d.style.margin='8px 0';d.innerHTML='<div style="font-weight:800">'+q+'</div>';let dn=false;const order=opts.map((o,i)=>i).sort(()=>Math.random()-.5);
+ order.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=opts[i];b.onclick=()=>{if(dn)return;dn=true;b.classList.add(i===right?'ok':'no');if(i!==right)[...d.querySelectorAll('.opt')][order.indexOf(right)].classList.add('ok');onAns&&onAns(i===right)};d.appendChild(b)});host.appendChild(d)}
+function MCQP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();g.o=g.o.filter((x,i)=>g.o.indexOf(x)===i);const ord=g.o.map((x,i)=>i).sort(()=>Math.random()-.5);let done=false;
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div>';const opts=document.createElement('div');box.appendChild(opts);const fb=document.createElement('div');fb.className='fb';const nx=document.createElement('div');nx.className='btns';box.appendChild(fb);box.appendChild(nx);
+  ord.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=g.o[i];b.onclick=()=>{if(done)return;done=true;const r=i===0;b.classList.add(r?'ok':'no');if(!r)[...opts.children][ord.indexOf(0)].classList.add('ok');dn++;if(r)ok++;sc.textContent='✔️ صحيح: '+ok+' من '+dn;fb.className='fb '+(r?'ok':'no');fb.innerHTML=(r?'🎉 صحيح! ':'❌ ليس صحيحًا. ')+(g.ex?'<div style="font-size:.95rem;color:var(--ink);font-weight:700">'+g.ex+'</div>':'');nx.innerHTML='<button class="btn or">سؤال جديد ⬅</button>';nx.firstChild.onclick=render};opts.appendChild(b)})}render()}
+/* matrix-answer practice: gen -> {q, ans(2D), steps[]} */
+function MatP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();let tries=0;const E=g.ans.map(r=>r.map(()=>''));
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div><div style="text-align:center;margin:8px 0">= '+M(E,{inp:'z'})+'</div><div class="btns"><button class="btn main" data-k="chk">✔️ تحقّق</button><button class="btn" data-k="help">💡 أرني الحل</button><button class="btn or" data-k="new">سؤال جديد ⬅</button></div><div class="fb"></div><div class="steps"></div>';
+  const ins=[...box.querySelectorAll('input.c')],fb=box.querySelector('.fb'),st=box.querySelector('.steps');const steps=()=>{st.style.display='block';st.innerHTML='<b>الحل:</b>'+g.steps.map(s=>'<div class="mx" style="font-size:1rem">'+s+'</div>').join('')};
+  box.querySelector('[data-k=chk]').onclick=()=>{let all=true,emp=false;ins.forEach(x=>{const v=parse(x.value);if(isNaN(v)){emp=true;all=false;return}const g2=Math.abs(v-g.ans[+x.dataset.i][+x.dataset.j])<.001;x.classList.remove('ok','no');x.classList.add(g2?'ok':'no');if(!g2)all=false});
+   if(emp&&!all){fb.className='fb';fb.textContent='املأ كل الخانات';return}tries++;if(tries===1){dn++;if(all)ok++;sc.textContent='✔️ صحيح من أول محاولة: '+ok+' من '+dn}fb.className='fb '+(all?'ok':'no');fb.textContent=all?'🎉 ممتاز!':'🤔 الخانات الحمراء غير صحيحة';if(all||tries>=2)steps();if(all)setTimeout(render,2400)};
+  box.querySelector('[data-k=help]').onclick=()=>{ins.forEach(x=>{x.value=ms(g.ans[+x.dataset.i][+x.dataset.j]);x.classList.add('ok')});steps()};box.querySelector('[data-k=new]').onclick=render}render()}
+
+
+const TOC=[['Unit 1: Describing Things',8,[['','At the Mall · Telling the Time',8,'a1'],['','Car of the Year · Adverts',11,'a2'],['','What do they look like?',15,'a3'],['','Unit 1 Review',18,'rv1']]],
+ ['Unit 2: Spare Time Activities',22,[['','Hobbies & Suggestions',22,'b1'],['','Books, Films & Invitations',24,'b2'],['','Unit 2 Review',31,'rv2']]],
+ ['Unit 3: Our World',36,[['','Creatures & Comparisons',36,'c1'],['','If … & Wildlife',38,'c2'],['','Unit 3 Review',46,'rv3']]],
+ ['Unit 4: Fun with English 1',50,[['','The Challenge',50,'ry1']]],
+ ['Unit 5: The Media',58,[['','Sports & the News',58,'d1'],['','Buying, Planning & Surveys',63,'d2'],['','Unit 5 Review',69,'rv5']]],
+ ['Unit 6: Jobs and Careers',72,[['','Jobs & Future Plans',72,'f1'],['','Articles & Directions',76,'f2'],['','Unit 6 Review',81,'rv6']]],
+ ['Unit 7: Other Countries',84,[['','Countries & Travel',84,'h1'],['','Apologies · Libya & Sudan',88,'h2'],['','Unit 7 Review',92,'rv7']]],
+ ['Unit 8: Fun with English 2',96,[['','The Final Challenge',96,'ry2']]]];
+(function(){const t=$('toc');TOC.forEach(([n,pg,ls],i)=>{const r=ls.filter(l=>l[3]).length;const d=document.createElement('div');d.className='chap'+(i===0?' open':'');
+ d.innerHTML='<div><span class="cn">'+(i+1)+'</span><span style="flex:1">'+n+'</span><span class="tg '+(r?'r':'s')+'">'+(r?'جاهز ✅':'قريبًا')+'</span></div><div class="ls">'+ls.map(l=>'<div class="li'+(l[3]?' ready" data-go="'+l[3]:'')+'"><span>'+(l[3]?'✅':'⏳')+'</span><span>'+(l[0]?'<b>'+l[0]+'</b> ':'')+l[1]+'</span><span class="pg">ص '+l[2]+'</span></div>').join('')+'</div>';
+ d.firstChild.onclick=()=>d.classList.toggle('open');t.appendChild(d)});t.querySelectorAll('[data-go]').forEach(x=>x.onclick=()=>go(x.dataset.go))})();
+
+/* ================= أمثلة الكتاب وتمارينه (عام) ================= */
+const QB=s=>s.replace(/ (?=(?:أ|ب|ج|د|هـ|و)\) )/g,'<br>').replace(/ (?=\((?:i|ii|iii|iv|1|2|3)\) )/g,'<br>');
+const FX=s=>s.replace(/(−?\d+(?:\.\d+)?)\/(\d+)/g,'<span class="rt">$1/$2</span>');
+function addSecs(pid,exs,bks){const pg=$(pid);if(!pg)return;const first=[...pg.querySelectorAll('.box')].find(b=>(b.querySelector('h3')||{}).textContent&&b.querySelector('h3').textContent.trim().startsWith('✏️'));
+ if(exs&&exs.length){const b=document.createElement('div');b.className='box exb';b.innerHTML='<h3>📖 أمثلة الكتاب محلولة خطوة بخطوة</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">اضغط «الخطوة التالية» وحاول أن تتوقع الخطوة قبل أن تظهر 🤔</p>';exs.forEach(e=>b.appendChild(wex(e)));first?pg.insertBefore(b,first):pg.appendChild(b)}
+ if(bks&&bks.length){const b=document.createElement('div');b.className='box bkb';b.innerHTML='<h3>📝 تمارين الكتاب مع الحلول</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">✍️ حلّ في دفترك أولًا، ثم اضغط «تلميح» إذا احتجت، و«الحل» لتتأكد.</p>';bks.forEach(e=>b.appendChild(bkx(e)));pg.appendChild(b)}}
+function wex(e){const d=document.createElement('div');d.className='wx';let k=0;
+ d.innerHTML='<div class="wxq"><b style="color:var(--tl)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="wxs"></div><div class="btns"><button class="btn main" data-a="n">▶️ الخطوة التالية</button><button class="btn" data-a="all">📜 الحل كاملًا</button><button class="btn" data-a="r">↺ من جديد</button></div>';
+ const S=d.querySelector('.wxs'),nb=d.querySelector('[data-a=n]');const add=()=>{if(k>=e.s.length)return;const x=document.createElement('div');x.className='wst';x.innerHTML='<span class="sn">'+(k+1)+'</span>'+FX(e.s[k]);S.appendChild(x);k++;if(k>=e.s.length){nb.textContent='✅ انتهى الحل';nb.disabled=true;try{S.lastChild.classList.add('fin')}catch(_){}}};
+ nb.onclick=add;d.querySelector('[data-a=all]').onclick=()=>{while(k<e.s.length)add()};d.querySelector('[data-a=r]').onclick=()=>{k=0;S.innerHTML='';nb.disabled=false;nb.textContent='▶️ الخطوة التالية'};return d}
+function bkx(e){const d=document.createElement('div');d.className='bx';
+ d.innerHTML='<div class="wxq"><b style="color:var(--or)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="btns" style="justify-content:flex-start"><button class="btn" data-a="h">💡 تلميح</button><button class="btn ok" data-a="s">✅ الحل</button></div><div class="bh" style="display:none"></div><div class="bs" style="display:none"></div>';
+ const H=d.querySelector('.bh'),S=d.querySelector('.bs');H.innerHTML='💡 '+FX(e.h);S.innerHTML=e.s.map(x=>'<div class="wst">'+FX(x)+'</div>').join('')+(e.a?'<div class="ans">🎯 الجواب: '+FX(e.a)+'</div>':'');
+ d.querySelector('[data-a=h]').onclick=()=>{H.style.display=H.style.display==='none'?'block':'none'};d.querySelector('[data-a=s]').onclick=()=>{S.style.display=S.style.display==='none'?'block':'none'};return d}
+
+
+const nf=(v,d)=>{d=d==null?3:d;const r=Math.round(v*10**d)/10**d;return ms(r)};
+/* ================= فيزياء: الوحدة 1 ================= */
+const sci=(v,d)=>{d=d==null?2:d;if(v===0)return'0';const e=Math.floor(Math.log10(Math.abs(v)));if(e>=-2&&e<=4)return nf(v,Math.max(0,d+1-Math.max(0,e)));const m=v/10**e;return '<span dir="ltr" style="unicode-bidi:isolate">'+(+m.toFixed(d))+' × 10<sup>'+e+'</sup></span>'};
+function cv(id){const c=$(id),x=c.getContext('2d');return{c,x,W:c.width,H:c.height}}
+const loops={};function loop(id,fn){if(loops[id])return;let last=performance.now();const st=()=>{const now=performance.now(),dt=Math.min(0.05,(now-last)/1000);last=now;const pg=$(id).closest('.page');if(pg.classList.contains('on'))fn(dt);loops[id]=requestAnimationFrame(st)};loops[id]=requestAnimationFrame(st)}
+function glow(x,X,Y,r,col){const g=x.createRadialGradient(X,Y,0,X,Y,r);g.addColorStop(0,col);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.beginPath();x.arc(X,Y,r,0,7);x.fill()}
+function chg(x,X,Y,q,r){r=r||10;x.fillStyle=q>0?'#ff6b6b':'#5ab0ff';x.beginPath();x.arc(X,Y,r,0,7);x.fill();x.fillStyle='#fff';x.font='bold '+(r*1.6)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(q>0?'+':'−',X,Y+1)}
+function label(x,t,X,Y,col,sz){x.fillStyle=col||'#fff';x.font='bold '+(sz||16)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(t,X,Y)}
+
+
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){r=Math.min(r||0,Math.abs(w)/2,Math.abs(h)/2);this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();return this};
+/* ================= الصف السابع – الوحدة 1 ================= */
+/* عرض الرياضيات من اليمين لليسار كما في الكتاب: X('1 + 2 − 3 × 4') */
+const SN=n=>n<0?'−'+(-n):''+n;               // نص عدد بإشارة
+const PN=n=>n<0?'('+SN(n)+')':SN(n);          // عدد سالب بين قوسين
+function xnum(s,i){let j=i;while(j<s.length&&/[0-9.□\u0307]/.test(s[j]))j++;const v=s.slice(i,j);
+ if(s[j]==='_'&&/[0-9□]/.test(s[j+1]||'')){let a=j+1,b=a;while(/[0-9□]/.test(s[b]||''))b++;if(s[b]==='/'){let c=b+1,e=c;while(/[0-9□]/.test(s[e]||''))e++;return[{k:'f',w:v,n:s.slice(a,b),d:s.slice(c,e)},e]}}
+ if(s[j]==='/'&&/[0-9□]/.test(s[j+1]||'')){let c=j+1,e=c;while(/[0-9□]/.test(s[e]||''))e++;return[{k:'f',n:v,d:s.slice(c,e)},e]}
+ let sup='';while(j<s.length&&/[²³⁴]/.test(s[j])){sup+=s[j];j++}return[{k:'n',v,sup},j]}
+function xtok(s){const t=[];let i=0;s=String(s);
+ while(i<s.length){const c=s[i];
+  if(c===' '){i++;continue}
+  const prev=t.length?t[t.length-1]:null;const unaryOK=!prev||(prev.k==='op'||prev.v==='('||prev.v==='['||prev.v===',');
+  if((c==='−'||c==='+')&&unaryOK&&/[0-9]/.test(s[i+1]||'')){if(c==='+'&&!(prev&&prev.v==='(')){t.push({k:'op',v:c});i++;continue}let [tk,j]=xnum(s,i+1);if(/[\u0621-\u064A]/.test(s[j]||'')){let e=j;while(e<s.length&&/[\u0621-\u064A\u0640\u200C²³]/.test(s[e]))e++;tk={k:'t',c:tk,v:s.slice(j,e)};j=e}tk.sg=c;t.push(tk);i=j;continue}
+  if(/[0-9□]/.test(c)){let [tk,j]=xnum(s,i);if(/[\u0621-\u064A]/.test(s[j]||'')){let e=j;while(e<s.length&&/[\u0621-\u064A\u0640\u200C²³]/.test(s[e]))e++;tk={k:'t',c:tk,v:s.slice(j,e),sg:tk.sg};j=e}t.push(tk);i=j;continue}
+  if('+−×÷=<>≠≤≥'.includes(c)){t.push({k:'op',v:c});i++;continue}
+  if('()[]'.includes(c)){t.push({k:'b',v:c});i++;continue}
+  let j=i;while(j<s.length&&!' +−×÷=<>≠()[]'.includes(s[j])&&!/[0-9□]/.test(s[j]))j++;if(j===i)j=i+1;t.push({k:'w',v:s.slice(i,j)});i=j}
+ return t}
+const FRH=(n,d)=>'<span class="fr"><span>'+n+'</span><span>'+d+'</span></span>';
+function xspan(tok,cls){if(tok.k==='t'){const cc=tok.c.k==='f'?FRH(tok.c.n,tok.c.d):tok.c.v;return '<span class="xt'+(cls||'')+'"><span style="display:inline-flex;direction:rtl;align-items:center;gap:1px">'+(tok.sg==='−'?'<i style="font-style:normal">−</i>':'')+'<span style="direction:ltr">'+cc+'</span><span>'+tok.v+'</span></span></span>'}let num;if(tok.k==='f'){const f=FRH(tok.n,tok.d);num=tok.w?'<span class="mxn">'+tok.w+f+'</span>':f}
+ else if(tok.k==='n')num='<span style="direction:ltr;unicode-bidi:isolate">'+tok.v+(tok.sup||'')+'</span>';
+ else return '<span class="xt'+(cls||'')+'">'+tok.v+'</span>';
+ return '<span class="xt'+(cls||'')+'">'+(tok.sg&&tok.sg!=='+'?'<span class="xs">'+num+'<i>'+tok.sg+'</i></span>':tok.sg==='+'?'<span class="xs">'+num+'<i>+</i></span>':num)+'</span>'}
+const X=(s,hi)=>'<span class="x">'+xtok(s).map((t,i)=>xspan(t,hi&&i>=hi[0]&&i<=hi[1]?' hi':'')).join('')+'</span>';
+(function(){const st=document.createElement('style');st.textContent='.x{display:inline-flex;direction:rtl;gap:.28em;align-items:center;flex-wrap:wrap;font-weight:800;unicode-bidi:isolate;vertical-align:baseline}.x .xs{display:inline-flex;direction:ltr;flex-direction:row-reverse}.x .xs i{font-style:normal}.x .xt{transition:.25s;border-radius:6px;padding:0 1px}.x .xt.hi{background:#ffd54f;box-shadow:0 0 0 3px #ffd54f}';document.head.appendChild(st);
+ document.querySelectorAll('.e').forEach(e=>{e.innerHTML=X(e.textContent);e.classList.remove('e')})})();
+/* ================= علوم الصف السابع – الجزء الأول والثاني ================= */
+const C2=id=>{const c=$(id);return [c,c.getContext('2d')]};
+const FONT=(s,w)=>(w||800)+' '+s+'px Cairo, Tahoma, Arial';
+const shake=el=>{el.classList.remove('shk');void el.offsetWidth;el.classList.add('shk')};
+const cheer=()=>{try{window.FX&&FX.ok()}catch(e){}};
+const N=s=>'<bdi'+(/[\u0600-\u06FF]/.test(s)?'':' dir="ltr"')+' style="font-weight:800">'+s+'</bdi>';
+const fx=(x,k)=>String(+(+x).toFixed(k==null?2:k));
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){r=Math.min(r||0,Math.abs(w)/2,Math.abs(h)/2);this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();return this};
+/* لعبة التصنيف العامة: اختر عنصرًا ثم بيتًا */
+function sortGame(poolId,catId,outId,cats,items,done){const P=$(poolId),Cc=$(catId);let sel=null,left=items.length;P.innerHTML='';Cc.innerHTML='';
+ shuf(items).forEach(([lab,k,why])=>{const b=document.createElement('button');b.innerHTML=lab;b.dataset.k=k;b.dataset.why=why||'';b.onclick=()=>{P.querySelectorAll('button').forEach(y=>y.classList.remove('sel'));b.classList.add('sel');sel=b};P.appendChild(b)});
+ cats.forEach(([n,s,c],i)=>{const d=document.createElement('div');d.style.borderColor=c;d.innerHTML='<b style="color:'+c+'">'+n+'</b>'+(s?'<small>'+s+'</small>':'')+'<div class="pool" style="margin:4px 0"></div>';
+  d.onclick=()=>{if(!sel)return;if(+sel.dataset.k===i){sel.classList.remove('sel');sel.classList.add('ok');sel.onclick=null;d.querySelector('.pool').appendChild(sel);$(outId).innerHTML='✅ صحيح! '+sel.dataset.why;sel=null;left--;if(!left){$(outId).innerHTML='🎉 أحسنت! رتّبت كل شيء.';cheer();done&&done()}}else{shake(d);$(outId).innerHTML='🤔 حاول مرة أخرى'}};Cc.appendChild(d)});$(outId).textContent=''}
+/* اختبار فصل من 12 سؤالًا */
+function chapterTest(pfx,G){let ok=0,dn=0;const host=$(pfx+'Q');function upd(){$(pfx+'Sc').textContent=dn<G.length?'أجبت عن '+dn+' من '+G.length+' · صحيح: '+ok:(ok>=G.length-1?'🌟 ممتاز! ':ok>=G.length-3?'👍 جيد جدًا! ':'💪 راجع الدروس. ')+'النتيجة: '+ok+' من '+G.length}
+ function make(){host.innerHTML='';ok=0;dn=0;shuf(G).forEach((g,i)=>{const [q,o]=typeof g==='function'?g():g;mcq(host,(i+1)+') '+q,o,0,r=>{dn++;if(r)ok++;upd();if(dn===G.length&&ok>=G.length-3)cheer()})});upd()}
+ $(pfx+'New').onclick=make;make()}
+const bank=(arr)=>()=>{const [q,o,ex]=pick(arr);return{q,o,ex:ex||''}};
+const vis=el=>{const p=el.closest('.page');return p&&p.classList.contains('on')};
+function anim(id,fn){const [c,x]=C2(id);let t0=performance.now();(function f(t){if(vis(c))fn(x,c,(t-t0)/1000);requestAnimationFrame(f)})(t0);return[c,x]}
+const flipCards=(id,arr)=>{const C=$(id);C.innerHTML=arr.map(([ic,t,b])=>'<div class="card"><div class="fr"><span class="big">'+ic+'</span>'+t+'</div><div class="bk"><b>'+t+':</b> '+b+'</div></div>').join('');C.querySelectorAll('.card').forEach(c=>c.onclick=()=>c.classList.toggle('flip'))};
+const TF=(s,t)=>[s,t?['✔️ صح','❌ خطأ']:['❌ خطأ','✔️ صح']];
+function txt(x,s,X,Y,sz,col,al){x.font=FONT(sz||16);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='rtl';x.fillText(s,X,Y)}
+function steps(id,outId,newId,S){let k=0;function mk(){k=0;const L=$(id);L.innerHTML='';shuf(S.map((s,i)=>[s,i])).forEach(([[a,b],i])=>{const li=document.createElement('li');li.innerHTML='<b>?</b><span>'+a+'<br><small style="color:var(--soft)">'+b+'</small></span>';li.onclick=()=>{if(li.classList.contains('ok'))return;if(i===k){li.classList.add('ok');li.querySelector('b').textContent=k+1;k++;$(outId).innerHTML='✅ صحيح!';if(k===S.length){$(outId).innerHTML='🎉 رتّبت الرحلة كاملة!';cheer()}}else{shake(li);$(outId).innerHTML='🤔 ليس هذا… ما الذي جاء قبله؟'}};L.appendChild(li)});$(outId).textContent=''}$(newId).onclick=mk;mk()}
+function choiceQs(host,Q,scId){const H=$(host);let i=0,ok=0;function show(){if(i>=Q.length){H.innerHTML='<div class="big2">🎉 '+ok+' من '+Q.length+'</div><div class="btns"><button class="btn" id="'+host+'R">🔄 من جديد</button></div>';$(host+'R').onclick=()=>{i=0;ok=0;show()};if(ok>=Q.length-1)cheer();return}
+ const [s,o,why]=Q[i];const ord=shuf(o.map((t,j)=>j));H.innerHTML='<div class="scn">'+s+'</div><div class="opts2">'+ord.map(j=>'<button data-j="'+j+'">'+o[j]+'</button>').join('')+'</div><div class="fb" id="'+host+'F"></div>';
+ let dn=0;H.querySelectorAll('[data-j]').forEach(b=>b.onclick=()=>{if(dn)return;dn=1;const j=+b.dataset.j;b.classList.add(j===0?'ok':'no');if(j)H.querySelector('[data-j="0"]').classList.add('ok');else ok++;$(host+'F').innerHTML=(j?'💡 ':'✅ ')+why+'<br><button class="btn main" style="margin-top:6px" id="'+host+'N">التالي ⬅️</button>';$(host+'N').onclick=()=>{i++;show()};if(scId)$(scId).textContent='✔️ '+ok+' / '+Q.length})}show()}
+const gcd=(a,b)=>b?gcd(b,a%b):Math.abs(a);
+
+/* ================= English – الصف التاسع ================= */
+const r1=v=>Math.round(v*10)/10,r2=v=>Math.round(v*100)/100,sn=v=>v<0?'−'+(-v):''+v,EQ=s=>'<span class="eq">'+s+'</span>';
+const cpos=(c,e)=>{const r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}};
+function tL(x,s,X,Y,sz,col,al){x.font=FONT(sz||14);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='ltr';x.fillText(s,X,Y);x.direction='rtl'}
+function tA(x,s,X,Y,sz,col,al){x.font=FONT(sz||14);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='rtl';x.fillText(s,X,Y)}
+function EMJ(x,e,X,Y,sz){x.font=(sz||40)+'px "Segoe UI Emoji","Noto Color Emoji",sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(e,X,Y);x.textBaseline='alphabetic'}
+function RR(x,X,Y,W,H,r){x.beginPath();x.moveTo(X+r,Y);x.arcTo(X+W,Y,X+W,Y+H,r);x.arcTo(X+W,Y+H,X,Y+H,r);x.arcTo(X,Y+H,X,Y,r);x.arcTo(X,Y,X+W,Y,r);x.closePath()}
+function ARW(x,x1,y1,x2,y2,col,w){x.strokeStyle=col;x.fillStyle=col;x.lineWidth=w||4;x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke();const a=Math.atan2(y2-y1,x2-x1),h=10+(w||4)*1.5;x.beginPath();x.moveTo(x2+Math.cos(a)*2,y2+Math.sin(a)*2);x.lineTo(x2-h*Math.cos(a-.42),y2-h*Math.sin(a-.42));x.lineTo(x2-h*Math.cos(a+.42),y2-h*Math.sin(a+.42));x.closePath();x.fill()}
+function chipsP(id,arr,on,cb){const H=$(id);H.innerHTML=arr.map((t,i)=>'<button data-i="'+i+'"'+(i===on?' class="on"':'')+'>'+t+'</button>').join('');H.querySelectorAll('button').forEach(b=>b.onclick=()=>{H.querySelectorAll('button').forEach(y=>y.classList.toggle('on',y===b));cb(+b.dataset.i)})}
+const OPSP=(ok,bad)=>[ok,...shuf(bad.filter((b,i,a)=>String(b)!==String(ok)&&a.indexOf(b)===i)).slice(0,3)];
+const lerp=(a,b,k)=>a+(b-a)*k,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+/* لون حراري: من الأزرق البارد إلى الأحمر المتوهج */
+function heatCol(t){t=clamp(t,0,1);const st=[[59,91,219],[34,184,207],[255,212,59],[247,103,7],[224,49,49]],k=t*(st.length-1),i=Math.min(st.length-2,Math.floor(k)),f=k-i;const c=st[i].map((v,j)=>Math.round(lerp(v,st[i+1][j],f)));return 'rgb('+c+')'}
+function toast(s){const d=document.createElement('div');d.className='toast';d.innerHTML=s;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+/* ---------- نظام المهمات ---------- */
+const MS={};let MSAVE={};try{MSAVE=JSON.parse(localStorage.getItem('e9mis')||'{}')}catch(e){}
+function MIS(pid,goals){MS[pid]={g:goals,d:new Set(MSAVE[pid]||[])};misR(pid)}
+function misR(pid){const m=MS[pid],H=$('mis_'+pid);if(!H)return;H.innerHTML='<h4>🎯 مهمات الدرس ('+m.d.size+' / '+m.g.length+')</h4>'+m.g.map((g,i)=>'<div class="g'+(m.d.has(i)?' ok':'')+'"><i>'+(m.d.has(i)?'★':i+1)+'</i>'+g+'</div>').join('')+'<div class="pr"><b style="width:'+(100*m.d.size/m.g.length)+'%"></b></div>';starsAll()}
+function done(pid,i){const m=MS[pid];if(!m||m.d.has(i))return;m.d.add(i);MSAVE[pid]=[...m.d];try{localStorage.setItem('e9mis',JSON.stringify(MSAVE))}catch(e){}misR(pid);cheer();toast('⭐ مهمة منجزة: '+m.g[i]+(m.d.size===m.g.length?' · 🏆 أكملت الدرس!':''))}
+function starsAll(){const H=$('allStars');if(!H)return;let a=0,b=0;for(const k in MS){a+=MS[k].d.size;b+=MS[k].g.length}H.innerHTML='<span>⭐ إنجازاتك: '+a+' / '+b+'</span>'}
+/* مهمة: عدد إجابات صحيحة في تدريب */
+function qGoal(host,pid,i,n){let c=0;$(host).addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;setTimeout(()=>{if(b.classList.contains('ok')&&++c>=n)done(pid,i)},0)})}
+/* ترمومتر زجاجي */
+function therm(x,X,Y0,Y1,t,mn,mx,col,lab){const k=clamp((t-mn)/(mx-mn),0,1),top=Y1-(Y1-Y0)*k;x.fillStyle='rgba(233,236,239,.9)';RR(x,X-9,Y0-12,18,Y1-Y0+14,9);x.fill();x.strokeStyle='#adb5bd';x.lineWidth=2;x.stroke();
+ x.beginPath();x.arc(X,Y1+14,16,0,7);x.fillStyle=col;x.fill();x.strokeStyle='#adb5bd';x.stroke();x.fillStyle=col;x.fillRect(X-4,top,8,Y1-top+8);x.fillStyle='rgba(255,255,255,.5)';x.fillRect(X-6,Y0-6,3,Y1-Y0);
+ if(lab)lab.forEach(([v,s])=>{const y=Y1-(Y1-Y0)*(v-mn)/(mx-mn);x.strokeStyle='#495057';x.lineWidth=1.5;x.beginPath();x.moveTo(X+10,y);x.lineTo(X+18,y);x.stroke();tL(x,s,X+22,y+4,11,'#495057','left')})}
+
+
+/* ================= محرك الصوت الإنجليزي ================= */
+const EW=s=>s,ABASE='audio-e9/';
+function hsh(s){let h=0x811c9dc5;for(const ch of s){h^=ch.codePointAt(0);h=Math.imul(h,0x01000193)>>>0}return ('0000000'+h.toString(16)).slice(-8)}
+let CUR=null,SEQ=0;
+function tts(t,cb){try{const u=new SpeechSynthesisUtterance(t);u.lang='en-GB';u.rate=.9;if(cb)u.onend=cb;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){cb&&cb()}}
+function SAY(t,cb){try{if(CUR){CUR.onended=null;CUR.pause()}}catch(e){}const txt=t.replace(/^m\|/,'');let fb=0;const a=new Audio(ABASE+hsh(t)+'.mp3');CUR=a;const fall=()=>{if(fb)return;fb=1;tts(txt,cb)};a.onerror=fall;a.onended=()=>cb&&cb();const p=a.play();if(p&&p.catch)p.catch(fall)}
+function SAYSEQ(L){const id=++SEQ;let i=0;const nx=()=>{if(id!==SEQ||i>=L.length)return;SAY(L[i++],nx)};nx()}
+const S=t=>'<span class="say" data-say="'+t.replace(/"/g,'&quot;')+'">🔊 '+t.replace(/^m\|/,'')+'</span>';
+document.addEventListener('click',e=>{const s=e.target.closest('.say');if(!s)return;e.stopPropagation();SEQ++;SAY(s.dataset.say);s.classList.add('on');setTimeout(()=>s.classList.remove('on'),900)},true);
+const enq=s=>'<span class="en">'+s+'</span>';
+/* بطاقات: [إيموجي, نص إنجليزي, معنى عربي, نص النطق اختياري] */
+function FLASH(id,items,cb){const H=$(id),heard=new Set();H.innerHTML='<div class="fgrid">'+items.map((it,i)=>'<div class="fc" data-i="'+i+'"><i>'+it[0]+'</i><b>'+it[1].replace(/^m\|/,'')+'</b><small></small></div>').join('')+'</div><div class="sc" style="margin-top:6px"></div>';
+ const sc=H.querySelector('.sc'),up=()=>sc.textContent='🔊 استمعت إلى '+heard.size+' من '+items.length;up();
+ H.querySelectorAll('.fc').forEach(c=>c.onclick=()=>{const i=+c.dataset.i,it=items[i];SEQ++;SAY(it[3]||it[1]);c.classList.add('h');c.classList.remove('pl');void c.offsetWidth;c.classList.add('pl');c.querySelector('small').textContent=it[2];heard.add(i);up();cb&&cb(heard.size,items.length)})}
+/* استماع: items=[[وسم الخيار html, نص النطق]] */
+function LISTEN(id,items,cb,n){n=n||4;const H=$(id);let ok=0,dn=0,cur=null,lock=0;
+ const nx=()=>{lock=0;cur=pick(items);const ops=shuf([cur,...shuf(items.filter(x=>x!==cur)).slice(0,n-1)]);
+  H.innerHTML='<div class="lis"><button class="play">🔊 استمع</button><div class="ops">'+ops.map((o,i)=>'<button data-i="'+i+'">'+o[0]+'</button>').join('')+'</div><div class="sc" style="margin-top:8px">✔️ صحيح: '+ok+' من '+dn+'</div></div>';
+  H.querySelector('.play').onclick=()=>{SEQ++;SAY(cur[1])};H.querySelectorAll('.ops button').forEach(b=>b.onclick=()=>{if(lock)return;lock=1;dn++;const o=ops[+b.dataset.i];if(o===cur){b.classList.add('ok');ok++;cheer();cb&&cb(ok)}else{b.classList.add('no');shake(b);H.querySelectorAll('.ops button')[ops.indexOf(cur)].classList.add('ok')}setTimeout(nx,o===cur?900:1700)});setTimeout(()=>{if(vis(H))SAY(cur[1])},250)};
+ nx()}
+/* ترتيب الجملة: [[الجملة, تلميح عربي]] */
+function BUILD(id,L,cb){const H=$(id);let ok=0,bag=[];const nx=()=>{if(!bag.length)bag=shuf(L.slice());const [s,ar]=bag.pop(),words=s.replace(/^m\|/,'').split(' ');let pool=shuf(words.map((w,i)=>[w,i]));if(words.length>1&&pool.every((p,i)=>p[1]===i))pool.reverse();let line=[];
+  const draw=()=>{H.innerHTML='<div class="bld"><div class="ar">'+(ar||'رتّب الكلمات لتكوّن جملة صحيحة')+'</div><div class="line">'+line.map((p,i)=>'<button class="w" data-l="'+i+'">'+p[0]+'</button>').join('')+'</div><div class="pool">'+pool.map((p,i)=>'<button class="w" data-p="'+i+'">'+p[0]+'</button>').join('')+'</div><div class="st">✔️ جمل صحيحة: '+ok+'</div></div>';
+   H.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{line.push(pool.splice(+b.dataset.p,1)[0]);draw();chk()});H.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{pool.push(line.splice(+b.dataset.l,1)[0]);draw()})};
+  const chk=()=>{if(pool.length)return;if(line.map(p=>p[0]).join(' ')===words.join(' ')){ok++;cheer();SEQ++;SAY(s);H.querySelector('.line').style.background='#d3f9d8';cb&&cb(ok);setTimeout(nx,1800)}else{shake(H.querySelector('.line'));toast('ترتيب غير صحيح، حاول مرة أخرى');setTimeout(()=>{pool=shuf(words.map((w,i)=>[w,i]));line=[];draw()},700)}};draw()};nx()}
+/* فرز مع نطق: items=[[نص إنجليزي, رقم الفئة, إيموجي]] */
+function SORTE(id,items,cats,cb){const H=$(id);let ok=0,n=0,cur=null,bag=[],lock=0;const nx=()=>{lock=0;if(!bag.length)bag=shuf(items.slice());cur=bag.pop();
+  H.innerHTML='<div class="srt"><div class="card">'+(cur[2]?'<span style="font-size:2rem;margin-left:8px">'+cur[2]+'</span>':'')+S(cur[0])+'</div><div class="bins">'+cats.map((c,i)=>'<button data-i="'+i+'">'+c+'</button>').join('')+'</div><div class="st">✔️ صحيح: '+ok+' من '+n+'</div></div>';SEQ++;setTimeout(()=>{if(vis(H))SAY(cur[0])},200);
+  H.querySelectorAll('.bins button').forEach(b=>b.onclick=()=>{if(lock)return;lock=1;n++;const r=+b.dataset.i===cur[1];if(r){b.classList.add('ok');ok++;cheer();cb&&cb(ok)}else{b.classList.add('no');shake(b);H.querySelectorAll('.bins button')[cur[1]].classList.add('ok')}setTimeout(nx,r?750:1600)})};nx()}
+/* نص قراءة: جمل قابلة للضغط */
+function READ(id,btn,L){const H=$(id);H.innerHTML=L.map(s=>S(s)).join(' ').replace(/🔊 /g,'');$(btn).onclick=()=>{const sp=[...H.querySelectorAll('.say')];let i=0;const id2=++SEQ;const nx=()=>{sp.forEach(x=>x.classList.remove('on'));if(id2!==SEQ||i>=sp.length)return;sp[i].classList.add('on');SAY(L[i++],nx)};nx()}}
+function TOG(id,arr,cb){const H=$(id),st=arr.map(()=>false);H.innerHTML=arr.map((t,i)=>'<button data-i="'+i+'">'+t+'</button>').join('');H.querySelectorAll('button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;st[i]=!st[i];b.classList.toggle('on',st[i]);cb&&cb(st)});return st}
+const onTap=(c,f)=>c.addEventListener('pointerdown',e=>f(cpos(c,e)));
+/* الساعة */
+const HW=['one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'],MW=["o'clock",'fifteen','thirty','forty-five'];
+const TIMESAY=(h,m)=>"It's "+HW[h-1]+' '+MW[m/15]+'.';
+function DIALOG(id,L){$(id).innerHTML=L.map((s,i)=>'<div style="display:flex;justify-content:'+(s.startsWith('m|')?'flex-end':'flex-start')+';margin:4px 0;align-items:center"><span style="font-size:1.5rem;margin:0 6px">'+(s.startsWith('m|')?'👨':'👧')+'</span>'+S(s)+'</div>').join('')+'<div class="btns"><button class="btn main">🔊 استمع إلى الحوار كله</button></div>';$(id).querySelector('.btn').onclick=()=>SAYSEQ(L)}
+
+/* ================= Unit 1 · At the Mall ================= */
+MIS('a1',['استمع إلى 8 أشياء في المول','غيّر 6 أشياء في مولك واستمع إلى الوصف','استمع إلى 6 أوقات مختلفة','رتّب 3 جمل صحيحة']);
+FLASH('mlF',[['🕐',EW("a clock"),'ساعة'],['ℹ️',EW("an information desk"),'مكتب الاستعلامات'],['🧍‍♂️🧍‍♀️',EW("a queue"),'طابور'],['👮',EW("a security guard"),'حارس أمن'],['🛍️',EW("a shop assistant"),'بائع'],['🪴',EW("a plant"),'نبتة'],['🎬',EW("a cinema"),'سينما'],['🛗',EW("a lift"),'مصعد'],['↗️',EW("an escalator"),'سلّم متحرك'],['🅿️',EW("a car park"),'موقف سيارات']],n=>{if(n>=8)done('a1',0)});
+(function(){const [c,x]=C2('mlC');const IT=[['🎬','cinema',EW("There's a cinema."),EW("There isn't a cinema.")],['🛒','supermarket',EW("There's a supermarket."),EW("There isn't a supermarket.")],['🅿️','car park',EW("It has a big car park."),EW("It doesn't have a car park.")],['↗️','escalators',EW("There are escalators."),EW("There aren't any escalators.")],['👕','clothes shops',EW("There are lots of clothes shops."),EW("There aren't any clothes shops.")],['🏊','swimming pool',EW("It has a swimming pool."),EW("It doesn't have a swimming pool.")],['🎮','video game shop',EW("There's a shop that sells video games."),EW("There isn't a video game shop.")],['🪴','plants',EW("There are some plants and trees."),EW("There aren't any plants.")]];
+ const on=IT.map((_,i)=>i%2===0);let ch=new Set();
+ const K=$('mlK');K.innerHTML=IT.map((t,i)=>'<button data-i="'+i+'"'+(on[i]?' class="on"':'')+'>'+t[0]+' '+t[1]+'</button>').join('');
+ K.querySelectorAll('button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;on[i]=!on[i];b.classList.toggle('on',on[i]);ch.add(i+':'+on[i]);SEQ++;const s=IT[i][on[i]?2:3];SAY(s);$('mlOut').innerHTML=S(s);if(ch.size>=6)done('a1',1)});
+ $('mlOut').innerHTML='اضغط على الأشياء لتضيفها أو تحذفها من مولك';
+ anim('mlC',(x,c,t)=>{x.clearRect(0,0,640,280);x.fillStyle='#e7f5ff';x.fillRect(0,0,640,280);x.fillStyle='#fff';RR(x,30,30,580,220,16);x.fill();x.strokeStyle='#74c0fc';x.lineWidth=3;x.stroke();
+  x.fillStyle='#d0ebff';x.beginPath();x.moveTo(30,30);x.lineTo(320,4);x.lineTo(610,30);x.fill();tL(x,'TRIPOLI MALL',320,24,14,'#1864ab');
+  IT.forEach((it,i)=>{const X=90+(i%4)*150,Y=95+Math.floor(i/4)*95;x.fillStyle=on[i]?'#fff9db':'#f1f3f5';RR(x,X-60,Y-38,120,80,12);x.fill();x.strokeStyle=on[i]?'#fab005':'#dee2e6';x.lineWidth=2;x.stroke();
+   if(on[i]){EMJ(x,it[0],X,Y-4+Math.sin(t*3+i)*3,34);tL(x,it[1],X,Y+32,11,'#495057')}else{x.globalAlpha=.25;EMJ(x,it[0],X,Y-4,30);x.globalAlpha=1;tL(x,'✗',X,Y+32,14,'#e03131')}})})})();
+(function(){const [c,x]=C2('ckC');const T=[[12,10,EW("It's ten past twelve. It's twelve ten.")],[15,0,EW("It's three o'clock.")],[15,20,EW("It's twenty past three. It's three twenty.")],[15,40,EW("It's twenty to four. It's three forty.")],[17,50,EW("It's ten to six. It's five fifty.")],[19,20,EW("It's twenty past seven. It's seven twenty.")],[20,45,EW("It's quarter to nine. It's eight forty-five.")],[21,30,EW("It's half past nine. It's nine thirty.")]];
+ let k=0,cur=[12,10],tg=[12,10];const seen=new Set();const p2=n=>String(n).padStart(2,'0');
+ chipsP('ckK',T.map(a=>p2(a[0])+':'+p2(a[1])),-1,i=>{k=i;tg=[T[i][0],T[i][1]];seen.add(i);SEQ++;SAY(T[i][2]);$('ckOut').innerHTML=S(T[i][2]);if(seen.size>=6)done('a1',2)});$('ckOut').innerHTML='اختر وقتًا رقميًا لتراه على الساعة وتسمعه';
+ anim('ckC',(x,c,t)=>{const a=cur[0]*60+cur[1],b=tg[0]*60+tg[1];const m=a+(b-a)*.08;cur=[Math.floor(m/60),m%60];x.clearRect(0,0,640,230);
+  const X=170,Y=115,R=95;x.fillStyle='#fff';x.beginPath();x.arc(X,Y,R,0,7);x.fill();x.strokeStyle='#1971c2';x.lineWidth=6;x.stroke();for(let i=1;i<=12;i++){const an=i*Math.PI/6-Math.PI/2;tL(x,String(i),X+Math.cos(an)*76,Y+Math.sin(an)*76+6,16,'#343a40')}
+  const mm=m%60,hh=(m/60)%12;const ha=hh*Math.PI/6-Math.PI/2,ma=mm*Math.PI/30-Math.PI/2;x.lineCap='round';x.strokeStyle='#212529';x.lineWidth=8;x.beginPath();x.moveTo(X,Y);x.lineTo(X+Math.cos(ha)*48,Y+Math.sin(ha)*48);x.stroke();x.strokeStyle='#e8590c';x.lineWidth=5;x.beginPath();x.moveTo(X,Y);x.lineTo(X+Math.cos(ma)*72,Y+Math.sin(ma)*72);x.stroke();x.fillStyle='#212529';x.beginPath();x.arc(X,Y,7,0,7);x.fill();
+  x.fillStyle='#212529';RR(x,330,70,270,90,14);x.fill();tL(x,p2(tg[0])+':'+p2(tg[1]),465,135,52,'#69db7c');tL(x,tg[0]>=12?'pm':'am',465,190,16,'#495057')})})();
+BUILD('ba1',[[EW("There's an information desk near the entrance."),'يوجد مكتب استعلامات قرب المدخل'],[EW("I was waiting in a queue."),'كنت أنتظر في الطابور'],[EW("What were you doing at ten o'clock?"),'ماذا كنت تفعل الساعة العاشرة؟'],[EW("The mall doesn't have a swimming pool."),'المول ليس فيه مسبح'],[EW("He is wearing a green jacket."),'يرتدي سترة خضراء']],n=>{if(n>=3)done('a1',3)});
+
+/* ================= Unit 1 · Car of the Year ================= */
+MIS('a2',['استمع إلى 6 مزايا للسيارة','أضف 5 مزايا لسيارتك واسمع السبب','أجب عن 4 أسئلة مقارنة الفُرش صحيحة','أجب عن 3 أسئلة صحيحة']);
+FLASH('crF',[['🎈',EW("airbags"),'وسائد هوائية'],['🛰️',EW("GPS"),'نظام تحديد المواقع'],['☀️',EW("a sunroof"),'فتحة سقف'],['🪟',EW("electric windows"),'نوافذ كهربائية'],['🕶️',EW("tinted windows"),'زجاج مظلّل'],['💿',EW("a CD player"),'مشغّل أقراص'],['❄️',EW("air conditioning"),'تكييف'],['🛑',EW("disc brakes"),'فرامل قرصية']],n=>{if(n>=6)done('a2',0)});
+(function(){const [c,x]=C2('crC');const F=[['🎈','airbags',EW("It has airbags to help you keep safe in an accident.")],['🛰️','GPS',EW("It has GPS so you won't get lost.")],['☀️','sunroof',EW("It has a sunroof so you can see the sky.")],['🪟','electric windows',EW("It has electric windows so you can open them easily.")],['🕶️','tinted windows',EW("It has tinted windows to help you keep cool.")],['💿','CD player',EW("It has a CD player so you can listen to music.")],['🛑','disc brakes',EW("It has disc brakes to help you stop quickly.")]];
+ const on=F.map(()=>false);let n=0;const K=$('crK');K.innerHTML=F.map((f,i)=>'<button data-i="'+i+'">'+f[0]+' '+f[1]+'</button>').join('');
+ K.querySelectorAll('button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;on[i]=!on[i];b.classList.toggle('on',on[i]);if(on[i]){SEQ++;SAY(F[i][2]);$('crOut').innerHTML=S(F[i][2]);if(on.filter(Boolean).length>=5)done('a2',1)}});$('crOut').innerHTML='اضغط على المزايا لتضيفها إلى «سيارة العام»';
+ anim('crC',(x,c,t)=>{x.clearRect(0,0,640,260);x.fillStyle='#f8f9fa';x.fillRect(0,0,640,260);x.fillStyle='#adb5bd';x.fillRect(0,215,640,45);for(let i=0;i<8;i++){x.fillStyle='#fff';x.fillRect(((i*90-t*60)%720+720)%720-40,236,50,5)}
+  const X=320,Y=170;x.fillStyle='#5f3dc4';x.beginPath();x.moveTo(X-200,Y+20);x.lineTo(X-190,Y-20);x.lineTo(X-110,Y-30);x.lineTo(X-60,Y-80);x.lineTo(X+80,Y-80);x.lineTo(X+140,Y-30);x.lineTo(X+200,Y-20);x.lineTo(X+205,Y+20);x.closePath();x.fill();
+  x.fillStyle=on[4]?'#343a40':'#d0ebff';x.beginPath();x.moveTo(X-48,Y-72);x.lineTo(X+5,Y-72);x.lineTo(X+5,Y-34);x.lineTo(X-90,Y-34);x.fill();x.beginPath();x.moveTo(X+15,Y-72);x.lineTo(X+74,Y-72);x.lineTo(X+122,Y-34);x.lineTo(X+15,Y-34);x.fill();
+  if(on[2]){x.fillStyle='#ffd43b';x.fillRect(X-30,Y-86,80,7)}
+  [-120,120].forEach(d=>{x.fillStyle='#212529';x.beginPath();x.arc(X+d,Y+22,30,0,7);x.fill();x.fillStyle=on[6]?'#e03131':'#868e96';x.beginPath();x.arc(X+d,Y+22,13,0,7);x.fill()});
+  const lab=[[0,X-20,Y-10],[1,X+60,Y-10],[3,X-70,Y-50],[5,X+100,Y-5]];lab.forEach(([i,a,b])=>{if(on[i])EMJ(x,F[i][0],a,b+Math.sin(t*4+i)*3,26)});
+  tL(x,'⭐ CAR OF THE YEAR · '+on.filter(Boolean).length+'/7',320,30,18,'#5f3dc4')})})();
+(function(){$('tbT').innerHTML='<table class="tbl en"><tr><th>Toothbrush</th><th>Price</th><th>Features</th></tr><tr><td>Pro dental</td><td>30 LYD</td><td>battery · 1,000 times a minute · great for travelling</td></tr><tr><td>Sonic 2000</td><td>50 LYD</td><td>changeable brushes · 2,000 times a minute · good for the whole family</td></tr><tr><td>Maxi Clean</td><td>12 LYD</td><td>four bright colours · no changing needed</td></tr></table>';
+ MCQP($('tbQ'),bank([[S(EW("Which toothbrush is the cheapest?")),[enq('Maxi Clean'),enq('Pro dental'),enq('Sonic 2000')]],[S(EW("Which toothbrush is the most expensive?")),[enq('Sonic 2000'),enq('Maxi Clean'),enq('Pro dental')]],[S(EW("Which toothbrush is the best for travelling?")),[enq('Pro dental'),enq('Sonic 2000'),enq('Maxi Clean')]],[S(EW("Which toothbrush is the fastest?")),[enq('Sonic 2000'),enq('Pro dental'),enq('Maxi Clean')]],[S(EW("Which toothbrush is available in the most colours?")),[enq('Maxi Clean'),enq('Sonic 2000'),enq('Pro dental')]],[S(EW("Which toothbrush has changeable brushes?")),[enq('Sonic 2000'),enq('Maxi Clean'),enq('Pro dental')]]]));qGoal('tbQ','a2',2,4)})();
+MCQP($('qa2'),bank([[enq('It has disc brakes ___ help you stop quickly.'),[enq('to'),enq('so'),enq('for'),enq('can')]],[enq('It has a CD player ___ you can listen to music.'),[enq('so'),enq('to'),enq('for'),enq('because to')]],[enq('wind + proof = ___'),[enq('windproof'),enq('proofwind'),enq('windsproof'),enq('wind-proofs')]],[enq('information + desk = ___'),[enq('information desk'),enq('desk information'),enq('informations desk'),enq('informdesk')]],[enq('A tent that insects can\'t get into is ___.'),[enq('insect-proof'),enq('waterproof'),enq('lightweight'),enq('windy')]],[enq('Glass you can\'t see through well:'),[enq('tinted windows'),enq('a sunroof'),enq('airbags'),enq('GPS')]]]));qGoal('qa2','a2',3,3);
+
+/* ================= Unit 1 · What do they look like? ================= */
+MIS('a3',['صِف 4 أصدقاء مختلفين','استمع إلى 8 صفات شخصية','أجب عن 4 ألغاز «من هو؟» صحيحة','أجب عن 3 أسئلة صحيحة']);
+(function(){const [c,x]=C2('pfC2');const HA=[['straight','black',EW("He has straight black hair."),'#212529',0],['straight','brown',EW("He has straight brown hair."),'#8d5524',0],['straight','fair',EW("He has straight fair hair."),'#f2c94c',0],['curly','black',EW("He has curly black hair."),'#212529',1],['curly','brown',EW("He has curly brown hair."),'#8d5524',1],['curly','fair',EW("He has curly fair hair."),'#f2c94c',1]];
+ const EY=[['blue',EW("He has blue eyes."),'#339af0'],['brown',EW("He has brown eyes."),'#6f4e37'],['green',EW("He has green eyes."),'#40c057']],TL=[['tall',EW("He's quite tall."),1.15],['short',EW("He's short."),.85],['a bit thin',EW("He's a bit thin."),1]];
+ let ht=0,hc=0,e=0,h=0;const desc=new Set();const hi=()=>HA.findIndex(a=>a[0]===['straight','curly'][ht]&&a[1]===['black','brown','fair'][hc]);
+ const say=()=>[HA[hi()][2],EY[e][1],TL[h][1]];const show=()=>$('pfOut').innerHTML=say().map(S).join(' ');
+ chipsP('pfH',['straight','curly'],0,i=>{ht=i;show()});chipsP('pfC',['⚫ black','🟤 brown','🟡 fair'],0,i=>{hc=i;show()});chipsP('pfE',['🔵 blue','🟤 brown','🟢 green'],0,i=>{e=i;show()});chipsP('pfT',['📏 tall','📐 short','🥢 a bit thin'],0,i=>{h=i;show()});show();
+ $('pfGo').onclick=()=>{SAYSEQ(say());desc.add([ht,hc,e,h].join());if(desc.size>=4)done('a3',0)};
+ anim('pfC2',(x,c,t)=>{x.clearRect(0,0,640,260);x.fillStyle='#f3f0ff';x.fillRect(0,0,640,260);const s=TL[h][2],X=320,Y=135;const wx=h===2?.8:1;
+  x.fillStyle='#4dabf7';RR(x,X-55*wx,Y+40*s,110*wx,120,30);x.fill();x.fillStyle='#f1c27d';x.beginPath();x.ellipse(X,Y,48*wx,58*s,0,0,7);x.fill();
+  const H=HA[hi()];x.fillStyle=H[3];if(H[4]){for(let i=0;i<9;i++){x.beginPath();x.arc(X-44*wx+i*11*wx,Y-48*s+Math.sin(i*2)*5,12,0,7);x.fill()}}else{x.beginPath();x.ellipse(X,Y-40*s,52*wx,26*s,0,Math.PI,0);x.fill();x.fillRect(X-52*wx,Y-42*s,12,40)}
+  const bl=Math.sin(t*2)>.97?1:0;[-18,18].forEach(d=>{x.fillStyle='#fff';x.beginPath();x.ellipse(X+d*wx,Y-5,10,bl?1:7,0,0,7);x.fill();if(!bl){x.fillStyle=EY[e][2];x.beginPath();x.arc(X+d*wx,Y-5,5,0,7);x.fill()}});
+  x.strokeStyle='#c2255c';x.lineWidth=3;x.beginPath();x.arc(X,Y+18,14,.2,Math.PI-.2);x.stroke();tL(x,'My best friend',320,250,14,'#5f3dc4')})})();
+FLASH('chF',[['💪',EW("hard-working"),'مجتهد'],['⚽',EW("sporty"),'رياضي'],['🎻',EW("musical"),'موسيقي'],['🎨',EW("artistic"),'فنان'],['😊',EW("friendly"),'ودود'],['🗣️',EW("talkative"),'كثير الكلام'],['💗',EW("kind"),'لطيف'],['🤝',EW("helpful"),'متعاون'],['💡',EW("creative"),'مبدع'],['🧠',EW("clever"),'ذكي']],n=>{if(n>=8)done('a3',1)});
+LISTEN('chL',[['<i>🎨</i>artistic',EW("She paints really well and loves drawing.")],['<i>⚽</i>sporty',EW("He plays volleyball and football every day.")],['<i>🎻</i>musical',EW("She plays the violin beautifully.")],['<i>💪</i>hard-working',EW("He always does his homework and studies a lot.")],['<i>🗣️</i>talkative',EW("She talks all the time!")],['<i>🤝</i>helpful',EW("He always helps his friends with their homework.")],['<i>😊</i>friendly',EW("She smiles and says hello to everyone.")]],n=>{if(n>=4)done('a3',2)});
+MCQP($('qa3'),bank([[enq('She has ___ hair.'),[enq('beautiful, curly, black'),enq('black, curly, beautiful'),enq('curly, beautiful, black'),enq('black, beautiful, curly')]],[enq('It is a ___ table.'),[enq('beautiful, little, black, French'),enq('French, black, little, beautiful'),enq('little, beautiful, French, black'),enq('black, French, little, beautiful')]],[enq('He ___ straight black hair.'),[enq('has'),enq('is'),enq('have'),enq('wearing')]],[enq('He ___ a white shirt.'),[enq('is wearing'),enq('has wearing'),enq('wearing'),enq('is wear')]],[enq('He loves playing sports. He\'s ___.'),[enq('sporty'),enq('artistic'),enq('musical'),enq('shy')]],[enq('She ___ quite tall.'),[enq('is'),enq('has'),enq('have'),enq('does')]],[enq('He was ___ his white trainers.'),[enq('wearing'),enq('wear'),enq('wore'),enq('wears')]]]));qGoal('qa3','a3',3,3);
+chapterTest('rv1',[[enq('There ___ an information desk.'),[enq('is'),enq('are'),enq('has')]],[enq('There ___ lots of clothes shops.'),[enq('are'),enq('is'),enq('has')]],[enq('It ___ a big car park.'),[enq('has'),enq('is'),enq('are')]],[enq('There aren\'t ___ sweet shops.'),[enq('any'),enq('some'),enq('a')]],[enq('15:40 = It\'s twenty ___ four.'),[enq('to'),enq('past'),enq('at')]],[enq('12:10 = It\'s ten ___ twelve.'),[enq('past'),enq('to'),enq('on')]],[enq('What were you doing? I ___ queuing.'),[enq('was'),enq('were'),enq('am')]],[enq('It has airbags ___ help you keep safe.'),[enq('to'),enq('so'),enq('for')]],[enq('The cheapest toothbrush costs ___ money.'),[enq('the least'),enq('the most'),enq('more')]],[enq('She has ___ hair.'),[enq('long, curly, brown'),enq('brown, curly, long'),enq('curly, brown, long')]],[enq('He plays the violin. He\'s ___.'),[enq('musical'),enq('sporty'),enq('artistic')]],[enq('You can go up and down on an ___.'),[enq('escalator'),enq('information desk'),enq('car park')]]]);
+
+/* ================= Unit 2 · Hobbies ================= */
+MIS('b1',['استمع إلى 8 هوايات','عبّر عن 6 مشاعر مختلفة في مقياس الحب','استمع إلى حوار الاقتراحات','رتّب 3 جمل صحيحة']);
+FLASH('hbF',[['🏊',EW("swimming"),'السباحة'],['🎣',EW("fishing"),'الصيد'],['⛵',EW("sailing"),'الإبحار'],['🐎',EW("horse riding"),'ركوب الخيل'],['⛺',EW("camping"),'التخييم'],['🏄',EW("surfing"),'ركوب الأمواج'],['📿',EW("jewellery making"),'صناعة المجوهرات'],['🧶',EW("blanket weaving"),'نسج البطاطين'],['📺',EW("watching television"),'مشاهدة التلفاز'],['🪙',EW("collecting things"),'جمع الأشياء']],n=>{if(n>=8)done('b1',0)});
+(function(){const [c,x]=C2('lkC');const A=[['🏊','swimming'],['🎣','fishing'],['⛵','sailing'],['🐎','horse riding'],['⛺','camping'],['🏄','surfing']],V=['love','enjoy','like',"don't like",'hate'];const L=[[EW("I love swimming."),EW("I enjoy swimming."),EW("I like swimming."),EW("I don't like swimming."),EW("I hate swimming.")],[EW("I love fishing."),EW("I enjoy fishing."),EW("I like fishing."),EW("I don't like fishing."),EW("I hate fishing.")],[EW("I love sailing."),EW("I enjoy sailing."),EW("I like sailing."),EW("I don't like sailing."),EW("I hate sailing.")],[EW("I love horse riding."),EW("I enjoy horse riding."),EW("I like horse riding."),EW("I don't like horse riding."),EW("I hate horse riding.")],[EW("I love camping."),EW("I enjoy camping."),EW("I like camping."),EW("I don't like camping."),EW("I hate camping.")],[EW("I love surfing."),EW("I enjoy surfing."),EW("I like surfing."),EW("I don't like surfing."),EW("I hate surfing.")]];
+ let a=0,v=0,lv=4;const said=new Set();const go=()=>{const s=L[a][v];SEQ++;SAY(s);$('lkOut').innerHTML=S(s);said.add(a+'-'+v);if(said.size>=6)done('b1',1)};
+ chipsP('lkA',A.map(z=>z[0]+' '+z[1]),0,i=>{a=i;go()});chipsP('lkV',['😍 love','😀 enjoy','🙂 like','😕 don\'t like','😖 hate'],-1,i=>{v=i;go()});$('lkOut').innerHTML='اختر الهواية ثم شعورك نحوها';
+ anim('lkC',(x,c,t)=>{x.clearRect(0,0,640,240);const tgt=4-v;lv+=(tgt-lv)*.1;const g=x.createLinearGradient(80,0,560,0);g.addColorStop(0,'#e03131');g.addColorStop(.5,'#fab005');g.addColorStop(1,'#2f9e44');x.fillStyle=g;RR(x,80,150,480,24,12);x.fill();
+  ['hate',"don't like",'like','enjoy','love'].forEach((w,i)=>tL(x,w,80+i*120,205,13,'#495057'));const X=80+lv*120;x.fillStyle='#212529';x.beginPath();x.moveTo(X,145);x.lineTo(X-12,120);x.lineTo(X+12,120);x.fill();
+  EMJ(x,['😖','😕','🙂','😀','😍'][Math.round(lv)],X,90,44);EMJ(x,A[a][0],120,60+Math.sin(t*3)*4,50);tL(x,'+ ing',540,70,22,'#5f3dc4')})})();
+(function(){DIALOG('sgD',[EW("What would you like to do this afternoon?"),EW("m|How about going to the park?"),EW("No, it's too hot."),EW("m|What about playing football?"),EW("I'd rather not. Let's go to the mall. There's a new game shop there."),EW("m|Yes! That's a good idea."),EW("I hope you have some money!")]);$('sgD').querySelector('.btn').addEventListener('click',()=>setTimeout(()=>done('b1',2),6000))})();
+BUILD('bb1',[[EW("I enjoy swimming in the sea."),'أستمتع بالسباحة في البحر'],[EW("Why not go to the beach?"),'لماذا لا نذهب إلى الشاطئ؟'],[EW("How about going to the cinema?"),'ما رأيك في الذهاب إلى السينما؟'],[EW("I'd rather stay at home."),'أفضّل البقاء في البيت'],[EW("Would you like to go fishing?"),'هل تحب الذهاب للصيد؟']],n=>{if(n>=3)done('b1',3)});
+
+/* ================= Unit 2 · Books, Films & Invitations ================= */
+MIS('b2',['صنّف 6 كتب وأفلام حسب نوعها','استمع إلى ملف الفيلم وأجب عن سؤالين','استمع إلى حوار الدعوة','أجب عن 3 أسئلة صحيحة']);
+SORTE('stS',[[EW("Giant cockroaches start attacking people."),0,'🪳'],[EW("The strangest events. This story will keep you awake at night."),0,'🐈‍⬛'],[EW("The funniest comedy book of the year."),1,'😂'],[EW("A man has a lot of funny problems on holiday."),1,'🤣'],[EW("A guide for the traveller to Egypt."),2,'🧭'],[EW("A guide to the best hotels in Tunisia."),2,'🏨'],[EW("A journey to destroy evil in another world."),3,'🧙'],[EW("Robots live on Mars in the year 3000."),3,'🤖'],[EW("A man survives a shipwreck and lives alone on an island."),4,'🏝️'],[EW("Pirates look for treasure on a secret island."),4,'🏴‍☠️']],['horror','comedy','travel','fiction','adventure'],n=>{if(n>=6)done('b2',0)});
+(function(){const L=[EW("The film is called Lion of the Desert."),EW("It was released in 1981."),EW("It is a historical drama."),EW("The director was Moustapha Akkad."),EW("The film tells the story of Omar Al-Mukhtar."),EW("He was the leader of the Libyan resistance."),EW("He fought bravely for his people's freedom.")];READ('ffR','ffGo',L);
+ MCQP($('ffQ'),bank([[S(EW("When was Lion of the Desert released?")),[enq('In 1981.'),enq('In 1918.'),enq('In 2001.')]],[S(EW("Who directed the film?")),[enq('Moustapha Akkad'),enq('Omar Al-Mukhtar'),enq('Anthony Quinn')]],[S(EW("What kind of film is it?")),[enq('A historical drama.'),enq('A comedy.'),enq('A horror film.')]],[S(EW("Who was Omar Al-Mukhtar?")),[enq('The leader of the Libyan resistance.'),enq('A famous actor.'),enq('A film director.')]]]));qGoal('ffQ','b2',1,2)})();
+(function(){DIALOG('ivD',[EW("Hi. Would you like to come to the school graduation party?"),EW("m|Oh, that sounds good. When is it?"),EW("It's on Thursday the fifteenth of April."),EW("m|What time does it start?"),EW("Well, the party starts at ten a.m., but the doors open at nine thirty."),EW("m|Oh, OK. I think I can make that. How much are the tickets?"),EW("They're free. Shall I get one for you?"),EW("m|Yes, please. I'm looking forward to it!")]);$('ivD').querySelector('.btn').addEventListener('click',()=>setTimeout(()=>done('b2',2),7000))})();
+MCQP($('qb2'),bank([[enq('What character ___ you play?'),[enq('do'),enq('are'),enq('did'),enq('does')]],[enq('How ___ you get the part? (past)'),[enq('did'),enq('do'),enq('were'),enq('was')]],[enq('___ you happy? (past)'),[enq('Were'),enq('Did'),enq('Was'),enq('Do')]],[enq('Did she want to do the show? Yes, she ___.'),[enq('did'),enq('was'),enq('does'),enq('wanted')]],[enq('Which word goes with "book"?'),[enq('read'),enq('kick'),enq('watch'),enq('spend')]],[enq('Which word goes with "time"?'),[enq('spend'),enq('read'),enq('kick'),enq('play')]],[enq('Shall I get the cheapest ___?'),[enq('seats'),enq('sit'),enq('seating'),enq('sat')]]]));qGoal('qb2','b2',3,3);
+chapterTest('rv2',[[enq('I enjoy ___.'),[enq('swimming'),enq('swim'),enq('to swimming')]],[enq('I\'d like ___ to the beach.'),[enq('to go'),enq('going'),enq('go to')]],[enq('How about ___ to the park?'),[enq('going'),enq('go'),enq('to go')]],[enq('Why not ___ to the theatre?'),[enq('go'),enq('going'),enq('to go')]],[enq('I\'d ___ go to the cinema.'),[enq('rather'),enq('prefer'),enq('like')]],[enq('A frightening story is a ___ story.'),[enq('horror'),enq('comedy'),enq('travel')]],[enq('A funny film is a ___.'),[enq('comedy'),enq('tragedy'),enq('documentary')]],[enq('When ___ the film released?'),[enq('was'),enq('did'),enq('were')]],[enq('What kind of TV programme ___ it?'),[enq('is'),enq('does'),enq('do')]],[enq('kick a ___'),[enq('ball'),enq('book'),enq('television')]],[enq('Are you free on Thursday? — ___'),[enq('Yes, I am.'),enq('Yes, I do.'),enq('Yes, it is.')]],[enq('Making necklaces and earrings:'),[enq('jewellery making'),enq('blanket weaving'),enq('sailing')]]]);
+
+/* ================= Unit 3 · Creatures & Comparisons ================= */
+MIS('c1',['استمع إلى 10 حيوانات','قارن 6 مرات في ميزان المقارنة','صنّف 8 حيوانات حسب موطنها','أجب عن 3 أسئلة صحيحة']);
+FLASH('anF',[['🐻',EW("a bear"),'دب'],['🐪',EW("a camel"),'جمل'],['🐺',EW("a jackal"),'ابن آوى'],['🦢',EW("a stork"),'لقلق'],['🦆',EW("a duck"),'بطة'],['🐑',EW("a sheep"),'خروف'],['🦅',EW("a falcon"),'صقر'],['🦌',EW("a deer"),'غزال/أيل'],['🕷️',EW("a spider"),'عنكبوت'],['🦟',EW("a mosquito"),'بعوضة'],['🦊',EW("a fennec fox"),'ثعلب الفنك'],['🦭',EW("a monk seal"),'فقمة الراهب']],n=>{if(n>=10)done('c1',0)});
+(function(){const [c,x]=C2('cmC');const A=[['🐻','bear'],['🐺','wolf'],['🐪','camel'],['🦅','falcon']],P=['big','fast','dangerous'],V={bear:[9,5,9],wolf:[5,6,7],camel:[10,4,2],falcon:[1,10,3]};const CMP={"0-1-0":[EW("A bear is bigger than a wolf."),EW("A wolf is not as big as a bear.")],"0-1-1":[EW("A bear is not as fast as a wolf."),EW("A wolf is faster than a bear.")],"0-1-2":[EW("A bear is more dangerous than a wolf."),EW("A wolf is not as dangerous as a bear.")],"0-2-0":[EW("A bear is not as big as a camel."),EW("A camel is bigger than a bear.")],"0-2-1":[EW("A bear is faster than a camel."),EW("A camel is not as fast as a bear.")],"0-2-2":[EW("A bear is more dangerous than a camel."),EW("A camel is not as dangerous as a bear.")],"0-3-0":[EW("A bear is bigger than a falcon."),EW("A falcon is not as big as a bear.")],"0-3-1":[EW("A bear is not as fast as a falcon."),EW("A falcon is faster than a bear.")],"0-3-2":[EW("A bear is more dangerous than a falcon."),EW("A falcon is not as dangerous as a bear.")],"1-0-0":[EW("A wolf is not as big as a bear."),EW("A bear is bigger than a wolf.")],"1-0-1":[EW("A wolf is faster than a bear."),EW("A bear is not as fast as a wolf.")],"1-0-2":[EW("A wolf is not as dangerous as a bear."),EW("A bear is more dangerous than a wolf.")],"1-2-0":[EW("A wolf is not as big as a camel."),EW("A camel is bigger than a wolf.")],"1-2-1":[EW("A wolf is faster than a camel."),EW("A camel is not as fast as a wolf.")],"1-2-2":[EW("A wolf is more dangerous than a camel."),EW("A camel is not as dangerous as a wolf.")],"1-3-0":[EW("A wolf is bigger than a falcon."),EW("A falcon is not as big as a wolf.")],"1-3-1":[EW("A wolf is not as fast as a falcon."),EW("A falcon is faster than a wolf.")],"1-3-2":[EW("A wolf is more dangerous than a falcon."),EW("A falcon is not as dangerous as a wolf.")],"2-0-0":[EW("A camel is bigger than a bear."),EW("A bear is not as big as a camel.")],"2-0-1":[EW("A camel is not as fast as a bear."),EW("A bear is faster than a camel.")],"2-0-2":[EW("A camel is not as dangerous as a bear."),EW("A bear is more dangerous than a camel.")],"2-1-0":[EW("A camel is bigger than a wolf."),EW("A wolf is not as big as a camel.")],"2-1-1":[EW("A camel is not as fast as a wolf."),EW("A wolf is faster than a camel.")],"2-1-2":[EW("A camel is not as dangerous as a wolf."),EW("A wolf is more dangerous than a camel.")],"2-3-0":[EW("A camel is bigger than a falcon."),EW("A falcon is not as big as a camel.")],"2-3-1":[EW("A camel is not as fast as a falcon."),EW("A falcon is faster than a camel.")],"2-3-2":[EW("A camel is not as dangerous as a falcon."),EW("A falcon is more dangerous than a camel.")],"3-0-0":[EW("A falcon is not as big as a bear."),EW("A bear is bigger than a falcon.")],"3-0-1":[EW("A falcon is faster than a bear."),EW("A bear is not as fast as a falcon.")],"3-0-2":[EW("A falcon is not as dangerous as a bear."),EW("A bear is more dangerous than a falcon.")],"3-1-0":[EW("A falcon is not as big as a wolf."),EW("A wolf is bigger than a falcon.")],"3-1-1":[EW("A falcon is faster than a wolf."),EW("A wolf is not as fast as a falcon.")],"3-1-2":[EW("A falcon is not as dangerous as a wolf."),EW("A wolf is more dangerous than a falcon.")],"3-2-0":[EW("A falcon is not as big as a camel."),EW("A camel is bigger than a falcon.")],"3-2-1":[EW("A falcon is faster than a camel."),EW("A camel is not as fast as a falcon.")],"3-2-2":[EW("A falcon is more dangerous than a camel."),EW("A camel is not as dangerous as a falcon.")]};
+ let a=0,b=1,p=0,k=0;const said=new Set();const go=()=>{if(a===b){$('cmOut').innerHTML='اختر حيوانين مختلفين 🙂';return}const key=a+'-'+b+'-'+p,s=CMP[key];k=0;SEQ++;SAYSEQ(s);$('cmOut').innerHTML=s.map(S).join(' ');said.add(key);if(said.size>=6)done('c1',1)};
+ chipsP('cmA',A.map(z=>z[0]+' '+z[1]),0,i=>{a=i;go()});chipsP('cmB',A.map(z=>z[0]+' '+z[1]),1,i=>{b=i;go()});chipsP('cmP',['📏 big','⚡ fast','⚠️ dangerous'],0,i=>{p=i;go()});$('cmOut').innerHTML='اختر حيوانين وصفة لتقارن بينهما';
+ anim('cmC',(x,c,t)=>{k=Math.min(1,k+.04);x.clearRect(0,0,640,260);const va=V[A[a][1]][p],vb=V[A[b][1]][p],tilt=clamp((va-vb)/10,-.5,.5)*k;x.save();x.translate(320,150);x.rotate(-tilt*.6);x.fillStyle='#868e96';x.fillRect(-230,-6,460,12);
+  x.fillStyle='#fff9db';RR(x,-260,-70,110,64,12);x.fill();RR(x,150,-70,110,64,12);x.fill();EMJ(x,A[a][0],-205,-40,46);EMJ(x,A[b][0],205,-40,46);x.restore();
+  x.fillStyle='#495057';x.beginPath();x.moveTo(320,156);x.lineTo(296,240);x.lineTo(344,240);x.fill();tL(x,P[p],320,30,18,'#5f3dc4');
+  [[a,90],[b,550]].forEach(([i,X])=>{const v=V[A[i][1]][p];x.fillStyle='#e9ecef';RR(x,X-50,232,100,12,6);x.fill();x.fillStyle='#7048e8';RR(x,X-50,232,v*10,12,6);x.fill()})})})();
+SORTE('hbS',[[EW("camel"),0,'🐪'],[EW("fennec fox"),0,'🦊'],[EW("scorpion"),0,'🦂'],[EW("bear"),1,'🐻'],[EW("deer"),1,'🦌'],[EW("wolf"),1,'🐺'],[EW("monk seal"),2,'🦭'],[EW("dolphin"),2,'🐬'],[EW("flamingo"),3,'🦩'],[EW("stork"),3,'🦢'],[EW("sheep"),4,'🐑'],[EW("cow"),4,'🐄']],['🏜️ desert','🌲 forest','🌊 sea','🪷 wetlands','🌾 farm'],n=>{if(n>=8)done('c1',2)});
+MCQP($('qc1'),bank([[enq('cold → colder → ___'),[enq('the coldest'),enq('the most cold'),enq('the colder'),enq('coldiest')]],[enq('useful → ___ → the most useful'),[enq('more useful'),enq('usefuller'),enq('most useful'),enq('usefullest')]],[enq('A bear is ___ than a wolf.'),[enq('bigger'),enq('biger'),enq('more big'),enq('biggest')]],[enq('A wolf is not as big ___ a bear.'),[enq('as'),enq('than'),enq('like'),enq('so')]],[enq('Small cars are ___ expensive than big ones.'),[enq('less'),enq('least'),enq('little'),enq('fewer')]],[enq('The dawn is ___ beautiful than the night.'),[enq('more'),enq('most'),enq('much'),enq('very')]],[enq('Snakes are not as ___ as crocodiles.'),[enq('dangerous'),enq('more dangerous'),enq('dangerouser'),enq('most dangerous')]]]));qGoal('qc1','c1',3,3);
+
+/* ================= Unit 3 · If … & Wildlife ================= */
+MIS('c2',['أطلق الصقر 3 مرات','استمع إلى 5 مواقف «ماذا لو…؟»','رتّب 3 جمل شرطية صحيحة','أجب عن 3 أسئلة صحيحة']);
+(function(){const [c,x]=C2('fcC');const R=[['🦅','falcon',240],['🚗','car',120],['🐆','cheetah',110],['🐎','horse',70]];let T=null,runs=0;
+ $('fcGo').onclick=()=>{T=performance.now();runs++;if(runs>=3)done('c2',0);setTimeout(()=>{SAYSEQ([EW("The falcon is the fastest living thing."),EW("Falcons can dive at two hundred and forty kilometres an hour.")]);$('fcOut').innerHTML=S(EW("The falcon is the fastest living thing."))+' '+S(EW("Falcons can dive at two hundred and forty kilometres an hour."))},2600)};
+ anim('fcC',(x,c,t)=>{x.clearRect(0,0,640,260);x.fillStyle='#d0ebff';x.fillRect(0,0,640,260);x.fillStyle='#e9c46a';x.fillRect(0,230,640,30);const el=T?(performance.now()-T)/1000:0;
+  R.forEach((r,i)=>{const p=Math.min(1,el*r[2]/600),X=40+p*540,Y=40+i*52;x.strokeStyle='rgba(0,0,0,.08)';x.beginPath();x.moveTo(40,Y+12);x.lineTo(600,Y+12);x.stroke();x.save();x.translate(X,Y);x.scale(-1,1);EMJ(x,r[0],0,0,38);x.restore();tA(x,r[1]+' · '+r[2]+' km/h',10,Y+30,11,'#495057','left')});
+  x.fillStyle='#212529';x.fillRect(600,20,4,210);tL(x,'🏁',612,20,18,'#000')})})();
+(function(){const [c,x]=C2('ifC');const S5=[['💰','📦🎁',EW("If I had lots of money, I would buy presents for all of my friends.")],['👽','🛸',EW("If I met an alien, I would ask it about its planet.")],['🐌','🤢',EW("If I had to eat snails, I would be very surprised.")],['🌐','📚',EW("If the internet disappeared, I would read more books.")],['🕷️','🦟🦟🦟',EW("If we didn't have any spiders, we would have more mosquitoes.")],['⏰','😠',EW("If I was late for school, my teacher would be very angry.")],['📈','🏠',EW("If people grow taller, we will need bigger houses.")]];
+ let k=0,s=0;const seen=new Set();chipsP('ifK',S5.map(z=>z[0]),-1,i=>{s=i;k=0;seen.add(i);SEQ++;SAY(S5[i][2]);$('ifOut').innerHTML=S(S5[i][2]);if(seen.size>=5)done('c2',1)});$('ifOut').innerHTML='اختر موقفًا خياليًا';
+ anim('ifC',(x,c,t)=>{k=Math.min(1,k+.03);x.clearRect(0,0,640,220);x.fillStyle='#f8f0fc';RR(x,20,20,600,180,20);x.fill();EMJ(x,S5[s][0],140,110,70);ARW(x,220,110,220+180*k,110,'#ae3ec9',5);x.globalAlpha=k;EMJ(x,S5[s][1],480,110+Math.sin(t*3)*5,60);x.globalAlpha=1;tL(x,s===6?'If + present → will':'If + past → would',320,190,15,'#862e9c')})})();
+BUILD('bc2',[[EW("If the population increases, we will need more food."),'إذا زاد السكان سنحتاج طعامًا أكثر'],[EW("If I had lots of money, I would travel."),'لو كان لدي مال كثير لسافرت'],[EW("Several species of birds can be seen."),'يمكن رؤية أنواع عديدة من الطيور'],[EW("The Bedouins used to hunt on camels."),'كان البدو يصطادون على الجمال'],[EW("There used to be more wildlife."),'كانت هناك حياة برية أكثر']],n=>{if(n>=3)done('c2',2)});
+MCQP($('qc2'),bank([[enq('If people grow taller, we ___ bigger houses.'),[enq('will need'),enq('would need'),enq('needed'),enq('need will')]],[enq('If we didn\'t have spiders, we ___ more mosquitoes.'),[enq('would have'),enq('will have'),enq('have'),enq('had')]],[enq('If I ___ an alien, I would be surprised.'),[enq('met'),enq('meet'),enq('will meet'),enq('meeting')]],[enq('Several species of birds can ___ seen.'),[enq('be'),enq('been'),enq('being'),enq('is')]],[enq('My country is greener than it ___ to be.'),[enq('used'),enq('use'),enq('uses'),enq('using')]],[enq('My friend lent me ___ pen.'),[enq('his'),enq('him'),enq('he'),enq('he\'s')]],[enq('I like spiders. — So ___ I.'),[enq('do'),enq('am'),enq('like'),enq('have')]],[enq('I don\'t like spiders. — Neither ___ I.'),[enq('do'),enq('don\'t'),enq('am'),enq('like')]]]));qGoal('qc2','c2',3,3);
+chapterTest('rv3',[[enq('hot → hotter → ___'),[enq('the hottest'),enq('the hotest'),enq('the most hot')]],[enq('A camel is ___ than a sheep.'),[enq('bigger'),enq('more big'),enq('biggest')]],[enq('Monkeys are ___ interesting than sheep.'),[enq('more'),enq('most'),enq('much')]],[enq('A wolf is not as big ___ a bear.'),[enq('as'),enq('than'),enq('so')]],[enq('If it rains, we ___ stay at home.'),[enq('will'),enq('would'),enq('did')]],[enq('If I had wings, I ___ fly.'),[enq('would'),enq('will'),enq('can will')]],[enq('Crops ___ grown.'),[enq('are'),enq('is'),enq('be')]],[enq('There ___ to be more wildlife.'),[enq('used'),enq('use'),enq('uses')]],[enq('Falcons are the ___ living things.'),[enq('fastest'),enq('faster'),enq('fast')]],[enq('A place where an animal lives:'),[enq('habitat'),enq('population'),enq('questionnaire')]],[enq('They gave ___ presents. (we)'),[enq('us'),enq('our'),enq('we')]],[enq('A young deer:'),[enq('fawn'),enq('falcon'),enq('fly')]]]);
+LISTEN('f1L',[['<i>ℹ️</i>',EW("There's an information desk near the entrance.")],['<i>🕘</i>',EW("It's quarter to nine.")],['<i>🎈</i>',EW("It has airbags to help you keep safe in an accident.")],['<i>🎣</i>',EW("I enjoy fishing with my father.")],['<i>🎬</i>',EW("It was released in 1981.")],['<i>🐻</i>',EW("A bear is bigger than a wolf.")],['<i>🦅</i>',EW("Falcons can dive at two hundred and forty kilometres an hour.")],['<i>🕷️</i>',EW("If we didn't have any spiders, we would have more mosquitoes.")]]);
+chapterTest('ry1',[[enq('There ___ any bakeries.'),[enq('aren\'t'),enq('isn\'t'),enq('doesn\'t')]],[enq('20:45 = It\'s quarter ___ nine.'),[enq('to'),enq('past'),enq('at')]],[enq('It has GPS ___ you won\'t get lost.'),[enq('so'),enq('to'),enq('for')]],[enq('He has ___ hair.'),[enq('short, straight, black'),enq('black, straight, short'),enq('straight, short, black')]],[enq('I hate ___ up early.'),[enq('getting'),enq('get'),enq('to getting')]],[enq('How about ___ a film?'),[enq('watching'),enq('watch'),enq('to watch')]],[enq('Where ___ you born?'),[enq('were'),enq('did'),enq('are')]],[enq('Small cars are ___ expensive than big ones.'),[enq('less'),enq('least'),enq('few')]],[enq('If I met an alien, I ___ run away.'),[enq('would'),enq('will'),enq('am')]],[enq('People can ___ several species of birds.'),[enq('see'),enq('be seen'),enq('seen')]],[enq('Listening tip: listen for the ___ words.'),[enq('loud, slow'),enq('quiet, fast'),enq('short, easy')]],[enq('A sentence that gives the main idea of a paragraph:'),[enq('topic sentence'),enq('headline'),enq('title page')]]]);
+
+/* ================= Unit 5 · Sports & the News ================= */
+MIS('d1',['استمع إلى 10 رياضات وأدوات','صنّف 6 أخبار حسب أقسام الجريدة','رتّب أحداث القصة كاملة','أجب عن 3 أسئلة صحيحة']);
+FLASH('spF',[['🏸',EW("badminton"),'الريشة الطائرة'],['🏀',EW("basketball"),'كرة السلة'],['⚾',EW("baseball"),'البيسبول'],['⚽',EW("football"),'كرة القدم'],['🏃',EW("running"),'الجري'],['🎾',EW("tennis"),'التنس'],['🏓',EW("table tennis"),'تنس الطاولة'],['🥅',EW("a goal"),'مرمى'],['🏏',EW("a bat"),'مضرب البيسبول'],['👟',EW("trainers"),'حذاء رياضي'],['🎾',EW("a racket"),'مضرب'],['🕸️',EW("a net"),'شبكة']],n=>{if(n>=10)done('d1',0)});
+SORTE('nwS',[[EW("The Longton Mall in Hightown is now fully open."),0,'🏬'],[EW("A new hospital opens in Misrata next week."),0,'🏥'],[EW("Meeting in South America to talk about rainforests."),1,'🌎'],[EW("Education talks in London."),1,'🇬🇧'],[EW("Two films opened last night. One was very good."),2,'🎬'],[EW("A new art gallery shows paintings by young artists."),2,'🖼️'],[EW("Libya wins the football match three nil."),3,'⚽'],[EW("Tennis star arrives in Tripoli."),3,'🎾'],[EW("Oil company chiefs meet to discuss the price of oil."),4,'🛢️'],[EW("Oil prices rise. More jobs for local people."),4,'💹'],[EW("The second part of The Hassan Family is on tonight at seven."),5,'📺'],[EW("A new cartoon series starts on Friday."),5,'🖍️']],['Home News','International','Arts','Sport','Business','Television'],n=>{if(n>=6)done('d1',1)});
+(function(){const [c,x]=C2('stC');const ST=[['B','👧⚽',EW("Nadia was playing with a ball in the park.")],['B','👩🛍️',EW("Her mother was walking to the shops.")],['E','🐕',EW("Suddenly, a big dog ran up to Nadia.")],['E','😱',EW("The dog jumped on her and knocked her down.")],['B','👦👨‍👩‍👦',EW("John Smith was walking past with his family.")],['E','🦵⚽',EW("He kicked the ball at the dog.")],['E','💨',EW("The dog ran away.")]];
+ let nx=0,k=1;const K=$('stK');K.innerHTML=shuf(ST.map((s,i)=>i)).map(i=>'<button data-i="'+i+'">'+ST[i][1]+'</button>').join('');$('stOut').innerHTML='«ولد ينقذ طفلة» — اضغط الصور بترتيب القصة. 🟦 خلفية (was/were + ing) · 🟧 حدث (ماضٍ بسيط)';
+ K.querySelectorAll('button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(b.disabled)return;if(i===nx){b.disabled=true;b.classList.add('on');k=0;SEQ++;SAY(ST[i][2]);$('stOut').innerHTML=(ST[i][0]==='B'?'🟦 background · ':'🟧 event · ')+S(ST[i][2]);nx++;if(nx>=ST.length){cheer();done('d1',2)}}else{shake(K);toast('فكّر: ماذا حدث قبل ذلك؟')}});
+ anim('stC',(x,c,t)=>{k=Math.min(1,k+.03);x.clearRect(0,0,640,260);x.fillStyle='#d3f9d8';x.fillRect(0,0,640,260);x.fillStyle='#b2f2bb';x.fillRect(0,190,640,70);EMJ(x,'🌳',60,120,70);EMJ(x,'🌳',590,120,70);
+  if(nx>=1){EMJ(x,'👧',nx>=4?260:220,nx>=4?205:170,44);EMJ(x,'⚽',nx>=6?lerp(330,420,k):250,190,26)}if(nx>=2)EMJ(x,'👩',120,170,40);
+  if(nx>=3){const dx=nx>=7?lerp(300,700,k):nx>=3&&nx<4?lerp(640,300,k):300;EMJ(x,'🐕',dx,180,52)}if(nx>=5)EMJ(x,'👦',nx>=6?380:lerp(640,450,nx===5?k:1),170,44);
+  tL(x,'BOY SAVES CHILD',320,30,18,'#2b8a3e');tL(x,nx+' / 7',600,30,14,'#495057')})})();
+MCQP($('qd1'),bank([[enq('It ___ raining when we left.'),[enq('was'),enq('were'),enq('is'),enq('did')]],[enq('We ___ playing a game when the phone rang.'),[enq('were'),enq('was'),enq('are'),enq('did')]],[enq('Nadia was playing. A dog ___ her.'),[enq('chased'),enq('was chase'),enq('chasing'),enq('chases')]],[enq('He ___ stop. (negative)'),[enq('didn\'t'),enq('wasn\'t'),enq('don\'t'),enq('not')]],[enq('Most people in ___ UK prefer football.'),[enq('the'),enq('a'),enq('an'),enq('— (no article)')]],[enq('A dog chased ___. (Nadia)'),[enq('her'),enq('she'),enq('hers'),enq('his')]],[enq('Which section has news from other countries?'),[enq('International News'),enq('Home News'),enq('Cartoons'),enq('Sport')]]]));qGoal('qd1','d1',3,3);
+
+/* ================= Unit 5 · Buying, Planning & Surveys ================= */
+MIS('d2',['استمع إلى حوار بيع الدراجة','أجب عن 4 أسئلة عن جدول الأنشطة صحيحة','صوّت 10 مرات واقرأ النتائج','أجب عن 3 أسئلة صحيحة']);
+(function(){DIALOG('bkD',[EW("What kind of bike is it?"),EW("m|It's a mountain bike."),EW("Is it in good condition?"),EW("m|Yes, very good."),EW("What colour is it?"),EW("m|It's mainly red."),EW("How many gears does it have?"),EW("m|Twenty-one."),EW("How old is it?"),EW("m|It's only a year old. It's as good as new."),EW("How much is it?"),EW("m|It's ninety Libyan dinars."),EW("Would you take less?"),EW("m|Well, maybe eighty dinars.")]);$('bkD').querySelector('.btn').addEventListener('click',()=>setTimeout(()=>done('d2',0),9000))})();
+(function(){$('wkT').innerHTML='<table class="tbl en"><tr><th>Activities</th><th>Date</th><th>Start</th><th>Finish</th></tr><tr><td>🎨 Art</td><td>Sun 12 April</td><td>08.00</td><td>12.00</td></tr><tr><td>🔤 English</td><td>Mon 13 April</td><td>09.30</td><td>12.30</td></tr><tr><td>🔬 Science</td><td>Tues 14 April</td><td>09.15</td><td>13.15</td></tr><tr><td>⚽ Sport</td><td>Weds 15 April</td><td>08.25</td><td>12.45</td></tr><tr><td>💝 Charity</td><td>Thurs 16 April</td><td>10.00</td><td>11.30</td></tr></table>';
+ MCQP($('wkQ'),bank([[S(EW("When will the Art activities start?")),[enq('At eight o\'clock on Sunday.'),enq('At ten o\'clock on Thursday.'),enq('At nine fifteen on Tuesday.')]],[S(EW("When will the Science activities finish?")),[enq('At one fifteen.'),enq('At twelve o\'clock.'),enq('At eleven thirty.')]],[S(EW("When will the Sport activities start?")),[enq('At eight twenty-five on Wednesday.'),enq('At nine thirty on Monday.'),enq('At eight o\'clock on Sunday.')]],[S(EW("Which activities will start on Monday?")),[enq('English.'),enq('Art.'),enq('Charity.')]],[S(EW("How long will the charity activities go on for?")),[enq('One hour and a half.'),enq('Four hours.'),enq('Three hours.')]],[S(EW("When will the English activities finish?")),[enq('At twelve thirty.'),enq('At one fifteen.'),enq('At twelve forty-five.')]]]));qGoal('wkQ','d2',1,4)})();
+(function(){const [c,x]=C2('svC');const F=[['⚽','sport',EW("Most people like sport."),EW("A few people like sport.")],['🎵','music',EW("Most people like music."),EW("A few people like music.")],['👗','fashion',EW("Most people like fashion."),EW("A few people like fashion.")],['🧩','puzzles',EW("Most people like puzzles."),EW("A few people like puzzles.")],['📖','true stories',EW("Most people like true stories."),EW("A few people like true stories.")],['🖍️','cartoons',EW("Most people like reading cartoons."),EW("A few people like reading cartoons.")]];
+ const V=[7,5,2,6,8,12],H=V.slice();let n=0;chipsP('svK',F.map(f=>f[0]+' '+f[1]),-1,i=>{V[i]++;n++;$('svOut').innerHTML='صوتك رقم '+n+' 🗳️'});
+ $('svGo').onclick=()=>{const mx=V.indexOf(Math.max(...V)),mn=V.indexOf(Math.min(...V));SAYSEQ([F[mx][2],F[mn][3]]);$('svOut').innerHTML=S(F[mx][2])+' '+S(F[mn][3]);if(n>=10)done('d2',2)};$('svOut').innerHTML='اضغط على القسم الذي تحبه في مجلة المدرسة لتصوّت';
+ anim('svC',(x,c,t)=>{x.clearRect(0,0,640,240);const M=Math.max(...V);F.forEach((f,i)=>{H[i]+=(V[i]-H[i])*.1;const X=60+i*100,h=H[i]/M*150;x.fillStyle=V[i]===M?'#7048e8':'#b197fc';RR(x,X-30,190-h,60,h,8);x.fill();tL(x,String(V[i]),X,182-h,14,'#343a40');EMJ(x,f[0],X,212,24);tL(x,f[1],X,234,10,'#495057')})})})();
+MCQP($('qd2'),bank([[enq('The concert ___ start at eight.'),[enq('will'),enq('is will'),enq('wills'),enq('going')]],[enq('When ___ the sport activities finish?'),[enq('will'),enq('do will'),enq('are'),enq('is')]],[enq('___ people like football. (almost everyone)'),[enq('Most'),enq('A few'),enq('Few a'),enq('Least')]],[enq('Only ___ people like fashion.'),[enq('a few'),enq('most'),enq('much'),enq('a little')]],[enq('Would you take ___? It\'s too expensive.'),[enq('less'),enq('more'),enq('least'),enq('fewer')]],[enq('It\'s only a year old. It\'s as good ___ new.'),[enq('as'),enq('than'),enq('like'),enq('so')]],[enq('Most people in ___ USA prefer American football.'),[enq('the'),enq('a'),enq('— (no article)'),enq('an')]]]));qGoal('qd2','d2',3,3);
+chapterTest('rv5',[[enq('We ___ playing when it started to rain.'),[enq('were'),enq('was'),enq('are')]],[enq('The minister ___ quickly to his meeting.'),[enq('drove'),enq('was drive'),enq('driving')]],[enq('He ___ talk to anyone.'),[enq('didn\'t'),enq('wasn\'t'),enq('doesn\'t')]],[enq('The charity activities ___ start at 10.00.'),[enq('will'),enq('are'),enq('do')]],[enq('___ people like cartoons. (nearly all)'),[enq('Most'),enq('A few'),enq('Some few')]],[enq('Which game uses a racket and a net?'),[enq('tennis'),enq('football'),enq('running')]],[enq('Which game uses a bat?'),[enq('baseball'),enq('badminton'),enq('basketball')]],[enq('News about money and companies:'),[enq('Business'),enq('Arts'),enq('Cartoons')]],[enq('A person who writes for a newspaper:'),[enq('reporter'),enq('minister'),enq('footballer')]],[enq('We live in ___ UAE.'),[enq('the'),enq('a'),enq('— (no article)')]],[enq('A dog chased Nadia. John kicked a ball at ___.'),[enq('it'),enq('its'),enq('them')]],[enq('Would you take less? — Well, maybe ___.'),[enq('80 LYD'),enq('in the park'),enq('tomorrow morning')]]]);
+
+/* ================= Unit 6 · Jobs ================= */
+MIS('f1',['استمع إلى 10 مهن وأماكن عمل','أجب عن 5 ألغاز «Who am I?» صحيحة','استمع إلى نص مدرسة المستقبل','أجب عن 3 أسئلة صحيحة']);
+FLASH('jwF',[['🔧',EW("a mechanic"),'ميكانيكي · garage',EW("A mechanic works in a garage.")],['🚒',EW("a firefighter"),'رجل إطفاء · fire station',EW("A firefighter works at a fire station.")],['👩‍🏫',EW("a teacher"),'معلّم · school',EW("A teacher works in a school.")],['🛍️',EW("a shop assistant"),'بائع · supermarket',EW("A shop assistant works in a supermarket.")],['🏨',EW("a receptionist"),'موظف استقبال · hotel',EW("A receptionist works in a hotel.")],['👩‍⚕️',EW("a nurse"),'ممرضة · hospital',EW("A nurse works in a hospital.")],['📐',EW("an architect"),'مهندس معماري'],['👨‍🚀',EW("an astronaut"),'رائد فضاء'],['✍️',EW("an author"),'مؤلف'],['📷',EW("a photographer"),'مصوّر'],['🦷',EW("a dentist"),'طبيب أسنان'],['🐶',EW("a vet"),'طبيب بيطري']],n=>{if(n>=10)done('f1',0)});
+LISTEN('jwL',[['<i>📐</i>architect',EW("I'm someone who plans buildings.")],['<i>✈️</i>pilot',EW("I'm someone who flies a plane.")],['<i>⚽</i>footballer',EW("I'm someone who plays football.")],['<i>✍️</i>author',EW("I'm someone who writes books.")],['<i>💻</i>web designer',EW("I'm someone who designs websites.")],['<i>🐶</i>vet',EW("I'm someone who takes care of sick animals.")],['<i>👨‍🚀</i>astronaut',EW("I'm someone who flies in a rocket.")],['<i>📷</i>photographer',EW("I'm someone who takes photographs.")],['<i>🦷</i>dentist',EW("I'm someone who looks after people's teeth.")],['<i>🖌️</i>painter',EW("I'm someone who paints rooms.")]],n=>{if(n>=5)done('f1',1)});
+(function(){READ('sfR','sfGo',[EW("Schools in the future will be very different."),EW("There will be much more technology."),EW("Students will only need to come to school once or twice a week."),EW("Most of the teaching will take place over computers in students' own homes."),EW("There will be one super school in each town."),EW("Students will be able to learn from experts all around the world.")]);$('sfGo').addEventListener('click',()=>setTimeout(()=>done('f1',2),9000))})();
+MCQP($('qf1'),bank([[enq('A vet is someone ___ takes care of sick animals.'),[enq('who'),enq('which'),enq('where'),enq('what')]],[enq('That\'s the dog ___ frightened my sister.'),[enq('that'),enq('who'),enq('where'),enq('whose')]],[enq('I\'m going ___ leave school when I\'m 16. (plan)'),[enq('to'),enq('will'),enq('for'),enq('— (no article)')]],[enq('You ___ only get pocket money if you stay at school. (certain)'),[enq('will'),enq('are going'),enq('going'),enq('would to')]],[enq('Where does a mechanic work?'),[enq('in a garage'),enq('in a hotel'),enq('in a school'),enq('in a rocket')]],[enq('Who has to work with animals?'),[enq('a vet'),enq('an author'),enq('an architect'),enq('a pilot')]],[enq('Do you have any career ___?'),[enq('plans'),enq('plan to'),enq('planning'),enq('plane')]]]));qGoal('qf1','f1',3,3);
+
+/* ================= Unit 6 · Articles & Directions ================= */
+MIS('f2',['صنّف 8 عبارات: a / an / the / بلا أداة','أوصل السيارة إلى المكتبة','طابق 3 نصائح لمنى صحيحة','أجب عن 3 أسئلة صحيحة']);
+SORTE('arS',[[EW("Can I have … pen, please?"),0,'🖊️'],[EW("I want to be … teacher."),0,'👩‍🏫'],[EW("Can I have … apple, please?"),1,'🍎'],[EW("She's … engineer."),1,'⚙️'],[EW("… sun is shining."),2,'☀️'],[EW("… pen on your desk is mine."),2,'🖊️'],[EW("Have you seen … Pyramids?"),2,'🔺'],[EW("I'm good at … maths."),3,'➗'],[EW("We went to … Abu Dhabi."),3,'🏙️'],[EW("I like … ice cream."),3,'🍦'],[EW("I need some … milk."),3,'🥛']],['a','an','the','∅ no article'],n=>{if(n>=8)done('f2',0)});
+(function(){const [c,x]=C2('mpC');const R=[[EW("Go straight along Al Nasr Street."),[80,250],[300,250]],[EW("Turn left at the traffic lights."),[300,250],[300,250]],[EW("Go past the park."),[300,250],[300,130]],[EW("Turn right into Gorji Street."),[300,130],[300,130]],[EW("Go straight on."),[300,130],[470,130]],[EW("The bookshop is on the right.")," "," "]];
+ const OPT=[0,1,2,3,4,5];let st=0,k=1,pos=[80,250],from=[80,250],ang=0,tgA=0;const K=$('mpK');
+ const draw=()=>{K.innerHTML=shuf(OPT.slice()).map(i=>'<button data-i="'+i+'">'+R[i][0]+'</button>').join('');K.querySelectorAll('button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;if(i!==st){shake(K);toast('ليست هذه الخطوة التالية. انظر إلى الخريطة!');return}
+  SEQ++;SAY(R[i][0]);$('mpOut').innerHTML=(st+1)+'/6 · '+S(R[i][0]);if(i===1)tgA=-Math.PI/2;if(i===3)tgA=0;if(R[i][1]!==' '){from=pos.slice();pos=R[i][2].slice();k=0}st++;b.disabled=true;b.classList.add('on');if(st>=6){cheer();done('f2',1);setTimeout(()=>{st=0;pos=[80,250];from=pos.slice();ang=0;tgA=0;draw()},4000)}})};draw();
+ $('mpOut').innerHTML='اختر الإرشادات بالترتيب لتوصل السيارة من المدرسة إلى المكتبة 📚';
+ anim('mpC',(x,c,t)=>{k=Math.min(1,k+.02);ang+=(tgA-ang)*.1;x.clearRect(0,0,640,300);x.fillStyle='#e9ecef';x.fillRect(0,0,640,300);x.fillStyle='#adb5bd';x.fillRect(0,232,640,36);x.fillRect(282,40,36,228);x.fillRect(282,112,320,36);
+  x.fillStyle='#8ce99a';RR(x,340,170,180,50,10);x.fill();EMJ(x,'🌳',380,195,26);EMJ(x,'🌳',470,195,26);tL(x,'park',430,226,11,'#2b8a3e');tL(x,'Al Nasr Street',160,286,12,'#495057');tL(x,'Gorji Street',540,105,12,'#495057');
+  EMJ(x,'🏫',60,205,40);tL(x,'School',60,180,11,'#495057');EMJ(x,'🚦',330,222,22);EMJ(x,'📚',490,85,38);tL(x,'Bookshop',490,60,11,'#e8590c');
+  const X=lerp(from[0],pos[0],k),Y=lerp(from[1],pos[1],k);x.save();x.translate(X,Y);x.rotate(ang);x.scale(-1,1);EMJ(x,'🚗',0,0,30);x.restore()})})();
+LISTEN('mnL',[['🛍️ Fatima: work in a shop',EW("Mona, I think you should get a job in a shop. You could live at home and use your maths every day.")],['🎓 Anna: stay in education',EW("Mona, you should really go to college. Ask your teachers for advice.")],['🩺 Leena: study medicine',EW("Mona, make sure you study medicine. You will earn good money.")],['🌍 Dalia: language school',EW("Mona, you need to go to language school in another country. You meet lots of new people.")]],n=>{if(n>=3)done('f2',2)});
+MCQP($('qf2'),bank([[enq('I want to be ___ engineer.'),[enq('an'),enq('a'),enq('the'),enq('— (no article)')]],[enq('___ moon is very bright tonight.'),[enq('The'),enq('A'),enq('An'),enq('— (no article)')]],[enq('I\'m good at ___ history.'),[enq('— (no article)'),enq('the'),enq('a'),enq('an')]],[enq('I like the apples ___ grow in our garden.'),[enq('that'),enq('who'),enq('where'),enq('when')]],[enq('Can you tell me how ___ get to the hotel?'),[enq('to'),enq('for'),enq('can'),enq('I')]],[enq('Turn ___ at the lights.'),[enq('left'),enq('straight'),enq('past'),enq('along')]],[enq('Go ___ the park.'),[enq('past'),enq('turn'),enq('left'),enq('at')]]]));qGoal('qf2','f2',3,3);
+chapterTest('rv6',[[enq('I\'m ___ to be a doctor. (plan)'),[enq('going'),enq('will'),enq('go')]],[enq('It ___ be a lot of work. (certain)'),[enq('will'),enq('is going'),enq('going')]],[enq('A pilot is someone ___ flies a plane.'),[enq('who'),enq('which'),enq('where')]],[enq('That\'s the book ___ I read.'),[enq('that'),enq('who'),enq('whose')]],[enq('Can I have ___ orange?'),[enq('an'),enq('a'),enq('— (no article)')]],[enq('___ sun is shining.'),[enq('The'),enq('A'),enq('— (no article)')]],[enq('We go to ___ Dahuk for our holidays.'),[enq('— (no article)'),enq('the'),enq('a')]],[enq('Someone who writes books:'),[enq('author'),enq('architect'),enq('astronaut')]],[enq('Someone who looks after people\'s teeth:'),[enq('dentist'),enq('vet'),enq('mechanic')]],[enq('Go ___ along East Street.'),[enq('straight'),enq('left'),enq('past')]],[enq('The Grand Hotel is ___ the right.'),[enq('on'),enq('in'),enq('at')]],[enq('Studying over the internet from home:'),[enq('virtual learning'),enq('a career plan'),enq('a workplace')]]]);
+
+/* ================= Unit 7 · Countries & Travel ================= */
+MIS('h1',['أجب عن 5 أسئلة «من أين التذكار؟» صحيحة','استمع إلى 8 وسائل تنقل','صنّف 8 ظروف: How / Where / When','رتّب 3 جمل صحيحة']);
+LISTEN('svL',[['🗼 France',EW("Lina has been to France. She bought a key ring of the Eiffel Tower.")],['👘 Japan',EW("Zahra has been to Japan. She bought a beautiful doll.")],['🌲 Lebanon',EW("Bashir has been to Lebanon. He bought a mug with a cedar tree on it.")],['🇬🇧 England',EW("Tareq and Fawzi have been to England. They bought T-shirts with a flag on them.")],['🔺 Egypt',EW("Amina and Aisha have been to Egypt. They bought a small pyramid.")],['🕌 India',EW("Khalil has been to India. He visited the Taj Mahal.")],['🕋 Saudi Arabia',EW("Fatima has been to Saudi Arabia. She visited Makkah.")]],n=>{if(n>=5)done('h1',0)});
+FLASH('trF',[['🚲',EW("by bicycle"),'بالدراجة',EW("People in Holland often ride bicycles.")],['🚌',EW("by bus"),'بالحافلة',EW("People who live in Africa usually travel by bus.")],['🚗',EW("by car"),'بالسيارة',EW("North Americans nearly always use cars.")],['🚇',EW("by underground"),'بالمترو',EW("Most people in London travel by bus or underground every day.")],['🛺',EW("by rickshaw"),'بالركشة',EW("People in Indian cities often travel by rickshaw.")],['🚶',EW("on foot"),'مشيًا',EW("They crossed the desert on foot.")],['🐎',EW("on horseback"),'على ظهر الحصان',EW("He travelled through the Himalayas on horseback.")],['🎈',EW("by hot-air balloon"),'بالمنطاد',EW("Ali flew across the Sahara by hot-air balloon.")],['⛵',EW("by boat"),'بالقارب',EW("John travelled along the Nile by boat.")],['✈️',EW("by plane"),'بالطائرة']],n=>{if(n>=8)done('h1',1)});
+SORTE('adS',[[EW("quickly"),0,'⚡'],[EW("slowly"),0,'🐢'],[EW("loudly"),0,'📢'],[EW("happily"),0,'😊'],[EW("by bus"),0,'🚌'],[EW("in London"),1,'🇬🇧'],[EW("at the hospital"),1,'🏥'],[EW("in the garden"),1,'🌷'],[EW("to the Emirates"),1,'🏙️'],[EW("last night"),2,'🌙'],[EW("after dinner"),2,'🍽️'],[EW("every day"),2,'📅'],[EW("in the holidays"),2,'🏖️']],['How?','Where?','When?'],n=>{if(n>=8)done('h1',2)});
+BUILD('bh1',[[EW("My friend sang very well at the concert last night."),'غنّى صديقي جيدًا جدًا في الحفل ليلة أمس'],[EW("I sometimes go swimming."),'أذهب للسباحة أحيانًا'],[EW("They walked slowly to the hospital."),'مشوا ببطء إلى المستشفى'],[EW("We played happily in the garden after dinner."),'لعبنا بسعادة في الحديقة بعد العشاء'],[EW("After school, I'm going to have a swim."),'بعد المدرسة سأسبح']],n=>{if(n>=3)done('h1',3)});
+
+/* ================= Unit 7 · Apologies & Two African Countries ================= */
+MIS('h2',['اختر الرد المناسب 5 مرات','قارن ليبيا والسودان في 5 حقائق','استمع إلى قصة فنجان القهوة','أجب عن 3 أسئلة صحيحة']);
+LISTEN('apL',[['😐 That\'s OK.',EW("I'm sorry. I didn't see you there.")],['🙂 Don\'t mention it.',EW("I'm so sorry. I just knocked your bag on the floor.")],['🤔 Pardon?',EW("Open your books at page forty-three, please.")],['😟 Oh, I\'m sorry. Can I get you anything?',EW("I have a bad headache.")],['👍 Don\'t worry. I can dry it easily.',EW("I'm sorry, I just dropped some water on your shoe.")],['😊 You\'re welcome.',EW("Thank you very much for your help.")]],n=>{if(n>=5)done('h2',0)},3);
+(function(){const [c,x]=C2('cfC');const F=[['📐','area',EW("Libya is about one point seven six million square kilometres."),EW("Sudan is about one point eight six million square kilometres. It is bigger than Libya."),1.76,1.86],['👥','population',EW("About seven million people live in Libya."),EW("About forty-eight million people live in Sudan."),7,48],['💵','currency',EW("The currency of Libya is the Libyan dinar."),EW("The currency of Sudan is the Sudanese pound."),0,0],['🗣️','language',EW("People in Libya speak Arabic."),EW("People in Sudan speak Arabic too."),0,0],['🏙️','capital',EW("The capital of Libya is Tripoli."),EW("The capital of Sudan is Khartoum."),0,0],['🏞️','nature',EW("Most of Libya is desert. The highest temperature ever was recorded in Libya: fifty-eight degrees."),EW("The Blue Nile and the White Nile join at Khartoum."),0,0]];
+ let f=0,k=1;const seen=new Set();chipsP('cfK',F.map(z=>z[0]+' '+z[1]),-1,i=>{f=i;k=0;seen.add(i);SAYSEQ([F[i][2],F[i][3]]);$('cfOut').innerHTML=S(F[i][2])+'<br>'+S(F[i][3]);if(seen.size>=5)done('h2',1)});$('cfOut').innerHTML='اختر حقيقة لتقارن بين البلدين';
+ const TXT={2:['Libyan dinar','Sudanese pound'],3:['Arabic','Arabic'],4:['Tripoli','Khartoum'],5:['🏜️ 58°C','🌊 Nile']};
+ anim('cfC',(x,c,t)=>{k=Math.min(1,k+.03);x.clearRect(0,0,640,300);[[0,'LIBYA','#40c057',160],[1,'SUDAN','#e64980',480]].forEach(([j,n,col,X])=>{x.fillStyle=col;x.globalAlpha=.85;x.beginPath();if(j===0){x.moveTo(X-90,60);x.lineTo(X+90,60);x.lineTo(X+100,170);x.lineTo(X+60,230);x.lineTo(X-80,230);x.lineTo(X-100,140)}else{x.moveTo(X-100,60);x.lineTo(X+70,60);x.lineTo(X+110,150);x.lineTo(X+60,240);x.lineTo(X-60,230);x.lineTo(X-110,150)}x.closePath();x.fill();x.globalAlpha=1;tL(x,n,X,40,20,col);
+  const z=F[f];if(z[4]){const v=j?z[5]:z[4],m=Math.max(z[4],z[5]);x.fillStyle='#fff';RR(x,X-70,250,140,16,8);x.fill();x.fillStyle='#212529';RR(x,X-70,250,140*v/m*k,16,8);x.fill();tL(x,(z[1]==='area'?v+' m km²':v+' million'),X,150,18,'#fff')}else{tL(x,TXT[f][j],X,150,20,'#fff')}if(f===4)EMJ(x,'⭐',j?X+10:X-50,j?170:80,24)});
+  EMJ(x,F[f][0],320,150+Math.sin(t*3)*5,44)})})();
+(function(){READ('cpR','cpGo',[EW("A group of old students visited their university professor."),EW("He made coffee and brought many different cups."),EW("Some cups were expensive and beautiful. Some were plain and cheap."),EW("Everyone took the nicest cups."),EW("The professor said: life is the coffee."),EW("Jobs, money and position are only the cups."),EW("The happiest people don't have the best of everything."),EW("They make the best of everything.")]);$('cpGo').addEventListener('click',()=>setTimeout(()=>done('h2',2),10000))})();
+MCQP($('qh2'),bank([[enq('Cotton and sugar ___ grown in Sudan.'),[enq('are'),enq('is'),enq('were'),enq('be')]],[enq('Leptis Magna ___ built about 2,000 years ago.'),[enq('was'),enq('is'),enq('were'),enq('has')]],[enq('I ___ that book last year.'),[enq('read'),enq('have read'),enq('am reading'),enq('reads')]],[enq('I have lived in this house ___ I was three.'),[enq('since'),enq('for'),enq('ago'),enq('when')]],[enq('I have ___ to England.'),[enq('been'),enq('went'),enq('go'),enq('was')]],[enq('I just knocked your bag on the floor. — ___'),[enq('Don\'t mention it.'),enq('Pardon?'),enq('Yes, please.'),enq('Good morning.')]],[enq('The capital of Sudan is ___.'),[enq('Khartoum'),enq('Tripoli'),enq('Cairo'),enq('Benghazi')]]]));qGoal('qh2','h2',3,3);
+chapterTest('rv7',[[enq('They walked ___. (how)'),[enq('slowly'),enq('slow'),enq('slowness')]],[enq('I ___ go swimming.'),[enq('sometimes'),enq('sometime'),enq('some times')]],[enq('Manner → Place → ___'),[enq('Time'),enq('Name'),enq('Thing')]],[enq('People in Holland often ride ___.'),[enq('bicycles'),enq('camels'),enq('rickshaws')]],[enq('They crossed the desert ___ foot.'),[enq('on'),enq('by'),enq('in')]],[enq('We travelled ___ bus.'),[enq('by'),enq('on'),enq('with')]],[enq('Rice ___ grown in India.'),[enq('is'),enq('are'),enq('be')]],[enq('The pyramids ___ built thousands of years ago.'),[enq('were'),enq('was'),enq('are')]],[enq('I saw him an hour ___.'),[enq('ago'),enq('since'),enq('for')]],[enq('I have ___ that TV show.'),[enq('seen'),enq('saw'),enq('see')]],[enq('I\'m sorry! — That\'s ___.'),[enq('OK'),enq('sorry'),enq('pardon')]],[enq('The currency of Libya is the Libyan ___.'),[enq('dinar'),enq('pound'),enq('dollar')]]]);
+LISTEN('f2L',[['<i>🐕</i>',EW("Nadia was playing in the park when a dog chased her.")],['<i>📅</i>',EW("The Science activities will start at nine fifteen.")],['<i>📊</i>',EW("Most people like reading cartoons.")],['<i>🐶</i>',EW("A vet is someone who takes care of sick animals.")],['<i>☀️</i>',EW("The sun is shining.")],['<i>🚦</i>',EW("Turn left at the traffic lights.")],['<i>🛺</i>',EW("People in Indian cities often travel by rickshaw.")],['<i>🇸🇩</i>',EW("The Blue Nile and the White Nile join at Khartoum.")]]);
+chapterTest('ry2',[[enq('It ___ raining when we arrived.'),[enq('was'),enq('were'),enq('did')]],[enq('The show ___ start at 8.00.'),[enq('will'),enq('is'),enq('does')]],[enq('___ people like football. (almost all)'),[enq('Most'),enq('A few'),enq('Little')]],[enq('Someone ___ designs websites:'),[enq('who'),enq('which'),enq('where')]],[enq('I\'m going ___ be a vet.'),[enq('to'),enq('will'),enq('for')]],[enq('Can I have ___ egg?'),[enq('an'),enq('a'),enq('the')]],[enq('I\'m good at ___ science.'),[enq('— (no article)'),enq('the'),enq('a')]],[enq('Go ___ the park.'),[enq('past'),enq('turn'),enq('right')]],[enq('She sings ___.'),[enq('beautifully'),enq('beautiful'),enq('beauty')]],[enq('Sugar ___ grown in Sudan.'),[enq('is'),enq('are'),enq('be')]],[enq('I\'m sorry. — Don\'t ___ it.'),[enq('mention'),enq('say'),enq('tell')]],[enq('Rania was ___ a tour of the TV studio.'),[enq('rewarded with'),enq('rewarding'),enq('reward on')]]]);
+
+</script>
+<script>window.NARR=["a1", "a2", "a3", "rv1", "b1", "b2", "rv2", "c1", "c2", "rv3", "ry1", "d1", "d2", "rv5", "f1", "f2", "rv6", "h1", "h2", "rv7", "ry2"];window.AUDIO_BASE="audio-e9/";</script>
+<style>
+.fxbar{position:fixed;left:10px;bottom:10px;z-index:90;display:flex;gap:6px}
+.fxbar button{width:46px;height:46px;border-radius:50%;border:none;background:#1f2a44;color:#fff;font-size:1.3rem;box-shadow:0 4px 12px #0004;cursor:pointer}
+.say{border:2px solid #f08c2e;background:#fff7e8;color:#b35b00;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.9rem;margin:0 6px;vertical-align:middle;font-family:inherit}
+.say.on{background:#f08c2e;color:#fff;animation:pul 1s infinite}
+@keyframes pul{50%{transform:scale(1.06)}}
+.cfx{position:fixed;pointer-events:none;z-index:95;font-size:20px;animation:cf 1.1s ease-out forwards}
+@keyframes cf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+.pop{animation:popk .35s}
+@keyframes popk{50%{transform:scale(1.08)}}
+.shk{animation:shk .4s}
+@keyframes shk{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.stars{position:fixed;bottom:16px;left:66px;background:#1f2a44;color:#fff;border-radius:20px;padding:3px 14px;font-weight:900;z-index:91;font-family:inherit;transition:.3s}
+</style>
+<div class="fxbar"><button id="fxMute" title="الأصوات">🔊</button></div>
+<div class="stars" id="fxStars">⭐ 0</div>
+<script>
+(function(){let AC=null,mute=false,stars=0;try{mute=localStorage.getItem('lb_mute')==='1';stars=+localStorage.getItem('lb_stars_'+location.pathname)||0}catch(e){}
+ const mb=document.getElementById('fxMute');const sb=document.getElementById('fxStars');const upd=()=>{mb.textContent=mute?'🔇':'🔊';sb.textContent='⭐ '+stars};upd();
+ mb.onclick=()=>{mute=!mute;try{localStorage.setItem('lb_mute',mute?'1':'0')}catch(e){}upd();if(mute&&cur){cur.pause();cur=null;document.querySelectorAll('.say.on').forEach(b=>b.classList.remove('on'))}};
+ function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC}
+ function tone(f,t0,d,type,v){const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,a.currentTime+t0);g.gain.setValueAtTime(0,a.currentTime+t0);g.gain.linearRampToValueAtTime(v||.18,a.currentTime+t0+.015);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+t0+d);o.connect(g);g.connect(a.destination);o.start(a.currentTime+t0);o.stop(a.currentTime+t0+d+.05)}
+ const S={ok:()=>{tone(523,0,.15,'triangle');tone(659,.09,.15,'triangle');tone(784,.18,.3,'triangle')},no:()=>{tone(220,0,.18,'sawtooth',.08);tone(185,.12,.25,'sawtooth',.08)},tick:()=>tone(900,0,.04,'square',.03),win:()=>{[523,659,784,1046,784,1046].forEach((f,i)=>tone(f,i*.1,.22,'triangle'))},whoosh:()=>{const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.frequency.setValueAtTime(300,a.currentTime);o.frequency.exponentialRampToValueAtTime(1200,a.currentTime+.25);g.gain.setValueAtTime(.06,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.3);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.32)}};
+ window.FX=S;
+ function confetti(el,big){const r=el&&el.getBoundingClientRect?el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};const E=['⭐','✨','🎉','💚','🌟','🎊'];const n=big?26:9;
+  for(let i=0;i<n;i++){const s=document.createElement('div');s.className='cfx';s.textContent=E[i%E.length];s.style.left=(r.left+r.width/2)+'px';s.style.top=(r.top+r.height/2)+'px';const a=Math.random()*6.28,d=(big?160:70)+Math.random()*80;s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',(Math.sin(a)*d-40)+'px');s.style.setProperty('--r',(Math.random()*720-360)+'deg');document.body.appendChild(s);setTimeout(()=>s.remove(),1200)}}
+ let last=0,lastNo=0;function hit(el,good){const now=Date.now();if(good){if(now-lastNo<400||now-last<250)return;last=now;S.ok();confetti(el);stars++;try{localStorage.setItem('lb_stars_'+location.pathname,stars)}catch(e){}upd();sb.classList.add('pop');setTimeout(()=>sb.classList.remove('pop'),400);el.classList&&el.classList.add('pop');setTimeout(()=>el.classList&&el.classList.remove('pop'),400);
+   if(stars%10===0){S.win();confetti(sb,true)}}else{lastNo=now;S.no();el.classList&&el.classList.add('shk');setTimeout(()=>el.classList&&el.classList.remove('shk'),450)}}
+ new MutationObserver(ms=>{ms.forEach(m=>{const t=m.target;if(!(t instanceof Element))return;if(m.type==='attributes'){const was=(m.oldValue||'').split(/\s+/);const c=t.classList;if(c.contains('ok')&&!was.includes('ok')&&(t.matches('button,input,.fb,.opt')))hit(t,true);else if(c.contains('no')&&!was.includes('no')&&t.matches('button,input,.opt'))hit(t,false)}})}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class'],attributeOldValue:true});
+ document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&!b.classList.contains('say')&&b.id!=='fxMute')S.tick()},true);
+ document.addEventListener('input',e=>{if(e.target.type==='range'){const n=Date.now();if(!window._lt||n-window._lt>90){window._lt=n;tone(400+(+e.target.value-+e.target.min)/(+e.target.max-+e.target.min+.001)*600,0,.03,'sine',.03)}}},true);
+ /* narration */
+ let cur=null;const base=window.AUDIO_BASE||'audio/';
+ function addSay(){document.querySelectorAll('.page').forEach(p=>{if(!(window.NARR||[]).includes(p.id))return;const h=p.querySelector('h2');if(!h||h.querySelector('.say'))return;const b=document.createElement('button');b.className='say';b.textContent='🔊 اسمع';
+  b.onclick=()=>{if(cur){cur.pause();const was=b.classList.contains('on');document.querySelectorAll('.say.on').forEach(x=>x.classList.remove('on'));cur=null;if(was)return}if(mute){mute=false;upd()}const a=new Audio(base+p.id+'.mp3');cur=a;b.classList.add('on');b.textContent='⏸️ إيقاف';a.onended=a.onerror=()=>{b.classList.remove('on');b.textContent='🔊 اسمع';cur=null};a.play().catch(()=>{b.classList.remove('on');b.textContent='🔊 اسمع'})};h.appendChild(b)})}
+ addSay();document.querySelectorAll('#bar button,[data-go]').forEach(b=>b.addEventListener('click',()=>{S.whoosh();if(cur){cur.pause();cur=null;document.querySelectorAll('.say').forEach(x=>{x.classList.remove('on');x.textContent='🔊 اسمع'})}}));
+})();
+</script>
+
+</body>
+</html>
