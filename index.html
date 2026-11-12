@@ -259,6 +259,7 @@ input:focus,select:focus{outline:none;border-color:var(--roy2)!important;box-sha
 @media (prefers-reduced-motion:reduce){#splash *{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}}
 </style>
 <style>.kidAct{display:flex;gap:8px;margin:8px 0 4px}.kidAct .btn{flex:1;font-size:.92rem;padding:10px 6px}.addKid{border:2px dashed var(--or)}#hParent{display:none;background:#fff4e6;border:2px solid #ffa94d;border-radius:14px;padding:8px 12px;margin:8px 0;font-weight:800;align-items:center;gap:8px;justify-content:space-between}#hParent.on{display:flex}.pinBox{background:#f1f3ff;border-radius:14px;padding:12px;text-align:center;margin:8px 0}.pinBox b{display:block;font-size:1.6rem;letter-spacing:3px;direction:ltr;color:var(--ink)}</style>
+<style>.incl{background:#f1f8f4;border:1.5px solid #b2dfc4;border-radius:14px;padding:10px 12px;margin:8px 0;font-size:.88rem;line-height:1.8;color:var(--ink)}.incl .free{margin-top:6px;padding-top:6px;border-top:1px dashed #b2dfc4;color:#2b7a4b}</style>
 </head>
 <body>
 <div id="splash" aria-hidden="true"><div class="sp-dots"><i style="left:8%;animation-duration:4.2s;animation-delay:0.3s;width:5px;height:5px"></i><i style="left:18%;animation-duration:5.5s;animation-delay:1.1s;width:4px;height:4px"></i><i style="left:30%;animation-duration:3.8s;animation-delay:0.6s;width:6px;height:6px"></i><i style="left:44%;animation-duration:6.0s;animation-delay:1.6s;width:3px;height:3px"></i><i style="left:57%;animation-duration:4.6s;animation-delay:0.2s;width:5px;height:5px"></i><i style="left:68%;animation-duration:5.2s;animation-delay:1.3s;width:4px;height:4px"></i><i style="left:79%;animation-duration:3.6s;animation-delay:0.9s;width:6px;height:6px"></i><i style="left:90%;animation-duration:4.9s;animation-delay:0.5s;width:4px;height:4px"></i></div>
@@ -977,7 +978,11 @@ let selPlan='T7';
 function cpRow(label,val){return'<div><span>'+label+'</span><span style="display:flex;gap:6px;align-items:center"><b>'+val+'</b>'+(val&&!val.startsWith('[')?'<button class="cp" data-cp="'+val+'">نسخ</button>':'')+'</span></div>'}
 function refNo(){const w=who();return'LB'+(w?w.phone.slice(-4):'0000')+selPlan}
 let SIB=false;function payAmt(){const pl=PLANS.find(p=>p.id===selPlan);return SIB?Math.round(pl.p*0.7):pl.p}
-function renderPay(){const gp=PLANS.filter(p=>p.g===grade().id);if(!gp.some(p=>p.id===selPlan))selPlan=(gp[0]||PLANS[0]).id;$('plans').innerHTML=(gp.length?gp:PLANS).map(p=>'<div class="pl'+(p.id===selPlan?' sel':'')+'" data-pl="'+p.id+'"><b>'+p.t+'<small style="display:block;font-weight:600;opacity:.75">حتى نهاية الفصل الأول · وكل كتاب جديد يُضاف لصفك يُفتح لك مجانًا</small></b><span class="pr">'+(p.o?'<s style="display:block;font-size:.8rem;opacity:.6">'+p.o+' د.ل</s>':'')+p.p+' د.ل'+(p.o?'<small style="display:block;font-size:.7rem;background:#e03131;color:#fff;border-radius:8px;padding:1px 6px;margin-top:2px;white-space:nowrap">🎉 سعر الافتتاح</small>':'')+'</span></div>').join('');
+const bkCount=n=>n===1?'كتاب تفاعلي واحد':n===2?'كتابان تفاعليان':n+(n<=10?' كتب تفاعلية':' كتابًا تفاعليًا');
+function planSubs(gid){const g=GRADES.find(x=>x.id===gid)||{subjects:[]};const all=g.subjects||[];return{rd:all.filter(s=>!s.soon),sn:all.filter(s=>s.soon)}}
+function planTitle(p){return'باقة '+GN(p.g)+' – '+bkCount(planSubs(p.g).rd.length)}
+function inclBox(gid){const {rd,sn}=planSubs(gid);return'<div class="incl"><div><b>✅ مشمول الآن:</b> '+rd.map(s=>s.icon+' '+esc(s.name)).join(' · ')+'</div>'+(sn.length?'<div style="margin-top:4px"><b>⏳ قادم قريبًا (مجانًا لك):</b> '+sn.map(s=>esc(s.name)).join(' · ')+'</div>':'')+'<div class="free">💡 <b>جرّب قبل أن تدفع:</b> الدروس الأولى في كل كتاب مجانية.</div></div>'}
+function renderPay(){const gp=PLANS.filter(p=>p.g===grade().id);if(!gp.some(p=>p.id===selPlan))selPlan=(gp[0]||PLANS[0]).id;$('plans').innerHTML=(gp.length?gp:PLANS).map(p=>'<div class="pl'+(p.id===selPlan?' sel':'')+'" data-pl="'+p.id+'"><b>'+planTitle(p)+'<small style="display:block;font-weight:600;opacity:.75">حتى نهاية الفصل الأول · وكل كتاب جديد يُضاف لصفك يُفتح لك مجانًا</small></b><span class="pr">'+(p.o?'<s style="display:block;font-size:.8rem;opacity:.6">'+p.o+' د.ل</s>':'')+p.p+' د.ل'+(p.o?'<small style="display:block;font-size:.7rem;background:#e03131;color:#fff;border-radius:8px;padding:1px 6px;margin-top:2px;white-space:nowrap">🎉 سعر الافتتاح</small>':'')+'</span></div>').join('')+inclBox(grade().id);
  $('plans').querySelectorAll('[data-pl]').forEach(x=>x.onclick=()=>{selPlan=x.dataset.pl;renderPay()});
  const pl=PLANS.find(p=>p.id===selPlan);
  const ok_=v=>v&&!v.startsWith('[');$('bank').innerHTML=(ok_(CONFIG.bank)?cpRow('المصرف',CONFIG.bank):'')+(ok_(CONFIG.accountName)?cpRow('اسم الحساب',CONFIG.accountName):'')+(ok_(CONFIG.account)?cpRow('رقم الحساب',CONFIG.account):'')+(CONFIG.iban?cpRow('رقم الآيبان IBAN',CONFIG.iban):'')+'<div><span>المبلغ</span><b style="color:var(--or);font-size:1.2rem">'+payAmt()+' د.ل</b></div><label style="display:flex;gap:8px;align-items:center;font-weight:800;margin-top:6px;cursor:pointer"><input type="checkbox" id="sibChk"'+(SIB?' checked':'')+'> 👨‍👩‍👧 عندي ابن آخر مشترك معكم (خصم 30٪)</label>';
@@ -996,7 +1001,7 @@ $('rcGo').onclick=async()=>{if(!rcData)return msg('rcMsg','اختر صورة ا�
  const r=await rpc('lb_pay_submit',{p_token:S.tok,p_plan_id:selPlan,p_receipt:rcData,p_note:$('rcNote').value,p_child:role()==='parent'&&kid()?kid().id:null});busy(b,0);
  if(r.err)return msg('rcMsg','❌ '+r.err);toast('✅ وصل طلبك، سنراجعه ونفعّل الاشتراك');await loadPays();payView()};
 $('payClose').onclick=()=>$('pay').classList.remove('on');
-function waMsg(){const pl=PLANS.find(p=>p.id===selPlan),g=grade(),w=who();return 'السلام عليكم، أرسلت تحويل اشتراك الكتاب الحي.\nاسم الطالب: '+w.name+'\nهاتف الطالب: 0'+w.phone+'\nالصف: '+g.name+'\nالباقة: '+pl.t+'\nالمبلغ: '+payAmt()+' د.ل'+(SIB?' (بعد خصم الإخوة 30٪ – اسم الأخ المشترك: ......)':'')+'\nرقم المرجع: '+refNo()+'\n(أرفق صورة الإيصال)'}
+function waMsg(){const pl=PLANS.find(p=>p.id===selPlan),g=grade(),w=who();return 'السلام عليكم، أرسلت تحويل اشتراك الكتاب الحي.\nاسم الطالب: '+w.name+'\nهاتف الطالب: 0'+w.phone+'\nالصف: '+g.name+'\nالباقة: '+planTitle(pl)+'\nالمبلغ: '+payAmt()+' د.ل'+(SIB?' (بعد خصم الإخوة 30٪ – اسم الأخ المشترك: ......)':'')+'\nرقم المرجع: '+refNo()+'\n(أرفق صورة الإيصال)'}
 $('codeGo').onclick=async()=>{const b=$('codeGo'),c=$('codeIn').value.trim();if(c.length<8)return msg('codeMsg','اكتب الكود كاملًا: KH-XXXX-XXXX');
  busy(b,1);const r=await rpc('lb_redeem',{p_token:S.tok,p_code:c});busy(b,0);if(r.err)return msg('codeMsg','❌ '+r.err);
  setUser(r);msg('codeMsg','🎉 تم التفعيل! اشتراكك فعّال حتى '+fmtD(r.user.sub&&r.user.sub.until),true);
@@ -1018,7 +1023,7 @@ setInterval(()=>{if(navigator.onLine&&S.tok&&(S.pays||[]).some(p=>p.status==='pe
 /* ============ الإدارة ============ */
 const GN=id=>{const g=GRADES.find(x=>x.id===id);return g?g.name:'كل الصفوف'};
 const STN={new:'جديد',used:'مستخدم',cancelled:'ملغى'};
-$('gPlan').innerHTML=PLANS.map(p=>'<option value="'+p.id+'">'+p.t+' – '+p.p+' د.ل</option>').join('');
+$('gPlan').innerHTML=PLANS.map(p=>'<option value="'+p.id+'">'+planTitle(p)+' – '+p.p+' د.ل</option>').join('');
 $('gPlan').onchange=()=>{$('gDays').value=PLANS.find(p=>p.id===$('gPlan').value).d};$('gPlan').value='T7';$('gPlan').onchange();
 $('gGrade').innerHTML='<option value="">كل الصفوف (أي طالب)</option>'+GRADES.filter(g=>g.ready).map(g=>'<option value="'+g.id+'">'+g.name+'</option>').join('');
 let aTab='pays';
