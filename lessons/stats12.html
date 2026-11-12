@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>أسس الإحصاء – الثالث الثانوي – الكتاب الحي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+html{color-scheme:light}button,input,select{font-family:inherit;color:#1f2a44}
+:root{--ink:#1f2a44;--tl:#5f3dc4;--tl2:#f3f0ff;--or:#f08c2e;--gr:#2e9e5b;--rd:#d64545;--pu:#6b4fd8;--line:#e2e8ee;--soft:#6b7690}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Cairo',Tahoma,sans-serif;background:#e9eef6;color:var(--ink);line-height:1.85}
+.book{max-width:800px;margin:12px auto;background:#fff;border-radius:16px;box-shadow:0 10px 30px #0002;overflow:hidden}
+header{background:linear-gradient(135deg,#3b1f7a,#7048e8);color:#fff;padding:16px;text-align:center}
+header h1{margin:0;font-size:1.3rem;font-weight:900}header div{opacity:.9;font-size:.85rem}
+.bar{display:flex;gap:6px;padding:8px 10px;background:var(--tl2);border-bottom:2px solid #c9d8f0;position:sticky;top:0;z-index:5;overflow-x:auto}
+.bar button{flex:0 0 auto;border:2px solid var(--tl);background:#fff;color:#1b3f73;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.86rem}
+.bar button.on{background:var(--tl);color:#fff}
+.page{display:none;padding:14px 16px 40px;animation:in .35s}.page.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h2{color:#1b3f73;margin:4px 0 6px;font-size:1.35rem;line-height:1.5}
+.num{display:inline-block;background:var(--tl);color:#fff;border-radius:10px;padding:0 10px;margin-left:6px;font-size:1rem}
+.box{border:2px solid var(--line);border-radius:16px;padding:14px;margin:14px 0;background:#fff}
+.box h3{margin:0 0 6px;font-size:1.05rem;color:#1b3f73}
+.lab{border-style:dashed;border-color:#a9c3ea;background:#fbfcff}
+.idea{background:linear-gradient(135deg,#3b1f7a,#7048e8);color:#fff;border-radius:16px;padding:12px 16px;margin:10px 0;font-weight:800}
+.idea small{display:block;opacity:.85;font-weight:600}
+.life{background:#fff7e8;border-right:5px solid var(--or);border-radius:10px;padding:8px 12px;margin:10px 0}
+.law{background:#fff7e8;border:2px solid #f5c27a;border-radius:14px;padding:10px 14px;margin:10px 0;font-weight:800;text-align:center;font-size:1.05rem}
+.warn{background:#fdeeee;border-right:5px solid var(--rd);border-radius:10px;padding:8px 12px;margin:10px 0}
+.btn{border:2px solid var(--ink);background:#fff;border-radius:10px;padding:6px 14px;font-weight:800;cursor:pointer;font-size:.95rem}
+.btn.main{background:var(--tl);border-color:var(--tl);color:#fff}.btn.or{background:var(--or);border-color:var(--or);color:#2a1600}
+.btn.ok{background:#dff5e7;border-color:var(--gr)}.btn.no{background:#fde4e4;border-color:var(--rd)}
+.btns{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0;justify-content:center}
+.fb{font-weight:800;min-height:1.4em;text-align:center;margin-top:6px}.fb.ok{color:var(--gr)}.fb.no{color:var(--rd)}
+.prob{background:#f5f8fd;border-radius:14px;padding:10px;text-align:center;font-weight:700}
+.mx{font-size:1.2rem;font-weight:800;line-height:2.1}
+.sc{text-align:center;font-weight:900;background:var(--tl2);border-radius:12px;padding:8px}
+.steps{background:#f8f9fc;border-radius:12px;padding:8px 12px;margin-top:8px;display:none}
+.opt{display:block;width:100%;text-align:right;margin:5px 0}.opt.ok{background:#dff5e7;border-color:var(--gr)}.opt.no{background:#fde4e4;border-color:var(--rd)}
+input.cf{width:60px;height:42px;font-size:1.15rem;font-weight:900;text-align:center;border:3px solid #c9d8f0;border-radius:10px;direction:ltr;vertical-align:middle;margin:0 2px}
+input.cf.ok{border-color:var(--gr);background:#eefaf2}input.cf.no{border-color:var(--rd);background:#fdeeee}
+/* matrix */
+.M{display:inline-flex;align-items:stretch;vertical-align:middle;margin:2px 4px}
+.M .br{width:8px;border:3px solid var(--ink)}.M .br.r{border-left:none;border-radius:0 6px 6px 0}.M .br.l{border-right:none;border-radius:6px 0 0 6px}
+.M.det .br{width:0;border-width:0 0 0 3px;border-radius:0}.M.det .br.l{border-width:0 3px 0 0}
+.M .g{display:grid;direction:rtl;gap:2px 4px;padding:2px 4px}
+.M .c{min-width:36px;text-align:center;font-weight:900;font-size:1.1rem;padding:2px 4px;border-radius:8px;direction:ltr;transition:.25s}
+.M .c.h1{background:#ffe08a}.M .c.h2{background:#b9e4ff}.M .c.x{opacity:.18;text-decoration:line-through}.M .c.h3{background:#c8f0d2}
+.M input.c{width:48px;height:36px;border:2px solid #c9d8f0;border-radius:8px;background:#fff;font-family:inherit}
+.chap{border:2px solid var(--line);border-radius:14px;margin:8px 0;overflow:hidden}
+.chap>div:first-child{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer;font-weight:800;background:#f8faff}
+.chap .cn{background:var(--tl);color:#fff;border-radius:50%;width:32px;height:32px;display:grid;place-items:center;flex:0 0 auto}
+.chap .ls{display:none;padding:4px 12px 10px}.chap.open .ls{display:block}
+.li{display:flex;align-items:center;gap:8px;padding:6px 4px;border-bottom:1px dashed var(--line);font-size:.95rem}
+.li .pg{margin-right:auto;color:var(--soft);font-size:.8rem}.li.ready{cursor:pointer;font-weight:800;color:#1b3f73}
+.tg{font-size:.72rem;border-radius:8px;padding:0 8px;font-weight:800}.tg.r{background:#e6f6ec;color:#1d7a3f}.tg.s{background:#f1f1f1;color:#999}
+table.t{border-collapse:collapse;width:100%;font-size:.92rem;margin:6px 0}table.t td,table.t th{border:1px solid #d6e1f2;padding:5px 8px}table.t th{background:var(--tl2)}
+.sl{display:flex;align-items:center;gap:8px;margin:4px 0}.sl label{min-width:90px;font-weight:800}.sl input{flex:1;accent-color:var(--tl)}
+footer{text-align:center;color:#999;font-size:.8rem;padding:10px 10px 70px}
+.rt{direction:ltr;unicode-bidi:isolate;display:inline-block}.wx,.bx{border:1px solid #dbe5f5;border-radius:12px;padding:8px 10px;margin:8px 0;background:#fbfcff}.wxq{font-weight:700;line-height:2}.wst{background:#fff;border-right:4px solid var(--tl);border-radius:8px;padding:4px 10px;margin:5px 0;animation:in .3s;line-height:2}.wst.fin{border-color:var(--gr);background:#eefaf2}.sn{display:inline-block;background:var(--tl);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:.8rem;margin-left:6px}.bh{background:#fff7e8;border-radius:8px;padding:6px 10px;margin:4px 0}.ans{font-weight:900;color:var(--gr);margin-top:4px}.exb{border-color:#a9c3ea}.M.det .br.r,.M.det .br.l{border:none;border-radius:0;width:0}.M.det .br.r{border-right:3px solid var(--ink)}.M.det .br.l{border-left:3px solid var(--ink)}.bkb{border-color:#f5c27a;background:#fffdf8}/*darkfix*/input,select,textarea,.cf,.M input.c{background-color:#fff !important;color:#1f2a44 !important;-webkit-text-fill-color:#1f2a44 !important;caret-color:#1f2a44}input.cf.ok{background-color:#eefaf2 !important}input.cf.no{background-color:#fdeeee !important}svg text{font-family:Cairo,Tahoma,Arial,sans-serif}
+canvas{touch-action:manipulation;max-width:100%;height:auto}
+.shk{animation:shk .4s}@keyframes shk{25%{transform:translateX(6px)}75%{transform:translateX(-6px)}}
+ol.steps{display:block;background:none}
+</style>
+</head>
+<body>
+<div class="book">
+<header><h1>📊 أسس الإحصاء – الثالث الثانوي</h1><div>الكتاب الحي · الاحتمالات · المتغيرات العشوائية · التوزيعات · المعاينة · التقدير · اختبار الفروض</div></header>
+<div class="bar" id="bar">
+  <button data-p="home" class="on">📚 الفهرس</button>
+  <button data-p="s1">1 التجربة وفراغ العينة والأحداث</button>
+  <button data-p="s2">1 الاحتمال والاحتمال الشرطي</button>
+  <button data-p="rv1">🏁 مراجعة 1</button>
+  <button data-p="s3">2 المتغير العشوائي المنفصل</button>
+  <button data-p="s4">2 المتغير العشوائي المتصل</button>
+  <button data-p="rv2">🏁 مراجعة 2</button>
+  <button data-p="s5">3 توزيع ذي الحدين وبواسون</button>
+  <button data-p="s6">3 التوزيع الطبيعي وتوزيع t</button>
+  <button data-p="rv3">🏁 مراجعة 3</button>
+  <button data-p="s7">4 توزيعات المعاينة</button>
+  <button data-p="rv4">🏁 مراجعة 4</button>
+  <button data-p="s8">5 التقدير وفترات الثقة</button>
+  <button data-p="rv5">🏁 مراجعة 5</button>
+  <button data-p="s9">6 اختبارات الفروض</button>
+  <button data-p="rv6">🏁 مراجعة 6</button>
+</div>
+<style>
+.sl{display:flex;align-items:center;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px 0;font-weight:800}
+.sl input[type=range]{width:200px;accent-color:var(--tl)}
+.pool{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.pool button{border:2px solid var(--line);border-radius:12px;background:#fff;padding:7px 11px;font-family:inherit;font-weight:800;cursor:pointer;font-size:.92rem}
+.pool button.sel{border-color:var(--tl);background:var(--tl2)}
+.pool button.ok{border-color:#2fb24c;background:#e6f7ea}.pool button.no{border-color:#e5484d;background:#fde8e8}
+.cat{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}
+.cat>div{border:2px dashed var(--line);border-radius:14px;padding:8px;min-height:70px;text-align:center;cursor:pointer}
+.cat>div b{display:block;margin-bottom:4px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:8px 0}
+.steps li{background:#fff;border:2px solid var(--line);border-radius:12px;padding:8px 12px;margin:6px 0;font-weight:800;cursor:pointer;display:flex;gap:8px;align-items:center}
+.steps li.ok{border-color:#2fb24c;background:#e6f7ea}.steps li b{min-width:26px;height:26px;border-radius:50%;background:var(--tl);color:#fff;display:grid;place-items:center;font-size:.85rem}
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:8px 0}
+.tools button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px 2px;font-family:inherit;font-weight:800;font-size:.72rem;cursor:pointer}
+.tools button svg{width:100%;height:58px;display:block}.tools button.sel{border-color:var(--tl);background:var(--tl2)}
+.hz{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.hz button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:6px;cursor:pointer;font-family:inherit;font-weight:800;font-size:.75rem}
+.hz button.sel{border-color:var(--tl);background:var(--tl2)}.hz button.ok{border-color:#2fb24c;background:#e6f7ea}
+.hz svg{width:64px;height:64px;display:block;margin:auto}
+.big2{font-size:1.5rem;font-weight:900;text-align:center;margin:6px 0}
+.matr{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:8px 0}
+.matr button{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 2px;font-family:inherit;font-weight:800;font-size:.8rem;cursor:pointer}
+.matr button span{font-size:1.6rem;display:block}.matr button.sel{border-color:var(--tl);background:var(--tl2)}
+.ptab{display:grid;grid-template-columns:repeat(18,1fr);gap:2px;direction:ltr;margin:8px 0}
+.ptab div{aspect-ratio:1;border-radius:4px;font-size:.55rem;font-weight:900;display:grid;place-items:center;cursor:pointer;line-height:1}
+.ptab div.m{background:#ffd8a8}.ptab div.n{background:#b2f2bb}.ptab div.g{background:#a5d8ff}.ptab div.sel{outline:3px solid #e5484d}
+</style>
+<style>
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+.chips button{border:2px solid var(--line);border-radius:20px;background:#fff;padding:6px 12px;font-family:inherit;font-weight:800;cursor:pointer}
+.chips button.on{border-color:var(--tl);background:var(--tl2)}
+.sl{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;margin:6px 0;font-weight:800}
+.sl input[type=range]{flex:1;min-width:130px;max-width:300px}
+.sl select{font-family:inherit;font-weight:800;font-size:1rem;border:2px solid var(--tl);border-radius:10px;padding:4px 6px;max-width:100%}
+.tbl{width:100%;border-collapse:collapse;margin:8px 0;font-weight:800;text-align:center;background:#fff}.tbl td,.tbl th{border:2px solid var(--line);padding:5px}.tbl th{background:var(--tl2)}
+.big2{font-size:1.12rem;font-weight:900;text-align:center;color:var(--tl);margin:6px 0;line-height:1.9}
+.eq{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:"Cambria Math","Times New Roman",serif;font-weight:700;background:#fff;border:1.5px solid var(--line);border-radius:8px;padding:0 6px;color:#1b1b1b}
+.mis{background:linear-gradient(135deg,#0b3954,#087e8b);color:#fff;border-radius:18px;padding:12px 14px;margin:10px 0;box-shadow:0 6px 18px rgba(8,126,139,.25)}
+.mis h4{margin:0 0 6px;font-size:1.05rem}.mis .g{display:flex;align-items:center;gap:8px;font-weight:800;padding:4px 0;opacity:.85;transition:.3s}
+.mis .g i{font-style:normal;width:26px;height:26px;border-radius:50%;border:2px solid #fff;display:inline-flex;align-items:center;justify-content:center;flex:none;font-size:.9rem}
+.mis .g.ok{opacity:1}.mis .g.ok i{background:#ffd43b;border-color:#ffd43b;color:#0b3954;animation:pop .4s}
+.mis .pr{height:8px;background:rgba(255,255,255,.25);border-radius:6px;margin-top:6px;overflow:hidden}.mis .pr b{display:block;height:100%;background:#ffd43b;width:0;transition:width .5s}
+.lab canvas{background:#fff;border-radius:14px}
+.hud{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;font-weight:900;margin:6px 0}.hud span{background:#fff;border:2px solid var(--line);border-radius:12px;padding:3px 10px}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:#0b3954;color:#ffd43b;font-weight:900;padding:10px 18px;border-radius:30px;z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.25);animation:pop .4s}
+</style>
+
+
+<section class="page on" id="home">
+  <h2>فهرس الكتاب</h2>
+  <div class="idea">📊 أهلًا بك في مختبر الإحصاء الحي!<small>هنا ترمي آلاف النرد في ثوانٍ، وتُسقط الكرات في لوح جالتون، وتسحب العينات، وتصطاد المعلمة بفترات الثقة، وتحكم في محكمة الفروض… وفي كل درس <b>مهمات</b> 🎯 تملأ شريط إنجازك ⭐</small></div>
+  <div class="hud" id="allStars"></div>
+  <div id="toc"></div>
+</section>
+
+<section class="page" id="s1">
+  <div class="muted">الفصل الأول · ص 5–30</div>
+  <h2><span class="num">1</span>التجربة العشوائية وفراغ العينة والأحداث</h2>
+  <div class="idea">💡 <b>التجربة العشوائية</b>: نعرف كل نتائجها الممكنة مسبقًا لكن لا نستطيع التنبؤ بالنتيجة. <b>فراغ العينة S</b>: مجموعة كل النتائج الممكنة. <b>الحدث</b>: مجموعة جزئية من S.<small>الحدث المؤكد = S · الحدث المستحيل = ∅ · المكمل A' · الاتحاد A ∪ B (أحدهما على الأقل) · التقاطع A ∩ B (كلاهما معًا) · الحدثان <b>متنافيان</b> إذا A ∩ B = ∅</small></div>
+  <div class="mis" id="mis_s1"></div>
+  <div class="box lab"><h3>🎲 المختبر: آلة فراغ العينة</h3><div class="chips" id="ssK"></div><div class="chips" id="ssE"></div>
+    <canvas id="ssC" class="cv" width="640" height="380"></canvas><div class="big2" id="ssOut"></div></div>
+  <div class="box lab"><h3>⭕ مختبر فن (العمليات على الأحداث)</h3><div class="hint" style="text-align:center">نرمي مكعب نرد: A = عدد زوجي ، B = عدد أكبر من 3. اختر العملية وشاهد المنطقة المظللة</div>
+    <div class="chips" id="vnK"></div><canvas id="vnC" class="cv" width="640" height="300"></canvas><div class="big2" id="vnOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qs1"></div></div>
+</section>
+
+<section class="page" id="s2">
+  <div class="muted">الفصل الأول · ص 30–57</div>
+  <h2><span class="num">1</span>الاحتمال وقوانينه والاحتمال الشرطي</h2>
+  <div class="idea">💡 إذا كانت النتائج متساوية الإمكانية: <span class="eq">P(A) = n(A) ÷ n(S)</span> ، و <span class="eq">0 ≤ P(A) ≤ 1</span><small><span class="eq">P(A') = 1 − P(A)</span> · <span class="eq">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</span> · الشرطي: <span class="eq">P(A/B) = P(A ∩ B) ÷ P(B)</span> · الاستقلال: <span class="eq">P(A ∩ B) = P(A) × P(B)</span></small></div>
+  <div class="mis" id="mis_s2"></div>
+  <div class="box lab"><h3>🚀 المختبر: قانون الأعداد الكبيرة</h3><div class="hint" style="text-align:center">ارمِ مكعبي نرد آلاف المرات… هل يقترب التكرار النسبي لمجموع 7 من الاحتمال النظري 6/36؟</div>
+    <div class="chips" id="lnK"></div><canvas id="lnC" class="cv" width="640" height="360"></canvas><div class="btns"><button class="btn" id="ln1">🎲 رمية</button><button class="btn" id="ln100">🎲×100</button><button class="btn main" id="ln5k">🚀 ×5000</button><button class="btn or" id="lnR">↺</button></div><div class="big2" id="lnOut"></div></div>
+  <div class="box lab"><h3>🔎 الاحتمال الشرطي: فلتر المعلومة</h3><div class="hint" style="text-align:center">نرمي مكعبين. اختر الحدث A والشرط B، وشاهد فراغ العينة «ينكمش» إلى B</div>
+    <div class="chips" id="cdA"></div><div class="chips" id="cdB"></div><canvas id="cdC" class="cv" width="640" height="380"></canvas><div class="big2" id="cdOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qs2"></div></div>
+</section>
+
+<section class="page" id="rv1"><div class="muted">الفصل الأول · مراجعة</div><h2>🏁 مراجعة: نظرية الاحتمالات</h2><div class="sc" id="rv1Sc"></div><div id="rv1Q"></div><div class="btns"><button class="btn or" id="rv1New">🔄 اختبار جديد</button></div></section>
+
+<section class="page" id="s3">
+  <div class="muted">الفصل الثاني · ص 58–80</div>
+  <h2><span class="num">2</span>المتغير العشوائي المنفصل وتوقعه وتباينه</h2>
+  <div class="idea">💡 <b>المتغير العشوائي X</b> يحوّل نتائج التجربة إلى أعداد. المنفصل يأخذ قيمًا قابلة للعد. شروط دالة الاحتمال: <span class="eq">0 ≤ f(x) ≤ 1</span> و <span class="eq">Σ f(x) = 1</span><small>التوقع (الوسط): <span class="eq">μ = E(X) = Σ x f(x)</span> · التباين: <span class="eq">σ² = Σ x² f(x) − μ²</span> · دالة التوزيع: <span class="eq">F(x) = P(X ≤ x)</span></small></div>
+  <div class="mis" id="mis_s3"></div>
+  <div class="box lab"><h3>⚖️ المختبر: الوسط هو نقطة الاتزان!</h3><div class="hint" style="text-align:center">اسحب أعمدة الاحتمال لأعلى وأسفل (المجموع يبقى 1)… والمثلث تحتها يتحرك إلى نقطة الاتزان = E(X)</div>
+    <canvas id="bpC" class="cv" width="640" height="360"></canvas><div class="btns"><button class="btn" id="bpU">⬜ متساوية</button><button class="btn" id="bpN">🎲 عشوائية</button></div><div class="big2" id="bpOut"></div></div>
+  <div class="box lab"><h3>🪙 من التجربة إلى التوزيع</h3><div class="chips" id="dxK"></div><canvas id="dxC" class="cv" width="640" height="320"></canvas><div class="big2" id="dxOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qs3"></div></div>
+</section>
+
+<section class="page" id="s4">
+  <div class="muted">الفصل الثاني · ص 80–88</div>
+  <h2><span class="num">2</span>المتغير العشوائي المتصل ودالة الكثافة</h2>
+  <div class="idea">💡 المتغير <b>المتصل</b> يأخذ كل القيم في فترة (أطوال، أوزان، أزمنة). الاحتمال هنا = <b>المساحة تحت منحنى دالة الكثافة</b>.<small><span class="eq">P(a ≤ X ≤ b) = ∫ f(x) dx</span> من a إلى b · المساحة الكلية = 1 · <span class="eq">P(X = a) = 0</span> لأي قيمة مفردة!</small></div>
+  <div class="mis" id="mis_s4"></div>
+  <div class="box lab"><h3>🖌️ المختبر: الاحتمال مساحة</h3><div class="hint" style="text-align:center">اسحب الحدّين a و b على المحور، وشاهد المساحة المظللة = الاحتمال</div>
+    <div class="chips" id="arK"></div><canvas id="arC" class="cv" width="640" height="320"></canvas><div class="big2" id="arOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qs4"></div></div>
+</section>
+
+<section class="page" id="rv2"><div class="muted">الفصل الثاني · مراجعة</div><h2>🏁 مراجعة: المتغيرات العشوائية</h2><div class="sc" id="rv2Sc"></div><div id="rv2Q"></div><div class="btns"><button class="btn or" id="rv2New">🔄 اختبار جديد</button></div></section>
+
+<section class="page" id="s5">
+  <div class="muted">الفصل الثالث · ص 89–100</div>
+  <h2><span class="num">3</span>توزيع ذي الحدين وتوزيع بواسون</h2>
+  <div class="idea">💡 <b>ذو الحدين</b>: n محاولات مستقلة، لكل منها نتيجتان، واحتمال النجاح p ثابت: <span class="eq">P(X = x) = C(n,x) pˣ qⁿ⁻ˣ</span> حيث q = 1 − p<small><span class="eq">μ = np</span> · <span class="eq">σ² = npq</span> · <b>بواسون</b> لعدد مرات وقوع حدث في فترة: <span class="eq">f(x) = e<sup>−λ</sup> λˣ ÷ x!</span> و <span class="eq">μ = σ² = λ</span></small></div>
+  <div class="mis" id="mis_s5"></div>
+  <div class="box lab"><h3>🔻 المختبر: لوح جالتون</h3><div class="hint" style="text-align:center">كل كرة تصطدم بـ n مسمار، وعند كل مسمار تذهب يمينًا باحتمال p… انظر كيف يتشكّل توزيع ذي الحدين!</div>
+    <div class="sl">n <input type="range" id="gbN" min="2" max="12" value="8"><b id="gbNv"></b> p <input type="range" id="gbP" min="0.1" max="0.9" step="0.05" value="0.5"><b id="gbPv"></b></div>
+    <canvas id="gbC" class="cv" width="640" height="440"></canvas><div class="btns"><button class="btn main" id="gbGo">⚪ أطلق 200 كرة</button><button class="btn or" id="gbR">↺</button></div><div class="big2" id="gbOut"></div></div>
+  <div class="box lab"><h3>🛍️ المختبر: زبائن المحل (بواسون)</h3><div class="hint" style="text-align:center">يدخل المحل في المتوسط λ زبائن في الساعة. شغّل الساعات وشاهد توزيع عدد الزبائن</div>
+    <div class="sl">λ <input type="range" id="psL" min="1" max="10" step="0.5" value="6"><b id="psLv"></b></div>
+    <canvas id="psC" class="cv" width="640" height="320"></canvas><div class="btns"><button class="btn main" id="psGo">⏩ شغّل 50 ساعة</button><button class="btn or" id="psR">↺</button></div><div class="big2" id="psOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qs5"></div></div>
+</section>
+
+<section class="page" id="s6">
+  <div class="muted">الفصل الثالث · ص 100–128</div>
+  <h2><span class="num">3</span>التوزيع الطبيعي وتوزيع t</h2>
+  <div class="idea">💡 <b>التوزيع الطبيعي</b> منحنى جرسي متماثل حول μ، ومساحته الكلية 1. نحوّل أي قيمة إلى <b>الدرجة المعيارية</b>: <span class="eq">Z = (X − μ) ÷ σ</span> ثم نقرأ المساحة من جدول التوزيع الطبيعي المعياري.<small>قاعدة تقريبية: 68% من القيم ضمن σ واحد، 95% ضمن 2σ، 99.7% ضمن 3σ · <b>توزيع t</b> يشبهه لكن أطرافه أسمك، ويقترب منه كلما زادت درجات الحرية</small></div>
+  <div class="mis" id="mis_s6"></div>
+  <div class="box lab"><h3>🔔 المختبر: الجرس الحي</h3><div class="sl">μ <input type="range" id="nmM" min="40" max="80" value="60"><b id="nmMv"></b> σ <input type="range" id="nmS" min="4" max="15" value="10"><b id="nmSv"></b></div>
+    <div class="sl">a <input type="range" id="nmA" min="20" max="100" value="50"><b id="nmAv"></b> b <input type="range" id="nmB" min="20" max="100" value="70"><b id="nmBv"></b></div>
+    <canvas id="nmC" class="cv" width="640" height="320"></canvas><div class="big2" id="nmOut"></div></div>
+  <div class="box lab"><h3>🎓 مسألة: درجات الامتحان</h3><div class="hint" style="text-align:center">درجات طلاب في امتحان تتوزع طبيعيًا. احسب النسبة المطلوبة خطوة بخطوة</div><div id="nzQ"></div></div>
+  <div class="box lab"><h3>🦒 توزيع t مقابل الطبيعي</h3><div class="sl">درجات الحرية ν <input type="range" id="tdF" min="1" max="30" value="2"><b id="tdFv"></b></div><canvas id="tdC" class="cv" width="640" height="260"></canvas><div class="big2" id="tdOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qs6"></div></div>
+</section>
+
+<section class="page" id="rv3"><div class="muted">الفصل الثالث · مراجعة</div><h2>🏁 مراجعة: التوزيعات الاحتمالية</h2><div class="sc" id="rv3Sc"></div><div id="rv3Q"></div><div class="btns"><button class="btn or" id="rv3New">🔄 اختبار جديد</button></div></section>
+
+<section class="page" id="s7">
+  <div class="muted">الفصل الرابع · ص 129–152</div>
+  <h2><span class="num">4</span>توزيعات المعاينة: توزيع الوسط الحسابي للعينة</h2>
+  <div class="idea">💡 لو سحبنا عينات كثيرة حجم كل منها n وحسبنا وسط كل عينة X̄، فإن قيم X̄ نفسها تتوزع:<small><span class="eq">μ<sub>X̄</sub> = μ</span> · <span class="eq">σ<sub>X̄</sub> = σ ÷ √n</span> (الخطأ المعياري) · ومهما كان شكل المجتمع، يقترب توزيع X̄ من الطبيعي كلما كبرت n (<b>نظرية النهاية المركزية</b>)</small></div>
+  <div class="mis" id="mis_s7"></div>
+  <div class="box lab"><h3>🪣 المختبر: آلة سحب العينات</h3><div class="hint" style="text-align:center">اختر شكل المجتمع وحجم العينة، ثم اسحب مئات العينات وشاهد مدرّج أوساطها يتحول إلى جرس!</div>
+    <div class="chips" id="smK"></div><div class="sl">حجم العينة n <input type="range" id="smN" min="1" max="40" value="5"><b id="smNv"></b></div>
+    <canvas id="smC" class="cv" width="640" height="460"></canvas><div class="btns"><button class="btn" id="sm1">🪣 عينة واحدة</button><button class="btn main" id="sm500">🚀 500 عينة</button><button class="btn or" id="smR">↺</button></div><div class="big2" id="smOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qs7"></div></div>
+</section>
+
+<section class="page" id="rv4"><div class="muted">الفصل الرابع · مراجعة</div><h2>🏁 مراجعة: توزيعات المعاينة</h2><div class="sc" id="rv4Sc"></div><div id="rv4Q"></div><div class="btns"><button class="btn or" id="rv4New">🔄 اختبار جديد</button></div></section>
+
+<section class="page" id="s8">
+  <div class="muted">الفصل الخامس · ص 153–169</div>
+  <h2><span class="num">5</span>التقدير بقيمة وبفترة: فترات الثقة</h2>
+  <div class="idea">💡 <b>التقدير بقيمة</b>: نقدّر μ بالوسط X̄. <b>التقدير بفترة</b>: نعطي فترة نثق بنسبة (1 − α) أنها تحتوي μ:<small><span class="eq">X̄ ± Z<sub>α/2</sub> × σ ÷ √n</span> · ثقة 90% ⟸ Z = 1.645 · ثقة 95% ⟸ Z = 1.96 · ثقة 99% ⟸ Z = 2.58 · وإذا كانت σ مجهولة والعينة صغيرة نستخدم t و s</small></div>
+  <div class="mis" id="mis_s8"></div>
+  <div class="box lab"><h3>🎣 المختبر: اصطد المعلمة μ</h3><div class="hint" style="text-align:center">الخط الأحمر هو μ الحقيقي (مخفي عن الباحث). كل عينة تعطي فترة ثقة… كم فترة «تصطاده»؟</div>
+    <div class="chips" id="ciK"></div><div class="sl">حجم العينة n <input type="range" id="ciN" min="5" max="100" value="25"><b id="ciNv"></b></div>
+    <canvas id="ciC" class="cv" width="640" height="440"></canvas><div class="btns"><button class="btn" id="ci1">🎣 فترة واحدة</button><button class="btn main" id="ci50">🚀 50 فترة</button><button class="btn or" id="ciR">↺</button></div><div class="big2" id="ciOut"></div></div>
+  <div class="box lab"><h3>🧮 احسب فترة الثقة</h3><div id="ciQ"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qs8"></div></div>
+</section>
+
+<section class="page" id="rv5"><div class="muted">الفصل الخامس · مراجعة</div><h2>🏁 مراجعة: التقدير الإحصائي</h2><div class="sc" id="rv5Sc"></div><div id="rv5Q"></div><div class="btns"><button class="btn or" id="rv5New">🔄 اختبار جديد</button></div></section>
+
+<section class="page" id="s9">
+  <div class="muted">الفصل السادس · ص 170–190</div>
+  <h2><span class="num">6</span>اختبارات الفروض الإحصائية</h2>
+  <div class="idea">💡 <b>فرض العدم H₀</b>: لا تغيير (μ = μ₀). <b>الفرض البديل H₁</b>: يوجد تغيير. نحسب <span class="eq">Z = (X̄ − μ₀) ÷ (σ ÷ √n)</span> ونقارنها بالقيمة الحرجة عند مستوى المعنوية α.<small><b>خطأ من النوع الأول</b>: رفض H₀ وهو صحيح (احتماله α) · <b>خطأ من النوع الثاني</b>: قبول H₀ وهو خاطئ · الاختبار ذو طرفين (≠) أو طرف واحد (&gt; أو &lt;)</small></div>
+  <div class="mis" id="mis_s9"></div>
+  <div class="box lab"><h3>⚖️ محكمة الفروض</h3><div class="hint" style="text-align:center">المتهم: «فرض العدم H₀» بريء حتى تثبت إدانته! اقرأ القضية، احسب Z، وأصدر الحكم</div>
+    <div class="chips" id="htK"></div><canvas id="htC" class="cv" width="640" height="320"></canvas><div id="htQ"></div></div>
+  <div class="box lab"><h3>🎯 مختبر الأخطاء: α و β</h3><div class="hint" style="text-align:center">حرّك القيمة الحرجة وغيّر الفرق الحقيقي، وشاهد كيف يتنافس الخطآن</div>
+    <div class="sl">القيمة الحرجة <input type="range" id="erC" min="0.5" max="3" step="0.05" value="1.645"><b id="erCv"></b> الفرق الحقيقي <input type="range" id="erD" min="0" max="4" step="0.1" value="2.5"><b id="erDv"></b></div>
+    <canvas id="erCv2" class="cv" width="640" height="300"></canvas><div class="big2" id="erOut"></div></div>
+  <div class="box"><h3>✏️ تدرّب</h3><div id="qs9"></div></div>
+</section>
+
+<section class="page" id="rv6"><div class="muted">الفصل السادس · مراجعة</div><h2>🏁 مراجعة: اختبارات الفروض</h2><div class="sc" id="rv6Sc"></div><div id="rv6Q"></div><div class="btns"><button class="btn or" id="rv6New">🔄 اختبار جديد</button></div></section>
+<footer>الكتاب الحي · مبني على كتاب أسس الإحصاء للسنة الثالثة بمرحلة التعليم الثانوي – القسم العلمي 2025–2026 (مركز المناهج التعليمية والبحوث التربوية – ليبيا)</footer>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const pages=[...document.querySelectorAll('.page')],nb=[...document.querySelectorAll('#bar button')];
+function go(id){pages.forEach(p=>p.classList.toggle('on',p.id===id));nb.forEach(b=>b.classList.toggle('on',b.dataset.p===id));window.scrollTo({top:0,behavior:'smooth'})}
+nb.forEach(b=>b.onclick=()=>go(b.dataset.p));
+(function(){const h=location.hash.slice(1);if(h&&$(h))go(h);addEventListener('hashchange',()=>{const x=location.hash.slice(1);if($(x))go(x)})})();
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),nz=(a,b)=>{let x;do{x=rnd(a,b)}while(!x);return x},pick=a=>a[rnd(0,a.length-1)];
+const ms=n=>n<0?'−'+(-n):String(n);const pr=n=>n<0?'('+ms(n)+')':String(n);
+const V='س';
+const parse=s=>{s=(s||'').trim().replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[−–—]/g,'-').replace(/\s/g,'');if(s===''||s==='+'||s==='-')return NaN;if(/^-?\d+\/\d+$/.test(s)){const[a,b]=s.split('/');return a/b}return Number(s)};
+function term(c,p,first,v){v=v||V;if(c===0)return'';const a=Math.abs(c);const cs=(a===1&&p>0)?'':String(a);const vs=p===0?'':(p===1?v:v+'<sup>'+p+'</sup>');const s=c<0?(first?'−':' − '):(first?'':' + ');return s+cs+vs}
+function poly(cs,v){let out='',f=true;cs.forEach(([c,p])=>{if(c){out+=term(c,p,f,v);f=false}});return out||'0'}
+/* matrix renderer: A 2D array, o:{det, cls(i,j)->class, inp:prefix} */
+function M(A,o){o=o||{};const r=A.length,c=A[0].length;let g='<div class="g" style="grid-template-columns:repeat('+c+',auto)">';
+ A.forEach((row,i)=>row.forEach((v,j)=>{const cl=o.cls?o.cls(i,j)||'':'';g+=o.inp?'<input class="c '+cl+'" data-i="'+i+'" data-j="'+j+'" data-m="'+o.inp+'" value="'+(v===''?'':ms(v))+'" inputmode="text">':'<div class="c '+cl+'" data-i="'+i+'" data-j="'+j+'">'+(typeof v==='number'?ms(Math.round(v*1000)/1000):v)+'</div>'}));
+ return '<span class="M'+(o.det?' det':'')+'"'+(o.id?' id="'+o.id+'"':'')+'><span class="br r"></span>'+g+'</div><span class="br l"></span></span>'}
+function readM(host,name,r,c){const A=Array.from({length:r},()=>Array(c).fill(0));host.querySelectorAll('input[data-m="'+name+'"]').forEach(x=>{const v=parse(x.value);A[+x.dataset.i][+x.dataset.j]=isNaN(v)?0:v});return A}
+const det2=a=>a[0][0]*a[1][1]-a[0][1]*a[1][0];
+const minor=(a,i,j)=>a.filter((_,r)=>r!==i).map(row=>row.filter((_,c)=>c!==j));
+const det3=a=>a[0][0]*det2(minor(a,0,0))-a[0][1]*det2(minor(a,0,1))+a[0][2]*det2(minor(a,0,2));
+const det=a=>a.length===2?det2(a):det3(a);
+const rM=(r,c,lo,hi)=>Array.from({length:r},()=>Array.from({length:c},()=>rnd(lo==null?-5:lo,hi==null?9:hi)));
+const mul=(A,B)=>A.map(row=>B[0].map((_,j)=>row.reduce((s,v,k)=>s+v*B[k][j],0)));
+const T=A=>A[0].map((_,j)=>A.map(r=>r[j]));
+const sub='₀₁₂₃₄₅₆₇₈₉';const ij=(i,j)=>''+sub[i]+sub[j];
+function mcq(host,q,opts,right,onAns){const d=document.createElement('div');d.className='box';d.style.margin='8px 0';d.innerHTML='<div style="font-weight:800">'+q+'</div>';let dn=false;const order=opts.map((o,i)=>i).sort(()=>Math.random()-.5);
+ order.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=opts[i];b.onclick=()=>{if(dn)return;dn=true;b.classList.add(i===right?'ok':'no');if(i!==right)[...d.querySelectorAll('.opt')][order.indexOf(right)].classList.add('ok');onAns&&onAns(i===right)};d.appendChild(b)});host.appendChild(d)}
+function MCQP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();g.o=g.o.filter((x,i)=>g.o.indexOf(x)===i);const ord=g.o.map((x,i)=>i).sort(()=>Math.random()-.5);let done=false;
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div>';const opts=document.createElement('div');box.appendChild(opts);const fb=document.createElement('div');fb.className='fb';const nx=document.createElement('div');nx.className='btns';box.appendChild(fb);box.appendChild(nx);
+  ord.forEach(i=>{const b=document.createElement('button');b.className='btn opt';b.innerHTML=g.o[i];b.onclick=()=>{if(done)return;done=true;const r=i===0;b.classList.add(r?'ok':'no');if(!r)[...opts.children][ord.indexOf(0)].classList.add('ok');dn++;if(r)ok++;sc.textContent='✔️ صحيح: '+ok+' من '+dn;fb.className='fb '+(r?'ok':'no');fb.innerHTML=(r?'🎉 صحيح! ':'❌ ليس صحيحًا. ')+(g.ex?'<div style="font-size:.95rem;color:var(--ink);font-weight:700">'+g.ex+'</div>':'');nx.innerHTML='<button class="btn or">سؤال جديد ⬅</button>';nx.firstChild.onclick=render};opts.appendChild(b)})}render()}
+/* matrix-answer practice: gen -> {q, ans(2D), steps[]} */
+function MatP(host,gen){let ok=0,dn=0;const box=document.createElement('div'),sc=document.createElement('div');sc.className='sc';host.appendChild(box);host.appendChild(sc);sc.textContent='ابدأ ✍️';
+ function render(){const g=gen();let tries=0;const E=g.ans.map(r=>r.map(()=>''));
+  box.innerHTML='<div class="prob mx" style="font-size:1.05rem">'+g.q+'</div><div style="text-align:center;margin:8px 0">= '+M(E,{inp:'z'})+'</div><div class="btns"><button class="btn main" data-k="chk">✔️ تحقّق</button><button class="btn" data-k="help">💡 أرني الحل</button><button class="btn or" data-k="new">سؤال جديد ⬅</button></div><div class="fb"></div><div class="steps"></div>';
+  const ins=[...box.querySelectorAll('input.c')],fb=box.querySelector('.fb'),st=box.querySelector('.steps');const steps=()=>{st.style.display='block';st.innerHTML='<b>الحل:</b>'+g.steps.map(s=>'<div class="mx" style="font-size:1rem">'+s+'</div>').join('')};
+  box.querySelector('[data-k=chk]').onclick=()=>{let all=true,emp=false;ins.forEach(x=>{const v=parse(x.value);if(isNaN(v)){emp=true;all=false;return}const g2=Math.abs(v-g.ans[+x.dataset.i][+x.dataset.j])<.001;x.classList.remove('ok','no');x.classList.add(g2?'ok':'no');if(!g2)all=false});
+   if(emp&&!all){fb.className='fb';fb.textContent='املأ كل الخانات';return}tries++;if(tries===1){dn++;if(all)ok++;sc.textContent='✔️ صحيح من أول محاولة: '+ok+' من '+dn}fb.className='fb '+(all?'ok':'no');fb.textContent=all?'🎉 ممتاز!':'🤔 الخانات الحمراء غير صحيحة';if(all||tries>=2)steps();if(all)setTimeout(render,2400)};
+  box.querySelector('[data-k=help]').onclick=()=>{ins.forEach(x=>{x.value=ms(g.ans[+x.dataset.i][+x.dataset.j]);x.classList.add('ok')});steps()};box.querySelector('[data-k=new]').onclick=render}render()}
+
+
+const TOC=[['الفصل الأول: نظرية الاحتمالات',5,[['','التجربة العشوائية وفراغ العينة والأحداث',5,'s1'],['','الاحتمال وقوانينه والاحتمال الشرطي',30,'s2'],['','مراجعة الفصل الأول',50,'rv1']]],
+ ['الفصل الثاني: المتغيرات العشوائية',58,[['','المتغير العشوائي المنفصل وتوقعه وتباينه',58,'s3'],['','المتغير العشوائي المتصل ودالة الكثافة',80,'s4'],['','مراجعة الفصل الثاني',86,'rv2']]],
+ ['الفصل الثالث: توزيعات احتمالية هامة',89,[['','توزيع ذي الحدين وتوزيع بواسون',89,'s5'],['','التوزيع الطبيعي وتوزيع t',100,'s6'],['','مراجعة الفصل الثالث',126,'rv3']]],
+ ['الفصل الرابع: توزيعات المعاينة',129,[['','توزيع الوسط الحسابي للعينة',129,'s7'],['','مراجعة الفصل الرابع',150,'rv4']]],
+ ['الفصل الخامس: التقدير الإحصائي',153,[['','التقدير بقيمة وبفترة',153,'s8'],['','مراجعة الفصل الخامس',167,'rv5']]],
+ ['الفصل السادس: اختبارات الفروض',170,[['','اختبارات الفروض الإحصائية',170,'s9'],['','مراجعة الفصل السادس',188,'rv6']]]];
+(function(){const t=$('toc');TOC.forEach(([n,pg,ls],i)=>{const r=ls.filter(l=>l[3]).length;const d=document.createElement('div');d.className='chap'+(i===0?' open':'');
+ d.innerHTML='<div><span class="cn">'+(i+1)+'</span><span style="flex:1">'+n+'</span><span class="tg '+(r?'r':'s')+'">'+(r?'جاهز ✅':'قريبًا')+'</span></div><div class="ls">'+ls.map(l=>'<div class="li'+(l[3]?' ready" data-go="'+l[3]:'')+'"><span>'+(l[3]?'✅':'⏳')+'</span><span>'+(l[0]?'<b>'+l[0]+'</b> ':'')+l[1]+'</span><span class="pg">ص '+l[2]+'</span></div>').join('')+'</div>';
+ d.firstChild.onclick=()=>d.classList.toggle('open');t.appendChild(d)});t.querySelectorAll('[data-go]').forEach(x=>x.onclick=()=>go(x.dataset.go))})();
+
+/* ================= أمثلة الكتاب وتمارينه (عام) ================= */
+const QB=s=>s.replace(/ (?=(?:أ|ب|ج|د|هـ|و)\) )/g,'<br>').replace(/ (?=\((?:i|ii|iii|iv|1|2|3)\) )/g,'<br>');
+const FX=s=>s.replace(/(−?\d+(?:\.\d+)?)\/(\d+)/g,'<span class="rt">$1/$2</span>');
+function addSecs(pid,exs,bks){const pg=$(pid);if(!pg)return;const first=[...pg.querySelectorAll('.box')].find(b=>(b.querySelector('h3')||{}).textContent&&b.querySelector('h3').textContent.trim().startsWith('✏️'));
+ if(exs&&exs.length){const b=document.createElement('div');b.className='box exb';b.innerHTML='<h3>📖 أمثلة الكتاب محلولة خطوة بخطوة</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">اضغط «الخطوة التالية» وحاول أن تتوقع الخطوة قبل أن تظهر 🤔</p>';exs.forEach(e=>b.appendChild(wex(e)));first?pg.insertBefore(b,first):pg.appendChild(b)}
+ if(bks&&bks.length){const b=document.createElement('div');b.className='box bkb';b.innerHTML='<h3>📝 تمارين الكتاب مع الحلول</h3><p style="margin:0 0 4px;font-size:.88rem;color:var(--soft)">✍️ حلّ في دفترك أولًا، ثم اضغط «تلميح» إذا احتجت، و«الحل» لتتأكد.</p>';bks.forEach(e=>b.appendChild(bkx(e)));pg.appendChild(b)}}
+function wex(e){const d=document.createElement('div');d.className='wx';let k=0;
+ d.innerHTML='<div class="wxq"><b style="color:var(--tl)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="wxs"></div><div class="btns"><button class="btn main" data-a="n">▶️ الخطوة التالية</button><button class="btn" data-a="all">📜 الحل كاملًا</button><button class="btn" data-a="r">↺ من جديد</button></div>';
+ const S=d.querySelector('.wxs'),nb=d.querySelector('[data-a=n]');const add=()=>{if(k>=e.s.length)return;const x=document.createElement('div');x.className='wst';x.innerHTML='<span class="sn">'+(k+1)+'</span>'+FX(e.s[k]);S.appendChild(x);k++;if(k>=e.s.length){nb.textContent='✅ انتهى الحل';nb.disabled=true;try{S.lastChild.classList.add('fin')}catch(_){}}};
+ nb.onclick=add;d.querySelector('[data-a=all]').onclick=()=>{while(k<e.s.length)add()};d.querySelector('[data-a=r]').onclick=()=>{k=0;S.innerHTML='';nb.disabled=false;nb.textContent='▶️ الخطوة التالية'};return d}
+function bkx(e){const d=document.createElement('div');d.className='bx';
+ d.innerHTML='<div class="wxq"><b style="color:var(--or)">'+e.t+'</b> '+FX(QB(e.q))+'</div><div class="btns" style="justify-content:flex-start"><button class="btn" data-a="h">💡 تلميح</button><button class="btn ok" data-a="s">✅ الحل</button></div><div class="bh" style="display:none"></div><div class="bs" style="display:none"></div>';
+ const H=d.querySelector('.bh'),S=d.querySelector('.bs');H.innerHTML='💡 '+FX(e.h);S.innerHTML=e.s.map(x=>'<div class="wst">'+FX(x)+'</div>').join('')+(e.a?'<div class="ans">🎯 الجواب: '+FX(e.a)+'</div>':'');
+ d.querySelector('[data-a=h]').onclick=()=>{H.style.display=H.style.display==='none'?'block':'none'};d.querySelector('[data-a=s]').onclick=()=>{S.style.display=S.style.display==='none'?'block':'none'};return d}
+
+
+const nf=(v,d)=>{d=d==null?3:d;const r=Math.round(v*10**d)/10**d;return ms(r)};
+/* ================= فيزياء: الوحدة 1 ================= */
+const sci=(v,d)=>{d=d==null?2:d;if(v===0)return'0';const e=Math.floor(Math.log10(Math.abs(v)));if(e>=-2&&e<=4)return nf(v,Math.max(0,d+1-Math.max(0,e)));const m=v/10**e;return '<span dir="ltr" style="unicode-bidi:isolate">'+(+m.toFixed(d))+' × 10<sup>'+e+'</sup></span>'};
+function cv(id){const c=$(id),x=c.getContext('2d');return{c,x,W:c.width,H:c.height}}
+const loops={};function loop(id,fn){if(loops[id])return;let last=performance.now();const st=()=>{const now=performance.now(),dt=Math.min(0.05,(now-last)/1000);last=now;const pg=$(id).closest('.page');if(pg.classList.contains('on'))fn(dt);loops[id]=requestAnimationFrame(st)};loops[id]=requestAnimationFrame(st)}
+function glow(x,X,Y,r,col){const g=x.createRadialGradient(X,Y,0,X,Y,r);g.addColorStop(0,col);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.beginPath();x.arc(X,Y,r,0,7);x.fill()}
+function chg(x,X,Y,q,r){r=r||10;x.fillStyle=q>0?'#ff6b6b':'#5ab0ff';x.beginPath();x.arc(X,Y,r,0,7);x.fill();x.fillStyle='#fff';x.font='bold '+(r*1.6)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(q>0?'+':'−',X,Y+1)}
+function label(x,t,X,Y,col,sz){x.fillStyle=col||'#fff';x.font='bold '+(sz||16)+'px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';x.fillText(t,X,Y)}
+
+
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){r=Math.min(r||0,Math.abs(w)/2,Math.abs(h)/2);this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();return this};
+/* ================= الصف السابع – الوحدة 1 ================= */
+/* عرض الرياضيات من اليمين لليسار كما في الكتاب: X('1 + 2 − 3 × 4') */
+const SN=n=>n<0?'−'+(-n):''+n;               // نص عدد بإشارة
+const PN=n=>n<0?'('+SN(n)+')':SN(n);          // عدد سالب بين قوسين
+function xnum(s,i){let j=i;while(j<s.length&&/[0-9.□\u0307]/.test(s[j]))j++;const v=s.slice(i,j);
+ if(s[j]==='_'&&/[0-9□]/.test(s[j+1]||'')){let a=j+1,b=a;while(/[0-9□]/.test(s[b]||''))b++;if(s[b]==='/'){let c=b+1,e=c;while(/[0-9□]/.test(s[e]||''))e++;return[{k:'f',w:v,n:s.slice(a,b),d:s.slice(c,e)},e]}}
+ if(s[j]==='/'&&/[0-9□]/.test(s[j+1]||'')){let c=j+1,e=c;while(/[0-9□]/.test(s[e]||''))e++;return[{k:'f',n:v,d:s.slice(c,e)},e]}
+ let sup='';while(j<s.length&&/[²³⁴]/.test(s[j])){sup+=s[j];j++}return[{k:'n',v,sup},j]}
+function xtok(s){const t=[];let i=0;s=String(s);
+ while(i<s.length){const c=s[i];
+  if(c===' '){i++;continue}
+  const prev=t.length?t[t.length-1]:null;const unaryOK=!prev||(prev.k==='op'||prev.v==='('||prev.v==='['||prev.v===',');
+  if((c==='−'||c==='+')&&unaryOK&&/[0-9]/.test(s[i+1]||'')){if(c==='+'&&!(prev&&prev.v==='(')){t.push({k:'op',v:c});i++;continue}let [tk,j]=xnum(s,i+1);if(/[\u0621-\u064A]/.test(s[j]||'')){let e=j;while(e<s.length&&/[\u0621-\u064A\u0640\u200C²³]/.test(s[e]))e++;tk={k:'t',c:tk,v:s.slice(j,e)};j=e}tk.sg=c;t.push(tk);i=j;continue}
+  if(/[0-9□]/.test(c)){let [tk,j]=xnum(s,i);if(/[\u0621-\u064A]/.test(s[j]||'')){let e=j;while(e<s.length&&/[\u0621-\u064A\u0640\u200C²³]/.test(s[e]))e++;tk={k:'t',c:tk,v:s.slice(j,e),sg:tk.sg};j=e}t.push(tk);i=j;continue}
+  if('+−×÷=<>≠≤≥'.includes(c)){t.push({k:'op',v:c});i++;continue}
+  if('()[]'.includes(c)){t.push({k:'b',v:c});i++;continue}
+  let j=i;while(j<s.length&&!' +−×÷=<>≠()[]'.includes(s[j])&&!/[0-9□]/.test(s[j]))j++;if(j===i)j=i+1;t.push({k:'w',v:s.slice(i,j)});i=j}
+ return t}
+const FRH=(n,d)=>'<span class="fr"><span>'+n+'</span><span>'+d+'</span></span>';
+function xspan(tok,cls){if(tok.k==='t'){const cc=tok.c.k==='f'?FRH(tok.c.n,tok.c.d):tok.c.v;return '<span class="xt'+(cls||'')+'"><span style="display:inline-flex;direction:rtl;align-items:center;gap:1px">'+(tok.sg==='−'?'<i style="font-style:normal">−</i>':'')+'<span style="direction:ltr">'+cc+'</span><span>'+tok.v+'</span></span></span>'}let num;if(tok.k==='f'){const f=FRH(tok.n,tok.d);num=tok.w?'<span class="mxn">'+tok.w+f+'</span>':f}
+ else if(tok.k==='n')num='<span style="direction:ltr;unicode-bidi:isolate">'+tok.v+(tok.sup||'')+'</span>';
+ else return '<span class="xt'+(cls||'')+'">'+tok.v+'</span>';
+ return '<span class="xt'+(cls||'')+'">'+(tok.sg&&tok.sg!=='+'?'<span class="xs">'+num+'<i>'+tok.sg+'</i></span>':tok.sg==='+'?'<span class="xs">'+num+'<i>+</i></span>':num)+'</span>'}
+const X=(s,hi)=>'<span class="x">'+xtok(s).map((t,i)=>xspan(t,hi&&i>=hi[0]&&i<=hi[1]?' hi':'')).join('')+'</span>';
+(function(){const st=document.createElement('style');st.textContent='.x{display:inline-flex;direction:rtl;gap:.28em;align-items:center;flex-wrap:wrap;font-weight:800;unicode-bidi:isolate;vertical-align:baseline}.x .xs{display:inline-flex;direction:ltr;flex-direction:row-reverse}.x .xs i{font-style:normal}.x .xt{transition:.25s;border-radius:6px;padding:0 1px}.x .xt.hi{background:#ffd54f;box-shadow:0 0 0 3px #ffd54f}';document.head.appendChild(st);
+ document.querySelectorAll('.e').forEach(e=>{e.innerHTML=X(e.textContent);e.classList.remove('e')})})();
+/* ================= علوم الصف السابع – الجزء الأول والثاني ================= */
+const C2=id=>{const c=$(id);return [c,c.getContext('2d')]};
+const FONT=(s,w)=>(w||800)+' '+s+'px Cairo, Tahoma, Arial';
+const shake=el=>{el.classList.remove('shk');void el.offsetWidth;el.classList.add('shk')};
+const cheer=()=>{try{window.FX&&FX.ok()}catch(e){}};
+const N=s=>'<bdi'+(/[\u0600-\u06FF]/.test(s)?'':' dir="ltr"')+' style="font-weight:800">'+s+'</bdi>';
+const fx=(x,k)=>String(+(+x).toFixed(k==null?2:k));
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){r=Math.min(r||0,Math.abs(w)/2,Math.abs(h)/2);this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();return this};
+/* لعبة التصنيف العامة: اختر عنصرًا ثم بيتًا */
+function sortGame(poolId,catId,outId,cats,items,done){const P=$(poolId),Cc=$(catId);let sel=null,left=items.length;P.innerHTML='';Cc.innerHTML='';
+ shuf(items).forEach(([lab,k,why])=>{const b=document.createElement('button');b.innerHTML=lab;b.dataset.k=k;b.dataset.why=why||'';b.onclick=()=>{P.querySelectorAll('button').forEach(y=>y.classList.remove('sel'));b.classList.add('sel');sel=b};P.appendChild(b)});
+ cats.forEach(([n,s,c],i)=>{const d=document.createElement('div');d.style.borderColor=c;d.innerHTML='<b style="color:'+c+'">'+n+'</b>'+(s?'<small>'+s+'</small>':'')+'<div class="pool" style="margin:4px 0"></div>';
+  d.onclick=()=>{if(!sel)return;if(+sel.dataset.k===i){sel.classList.remove('sel');sel.classList.add('ok');sel.onclick=null;d.querySelector('.pool').appendChild(sel);$(outId).innerHTML='✅ صحيح! '+sel.dataset.why;sel=null;left--;if(!left){$(outId).innerHTML='🎉 أحسنت! رتّبت كل شيء.';cheer();done&&done()}}else{shake(d);$(outId).innerHTML='🤔 حاول مرة أخرى'}};Cc.appendChild(d)});$(outId).textContent=''}
+/* اختبار فصل من 12 سؤالًا */
+function chapterTest(pfx,G){let ok=0,dn=0;const host=$(pfx+'Q');function upd(){$(pfx+'Sc').textContent=dn<G.length?'أجبت عن '+dn+' من '+G.length+' · صحيح: '+ok:(ok>=G.length-1?'🌟 ممتاز! ':ok>=G.length-3?'👍 جيد جدًا! ':'💪 راجع الدروس. ')+'النتيجة: '+ok+' من '+G.length}
+ function make(){host.innerHTML='';ok=0;dn=0;shuf(G).forEach((g,i)=>{const [q,o]=typeof g==='function'?g():g;mcq(host,(i+1)+') '+q,o,0,r=>{dn++;if(r)ok++;upd();if(dn===G.length&&ok>=G.length-3)cheer()})});upd()}
+ $(pfx+'New').onclick=make;make()}
+const bank=(arr)=>()=>{const [q,o,ex]=pick(arr);return{q,o,ex:ex||''}};
+const vis=el=>{const p=el.closest('.page');return p&&p.classList.contains('on')};
+function anim(id,fn){const [c,x]=C2(id);let t0=performance.now();(function f(t){if(vis(c))fn(x,c,(t-t0)/1000);requestAnimationFrame(f)})(t0);return[c,x]}
+const flipCards=(id,arr)=>{const C=$(id);C.innerHTML=arr.map(([ic,t,b])=>'<div class="card"><div class="fr"><span class="big">'+ic+'</span>'+t+'</div><div class="bk"><b>'+t+':</b> '+b+'</div></div>').join('');C.querySelectorAll('.card').forEach(c=>c.onclick=()=>c.classList.toggle('flip'))};
+const TF=(s,t)=>[s,t?['✔️ صح','❌ خطأ']:['❌ خطأ','✔️ صح']];
+function txt(x,s,X,Y,sz,col,al){x.font=FONT(sz||16);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='rtl';x.fillText(s,X,Y)}
+function steps(id,outId,newId,S){let k=0;function mk(){k=0;const L=$(id);L.innerHTML='';shuf(S.map((s,i)=>[s,i])).forEach(([[a,b],i])=>{const li=document.createElement('li');li.innerHTML='<b>?</b><span>'+a+'<br><small style="color:var(--soft)">'+b+'</small></span>';li.onclick=()=>{if(li.classList.contains('ok'))return;if(i===k){li.classList.add('ok');li.querySelector('b').textContent=k+1;k++;$(outId).innerHTML='✅ صحيح!';if(k===S.length){$(outId).innerHTML='🎉 رتّبت الرحلة كاملة!';cheer()}}else{shake(li);$(outId).innerHTML='🤔 ليس هذا… ما الذي جاء قبله؟'}};L.appendChild(li)});$(outId).textContent=''}$(newId).onclick=mk;mk()}
+function choiceQs(host,Q,scId){const H=$(host);let i=0,ok=0;function show(){if(i>=Q.length){H.innerHTML='<div class="big2">🎉 '+ok+' من '+Q.length+'</div><div class="btns"><button class="btn" id="'+host+'R">🔄 من جديد</button></div>';$(host+'R').onclick=()=>{i=0;ok=0;show()};if(ok>=Q.length-1)cheer();return}
+ const [s,o,why]=Q[i];const ord=shuf(o.map((t,j)=>j));H.innerHTML='<div class="scn">'+s+'</div><div class="opts2">'+ord.map(j=>'<button data-j="'+j+'">'+o[j]+'</button>').join('')+'</div><div class="fb" id="'+host+'F"></div>';
+ let dn=0;H.querySelectorAll('[data-j]').forEach(b=>b.onclick=()=>{if(dn)return;dn=1;const j=+b.dataset.j;b.classList.add(j===0?'ok':'no');if(j)H.querySelector('[data-j="0"]').classList.add('ok');else ok++;$(host+'F').innerHTML=(j?'💡 ':'✅ ')+why+'<br><button class="btn main" style="margin-top:6px" id="'+host+'N">التالي ⬅️</button>';$(host+'N').onclick=()=>{i++;show()};if(scId)$(scId).textContent='✔️ '+ok+' / '+Q.length})}show()}
+const gcd=(a,b)=>b?gcd(b,a%b):Math.abs(a);
+
+/* ================= فيزياء الثاني الثانوي – الجزء الأول: الحرارة ================= */
+const r1=v=>Math.round(v*10)/10,r2=v=>Math.round(v*100)/100,sn=v=>v<0?'−'+(-v):''+v,EQ=s=>'<span class="eq">'+s+'</span>';
+const cpos=(c,e)=>{const r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}};
+function tL(x,s,X,Y,sz,col,al){x.font=FONT(sz||14);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='ltr';x.fillText(s,X,Y);x.direction='rtl'}
+function tA(x,s,X,Y,sz,col,al){x.font=FONT(sz||14);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='rtl';x.fillText(s,X,Y)}
+function EMJ(x,e,X,Y,sz){x.font=(sz||40)+'px "Segoe UI Emoji","Noto Color Emoji",sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(e,X,Y);x.textBaseline='alphabetic'}
+function RR(x,X,Y,W,H,r){x.beginPath();x.moveTo(X+r,Y);x.arcTo(X+W,Y,X+W,Y+H,r);x.arcTo(X+W,Y+H,X,Y+H,r);x.arcTo(X,Y+H,X,Y,r);x.arcTo(X,Y,X+W,Y,r);x.closePath()}
+function ARW(x,x1,y1,x2,y2,col,w){x.strokeStyle=col;x.fillStyle=col;x.lineWidth=w||4;x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke();const a=Math.atan2(y2-y1,x2-x1),h=10+(w||4)*1.5;x.beginPath();x.moveTo(x2+Math.cos(a)*2,y2+Math.sin(a)*2);x.lineTo(x2-h*Math.cos(a-.42),y2-h*Math.sin(a-.42));x.lineTo(x2-h*Math.cos(a+.42),y2-h*Math.sin(a+.42));x.closePath();x.fill()}
+function chipsP(id,arr,on,cb){const H=$(id);H.innerHTML=arr.map((t,i)=>'<button data-i="'+i+'"'+(i===on?' class="on"':'')+'>'+t+'</button>').join('');H.querySelectorAll('button').forEach(b=>b.onclick=()=>{H.querySelectorAll('button').forEach(y=>y.classList.toggle('on',y===b));cb(+b.dataset.i)})}
+const OPSP=(ok,bad)=>[ok,...shuf(bad.filter((b,i,a)=>String(b)!==String(ok)&&a.indexOf(b)===i)).slice(0,3)];
+const lerp=(a,b,k)=>a+(b-a)*k,clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+/* لون حراري: من الأزرق البارد إلى الأحمر المتوهج */
+function heatCol(t){t=clamp(t,0,1);const st=[[59,91,219],[34,184,207],[255,212,59],[247,103,7],[224,49,49]],k=t*(st.length-1),i=Math.min(st.length-2,Math.floor(k)),f=k-i;const c=st[i].map((v,j)=>Math.round(lerp(v,st[i+1][j],f)));return 'rgb('+c+')'}
+function toast(s){const d=document.createElement('div');d.className='toast';d.innerHTML=s;document.body.appendChild(d);setTimeout(()=>d.remove(),2200)}
+/* ---------- نظام المهمات ---------- */
+const MS={};let MSAVE={};try{MSAVE=JSON.parse(localStorage.getItem('s12mis')||'{}')}catch(e){}
+function MIS(pid,goals){MS[pid]={g:goals,d:new Set(MSAVE[pid]||[])};misR(pid)}
+function misR(pid){const m=MS[pid],H=$('mis_'+pid);if(!H)return;H.innerHTML='<h4>🎯 مهمات الدرس ('+m.d.size+' / '+m.g.length+')</h4>'+m.g.map((g,i)=>'<div class="g'+(m.d.has(i)?' ok':'')+'"><i>'+(m.d.has(i)?'★':i+1)+'</i>'+g+'</div>').join('')+'<div class="pr"><b style="width:'+(100*m.d.size/m.g.length)+'%"></b></div>';starsAll()}
+function done(pid,i){const m=MS[pid];if(!m||m.d.has(i))return;m.d.add(i);MSAVE[pid]=[...m.d];try{localStorage.setItem('s12mis',JSON.stringify(MSAVE))}catch(e){}misR(pid);cheer();toast('⭐ مهمة منجزة: '+m.g[i]+(m.d.size===m.g.length?' · 🏆 أكملت الدرس!':''))}
+function starsAll(){const H=$('allStars');if(!H)return;let a=0,b=0;for(const k in MS){a+=MS[k].d.size;b+=MS[k].g.length}H.innerHTML='<span>⭐ إنجازاتك: '+a+' / '+b+'</span>'}
+/* مهمة: عدد إجابات صحيحة في تدريب */
+function qGoal(host,pid,i,n){let c=0;$(host).addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;setTimeout(()=>{if(b.classList.contains('ok')&&++c>=n)done(pid,i)},0)})}
+/* ترمومتر زجاجي */
+function therm(x,X,Y0,Y1,t,mn,mx,col,lab){const k=clamp((t-mn)/(mx-mn),0,1),top=Y1-(Y1-Y0)*k;x.fillStyle='rgba(233,236,239,.9)';RR(x,X-9,Y0-12,18,Y1-Y0+14,9);x.fill();x.strokeStyle='#adb5bd';x.lineWidth=2;x.stroke();
+ x.beginPath();x.arc(X,Y1+14,16,0,7);x.fillStyle=col;x.fill();x.strokeStyle='#adb5bd';x.stroke();x.fillStyle=col;x.fillRect(X-4,top,8,Y1-top+8);x.fillStyle='rgba(255,255,255,.5)';x.fillRect(X-6,Y0-6,3,Y1-Y0);
+ if(lab)lab.forEach(([v,s])=>{const y=Y1-(Y1-Y0)*(v-mn)/(mx-mn);x.strokeStyle='#495057';x.lineWidth=1.5;x.beginPath();x.moveTo(X+10,y);x.lineTo(X+18,y);x.stroke();tL(x,s,X+22,y+4,11,'#495057','left')})}
+
+
+/* ================= أسس الإحصاء – الثالث الثانوي ================= */
+const fact=n=>{let r=1;for(let i=2;i<=n;i++)r*=i;return r},nCr=(n,k)=>k<0||k>n?0:fact(n)/(fact(k)*fact(n-k));
+const erf=x=>{const s=Math.sign(x);x=Math.abs(x);const t=1/(1+.3275911*x),y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-.284496736)*t+.254829592)*t*Math.exp(-x*x);return s*y};
+const Phi=z=>.5*(1+erf(z/Math.SQRT2)),pdfN=(x,m,s)=>Math.exp(-.5*((x-m)/s)**2)/(s*Math.sqrt(2*Math.PI));
+const gln=z=>{const g=7,c=[.99999999999980993,676.5203681218851,-1259.1392167224028,771.32342877765313,-176.61502916214059,12.507343278686905,-.13857109526572012,9.9843695780195716e-6,1.5056327351493116e-7];if(z<.5)return Math.log(Math.PI/Math.sin(Math.PI*z))-gln(1-z);z-=1;let x=c[0];for(let i=1;i<g+2;i++)x+=c[i]/(z+i);const t=z+g+.5;return .5*Math.log(2*Math.PI)+(z+.5)*Math.log(t)-t+Math.log(x)};
+const pdfT=(x,v)=>Math.exp(gln((v+1)/2)-gln(v/2))/Math.sqrt(v*Math.PI)*Math.pow(1+x*x/v,-(v+1)/2);
+const pois=(k,l)=>Math.exp(-l+k*Math.log(l)-gln(k+1));
+const rnorm=()=>{let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v)};
+const f4=v=>(Math.round(v*10000)/10000).toFixed(4);
+function dieFace(x,X,Y,s,n,col){x.fillStyle=col||'#fff';x.strokeStyle='#495057';x.lineWidth=1.5;RR(x,X-s/2,Y-s/2,s,s,s*.18);x.fill();x.stroke();const P={1:[[0,0]],2:[[-1,-1],[1,1]],3:[[-1,-1],[0,0],[1,1]],4:[[-1,-1],[1,-1],[-1,1],[1,1]],5:[[-1,-1],[1,-1],[0,0],[-1,1],[1,1]],6:[[-1,-1],[1,-1],[-1,0],[1,0],[-1,1],[1,1]]}[n];x.fillStyle='#212529';P.forEach(([a,b])=>{x.beginPath();x.arc(X+a*s*.27,Y+b*s*.27,s*.08,0,7);x.fill()})}
+function coin(x,X,Y,r,h,col){x.fillStyle=col||(h?'#fcc419':'#ced4da');x.strokeStyle='#868e96';x.lineWidth=2;x.beginPath();x.arc(X,Y,r,0,7);x.fill();x.stroke();tL(x,h?'H':'T',X,Y+r*.35,r,'#495057')}
+function bars(x,X0,Y0,W,H,vals,labels,col,mx,hl){const n=vals.length,bw=W/n;mx=mx||Math.max(...vals,1e-9);x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(X0,Y0-H);x.lineTo(X0,Y0);x.lineTo(X0+W,Y0);x.stroke();vals.forEach((v,i)=>{const h=v/mx*H;x.fillStyle=hl&&hl(i)?'#e8590c':col;x.fillRect(X0+i*bw+bw*.12,Y0-h,bw*.76,h);if(labels)tL(x,labels[i],X0+i*bw+bw/2,Y0+14,10,'#495057')});return{bw,mx}}
+
+/* ================= 1-1 فراغ العينة ================= */
+MIS('s1',['استكشف 4 تجارب مختلفة','اكتشف حدثًا مستحيلًا وحدثًا مؤكدًا','جرّب العمليات الخمس في مختبر فن']);
+(function(){const [c,x]=C2('ssC');const coins=n=>{let r=[''];for(let i=0;i<n;i++)r=r.flatMap(s=>[s+'H',s+'T']);return r};
+ const EX=[['🪙 عملة',coins(1),[['ظهور صورة H',o=>o==='H']]],['🪙🪙 عملتان',coins(2),[['صورة واحدة على الأقل',o=>o.includes('H')],['الوجهان متشابهان',o=>o[0]===o[1]],['ظهور كتابتين',o=>o==='TT']]],
+  ['🪙×3 ثلاث عملات',coins(3),[['صورتان بالضبط',o=>o.split('H').length-1===2],['صورة على الأقل',o=>o.includes('H')],['لا تظهر أي صورة',o=>!o.includes('H')]]],
+  ['🎲 مكعب نرد',[1,2,3,4,5,6],[['عدد زوجي',o=>o%2===0],['عدد أكبر من 4',o=>o>4],['عدد أولي',o=>[2,3,5].includes(o)],['الحصول على 9',o=>o===9],['عدد أقل من 7',o=>o<7]]],
+  ['🎲🎲 مكعبا نرد',[].concat(...[1,2,3,4,5,6].map(a=>[1,2,3,4,5,6].map(b=>[a,b]))),[['المجموع 7',o=>o[0]+o[1]===7],['العددان متساويان',o=>o[0]===o[1]],['المجموع أكبر من 9',o=>o[0]+o[1]>9],['المجموع 13',o=>o[0]+o[1]===13],['المجموع أكبر من 1',o=>o[0]+o[1]>1]]]];
+ let K=3,E=0;const seen=new Set([3]);let imp=0,sure=0;
+ const setE=()=>chipsP('ssE',EX[K][2].map(e=>e[0]),0,i=>{E=i;chk()});setE();
+ chipsP('ssK',EX.map(e=>e[0]),3,i=>{K=i;E=0;seen.add(i);if(seen.size>=4)done('s1',0);setE();chk()});
+ function chk(){const [n,S,EV]=EX[K],A=S.filter(EV[E][1]);if(!A.length)imp=1;if(A.length===S.length)sure=1;if(imp&&sure)done('s1',1)}
+ anim('ssC',(x,c,t)=>{x.clearRect(0,0,640,380);const [n,S,EV]=EX[K],f=EV[E][1],A=S.filter(f);
+  if(K===4){S.forEach((o,i)=>{const X=90+(o[1]-1)*82,Y=40+(o[0]-1)*55,in_=f(o),pul=in_?1+Math.sin(t*4)*.04:1;if(in_){x.fillStyle='rgba(232,89,12,.18)';RR(x,X-38,Y-24,76,48,10);x.fill()}dieFace(x,X-17,Y,26*pul,o[0],in_?'#fff4e6':'#fff');dieFace(x,X+17,Y,26*pul,o[1],in_?'#fff4e6':'#fff')})}
+  else{const cols=Math.min(S.length,4),rows=Math.ceil(S.length/cols);S.forEach((o,i)=>{const X=320+((i%cols)-(cols-1)/2)*140,Y=150+(Math.floor(i/cols)-(rows-1)/2)*110,in_=f(o),b=in_?Math.sin(t*4)*4:0;if(in_){x.fillStyle='rgba(232,89,12,.18)';RR(x,X-64,Y-44,128,88,14);x.fill()}
+   if(K===3)dieFace(x,X,Y+b,60,o,in_?'#fff4e6':'#fff');else{const L=o.length;[...o].forEach((ch,j)=>coin(x,X+(j-(L-1)/2)*40,Y+b,18,ch==='H'))}})}
+  const fmt=o=>Array.isArray(o)?'('+o.join('،')+')':o;const P=A.length/S.length;
+  $('ssOut').innerHTML='n(S) = '+N(S.length)+' · A = {'+(A.length>8?A.slice(0,8).map(fmt).join(' ، ')+' …':A.map(fmt).join(' ، '))+'} · n(A) = '+N(A.length)+'<br>'+EQ('P(A) = '+A.length+' ÷ '+S.length+' = '+r2(P))+(A.length===0?' · <b>حدث مستحيل</b> (A = ∅)':A.length===S.length?' · <b>حدث مؤكد</b> (A = S)':A.length===1?' · حدث بسيط':' · حدث مركّب')})})();
+(function(){const [c,x]=C2('vnC');const OP=[['A',n=>n%2===0],['B',n=>n>3],['A ∪ B',n=>n%2===0||n>3],['A ∩ B',n=>n%2===0&&n>3],["A'",n=>n%2!==0],["B'",n=>n<=3],['A − B',n=>n%2===0&&n<=3]];let K=2;const seen=new Set([2]);
+ chipsP('vnK',OP.map(o=>o[0]),2,i=>{K=i;seen.add(i);if(seen.size>=5)done('s1',2)});
+ const pos={2:[220,150],4:[320,130],6:[320,175],5:[420,150],1:[150,250],3:[500,250]};
+ anim('vnC',(x,c,t)=>{x.clearRect(0,0,640,300);const f=OP[K][1];x.fillStyle='#f8f9fa';RR(x,90,20,460,260,16);x.fill();x.strokeStyle='#495057';x.lineWidth=2;x.stroke();tL(x,'S',110,44,16,'#495057');
+  x.save();x.beginPath();x.rect(90,20,460,260);x.clip();for(let px=90;px<550;px+=4)for(let py=20;py<280;py+=4){const inA=Math.hypot(px-260,py-150)<100,inB=Math.hypot(px-380,py-150)<100;const n=inA&&inB?4:inA?2:inB?5:1;if(f(n)){x.fillStyle='rgba(232,89,12,.35)';x.fillRect(px,py,4,4)}}x.restore();
+  x.lineWidth=3;x.strokeStyle='#1971c2';x.beginPath();x.arc(260,150,100,0,7);x.stroke();x.strokeStyle='#2f9e44';x.beginPath();x.arc(380,150,100,0,7);x.stroke();tL(x,'A',190,70,20,'#1971c2');tL(x,'B',450,70,20,'#2f9e44');
+  Object.entries(pos).forEach(([n,[X,Y]])=>{x.fillStyle=f(+n)?'#e8590c':'#495057';x.beginPath();x.arc(X,Y,15,0,7);x.fill();tL(x,n,X,Y+6,16,'#fff')});
+  const R=[1,2,3,4,5,6].filter(f);$('vnOut').innerHTML=EQ(OP[K][0]+' = {'+R.join(' ، ')+'}')+' · '+EQ('P = '+R.length+'/6')+(K===3?' · ليسا متنافيين لأن التقاطع غير خالٍ':'')})})();
+MCQP($('qs1'),bank([['عدد عناصر فراغ العينة عند رمي ثلاث قطع نقود:',['8','6','3','9']],['عدد عناصر فراغ العينة عند رمي مكعبي نرد:',['36','12','6','18']],['الحدث المستحيل يرمز له بالرمز:',['∅','S','A\'','1']],['الحدثان المتنافيان:',['لا يمكن وقوعهما معًا','يقعان معًا دائمًا','احتمالهما متساوٍ','أحدهما مكمل للآخر دائمًا']],['A ∪ B يعني:',['وقوع A أو B أو كليهما','وقوع A و B معًا','عدم وقوع A','وقوع A دون B']],['A ∩ B يعني:',['وقوع A و B معًا','وقوع أحدهما فقط','عدم وقوعهما','وقوع A أو B']],['مكمل الحدث A هو:',['كل نتائج S غير الموجودة في A','الحدث المستحيل','A نفسه','S']],['إلقاء قطعة نقود هو تجربة:',['عشوائية','غير عشوائية','مستحيلة','مؤكدة النتيجة']]]));
+
+/* ================= 1-2 الاحتمال ================= */
+MIS('s2',['ارمِ النرد أكثر من 5000 مرة','اكتشف حدثين مستقلين في فلتر المعلومة','أجب عن 3 أسئلة تدريب صحيحة']);
+(function(){const [c,x]=C2('lnC');const EV=[['المجموع 7',(a,b)=>a+b===7,6],['المجموع 12',(a,b)=>a+b===12,1],['العددان متساويان',(a,b)=>a===b,6],['المجموع زوجي',(a,b)=>(a+b)%2===0,18]];let K=0,n=0,hit=0,hist=[],sums=Array(13).fill(0),last=[1,1],queue=0;
+ chipsP('lnK',EV.map(e=>e[0]),0,i=>{K=i;reset()});
+ function reset(){n=0;hit=0;hist=[];sums=Array(13).fill(0);queue=0}
+ function roll(){const a=rnd(1,6),b=rnd(1,6);last=[a,b];n++;sums[a+b]++;if(EV[K][1](a,b))hit++;if(n<=50||n%Math.ceil(n/200)===0)hist.push([n,hit/n]);if(n>=5000)done('s2',0)}
+ $('ln1').onclick=()=>roll();$('ln100').onclick=()=>queue+=100;$('ln5k').onclick=()=>queue+=5000;$('lnR').onclick=reset;
+ anim('lnC',(x,c,t)=>{for(let i=0;i<Math.min(queue,180);i++)roll();queue=Math.max(0,queue-180);const th=EV[K][2]/36;x.clearRect(0,0,640,360);
+  dieFace(x,60,60,56,last[0]);dieFace(x,130,60,56,last[1]);tL(x,'n = '+n.toLocaleString('en'),95,120,15,'#212529');
+  const X0=200,W=420,Y0=170,H=140,px=v=>X0+Math.log10(Math.max(1,v))/Math.log10(Math.max(10,n,1000))*W,py=v=>Y0-v*H/Math.max(.6,th*2.2);
+  x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(X0,Y0-H);x.lineTo(X0,Y0);x.lineTo(X0+W,Y0);x.stroke();x.setLineDash([6,4]);x.strokeStyle='#e03131';x.beginPath();x.moveTo(X0,py(th));x.lineTo(X0+W,py(th));x.stroke();x.setLineDash([]);tL(x,'نظري '+r2(th),X0+W-30,py(th)-6,11,'#e03131');
+  x.strokeStyle='#1971c2';x.lineWidth=2.5;x.beginPath();hist.forEach(([k,v],i)=>i?x.lineTo(px(k),py(v)):x.moveTo(px(k),py(v)));x.stroke();tA(x,'التكرار النسبي (محور n لوغاريتمي)',X0+W/2,Y0-H-6,11,'#495057');
+  const S=sums.slice(2);bars(x,60,340,560,120,S,[2,3,4,5,6,7,8,9,10,11,12],'#74c0fc',null,i=>EV[K][1](1,i+1)&&K!==2&&K!==3);tA(x,'توزيع المجاميع',340,212,11,'#495057');
+  $('lnOut').innerHTML=EQ('التكرار النسبي = '+hit+' ÷ '+n+' = '+(n?f4(hit/n):'—'))+' · '+EQ('P النظري = '+EV[K][2]+'/36 = '+f4(th))+(n>=1000?'<br><small>كلما زاد عدد الرميات اقترب التكرار النسبي من الاحتمال النظري ✨</small>':'')})})();
+(function(){const [c,x]=C2('cdC');const A=[['المجموع 8',(a,b)=>a+b===8],['العدد الأول 6',(a,b)=>a===6],['العددان متساويان',(a,b)=>a===b],['المجموع زوجي',(a,b)=>(a+b)%2===0]],B=[['بلا شرط',()=>true],['العدد الأول زوجي',(a,b)=>a%2===0],['المجموع أكبر من 6',(a,b)=>a+b>6],['أحدهما 3',(a,b)=>a===3||b===3],['العدد الثاني 4',(a,b)=>b===4]];let ka=0,kb=2;
+ chipsP('cdA',A.map(a=>'A: '+a[0]),0,i=>{ka=i});chipsP('cdB',B.map(b=>'B: '+b[0]),2,i=>{kb=i});
+ anim('cdC',(x,c,t)=>{x.clearRect(0,0,640,380);const fa=A[ka][1],fb=B[kb][1];let nB=0,nAB=0,nA=0;
+  for(let a=1;a<=6;a++)for(let b=1;b<=6;b++){const X=70+(b-1)*62,Y=40+(a-1)*52,inB=fb(a,b),inA=fa(a,b);if(inB)nB++;if(inA)nA++;if(inA&&inB)nAB++;x.globalAlpha=inB?1:.18;x.fillStyle=inA&&inB?'#ffd8a8':inB?'#e7f5ff':'#f1f3f5';RR(x,X-28,Y-22,56,44,8);x.fill();if(inA){x.strokeStyle='#e8590c';x.lineWidth=3;x.stroke()}dieFace(x,X-12,Y,20,a);dieFace(x,X+12,Y,20,b);x.globalAlpha=1}
+  const pab=nAB/nB,pa=nA/36,ind=kb>0&&Math.abs(pab-pa)<1e-9;if(ind)done('s2',1);
+  x.fillStyle='#212529';RR(x,460,60,165,250,14);x.fill();[['n(B)',nB],['n(A∩B)',nAB],['P(A/B)',r2(pab)],['P(A)',r2(pa)]].forEach(([l,v],i)=>{tL(x,l,542,95+i*58,13,'#adb5bd');tL(x,''+v,542,120+i*58,22,i===2?'#ffa94d':'#69db7c')});
+  $('cdOut').innerHTML=EQ('P(A/B) = n(A∩B) ÷ n(B) = '+nAB+' ÷ '+nB+' = '+r2(pab))+' · '+EQ('P(A) = '+nA+'/36 = '+r2(pa))+'<br>'+(kb===0?'بلا شرط: فراغ العينة كامل':ind?'🎯 <b>A و B مستقلان</b>: معرفة B لم تغيّر احتمال A':'معرفة B <b>غيّرت</b> احتمال A ⟸ الحدثان غير مستقلين')})})();
+MCQP($('qs2'),()=>{const t=rnd(0,3);if(t===0){const a=pick([.2,.3,.4,.5]),b=pick([.3,.4,.5]),ab=pick([.1,.15,.2]);return{q:'P(A) = '+a+' ، P(B) = '+b+' ، P(A ∩ B) = '+ab+'. احسب P(A ∪ B):',o:OPSP(r2(a+b-ab)+'',[r2(a+b)+'',r2(a*b)+'',r2(a+b+ab)+'']),ex:'P(A ∪ B) = P(A) + P(B) − P(A ∩ B)'}}
+ if(t===1){const a=pick([.2,.35,.6,.75]);return{q:'إذا كان P(A) = '+a+' فإن P(A\') = ',o:OPSP(r2(1-a)+'',[a+'',r2(1/a)+'','0']),ex:'P(A\') = 1 − P(A)'}}
+ if(t===2){const ab=pick([.12,.2,.1]),b=pick([.4,.5,.25]);return{q:'P(A ∩ B) = '+ab+' و P(B) = '+b+'. احسب P(A/B):',o:OPSP(r2(ab/b)+'',[r2(ab*b)+'',r2(b/ab)+'',r2(ab+b)+'']),ex:'P(A/B) = P(A ∩ B) ÷ P(B)'}}
+ return bank([['احتمال ظهور عدد زوجي عند رمي مكعب نرد:',['1/2','1/3','1/6','2/3']],['احتمال الحصول على مجموع 7 عند رمي مكعبين:',['1/6','1/12','7/36','1/36']],['إذا كان A و B مستقلين و P(A) = 0.5 و P(B) = 0.4 فإن P(A ∩ B) = ',['0.2','0.9','0.1','0.45']],['احتمال الحدث المؤكد:',['1','0','0.5','∞']],['إذا كان A و B متنافيين فإن P(A ∩ B) = ',['0','1','P(A)P(B)','P(A)+P(B)']]])()});
+qGoal('qs2','s2',2,3);
+chapterTest('rv1',[['فراغ عينة رمي عملتين:',['{HH, HT, TH, TT}','{H, T}','{HH, TT}']],['n(S) لرمي مكعبين:',['36','12','6']],['الحدث المستحيل:',['∅','S','A\'']],['P(A\') = ',['1 − P(A)','P(A) − 1','1 ÷ P(A)']],['A و B متنافيان ⟸ P(A ∩ B) = ',['0','1','P(A)']],['P(A ∪ B) = ',['P(A) + P(B) − P(A ∩ B)','P(A) × P(B)','P(A) − P(B)']],['P(A/B) = ',['P(A ∩ B) ÷ P(B)','P(A) ÷ P(B)','P(B) ÷ P(A ∩ B)']],['A و B مستقلان ⟸',['P(A ∩ B) = P(A) P(B)','P(A ∩ B) = 0','P(A) = P(B)']],['احتمال عدد أكبر من 4 في مكعب:',['1/3','1/2','2/3']],['0 ≤ P(A) ≤ ',['1','100','∞']],['احتمال مجموع 12 في مكعبين:',['1/36','1/12','1/6']],['التكرار النسبي يقترب من الاحتمال عندما:',['يزيد عدد المحاولات','يقل عدد المحاولات','دائمًا يساويه']]]);
+
+/* ================= 2 المتغير المنفصل ================= */
+MIS('s3',['اجعل الوسط E(X) يساوي 4 أو أكثر','اجعل التباين أقل من 0.5','استكشف 3 تجارب في «من التجربة إلى التوزيع»']);
+(function(){const c=$('bpC'),x=c.getContext('2d');let P=[1,2,3,3,2,1].map(v=>v/12);const X0=80,W=480,Y0=230,H=170,bw=W/6;c.style.touchAction='none';let dr=-1;
+ const set=(i,v)=>{v=clamp(v,0,.95);const rest=P.reduce((a,b,j)=>j===i?a:a+b,0);P=P.map((p,j)=>j===i?v:rest>0?p/rest*(1-v):(1-v)/5)};
+ c.addEventListener('pointerdown',e=>{const p=cpos(c,e);const i=Math.floor((p.x-X0)/bw);if(i>=0&&i<6){dr=i;c.setPointerCapture(e.pointerId);set(i,(Y0-p.y)/H)}});c.addEventListener('pointermove',e=>{if(dr<0)return;const p=cpos(c,e);set(dr,(Y0-p.y)/H)});c.addEventListener('pointerup',()=>dr=-1);
+ $('bpU').onclick=()=>P=P.map(()=>1/6);$('bpN').onclick=()=>{const r=P.map(()=>Math.random());const s=r.reduce((a,b)=>a+b);P=r.map(v=>v/s)};
+ anim('bpC',(x,c,t)=>{const mu=P.reduce((a,p,i)=>a+i*p,0),v=P.reduce((a,p,i)=>a+i*i*p,0)-mu*mu;if(mu>=4)done('s3',0);if(v<.5)done('s3',1);x.clearRect(0,0,640,360);
+  x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(X0,Y0);x.lineTo(X0+W,Y0);x.stroke();
+  P.forEach((p,i)=>{const h=p*H;const g=x.createLinearGradient(0,Y0-h,0,Y0);g.addColorStop(0,'#74c0fc');g.addColorStop(1,'#1971c2');x.fillStyle=g;RR(x,X0+i*bw+bw*.18,Y0-h,bw*.64,Math.max(h,1),6);x.fill();tL(x,f4(p).slice(0,4),X0+i*bw+bw/2,Y0-h-8,12,'#1971c2');tL(x,''+i,X0+i*bw+bw/2,Y0+18,14,'#212529');x.fillStyle='#fff';x.beginPath();x.arc(X0+i*bw+bw/2,Y0-h,7,0,7);x.fill();x.strokeStyle='#1971c2';x.stroke()});
+  const mx=X0+(mu+.5)*bw;x.fillStyle='#e8590c';x.beginPath();x.moveTo(mx,Y0+28);x.lineTo(mx-18,Y0+58);x.lineTo(mx+18,Y0+58);x.fill();tL(x,'μ = '+r2(mu),mx,Y0+80,15,'#e8590c');
+  const sd=Math.sqrt(Math.max(0,v))*bw;x.strokeStyle='#ae3ec9';x.lineWidth=3;x.beginPath();x.moveTo(mx-sd,Y0+100);x.lineTo(mx+sd,Y0+100);x.stroke();[mx-sd,mx+sd].forEach(q=>{x.beginPath();x.moveTo(q,Y0+92);x.lineTo(q,Y0+108);x.stroke()});tL(x,'σ = '+r2(Math.sqrt(Math.max(0,v))),mx+sd+34,Y0+104,12,'#ae3ec9');
+  $('bpOut').innerHTML=EQ('E(X) = Σ x f(x) = '+P.map((p,i)=>i+'×'+r2(p)).join(' + ')+' = '+r2(mu))+'<br>'+EQ('σ² = Σx²f(x) − μ² = '+r2(v+mu*mu)+' − '+r2(mu*mu)+' = '+r2(v))+' · Σ f(x) = 1 ✅'})})();
+(function(){const [c,x]=C2('dxC');const coins3=()=>{let r=[''];for(let i=0;i<3;i++)r=r.flatMap(s=>[s+'H',s+'T']);return r};const two=[].concat(...[1,2,3,4,5,6].map(a=>[1,2,3,4,5,6].map(b=>[a,b])));
+ const EX=[['عدد الصور في رمي 3 عملات',coins3(),o=>o.split('H').length-1],['الفرق المطلق بين عددي مكعبين',two,o=>Math.abs(o[0]-o[1])],['العدد الأكبر في رمي مكعبين',two,o=>Math.max(...o)],['عدد الصور في رمي عملتين',coins3().map(s=>s.slice(0,2)).filter((v,i,a)=>a.indexOf(v)===i),o=>o.split('H').length-1]];let K=0;const seen=new Set([0]);
+ chipsP('dxK',EX.map(e=>e[0]),0,i=>{K=i;seen.add(i);if(seen.size>=3)done('s3',2)});
+ anim('dxC',(x,c,t)=>{x.clearRect(0,0,640,320);const [n,S,f]=EX[K],vals=[...new Set(S.map(f))].sort((a,b)=>a-b),pr=vals.map(v=>S.filter(o=>f(o)===v).length/S.length);let F=0;const cum=pr.map(p=>F+=p);
+  bars(x,40,240,270,190,pr,vals.map(String),'#4dabf7',Math.max(...pr));tA(x,'f(x) = P(X = x)',175,30,12,'#495057');
+  const X0=350,W=260,Y0=240,H=190,xs=v=>X0+(v-vals[0]+.5)/(vals.length+1)*W;x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(X0,Y0-H);x.lineTo(X0,Y0);x.lineTo(X0+W,Y0);x.stroke();
+  x.strokeStyle='#e8590c';x.lineWidth=3;vals.forEach((v,i)=>{const y=Y0-cum[i]*H,x1=xs(v),x2=i<vals.length-1?xs(vals[i+1]):X0+W;x.beginPath();x.moveTo(x1,y);x.lineTo(x2,y);x.stroke();x.fillStyle='#e8590c';x.beginPath();x.arc(x1,y,5,0,7);x.fill();tL(x,''+v,x1,Y0+14,10,'#495057')});tA(x,'F(x) = P(X ≤ x) (سلّم)',X0+W/2,30,12,'#495057');
+  const mu=vals.reduce((a,v,i)=>a+v*pr[i],0),va=vals.reduce((a,v,i)=>a+v*v*pr[i],0)-mu*mu;
+  $('dxOut').innerHTML='<div style="overflow-x:auto"><table class="tbl" style="font-size:.85rem"><tr><th>x</th>'+vals.map(v=>'<td>'+v+'</td>').join('')+'</tr><tr><th>f(x)</th>'+pr.map(p=>'<td>'+Math.round(p*S.length)+'/'+S.length+'</td>').join('')+'</tr><tr><th>F(x)</th>'+cum.map(p=>'<td>'+r2(p)+'</td>').join('')+'</tr></table></div>'+EQ('μ = '+r2(mu))+' · '+EQ('σ² = '+r2(va))})})();
+MCQP($('qs3'),()=>{const t=rnd(0,2);const P=pick([[.2,.3,.5],[.1,.4,.5],[.25,.25,.5],[.3,.3,.4],[.5,.3,.2]]),xs=pick([[0,1,2],[1,2,3],[1,3,5]]);const mu=r2(xs.reduce((a,v,i)=>a+v*P[i],0)),v2=r2(xs.reduce((a,v,i)=>a+v*v*P[i],0)-mu*mu);const tb='x: '+xs.join(' ، ')+' · f(x): '+P.join(' ، ')+'. ';
+ if(t===0)return{q:tb+'التوقع E(X) = ',o:OPSP(mu+'',[r2(mu+.5)+'',r2(xs.reduce((a,b)=>a+b)/3)+'',r2(mu*mu)+'']),ex:'Σ x f(x)'};
+ if(t===1)return{q:tb+'التباين σ² = ',o:OPSP(v2+'',[r2(v2+mu*mu)+'',r2(Math.sqrt(Math.max(v2,0)))+'',r2(v2+1)+'']),ex:'Σ x² f(x) − μ²'};
+ return bank([['شرط دالة الاحتمال للمتغير المنفصل:',['Σ f(x) = 1 و 0 ≤ f(x) ≤ 1','Σ f(x) = 0','f(x) سالبة','Σ f(x) = 100']],['F(x) = ',['P(X ≤ x)','P(X = x)','P(X > x)','E(X)']],['عدد الأطفال في أسرة متغير:',['منفصل','متصل','ثابت','نوعي']],['إذا كان f(0)=0.3 و f(1)=k و f(2)=0.4 فإن k = ',['0.3','0.4','0.7','1']]])()});
+/* ================= 2 المتصل ================= */
+MIS('s4',['اجعل المساحة المظللة 0.5 تمامًا (±0.01)','اجعل a = b لترى أن P(X = a) = 0','أجب عن 3 أسئلة تدريب صحيحة']);
+(function(){const c=$('arC'),x=c.getContext('2d');const PDF=[['منتظم f(x) = 0.1',v=>.1,(a,b)=>(b-a)*.1],['متزايد f(x) = x/50',v=>v/50,(a,b)=>(b*b-a*a)/100],['متناقص f(x) = (10−x)/50',v=>(10-v)/50,(a,b)=>((10-a)**2-(10-b)**2)/100]];let K=1,A=2,B=6;c.style.touchAction='none';let dr=null;
+ chipsP('arK',PDF.map(p=>p[0]),1,i=>{K=i});const X0=60,W=520,Y0=270,H=1000,px=v=>X0+v/10*W,gx=p=>clamp(Math.round((p-X0)/W*100)/10,0,10);
+ c.addEventListener('pointerdown',e=>{const p=cpos(c,e);dr=Math.abs(p.x-px(A))<Math.abs(p.x-px(B))?'a':'b';c.setPointerCapture(e.pointerId);mv(p)});c.addEventListener('pointermove',e=>{if(dr)mv(cpos(c,e))});c.addEventListener('pointerup',()=>dr=null);
+ function mv(p){const v=gx(p.x);if(dr==='a')A=Math.min(v,B);else B=Math.max(v,A)}
+ anim('arC',(x,c,t)=>{x.clearRect(0,0,640,320);const [n,f,F]=PDF[K],pr=F(A,B);if(Math.abs(pr-.5)<=.01)done('s4',0);if(A===B)done('s4',1);
+  x.fillStyle='rgba(232,89,12,.45)';x.beginPath();x.moveTo(px(A),Y0);for(let v=A;v<=B+1e-9;v+=.05)x.lineTo(px(v),Y0-f(v)*H);x.lineTo(px(B),Y0);x.fill();
+  x.strokeStyle='#1971c2';x.lineWidth=3.5;x.beginPath();for(let v=0;v<=10.001;v+=.05)v?x.lineTo(px(v),Y0-f(v)*H):x.moveTo(px(v),Y0-f(v)*H);x.stroke();x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(X0,Y0);x.lineTo(X0+W,Y0);x.moveTo(X0,Y0);x.lineTo(X0,40);x.stroke();for(let v=0;v<=10;v++)tL(x,''+v,px(v),Y0+16,11,'#495057');
+  [[A,'a'],[B,'b']].forEach(([v,l])=>{x.fillStyle='#e8590c';x.beginPath();x.moveTo(px(v),Y0+22);x.lineTo(px(v)-10,Y0+40);x.lineTo(px(v)+10,Y0+40);x.fill();tL(x,l+' = '+v,px(v),Y0+52,12,'#e8590c')});
+  tL(x,'P = '+f4(pr),px((A+B)/2),Y0-f((A+B)/2)*H*.45,18,'#212529');
+  $('arOut').innerHTML=EQ('P('+A+' ≤ X ≤ '+B+') = ∫ f(x) dx = '+f4(pr))+(A===B?'<br>🎯 عند a = b المساحة صفر ⟸ <b>P(X = a) = 0</b> للمتغير المتصل':'')+' · المساحة الكلية = 1 ✅'})})();
+MCQP($('qs4'),bank([['في المتغير المتصل P(X = 3) = ',['0','1','f(3)','0.5']],['الاحتمال في المتغير المتصل يمثل:',['مساحة تحت منحنى الكثافة','ارتفاع المنحنى','طول الفترة','ميل المنحنى']],['المساحة الكلية تحت منحنى دالة الكثافة:',['1','0','100','لا نهائية']],['f(x) = 0.1 على [0، 10]. احسب P(2 ≤ X ≤ 5):',['0.3','0.5','0.2','0.7']],['f(x) = 0.25 على [0، 4]. احسب P(X ≤ 1):',['0.25','0.5','1','0.75']],['طول الطالب متغير:',['متصل','منفصل','ثابت','نوعي']],['f(x) = x/2 على [0، 2]. احسب P(0 ≤ X ≤ 1):',['0.25','0.5','1','0.75']]]));
+qGoal('qs4','s4',2,3);
+chapterTest('rv2',[['المتغير المنفصل قيمه:',['قابلة للعد','كل قيم الفترة','سالبة فقط']],['Σ f(x) = ',['1','0','μ']],['E(X) = ',['Σ x f(x)','Σ f(x)','Σ x²']],['σ² = ',['Σ x² f(x) − μ²','Σ x f(x)','μ²']],['F(x) = ',['P(X ≤ x)','P(X = x)','P(X ≥ x)']],['الوسط هو نقطة:',['الاتزان','البداية','النهاية']],['المتغير المتصل P(X = a) = ',['0','1','f(a)']],['الاحتمال للمتصل:',['مساحة تحت المنحنى','ارتفاع المنحنى','عدد القيم']],['المساحة الكلية تحت f(x):',['1','0','2']],['الوزن متغير:',['متصل','منفصل','ثابت']],['x: 0،1 ، f: 0.4، 0.6 ⟸ E(X) = ',['0.6','0.4','1']],['عدد الصور في 3 عملات يأخذ قيمًا:',['0، 1، 2، 3','1، 2، 3','0، 1، 2']]]);
+
+/* ================= 3 ذو الحدين وبواسون ================= */
+MIS('s5',['أطلق 200 كرة في لوح جالتون','اجعل التوزيع ملتويًا (p ≠ 0.5) وأطلق الكرات','شغّل 50 ساعة في محل بواسون']);
+(function(){const [c,x]=C2('gbC');let balls=[],bins=[],queue=0,tot=0;const reset=()=>{balls=[];queue=0;tot=0;bins=Array(13).fill(0)};reset();
+ const g=()=>{const n=+$('gbN').value,p=+$('gbP').value;$('gbNv').textContent=n;$('gbPv').textContent=p;return{n,p}};$('gbN').oninput=$('gbP').oninput=()=>{reset();g()};g();
+ $('gbGo').onclick=()=>queue+=200;$('gbR').onclick=reset;
+ anim('gbC',(x,c,t)=>{const {n,p}=g(),top=30,rowH=Math.min(26,220/n),pegY=i=>top+20+i*rowH,pegX=(i,j)=>320+(j-i/2)*40;
+  if(queue>0&&Math.random()<.9){queue--;const path=[];for(let i=0;i<n;i++)path.push(Math.random()<p?1:0);balls.push({path,s:0})}
+  x.clearRect(0,0,640,440);for(let i=0;i<n;i++)for(let j=0;j<=i;j++){x.fillStyle='#495057';x.beginPath();x.arc(pegX(i,j),pegY(i),4,0,7);x.fill()}
+  const binY=pegY(n)+8,bw=40;
+  balls=balls.filter(b=>{b.s+=.12;const st=Math.floor(b.s);if(st>=n){const k=b.path.reduce((a,v)=>a+v,0);bins[k]++;tot++;if(tot>=200)done('s5',0);if(tot>=100&&Math.abs(p-.5)>.1)done('s5',1);return false}
+   const k=b.path.slice(0,st).reduce((a,v)=>a+v,0),f=b.s-st,x1=pegX(st,k),x2=pegX(st+1,k+b.path[st]);x.fillStyle='#e8590c';x.beginPath();x.arc(x1+(x2-x1)*f,pegY(st)+rowH*f-6,5,0,7);x.fill();return true});
+  const mx=Math.max(...bins.slice(0,n+1),1),bH=440-binY-24;
+  for(let k=0;k<=n;k++){const X=320+(k-n/2)*40,h=bins[k]/Math.max(mx,tot*.35+1)*bH;x.fillStyle='#74c0fc';x.fillRect(X-bw*.4,440-24-h,bw*.8,h);tL(x,''+k,X,436,11,'#495057');const th=nCr(n,k)*p**k*(1-p)**(n-k)*tot/Math.max(mx,tot*.35+1)*bH;x.fillStyle='#e03131';x.beginPath();x.arc(X,440-24-th,4,0,7);x.fill()}
+  x.strokeStyle='#adb5bd';x.beginPath();x.moveTo(20,440-24);x.lineTo(620,440-24);x.stroke();tL(x,'كرات: '+tot,70,30,13,'#495057');
+  $('gbOut').innerHTML=EQ('P(X = k) = C('+n+'،k) × '+p+'ᵏ × '+r2(1-p)+'ⁿ⁻ᵏ')+' <small>(النقاط الحمراء نظرية)</small><br>'+EQ('μ = np = '+r2(n*p))+' · '+EQ('σ² = npq = '+r2(n*p*(1-p)))})})();
+(function(){const [c,x]=C2('psC');let hrs=[],queue=0,cur=null;const reset=()=>{hrs=[];queue=0;cur=null};
+ $('psL').oninput=()=>{$('psLv').textContent=$('psL').value;reset()};$('psLv').textContent='6';$('psGo').onclick=()=>queue+=50;$('psR').onclick=reset;
+ const draw=l=>{const L=Math.exp(-l);let k=0,p=1;do{k++;p*=Math.random()}while(p>L);return k-1};
+ anim('psC',(x,c,t)=>{const l=+$('psL').value;if(queue>0&&(!cur||performance.now()-cur.t>140)){queue--;cur={t:performance.now(),k:draw(l)};hrs.push(cur.k);if(hrs.length>=50)done('s5',2)}
+  x.clearRect(0,0,640,320);EMJ(x,'🏪',70,80,60);if(cur){const e=Math.min(1,(performance.now()-cur.t)/140);for(let i=0;i<cur.k;i++)EMJ(x,'🧍',130+i*22*e,80+(i%2)*14,20);tL(x,'هذه الساعة: '+cur.k,90,140,13,'#495057')}
+  const K=16,cnt=Array(K).fill(0);hrs.forEach(k=>{if(k<K)cnt[k]++});const n=hrs.length||1,mx=Math.max(.0001,...cnt.map(v=>v/n),...[...Array(K).keys()].map(k=>pois(k,l)));
+  const X0=40,W=580,Y0=290,H=120,bw=W/K;x.strokeStyle='#343a40';x.beginPath();x.moveTo(X0,Y0);x.lineTo(X0+W,Y0);x.stroke();
+  for(let k=0;k<K;k++){const h=cnt[k]/n/mx*H;x.fillStyle='#69db7c';x.fillRect(X0+k*bw+bw*.15,Y0-h,bw*.7,h);const th=pois(k,l)/mx*H;x.fillStyle='#e03131';x.beginPath();x.arc(X0+k*bw+bw/2,Y0-th,4,0,7);x.fill();tL(x,''+k,X0+k*bw+bw/2,Y0+14,10,'#495057')}
+  const avg=hrs.length?hrs.reduce((a,b)=>a+b,0)/hrs.length:0;tL(x,'ساعات: '+hrs.length+' · المتوسط: '+r2(avg),470,60,14,'#212529');
+  $('psOut').innerHTML=EQ('P(X = 8) = e⁻'+l+' × '+l+'⁸ ÷ 8! = '+f4(pois(8,l)))+' · '+EQ('μ = σ² = λ = '+l)})})();
+MCQP($('qs5'),()=>{const t=rnd(0,3);if(t===0){const n=pick([4,5,6]),p=pick([.5,.2,.3]),k=rnd(1,n-1);return{q:'X ~ ذو الحدين (n = '+n+' ، p = '+p+'). احسب P(X = '+k+'):',o:OPSP(f4(nCr(n,k)*p**k*(1-p)**(n-k)),[f4(p**k*(1-p)**(n-k)),f4(nCr(n,k)*p**k),f4(k/n)]),ex:'C(n،k) pᵏ qⁿ⁻ᵏ'}}
+ if(t===1){const n=pick([10,20,50,100]),p=pick([.2,.4,.5,.1]);return{q:'X ~ ذو الحدين n = '+n+' ، p = '+p+'. الوسط والتباين:',o:OPSP('μ = '+r2(n*p)+' ، σ² = '+r2(n*p*(1-p)),['μ = '+r2(n*p)+' ، σ² = '+r2(n*p),'μ = '+r2(n*(1-p))+' ، σ² = '+r2(n*p*(1-p)),'μ = '+r2(n*p*(1-p))+' ، σ² = '+r2(n*p)]),ex:'μ = np ، σ² = npq'}}
+ if(t===2){const l=pick([2,3,4,6]),k=rnd(0,3);return{q:'X ~ بواسون λ = '+l+'. احسب P(X = '+k+'):',o:OPSP(f4(pois(k,l)),[f4(Math.exp(-l)),f4(l**k/fact(k)),f4(k/l)]),ex:'e⁻ᵏ λˣ ÷ x!'}}
+ return bank([['في توزيع بواسون:',['الوسط = التباين = λ','الوسط = λ² ','التباين = √λ','الوسط = 1/λ']],['شروط تجربة ذي الحدين:',['محاولات مستقلة ولكل منها نتيجتان واحتمال نجاح ثابت','نتائج كثيرة','محاولات غير مستقلة','p متغير']],['C(5، 2) = ',['10','20','5','25']],['يستخدم توزيع بواسون لـ:',['عدد مرات وقوع حدث في فترة زمنية','أطوال الطلاب','درجات الامتحان','الأوزان']]])()});
+/* ================= 3 الطبيعي و t ================= */
+MIS('s6',['اجعل المساحة بين a و b أكبر من 0.95','حل مسألة درجات الامتحان 3 مرات','اجعل توزيع t مطابقًا تقريبًا للطبيعي (ν ≥ 30)']);
+(function(){const [c,x]=C2('nmC');anim('nmC',(x,c,t)=>{const m=+$('nmM').value,s=+$('nmS').value;let a=+$('nmA').value,b=+$('nmB').value;if(b<a)[a,b]=[b,a];['nmM','nmS','nmA','nmB'].forEach(i=>$(i+'v').textContent=$(i).value);
+  const za=(a-m)/s,zb=(b-m)/s,P=Phi(zb)-Phi(za);if(P>.95)done('s6',0);x.clearRect(0,0,640,320);const X0=20,W=600,Y0=260,px=v=>X0+(v-10)/100*W,py=v=>Y0-v*3400;
+  for(let k=-3;k<=3;k++){x.strokeStyle=k?'rgba(173,181,189,.5)':'#868e96';x.setLineDash(k?[3,3]:[]);x.beginPath();x.moveTo(px(m+k*s),Y0);x.lineTo(px(m+k*s),40);x.stroke();tL(x,(k?(k>0?'+':'')+k+'σ':'μ'),px(m+k*s),36,10,'#868e96')}x.setLineDash([]);
+  x.fillStyle='rgba(232,89,12,.4)';x.beginPath();x.moveTo(px(a),Y0);for(let v=a;v<=b;v+=.25)x.lineTo(px(v),py(pdfN(v,m,s)));x.lineTo(px(b),Y0);x.fill();
+  x.strokeStyle='#1971c2';x.lineWidth=3.5;x.beginPath();for(let v=10;v<=110;v+=.5)v===10?x.moveTo(px(v),py(pdfN(v,m,s))):x.lineTo(px(v),py(pdfN(v,m,s)));x.stroke();
+  x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(X0,Y0);x.lineTo(X0+W,Y0);x.stroke();for(let v=20;v<=100;v+=10)tL(x,''+v,px(v),Y0+16,10,'#495057');
+  tL(x,'Z: '+r2(za)+' → '+r2(zb),px((a+b)/2),Y0+38,12,'#e8590c');tL(x,'P = '+f4(P),px((a+b)/2),py(pdfN((a+b)/2,m,s))*.5+Y0*.5,18,'#212529');
+  $('nmOut').innerHTML=EQ('Z = (X − μ) ÷ σ')+' ⟸ '+EQ('Z₁ = ('+a+' − '+m+') ÷ '+s+' = '+r2(za))+' · '+EQ('Z₂ = '+r2(zb))+'<br>'+EQ('P('+a+' ≤ X ≤ '+b+') = Φ('+r2(zb)+') − Φ('+r2(za)+') = '+f4(P))})})();
+(function(){let ok=0;MCQP($('nzQ'),()=>{const m=pick([60,65,70,75]),s=pick([5,8,10,12]),t=rnd(0,2),z=pick([1,1.5,2,-1,-.5,.5,1.25]),X=m+z*s;
+  if(t===0)return{q:'درجات الطلاب X ~ N(μ = '+m+' ، σ = '+s+'). ما نسبة الطلاب الذين درجاتهم أكبر من '+X+'؟<br><small>Z = ('+X+' − '+m+') ÷ '+s+' = '+z+'</small>',o:OPSP(f4(1-Phi(z)),[f4(Phi(z)),f4(1-Phi(-z)+.05),f4(.5)]),ex:'P(Z > '+z+') = 1 − Φ('+z+')'};
+  if(t===1)return{q:'X ~ N('+m+' ، σ = '+s+'). احسب P(X &lt; '+X+'):',o:OPSP(f4(Phi(z)),[f4(1-Phi(z)),f4(Phi(z)-.5),f4(Phi(-z)/2)]),ex:'Z = '+z};
+  const z2=Math.abs(z);return{q:'X ~ N('+m+' ، σ = '+s+'). احسب P('+(m-z2*s)+' ≤ X ≤ '+(m+z2*s)+'):',o:OPSP(f4(2*Phi(z2)-1),[f4(Phi(z2)),f4(1-Phi(z2)),f4(2*Phi(z2))]),ex:'متماثل حول μ ⟸ 2Φ(z) − 1'}});qGoal('nzQ','s6',1,3)})();
+(function(){const [c,x]=C2('tdC');anim('tdC',(x,c,t)=>{const v=+$('tdF').value;$('tdFv').textContent=v;if(v>=30)done('s6',2);x.clearRect(0,0,640,260);const X0=20,W=600,Y0=230,px=z=>X0+(z+4)/8*W,py=y=>Y0-y*480;
+  [[z=>pdfN(z,0,1),'#1971c2','الطبيعي المعياري'],[z=>pdfT(z,v),'#e8590c','t (ν = '+v+')']].forEach(([f,col,l],i)=>{x.strokeStyle=col;x.lineWidth=3.5;x.beginPath();for(let z=-4;z<=4;z+=.04)z===-4?x.moveTo(px(z),py(f(z))):x.lineTo(px(z),py(f(z)));x.stroke();tA(x,'● '+l,i?470:170,24,13,col)});
+  x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(X0,Y0);x.lineTo(X0+W,Y0);x.stroke();for(let z=-3;z<=3;z++)tL(x,''+z,px(z),Y0+16,11,'#495057');
+  $('tdOut').innerHTML=v<30?'أطراف t أسمك ⟸ القيم المتطرفة أكثر احتمالًا (عندما العينة صغيرة وσ مجهولة)':'🎯 عند ν ≥ 30 أصبح توزيع t شبه مطابق للطبيعي'})})();
+MCQP($('qs6'),bank([['منحنى التوزيع الطبيعي:',['متماثل حول الوسط μ','ملتوٍ إلى اليمين','مستطيل','غير محدد']],['Z = ',['(X − μ) ÷ σ','(X + μ) ÷ σ','σ ÷ (X − μ)','X × σ']],['التوزيع الطبيعي المعياري وسطه وانحرافه:',['0 و 1','1 و 0','μ و σ','100 و 15']],['نسبة القيم ضمن انحراف معياري واحد عن الوسط تقريبًا:',['68%','95%','99.7%','50%']],['P(Z > 0) = ',['0.5','1','0','0.68']],['توزيع t يُستخدم عندما:',['العينة صغيرة وσ للمجتمع مجهول','العينة كبيرة جدًا','σ معلوم دائمًا','البيانات منفصلة']],['كلما زادت درجات الحرية فإن توزيع t:',['يقترب من الطبيعي','يبتعد عنه','يصبح منتظمًا','يختفي']]]));
+chapterTest('rv3',[['ذو الحدين μ = ',['np','npq','n/p']],['ذو الحدين σ² = ',['npq','np','√np']],['n = 10 ، p = 0.5 ⟸ μ = ',['5','2.5','10']],['بواسون μ = σ² = ',['λ','λ²','√λ']],['C(4، 2) = ',['6','8','4']],['Z = ',['(X − μ) ÷ σ','(X − σ) ÷ μ','X ÷ μ']],['المساحة تحت المنحنى الطبيعي:',['1','0.5','100']],['P(Z < 0) = ',['0.5','0','1']],['ضمن 2σ تقريبًا:',['95%','68%','50%']],['N(70 ، 10) ⟸ Z للدرجة 85:',['1.5','15','0.85']],['توزيع t أطرافه:',['أسمك من الطبيعي','أنحف','مثله تمامًا']],['بواسون لـ:',['عدد الأحداث في فترة','الأطوال','الأوزان']]]);
+
+/* ================= 4 توزيعات المعاينة ================= */
+MIS('s7',['اسحب 500 عينة','اكتشف نظرية النهاية المركزية: مجتمع ملتوٍ و n ≥ 30','أجب عن 3 أسئلة تدريب صحيحة']);
+(function(){const [c,x]=C2('smC');const POP=[['📏 منتظم',()=>Math.random()*10,5,10/Math.sqrt(12)],['📉 ملتوٍ (أسّي)',()=>Math.min(10,-Math.log(1-Math.random())*2),2,2],['🐫 ذو قمتين',()=>Math.random()<.5?clamp(2+rnorm()*.8,0,10):clamp(8+rnorm()*.8,0,10),5,Math.sqrt(9+.64)]];let K=1,means=[],last=[],queue=0;
+ chipsP('smK',POP.map(p=>p[0]),1,i=>{K=i;means=[];last=[]});$('smN').oninput=()=>{$('smNv').textContent=$('smN').value;means=[]};$('smNv').textContent='5';
+ const one=()=>{const n=+$('smN').value;last=[...Array(n)].map(POP[K][1]);means.push(last.reduce((a,b)=>a+b,0)/n);if(means.length>=500){done('s7',0);if(K===1&&n>=30)done('s7',1)}};
+ $('sm1').onclick=one;$('sm500').onclick=()=>queue+=500;$('smR').onclick=()=>{means=[];last=[]};
+ anim('smC',(x,c,t)=>{for(let i=0;i<Math.min(queue,25);i++)one();queue=Math.max(0,queue-25);const [nm,f,mu,sg]=POP[K],n=+$('smN').value;x.clearRect(0,0,640,460);const X0=40,W=560,px=v=>X0+v/10*W;
+  /* المجتمع */
+  const pb=Array(40).fill(0);for(let i=0;i<4000;i++){const v=f();pb[Math.min(39,Math.floor(v/10*40))]++}const pm=Math.max(...pb);x.fillStyle='rgba(134,142,150,.5)';pb.forEach((v,i)=>{const h=v/pm*90;x.fillRect(X0+i*W/40,120-h,W/40-1,h)});tA(x,'المجتمع · μ = '+r2(mu)+' · σ = '+r2(sg),320,22,12,'#495057');
+  /* العينة */
+  x.strokeStyle='#adb5bd';x.beginPath();x.moveTo(X0,170);x.lineTo(X0+W,170);x.stroke();last.forEach((v,i)=>{x.fillStyle='#e8590c';x.beginPath();x.arc(px(v),165-(i%5)*6,4,0,7);x.fill()});if(last.length){const m=last.reduce((a,b)=>a+b,0)/last.length;x.fillStyle='#ae3ec9';x.beginPath();x.moveTo(px(m),178);x.lineTo(px(m)-8,192);x.lineTo(px(m)+8,192);x.fill();tL(x,'x̄ = '+r2(m),px(m),206,12,'#ae3ec9')}tA(x,'آخر عينة (n = '+n+')',320,140,12,'#495057');
+  /* أوساط العينات */
+  const B=Array(80).fill(0);means.forEach(m=>B[Math.min(79,Math.floor(m/10*80))]++);const bm=Math.max(...B,1),Y0=440,H=200,se=sg/Math.sqrt(n),dens=v=>pdfN(v,mu,se);const scale=means.length?means.length*(10/80):1;const mxH=Math.max(bm,dens(mu)*scale);
+  B.forEach((v,i)=>{const h=v/mxH*H;x.fillStyle='#4dabf7';x.fillRect(X0+i*W/80,Y0-h,W/80-1,h)});if(means.length>20){x.strokeStyle='#e03131';x.lineWidth=2.5;x.beginPath();for(let v=0;v<=10;v+=.05){const y=Y0-dens(v)*scale/mxH*H;v?x.lineTo(px(v),y):x.moveTo(px(v),y)}x.stroke()}
+  x.strokeStyle='#343a40';x.lineWidth=1.5;x.beginPath();x.moveTo(X0,Y0);x.lineTo(X0+W,Y0);x.stroke();for(let v=0;v<=10;v+=2)tL(x,''+v,px(v),Y0+14,10,'#495057');tA(x,'توزيع أوساط العينات x̄ ('+means.length+' عينة)',320,228,12,'#1971c2');
+  const mm=means.length?means.reduce((a,b)=>a+b,0)/means.length:0,sd=means.length>1?Math.sqrt(means.reduce((a,b)=>a+(b-mm)**2,0)/(means.length-1)):0;
+  $('smOut').innerHTML=EQ('متوسط x̄ = '+r2(mm)+' ≈ μ = '+r2(mu))+' · '+EQ('انحراف x̄ = '+r2(sd)+' ≈ σ/√n = '+r2(sg)+'/√'+n+' = '+r2(se))+(n>=30&&K!==0?'<br>🔔 رغم أن المجتمع غير طبيعي، أوساط العينات الكبيرة تتوزع طبيعيًا!':'')})})();
+MCQP($('qs7'),()=>{const t=rnd(0,2);if(t===0){const s=pick([10,12,20,15]),n=pick([4,16,25,36,100]);return{q:'مجتمع انحرافه σ = '+s+'. الخطأ المعياري لوسط عينة حجمها '+n+':',o:OPSP(r2(s/Math.sqrt(n))+'',[r2(s/n)+'',r2(s*Math.sqrt(n))+'',s+'']),ex:'σ/√n'}}
+ if(t===1){const m=pick([50,70,100]),s=pick([10,12]),n=pick([4,16,36]),z=pick([1,1.5,2]),se=s/Math.sqrt(n),xb=r2(m+z*se);return{q:'μ = '+m+' ، σ = '+s+' ، n = '+n+'. احسب P(X̄ > '+xb+'):',o:OPSP(f4(1-Phi(z)),[f4(Phi(z)),f4(1-Phi(z*Math.sqrt(n)/4)),f4(.5)]),ex:'Z = (x̄ − μ) ÷ (σ/√n) = '+z}}
+ return bank([['وسط توزيع المعاينة لـ X̄ يساوي:',['μ وسط المجتمع','σ','σ/√n','صفر']],['عند زيادة حجم العينة، الخطأ المعياري:',['يقل','يزيد','لا يتغير','يصبح سالبًا']],['نظرية النهاية المركزية: توزيع X̄ يقترب من:',['الطبيعي كلما كبرت n','المنتظم','بواسون','ذي الحدين']],['لتقليل الخطأ المعياري إلى النصف نضرب حجم العينة في:',['4','2','8','0.5']]])()});
+qGoal('qs7','s7',2,3);
+chapterTest('rv4',[['μ(X̄) = ',['μ','σ','σ/√n']],['σ(X̄) = ',['σ ÷ √n','σ × √n','σ ÷ n']],['σ = 10 ، n = 25 ⟸ σ(X̄) = ',['2','0.4','10']],['زيادة n تجعل الخطأ المعياري:',['أصغر','أكبر','ثابتًا']],['نظرية النهاية المركزية:',['X̄ تقريبًا طبيعي لعينات كبيرة','X دائمًا طبيعي','σ = 0']],['n = 100 ، σ = 20 ⟸ σ(X̄) = ',['2','0.2','20']],['Z لوسط العينة = ',['(x̄ − μ) ÷ (σ/√n)','(x̄ − μ) ÷ σ','x̄ ÷ μ']],['أوساط العينات أقل تشتتًا من:',['القيم المفردة','الصفر','لا شيء']],['لنصف الخطأ المعياري نضاعف n:',['4 مرات','مرتين','8 مرات']],['حجم كبير للعينة عادة:',['n ≥ 30','n = 2','n = 5']],['الخطأ المعياري يقيس تشتت:',['أوساط العينات','المجتمع فقط','الصفر']],['μ = 50 ، x̄ = 52 ، σ/√n = 1 ⟸ Z = ',['2','52','1']]]);
+
+/* ================= 5 التقدير ================= */
+MIS('s8',['ولّد 50 فترة ثقة بمستوى 95%','لاحظ أثر الثقة: جرّب 99%','احسب فترة ثقة صحيحة 3 مرات']);
+(function(){const [c,x]=C2('ciC');const LV=[['90%',1.645],['95%',1.96],['99%',2.576]];let L=1,iv=[],queue=0;const mu=50,sg=10;
+ chipsP('ciK',LV.map(l=>'ثقة '+l[0]),1,i=>{L=i;iv=[];if(i===2)done('s8',1)});$('ciN').oninput=()=>{$('ciNv').textContent=$('ciN').value;iv=[]};$('ciNv').textContent='25';
+ const one=()=>{const n=+$('ciN').value;let s=0;for(let i=0;i<n;i++)s+=mu+sg*rnorm();const m=s/n,e=LV[L][1]*sg/Math.sqrt(n);iv.push([m-e,m+e]);if(iv.length>60)iv.shift();if(iv.length>=50&&L===1)done('s8',0)};
+ $('ci1').onclick=one;$('ci50').onclick=()=>queue+=50;$('ciR').onclick=()=>iv=[];
+ anim('ciC',(x,c,t)=>{if(queue>0&&Math.floor(t*30)%1===0){one();queue--}x.clearRect(0,0,640,440);const px=v=>320+(v-mu)*22;
+  x.strokeStyle='#e03131';x.lineWidth=3;x.beginPath();x.moveTo(px(mu),20);x.lineTo(px(mu),420);x.stroke();tL(x,'μ = 50',px(mu),16,13,'#e03131');
+  iv.forEach(([a,b],i)=>{const y=410-i*6.5,hit=a<=mu&&mu<=b;x.strokeStyle=hit?'#2f9e44':'#e03131';x.lineWidth=hit?2.5:3.5;x.beginPath();x.moveTo(px(a),y);x.lineTo(px(b),y);x.stroke();x.fillStyle=x.strokeStyle;x.beginPath();x.arc(px((a+b)/2),y,2.5,0,7);x.fill()});
+  for(let v=40;v<=60;v+=5)tL(x,''+v,px(v),436,11,'#495057');
+  const h=iv.filter(([a,b])=>a<=mu&&mu<=b).length;$('ciOut').innerHTML='اصطادت μ: <b>'+h+'</b> من '+iv.length+(iv.length?' = '+Math.round(h/iv.length*100)+'%':'')+' (المتوقع '+LV[L][0]+')<br>'+EQ('X̄ ± '+LV[L][1]+' × 10 ÷ √'+$('ciN').value+' = X̄ ± '+r2(LV[L][1]*10/Math.sqrt(+$('ciN').value)))+' <small>(ثقة أعلى ⟸ فترة أعرض · n أكبر ⟸ فترة أضيق)</small>'})})();
+(function(){MCQP($('ciQ'),()=>{const xb=pick([48,62.5,75,120,240]),s=pick([6,8,10,12,15]),n=pick([16,25,36,64,100]),[l,z]=pick([['90%',1.645],['95%',1.96],['99%',2.58]]),e=z*s/Math.sqrt(n);
+  return{q:'عينة حجمها '+n+' وسطها '+xb+' من مجتمع انحرافه σ = '+s+'. فترة الثقة '+l+' لـ μ:',o:OPSP('['+r2(xb-e)+' ، '+r2(xb+e)+']',['['+r2(xb-z*s/n)+' ، '+r2(xb+z*s/n)+']','['+r2(xb-z*s)+' ، '+r2(xb+z*s)+']','['+r2(xb-s/Math.sqrt(n))+' ، '+r2(xb+s/Math.sqrt(n))+']']),ex:'X̄ ± Z × σ/√n = '+xb+' ± '+r2(e)}});qGoal('ciQ','s8',2,3)})();
+MCQP($('qs8'),bank([['أفضل تقدير بقيمة لوسط المجتمع μ:',['وسط العينة X̄','الوسيط فقط','σ','حجم العينة']],['Z المقابلة لثقة 95%:',['1.96','1.645','2.58','1']],['زيادة مستوى الثقة تجعل الفترة:',['أعرض','أضيق','ثابتة','تختفي']],['زيادة حجم العينة تجعل فترة الثقة:',['أضيق','أعرض','لا تتغير','سالبة']],['معنى ثقة 95%:',['95% من الفترات المحسوبة بهذه الطريقة تحتوي μ','μ تقع في الفترة باحتمال 95% دائمًا لكل عينة','X̄ = μ بنسبة 95%','الخطأ 95%']],['إذا كانت σ مجهولة والعينة صغيرة نستخدم:',['توزيع t والانحراف s','Z دائمًا','بواسون','ذا الحدين']]]));
+chapterTest('rv5',[['تقدير μ بقيمة:',['X̄','σ','n']],['فترة الثقة:',['X̄ ± Z σ/√n','X̄ ± σ','μ ± n']],['Z لثقة 95%:',['1.96','1.645','2.58']],['Z لثقة 99%:',['2.58','1.96','1.645']],['Z لثقة 90%:',['1.645','1.96','2.58']],['ثقة أعلى ⟸ فترة:',['أعرض','أضيق','مثلها']],['n أكبر ⟸ فترة:',['أضيق','أعرض','مثلها']],['x̄ = 50 ، σ = 10 ، n = 100 ، 95% ⟸',['[48.04 ، 51.96]','[40 ، 60]','[49 ، 51]']],['σ مجهولة وn صغيرة:',['t','Z','بواسون']],['هامش الخطأ = ',['Z σ/√n','σ','n']],['α لثقة 95%:',['0.05','0.95','0.5']],['الفترة تُبنى حول:',['X̄','μ','σ']]]);
+
+/* ================= 6 اختبارات الفروض ================= */
+MIS('s9',['احكم في القضايا الثلاث بشكل صحيح','اجعل α أقل من 0.05 و β أقل من 0.2 معًا','أجب عن 3 أسئلة تدريب صحيحة']);
+(function(){const [c,x]=C2('htC');const CS=[['📦 مصنع العبوات','يدّعي مصنع أن متوسط وزن العبوة 500 جم (σ = 12). عينة من 36 عبوة وسطها 495 جم. هل الادعاء صحيح عند α = 0.05؟','μ = 500','μ ≠ 500',500,12,36,495,2],['💡 المصابيح الجديدة','متوسط عمر المصباح 800 ساعة (σ = 40). طُوّر تصميم جديد، وعينة 16 مصباحًا وسطها 820 ساعة. هل زاد العمر عند α = 0.05؟','μ = 800','μ > 800',800,40,16,820,1],['📝 درجات المدرسة','متوسط الدرجات الوطني 70 (σ = 15). مدرسة فيها 25 طالبًا وسطهم 74. هل تختلف المدرسة عند α = 0.05؟','μ = 70','μ ≠ 70',70,15,25,74,2]];let K=0,z=0,st=0;const solved=new Set();
+ chipsP('htK',CS.map(cs=>cs[0]),0,i=>{K=i;ask()});
+ function ask(){const [n,d,h0,h1,m0,s,nn,xb,tails]=CS[K];z=(xb-m0)/(s/Math.sqrt(nn));st=0;const zc=tails===2?1.96:1.645,rej=tails===2?Math.abs(z)>zc:z>zc;
+  $('htQ').innerHTML='<div class="prob">'+d+'<br>'+EQ('H₀: '+h0)+' · '+EQ('H₁: '+h1)+' · القيمة الحرجة '+EQ((tails===2?'±':'')+zc)+'</div><b>① احسب إحصاءة الاختبار Z:</b><div id="htA"></div><div id="htB"></div>';
+  const ok=r2(z)+'',o=shuf(OPSP(ok,[r2(xb-m0)+'',r2((xb-m0)/s)+'',r2(-z)+'']));$('htA').innerHTML=o.map(v=>'<button class="btn opt">'+v+'</button>').join('');
+  $('htA').querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(b.textContent!==ok){b.classList.add('no');shake(b);return}b.classList.add('ok');st=performance.now();
+   $('htB').innerHTML='<b>② الحكم:</b><br><button class="btn opt" data-r="1">🔨 نرفض H₀</button><button class="btn opt" data-r="0">🕊️ لا نرفض H₀</button>';
+   $('htB').querySelectorAll('.opt').forEach(q=>q.onclick=()=>{if(+q.dataset.r===+rej){q.classList.add('ok');cheer();solved.add(K);if(solved.size>=3)done('s9',0);$('htB').insertAdjacentHTML('beforeend','<div class="fb ok">'+(rej?'Z = '+r2(z)+' تقع في منطقة الرفض ⟸ نرفض H₀ عند α = 0.05':'Z = '+r2(z)+' في منطقة القبول ⟸ لا يوجد دليل كافٍ لرفض H₀')+'</div>')}else{q.classList.add('no');shake(q)}})})}
+ ask();
+ anim('htC',(x,c,t)=>{x.clearRect(0,0,640,320);const tails=CS[K][8],zc=tails===2?1.96:1.645,X0=20,W=600,Y0=260,px=v=>X0+(v+4)/8*W,py=y=>Y0-y*500;
+  x.fillStyle='rgba(224,49,49,.35)';const shade=(a,b)=>{x.beginPath();x.moveTo(px(a),Y0);for(let v=a;v<=b;v+=.02)x.lineTo(px(v),py(pdfN(v,0,1)));x.lineTo(px(b),Y0);x.fill()};shade(zc,4);if(tails===2)shade(-4,-zc);
+  x.strokeStyle='#1971c2';x.lineWidth=3;x.beginPath();for(let v=-4;v<=4;v+=.04)v===-4?x.moveTo(px(v),py(pdfN(v,0,1))):x.lineTo(px(v),py(pdfN(v,0,1)));x.stroke();x.strokeStyle='#343a40';x.lineWidth=2;x.beginPath();x.moveTo(X0,Y0);x.lineTo(X0+W,Y0);x.stroke();for(let v=-3;v<=3;v++)tL(x,''+v,px(v),Y0+16,10,'#495057');
+  tA(x,'منطقة الرفض',px(3),Y0-60,12,'#c92a2a');if(tails===2)tA(x,'منطقة الرفض',px(-3),Y0-60,12,'#c92a2a');tA(x,'منطقة القبول',px(0),Y0-40,12,'#1971c2');
+  if(st){const k=Math.min(1,(performance.now()-st)/1200),zz=clamp(z,-3.9,3.9)*k;EMJ(x,'🔨',px(zz),Y0-150-Math.abs(Math.sin(k*Math.PI*3))*20,34);x.strokeStyle='#e8590c';x.lineWidth=3;x.beginPath();x.moveTo(px(zz),Y0);x.lineTo(px(zz),Y0-130);x.stroke();tL(x,'Z = '+r2(z),px(zz),Y0+34,14,'#e8590c')}})})();
+(function(){const [c,x]=C2('erCv2');anim('erCv2',(x,c,t)=>{const zc=+$('erC').value,d=+$('erD').value;$('erCv').textContent=zc;$('erDv').textContent=d;const al=1-Phi(zc),be=Phi(zc-d);if(al<.05&&be<.2)done('s9',1);
+  x.clearRect(0,0,640,300);const X0=20,W=600,Y0=250,px=v=>X0+(v+3.5)/9*W,py=y=>Y0-y*480;
+  x.fillStyle='rgba(224,49,49,.35)';x.beginPath();x.moveTo(px(zc),Y0);for(let v=zc;v<=5.5;v+=.03)x.lineTo(px(v),py(pdfN(v,0,1)));x.lineTo(px(5.5),Y0);x.fill();
+  x.fillStyle='rgba(25,113,194,.3)';x.beginPath();x.moveTo(px(-3.5),Y0);for(let v=-3.5;v<=zc;v+=.03)x.lineTo(px(v),py(pdfN(v,d,1)));x.lineTo(px(zc),Y0);x.fill();
+  [[0,'#c92a2a','H₀'],[d,'#1864ab','H₁ (الحقيقة)']].forEach(([m,col,l])=>{x.strokeStyle=col;x.lineWidth=3;x.beginPath();for(let v=-3.5;v<=5.5;v+=.04)v===-3.5?x.moveTo(px(v),py(pdfN(v,m,1))):x.lineTo(px(v),py(pdfN(v,m,1)));x.stroke();tL(x,l,px(m),py(pdfN(m,m,1))-8,13,col)});
+  x.strokeStyle='#212529';x.setLineDash([6,4]);x.lineWidth=2;x.beginPath();x.moveTo(px(zc),30);x.lineTo(px(zc),Y0);x.stroke();x.setLineDash([]);x.strokeStyle='#343a40';x.beginPath();x.moveTo(X0,Y0);x.lineTo(X0+W,Y0);x.stroke();
+  tL(x,'α = '+f4(al),px(zc)+60,60,15,'#c92a2a');tL(x,'β = '+f4(be),px(zc)-60,60,15,'#1864ab');
+  $('erOut').innerHTML='🔴 <b>α</b> (خطأ النوع الأول): رفض H₀ وهو صحيح = '+f4(al)+' · 🔵 <b>β</b> (خطأ النوع الثاني): قبول H₀ وهو خاطئ = '+f4(be)+'<br><small>تقليل α (تحريك الخط يمينًا) يزيد β… والحل لتقليلهما معًا: فرق أوضح أو عينة أكبر</small>'})})();
+MCQP($('qs9'),()=>{const t=rnd(0,1);if(t===0){const m0=pick([50,100,200]),s=pick([10,20]),n=pick([25,64,100]),z=pick([1.5,2.5,-2.2,1,3]),xb=r2(m0+z*s/Math.sqrt(n));return{q:'H₀: μ = '+m0+' ، σ = '+s+' ، n = '+n+' ، x̄ = '+xb+'. قيمة Z:',o:OPSP(r2(z)+'',[r2(z*Math.sqrt(n)/s)+'',r2(xb-m0)+'',r2(z/2)+'']),ex:'(x̄ − μ₀) ÷ (σ/√n)'}}
+ return bank([['خطأ من النوع الأول:',['رفض H₀ وهو صحيح','قبول H₀ وهو خاطئ','رفض H₁','لا يوجد خطأ']],['خطأ من النوع الثاني:',['قبول H₀ وهو خاطئ','رفض H₀ وهو صحيح','رفض H₁ وهو خاطئ','حساب Z خطأ']],['مستوى المعنوية α هو احتمال:',['خطأ النوع الأول','خطأ النوع الثاني','صحة H₀','صحة H₁']],['القيمة الحرجة لاختبار ذي طرفين عند α = 0.05:',['±1.96','1.645','2.58','±1']],['القيمة الحرجة لاختبار طرف أيمن عند α = 0.05:',['1.645','1.96','2.33','−1.645']],['إذا وقعت Z في منطقة الرفض:',['نرفض H₀','نقبل H₀','نعيد التجربة','نغيّر α']],['فرض العدم H₀ يعبّر عادة عن:',['عدم وجود تغيير أو فرق','وجود فرق','رأي الباحث','العينة']]])()});
+qGoal('qs9','s9',2,3);
+chapterTest('rv6',[['H₀ تعني:',['فرض العدم','الفرض البديل','الخطأ']],['α = احتمال:',['خطأ النوع الأول','خطأ النوع الثاني','الصواب']],['Z الحرجة (طرفان، 0.05):',['±1.96','1.645','2.58']],['Z الحرجة (طرف أيمن، 0.05):',['1.645','1.96','2.33']],['Z = ',['(x̄ − μ₀) ÷ (σ/√n)','x̄ − μ₀','σ ÷ √n']],['Z في منطقة الرفض ⟸',['نرفض H₀','نقبل H₀','نقبل H₁ دائمًا']],['قبول H₀ وهو خاطئ:',['خطأ النوع الثاني','الأول','لا خطأ']],['H₁: μ ≠ 50 اختبار:',['ذو طرفين','طرف أيمن','طرف أيسر']],['H₁: μ > 50 اختبار:',['طرف أيمن','طرفين','طرف أيسر']],['μ₀ = 100 ، x̄ = 104 ، σ/√n = 2 ⟸ Z = ',['2','4','52']],['تقليل α يؤدي إلى:',['زيادة β','نقص β','لا شيء']],['لتقليل α و β معًا:',['نزيد حجم العينة','نقلل n','نغيّر H₀']]]);
+
+</script>
+<script>window.NARR=["s1", "s2", "rv1", "s3", "s4", "rv2", "s5", "s6", "rv3", "s7", "rv4", "s8", "rv5", "s9", "rv6"];window.AUDIO_BASE="audio-s12/";</script>
+<style>
+.fxbar{position:fixed;left:10px;bottom:10px;z-index:90;display:flex;gap:6px}
+.fxbar button{width:46px;height:46px;border-radius:50%;border:none;background:#1f2a44;color:#fff;font-size:1.3rem;box-shadow:0 4px 12px #0004;cursor:pointer}
+.say{border:2px solid #f08c2e;background:#fff7e8;color:#b35b00;border-radius:20px;padding:2px 12px;font-weight:800;cursor:pointer;font-size:.9rem;margin:0 6px;vertical-align:middle;font-family:inherit}
+.say.on{background:#f08c2e;color:#fff;animation:pul 1s infinite}
+@keyframes pul{50%{transform:scale(1.06)}}
+.cfx{position:fixed;pointer-events:none;z-index:95;font-size:20px;animation:cf 1.1s ease-out forwards}
+@keyframes cf{to{transform:translate(var(--dx),var(--dy)) rotate(var(--r));opacity:0}}
+.pop{animation:popk .35s}
+@keyframes popk{50%{transform:scale(1.08)}}
+.shk{animation:shk .4s}
+@keyframes shk{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.stars{position:fixed;bottom:16px;left:66px;background:#1f2a44;color:#fff;border-radius:20px;padding:3px 14px;font-weight:900;z-index:91;font-family:inherit;transition:.3s}
+</style>
+<div class="fxbar"><button id="fxMute" title="الأصوات">🔊</button></div>
+<div class="stars" id="fxStars">⭐ 0</div>
+<script>
+(function(){let AC=null,mute=false,stars=0;try{mute=localStorage.getItem('lb_mute')==='1';stars=+localStorage.getItem('lb_stars_'+location.pathname)||0}catch(e){}
+ const mb=document.getElementById('fxMute');const sb=document.getElementById('fxStars');const upd=()=>{mb.textContent=mute?'🔇':'🔊';sb.textContent='⭐ '+stars};upd();
+ mb.onclick=()=>{mute=!mute;try{localStorage.setItem('lb_mute',mute?'1':'0')}catch(e){}upd();if(mute&&cur){cur.pause();cur=null;document.querySelectorAll('.say.on').forEach(b=>b.classList.remove('on'))}};
+ function ac(){if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume();return AC}
+ function tone(f,t0,d,type,v){const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,a.currentTime+t0);g.gain.setValueAtTime(0,a.currentTime+t0);g.gain.linearRampToValueAtTime(v||.18,a.currentTime+t0+.015);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+t0+d);o.connect(g);g.connect(a.destination);o.start(a.currentTime+t0);o.stop(a.currentTime+t0+d+.05)}
+ const S={ok:()=>{tone(523,0,.15,'triangle');tone(659,.09,.15,'triangle');tone(784,.18,.3,'triangle')},no:()=>{tone(220,0,.18,'sawtooth',.08);tone(185,.12,.25,'sawtooth',.08)},tick:()=>tone(900,0,.04,'square',.03),win:()=>{[523,659,784,1046,784,1046].forEach((f,i)=>tone(f,i*.1,.22,'triangle'))},whoosh:()=>{const a=ac();if(!a||mute)return;const o=a.createOscillator(),g=a.createGain();o.frequency.setValueAtTime(300,a.currentTime);o.frequency.exponentialRampToValueAtTime(1200,a.currentTime+.25);g.gain.setValueAtTime(.06,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.3);o.connect(g);g.connect(a.destination);o.start();o.stop(a.currentTime+.32)}};
+ window.FX=S;
+ function confetti(el,big){const r=el&&el.getBoundingClientRect?el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};const E=['⭐','✨','🎉','💚','🌟','🎊'];const n=big?26:9;
+  for(let i=0;i<n;i++){const s=document.createElement('div');s.className='cfx';s.textContent=E[i%E.length];s.style.left=(r.left+r.width/2)+'px';s.style.top=(r.top+r.height/2)+'px';const a=Math.random()*6.28,d=(big?160:70)+Math.random()*80;s.style.setProperty('--dx',Math.cos(a)*d+'px');s.style.setProperty('--dy',(Math.sin(a)*d-40)+'px');s.style.setProperty('--r',(Math.random()*720-360)+'deg');document.body.appendChild(s);setTimeout(()=>s.remove(),1200)}}
+ let last=0,lastNo=0;function hit(el,good){const now=Date.now();if(good){if(now-lastNo<400||now-last<250)return;last=now;S.ok();confetti(el);stars++;try{localStorage.setItem('lb_stars_'+location.pathname,stars)}catch(e){}upd();sb.classList.add('pop');setTimeout(()=>sb.classList.remove('pop'),400);el.classList&&el.classList.add('pop');setTimeout(()=>el.classList&&el.classList.remove('pop'),400);
+   if(stars%10===0){S.win();confetti(sb,true)}}else{lastNo=now;S.no();el.classList&&el.classList.add('shk');setTimeout(()=>el.classList&&el.classList.remove('shk'),450)}}
+ new MutationObserver(ms=>{ms.forEach(m=>{const t=m.target;if(!(t instanceof Element))return;if(m.type==='attributes'){const was=(m.oldValue||'').split(/\s+/);const c=t.classList;if(c.contains('ok')&&!was.includes('ok')&&(t.matches('button,input,.fb,.opt')))hit(t,true);else if(c.contains('no')&&!was.includes('no')&&t.matches('button,input,.opt'))hit(t,false)}})}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['class'],attributeOldValue:true});
+ document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&!b.classList.contains('say')&&b.id!=='fxMute')S.tick()},true);
+ document.addEventListener('input',e=>{if(e.target.type==='range'){const n=Date.now();if(!window._lt||n-window._lt>90){window._lt=n;tone(400+(+e.target.value-+e.target.min)/(+e.target.max-+e.target.min+.001)*600,0,.03,'sine',.03)}}},true);
+ /* narration */
+ let cur=null;const base=window.AUDIO_BASE||'audio/';
+ function addSay(){document.querySelectorAll('.page').forEach(p=>{if(!(window.NARR||[]).includes(p.id))return;const h=p.querySelector('h2');if(!h||h.querySelector('.say'))return;const b=document.createElement('button');b.className='say';b.textContent='🔊 اسمع';
+  b.onclick=()=>{if(cur){cur.pause();const was=b.classList.contains('on');document.querySelectorAll('.say.on').forEach(x=>x.classList.remove('on'));cur=null;if(was)return}if(mute){mute=false;upd()}const a=new Audio(base+p.id+'.mp3');cur=a;b.classList.add('on');b.textContent='⏸️ إيقاف';a.onended=a.onerror=()=>{b.classList.remove('on');b.textContent='🔊 اسمع';cur=null};a.play().catch(()=>{b.classList.remove('on');b.textContent='🔊 اسمع'})};h.appendChild(b)})}
+ addSay();document.querySelectorAll('#bar button,[data-go]').forEach(b=>b.addEventListener('click',()=>{S.whoosh();if(cur){cur.pause();cur=null;document.querySelectorAll('.say').forEach(x=>{x.classList.remove('on');x.textContent='🔊 اسمع'})}}));
+})();
+</script>
+
+</body>
+</html>
