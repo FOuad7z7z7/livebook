@@ -37,6 +37,8 @@
 .secs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0}.secs div{background:#fff;border-radius:12px;padding:6px 12px;font-size:.85rem;display:flex;gap:6px}
 .tm2{color:#868e96;font-size:.85rem}.rb{display:flex;gap:8px;margin-top:10px}.rb .btn{flex:1;font-size:1rem;padding:12px}
 .cf{position:fixed;inset:0;pointer-events:none;z-index:9}
+.tbl.wide .tbl-h,.tbl.wide .tr{grid-template-columns:1fr}.tbl.wide .cell0{font-weight:700}
+.words{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px;background:#fff9db}.words span{background:#fff;border:2px solid #ffe066;border-radius:10px;padding:4px 12px;font-weight:800}
 </style></head><body><div id="app"></div>
 <script>/* ============ محرك الامتحانات – الكتاب الحي ============ */
 const $=id=>document.getElementById(id);
@@ -50,7 +52,8 @@ const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
 const SP=t=>'<span class="say" data-say="'+t.replace(/"/g,'&quot;')+'">🔊</span>';
 document.addEventListener('click',e=>{const s=e.target.closest('.say');if(!s)return;e.stopPropagation();SAY(s.dataset.say);s.classList.add('on');setTimeout(()=>s.classList.remove('on'),900)},true);
 const send=(t,q)=>{try{parent.postMessage(q?{lbt:t,qq:q}:{lbt:t},'*')}catch(e){}};
-const norm=s=>String(s||'').toLowerCase().replace(/[’']/g,"'").replace(/[^a-z' ]/g,' ').replace(/\s+/g,' ').trim();
+const norm=s=>(' '+String(s||'').toLowerCase().replace(/[’']/g,"'").replace(/[^a-z' ]/g,' ')+' ').replace(/\swhether\s/g,' if ').replace(/\sthat\s/g,' ').replace(/\s+/g,' ').trim();
+const okA=(v,c)=>String(c).split('|').some(x=>norm(v)===norm(x));const show1=c=>String(c).split('|')[0];
 let ANS={},T0=0,TI=null,DONE=false,ITEMS=[];
 
 function intro(){const tot=EX.sections.reduce((a,s)=>a+s.marks,0);EX.total=tot;
@@ -69,9 +72,9 @@ function start(){DONE=false;ANS={};ITEMS=[];T0=Date.now();window.scrollTo(0,0);
   if(s.type==='mcq')s.items.forEach((it,i)=>{const k=si+'_'+i;ITEMS.push({k,s,it,t:'mcq'});
    if(it.gift){h+='<div class="q gift" id="q'+k+'"><div class="qt"><span class="n">'+(i+1)+'</span><span class="en">'+esc(it.q)+'</span></div><div class="giftn">🎁 أُلغي هذا السؤال في الامتحان الأصلي، ودرجته محسوبة لك تلقائيًا.</div></div>';return}
    h+='<div class="q" id="q'+k+'"><div class="qt"><span class="n">'+(i+1)+'</span><span class="en">'+esc(it.q)+'</span>'+SP(it.say||it.q.replace(/_+|\.{3,}/g,'…'))+'</div><div class="ops">'+it.o.map((o,j)=>'<button data-k="'+k+'" data-v="'+j+'"><i>'+'abc'[j]+'</i><span class="en">'+esc(o)+'</span></button>').join('')+'</div><div class="ex"></div></div>'});
-  if(s.type==='table'){h+='<div class="tbl"><div class="tbl-h">'+s.cols.map(c=>'<span class="en">'+esc(c)+'</span>').join('')+'</div>';
+  if(s.type==='table'){h+='<div class="tbl'+(s.wide?' wide':'')+'">'+(s.words?'<div class="words">'+s.words.map(w=>'<span class="en">'+esc(w)+'</span>').join('')+'</div>':'')+'<div class="tbl-h">'+s.cols.map(c=>'<span class="en">'+esc(c)+'</span>').join('')+'</div>';
    s.rows.forEach((r,i)=>{const k=si+'_'+i;ITEMS.push({k,s,it:r,t:'table'});h+='<div class="tr" id="q'+k+'"><span class="en cell0">'+esc(r.p)+'</span>'+r.a.map((a,j)=>'<div class="cell">'+(s.bank?'<select data-k="'+k+'" data-j="'+j+'"><option value="">— اختر —</option>'+s.bank.map(b=>'<option>'+esc(b)+'</option>').join('')+'</select>':'<input data-k="'+k+'" data-j="'+j+'" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="اكتب هنا">')+'</div>').join('')+'</div>'});
-   h+='</div>'+(s.hint?'<div class="hint">'+s.hint+'</div>':'')}
+   h+='</div>'+(s.hint?'<div class="hint">'+enw(s.hint)+'</div>':'')}
   h+='</div>'});
  h+='<button class="btn go" id="sub">سلّم الامتحان ✔️</button></div>';$('app').innerHTML=h;
  document.querySelectorAll('.ops button').forEach(b=>b.onclick=()=>{if(DONE)return;const k=b.dataset.k;ANS[k]=b.dataset.v;b.parentElement.querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b));prog()});
@@ -87,7 +90,7 @@ function grade(){DONE=true;clearInterval(TI);const secs=Math.floor((Date.now()-T
   if(x.it.gift){ok=true}
   else if(x.t==='tf'){ok=a===x.it.a;right=x.it.a==='T'?'True':'False';el.querySelectorAll('button').forEach(b=>{b.disabled=true;if(b.dataset.v===x.it.a)b.classList.add('ok');else if(b.dataset.v===a)b.classList.add('no')})}
   else if(x.t==='mcq'){ok=+a===x.it.a;right=x.it.o[x.it.a];el.querySelectorAll('button').forEach(b=>{b.disabled=true;if(+b.dataset.v===x.it.a)b.classList.add('ok');else if(b.dataset.v===a)b.classList.add('no')})}
-  else{ok=x.it.a.every((c,j)=>a&&norm(a[j])===norm(c));right=x.it.a.join(' · ');el.querySelectorAll('input,select').forEach((f,j)=>{f.disabled=true;f.classList.add(norm(f.value)===norm(x.it.a[j])?'ok':'no');if(norm(f.value)!==norm(x.it.a[j])){const s=document.createElement('span');s.className='fix en';s.textContent='✔ '+x.it.a[j];f.parentElement.appendChild(s)}})}
+  else{ok=x.it.a.every((c,j)=>a&&okA(a[j],c));right=x.it.a.map(show1).join(' · ');el.querySelectorAll('input,select').forEach((f,j)=>{f.disabled=true;const g=okA(f.value,x.it.a[j]);f.classList.add(g?'ok':'no');if(!g){const s=document.createElement('span');s.className='fix en';s.textContent='✔ '+show1(x.it.a[j]);f.parentElement.appendChild(s)}})}
   const w=x.s.type==='table'?x.s.marks/x.s.rows.length:x.s.marks/x.s.items.length;if(ok){total+=w;per[EX.sections.indexOf(x.s)]+=w}
   el.classList.add(ok?'good':'bad');
   if(x.t!=='table'&&!x.it.gift){const exd=el.querySelector('.ex');exd.innerHTML=(ok?'✅ صحيح':'❌ الإجابة الصحيحة: <b class="en">'+esc(right)+'</b>')+(x.it.ex?'<div>💡 '+enw(x.it.ex)+'</div>':'')}
