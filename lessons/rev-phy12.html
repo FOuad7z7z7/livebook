@@ -1,0 +1,400 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>المراجعة السريعة – الكتاب الحي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet"><style>:root{--ink:#22223b;--pu:#7a4bc2;--pu2:#5a2fa0;--bg:#f5f2fb;--ok:#2f9e44;--no:#e03131;--or:#f08c2e}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:'Cairo',Tahoma,sans-serif;background:var(--bg);color:var(--ink);direction:rtl}
+.m{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:"Segoe UI",Roboto,Arial,sans-serif;font-weight:700;white-space:nowrap}
+#app{max-width:760px;margin:0 auto;padding:10px 12px 90px}
+.top{display:flex;align-items:center;gap:8px;margin:4px 0 10px}
+.pill{display:flex;background:#fff;border-radius:99px;padding:4px;box-shadow:0 2px 10px rgba(90,47,160,.1)}
+.pill a{padding:6px 14px;border-radius:99px;text-decoration:none;color:var(--ink);font-weight:700;font-size:.9rem}
+.pill a.on{background:var(--pu);color:#fff}
+.xp{margin-inline-start:auto;background:#fff;border-radius:99px;padding:6px 12px;font-weight:800;box-shadow:0 2px 10px rgba(90,47,160,.1)}
+.hero{background:linear-gradient(150deg,#7a4bc2,#4c2a85);color:#fff;border-radius:26px;padding:20px 18px;display:flex;gap:14px;align-items:center;box-shadow:0 10px 30px rgba(76,42,133,.3);position:relative;overflow:hidden}
+.hero:after{content:"⚡";position:absolute;left:-10px;bottom:-30px;font-size:8rem;opacity:.1}
+.hero h1{margin:0;font-size:1.35rem}.hero p{margin:4px 0 0;opacity:.85;font-size:.9rem}
+.ring{flex:0 0 86px;height:86px;position:relative}.ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:1.1rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:14px}
+.st{background:#fff;border-radius:20px;padding:14px;cursor:pointer;box-shadow:0 3px 14px rgba(90,47,160,.08);border:2px solid transparent;position:relative;transition:transform .15s}
+.st:active{transform:scale(.97)}.st .ic{font-size:2rem}.st b{display:block;margin:4px 0 2px}.st small{color:#868e96;line-height:1.5;display:block}
+.st.done{border-color:#b2f2bb}.st.done:after{content:"✓";position:absolute;top:10px;left:12px;background:var(--ok);color:#fff;border-radius:50%;width:24px;height:24px;display:grid;place-items:center;font-size:.85rem}
+.bar{display:flex;align-items:center;gap:10px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:3}
+.bar button{border:0;background:#fff;border-radius:12px;padding:8px 12px;font:inherit;font-weight:800;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.bar h2{margin:0;font-size:1.1rem}
+.box{background:#fff;border-radius:22px;padding:16px;box-shadow:0 3px 16px rgba(90,47,160,.08);min-height:300px}
+.cnt{color:#868e96;font-weight:700;font-size:.85rem;text-align:center;margin-bottom:10px}
+.btn{border:0;border-radius:14px;padding:12px 18px;font:inherit;font-weight:800;font-size:1rem;cursor:pointer}
+.btn.go{background:linear-gradient(135deg,#7a4bc2,#5a2fa0);color:#fff;width:100%;margin-top:10px}
+.btn.ok{background:#d3f9d8;color:#2b8a3e}.btn.re{background:#fff3bf;color:#a06000}
+.row{display:flex;gap:10px;justify-content:center;margin-top:14px}.row .btn{flex:1}
+/* flip cards */
+.flip{perspective:1000px;height:230px;cursor:pointer}
+.fin{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip.on .fin{transform:rotateY(180deg)}
+.fa{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;text-align:center}
+.front{background:linear-gradient(150deg,#f3ecff,#e5dbff);border:2px dashed #b197fc}
+.back{background:linear-gradient(150deg,#ebfbee,#d3f9d8);transform:rotateY(180deg);border:2px solid #8ce99a}
+.ft{font-size:1.5rem;font-weight:900;color:var(--pu2)}.ft2{font-size:1.05rem;line-height:1.9;font-weight:600}
+.hint{font-size:.8rem;color:#9775fa;margin-bottom:8px}
+/* sort */
+.chip{background:linear-gradient(150deg,#fff9db,#fff3bf);border:2px solid #ffd43b;border-radius:18px;padding:18px;text-align:center;font-size:1.15rem;font-weight:800;margin:6px auto 16px;max-width:460px;transition:all .4s}
+.chip.fly{transform:translateY(60px) scale(.4);opacity:0}
+.shake{animation:sh .4s}@keyframes sh{25%{transform:translateX(8px)}50%{transform:translateX(-8px)}75%{transform:translateX(5px)}}
+.bins{display:grid;gap:8px}.bins.b2{grid-template-columns:1fr 1fr}.bins.b3{grid-template-columns:1fr 1fr 1fr}
+.bin{border:2px solid #d0bfff;background:#f8f5ff;border-radius:16px;padding:16px 6px;font:inherit;font-weight:800;font-size:1rem;cursor:pointer;color:var(--pu2);min-height:70px}
+.bin.hit{background:#d3f9d8;border-color:#40c057;color:#2b8a3e}.bin.miss{background:#ffe3e3;border-color:#fa5252;color:#c92a2a}
+.sx{margin-top:12px;line-height:1.9;text-align:center}
+/* triangle */
+.tri{display:block;margin:0 auto;max-width:280px;width:100%}
+.tri text{font-family:"Segoe UI",Arial,sans-serif;font-weight:800;cursor:pointer}
+.tri .cv{fill:#22223b}
+.lab{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin:6px 0}
+.lab span{background:#f3f0ff;border-radius:10px;padding:4px 10px;font-size:.85rem}
+.fx{text-align:center;font-size:1.6rem;margin:6px 0;min-height:44px;color:var(--pu2)}
+.prob{background:#fff4e6;border-radius:16px;padding:12px;line-height:1.9;margin-top:10px}
+.ans{display:flex;gap:8px;margin-top:8px;align-items:center}
+.ans input{flex:1;min-width:0;border:2px solid #d0bfff;border-radius:12px;padding:10px;font:inherit;font-size:1.1rem;text-align:center;direction:ltr}
+.ans .btn{padding:10px 16px;background:var(--pu);color:#fff}
+.fb{margin-top:8px;line-height:1.9}.fb.ok{color:#2b8a3e}.fb.no{color:#c92a2a}
+.dots{display:flex;gap:6px;justify-content:center;margin:8px 0}.dots i{width:12px;height:12px;border-radius:50%;background:#e9ecef}.dots i.on{background:var(--ok)}
+canvas.cv{width:100%;display:block;border-radius:16px;background:#fbfaff;touch-action:manipulation}
+/* options */
+.opts{display:grid;gap:8px;margin-top:10px}
+.opt{border:2px solid #e5dbff;background:#fff;border-radius:14px;padding:12px;font:inherit;font-size:1rem;text-align:right;cursor:pointer;font-weight:600}
+.opt.ok{background:#d3f9d8;border-color:#40c057}.opt.no{background:#ffe3e3;border-color:#fa5252}
+.q{font-size:1.1rem;font-weight:800;line-height:1.9}
+.tbar{height:8px;background:#f1f3f5;border-radius:9px;overflow:hidden;margin:6px 0 10px}.tbar i{display:block;height:100%;background:linear-gradient(90deg,#f08c2e,#e8590c);width:100%}
+.streak{text-align:center;font-weight:900;color:#e8590c;min-height:24px}
+.ex{background:#f8f9fa;border-radius:12px;padding:10px;margin-top:10px;line-height:1.9}
+.fin0{text-align:center;padding:24px 8px}.fin0 .big{font-size:3.6rem}.fin0 h3{margin:8px 0}
+.sheet{line-height:2}.sheet .law{background:#f8f5ff;border-radius:16px;padding:10px 14px;margin:8px 0;border-inline-start:5px solid var(--pu)}
+.sheet .law b{color:var(--pu2)}.sheet table{width:100%;border-collapse:collapse;margin:8px 0;font-size:.92rem}
+.sheet td,.sheet th{border:1px solid #e5dbff;padding:6px;text-align:center}.sheet th{background:#f3f0ff}
+.why{background:#f8f5ff;border-radius:18px;padding:16px}
+.why .a{display:none;background:#ebfbee;border-radius:14px;padding:12px;margin-top:10px;line-height:1.9}
+.why.on .a{display:block}
+.cf{position:fixed;top:-40px;font-size:1.6rem;pointer-events:none;animation:fall 1.6s ease-in forwards;z-index:99}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.6}}
+.tag{display:inline-block;background:#e5dbff;color:var(--pu2);border-radius:8px;padding:0 8px;font-size:.8rem;font-weight:800}
+</style></head><body><div id="app"></div>
+<script>const BOOK='phy12';
+const m=s=>'<span class=m>'+s+'</span>';
+const rr=(a,d)=>+a.toFixed(d==null?4:d);
+/* رسم آلة كولوم */
+function drawCoul(c,P){const x=cx(c);x.font='bold 20px Cairo,Arial';
+ [[0,1,1,1,'قبل'],[1,P.a1,P.b1,P.c1,'بعد']].forEach(([row,a,b,d,t])=>{const Y=row?165:60,mid=330,half=Math.min(250,70*d);x.fillStyle='#868e96';x.fillText(t,40,Y);
+  x.strokeStyle='#dee2e6';x.setLineDash([6,6]);x.lineWidth=2;x.beginPath();x.moveTo(mid-half,Y);x.lineTo(mid+half,Y);x.stroke();x.setLineDash([]);
+  ball(x,mid-half,Y,Math.min(44,20*Math.sqrt(a)+8),1);ball(x,mid+half,Y,Math.min(44,20*Math.sqrt(b)+8),1);
+  x.fillStyle='#495057';x.font='bold 22px Arial';x.fillText(row?'R × '+fr(d):'R',mid,Y-30)});}
+/* رسم مصنع الأسلاك */
+function drawWire(c,P){const x=cx(c);x.font='bold 24px Cairo,Arial';
+ [[0,1,1,'السلك 1'],[1,P.L,P.A,'السلك 2']].forEach(([row,L,A,t])=>{const Y=row?165:65,len=Math.min(500,120*L),th=Math.max(6,26*Math.sqrt(A)),X=600-len;
+  x.fillStyle='#495057';x.fillText(t,600-len/2,Y-th/2-16);const g=x.createLinearGradient(0,Y-th/2,0,Y+th/2);g.addColorStop(0,'#ffd8a8');g.addColorStop(.5,'#e8590c');g.addColorStop(1,'#a63e00');x.fillStyle=g;x.fillRect(X,Y-th/2,len,th);
+  x.fillStyle='#7a4bc2';x.beginPath();x.ellipse(X,Y,th/4+2,th/2,0,0,7);x.fill()});
+ x.fillStyle='#868e96';x.font='19px Cairo,Arial';x.fillText('الطول ← الامتداد ، السُّمك ← مساحة المقطع',300,220)}
+const fr=f=>{const[p,q]=frac(f);return q===1?String(p):p+'/'+q};
+const REV={
+r1:{short:'الفصل 1',icon:'⚡',title:'مراجعة: الكهرباء الإستاتيكية',sub:'8 محطات تفاعلية تلخّص الفصل الأول كله — العب وراجع واجمع النجوم',
+stations:[
+{k:'sheet',ic:'🗺️',t:'خريطة الفصل',d:'كل الفصل في صفحة واحدة',html:`
+<div class=law><b>1) الشحنة الكهربائية</b><br>البروتون موجب، الإلكترون سالب، النيوترون متعادل. مقدار شحنة الإلكترون = شحنة البروتون = ${m('1.6×10⁻¹⁹ C')}<br>
+<table><tr><th>الجسيم</th><th>الشحنة</th><th>الكتلة</th></tr><tr><td>إلكترون</td><td>${m('−1.6×10⁻¹⁹ C')}</td><td>${m('9.1×10⁻³¹ kg')}</td></tr><tr><td>بروتون</td><td>${m('+1.6×10⁻¹⁹ C')}</td><td>${m('1.67×10⁻²⁷ kg')}</td></tr><tr><td>نيوترون</td><td>صفر</td><td>تقريبًا ككتلة البروتون</td></tr></table>
+🔑 الذي ينتقل عند الشحن هو <b>الإلكترونات فقط</b>: من يفقدها يصبح موجبًا، ومن يكتسبها يصبح سالبًا.</div>
+<div class=law><b>2) موصلات وعوازل</b><br>الموصل فيه إلكترونات حرة (الفلزات، المحاليل الإلكتروليتية، الغازات المتأينة). العازل إلكتروناته مقيدة (زجاج، مطاط، حرير، إيبونيت، بولي إيثيلين).</div>
+<div class=law><b>3) طرق الشحن</b><table><tr><th>الطريقة</th><th>نوع الشحنة الناتجة</th><th>تصلح لـ</th></tr><tr><td>الدلك</td><td>الجسمان يأخذان شحنتين مختلفتين</td><td>العوازل والموصلات (بمقبض عازل)</td></tr><tr><td>التلامس</td><td>نفس نوع شحنة الجسم المشحون</td><td>الموصلات أساسًا</td></tr><tr><td>الحث</td><td>عكس نوع شحنة الجسم المؤثر</td><td>الموصلات فقط</td></tr></table>
+التأريض: وصل الجسم بالأرض فتنتقل الشحنات حتى يتعادل.</div>
+<div class=law><b>4) قانون كولوم</b><br>${m('F = K q₁q₂ / R²')} &nbsp; حيث ${m('K = 9×10⁹ N·m²/C²')} &nbsp;و ${m('K = 1/(4πε₀)')} ، ${m('ε₀ = 8.85×10⁻¹² C²/N·m²')}<br>المتشابهتان تتنافران والمختلفتان تتجاذبان. القوة: <b>طردية</b> مع حاصل ضرب الشحنتين و<b>عكسية</b> مع مربع المسافة، وتقل إذا وُضعت الشحنتان في وسط سماحيته أكبر من الهواء.</div>
+<div class=law><b>5) المجال الكهربائي</b><br>${m('E = F / q₀')} و ${m('E = Kq / R²')} ، الوحدة ${m('N/C')}. الشحنة الموجبة تتحرك مع اتجاه المجال، والسالبة عكسه. المجال يخرج من الموجبة ويدخل في السالبة.</div>
+<div class=law><b>6) نقطة التعادل</b><table><tr><th>الشحنتان</th><th>مكان النقطة</th></tr><tr><td>متشابهتان متساويتان</td><td>في المنتصف</td></tr><tr><td>متشابهتان مختلفتان مقدارًا</td><td>بينهما، أقرب للأصغر</td></tr><tr><td>مختلفتان (غير متساويتين)</td><td>خارجهما على امتداد الخط، بجوار الأصغر</td></tr><tr><td>مختلفتان متساويتان</td><td>لا توجد</td></tr></table></div>`},
+{k:'cards',ic:'🃏',t:'بطاقات التعاريف',d:'اقلب البطاقة… هل حفظتها؟',items:[
+['الكهرباء الإستاتيكية','العلم الذي يدرس الشحنات الكهربائية <b>الساكنة</b> المتجمعة على الأجسام وآثارها.'],
+['الجسم المتعادل','جسم عدد شحناته الموجبة يساوي عدد شحناته السالبة.'],
+['الجسم الموجب الشحنة','جسم <b>فقد</b> بعض إلكتروناته فأصبحت شحناته الموجبة أكثر من السالبة.'],
+['الجسم السالب الشحنة','جسم <b>اكتسب</b> إلكترونات إضافية فأصبحت شحناته السالبة أكثر من الموجبة.'],
+['المادة الموصلة','مادة تسمح بانتقال الشحنات خلالها بسهولة لوجود إلكترونات حرة، مثل الفلزات والمحاليل الإلكتروليتية.'],
+['المادة العازلة','مادة لا تسمح بانتقال الشحنات خلالها لأن إلكتروناتها مرتبطة بقوة بذراتها، مثل الزجاج والمطاط.'],
+['التأريض','توصيل الجسم بالأرض بموصل لتنتقل الشحنات بينهما حتى يصبح الجسم متعادلًا.'],
+['الشحن بالحث','شحن موصل بتقريب جسم مشحون منه <b>دون تلامس</b> ثم تأريضه، فيكتسب شحنة مخالفة لشحنة الجسم المؤثر.'],
+['قانون كولوم','القوة بين شحنتين نقطيتين تتناسب طرديًا مع حاصل ضربهما وعكسيًا مع مربع المسافة بينهما.<br>'+m('F = K q₁q₂ / R²')],
+['شدة المجال الكهربائي عند نقطة','القوة التي تؤثر في شحنة اختبار موجبة صغيرة موضوعة عند تلك النقطة، مقسومة على مقدارها.<br>'+m('E = F/q₀')+' بوحدة '+m('N/C')],
+['نقطة التعادل','نقطة تنعدم عندها محصلة المجال الكهربائي لأن المجالين عندها متساويان مقدارًا ومتعاكسان اتجاهًا.'],
+['ثابت كولوم K',m('9×10⁹ N·m²/C²')+'<br>ويساوي '+m('1/(4πε₀)')],
+['شحنة الإلكترون وكتلته',m('1.6×10⁻¹⁹ C')+' (سالبة)<br>'+m('9.1×10⁻³¹ kg')]]},
+{k:'sort',ic:'🗂️',t:'لعبة الفرز',d:'ضع كل بطاقة في صندوقها الصحيح',rounds:[
+{t:'موصل أم عازل؟',bins:['🔌 موصل','🧤 عازل'],items:[['النحاس',0],['الزجاج',1],['الحرير',1],['الألومنيوم',0],['المطاط',1],['محلول ملح الطعام',0,'المحاليل الإلكتروليتية فيها أيونات حرة الحركة فتوصل الكهرباء.'],['البولي إيثيلين',1],['الإيبونيت',1],['الغاز المتأين',0,'الغاز المتأين فيه أيونات وإلكترونات حرة.'],['الفضة',0]]},
+{t:'أي طريقة شحن؟',bins:['🧽 الدلك','🤝 التلامس','🧲 الحث'],items:[['الجسمان يكتسبان شحنتين مختلفتين',0],['الجسم يأخذ نفس نوع شحنة الجسم المشحون',1],['تنتج شحنة مخالفة لشحنة الجسم المؤثر',2],['لا يحدث تلامس بين الجسمين',2],['مسح ساق زجاجية بقطعة حرير',0],['نؤرّض الموصل ثم نفصله قبل إبعاد الجسم المؤثر',2],['لمس كرة معدنية بساق مشحونة',1],['تصلح للموصلات فقط',2,'العوازل إلكتروناتها مقيدة فلا تتحرك داخلها لتتوزع.'],['تنتقل الإلكترونات بسبب الاحتكاك',0]]},
+{t:'تجاذب أم تنافر؟',bins:['🧲 تجاذب','💥 تنافر'],items:[['شحنة موجبة وشحنة سالبة',0],['شحنتان سالبتان',1],['شحنتان موجبتان',1],['إلكترون وبروتون',0],['ساقا زجاج دُلكت كل منهما بالحرير',1,'كلتاهما موجبة، والمتشابهتان تتنافران.'],['ساق زجاج دُلكت بالحرير وساق إيبونيت دُلكت بالصوف',0,'الزجاج يصبح موجبًا والإيبونيت سالبًا.']]}]},
+{k:'ratio',ic:'🎰',t:'آلة «ماذا لو؟» لكولوم',d:'غيّر الشحنات والمسافة وتوقّع القوة',base:'F',draw:drawCoul,gen(){
+ const a1=pick([1,1,2,3,4,.5]),b1=pick([1,2,3,.5,1]),c1=pick([1,2,3,.5,2]);const a=a1*b1/(c1*c1);
+ const part=[];if(a1!==1)part.push('الشحنة الأولى ×'+fr(a1));if(b1!==1)part.push('الشحنة الثانية ×'+fr(b1));if(c1!==1)part.push('المسافة ×'+fr(c1));if(!part.length)part.push('لم يتغير شيء');
+ return{a,a1,b1,c1,q:'القوة بين شحنتين '+m('F')+'. ماذا تصبح إذا: '+part.join('، و')+'؟',w:'القوة تتناسب طرديًا مع '+m('q₁q₂')+' وعكسيًا مع '+m('R²')+':<br>'+m('F₂ = ('+fr(a1)+' × '+fr(b1)+' ÷ '+fr(c1)+'²) F = '+fmtF(a,'F'))}}},
+{k:'tri',ic:'🔺',t:'مثلث القانون والحاسبة',d:'غطِّ المجهول وحل 3 مسائل',list:[
+{v:['F','E','q'],n:['القوة','شدة المجال','الشحنة'],u:['N','N/C','C'],gen(){const E=pick([2000,5000,4e4,1.5e5]),qu=pick([2,3,4,5]),F=E*qu*1e-6,t=pick([0,1,2]);
+ if(t===0)return{q:'شحنة '+m(qu+' μC')+' في مجال شدته '+m(E+' N/C')+'. احسب القوة المؤثرة عليها.',a:F,u:'N',w:m('F = Eq = '+E+' × '+qu+'×10⁻⁶ = '+rr(F,5)+' N')};
+ if(t===1)return{q:'تتأثر شحنة '+m(qu+' μC')+' بقوة '+m(rr(F,5)+' N')+'. احسب شدة المجال.',a:E,u:'N/C',w:m('E = F/q = '+rr(F,5)+' ÷ '+qu+'×10⁻⁶ = '+E+' N/C')};
+ return{q:'قوة '+m(rr(F,5)+' N')+' تؤثر على شحنة في مجال '+m(E+' N/C')+'. احسب الشحنة بالميكروكولوم.',a:qu,u:'μC',w:m('q = F/E = '+rr(F,5)+' ÷ '+E+' = '+qu+'×10⁻⁶ C = '+qu+' μC')}}},
+{v:['Kq','E','R²'],n:['الثابت × الشحنة','شدة المجال','مربع المسافة'],u:['N·m²/C','N/C','m²'],gen(){const qu=pick([1,2,4,8]),R=pick([.1,.2,.3,.5,1,2,3]),E=9e9*qu*1e-6/(R*R);
+ return{q:'احسب شدة المجال الكهربائي عند نقطة تبعد '+m(R+' m')+' عن شحنة نقطية '+m(qu+' μC')+'.',a:E,u:'N/C',w:m('E = Kq/R² = 9×10⁹ × '+qu+'×10⁻⁶ ÷ '+R+'² = '+rr(E,1)+' N/C')}}}]},
+{k:'neutral',ic:'🎯',t:'صيّاد نقطة التعادل',d:'اضغط حيث تتوقع أن ينعدم المجال',},
+{k:'why',ic:'🤔',t:'علّل',d:'السبب العلمي في جملة واحدة',items:[
+['يُمسك الموصل المعدني بمقبض عازل عند شحنه بالدلك.','لأن الشحنات تتحرك بسهولة في الموصل، فلولا المقبض العازل لتسرّبت عبر اليد إلى الأرض.'],
+['لا يمكن شحن الأجسام العازلة بالحث.','لأن إلكتروناتها مقيدة فلا تستطيع الانتقال داخل الجسم لتتجمع في طرف دون آخر.'],
+['الجسم الموجب فقد إلكترونات ولم يكتسب بروتونات.','لأن البروتونات مقيدة داخل النواة ولا تنتقل في عمليات الشحن، والإلكترونات هي التي تنتقل.'],
+['تقل القوة بين شحنتين إذا وُضعتا في وسط عازل بدل الهواء.','لأن سماحية الوسط أكبر من سماحية الهواء، والقوة تتناسب عكسيًا مع السماحية.'],
+['تقع نقطة التعادل لشحنتين متشابهتين بينهما.','لأن المجالين بين الشحنتين متعاكسان في الاتجاه، فيمكن أن يتساويا فتنعدم المحصلة.'],
+['تقع نقطة التعادل أقرب إلى الشحنة الأصغر.','لأن مجال الشحنة الأصغر أضعف، فلا يساوي مجال الأكبر إلا في نقطة قريبة منها.'],
+['لا توجد نقطة تعادل لشحنتين مختلفتين متساويتين مقدارًا.','بينهما يتجه المجالان في الاتجاه نفسه فيتجمعان، وخارجهما يكون مجال الشحنة الأقرب أكبر دائمًا.'],
+['تتحرك الشحنة السالبة عكس اتجاه المجال الكهربائي.','لأن اتجاه المجال هو اتجاه القوة على شحنة موجبة، والشحنة السالبة تتأثر بقوة معاكسة.']]},
+{k:'quiz',ic:'⏱️',t:'تحدي السرعة',d:'12 سؤالًا بالمؤقت — اجمع سلسلة 🔥',items:[
+{q:'جسم عدد إلكتروناته أكبر من عدد بروتوناته يكون:',o:['سالب الشحنة','موجب الشحنة','متعادلًا','لا يمكن الحكم'],e:'زيادة الإلكترونات (السالبة) تجعل الجسم سالبًا.'},
+{q:'عند دلك ساق زجاجية بقطعة حرير تصبح الساق:',o:['موجبة لأنها فقدت إلكترونات','موجبة لأنها اكتسبت بروتونات','سالبة لأنها اكتسبت إلكترونات','متعادلة'],e:'الزجاج يفقد إلكترونات لصالح الحرير.'},
+{q:'إذا ضوعفت المسافة بين شحنتين فإن القوة بينهما:',o:['تقل إلى الربع','تقل إلى النصف','تتضاعف','تزداد 4 مرات'],e:'القوة عكسية مع مربع المسافة: '+m('1/2² = 1/4')},
+{q:'إذا ضوعفت إحدى الشحنتين فقط وبقيت المسافة ثابتة فإن القوة:',o:['تتضاعف','تزداد 4 مرات','تقل إلى النصف','لا تتغير'],e:'القوة طردية مع حاصل ضرب الشحنتين.'},
+{q:'وحدة قياس شدة المجال الكهربائي:',o:[m('N/C'),m('C/N'),m('N·m²/C²'),m('J')],e:m('E = F/q')+' ⇐ نيوتن لكل كولوم.'},
+{q:'شدة المجال على بعد '+m('3 m')+' من شحنة '+m('2 μC')+' تساوي:',o:[m('2000 N/C'),m('6000 N/C'),m('18000 N/C'),m('667 N/C')],e:m('E = 9×10⁹ × 2×10⁻⁶ ÷ 9 = 2000 N/C')},
+{q:'القوة بين شحنتين '+m('1 μC')+' و '+m('4 μC')+' المسافة بينهما '+m('0.3 m')+':',o:[m('0.4 N'),m('0.12 N'),m('1.2 N'),m('4 N')],e:m('F = 9×10⁹ × 4×10⁻¹² ÷ 0.09 = 0.4 N')},
+{q:'شحنتان '+m('+4 μC')+' و '+m('+1 μC')+' بينهما '+m('30 cm')+'. نقطة التعادل تقع:',o:['بينهما على بعد 20 cm من الشحنة 4 μC','بينهما على بعد 10 cm من الشحنة 4 μC','في المنتصف','خارجهما'],e:'متشابهتان ⇐ بينهما وأقرب للأصغر: '+m('x = 30 × √4/(√4+√1) = 20 cm')+' من الكبرى.'},
+{q:'الشحن بالحث يُكسب الموصل شحنة:',o:['مخالفة لشحنة الجسم المؤثر','مماثلة لشحنة الجسم المؤثر','موجبة دائمًا','لا يكتسب شحنة'],e:'الجسم المؤثر يجذب الشحنات المخالفة له.'},
+{q:'أيّ مما يلي مادة موصلة؟',o:['محلول ملح الطعام','الإيبونيت','الحرير','البولي إيثيلين'],e:'المحاليل الإلكتروليتية توصل الكهرباء بأيوناتها.'},
+{q:'شحنتان '+m('+q')+' و '+m('−q')+' متساويتان مقدارًا. نقطة التعادل:',o:['لا توجد','في المنتصف','خارجهما قرب أي منهما','على بعد ربع المسافة'],e:'المختلفتان المتساويتان ليس لهما نقطة تعادل.'},
+{q:'عدد الإلكترونات التي تكوّن شحنة مقدارها '+m('1 C')+' تقريبًا:',o:[m('6.25×10¹⁸'),m('1.6×10¹⁹'),m('6.25×10¹⁹'),m('9×10⁹')],e:m('n = Q/e = 1 ÷ 1.6×10⁻¹⁹ = 6.25×10¹⁸')},
+{q:'اتجاه خطوط المجال الكهربائي حول شحنة موجبة منفردة:',o:['خارجة منها مبتعدة عنها','داخلة إليها','دائرية حولها','لا اتجاه لها'],e:'المجال يخرج من الموجبة ويدخل في السالبة.'}]}]},
+r2:{short:'الفصل 2',icon:'🔋',title:'مراجعة: الكهرباء التيارية',sub:'8 محطات: التيار، الدوائر، القوة الدافعة، قانون أوم والمقاومة النوعية',
+stations:[
+{k:'sheet',ic:'🗺️',t:'خريطة الفصل',d:'كل الفصل في صفحة واحدة',html:`
+<div class=law><b>1) التيار الكهربائي</b><br>الكهرباء التيارية تدرس الشحنات المتحركة، والجلفانومتر يكشف مرور التيار.<br>التيار = معدل سريان الشحنة: ${m('I = Q / t')} بوحدة الأمبير ${m('A = C/s')}.<br>${m('1 mA = 10⁻³ A')} &nbsp; ${m('1 μA = 10⁻⁶ A')} &nbsp;· عدد الشحنات: ${m('Q = n e')}</div>
+<div class=law><b>2) اتجاه التيار</b><table><tr><th></th><th>الاصطلاحي (الشحنات الموجبة)</th><th>الإلكتروني (الحقيقي)</th></tr><tr><td>خارج البطارية</td><td>من + إلى −</td><td>من − إلى +</td></tr><tr><td>داخل البطارية</td><td>من − إلى +</td><td>من + إلى −</td></tr></table>الاتجاهان متعاكسان دائمًا.</div>
+<div class=law><b>3) الدوائر وأجهزة القياس</b><br><b>مغلقة:</b> مسار كامل والتيار يمر. <b>مفتوحة:</b> قطع في المسار فلا تيار. <b>قصيرة:</b> سلك يتجاوز الحِمل فيمر تيار كبير خطِر.<table><tr><th></th><th>الأميتر</th><th>الفولتميتر</th></tr><tr><td>يقيس</td><td>شدة التيار</td><td>فرق الجهد / القوة الدافعة</td></tr><tr><td>التوصيل</td><td>توالٍ</td><td>توازٍ</td></tr><tr><td>مقاومته</td><td>صغيرة جدًا</td><td>كبيرة جدًا</td></tr></table></div>
+<div class=law><b>4) القوة الدافعة وفرق الجهد</b><br><b>القوة الدافعة:</b> طاقة غير كهربائية ⇐ كهربائية لكل كولوم داخل المصدر. <b>فرق الجهد:</b> طاقة كهربائية ⇐ غير كهربائية لكل كولوم بين نقطتين.<br>${m('V = W / Q')} والفولت = جول/كولوم. إذا أُهملت المقاومة الداخلية: القوة الدافعة = فرق الجهد بين القطبين.</div>
+<div class=law><b>5) المقاومة وقانون أوم</b><br>${m('V = I R')} عند ثبوت درجة الحرارة. منحنى (V–I) خط مستقيم <b>ميله = R</b>. الأوم: مقاومة موصل يمر به ${m('1 A')} عندما يكون فرق الجهد ${m('1 V')}.<br>المقاومة تزيد بزيادة <b>درجة الحرارة</b> و<b>الطول</b>، وتقل بزيادة <b>مساحة المقطع</b>، وتعتمد على <b>نوع المادة</b>.</div>
+<div class=law><b>6) المقاومة النوعية</b><br>${m('R = ρ L / A')} &nbsp;ووحدة ρ هي ${m('Ω·m')}. تعتمد على نوع المادة ودرجة حرارتها فقط؛ كلما صغرت كان الموصل أجود.<br>للمقارنة بين سلكين: ${m('R₂ = (ρ₂ L₂ A₁ / ρ₁ L₁ A₂) R₁')} — ومن نفس المادة تختصر ρ.</div>`},
+{k:'cards',ic:'🃏',t:'بطاقات التعاريف',d:'15 تعريفًا مهمًا',items:[
+['الكهرباء التيارية','العلم الذي يدرس الشحنات الكهربائية <b>المتحركة</b>.'],
+['الجلفانومتر','جهاز حساس يكشف مرور التيار الكهربائي في الدائرة.'],
+['التيار الكهربائي','المعدل الزمني لسريان الشحنة عبر مقطع الموصل.<br>'+m('I = Q/t')],
+['الأمبير','شدة التيار عندما تعبر شحنة مقدارها كولوم واحد مقطع الموصل في ثانية واحدة.'],
+['التيار الاصطلاحي','حركة الشحنات الموجبة: خارج البطارية من القطب الموجب إلى السالب (من الجهد الأعلى إلى الأقل).'],
+['التيار الإلكتروني (الحقيقي)','حركة الإلكترونات: خارج البطارية من القطب السالب إلى الموجب، أي عكس الاصطلاحي.'],
+['القوة الدافعة الكهربائية','الطاقة المحوَّلة من صورة غير كهربائية إلى كهربائية لكل كولوم يمر خلال المصدر.'],
+['فرق الجهد','الطاقة الكهربائية المحوَّلة إلى صورة أخرى (حرارة، ضوء…) لكل كولوم يمر بين نقطتين.'],
+['الفولت','فرق الجهد بين نقطتين عندما يتحول جول واحد من الطاقة لكل كولوم يمر بينهما.<br>'+m('V = W/Q')],
+['المقاومة الكهربائية','إعاقة الموصل لمرور التيار، وسببها تصادم الإلكترونات الحرة بذرات الموصل.'],
+['الأوم','مقاومة موصل يمر به تيار 1 A عندما يكون فرق الجهد بين طرفيه 1 V.'],
+['قانون أوم','يتناسب التيار المار في موصل طرديًا مع فرق الجهد بين طرفيه عند ثبوت درجة الحرارة.<br>'+m('V = IR')],
+['المقاومة النوعية','خاصية مميزة للمادة تعتمد على نوعها ودرجة حرارتها فقط، ووحدتها '+m('Ω·m')+'.<br>'+m('R = ρL/A')],
+['الريوستات','مقاومة متغيرة نتحكم بها في شدة التيار المار في الدائرة.'],
+['الدائرة القصيرة','دائرة يجد فيها التيار مسارًا مقاومته صغيرة جدًا يتجاوز الحِمل، فيمر تيار كبير خطِر.']]},
+{k:'sort',ic:'🗂️',t:'لعبة الفرز',d:'4 جولات مقارنات سريعة',rounds:[
+{t:'أميتر أم فولتميتر؟',bins:['Ⓐ الأميتر','Ⓥ الفولتميتر'],items:[['يقيس شدة التيار',0],['يقيس فرق الجهد',1],['يوصل على التوالي',0],['يوصل على التوازي',1],['مقاومته صغيرة جدًا',0,'حتى لا يغيّر التيار الذي يقيسه.'],['مقاومته كبيرة جدًا',1,'حتى لا يسحب تيارًا يُذكر من الدائرة.'],['يقيس القوة الدافعة إذا وُصل بين قطبي العمود',1],['قراءته بالأمبير',0]]},
+{t:'اصطلاحي أم إلكتروني؟',bins:['➕ الاصطلاحي','➖ الإلكتروني'],items:[['حركة الشحنات الموجبة',0],['حركة الإلكترونات',1],['خارج البطارية من + إلى −',0],['خارج البطارية من − إلى +',1],['داخل البطارية من − إلى +',0],['داخل البطارية من + إلى −',1],['من الجهد الأعلى إلى الأقل (خارج المصدر)',0],['يُسمى التيار الحقيقي',1]]},
+{t:'نوع الدائرة',bins:['💡 مغلقة','✂️ مفتوحة','⚠️ قصيرة'],items:[['المفتاح مغلق والمصباح يضيء',0],['سلك مقطوع في الدائرة',1],['سلك يصل طرفي المصباح مباشرة',2],['فتيل المصباح محترق',1],['يمر تيار كبير قد يسبب حريقًا',2],['المفتاح مفتوح',1],['التيار يمر في مسار كامل خلال الحِمل',0]]},
+{t:'قوة دافعة أم فرق جهد؟',bins:['🔋 القوة الدافعة','💡 فرق الجهد'],items:[['طاقة غير كهربائية ⇐ كهربائية',0],['طاقة كهربائية ⇐ غير كهربائية',1],['تخص المصدر (العمود الكهربائي)',0],['بين طرفي مصباح أو مقاومة',1],['تحوّل الطاقة الكيميائية في البطارية',0],['تسخين سلك المدفأة',1]]}]},
+{k:'tri',ic:'🔺',t:'مثلثات القوانين',d:'Q=It ، W=VQ ، V=IR — 9 مسائل',list:[
+{v:['Q','I','t'],n:['الشحنة','التيار','الزمن'],u:['C','A','s'],gen(){const t=pick([0,1,2]);
+ if(t===0){const mA=pick([200,250,500,400]),mn=pick([1,2,5]),Q=mA/1000*mn*60;return{q:'يمر تيار '+m(mA+' mA')+' لمدة '+m(mn+' min')+'. احسب الشحنة المارّة.',a:Q,u:'C',w:'حوّل أولًا: '+m(mA+' mA = '+mA/1000+' A')+' و '+m(mn+' min = '+mn*60+' s')+'<br>'+m('Q = It = '+mA/1000+' × '+mn*60+' = '+rr(Q)+' C')}}
+ if(t===1){const Q=pick([30,60,90,120]),s=pick([10,20,30,60]);return{q:'تعبر شحنة '+m(Q+' C')+' مقطع سلك خلال '+m(s+' s')+'. احسب شدة التيار.',a:Q/s,u:'A',w:m('I = Q/t = '+Q+' ÷ '+s+' = '+rr(Q/s)+' A')}}
+ const I=pick([2,4,5]),Q=pick([40,100,200,600]);return{q:'كم ثانية يحتاج تيار '+m(I+' A')+' لنقل شحنة '+m(Q+' C')+'؟',a:Q/I,u:'s',w:m('t = Q/I = '+Q+' ÷ '+I+' = '+rr(Q/I)+' s')}}},
+{v:['W','V','Q'],n:['الطاقة','فرق الجهد','الشحنة'],u:['J','V','C'],gen(){const t=pick([0,1,2]),V=pick([1.5,3,6,9,12]),Q=pick([2,4,5,10]),W=V*Q;
+ if(t===0)return{q:'بطارية قوتها الدافعة '+m(V+' V')+' تدفع شحنة '+m(Q+' C')+'. احسب الطاقة التي تمنحها.',a:W,u:'J',w:m('W = VQ = '+V+' × '+Q+' = '+rr(W)+' J')};
+ if(t===1)return{q:'يتحول '+m(rr(W)+' J')+' من الطاقة عند مرور '+m(Q+' C')+' في مصباح. احسب فرق الجهد بين طرفيه.',a:V,u:'V',w:m('V = W/Q = '+rr(W)+' ÷ '+Q+' = '+V+' V')};
+ return{q:'فرق جهد '+m(V+' V')+' حوّل '+m(rr(W)+' J')+' من الطاقة. احسب الشحنة المارّة.',a:Q,u:'C',w:m('Q = W/V = '+rr(W)+' ÷ '+V+' = '+Q+' C')}}},
+{v:['V','I','R'],n:['فرق الجهد','التيار','المقاومة'],u:['V','A','Ω'],gen(){const t=pick([0,1,2]),R=pick([4,5,10,20,50]),I=pick([.2,.5,1.5,2]),V=R*I;
+ if(t===0)return{q:'مقاومة '+m(R+' Ω')+' يمر بها تيار '+m(I+' A')+'. احسب فرق الجهد بين طرفيها.',a:V,u:'V',w:m('V = IR = '+I+' × '+R+' = '+rr(V)+' V')};
+ if(t===1)return{q:'فرق جهد '+m(rr(V)+' V')+' على مقاومة '+m(R+' Ω')+'. احسب التيار.',a:I,u:'A',w:m('I = V/R = '+rr(V)+' ÷ '+R+' = '+I+' A')};
+ const mA=I*1000;return{q:'سلك يمر به '+m(mA+' mA')+' عندما يكون فرق الجهد '+m(rr(V)+' V')+'. احسب مقاومته.',a:R,u:'Ω',w:'حوّل: '+m(mA+' mA = '+I+' A')+'<br>'+m('R = V/I = '+rr(V)+' ÷ '+I+' = '+R+' Ω')}}}]},
+{k:'graph',ic:'📈',t:'اقرأ منحنى أوم',d:'الميل = المقاومة… جرّب بنفسك'},
+{k:'ratio',ic:'🏭',t:'مصنع الأسلاك',d:'غيّر الطول والسُّمك وتوقّع المقاومة',base:'R',n:6,draw:drawWire,gen(){
+ const dia=Math.random()<.25;let L=pick([.25,.5,1,2,3,4]),A,txt;
+ if(dia){const d=pick([.5,2]);A=d*d;txt='و'+(d>1?'ضاعفنا قطره (نصف القطر ×2)':'جعلنا قطره النصف');}
+ else{A=pick([.25,.5,1,2,4]);if(L===1&&A===1)A=2;txt=A===1?'وبقيت مساحة مقطعه كما هي':'وجعلنا مساحة مقطعه ×'+fr(A)}
+ const a=L/A;return{a,L,A,q:'سلك مقاومته '+m('R')+'. صنعنا سلكًا من <b>نفس المادة</b> '+(L===1?'بنفس طوله':'طوله ×'+fr(L))+' '+txt+'. مقاومة السلك الجديد:',
+ w:'نفس المادة ⇐ '+m('ρ₂ = ρ₁')+(dia?'، والمساحة تتناسب مع مربع القطر ⇐ '+m('A × '+fr(A)):'')+'<br>'+m('R₂ = (L₂/L₁) ÷ (A₂/A₁) × R = '+fr(L)+' ÷ '+fr(A)+' × R = '+fmtF(a,'R'))}}},
+{k:'why',ic:'🤔',t:'علّل',d:'8 تعليلات متوقعة في الامتحان',items:[
+['يوصل الأميتر في الدائرة على التوالي.','ليمر خلاله التيار نفسه المار في الدائرة فيقيسه.'],
+['مقاومة الأميتر صغيرة جدًا.','حتى لا يغيّر شدة التيار المراد قياسه ولا يستهلك إلا طاقة ضئيلة.'],
+['يوصل الفولتميتر على التوازي ومقاومته كبيرة جدًا.','ليكون عليه فرق الجهد نفسه بين النقطتين، ومقاومته الكبيرة تجعله لا يسحب إلا تيارًا ضئيلًا فلا يغيّر الدائرة.'],
+['تزداد مقاومة الفلز بارتفاع درجة حرارته.','لأن اهتزاز الذرات يزداد فتكثر تصادمات الإلكترونات الحرة بها.'],
+['السلك الأطول مقاومته أكبر (من نفس المادة والسُّمك).','لأن الإلكترونات تقطع مسافة أطول فتزداد تصادماتها.'],
+['السلك الأسمك مقاومته أقل.','لأن مساحة المقطع الأكبر توفّر مسارات أكثر لحركة الإلكترونات.'],
+['الدائرة القصيرة خطيرة.','لأن مقاومة المسار صغيرة جدًا فيمر تيار كبير يسخّن الأسلاك وقد يسبب حريقًا.'],
+['المقاومة النوعية لا تتغير بتغيير طول السلك أو سُمكه.','لأنها خاصية للمادة نفسها تعتمد فقط على نوعها ودرجة حرارتها.']]},
+{k:'quiz',ic:'⏱️',t:'تحدي السرعة',d:'14 سؤالًا بالمؤقت — اجمع سلسلة 🔥',items:[
+{q:'تعبر '+m('30 C')+' مقطع سلك خلال '+m('10 s')+'. شدة التيار:',o:[m('3 A'),m('300 A'),m('0.33 A'),m('20 A')],e:m('I = Q/t = 30 ÷ 10 = 3 A')},
+{q:m('250 mA')+' تساوي:',o:[m('0.25 A'),m('2.5 A'),m('25 A'),m('0.025 A')],e:m('250 × 10⁻³ = 0.25 A')},
+{q:'يوصل الأميتر في الدائرة على:',o:['التوالي ومقاومته صغيرة','التوازي ومقاومته صغيرة','التوالي ومقاومته كبيرة','التوازي ومقاومته كبيرة'],e:'التوالي ليمر به التيار نفسه، ومقاومته صغيرة حتى لا يغيّره.'},
+{q:'بطارية تعطي '+m('12 J')+' لكل '+m('2 C')+'. قوتها الدافعة:',o:[m('6 V'),m('24 V'),m('0.17 V'),m('14 V')],e:m('V = W/Q = 12 ÷ 2 = 6 V')},
+{q:'مقاومة '+m('20 Ω')+' يمر بها '+m('0.5 A')+'. فرق الجهد بين طرفيها:',o:[m('10 V'),m('40 V'),m('20.5 V'),m('0.025 V')],e:m('V = IR = 0.5 × 20 = 10 V')},
+{q:'ميل الخط المستقيم في منحنى (فرق الجهد – التيار) يساوي:',o:['المقاومة','التيار','الشحنة','الطاقة'],e:m('الميل = ΔV/ΔI = R')},
+{q:'سلك ضوعف طوله ونُصّفت مساحة مقطعه (نفس المادة). مقاومته تصبح:',o:['4 أضعاف','ضعفين','كما هي','الربع'],e:m('R₂ = 2 ÷ ½ × R = 4R')},
+{q:'وحدة المقاومة النوعية:',o:[m('Ω·m'),m('Ω/m'),m('Ω·m²'),m('V/A')],e:m('ρ = RA/L ⇐ Ω·m²/m = Ω·m')},
+{q:'المقاومة النوعية لموصل تعتمد على:',o:['نوع المادة ودرجة حرارتها','طوله فقط','مساحة مقطعه فقط','طوله ومساحة مقطعه'],e:'هي خاصية للمادة نفسها.'},
+{q:'عند رفع درجة حرارة سلك فلزي فإن مقاومته:',o:['تزداد','تقل','لا تتغير','تنعدم'],e:'تزداد التصادمات بزيادة اهتزاز الذرات.'},
+{q:'اتجاه التيار الاصطلاحي داخل البطارية:',o:['من القطب السالب إلى الموجب','من القطب الموجب إلى السالب','لا يمر داخلها تيار','يتغير باستمرار'],e:'خارج البطارية من + إلى −، فداخلها يكمل الدورة من − إلى +.'},
+{q:'إذا أُهملت المقاومة الداخلية لعمود كهربائي فإن:',o:['قوته الدافعة = فرق الجهد بين قطبيه','قوته الدافعة صفر','فرق الجهد بين قطبيه صفر','قوته الدافعة أصغر من فرق الجهد'],e:'لا يضيع جهد داخل العمود.'},
+{q:'عدد الإلكترونات التي تعبر مقطع سلك يحمل '+m('1.6 A')+' في ثانية واحدة:',o:[m('10¹⁹'),m('1.6×10¹⁹'),m('10¹⁸'),m('1.6×10⁻¹⁹')],e:m('Q = 1.6 C ⇐ n = 1.6 ÷ 1.6×10⁻¹⁹ = 10¹⁹')},
+{q:'سلك مقاومته '+m('R')+'، نقص طوله إلى الربع ونقصت مساحة مقطعه إلى الربع. مقاومته الجديدة:',o:[m('R'),m('R/4'),m('4R'),m('16R')],e:m('R₂ = ¼ ÷ ¼ × R = R')}]}]}};
+
+const $=id=>document.getElementById(id);
+const send=(t,q)=>{try{parent.postMessage(q?{lbt:t,qq:q}:{lbt:t},'*')}catch(e){}};
+let AC;function beep(ok){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.connect(g);g.connect(AC.destination);const t=AC.currentTime;if(ok){o.type='sine';o.frequency.setValueAtTime(660,t);o.frequency.setValueAtTime(990,t+.09)}else{o.type='square';o.frequency.setValueAtTime(200,t);o.frequency.setValueAtTime(150,t+.1)}g.gain.setValueAtTime(.07,t);g.gain.exponentialRampToValueAtTime(.001,t+.28);o.start(t);o.stop(t+.3)}catch(e){}}
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const pick=a=>a[Math.random()*a.length|0];
+let ST={};try{ST=JSON.parse(localStorage.getItem('rev_'+BOOK)||'{}')}catch(e){}
+function save(){try{localStorage.setItem('rev_'+BOOK,JSON.stringify(ST))}catch(e){}}
+function xpShow(){const e=$('xp');if(e)e.textContent='⭐ '+(ST.xp||0)}
+function good(q){beep(1);send('ok',q);ST.xp=(ST.xp||0)+1;save();xpShow()}
+function bad(q){beep(0);send('no',q)}
+function confetti(){for(let i=0;i<26;i++){const s=document.createElement('span');s.className='cf';s.textContent=pick(['⚡','✨','⭐','🔋','💡']);s.style.left=Math.random()*100+'vw';s.style.animationDelay=Math.random()*.5+'s';document.body.appendChild(s);setTimeout(()=>s.remove(),2300)}}
+const fin=(t,extra)=>`<div class=fin0><div class=big>🏆</div><h3>${t}</h3>${extra||''}</div>`;
+const num=s=>{s=String(s).trim().replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[,،٫]/g,'.').replace(/\s/g,'').replace(/[×x\*]10\^?/i,'e');return parseFloat(s)};
+const near=(x,a)=>isFinite(x)&&Math.abs(x-a)<=Math.abs(a)*.02+1e-12;
+function fmtN(v){if(v===0)return'0';const a=Math.abs(v);if(a>=1e5||a<1e-3){const e=Math.floor(Math.log10(a));let m=+(v/Math.pow(10,e)).toFixed(2);return m+'×10<sup>'+e+'</sup>'}return String(+v.toPrecision(4))}
+function frac(f){for(let q=1;q<=64;q++){const p=f*q;if(Math.abs(p-Math.round(p))<1e-9)return[Math.round(p),q]}return[f,1]}
+function fmtF(f,B){const[p,q]=frac(f);if(q===1)return p===1?B:p+B;if(p===1)return B+'/'+q;return'('+p+'/'+q+') '+B}
+let CH,DATA;
+function route(){const h=location.hash.slice(1);CH=REV[h]?h:Object.keys(REV)[0];DATA=REV[CH];home()}
+function home(){scrollTo(0,0);const S=DATA.stations,d=S.filter((_,i)=>ST[CH+'_'+i]).length,p=d/S.length,C=2*Math.PI*36;
+ $('app').innerHTML=`<div class=top><div class=pill>${Object.keys(REV).map(k=>`<a href="#${k}" class="${k===CH?'on':''}">${REV[k].short}</a>`).join('')}</div><div class=xp id=xp></div></div>
+ <div class=hero><div class=ring><svg viewBox="0 0 86 86" width=86 height=86><circle cx=43 cy=43 r=36 fill=none stroke="rgba(255,255,255,.2)" stroke-width=8 /><circle cx=43 cy=43 r=36 fill=none stroke="#ffd43b" stroke-width=8 stroke-linecap=round stroke-dasharray="${C}" stroke-dashoffset="${C*(1-p)}" transform="rotate(-90 43 43)"/></svg><b>${d}/${S.length}</b></div><div><h1>${DATA.icon} ${DATA.title}</h1><p>${DATA.sub}</p></div></div>
+ <div class=grid>${S.map((s,i)=>`<div class="st ${ST[CH+'_'+i]?'done':''}" data-i=${i}><div class=ic>${s.ic}</div><b>${s.t}</b><small>${s.d}</small></div>`).join('')}</div>`;
+ xpShow();document.querySelectorAll('.st').forEach(e=>e.onclick=()=>openSt(+e.dataset.i))}
+function openSt(i){scrollTo(0,0);const s=DATA.stations[i];
+ $('app').innerHTML=`<div class=bar><button id=bk>→ المحطات</button><h2>${s.ic} ${s.t}</h2><div class=xp id=xp style="margin-inline-start:auto"></div></div><div class=box id=bx></div>`;
+ xpShow();$('bk').onclick=home;
+ const done=()=>{const first=!ST[CH+'_'+i];ST[CH+'_'+i]=1;save();confetti();const nx=DATA.stations[i+1];
+  $('bx').insertAdjacentHTML('beforeend',`<div class=row>${nx?`<button class="btn go" id=nxs>المحطة التالية: ${nx.ic} ${nx.t} ←</button>`:`<button class="btn go" id=nxs>🎉 أنهيت مراجعة ${DATA.short}! عودة للمحطات</button>`}</div>`);
+  $('nxs').onclick=()=>nx?openSt(i+1):home()};
+ R[s.k](s,$('bx'),done)}
+const R={};
+/* 1) خريطة الفصل */
+R.sheet=(s,b,done)=>{b.innerHTML=`<div class=sheet>${s.html}</div><button class="btn go" id=rd>✓ قرأتها وفهمتها</button>`;$('rd').onclick=()=>{$('rd').remove();good();done()}};
+/* 2) بطاقات */
+R.cards=(s,b,done)=>{let pile=shuf(s.items.map((_,i)=>i)),known=0,tries=0;const n=s.items.length;
+ function draw(){if(!pile.length){b.innerHTML=fin('حفظت كل البطاقات! 🧠','<p>'+(tries===n?'عرفتها كلها من أول مرة — ممتاز!':'كرّرنا '+(tries-n)+' بطاقة حتى ثبتت.')+'</p>');done();return}
+  const c=s.items[pile[0]];
+  b.innerHTML=`<div class=cnt>بقي ${pile.length} من ${n} · عرفت ${known}</div><div class=flip id=fc><div class=fin><div class="fa front"><div class=hint>👆 فكّر في الإجابة… ثم اضغط لقلب البطاقة</div><div class=ft>${c[0]}</div></div><div class="fa back"><div class=ft2>${c[1]}</div></div></div></div><div class=row id=fr style="visibility:hidden"><button class="btn ok" id=yes>✓ عرفتها</button><button class="btn re" id=no>↺ أعدها لي لاحقًا</button></div>`;
+  $('fc').onclick=()=>{$('fc').classList.add('on');$('fr').style.visibility='visible'};
+  $('yes').onclick=()=>{tries++;pile.shift();known++;good();draw()};
+  $('no').onclick=()=>{tries++;const x=pile.shift();pile.splice(Math.min(2,pile.length),0,x);beep(0);draw()}}
+ draw()};
+/* 3) فرز */
+R.sort=(s,b,done)=>{let r=0;
+ function round(){const RD=s.rounds[r];let q=shuf(RD.items),tot=q.length,miss=new Set();
+  function draw(){if(!q.length){r++;const sc=(tot-miss.size)+'/'+tot;if(r<s.rounds.length){b.innerHTML=fin('✅ '+RD.t+' — صحيح من أول محاولة: '+sc,'<button class="btn go" id=nx>الجولة التالية ←</button>');beep(1);$('nx').onclick=round}else{b.innerHTML=fin('رتّبت كل شيء في مكانه! 🗂️','<p>آخر جولة: '+sc+'</p>');done()}return}
+   const it=q[0];
+   b.innerHTML=`<div class=cnt>الجولة ${r+1}/${s.rounds.length}: ${RD.t} · بقي ${q.length}</div><div class=chip id=ch>${it[0]}</div><div class="bins b${RD.bins.length}">${RD.bins.map((x,i)=>`<button class=bin data-i=${i}>${x}</button>`).join('')}</div><div id=sx class=sx></div>`;
+   b.querySelectorAll('.bin').forEach(x=>x.onclick=()=>{if(b.dataset.lock)return;const i=+x.dataset.i;
+    if(i===it[1]){x.classList.add('hit');$('ch').classList.add('fly');good();b.dataset.lock=1;setTimeout(()=>{delete b.dataset.lock;q.shift();draw()},420)}
+    else{b.dataset.lock=1;miss.add(it[0]);x.classList.add('miss');b.querySelectorAll('.bin')[it[1]].classList.add('hit');$('ch').classList.add('shake');bad();
+     $('sx').innerHTML='❌ مكانها الصحيح: <b>'+RD.bins[it[1]]+'</b>'+(it[2]?'<br>💡 '+it[2]:'')+'<br><button class="btn re" id=ct>فهمت، سأراها مرة أخرى ↺</button>';
+     $('ct').onclick=()=>{delete b.dataset.lock;q.push(q.shift());draw()}}})}
+  draw()}
+ round()};
+/* 4) مثلث القوانين */
+R.tri=(s,b,done)=>{let t=0;
+ function one(){const T=s.list[t];let need=3,got=0,cov=-1,P;
+  const pos=[[120,82],[66,165],[174,165]];
+  b.innerHTML=`<div class=cnt>المثلث ${t+1} من ${s.list.length}</div><svg class=tri viewBox="0 0 240 200"><polygon points="120,8 232,192 8,192" fill="#f3f0ff" stroke="#7a4bc2" stroke-width=4 stroke-linejoin=round /><line x1=59 y1=110 x2=181 y2=110 stroke="#7a4bc2" stroke-width=3 /><line x1=120 y1=110 x2=120 y2=192 stroke="#7a4bc2" stroke-width=3 />${T.v.map((v,i)=>`<g data-i=${i} class=tl><rect x=${pos[i][0]-30} y=${pos[i][1]-34} width=60 height=46 rx=10 fill=transparent /><text x=${pos[i][0]} y=${pos[i][1]} text-anchor=middle font-size=34 fill="#5a2fa0">${v}</text></g>`).join('')}</svg>
+  <div class=lab>${T.v.map((v,i)=>`<span><b class=m>${v}</b> ${T.n[i]} <span class=m>(${T.u[i]})</span></span>`).join('')}</div>
+  <div class=fx id=fx><small style="font-size:.9rem;color:#868e96">👆 اضغط على الرمز الذي تريد حسابه لتغطيه بإصبعك</small></div>
+  <div class=prob id=pb></div>`;
+  const F=i=>i===0?`${T.v[0]} = ${T.v[1]} × ${T.v[2]}`:`${T.v[i]} = ${T.v[0]} ÷ ${T.v[3-i]}`;
+  b.querySelectorAll('.tl').forEach(g=>g.onclick=()=>{const i=+g.dataset.i;b.querySelectorAll('.tl text').forEach((x,k)=>x.setAttribute('fill',k===i?'#ced4da':'#5a2fa0'));$('fx').innerHTML='<span class=m>'+F(i)+'</span>';beep(1)});
+  function prob(){P=T.gen();$('pb').innerHTML=`<div class=dots>${[0,1,2].map(k=>`<i class="${k<got?'on':''}"></i>`).join('')}</div><b>🎯 مسألة ${got+1}/3:</b> ${P.q}<div class=ans><input id=in inputmode=decimal placeholder="الناتج"><span class=m>${P.u}</span><button class=btn id=ck>تحقق</button></div><div id=fb class=fb></div>`;
+   $('ck').onclick=()=>{const v=num($('in').value);if(!isFinite(v)){$('fb').className='fb no';$('fb').textContent='اكتب رقمًا (مثال: 0.25 أو 3e-6)';return}
+    if(near(v,P.a)){got++;good();$('fb').className='fb ok';$('fb').innerHTML='✅ صحيح! '+(P.w||'');$('ck').disabled=1;setTimeout(()=>{if(got<3)prob();else{t++;if(t<s.list.length){b.innerHTML=fin('أتقنت مثلث <span class=m>'+T.v.join(' ')+'</span>','<button class="btn go" id=nx>المثلث التالي ←</button>');$('nx').onclick=one}else{b.innerHTML=fin('أتقنت كل مثلثات القوانين! 🔺');done()}}},1300)}
+    else{bad({q:P.q.replace(/<[^>]+>/g,''),o:[fmtN(P.a).replace(/<[^>]+>/g,'')+' '+P.u,String(v)+' '+P.u],r:0,w:1});$('fb').className='fb no';$('fb').innerHTML='❌ ليس بعد. الحل: '+P.w}};
+   $('in').onkeydown=e=>{if(e.key==='Enter')$('ck').click()}}
+  prob()}
+ one()};
+/* 5) آلة "ماذا لو" للنسب */
+R.ratio=(s,b,done)=>{let k=0,score=0;const N=s.n||5;
+ function draw(){if(k>=N){b.innerHTML=fin('آلة ماذا لو: '+score+'/'+N,score>=N-1?'<p>تفكيرك بالنِّسَب ممتاز!</p>':'<p>تذكّر: البسط طردي والمقام عكسي.</p>');done();return}
+  const P=s.gen(),B=s.base;let o=[P.a],pool=shuf([P.a*2,P.a/2,1/P.a,P.a*4,P.a/4,1,P.a*P.a,Math.sqrt(P.a)]);
+  for(const x of pool){if(o.length>=4)break;if(isFinite(x)&&x>0&&frac(x)[1]<=64&&!o.some(y=>Math.abs(y-x)<1e-9))o.push(x)}o=shuf(o);
+  b.innerHTML=`<div class=cnt>سؤال ${k+1} من ${N} · نقاطك ${score}</div><canvas class=cv id=cv width=640 height=230></canvas><div class=q style="margin-top:10px">${P.q}</div><div class=opts>${o.map(x=>`<button class="opt m" style="text-align:center" data-v="${x}">${fmtF(x,B)}</button>`).join('')}</div><div id=ex></div>`;
+  s.draw($('cv'),P);
+  b.querySelectorAll('.opt').forEach(e=>e.onclick=()=>{if(b.dataset.lock)return;b.dataset.lock=1;const v=+e.dataset.v,ok=Math.abs(v-P.a)<1e-9;
+   b.querySelectorAll('.opt').forEach(x=>{if(Math.abs(+x.dataset.v-P.a)<1e-9)x.classList.add('ok')});if(!ok)e.classList.add('no');
+   const qq={q:P.q.replace(/<[^>]+>/g,''),o:o.map(x=>fmtF(x,B)),r:o.findIndex(x=>Math.abs(x-P.a)<1e-9),w:o.indexOf(v)};
+   if(ok){score++;good(qq)}else bad(qq);
+   $('ex').innerHTML=`<div class=ex>${ok?'✅':'❌'} ${P.w}</div><button class="btn go" id=nx>التالي ←</button>`;$('nx').onclick=()=>{delete b.dataset.lock;k++;draw()}})}
+ draw()};
+/* 6) علّل */
+R.why=(s,b,done)=>{let L=shuf(s.items),k=0,got=0;
+ function draw(){if(k>=L.length){b.innerHTML=fin('أجبت عن '+got+' من '+L.length+' تعليلًا بنفسك','<p>التعليل = السبب العلمي في جملة واحدة واضحة.</p>');done();return}
+  const it=L[k];b.innerHTML=`<div class=cnt>${k+1} من ${L.length}</div><div class=why id=w><span class=tag>علّل</span><div class=q style="margin-top:6px">${it[0]}</div><p style="color:#868e96;font-size:.9rem">🗣️ قل الإجابة بصوتك أو اكتبها في دفترك أولًا…</p><div class=a>💡 ${it[1]}</div></div><button class="btn go" id=sh>اكشف الإجابة</button><div class=row id=rr style="display:none"><button class="btn ok" id=y>✓ قلتها صح</button><button class="btn re" id=n>✗ احتاج أراجعها</button></div>`;
+  $('sh').onclick=()=>{$('w').classList.add('on');$('sh').remove();$('rr').style.display='flex'};
+  $('y').onclick=()=>{got++;good();k++;draw()};$('n').onclick=()=>{L.push(it);k++;beep(0);draw()}}
+ draw()};
+/* 7) تحدي السرعة */
+R.quiz=(s,b,done)=>{let L=shuf(s.items),k=0,sc=0,stk=0,best=0,wrong=[],tm,T0;const SEC=s.sec||30;
+ function draw(){clearInterval(tm);if(k>=L.length){const p=sc/L.length,st=p>=.9?'⭐⭐⭐':p>=.7?'⭐⭐':p>=.5?'⭐':'';
+   b.innerHTML=fin('نتيجتك '+sc+' من '+L.length+' '+st,`<p>أطول سلسلة صحيحة: 🔥 ${best}</p>${wrong.length?'<button class="btn re" id=rw>↺ أعد الأسئلة التي أخطأت فيها ('+wrong.length+')</button>':''}`);
+   if(wrong.length)$('rw').onclick=()=>{L=shuf(wrong);wrong=[];k=0;sc=0;stk=0;draw()};if(p>=.5)done();else b.insertAdjacentHTML('beforeend','<p class=cnt>احصل على النصف على الأقل لتُحتسب المحطة ✓</p><button class="btn go" id=ag>حاول من جديد</button>'),$('ag').onclick=()=>{L=shuf(s.items);k=0;sc=0;stk=0;wrong=[];draw()};return}
+  const it=L[k],ord=shuf(it.o.map((_,i)=>i));
+  b.innerHTML=`<div class=cnt>سؤال ${k+1} من ${L.length} · ✓ ${sc}</div><div class=tbar><i id=tb></i></div><div class=streak>${stk>=2?'🔥 '+stk+' متتالية!':''}</div><div class=q>${it.q}</div><div class=opts>${ord.map(i=>`<button class=opt data-i=${i}>${it.o[i]}</button>`).join('')}</div><div id=ex></div>`;
+  T0=Date.now();tm=setInterval(()=>{const f=1-(Date.now()-T0)/(SEC*1000);$('tb').style.width=Math.max(0,f*100)+'%';if(f<=0)ans(-1)},100);
+  function ans(w){clearInterval(tm);if(b.dataset.lock)return;b.dataset.lock=1;const ok=w===0;
+   b.querySelectorAll('.opt').forEach(x=>{if(+x.dataset.i===0)x.classList.add('ok');else if(+x.dataset.i===w)x.classList.add('no')});
+   const qq={q:it.q.replace(/<[^>]+>/g,''),o:ord.map(i=>it.o[i].replace(/<[^>]+>/g,'')),r:ord.indexOf(0),w:ord.indexOf(w)};
+   if(ok){sc++;stk++;best=Math.max(best,stk);good(qq)}else{stk=0;wrong.push(it);bad(qq)}
+   $('ex').innerHTML=`<div class=ex>${w<0?'⏰ انتهى الوقت! ':''}${ok?'✅ ':'❌ '}${it.e||''}</div><button class="btn go" id=nx>التالي ←</button>`;$('nx').onclick=()=>{delete b.dataset.lock;k++;draw()}}
+  b.querySelectorAll('.opt').forEach(x=>x.onclick=()=>ans(+x.dataset.i))}
+ draw()};
+/* أدوات رسم */
+function cx(c){const x=c.getContext('2d');x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.font='bold 22px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';return x}
+function arrow(x,x1,y1,x2,y2,col,w){x.strokeStyle=x.fillStyle=col;x.lineWidth=w||4;x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke();const a=Math.atan2(y2-y1,x2-x1),h=12;x.beginPath();x.moveTo(x2,y2);x.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));x.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));x.closePath();x.fill()}
+function ball(x,X,Y,r,q){const g=x.createRadialGradient(X-r/3,Y-r/3,2,X,Y,r);g.addColorStop(0,q>0?'#ffa8a8':'#a5d8ff');g.addColorStop(1,q>0?'#e03131':'#1971c2');x.fillStyle=g;x.beginPath();x.arc(X,Y,r,0,7);x.fill();x.fillStyle='#fff';x.font='bold '+Math.round(r*.9)+'px Arial';x.fillText(q>0?'+':'−',X,Y+1)}
+function onTap(c,f){c.onclick=e=>{const r=c.getBoundingClientRect();f({x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height})}}
+/* 8) محاكي نقطة التعادل */
+R.neutral=(s,b,done)=>{const types=shuf(['same','same','opp','opp','eq','none']).slice(0,5);let k=0,sc=0;
+ const D=100,X0=120,Y=120;// d = 100px ، q1 عند 120 و q2 عند 220
+ function mk(t){const sg=pick([1,-1]);let a,c;
+  if(t==='same'){[a,c]=pick([[1,4],[4,1],[1,9],[9,1],[4,9],[9,4],[2,8],[8,2]]);return[sg*a,sg*c]}
+  if(t==='eq'){a=pick([2,3,5]);return[sg*a,sg*a]}
+  if(t==='none'){a=pick([2,3,5]);return[sg*a,-sg*a]}
+  [a,c]=pick([[1,4],[4,1],[1,9],[9,1],[2,9],[9,2],[2,8],[8,2]]);return[sg*a,-sg*c]}
+ function sol(q1,q2){const a=Math.sqrt(Math.abs(q1)),c=Math.sqrt(Math.abs(q2));if(q1*q2>0)return a/(a+c);if(a===c)return null;return a<c?-a/(c-a):1+c/(a-c)}
+ function E(q1,q2,u){const f=(q,p)=>{const r=u-p;if(Math.abs(r)<.02)return 0;return q*Math.sign(r)/(r*r)};return[f(q1,0),f(q2,1)]}
+ function draw(){if(k>=types.length){b.innerHTML=fin('صيّاد نقاط التعادل: '+sc+'/'+types.length,'<p>القاعدة الذهبية: نقطة التعادل دائمًا أقرب إلى الشحنة <b>الأصغر</b> مقدارًا.</p>');done();return}
+  const [q1,q2]=mk(types[k]),u0=sol(q1,q2),dd=30;
+  b.innerHTML=`<div class=cnt>الحالة ${k+1} من ${types.length} · نقاطك ${sc}</div><div class=q>شحنتان: <span class=m>q₁ = ${q1>0?'+':'−'}${Math.abs(q1)} μC</span> و <span class=m>q₂ = ${q2>0?'+':'−'}${Math.abs(q2)} μC</span> والمسافة بينهما <span class=m>${dd} cm</span>.<br>👆 اضغط على الخط حيث تتوقع نقطة التعادل.</div><canvas class=cv id=cv width=640 height=230></canvas><button class="btn re" id=nn style="width:100%;margin-top:8px">🚫 لا توجد نقطة تعادل</button><div id=ex></div>`;
+  const c=$('cv'),toX=u=>X0*2/2+u*D*2,s2=2;
+  function scene(g){const x=cx(c);x.save();x.scale(s2,1);x.strokeStyle='#ced4da';x.lineWidth=2;x.beginPath();x.moveTo(5,Y);x.lineTo(315,Y);x.stroke();x.restore();
+   for(let u=-1;u<=2;u+=.5){const X=(X0+u*D)*s2;x.fillStyle='#adb5bd';x.font='16px Arial';x.fillText((u*dd)+'',X,Y+52)}
+   ball(x,X0*s2,Y,26,q1);ball(x,(X0+D)*s2,Y,26,q2);x.fillStyle='#22223b';x.font='bold 18px Arial';x.fillText('q₁ '+Math.abs(q1)+'μC',X0*s2,Y-44);x.fillText('q₂ '+Math.abs(q2)+'μC',(X0+D)*s2,Y-44);
+   if(g!=null){const X=(X0+g*D)*s2,[e1,e2]=E(q1,q2,g),m=Math.max(Math.abs(e1),Math.abs(e2),1e-9),L=110;
+    x.fillStyle='#f08c2e';x.beginPath();x.arc(X,Y,8,0,7);x.fill();
+    if(Math.abs(e1)>1e-9)arrow(x,X,Y-14,X+Math.sign(e1)*Math.max(18,L*Math.abs(e1)/m),Y-14,'#e03131',5);
+    if(Math.abs(e2)>1e-9)arrow(x,X,Y+16,X+Math.sign(e2)*Math.max(18,L*Math.abs(e2)/m),Y+16,'#1971c2',5)}
+   return x}
+  scene(null);
+  function fin1(g,none){if(b.dataset.lock)return;b.dataset.lock=1;let ok;
+   if(u0===null)ok=!!none;else ok=!none&&Math.abs(g-u0)<=.07;
+   const x=scene(none?null:g);if(u0!==null){const X=(X0+u0*D)*s2;x.fillStyle='#2f9e44';x.font='30px Arial';x.fillText('★',X,Y-6);}
+   const qq={q:'نقطة التعادل لشحنتين '+q1+' μC و '+q2+' μC',o:['حسب القاعدة'],r:0,w:ok?0:1};ok?(sc++,good(qq)):bad(qq);
+   let w;if(u0===null)w='الشحنتان مختلفتان ومتساويتان: بينهما يتجه المجالان في نفس الاتجاه فيتجمعان، وخارجهما يكون مجال الشحنة الأقرب أكبر دائمًا ⇐ <b>لا توجد نقطة تعادل</b>.';
+   else{const r1=Math.abs(u0*dd);w=(q1*q2>0?(q1===q2?'شحنتان متشابهتان ومتساويتان ⇐ النقطة <b>في المنتصف</b> تمامًا':'شحنتان متشابهتان ⇐ النقطة <b>بينهما</b>، أقرب إلى الأصغر'):'شحنتان مختلفتان ⇐ النقطة <b>خارجهما</b> على امتداد الخط، بجوار الأصغر')+'.<br>★ تقع على بعد <span class=m>'+(+r1.toFixed(1))+' cm</span> من q₁. '+(none?'':'<br>🔴 السهم الأحمر مجال q₁ و🔵 الأزرق مجال q₂ عند النقطة التي اخترتها: '+(ok?'متساويان ومتعاكسان تقريبًا ✓':'غير متساويين، لذلك المحصلة ليست صفرًا.'))}
+   $('ex').innerHTML=`<div class=ex>${ok?'✅ أحسنت!':'❌ ليست هنا.'} ${w}</div><button class="btn go" id=nx>الحالة التالية ←</button>`;$('nx').onclick=()=>{delete b.dataset.lock;k++;draw()}}
+  onTap(c,p=>{const u=(p.x/s2-X0)/D;if(u<-1.15||u>2.15)return;fin1(u,0)});$('nn').onclick=()=>fin1(null,1)}
+ draw()};
+/* 9) اقرأ المنحنى (قانون أوم) */
+R.graph=(s,b,done)=>{let k=0,sc=0;const N=4;
+ function draw(){if(k>=N){b.innerHTML=fin('قارئ المنحنيات: '+sc+'/'+N,'<p>الميل في منحنى (V–I) = المقاومة.</p>');done();return}
+  const Rv=pick([2,4,5,8,10,20,25]),Ip=pick([.2,.4,.5,1,1.5,2]),Vp=Rv*Ip,ask=k%2?'I':'R';const Vq=ask==='I'?Rv*pick([.25,.5,.75].map(f=>f*Ip*2)):0;
+  const Imax=Ip*2,Vmax=Rv*Imax,ans=ask==='R'?Rv:Vq/Rv;
+  b.innerHTML=`<div class=cnt>منحنى ${k+1} من ${N} · نقاطك ${sc}</div><canvas class=cv id=cv width=640 height=360></canvas><div class=q style="margin-top:8px">${ask==='R'?'من المنحنى: احسب مقاومة الموصل <span class=m>R</span>':'من المنحنى: ما شدة التيار عندما يكون فرق الجهد <span class=m>'+(+Vq.toFixed(3))+' V</span>؟'}</div><div class=ans><input id=in inputmode=decimal placeholder="الناتج"><span class=m>${ask==='R'?'Ω':'A'}</span><button class=btn id=ck>تحقق</button></div><div id=fb class=fb></div>`;
+  const x=cx($('cv')),L=80,Bt=300,W=520,H=260;x.strokeStyle='#e9ecef';x.lineWidth=1;
+  for(let i=0;i<=4;i++){x.beginPath();x.moveTo(L+i*W/4,Bt);x.lineTo(L+i*W/4,Bt-H);x.stroke();x.beginPath();x.moveTo(L,Bt-i*H/4);x.lineTo(L+W,Bt-i*H/4);x.stroke()}
+  x.fillStyle='#495057';x.font='17px Arial';for(let i=0;i<=4;i++){x.fillText(+(Imax*i/4).toFixed(3)+'',L+i*W/4,Bt+20);x.fillText(+(Vmax*i/4).toFixed(2)+'',L-34,Bt-i*H/4)}
+  x.font='bold 18px Arial';x.fillText('I (A)',L+W-10,Bt+46);x.fillText('V (V)',L-30,Bt-H-24);
+  arrow(x,L,Bt,L+W+20,Bt,'#495057',2);arrow(x,L,Bt,L,Bt-H-14,'#495057',2);
+  x.strokeStyle='#7a4bc2';x.lineWidth=5;x.beginPath();x.moveTo(L,Bt);x.lineTo(L+W,Bt-H);x.stroke();
+  const PX=L+W*Ip/Imax,PY=Bt-H*Vp/Vmax;x.setLineDash([6,6]);x.strokeStyle='#f08c2e';x.lineWidth=2;x.beginPath();x.moveTo(PX,Bt);x.lineTo(PX,PY);x.lineTo(L,PY);x.stroke();x.setLineDash([]);x.fillStyle='#f08c2e';x.beginPath();x.arc(PX,PY,8,0,7);x.fill();
+  $('ck').onclick=()=>{const v=num($('in').value);if(!isFinite(v))return;$('ck').disabled=1;const ok=near(v,ans);ok?(sc++,good()):bad();
+   $('fb').className='fb '+(ok?'ok':'no');$('fb').innerHTML=(ok?'✅ صحيح! ':'❌ ')+'الميل = <span class=m>ΔV/ΔI = '+(+Vp.toFixed(3))+' / '+Ip+' = '+Rv+' Ω</span>'+(ask==='I'?'<br>ثم <span class=m>I = V/R = '+(+Vq.toFixed(3))+' / '+Rv+' = '+(+ans.toFixed(4))+' A</span>':'')+'<button class="btn go" id=nx>التالي ←</button>';$('nx').onclick=()=>{k++;draw()}};
+  $('in').onkeydown=e=>{if(e.key==='Enter')$('ck').click()}}
+ draw()};
+addEventListener('hashchange',route);
+
+route();</script></body></html>
