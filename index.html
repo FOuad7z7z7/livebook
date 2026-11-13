@@ -1055,7 +1055,8 @@ function cheerP(){}
 let selPlan='T7';
 function cpRow(label,val){return'<div><span>'+label+'</span><span style="display:flex;gap:6px;align-items:center"><b>'+val+'</b>'+(val&&!val.startsWith('[')?'<button class="cp" data-cp="'+val+'">نسخ</button>':'')+'</span></div>'}
 function refNo(){const w=who();return'LB'+(w?w.phone.slice(-4):'0000')+selPlan}
-let SIB=false;function payAmt(){const pl=PLANS.find(p=>p.id===selPlan);return SIB?Math.round(pl.p*0.7):pl.p}
+function sibName(){if(role()!=='parent')return null;const k=kid();const o=S.kids.find(x=>x!==k&&k&&x.id!==k.id&&subOf(x).until>Date.now());return o?o.name:null}
+function payAmt(){const pl=PLANS.find(p=>p.id===selPlan);return sibName()?Math.round(pl.p*0.7):pl.p}
 const bkCount=n=>n===1?'كتاب تفاعلي واحد':n===2?'كتابان تفاعليان':n+(n<=10?' كتب تفاعلية':' كتابًا تفاعليًا');
 function planSubs(gid){const g=GRADES.find(x=>x.id===gid)||{subjects:[]};const all=g.subjects||[];return{rd:all.filter(s=>!s.soon),sn:all.filter(s=>s.soon)}}
 function planTitle(p){return'باقة '+GN(p.g)+' – '+bkCount(planSubs(p.g).rd.length)}
@@ -1063,8 +1064,7 @@ function inclBox(gid){const {rd,sn}=planSubs(gid);return'<div class="incl"><div>
 function renderPay(){const gp=PLANS.filter(p=>p.g===grade().id);if(!gp.some(p=>p.id===selPlan))selPlan=(gp[0]||PLANS[0]).id;$('plans').innerHTML=(gp.length?gp:PLANS).map(p=>'<div class="pl'+(p.id===selPlan?' sel':'')+'" data-pl="'+p.id+'"><b>'+planTitle(p)+'<small style="display:block;font-weight:600;opacity:.75">حتى نهاية الفصل الأول · وكل كتاب جديد يُضاف لصفك يُفتح لك مجانًا</small></b><span class="pr">'+(p.o?'<s style="display:block;font-size:.8rem;opacity:.6">'+p.o+' د.ل</s>':'')+p.p+' د.ل'+(p.o?'<small style="display:block;font-size:.7rem;background:#e03131;color:#fff;border-radius:8px;padding:1px 6px;margin-top:2px;white-space:nowrap">🎉 سعر الافتتاح</small>':'')+'</span></div>').join('')+inclBox(grade().id);
  $('plans').querySelectorAll('[data-pl]').forEach(x=>x.onclick=()=>{selPlan=x.dataset.pl;renderPay()});
  const pl=PLANS.find(p=>p.id===selPlan);
- const ok_=v=>v&&!v.startsWith('[');$('bank').innerHTML=(ok_(CONFIG.bank)?cpRow('المصرف',CONFIG.bank):'')+(ok_(CONFIG.accountName)?cpRow('اسم الحساب',CONFIG.accountName):'')+(ok_(CONFIG.account)?cpRow('رقم الحساب',CONFIG.account):'')+(CONFIG.iban?cpRow('رقم الآيبان IBAN',CONFIG.iban):'')+'<div><span>المبلغ</span><b style="color:var(--or);font-size:1.2rem">'+payAmt()+' د.ل</b></div><label style="display:flex;gap:8px;align-items:center;font-weight:800;margin-top:6px;cursor:pointer"><input type="checkbox" id="sibChk"'+(SIB?' checked':'')+'> 👨‍👩‍👧 عندي ابن آخر مشترك معكم (خصم 30٪)</label>';
- $('sibChk').onchange=e=>{SIB=e.target.checked;renderPay()};
+ const ok_=v=>v&&!v.startsWith('[');$('bank').innerHTML=(ok_(CONFIG.bank)?cpRow('المصرف',CONFIG.bank):'')+(ok_(CONFIG.accountName)?cpRow('اسم الحساب',CONFIG.accountName):'')+(ok_(CONFIG.account)?cpRow('رقم الحساب',CONFIG.account):'')+(CONFIG.iban?cpRow('رقم الآيبان IBAN',CONFIG.iban):'')+'<div><span>المبلغ</span><b style="color:var(--or);font-size:1.2rem">'+payAmt()+' د.ل</b></div>'+(sibName()?'<div style="margin-top:6px;font-weight:800;color:#2b8a3e">🎉 لأن '+esc(sibName())+' مشترك معنا، حصلت على خصم الإخوة 30٪ تلقائيًا</div>':(role()==='parent'?'<div class="muted" style="margin-top:6px;font-size:.85rem">👨‍👩‍👧 خصم الإخوة 30٪ يظهر تلقائيًا عندما يكون لك ابن آخر مشترك ومربوط بحسابك</div>':''))+'';
  $('bank').querySelectorAll('[data-cp]').forEach(b=>b.onclick=()=>copy(b.dataset.cp));
  $('ref').textContent=refNo();const ok=/^\d{11,13}$/.test(CONFIG.whatsapp);$('waBtn').href=ok?'https://wa.me/'+CONFIG.whatsapp+'?text='+encodeURIComponent(waMsg()):'#';$('waBtn').onclick=e=>{if(!ok){e.preventDefault();toast('رقم واتساب الشركة لم يُضبط بعد')}};$('waNum').textContent=ok?'أو أرسل على الرقم: +'+CONFIG.whatsapp:'';
  const par=role()==='parent';$('codeIn').style.display=par?'none':'';$('codeGo').style.display=par?'none':'';$('codeHint').textContent=par?'عند قبول التحويل يُفعَّل اشتراك ابنك تلقائيًا ✅. هذه الخانة لأكواد المدارس والعروض فقط: أعطِ الكود لابنك ليدخله من حسابه.':'سيصلك كود مثل KH-XXXX-XXXX، اكتبه هنا.'}
@@ -1079,7 +1079,7 @@ $('rcGo').onclick=async()=>{if(!rcData)return msg('rcMsg','اختر صورة ا�
  const r=await rpc('lb_pay_submit',{p_token:S.tok,p_plan_id:selPlan,p_receipt:rcData,p_note:$('rcNote').value,p_child:role()==='parent'&&kid()?kid().id:null});busy(b,0);
  if(r.err)return msg('rcMsg','❌ '+r.err);toast('✅ وصل طلبك، سنراجعه ونفعّل الاشتراك');await loadPays();payView()};
 $('payClose').onclick=()=>$('pay').classList.remove('on');
-function waMsg(){const pl=PLANS.find(p=>p.id===selPlan),g=grade(),w=who();return 'السلام عليكم، أرسلت تحويل اشتراك الكتاب الحي.\nاسم الطالب: '+w.name+'\nهاتف الطالب: 0'+w.phone+'\nالصف: '+g.name+'\nالباقة: '+planTitle(pl)+'\nالمبلغ: '+payAmt()+' د.ل'+(SIB?' (بعد خصم الإخوة 30٪ – اسم الأخ المشترك: ......)':'')+'\nرقم المرجع: '+refNo()+'\n(أرفق صورة الإيصال)'}
+function waMsg(){const pl=PLANS.find(p=>p.id===selPlan),g=grade(),w=who();return 'السلام عليكم، أرسلت تحويل اشتراك الكتاب الحي.\nاسم الطالب: '+w.name+'\nهاتف الطالب: 0'+w.phone+'\nالصف: '+g.name+'\nالباقة: '+planTitle(pl)+'\nالمبلغ: '+payAmt()+' د.ل'+(sibName()?' (بعد خصم الإخوة 30٪ – الأخ المشترك: '+sibName()+')':'')+'\nرقم المرجع: '+refNo()+'\n(أرفق صورة الإيصال)'}
 $('codeGo').onclick=async()=>{const b=$('codeGo'),c=$('codeIn').value.trim();if(c.length<8)return msg('codeMsg','اكتب الكود كاملًا: KH-XXXX-XXXX');
  busy(b,1);const r=await rpc('lb_redeem',{p_token:S.tok,p_code:c});busy(b,0);if(r.err)return msg('codeMsg','❌ '+r.err);
  setUser(r);msg('codeMsg','🎉 تم التفعيل! اشتراكك فعّال حتى '+fmtD(r.user.sub&&r.user.sub.until),true);
@@ -1118,7 +1118,7 @@ async function loadPayReqs(){const L=$('pList');L.innerHTML='<div class="muted">
  if(!r.length){L.innerHTML='<div class="muted" style="text-align:center;padding:20px">'+($('pSt').value==='pending'?'لا توجد طلبات معلّقة 👍':'لا توجد طلبات')+'</div>';return}
  const SN={pending:'⏳ بانتظار التفعيل',approved:'✅ مفعّل',rejected:'❌ مرفوض'},SC={pending:'s-new',approved:'s-used',rejected:'s-cancelled'};
  L.innerHTML=r.map(p=>'<div class="it"><div class="h"><b style="color:var(--ink)">'+STU+' '+esc(p.student)+'</b><span class="tag '+SC[p.status]+'">'+SN[p.status]+'</span></div>'
-  +'<div class="m"><span dir="ltr">0'+p.phone+'</span> · '+esc(GN(p.grade))+(p.sender?' · أرسله: '+esc(p.sender):'')+'</div>'
+  +'<div class="m"><span dir="ltr">0'+p.phone+'</span> · '+esc(GN(p.grade))+(p.sender?' · أرسله: '+esc(p.sender):'')+'</div>'+(p.sib?'<div class="m" style="color:#2b8a3e;font-weight:800">👨‍👩‍👧 خصم إخوة 30٪ ✓ — الأخ المشترك: '+esc(p.sib)+'</div>':'')
   +'<div style="font-weight:800;color:var(--ink);margin-top:4px">'+esc(p.plan)+' · <span style="color:var(--or)">'+p.amount+' د.ل</span> · '+p.days+' يومًا</div>'
   +'<div class="m">أُرسل '+new Date(p.created).toLocaleString('ar-LY',{dateStyle:'medium',timeStyle:'short'})+(p.decided?' · عولج '+fmtD(p.decided):'')+'</div>'
   +(p.note?'<div class="m">📝 '+esc(p.note)+'</div>':'')+(p.reason?'<div class="m" style="color:#b33636">السبب: '+esc(p.reason)+'</div>':'')
