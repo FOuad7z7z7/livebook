@@ -2,6 +2,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet"><style>:root{--ink:#22223b;--pu:#7a4bc2;--pu2:#5a2fa0;--bg:#f5f2fb;--ok:#2f9e44;--no:#e03131;--or:#f08c2e}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;font-family:'Cairo',Tahoma,sans-serif;background:var(--bg);color:var(--ink);direction:rtl}
+.mr{direction:rtl;unicode-bidi:isolate;display:inline-block;font-weight:800;white-space:nowrap}
+.mo{unicode-bidi:isolate-override!important}.mo bdi{unicode-bidi:isolate;direction:rtl}
 .m{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:"Segoe UI",Roboto,Arial,sans-serif;font-weight:700;white-space:nowrap}
 #app{max-width:760px;margin:0 auto;padding:10px 12px 90px}
 .top{display:flex;align-items:center;gap:8px;margin:4px 0 10px}
@@ -395,6 +397,15 @@ R.graph=(s,b,done)=>{let k=0,sc=0;const N=4;
    $('fb').className='fb '+(ok?'ok':'no');$('fb').innerHTML=(ok?'✅ صحيح! ':'❌ ')+'الميل = <span class=m>ΔV/ΔI = '+(+Vp.toFixed(3))+' / '+Ip+' = '+Rv+' Ω</span>'+(ask==='I'?'<br>ثم <span class=m>I = V/R = '+(+Vq.toFixed(3))+' / '+Rv+' = '+(+ans.toFixed(4))+' A</span>':'')+'<button class="btn go" id=nx>التالي ←</button>';$('nx').onclick=()=>{k++;draw()}};
   $('in').onkeydown=e=>{if(e.key==='Enter')$('ck').click()}}
  draw()};
+/* مسائل لا تنتهي */
+R.gen=(s,b,done)=>{const N=s.n||6;let got=0,P;
+ function prob(){P=pick(s.gens)();b.innerHTML=`<div class=cnt>حلّ ${N} مسائل صحيحة — أرقام جديدة كل مرة</div><div class=dots>${Array.from({length:N},(_,k)=>`<i class="${k<got?'on':''}"></i>`).join('')}</div><div class=prob><b>🎯 مسألة ${got+1}:</b> ${P.q}<div class=ans><input id=in inputmode=decimal placeholder="الناتج"><span class=m>${P.u||''}</span><button class=btn id=ck>تحقق</button></div><div id=fb class=fb></div></div>`;
+  $('ck').onclick=()=>{const v=num($('in').value);if(!isFinite(v)){$('fb').className='fb no';$('fb').textContent='اكتب رقمًا';return}
+   if(near(v,P.a)){got++;good();$('fb').className='fb ok';$('fb').innerHTML='✅ صحيح! '+P.w;$('ck').disabled=1;setTimeout(()=>{if(got<N)prob();else{b.innerHTML=fin('حللت '+N+' مسائل! 🧮');done()}},1600)}
+   else{bad({q:P.q.replace(/<[^>]+>/g,''),o:[String(P.a),String(v)],r:0,w:1});$('fb').className='fb no';$('fb').innerHTML='❌ ليس بعد. الحل: '+P.w+'<br><button class="btn re" id=nx2>مسألة أخرى ↺</button>';$('nx2').onclick=prob}};
+  $('in').onkeydown=e=>{if(e.key==='Enter')$('ck').click()}}
+ prob()};
+if(window.RX)Object.assign(R,window.RX);
 addEventListener('hashchange',route);
 
 route();</script></body></html>
