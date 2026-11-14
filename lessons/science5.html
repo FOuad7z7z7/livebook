@@ -370,7 +370,7 @@ function chapterTest(pfx,G){let ok=0,dn=0;const host=$(pfx+'Q');function upd(){$
  $(pfx+'New').onclick=make;make()}
 const bank=(arr)=>()=>{const [q,o,ex]=pick(arr);return{q,o,ex:ex||''}};
 const vis=el=>{const p=el.closest('.page');return p&&p.classList.contains('on')};
-function anim(id,fn){const [c,x]=C2(id);let t0=performance.now();(function f(t){if(vis(c))fn(x,c,(t-t0)/1000);requestAnimationFrame(f)})(t0);return[c,x]}
+function anim(id,fn){const [c,x]=C2(id);let t0=performance.now();(function f(t){requestAnimationFrame(f);if(vis(c))try{fn(x,c,(t-t0)/1000)}catch(e){}})(t0);return[c,x]}
 const flipCards=(id,arr)=>{const C=$(id);C.innerHTML=arr.map(([ic,t,b])=>'<div class="card"><div class="fr"><span class="big">'+ic+'</span>'+t+'</div><div class="bk"><b>'+t+':</b> '+b+'</div></div>').join('');C.querySelectorAll('.card').forEach(c=>c.onclick=()=>c.classList.toggle('flip'))};
 const TF=(s,t)=>[s,t?['✔️ صح','❌ خطأ']:['❌ خطأ','✔️ صح']];
 function txt(x,s,X,Y,sz,col,al){x.font=FONT(sz||16);x.fillStyle=col||'#222';x.textAlign=al||'center';x.direction='rtl';x.fillText(s,X,Y)}
