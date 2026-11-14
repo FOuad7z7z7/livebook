@@ -1,0 +1,108 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>اشرح لي الدرس – الكتاب الحي</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet"><style>*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;font-family:Cairo,Tahoma,sans-serif;background:#f5f2fb;color:#22223b;direction:rtl}
+.m{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:"Segoe UI",Roboto,Arial,sans-serif;font-weight:800}
+#wrap{max-width:720px;margin:0 auto;padding:12px 12px 40px}
+.hero{background:linear-gradient(150deg,#7a4bc2,#4c2a85);color:#fff;border-radius:26px;padding:26px 20px;text-align:center;box-shadow:0 10px 30px rgba(76,42,133,.3)}
+.hero h1{margin:6px 0;font-size:1.6rem}.hero p{margin:0;opacity:.85}.hero .big{font-size:3.4rem}
+.card{background:#fff;border-radius:22px;padding:16px;margin-top:12px;box-shadow:0 3px 16px rgba(90,47,160,.08)}
+.card ol{margin:6px 0;padding-inline-start:22px;line-height:2}
+.btn{display:block;width:100%;border:0;border-radius:16px;padding:14px;font:inherit;font-weight:800;font-size:1.1rem;cursor:pointer;text-align:center;text-decoration:none;margin-top:10px}
+.go{background:linear-gradient(135deg,#f08c2e,#e8590c);color:#fff}.re{background:#f3f0ff;color:#5a2fa0}
+#main{display:none}.top{display:flex;align-items:center;gap:10px}.top b{font-size:1.15rem}
+#dots{display:flex;gap:6px;margin:10px 0}#dots i{flex:1;height:7px;border-radius:9px;background:#e5dbff}#dots i.d{background:#9775fa}#dots i.on{background:#f08c2e}
+canvas{width:100%;display:block;background:#fbfaff;border-radius:18px}
+#tx{line-height:2;font-size:1.08rem;margin-top:10px;text-align:center}
+.bar{height:5px;background:#f1f3f5;border-radius:9px;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:#f08c2e;width:0}
+.ctl{display:flex;gap:8px;margin-top:12px}.ctl button{flex:1;border:0;border-radius:14px;padding:12px;font:inherit;font-weight:800;font-size:1.05rem;cursor:pointer;background:#f3f0ff;color:#5a2fa0}
+.ctl #pp{flex:0 0 64px;background:#7a4bc2;color:#fff}.ctl button:disabled{opacity:.4}
+#nx.glow{background:#f08c2e;color:#fff;animation:pu 1s infinite}@keyframes pu{50%{transform:scale(1.04)}}
+.q{font-weight:800;font-size:1.1rem;line-height:1.9;margin-top:10px}.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.opt{border:2px solid #e5dbff;background:#fff;border-radius:14px;padding:12px;font:inherit;font-size:1.05rem;cursor:pointer}
+.opt.ok{background:#d3f9d8;border-color:#40c057}.opt.no{background:#ffe3e3;border-color:#fa5252}
+.ex{background:#f8f9fa;border-radius:12px;padding:10px;margin-top:10px;line-height:1.9}.fin{text-align:center;font-weight:900;font-size:1.15rem;margin-top:12px;color:#2b8a3e}
+#seen{display:none;text-align:center;color:#2b8a3e;font-weight:800;margin-top:8px}</style></head><body><div id=wrap><div id=intro><div class=hero><div class=big>📖</div><div>اشرح لي الدرس</div><h1 id=ttl></h1><p id=sub></p></div>
+<div class=card><b>في <span id=n></span> شرائح قصيرة (حوالي دقيقتين) 🎧 شغّل الصوت:</b><ol id=lst></ol></div>
+<button class="btn go" id=go1>▶ ابدأ الشرح</button><a class="btn re" id=skip>أعرف الدرس، خذني للتجارب والأسئلة ←</a><div id=seen>✓ شاهدت هذا الشرح من قبل</div></div>
+<div id=main><div class=top><b id=st></b></div><div id=dots></div><canvas id=cv width=640 height=400></canvas><div class=bar><i id=pb></i></div>
+<div id=tx></div><div id=qz></div><div class=ctl><button id=pv>→ السابق</button><button id=pp>⏸</button><button id=nx>التالي ←</button></div></div></div><script>/* درس تجريبي: قانون أوم — الفيزياء الثالث الثانوي (4-2) */
+const LESSON={id:'ohm',title:'قانون أوم',sub:'الفيزياء · الثالث الثانوي · الدرس 4-2',audio:'audio-xp12/',next:'phy12.html#c4',
+slides:[
+{t:'💡 الفكرة',say:'تَخَيَّلْ سِلْكًا تَتَحَرَّكُ فِيهِ الإِلِكْتِرُونَات. البَطَّارِيَّةُ تَدْفَعُهَا، وَكُلَّمَا زَادَ فَرْقُ الجُهْد، زَادَتْ سُرْعَةُ تَدَفُّقِهَا... أَيْ زَادَ التَّيَّار.',
+ txt:'البطارية «تدفع» الإلكترونات في السلك.<br>كلما زاد <b>فرق الجهد V</b> ⇐ زاد <b>التيار I</b>.',draw:'flow'},
+{t:'🚧 المقاومة',say:'لَكِنَّ ذَرَّاتِ السِّلْكِ تَعْتَرِضُ طَرِيقَ الإِلِكْتِرُونَات، فَتَصْطَدِمُ بِهَا. هَذِهِ الإِعَاقَةُ اسْمُهَا: المُقَاوَمَة. وَكُلَّمَا زَادَتِ المُقَاوَمَة، قَلَّ التَّيَّار.',
+ txt:'ذرات السلك تعيق حركة الإلكترونات.<br>هذه الإعاقة اسمها <b>المقاومة R</b>، ووحدتها <b>الأوم Ω</b>.<br>مقاومة أكبر ⇐ تيار أقل.',draw:'resist'},
+{t:'📐 القانون',say:'وَهَذَا هُوَ قَانُونُ أُوم: فَرْقُ الجُهْدِ يُسَاوِي التَّيَّارَ مَضْرُوبًا فِي المُقَاوَمَة. وَهُوَ صَحِيحٌ عِنْدَ ثُبُوتِ دَرَجَةِ الحَرَارَة.',
+ txt:'<span class=m>V = I × R</span><br>V فرق الجهد (فولت) · I التيار (أمبير) · R المقاومة (أوم)<br><small>بشرط ثبوت درجة الحرارة</small>',draw:'law'},
+{t:'📈 المنحنى',say:'إِذَا رَسَمْنَا فَرْقَ الجُهْدِ مَعَ التَّيَّار، نَحْصُلُ عَلَى خَطٍّ مُسْتَقِيمٍ يَمُرُّ بِنُقْطَةِ الأَصْل. وَمَيْلُ هَذَا الخَطِّ... هُوَ المُقَاوَمَة.',
+ txt:'منحنى (V – I) خط مستقيم يمر بنقطة الأصل.<br><b>الميل = ΔV ÷ ΔI = R</b>',draw:'graph'},
+{t:'✍️ مثال محلول',say:'مِثَال: مُقَاوَمَةٌ قِيمَتُهَا عِشْرُونَ أُوم، يَمُرُّ بِهَا تَيَّارٌ مِئَتَانِ وَخَمْسُونَ مِلِّي أَمْبِير. أَوَّلًا نُحَوِّلُ المِلِّي أَمْبِير إِلَى أَمْبِير، فَتُصْبِحُ صِفْر فَاصِلَة خَمْسَةٍ وَعِشْرِين. ثُمَّ نَضْرِبُ فِي عِشْرِين... فَيَكُونُ فَرْقُ الجُهْدِ خَمْسَةَ فُولْت.',
+ txt:'مقاومة <span class=m>20 Ω</span> يمر بها <span class=m>250 mA</span>. احسب فرق الجهد.',draw:'example'},
+{t:'⚠️ انتبه!',say:'انْتَبِه! أَكْثَرُ خَطَأٍ يَقَعُ فِيهِ الطُّلَّاب: نِسْيَانُ تَحْوِيلِ المِلِّي أَمْبِير. لَوْ ضَرَبْتَ مِئَتَيْنِ وَخَمْسِينَ فِي عِشْرِين، سَتَحْصُلُ عَلَى خَمْسَةِ آلَافِ فُولْت... وَهَذَا خَطَأٌ كَبِير.',
+ txt:'حوّل دائمًا إلى الوحدات الأساسية قبل التعويض:<br><span class=m>1 mA = 0.001 A</span>',draw:'warn'},
+{t:'✅ سؤال سريع',say:'وَالآنَ دَوْرُك: مِصْبَاحٌ مُقَاوَمَتُهُ عَشَرَةُ أُوم، وَفَرْقُ الجُهْدِ بَيْنَ طَرَفَيْهِ سِتَّةُ فُولْت. كَمْ شِدَّةُ التَّيَّار؟',
+ q:{q:'مصباح مقاومته <span class=m>10 Ω</span> وفرق الجهد بين طرفيه <span class=m>6 V</span>. ما شدة التيار؟',o:['<span class=m>0.6 A</span>','<span class=m>60 A</span>','<span class=m>16 A</span>','<span class=m>1.67 A</span>'],e:'<span class=m>I = V ÷ R = 6 ÷ 10 = 0.6 A</span>'},draw:'quiz'}],
+done:'أحسنت! فهمت فكرة الدرس 🎉 الآن جرّبها بيدك.'};
+
+/* ===== رسومات الشرائح ===== */
+const D={};
+function dot(x,X,Y,r,c){x.fillStyle=c;x.beginPath();x.arc(X,Y,r,0,7);x.fill()}
+function battery(x,X,Y,v){x.fillStyle='#343a40';x.fillRect(X-26,Y-46,52,92);x.fillStyle='#f08c2e';x.fillRect(X-26,Y-46,52,14);x.fillStyle='#fff';x.font='bold 22px Arial';x.textAlign='center';x.fillText(v,X,Y+10)}
+function wireLoop(x){x.strokeStyle='#adb5bd';x.lineWidth=22;x.lineJoin='round';x.strokeRect(90,70,460,250)}
+function loopPos(s){/* s in [0,1) around rectangle 90..550 x 70..320 */const P=2*(460+250);let d=((s%1)+1)%1*P;
+ if(d<460)return[90+d,70];d-=460;if(d<250)return[550,70+d];d-=250;if(d<460)return[550-d,320];d-=460;return[90,320-d]}
+D.flow=(x,t)=>{const V=3+3*(.5-.5*Math.cos(t*.7));wireLoop(x);battery(x,90,195,V.toFixed(1)+'V');
+ for(let i=0;i<26;i++){const[p,q]=loopPos(i/26-t*.035*V);dot(x,p,q,7,'#1c7ed6')}
+ x.fillStyle='#22223b';x.font='bold 28px Arial';x.textAlign='center';x.fillText('V = '+V.toFixed(1)+' V',220,372);x.direction='rtl';x.font='bold 26px Cairo,Arial';x.fillStyle=V>4.5?'#e8590c':'#1c7ed6';x.fillText(V>4.5?'تيار أكبر ⬆':'تيار أصغر ⬇',440,372);x.direction='ltr'};
+D.resist=(x,t)=>{x.fillStyle='#fff4e6';x.fillRect(40,110,560,170);x.strokeStyle='#adb5bd';x.lineWidth=4;x.strokeRect(40,110,560,170);
+ for(let i=0;i<7;i++)for(let j=0;j<3;j++){const X=90+i*78+(j%2)*36,Y=150+j*45;dot(x,X+2*Math.sin(t*9+i+j),Y,13,'#e8590c')}
+ for(let k=0;k<12;k++){const X=40+((t*90+k*53)%560),Y=130+((k*37)%130)+10*Math.sin(t*6+k);dot(x,X,Y,6,'#1c7ed6')}
+ x.fillStyle='#22223b';x.font='bold 24px Cairo,Arial';x.textAlign='center';x.fillText('🔵 إلكترون   🟠 ذرة في السلك',320,330);x.fillText('التصادمات = مقاومة',320,70)};
+D.law=(x,t)=>{const L=[['V','فرق الجهد','#e8590c'],['I','التيار','#1c7ed6'],['R','المقاومة','#7a4bc2']];x.textAlign='center';
+ const a=Math.min(1,t/1.2);x.globalAlpha=a;x.font='900 110px Arial';x.fillStyle='#22223b';x.fillText('=',215,200);x.fillText('×',435,200);
+ L.forEach((l,i)=>{const X=[110,325,540][i],k=Math.max(0,Math.min(1,(t-1-i*1.4)/.6));x.globalAlpha=k;x.fillStyle=l[2];x.font='900 120px Arial';x.fillText(l[0],X,205);x.font='bold 28px Cairo,Arial';x.fillText(l[1],X,270)});
+ x.globalAlpha=Math.max(0,Math.min(1,(t-7.6)/.6));x.fillStyle='#868e96';x.font='bold 24px Cairo,Arial';x.fillText('بشرط ثبوت درجة الحرارة 🌡️',320,340);x.globalAlpha=1};
+D.graph=(x,t)=>{const L=80,B=330,Wd=480,Hd=260;x.strokeStyle='#e9ecef';x.lineWidth=1;for(let i=0;i<=5;i++){x.beginPath();x.moveTo(L+i*Wd/5,B);x.lineTo(L+i*Wd/5,B-Hd);x.stroke();x.beginPath();x.moveTo(L,B-i*Hd/5);x.lineTo(L+Wd,B-i*Hd/5);x.stroke()}
+ x.strokeStyle='#495057';x.lineWidth=3;x.beginPath();x.moveTo(L,B-Hd-10);x.lineTo(L,B);x.lineTo(L+Wd+10,B);x.stroke();x.fillStyle='#495057';x.font='bold 22px Arial';x.textAlign='center';x.fillText('I (A)',L+Wd-10,B+32);x.fillText('V (V)',L-10,B-Hd-20);
+ const k=Math.min(1,t/3);x.strokeStyle='#7a4bc2';x.lineWidth=6;x.beginPath();x.moveTo(L,B);x.lineTo(L+Wd*k,B-Hd*k);x.stroke();
+ for(let i=1;i<=4;i++)if(k>=i/5)dot(x,L+Wd*i/5,B-Hd*i/5,8,'#f08c2e');
+ if(t>8.8){const a=Math.min(1,(t-8.8)/.6);x.globalAlpha=a;x.setLineDash([6,6]);x.strokeStyle='#e8590c';x.lineWidth=3;const x1=L+Wd*.4,y1=B-Hd*.4,x2=L+Wd*.8,y2=B-Hd*.8;x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y1);x.lineTo(x2,y2);x.stroke();x.setLineDash([]);
+  x.fillStyle='#e8590c';x.font='bold 24px Arial';x.fillText('ΔI',(x1+x2)/2,y1+28);x.fillText('ΔV',x2+34,(y1+y2)/2);x.font='bold 28px Cairo,Arial';x.fillStyle='#7a4bc2';x.fillText('الميل = R',L+150,B-Hd+20);x.globalAlpha=1}};
+D.example=(x,t)=>{const S=[['1️⃣ التحويل:','250 mA = 0.25 A',9.5],['2️⃣ القانون:','V = I × R',15],['3️⃣ التعويض:','V = 0.25 × 20',18],['✅ الناتج:','V = 5 V',21]];x.textAlign='right';
+ S.forEach((s,i)=>{const a=Math.max(0,Math.min(1,(t-s[2])/.5));if(!a)return;x.globalAlpha=a;const Y=80+i*80;x.fillStyle=i===3?'#d3f9d8':'#f8f5ff';x.beginPath();x.roundRect(30,Y-38,580,64,16);x.fill();
+  x.fillStyle='#22223b';x.font='bold 26px Cairo,Arial';x.fillText(s[0],590,Y+4);x.textAlign='left';x.font='bold 32px Arial';x.fillStyle=i===3?'#2b8a3e':'#5a2fa0';x.fillText(s[1],50,Y+6);x.textAlign='right'});x.globalAlpha=1};
+D.warn=(x,t)=>{x.textAlign='center';const a=Math.min(1,t/.5);x.globalAlpha=a;x.fillStyle='#ffe3e3';x.beginPath();x.roundRect(40,40,560,120,20);x.fill();
+ x.fillStyle='#c92a2a';x.font='bold 30px Arial';x.fillText('V = 250 × 20 = 5000 V',320,100);x.font='bold 26px Cairo,Arial';x.fillText('❌ نسي التحويل!',320,140);
+ const b=Math.max(0,Math.min(1,(t-16.3)/.5));x.globalAlpha=b;x.fillStyle='#d3f9d8';x.beginPath();x.roundRect(40,200,560,120,20);x.fill();x.fillStyle='#2b8a3e';x.font='bold 30px Arial';x.fillText('V = 0.25 × 20 = 5 V',320,260);x.font='bold 26px Cairo,Arial';x.fillText('✅ حوّل أولًا',320,300);x.globalAlpha=1};
+D.quiz=(x,t)=>{x.textAlign='center';x.font='90px Arial';x.fillText('💡',320,150+8*Math.sin(t*3));x.font='bold 30px Cairo,Arial';x.fillStyle='#5a2fa0';x.fillText('R = 10 Ω  ·  V = 6 V  ·  I = ?',320,260)};
+
+const $=id=>document.getElementById(id);
+const send=(t,q)=>{try{parent.postMessage(q?{lbt:t,qq:q}:{lbt:t},'*')}catch(e){}};
+let cur=0,T0=0,raf,au=new Audio(),playing=false,ended=false;
+const S=LESSON.slides;
+function fnv(s){let h=2166136261;for(const c of s){h^=c.codePointAt(0);h=Math.imul(h,16777619)>>>0}return h.toString(16)}
+function start(){$('intro').style.display='none';$('main').style.display='block';go(0)}
+function go(i){cur=Math.max(0,Math.min(S.length-1,i));const s=S[cur];ended=false;
+ $('dots').innerHTML=S.map((_,k)=>`<i class="${k<cur?'d':k===cur?'on':''}"></i>`).join('');
+ $('st').textContent=s.t;$('tx').innerHTML=s.txt||'';$('qz').innerHTML='';$('nx').classList.remove('glow');
+ $('pv').disabled=cur===0;$('nx').textContent=cur===S.length-1?'إنهاء ✓':'التالي ←';$('nx').style.display=s.q?'none':'';
+ if(s.q)quiz(s.q);
+ T0=performance.now();au.pause();au.src=LESSON.audio+LESSON.id+'_'+cur+'.mp3';au.currentTime=0;playing=true;$('pp').textContent='⏸';au.play().catch(()=>{playing=false;$('pp').textContent='▶'});
+ cancelAnimationFrame(raf);loop()}
+au.onended=()=>{ended=true;playing=false;$('pp').textContent='↺';if(!S[cur].q)$('nx').classList.add('glow')};
+function loop(){const c=$('cv'),x=c.getContext('2d');x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.direction='ltr';
+ const t=playing||ended?(au.currentTime||(performance.now()-T0)/1000):(au.currentTime||0);
+ try{D[S[cur].draw](x,ended?Math.max(t,30):t)}catch(e){}
+ const p=au.duration?au.currentTime/au.duration:0;$('pb').style.width=(p*100)+'%';raf=requestAnimationFrame(loop)}
+function quiz(q){const ord=[0,1,2,3].sort(()=>Math.random()-.5);
+ $('qz').innerHTML=`<div class=q>${q.q}</div><div class=opts>${ord.map(i=>`<button class=opt data-i=${i}>${q.o[i]}</button>`).join('')}</div><div id=qe></div>`;
+ $('qz').querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const w=+b.dataset.i,ok=w===0;if($('qz').dataset.l)return;
+  b.classList.add(ok?'ok':'no');const qq={q:q.q.replace(/<[^>]+>/g,''),o:ord.map(i=>q.o[i].replace(/<[^>]+>/g,'')),r:ord.indexOf(0),w:ord.indexOf(w)};send(ok?'ok':'no',qq);
+  if(!ok){$('qe').innerHTML='<div class=ex>❌ ليست هذه. فكّر مرة أخرى: <span class=m>I = V ÷ R</span></div>';return}
+  $('qz').dataset.l=1;$('qe').innerHTML=`<div class=ex>✅ ${q.e}</div><div class=fin>${LESSON.done}</div><a class="btn go" href="${LESSON.next}">🧪 هيا نجرّب بأيدينا ←</a><button class="btn re" id=again>↺ أعد الشرح من البداية</button>`;
+  $('again').onclick=()=>{delete $('qz').dataset.l;go(0)};try{localStorage.setItem('ex_'+LESSON.id,'1')}catch(e){}})}
+$('go1').onclick=start;$('nx').onclick=()=>{if(cur<S.length-1)go(cur+1)};$('pv').onclick=()=>go(cur-1);
+$('pp').onclick=()=>{if(ended){go(cur);return}if(playing){au.pause();playing=false;$('pp').textContent='▶'}else{au.play();playing=true;$('pp').textContent='⏸'}};
+$('ttl').textContent=LESSON.title;$('sub').textContent=LESSON.sub;$('n').textContent=S.length;
+$('lst').innerHTML=S.map(s=>`<li>${s.t}</li>`).join('');
+try{if(localStorage.getItem('ex_'+LESSON.id))$('seen').style.display='block'}catch(e){}
+$('skip').href=LESSON.next;
+</script></body></html>
