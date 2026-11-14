@@ -342,7 +342,7 @@ R.quiz=(s,b,done)=>{let L=shuf(s.items),k=0,sc=0,stk=0,best=0,wrong=[],tm,T0;con
   b.querySelectorAll('.opt').forEach(x=>x.onclick=()=>ans(+x.dataset.i))}
  draw()};
 /* أدوات رسم */
-function cx(c){const x=c.getContext('2d');x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.font='bold 22px Cairo,Arial';x.textAlign='center';x.textBaseline='middle';return x}
+function cx(c){const x=c.getContext('2d');x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,c.width,c.height);x.font='bold 22px Cairo,Arial';x.direction='ltr';x.textAlign='center';x.textBaseline='middle';return x}
 function arrow(x,x1,y1,x2,y2,col,w){x.strokeStyle=x.fillStyle=col;x.lineWidth=w||4;x.beginPath();x.moveTo(x1,y1);x.lineTo(x2,y2);x.stroke();const a=Math.atan2(y2-y1,x2-x1),h=12;x.beginPath();x.moveTo(x2,y2);x.lineTo(x2-h*Math.cos(a-.45),y2-h*Math.sin(a-.45));x.lineTo(x2-h*Math.cos(a+.45),y2-h*Math.sin(a+.45));x.closePath();x.fill()}
 function ball(x,X,Y,r,q){const g=x.createRadialGradient(X-r/3,Y-r/3,2,X,Y,r);g.addColorStop(0,q>0?'#ffa8a8':'#a5d8ff');g.addColorStop(1,q>0?'#e03131':'#1971c2');x.fillStyle=g;x.beginPath();x.arc(X,Y,r,0,7);x.fill();x.fillStyle='#fff';x.font='bold '+Math.round(r*.9)+'px Arial';x.fillText(q>0?'+':'−',X,Y+1)}
 function onTap(c,f){c.onclick=e=>{const r=c.getBoundingClientRect();f({x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height})}}
@@ -361,7 +361,7 @@ R.neutral=(s,b,done)=>{const types=shuf(['same','same','opp','opp','eq','none'])
   b.innerHTML=`<div class=cnt>الحالة ${k+1} من ${types.length} · نقاطك ${sc}</div><div class=q>شحنتان: <span class=m>q₁ = ${q1>0?'+':'−'}${Math.abs(q1)} μC</span> و <span class=m>q₂ = ${q2>0?'+':'−'}${Math.abs(q2)} μC</span> والمسافة بينهما <span class=m>${dd} cm</span>.<br>👆 اضغط على الخط حيث تتوقع نقطة التعادل.</div><canvas class=cv id=cv width=640 height=230></canvas><button class="btn re" id=nn style="width:100%;margin-top:8px">🚫 لا توجد نقطة تعادل</button><div id=ex></div>`;
   const c=$('cv'),toX=u=>X0*2/2+u*D*2,s2=2;
   function scene(g){const x=cx(c);x.save();x.scale(s2,1);x.strokeStyle='#ced4da';x.lineWidth=2;x.beginPath();x.moveTo(5,Y);x.lineTo(315,Y);x.stroke();x.restore();
-   for(let u=-1;u<=2;u+=.5){const X=(X0+u*D)*s2;x.fillStyle='#adb5bd';x.font='16px Arial';x.fillText((u*dd)+'',X,Y+52)}
+   for(let u=-1;u<=1.5;u+=.5){const X=(X0+u*D)*s2;x.fillStyle='#adb5bd';x.font='16px Arial';x.fillText((u*dd)+'',X,Y+52)}
    ball(x,X0*s2,Y,26,q1);ball(x,(X0+D)*s2,Y,26,q2);x.fillStyle='#22223b';x.font='bold 18px Arial';x.fillText('q₁ '+Math.abs(q1)+'μC',X0*s2,Y-44);x.fillText('q₂ '+Math.abs(q2)+'μC',(X0+D)*s2,Y-44);
    if(g!=null){const X=(X0+g*D)*s2,[e1,e2]=E(q1,q2,g),m=Math.max(Math.abs(e1),Math.abs(e2),1e-9),L=110;
     x.fillStyle='#f08c2e';x.beginPath();x.arc(X,Y,8,0,7);x.fill();
