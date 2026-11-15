@@ -89,6 +89,34 @@ table.t td,table.t th{padding:6px;border-bottom:1px solid var(--line);text-align
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:14px;padding:10px 18px;font-weight:700;z-index:80;opacity:0;transition:.3s;pointer-events:none}
 .toast.on{opacity:1}
 .demo{background:#fff8e1;border:1px dashed #e0b84a;border-radius:12px;padding:8px 12px;font-size:.85rem;margin:10px 0}
+
+/* ===== بطاقات المواد والفصول (تصميم 2) ===== */
+.subs{gap:14px}
+.sub.cardx{color:#fff;text-align:right;min-height:170px;padding:16px 14px 14px;border-radius:24px;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;
+ background:linear-gradient(145deg,var(--c1),var(--c2));box-shadow:0 8px 0 color-mix(in srgb,var(--c2) 55%,#000 10%),0 14px 26px rgba(0,0,0,.08);transition:transform .15s}
+.sub.cardx:active{transform:translateY(4px)}
+.sub.cardx::before{display:none}
+.sub.cardx .ic{position:absolute;top:10px;left:10px;width:auto;height:auto;margin:0;background:none;font-size:3.1rem;filter:drop-shadow(0 6px 6px rgba(0,0,0,.22))}
+.sub.cardx b{color:#fff;font-size:1.15rem;text-shadow:0 2px 4px rgba(0,0,0,.15)}
+.sub.cardx .muted{color:#fff;opacity:.95;font-weight:800}
+.sub.cardx .bar{background:rgba(255,255,255,.35);height:9px}.sub.cardx .bar i{background:#fff}
+.sub.cardx.soon{filter:saturate(.35);opacity:.7}
+.sub.cardx .sn{background:rgba(255,255,255,.3);border-radius:99px;padding:0 10px;width:max-content;font-weight:800;font-size:.8rem}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.cch{background:#fff;border-radius:20px;padding:8px 8px 10px;box-shadow:0 6px 0 #e3e6f0;cursor:pointer;transition:transform .15s}
+.cch:active{transform:translateY(4px);box-shadow:0 2px 0 #e3e6f0}
+.cch .art{height:104px;border-radius:15px;display:grid;place-items:center;position:relative;background:linear-gradient(145deg,var(--c1),var(--c2))}
+.cch .art span{font-size:3.2rem;filter:drop-shadow(0 6px 5px rgba(0,0,0,.25))}
+.cch .art em{position:absolute;top:5px;right:7px;font-style:normal;font-size:1.3rem}
+.cch .art u{position:absolute;bottom:6px;left:7px;text-decoration:none;background:rgba(255,255,255,.88);color:#343a40;font-weight:800;font-size:.75rem;border-radius:99px;padding:0 8px}
+.cch .art .nn{position:absolute;top:6px;left:8px;background:rgba(0,0,0,.18);color:#fff;font-weight:900;font-size:.8rem;border-radius:99px;padding:0 8px}
+.cch b{display:block;font-size:.95rem;line-height:1.5;margin:7px 3px 4px;color:var(--ink);min-height:2.9em}
+.cch .bar{height:7px;margin:0 3px}.cch .bar i{background:var(--c2)}
+.cch small{display:block;margin:2px 3px 0;color:var(--soft);font-weight:700;font-size:.78rem}
+.cch.soonc{opacity:.6}
+.chback{display:flex;align-items:center;gap:10px;background:linear-gradient(145deg,var(--c1),var(--c2));color:#fff;border-radius:20px;padding:12px 14px;margin:10px 0 6px;cursor:pointer;font-weight:900}
+.chback .e{font-size:2.2rem}.chback small{display:block;font-weight:700;opacity:.9}
+.chback .x{margin-right:auto;white-space:nowrap;background:rgba(255,255,255,.25);border-radius:99px;padding:2px 12px;font-size:.85rem}
 </style>
 <style>
 .grade{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid var(--line);border-radius:16px;padding:12px 14px;margin:8px 0;cursor:pointer}
@@ -896,6 +924,7 @@ function home(){const r=role();show(r==='admin'?'admin':r==='parent'?'parent':r=
 function show(id){document.querySelectorAll('.scr').forEach(s=>s.classList.toggle('on',s.id==='s-'+id));window.scrollTo(0,0);
  if(id==='home')renderHome();if(id==='parent')renderParent();if(id==='admin')renderAdmin();if(id==='setup')renderSetup()}
 document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>show(b.dataset.go));
+{const sb=document.querySelector('#s-subj [data-go]');if(sb)sb.onclick=()=>{if(curChap!=null&&curSubj){curChap=null;openSubj(curSubj)}else show('home')}}
 document.querySelectorAll('[data-out]').forEach(b=>b.onclick=logout);
 document.querySelectorAll('.role').forEach(r=>r.onclick=()=>openAuth(r.dataset.role));
 $('adminLink').onclick=()=>openAuth('admin');
@@ -976,21 +1005,37 @@ function renderHome(){if(role()!=='student'){home();return}setTimeout(()=>window
  planBox($('hPlan'),'s');{const pp=parentSaved();$('hParent').classList.toggle('on',!!pp);if(pp)$('hParentT').textContent='👨‍👩‍👧 حساب '+S.user.name}
  const stars=Object.values(ALL).filter(l=>l.grade===g&&l.star&&l.f.includes('3d'));$('feat').innerHTML='';
  stars.forEach(l=>{const d=document.createElement('div');d.className='feat';d.innerHTML='<div class="ic">'+(l.t.match(/^\S+/)[0])+'</div><div><b>'+l.t.replace(/^\S+\s/,'')+'</b><span>تجربة ثلاثية الأبعاد – جرّبها الآن!</span></div>';d.onclick=()=>openLesson(l.id);$('feat').appendChild(d)});
- const G=$('subs');G.innerHTML='';(g.subjects||[]).forEach(s=>{const d=document.createElement('div');d.className='sub'+(s.soon?' soon':'');d.style.setProperty('--c',s.c);
-  const n=subLessons(s).length;d.innerHTML='<div class="ic">'+s.icon+'</div><b>'+s.name+'</b><span class="muted">'+(s.soon?'⏳ قريبًا':n+' دروس')+'</span>'+(s.soon?'':'<div class="bar" style="--c:'+s.c+'"><i style="width:'+subjProg(s)+'%"></i></div>');
-  if(!s.soon)d.onclick=()=>openSubj(s.id);else d.onclick=()=>toast('هذه المادة قيد الإعداد ⏳');G.appendChild(d)});
+ const G=$('subs');G.innerHTML='';(g.subjects||[]).forEach(s=>{const d=document.createElement('div');d.className='sub cardx'+(s.soon?' soon':'');const cc=subCol(s);d.style.setProperty('--c1',cc[0]);d.style.setProperty('--c2',cc[1]);
+  const LL=subLessons(s),n=LL.length,dn=LL.filter(l=>S.stats[l.id]&&S.stats[l.id].opened).length;d.innerHTML='<div class="ic">'+s.icon+'</div><b>'+s.name+'</b>'+(s.soon?'<span class="sn">قريبًا ✨</span>':'<div class="bar"><i style="width:'+(n?Math.round(dn/n*100):0)+'%"></i></div><span class="muted">'+dn+' من '+n+' درس</span>');
+  if(!s.soon)d.onclick=()=>{curChap=null;openSubj(s.id)};else d.onclick=()=>toast('هذه المادة قيد الإعداد ⏳');G.appendChild(d)});
  const r=$('recent');const rec=Object.entries(S.stats).filter(([k,v])=>v.last&&ALL[k]&&ALL[k].grade===g).sort((a,b)=>b[1].last-a[1].last).slice(0,3);
  r.innerHTML=rec.length?'':'<div class="muted">ابدأ أول درس لك من المواد أعلاه 👆</div>';rec.forEach(([k])=>r.appendChild(lessonRow(ALL[k])));window.funHome&&funHome()}
 function lessonRow(l){const x=st(l.id),locked=!l.free&&!active();const d=document.createElement('div');d.className='les'+(locked?' lock':'');
  const acc=x.ok+x.no?Math.round(x.ok/(x.ok+x.no)*100):null;const icon=locked?'🔒':x.opened?(acc!==null&&acc>=70?'🏆':'▶️'):'✨';const bg=locked?'rgba(255,255,255,.05)':x.opened?'rgba(60,203,127,.14)':'rgba(232,176,75,.14)';
  d.innerHTML='<div class="st" style="background:'+bg+'">'+icon+'</div><div style="flex:1"><b>'+l.t+'</b><span class="muted">'+l.sub.icon+' '+l.sub.name+(x.ok?' · ✓ '+x.ok+' إجابة صحيحة':'')+'</span></div>'+(l.free?'<span class="tag" style="background:#E6F7EA;color:#1E7A34">مجاني</span>':l.star?'<span class="tag" style="background:#FFF4DB;color:#A86B00">⭐</span>':'');
  d.onclick=()=>locked?openPay():openLesson(l.id);return d}
+
+/* ===== ألوان ورسومات البطاقات ===== */
+const SUBPAL=[[/رياض/,'#ffa94d','#f76707'],[/علوم/,'#69db7c','#2b8a3e'],[/إنجليز|انجليز/,'#4dabf7','#1971c2'],[/لغتي|العربية|عربي/,'#b197fc','#6741d9'],[/فيزياء/,'#748ffc','#3b5bdb'],[/كيمياء/,'#f783ac','#c2255c'],[/أحياء|احياء/,'#38d9a9','#087f5b'],[/إسلام/,'#63e6be','#0c8599'],[/اجتماع|تاريخ|جغراف/,'#ff8787','#c92a2a'],[/حاسوب|تقني/,'#66d9e8','#0b7285']];
+const CHPAL=[['#ffa94d','#e8590c'],['#4dabf7','#1c7ed6'],['#f783ac','#d6336c'],['#69db7c','#2f9e44'],['#b197fc','#7048e8'],['#ffd43b','#f08c00'],['#66d9e8','#0c8599'],['#ffa8a8','#e03131'],['#a9e34b','#5c940d'],['#e599f7','#ae3ec9']];
+function subCol(s){for(const p of SUBPAL)if(p[0].test(s.name))return[p[1],p[2]];return['color-mix(in srgb,'+s.c+' 65%,#fff)',s.c]}
+const CHKW=[[/ضوء|بصري|عدس|مرآ/,'💡'],[/كهرب|تيار|دائر|أوم/,'⚡'],[/مغناط/,'🧲'],[/صوت|موج/,'🔊'],[/حرار|طاقة/,'🔥'],[/حرك|قو[ةى]|نيوتن|سرعة/,'🚀'],[/كيميائ|تفاعل|ذر[ةا]|عنصر|مركب|محلول|أحماض|حمض/,'⚗️'],[/بيئ|نظام بيئي/,'🌍'],[/نبات|زهر|بذور/,'🌱'],[/خلي[ةا]/,'🦠'],[/تكاثر|وراث/,'🧬'],[/جسم|هضم|دم|قلب|تنفس/,'🫀'],[/دورات المواد|ماء|مياه/,'💧'],[/فضاء|كواكب|شمس/,'🪐'],[/أرض|صخور|زلازل/,'🌋'],
+ [/كسور|كسر/,'🍕'],[/معادل/,'⚖️'],[/إحداث|احداث/,'📍'],[/مساح|حجم|سطوح/,'📦'],[/مضلع/,'🔷'],[/تماثل/,'🦋'],[/تطابق|تشابه|مثلث/,'🔺'],[/إحصا|متوسط|بيانات/,'📊'],[/احتمال/,'🎲'],[/مجموع/,'🧺'],[/دال[ةه]|دوال/,'📈'],[/أسس|جذور|أعداد|عدد/,'🔢'],[/تحليل|مفكوك|جبر/,'🧩'],[/زاوي|هندس|دائرة/,'📐'],[/مثلثات|جيب/,'📐'],[/تفاضل|تكامل|نهاي/,'∫'],[/مصفوف/,'🔲'],[/مراجعة|العب/,'🎮'],[/تحد/,'🏆'],
+ [/family|عائل/i,'👨‍👩‍👧'],[/body|جسم/i,'🧍'],[/house|بيت/i,'🏠'],[/toy|ألعاب/i,'🧸'],[/class|فصل/i,'🏫'],[/media|إعلام/i,'📺'],[/job|career|مهن/i,'👷'],[/countr|دول/i,'🌍'],[/world|عالم/i,'🌎'],[/time|وقت/i,'⏰'],[/food|طعام|أكل/i,'🍎'],[/sport|رياض/i,'⚽'],[/describ|وصف/i,'🖼️'],[/fun|تحد/i,'🏆'],[/travel|سفر/i,'✈️'],[/health|صح/i,'🩺'],[/animal|حيوان/i,'🐾'],[/weather|طقس/i,'⛅']];
+function chEmoji(c,s){for(const k of CHKW)if(k[0].test(c.t))return k[1];const l=c.lessons[0];const m=l&&l.t.match(/^(\p{Extended_Pictographic}(️|‍\p{Extended_Pictographic})*)/u);return m?m[1]:s.icon}
+let curChap=null;
 let curSubj=null;
-function openSubj(id){const s=grade().subjects.find(x=>x.id===id);curSubj=id;$('sjTitle').innerHTML='<i style="background:'+s.c+'">'+s.icon+'</i>'+s.name;
+function openSubj(id){const s=grade().subjects.find(x=>x.id===id);if(id!==curSubj)curChap=null;curSubj=id;const sc0=subCol(s);$('sjTitle').innerHTML='<i style="background:linear-gradient(145deg,'+sc0[0]+','+sc0[1]+')">'+s.icon+'</i>'+s.name;
  const n=subLessons(s).length;$('sjInfo').textContent=grade().name+' · '+n+' دروس جاهزة';const L=$('sjList');L.innerHTML='';
  if(!active()){const w=document.createElement('div');w.className='warn';w.innerHTML='🔒 الاشتراك غير فعّال. الدروس المجانية متاحة، وللباقي <a href="#" id="wPay">اشترك الآن</a>.';L.appendChild(w);setTimeout(()=>{const a=$('wPay');if(a)a.onclick=e=>{e.preventDefault();openPay()}})}
- s.chapters.forEach(c=>{if(c.n){const h=document.createElement('div');h.className='chap';h.innerHTML='<span>'+c.n+'</span>'+c.t;L.appendChild(h)}
-  if(c.lessons.length)c.lessons.forEach(l=>L.appendChild(lessonRow(l)));else{const d=document.createElement('div');d.className='soonrow';d.innerHTML='<span>دروس هذا الفصل</span><span>⏳ قريبًا</span>';L.appendChild(d)}});
+ const CH=s.chapters,done=l=>S.stats[l.id]&&S.stats[l.id].opened;
+ if(CH.length<2){CH.forEach(c=>c.lessons.forEach(l=>L.appendChild(lessonRow(l))))}
+ else if(curChap!=null&&CH[curChap]){const c=CH[curChap],p=CHPAL[curChap%CHPAL.length],dn=c.lessons.filter(done).length;const h=document.createElement('div');h.className='chback';h.style.setProperty('--c1',p[0]);h.style.setProperty('--c2',p[1]);
+  h.innerHTML='<span class="e">'+chEmoji(c,s)+'</span><div><div>'+c.t+'</div><small>'+dn+' من '+c.lessons.length+' درس</small></div><span class="x">→ كل الفصول</span>';h.onclick=()=>{curChap=null;openSubj(id)};L.appendChild(h);
+  if(c.lessons.length)c.lessons.forEach(l=>L.appendChild(lessonRow(l)));else{const d=document.createElement('div');d.className='soonrow';d.innerHTML='<span>دروس هذا الفصل</span><span>⏳ قريبًا</span>';L.appendChild(d)}}
+ else{const gr=document.createElement('div');gr.className='cgrid';CH.forEach((c,i)=>{const p=CHPAL[i%CHPAL.length],n=c.lessons.length,dn=c.lessons.filter(done).length;const d=document.createElement('div');d.className='cch'+(n?'':' soonc');d.style.setProperty('--c1',p[0]);d.style.setProperty('--c2',p[1]);
+   d.innerHTML='<div class="art"><span>'+chEmoji(c,s)+'</span>'+(n&&dn===n?'<em>✅</em>':'')+'<u>'+(n?n+' درس':'قريبًا')+'</u>'+(c.n?'<i class="nn">'+c.n+'</i>':'')+'</div><b>'+c.t+'</b><div class="bar"><i style="width:'+(n?Math.round(dn/n*100):0)+'%"></i></div><small>'+dn+' من '+n+'</small>';
+   d.onclick=()=>{curChap=i;openSubj(id)};gr.appendChild(d)});L.appendChild(gr)}
  document.querySelectorAll('.scr').forEach(x=>x.classList.toggle('on',x.id==='s-subj'));window.scrollTo(0,0)}
 $('hLink').onclick=async()=>{const b=$('hLink');busy(b,1);const r=await rpc('lb_link_code',{p_token:S.tok});busy(b,0);if(r.err)return toast(r.err);
  const t='رمز ربط حسابي في تطبيق الكتاب الحي: '+r.code+'\nافتح التطبيق ← أنا ولي أمر ← اكتب الرمز. (صالح 24 ساعة)';
