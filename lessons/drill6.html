@@ -1,0 +1,364 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>كرّاسة تدريبات رياضيات السادس – الكتاب الحي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800;900&display=swap" rel="stylesheet"><style>*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+body{margin:0;font-family:Cairo,Tahoma,sans-serif;direction:rtl;color:#2b2d42;min-height:100vh;
+ background:radial-gradient(circle at 20% 10%,#fff6d6 0,transparent 40%),radial-gradient(circle at 90% 30%,#d7f5ff 0,transparent 45%),linear-gradient(180deg,#e9f7ff,#fff4fb);overflow-x:hidden}
+#sky{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+#sky i{position:absolute;font-style:normal;opacity:.55;animation:drift linear infinite}
+@keyframes drift{from{transform:translateX(110vw)}to{transform:translateX(-30vw)}}
+#app{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:10px 12px 120px}
+.top{display:flex;align-items:center;gap:8px}
+.top .home{border:0;background:#fff;border-radius:18px;padding:8px 14px;font:inherit;font-weight:900;font-size:1.1rem;box-shadow:0 4px 0 #d0d7e2;cursor:pointer}
+.stars{margin-inline-start:auto;background:#fff;border-radius:18px;padding:6px 14px;font-weight:900;font-size:1.2rem;box-shadow:0 4px 0 #ffd43b}
+/* البومة */
+#owl{position:fixed;bottom:10px;left:10px;z-index:20;display:flex;align-items:flex-end;gap:6px;pointer-events:none;max-width:92vw}
+#owl .o{width:84px;height:84px;animation:bob 2.2s ease-in-out infinite;filter:drop-shadow(0 6px 6px rgba(0,0,0,.18));pointer-events:auto;cursor:pointer}
+#owl .o.talk{animation:talk .25s ease-in-out infinite alternate}
+#owl .b{background:#fff;border-radius:22px 22px 22px 4px;padding:10px 14px;font-weight:800;font-size:1.05rem;box-shadow:0 6px 16px rgba(0,0,0,.12);max-width:300px;transform-origin:bottom left;animation:pop .3s}
+@keyframes bob{50%{transform:translateY(-8px) rotate(-3deg)}}
+@keyframes talk{to{transform:scale(1.08) rotate(4deg)}}
+@keyframes pop{from{transform:scale(.3);opacity:0}}
+/* الخريطة */
+.title{text-align:center;margin:8px 0 4px}.title h1{margin:0;font-size:2rem;color:#7048e8;text-shadow:0 3px 0 #fff}.title p{margin:0;font-weight:700;color:#868e96}
+.map{position:relative;margin-top:10px;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.map svg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.stop{position:relative;z-index:1;margin:0 auto 14px;text-align:center;cursor:pointer;animation:pop .4s backwards}
+.house{width:96px;height:96px;font-size:3rem!important;margin:0 auto;border-radius:36px;display:grid;place-items:center;font-size:3.6rem;font-weight:900;color:#fff;box-shadow:0 8px 0 rgba(0,0,0,.15),inset 0 -8px 0 rgba(0,0,0,.08);transition:transform .15s;position:relative}
+.stop:active .house{transform:scale(.92)}
+.house .st{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);font-size:1.05rem;background:#fff;border-radius:12px;padding:0 6px;white-space:nowrap}
+.stop b{display:block;margin-top:18px;font-size:1.05rem}
+.album{background:#fff;border-radius:24px;padding:12px;margin-top:16px;box-shadow:0 6px 0 #e9ecef}
+.album h3{margin:0 0 6px}.album .s{display:inline-grid;place-items:center;width:52px;height:52px;margin:3px;border-radius:50%;background:#f1f3f5;font-size:1.8rem;filter:grayscale(1);opacity:.35}
+.album .s.on{filter:none;opacity:1;background:#fff3bf;animation:pop .4s}
+/* صفحة الحرف */
+.hero{position:relative;text-align:center}
+canvas.lt{width:min(320px,80vw);height:auto;display:block;margin:0 auto;cursor:pointer}
+.steps{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:8px 0}
+.steps button{border:0;border-radius:22px;padding:10px 12px;min-width:70px;font:inherit;font-weight:900;font-size:1rem;background:#fff;box-shadow:0 5px 0 #dee2e6;cursor:pointer;position:relative}
+.steps button .e{display:block;font-size:1.8rem}
+.steps button.on{background:#7048e8;color:#fff;box-shadow:0 5px 0 #4c2fb0}
+.steps button.done::after{content:"⭐";position:absolute;top:-10px;left:-6px;font-size:1.3rem}
+.stage{background:#fff;border-radius:30px;padding:14px;box-shadow:0 8px 0 #e9ecef;min-height:360px;position:relative;overflow:hidden}
+.stage h2{margin:0 0 8px;text-align:center;font-size:1.3rem}
+canvas.play{width:100%;display:block;border-radius:22px;touch-action:none}
+.cards{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.card{border:0;border-radius:26px;min-width:96px;padding:12px 10px;font:inherit;font-weight:900;font-size:2.6rem;cursor:pointer;color:#fff;box-shadow:0 6px 0 rgba(0,0,0,.18);transition:transform .12s}
+.card small{display:block;font-size:.9rem;font-weight:800;opacity:.95}
+.card:active{transform:scale(.92)}
+.pics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pic{border:0;background:#f8f9fa;border-radius:24px;padding:10px 4px;font:inherit;cursor:pointer;box-shadow:0 5px 0 #e9ecef;transition:transform .15s}
+.pic .em{font-size:3.2rem;display:block}.pic b{font-size:1.1rem}
+.pic.ok{background:#d3f9d8;box-shadow:0 5px 0 #8ce99a;transform:scale(1.05)}.pic.no{animation:shk .4s;background:#ffe3e3}
+@keyframes shk{25%{transform:translateX(8px)}75%{transform:translateX(-8px)}}
+.big{display:block;width:100%;border:0;border-radius:24px;padding:14px;font:inherit;font-weight:900;font-size:1.25rem;color:#fff;background:linear-gradient(135deg,#ff922b,#f76707);box-shadow:0 6px 0 #d9480f;cursor:pointer;margin-top:12px}
+.big.g{background:linear-gradient(135deg,#51cf66,#2f9e44);box-shadow:0 6px 0 #2b8a3e}
+.prog{display:flex;justify-content:center;gap:5px;margin:6px 0}.prog i{width:14px;height:14px;border-radius:50%;background:#e9ecef}.prog i.on{background:#ffd43b;box-shadow:0 0 0 3px #fff3bf}
+.cf{position:fixed;top:-50px;font-size:2rem;pointer-events:none;z-index:50;animation:fall 1.8s ease-in forwards}
+@keyframes fall{to{transform:translateY(115vh) rotate(720deg)}}
+.reward{position:fixed;inset:0;z-index:40;background:rgba(43,45,66,.55);display:grid;place-items:center}
+.reward div{background:#fff;border-radius:36px;padding:24px 30px;text-align:center;animation:pop .4s}
+.reward .s{font-size:6rem;animation:bob 1.2s infinite}.reward h2{margin:6px 0}
+.word{font-size:2.6rem;font-weight:900;letter-spacing:2px;text-align:center;margin:6px 0}
+.word .gap{display:inline-block;min-width:56px;border-bottom:5px dashed #ffa94d;color:#ffa94d}
+</style></head><body><div id="app"></div>
+<script>const T=s=>s;
+const BOOK='drill6',ABASE='audio-dr6/',BOOKT='📝 كرّاسة التدريبات التفاعلية',BOOKS='رياضيات الصف السادس · تدريبات لا تنتهي مع شرح الحل';
+window.MINI0={ch:'6',c1:'#63e6be',c2:'#0ca678'};
+const HELLO=T("أهلا");
+const A3=[['t','🟢','تدريب','t'],['w','🟠','مسائل لفظية','w'],['c','🔴','تحدٍّ','c']];
+const PAGES=[
+ {id:'alg',g:'alg',type:'drill',t:'الجبر',icon:'🔤',col:'#1c7ed6',sticker:'🔤',acts:A3},
+ {id:'ang',g:'ang',type:'drill',t:'الزوايا في الأشكال',icon:'📐',col:'#e8590c',sticker:'📐',acts:A3},
+ {id:'sol',g:'sol',type:'drill',t:'المجسمات والشبكات',icon:'🧊',col:'#7048e8',sticker:'🧊',acts:A3},
+ {id:'rat',g:'rat',type:'drill',t:'النسبة',icon:'⚖️',col:'#2f9e44',sticker:'⚖️',acts:A3},
+ {id:'pc1',g:'pc1',type:'drill',t:'النسبة المئوية (1)',icon:'💯',col:'#c2255c',sticker:'💯',acts:A3},
+ {id:'pc2',g:'pc2',type:'drill',t:'النسبة المئوية (2)',icon:'🏷️',col:'#d6336c',sticker:'🏷️',acts:A3},
+ {id:'pc3',g:'pc3',type:'drill',t:'النسبة المئوية (3)',icon:'📈',col:'#ae3ec9',sticker:'📈',acts:A3},
+ {id:'spd',g:'spd',type:'drill',t:'الوقت والسرعة',icon:'🏎️',col:'#f08c00',sticker:'🏎️',acts:A3},
+ {id:'cir',g:'cir',type:'drill',t:'الدوائر',icon:'⭕',col:'#0c8599',sticker:'⭕',acts:A3},
+ {id:'pie',g:'pie',type:'drill',t:'القطاعات الدائرية',icon:'🥧',col:'#e67700',sticker:'🥧',acts:A3},
+ {id:'area',g:'area',type:'drill',t:'مساحة ومحيط الأشكال',icon:'🟦',col:'#1971c2',sticker:'🟦',acts:A3},
+ {id:'vol',g:'vol',type:'drill',t:'حجم المجسمات والسوائل',icon:'🧃',col:'#5f3dc4',sticker:'🧃',acts:A3},
+ {id:'mix',type:'drill',t:'التحدي الكبير',icon:'🏆',col:'#e03131',sticker:'👑',sub:'12 سؤالًا من كل المواضيع!',acts:[['m','🏆','التحدي','mix']]}
+];
+
+const $=id=>document.getElementById(id)||{innerHTML:'',style:{},querySelectorAll:()=>[],animate(){},classList:{add(){},remove(){}}};
+
+const send=(t,q)=>{try{parent.postMessage(q?{lbt:t,qq:q}:{lbt:t},'*')}catch(e){}};
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const pick=a=>a[Math.random()*a.length|0];
+function fnv(s){let h=2166136261;for(const c of s){h^=c.codePointAt(0);h=Math.imul(h,16777619)>>>0}return h.toString(16).padStart(8,'0')}
+/* ===== الصوت ===== */
+let AU=new Audio(),qCb=null,AC;
+function SAY(t,cb){if(window.NOAUDIO){const o=document.querySelector('#owl .o');o&&o.classList.add('talk');setTimeout(()=>{o&&o.classList.remove('talk');cb&&cb()},650);return}try{AU.pause()}catch(e){}AU=new Audio(ABASE+fnv(t)+'.mp3');const o=document.querySelector('#owl .o');o&&o.classList.add('talk');
+ const end=()=>{o&&o.classList.remove('talk');if(cb){const c=cb;cb=null;c()}};AU.onended=end;AU.onerror=end;AU.play().catch(end)}
+function SAYS(list,cb){let i=0;const nx=()=>{if(i>=list.length){cb&&cb();return}SAY(list[i++],nx)};nx()}
+function OWL(txt,say,cb){const b=document.querySelector('#owl .b');if(b){b.innerHTML=txt;b.style.animation='none';b.offsetWidth;b.style.animation=''}if(say)SAY(say,cb)}
+function tone(f,d,type,v,delay){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime+(delay||0),o=AC.createOscillator(),g=AC.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(v||.08,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d+.02)}catch(e){}}
+const FX={pop(){tone(900,.08,'triangle',.12);tone(1400,.06,'sine',.06,.03)},ok(){tone(660,.12,'sine',.08);tone(990,.18,'sine',.08,.1)},no(){tone(200,.18,'sawtooth',.05);tone(150,.2,'sawtooth',.05,.12)},win(){[523,659,784,1047,1319].forEach((f,i)=>tone(f,.25,'triangle',.08,i*.1))},boing(){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.frequency.setValueAtTime(300,t);o.frequency.exponentialRampToValueAtTime(120,t+.3);g.gain.setValueAtTime(.08,t);g.gain.exponentialRampToValueAtTime(.001,t+.35);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+.36)}catch(e){}}};
+const PRAISE=[T("أَحْسَنْتَ!"),T("رَائِعٌ!"),T("مُمْتَازٌ!"),T("بَطَلٌ!"),T("شَاطِرٌ!")];
+const TRY=T("حَاوِلْ مَرَّةً أُخْرَى");
+function good(q){FX.ok();send('ok',q);addStar()}
+function bad(q){FX.no();send('no',q)}
+function confetti(n){for(let i=0;i<(n||30);i++){const s=document.createElement('span');s.className='cf';s.textContent=pick(['⭐','🎈','🎉','✨','🍬','🌈','💖']);s.style.left=Math.random()*100+'vw';s.style.animationDelay=Math.random()*.6+'s';document.body.appendChild(s);setTimeout(()=>s.remove(),2600)}}
+/* ===== الحالة ===== */
+let ST={};try{ST=JSON.parse(localStorage.getItem('k_'+BOOK)||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem('k_'+BOOK,JSON.stringify(ST))}catch(e){}};
+function addStar(){ST.stars=(ST.stars||0)+1;save();const e=$('stc');if(e){e.textContent='⭐ '+ST.stars;e.animate([{transform:'scale(1.4)'},{transform:'scale(1)'}],{duration:300})}}
+const pg=id=>PAGES.find(p=>p.id===id);
+/* ===== السماء ===== */
+(function(){const s=document.createElement('div');s.id='sky';for(let i=0;i<7;i++){const c=document.createElement('i');c.textContent=pick(['☁️','☁️','☁️','🎈','⭐']);c.style.top=(5+i*13)+'%';c.style.fontSize=(30+Math.random()*40)+'px';c.style.animationDuration=(30+Math.random()*40)+'s';c.style.animationDelay=(-Math.random()*60)+'s';s.appendChild(c)}document.body.prepend(s);
+ const o=document.createElement('div');o.id='owl';o.innerHTML='<canvas class="o" width=150 height=150></canvas><div class="b"></div>';document.body.appendChild(o);o.querySelector('.o').onclick=()=>{FX.boing();SAY(pick(PRAISE))};
+ const mc=o.querySelector('.o'),mx=mc.getContext('2d');setInterval(()=>{const t=performance.now()/1000,M=window.MINI||{ch:'أ',c1:'#ff8787',c2:'#e03131'};mx.clearRect(0,0,150,150);mx.save();mx.translate(75,82+Math.sin(t*3)*4);
+  const g=mx.createLinearGradient(0,-60,0,60);g.addColorStop(0,M.c1);g.addColorStop(1,M.c2);mx.fillStyle=g;mx.lineWidth=8;mx.strokeStyle='#fff';mx.lineJoin='round';glyph(mx,M.ch,0,0,110,'both');
+  const bl=(t%3.4)<.12;[-14,14].forEach(ex=>{mx.fillStyle='#fff';mx.beginPath();mx.ellipse(ex,-12,10,bl?2:11,0,0,7);mx.fill();if(!bl){mx.fillStyle='#212529';mx.beginPath();mx.arc(ex+Math.sin(t)*2,-10,4.5,0,7);mx.fill()}});
+  const talk=mc.classList.contains('talk');mx.fillStyle='#212529';mx.beginPath();if(talk){mx.ellipse(0,12,7,3+Math.abs(Math.sin(t*18))*6,0,0,7);mx.fill()}else{mx.strokeStyle='#212529';mx.lineWidth=3;mx.arc(0,6,9,.15*Math.PI,.85*Math.PI);mx.stroke()}mx.restore()},50)})();
+/* ===== التنقل ===== */
+function route(){const h=location.hash.slice(1)||'home';{const q=pg(h);window.MINI=q&&q.ch?{ch:q.ch,c1:q.c1,c2:q.c2}:(window.MINI0||{ch:'أ',c1:'#ff8787',c2:'#e03131'})}scrollTo(0,0);try{AU.pause()}catch(e){}cancelAnimationFrame(RAF);if(h==='home'||!pg(h))return home();const p=pg(h);(Object.assign({letter:letterPage,shapes:shapesPage,review:reviewPage},window.XT||{}))[p.type](p)}
+let RAF=0;const loop=f=>{const L=t=>{f(t/1000);RAF=requestAnimationFrame(L)};cancelAnimationFrame(RAF);RAF=requestAnimationFrame(L)};
+function topBar(){return `<div class=top><button class=home onclick="location.hash='home'">🗺️ الخريطة</button><div class=stars id=stc>⭐ ${ST.stars||0}</div></div>`}
+function home(){const C=['#ff6b6b','#f59f00','#51cf66','#339af0','#cc5de8','#ff922b','#20c997','#f06595'];
+ $('app').innerHTML=topBar()+`<div class=title><h1>${BOOKT}</h1><p>${BOOKS}</p></div><div class=map id=map>${PAGES.map((p,i)=>{const d=(ST.done||{})[p.id]||0;return `<div class=stop onclick="location.hash='${p.id}'"><div class=house style="background:${p.col||C[i%C.length]}">${p.icon}<span class=st>${'⭐'.repeat(d)||'☆'}</span></div><b><bdi>${p.t}</bdi></b></div>`}).join('')}</div>
+ <div class=album><h3>🏆 ألبوم ملصقاتي</h3>${PAGES.filter(p=>p.sticker).map(p=>`<span class="s ${(ST.stk||{})[p.id]?'on':''}">${p.sticker}</span>`).join('')}</div>`;
+ const first=!ST.seen;ST.seen=1;save();OWL('أهلًا يا بطل! 👋 اختر بيتًا من الخريطة ولنبدأ اللعب!',first?HELLO:null)}
+function finishAct(p,k,n){ST.acts=ST.acts||{};const a=ST.acts[p.id]=ST.acts[p.id]||{};if(!a[k]){a[k]=1}const cnt=Object.keys(a).length;ST.done=ST.done||{};ST.done[p.id]=Math.min(3,Math.ceil(cnt*3/n));save();
+ document.querySelectorAll('.steps button').forEach(b=>{if(a[b.dataset.k])b.classList.add('done')});
+ if(cnt>=n&&!(ST.stk||{})[p.id]){ST.stk=ST.stk||{};ST.stk[p.id]=1;save();setTimeout(()=>reward(p),900)}}
+function reward(p){FX.win();confetti(50);const r=document.createElement('div');r.className='reward';r.innerHTML=`<div><div class=s>${p.sticker}</div><h2>ربحت ملصقًا جديدًا!</h2><p>أنهيت كل ألعاب «${p.t}» 🎉</p><button class="big g">إلى الخريطة 🗺️</button></div>`;document.body.appendChild(r);SAY(T("أَحْسَنْتَ! رَبِحْتَ مُلْصَقًا جَدِيدًا"));r.querySelector('button').onclick=()=>{r.remove();location.hash='home'}}
+function steps(p,acts,cur){return `<div class=steps>${acts.map((a,i)=>`<button data-k="${a[0]}" class="${i===cur?'on':''} ${((ST.acts||{})[p.id]||{})[a[0]]?'done':''}"><span class=e>${a[1]}</span><bdi>${a[2]}</bdi></button>`).join('')}</div>`}
+function bindSteps(p,acts,fns){document.querySelectorAll('.steps button').forEach((b,i)=>b.onclick=()=>{FX.pop();document.querySelectorAll('.steps button').forEach(x=>x.classList.remove('on'));b.classList.add('on');cancelAnimationFrame(RAF2);fns[i]()})}
+let RAF2=0;const loop2=f=>{cancelAnimationFrame(RAF2);const L=t=>{if(f(t/1000)!==false)RAF2=requestAnimationFrame(L)};RAF2=requestAnimationFrame(L)};
+function prog(n,k){return '<div class=prog>'+Array.from({length:n},(_,i)=>`<i class="${i<k?'on':''}"></i>`).join('')+'</div>'}
+function xy(c,e){const r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}}
+
+function glyph(x,ch,cx,cy,H,mode){/* يرسم الحرف في المنتصف بارتفاع H */let fs=H;x.font='900 '+fs+'px Cairo, "Noto Naskh Arabic", Tahoma';x.textAlign='left';x.textBaseline='alphabetic';let m=x.measureText(ch);let h=m.actualBoundingBoxAscent+m.actualBoundingBoxDescent,w=m.actualBoundingBoxLeft+m.actualBoundingBoxRight;const k=Math.min(H/h,H*1.1/w);fs=fs*k;x.font='900 '+fs+'px Cairo, "Noto Naskh Arabic", Tahoma';m=x.measureText(ch);
+ const X=cx-(m.actualBoundingBoxRight-m.actualBoundingBoxLeft)/2,Y=cy+(m.actualBoundingBoxAscent-m.actualBoundingBoxDescent)/2;if(mode==='s')x.strokeText(ch,X,Y);else if(mode==='both'){x.strokeText(ch,X,Y);x.fillText(ch,X,Y)}else x.fillText(ch,X,Y);return{top:Y-m.actualBoundingBoxAscent,bot:Y+m.actualBoundingBoxDescent}}
+function heroLive(p,onTap){ const c=$('lt'),x=c.getContext('2d');let jump=0,blink=0;
+ if(!p.eye){const oc=document.createElement('canvas');oc.width=640;oc.height=440;const ox=oc.getContext('2d');ox.fillStyle='#000';glyph(ox,p.ch,320,220,280);const D=ox.getImageData(0,0,640,440).data;let sx=0,sy=0,n=0;for(let yy=0;yy<440;yy+=4)for(let xx=0;xx<640;xx+=4)if(D[(yy*640+xx)*4+3]>128){sx+=xx;sy+=yy;n++}p.eye=n?[sx/n-320,sy/n-220-8]:[0,0]}
+ c.onclick=()=>{jump=1;FX.boing();onTap()};
+ loop(t=>{x.clearRect(0,0,640,440);jump=Math.max(0,jump-.03);const by=Math.sin(t*2.2)*10-Math.sin(jump*Math.PI)*60,sq=1+Math.sin(t*2.2)*.03;
+  x.save();x.translate(320,250+by);x.scale(1/sq,sq);
+  const g=x.createLinearGradient(0,-150,0,150);g.addColorStop(0,p.c1);g.addColorStop(1,p.c2);x.lineWidth=18;x.strokeStyle='#fff';x.lineJoin='round';x.fillStyle=g;glyph(x,p.ch,0,0,280,'both');
+  /* عيون وفم */ const ey=p.eye||[-30,-60];blink=(t%3.2)<.12?1:0;
+  [[ey[0]-28,ey[1]],[ey[0]+28,ey[1]]].forEach(([ex,eyy])=>{x.fillStyle='#fff';x.beginPath();x.ellipse(ex,eyy,20,blink?3:22,0,0,7);x.fill();if(!blink){x.fillStyle='#212529';x.beginPath();x.arc(ex+Math.sin(t)*5,eyy+4,9,0,7);x.fill();x.fillStyle='#fff';x.beginPath();x.arc(ex+3+Math.sin(t)*5,eyy,3,0,7);x.fill()}});
+  x.strokeStyle='#212529';x.lineWidth=6;x.lineCap='round';x.beginPath();x.arc(ey[0],ey[1]+32,16,.15*Math.PI,.85*Math.PI);x.stroke();
+  x.fillStyle='rgba(255,135,135,.6)';x.beginPath();x.arc(ey[0]-46,ey[1]+30,10,0,7);x.arc(ey[0]+46,ey[1]+30,10,0,7);x.fill();
+  x.restore();x.font='800 26px Cairo';x.textAlign='center';x.fillStyle='#868e96';x.fillText('👆 المسني لأتكلم!',320,425)});
+}
+/* ===== صفحة الحرف ===== */
+function letterPage(p){
+ $('app').innerHTML=topBar()+`<div class=hero><canvas class=lt id=lt width=640 height=440></canvas></div>`+steps(p,ACTS,0)+`<div class=stage id=stg></div>`;
+ heroLive(p,()=>SAYS([p.intro,p.hk.join('، ')]));
+ const fns=[()=>actListen(p),()=>actTrace(p),()=>actBalloons(p),()=>actPics(p)];bindSteps(p,ACTS,fns);fns[0]();
+ OWL('هذا <b>حرف '+p.name+'</b>! المسه ليتكلم 😄',p.intro)}
+const ACTS=[['l','👂','اسمع'],['t','🖍️','لوّن'],['b','🎈','بالونات'],['p','🖼️','صور']];
+function actListen(p){const S=$('stg'),cols=['#ff6b6b','#339af0','#51cf66'],nm=['فَتْحَة','ضَمَّة','كَسْرَة'];let heard=new Set(),quiz=0,qk=0,target=-1;
+ S.innerHTML=`<h2>👂 اسمع الحرف مع الحركات</h2><div class=cards id=hk>${p.hk.map((h,i)=>`<button class=card style="background:${cols[i]}" data-i=${i}>${h}<small>${nm[i]}</small></button>`).join('')}</div>
+ <h2 style="margin-top:14px">🧩 أشكال الحرف في الكلمة</h2><div class=cards id=fm>${p.forms.map(f=>`<button class=card style="background:#ffa94d;font-size:2.2rem">${f}</button>`).join('')}</div><div id=lq></div>`;
+ S.querySelectorAll('#hk .card').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;b.animate([{transform:'scale(1.2) rotate(-6deg)'},{transform:'scale(1)'}],{duration:350});
+  if(quiz){if(i===target){good();qk++;OWL('✅ '+pick(['أحسنت!','رائع!','ممتاز!']),pick(PRAISE),()=>{if(qk>=4){($('lq')).innerHTML='<div style="text-align:center;font-size:2rem">🎉</div>';finishAct(p,'l',4);OWL('أحسنت! هيا إلى لعبة التلوين 🖍️');quiz=0}else ask()})}else{bad();OWL('حاول مرة أخرى 🙂',TRY,()=>SAY(p.hk[target]))}return}
+  SAY(p.hk[i]);heard.add(i);if(heard.size===3&&!quiz){setTimeout(()=>{quiz=1;($('lq')).innerHTML='<button class="big" id=rep>🔁 اسمع مرة أخرى</button>';$('rep').onclick=()=>SAY(p.hk[target]);ask()},900)}});
+ S.querySelectorAll('#fm .card').forEach(b=>b.onclick=()=>{FX.pop();b.animate([{transform:'translateY(-14px)'},{transform:'none'}],{duration:300})});
+ function ask(){target=Math.random()*3|0;OWL('🎧 اسمع جيدًا… وأين هذا الصوت؟ ('+(qk+1)+'/4)',T("اِسْمَعْ وَاخْتَرْ"),()=>SAY(p.hk[target]))}
+ OWL('المس كل بطاقة لتسمع الصوت 👂')}
+function actTrace(p){const S=$('stg');S.innerHTML=`<h2>🖍️ لوّن ${p.num!=null?'العدد':'الحرف'} بإصبعك</h2><canvas class=play id=tc width=640 height=520></canvas><div id=tp style="height:16px;background:#f1f3f5;border-radius:9px;margin-top:8px;overflow:hidden"><i id=tpi style="display:block;height:100%;width:0;background:${p.c2}"></i></div><button class=big id=tclr style="background:linear-gradient(135deg,#adb5bd,#868e96);box-shadow:0 6px 0 #495057">🧽 امسح وابدأ من جديد</button>`;
+ const c=$('tc'),x=c.getContext('2d'),off=document.createElement('canvas');off.width=640;off.height=520;const o=off.getContext('2d');
+ glyph(o,p.ch,320,260,380);
+ const D=o.getImageData(0,0,640,520).data,pts=[];for(let yy=0;yy<520;yy+=10)for(let xx=0;xx<640;xx+=10)if(D[(yy*640+xx)*4+3]>128)pts.push([xx,yy,0]);
+ const paint=document.createElement('canvas');paint.width=640;paint.height=520;const pp=paint.getContext('2d');let hue=0,down=false,last=null,doneT=false,sp=[];
+ function base(){x.clearRect(0,0,640,520);x.fillStyle='#fffdf5';x.fillRect(0,0,640,520);x.save();x.fillStyle='#e9ecef';glyph(x,p.ch,320,260,380);x.setLineDash([10,12]);x.lineWidth=6;x.strokeStyle='#adb5bd';glyph(x,p.ch,320,260,380,'s');x.restore()}
+ const mk=document.createElement('canvas');mk.width=640;mk.height=520;const mx=mk.getContext('2d');
+ function draw(){base();mx.globalCompositeOperation='source-over';mx.clearRect(0,0,640,520);mx.drawImage(paint,0,0);mx.globalCompositeOperation='destination-in';mx.drawImage(off,0,0);x.drawImage(mk,0,0);sp=sp.filter(s=>(s.l-=.04)>0);sp.forEach(s=>{x.globalAlpha=s.l;x.font='28px serif';x.fillText('✨',s.x,s.y-=1.5);x.globalAlpha=1})}
+ function dot(P){pp.fillStyle=p.c2;pp.beginPath();pp.arc(P.x,P.y,26,0,7);pp.fill();if(Math.random()<.3)sp.push({x:P.x,y:P.y,l:1});
+  pts.forEach(q=>{if(!q[2]&&(q[0]-P.x)**2+(q[1]-P.y)**2<30*30)q[2]=1});const r=pts.filter(q=>q[2]).length/pts.length;$('tpi').style.width=Math.min(100,r/.85*100)+'%';
+  if(r>=.85&&!doneT){doneT=true;FX.win();confetti();good();finishAct(p,'t',4);OWL('🌈 واااو! لوّنت '+(p.num!=null?'العدد ':'حرف ')+p.name+'!',pick(PRAISE))}}
+ function line(a,b){const d=Math.hypot(b.x-a.x,b.y-a.y),n=Math.max(1,d/8|0);for(let i=0;i<=n;i++)dot({x:a.x+(b.x-a.x)*i/n,y:a.y+(b.y-a.y)*i/n})}
+ c.onpointerdown=e=>{down=true;c.setPointerCapture(e.pointerId);last=xy(c,e);dot(last)};c.onpointermove=e=>{if(!down)return;const P=xy(c,e);line(last,P);last=P;if(Math.random()<.15)tone(400+Math.random()*600,.05,'sine',.03)};c.onpointerup=()=>down=false;
+ $('tclr').onclick=()=>{pp.clearRect(0,0,640,520);pts.forEach(q=>q[2]=0);doneT=false;$('tpi').style.width='0'};
+ loop2(()=>{draw()});p.num!=null?OWL('مرّر إصبعك على العدد ولوّنه كله 🖍️',T("لَوِّنِ الْعَدَدَ بِإِصْبَعِكَ")):OWL('مرّر إصبعك على الحرف ولوّنه كله 🖍️',T("لَوِّنِ الْحَرْفَ بِإِصْبَعِكَ"))}
+function actBalloons(p){const S=$('stg'),N=8;let got=0,B=[],parts=[],t0=0;S.innerHTML=`<h2>🎈 فرقع البالونات التي فيها ${p.num!=null?'العدد':'حرف'} ${p.name}</h2><div id=bp>${prog(N,0)}</div><canvas class=play id=bc width=640 height=560></canvas>`;
+ const c=$('bc'),x=c.getContext('2d');const CL=['#ff6b6b','#339af0','#51cf66','#fcc419','#cc5de8','#ff922b','#20c997'];
+ function spawn(){const tg=Math.random()<.55;B.push({x:60+Math.random()*520,y:620,v:1.1+Math.random()*1.1,s:Math.random()*6,ch:tg?pick([p.ch,...p.forms]):pick(p.sim),tg,col:pick(CL),w:0})}
+ c.onpointerdown=e=>{const P=xy(c,e);for(let i=B.length-1;i>=0;i--){const b=B[i];if((P.x-b.x)**2+(P.y-b.y)**2<58*58){if(b.tg){B.splice(i,1);FX.pop();for(let k=0;k<14;k++)parts.push({x:b.x,y:b.y,vx:(Math.random()-.5)*10,vy:(Math.random()-.5)*10,l:1,c:b.col});got++;send('ok');addStar();$('bp').innerHTML=prog(N,got);
+     if(got===N){FX.win();confetti();finishAct(p,'b',4);OWL('🎉 فرقعت كل البالونات!',pick(PRAISE))}}else{b.w=1;FX.boing();send('no');OWL('هذا ليس '+(p.num!=null?'العدد ':'حرف ')+p.name+' 🙂')}break}}};
+ loop2(t=>{if(!t0)t0=t;x.clearRect(0,0,640,560);const g=x.createLinearGradient(0,0,0,560);g.addColorStop(0,'#d0ebff');g.addColorStop(1,'#fff9db');x.fillStyle=g;x.fillRect(0,0,640,560);
+  if(got<N&&(B.length<5)&&Math.random()<.03)spawn();
+  B.forEach(b=>{b.y-=b.v;b.x+=Math.sin(t*1.5+b.s)*.6;b.w=Math.max(0,b.w-.04);const wx=Math.sin(b.w*30)*b.w*10;
+   x.strokeStyle='#868e96';x.lineWidth=2;x.beginPath();x.moveTo(b.x+wx,b.y+56);x.quadraticCurveTo(b.x+10,b.y+90,b.x,b.y+120);x.stroke();
+   x.fillStyle=b.col;x.beginPath();x.ellipse(b.x+wx,b.y,50,58,0,0,7);x.fill();x.fillStyle='rgba(255,255,255,.35)';x.beginPath();x.ellipse(b.x+wx-18,b.y-22,10,16,-.5,0,7);x.fill();
+   x.fillStyle='#fff';x.font='900 52px Cairo, Tahoma';x.textAlign='center';x.textBaseline='middle';x.fillText(b.ch,b.x+wx,b.y+4)});
+  B=B.filter(b=>b.y>-80);
+  parts=parts.filter(q=>(q.l-=.03)>0);parts.forEach(q=>{q.x+=q.vx;q.y+=q.vy;q.vy+=.3;x.globalAlpha=q.l;x.fillStyle=q.c;x.fillRect(q.x,q.y,8,8);x.globalAlpha=1})});
+ OWL('فرقع البالونات التي عليها '+(p.num!=null?'العدد':'حرف')+' <b>'+p.name+'</b> فقط! 🎈',T("فَرْقِعِ الْبَالُونَاتِ"))}
+function actPics(p){const S=$('stg');const strip=t=>t.replace(/[\u064B-\u0652]/g,''),bad_=new RegExp('['+p.ch+(p.alt||'')+(p.ex||'')+']');
+ const items=shuf(p.words.map(w=>[...w,1]).concat(shuf(OTHER.filter(w=>!bad_.test(strip(w[1])))).slice(0,9-p.words.length).map(w=>[...w,0])));
+ const need=items.filter(i=>i[2]).length;let got=0;
+ S.innerHTML=`<h2>🖼️ اصطد الصور التي في اسمها حرف ${p.name}</h2><div id=pp>${prog(need,0)}</div><div class=pics>${items.map((w,i)=>`<button class=pic data-i=${i}><span class=em>${w[0]}</span><b>${w[2]?'?':'?'}</b></button>`).join('')}</div>`;
+ S.querySelectorAll('.pic').forEach(b=>b.onclick=()=>{const w=items[+b.dataset.i];if(b.classList.contains('ok'))return;SAY(w[1]);
+  if(w[2]){b.classList.add('ok');b.querySelector('b').innerHTML=w[1].replace(new RegExp('['+p.ch+p.alt+']','g'),m=>'<span style="color:'+p.c2+';font-size:1.3em">'+m+'</span>');got++;good();$('pp').innerHTML=prog(need,got);if(got===need){setTimeout(()=>{FX.win();confetti();finishAct(p,'p',4);OWL('🎯 اصطدت كل الصور!',pick(PRAISE))},700)}}
+  else{b.classList.remove('no');b.offsetWidth;b.classList.add('no');b.querySelector('b').textContent=w[1].replace(/[ً-ْ]/g,'');bad()}});
+ OWL('المس الصور… أيّها فيه حرف <b>'+p.name+'</b>؟ 🤔',T("أَيُّ الصُّوَرِ فِيهَا هَذَا الْحَرْفُ؟"))}
+
+/* ===== التهيئة: الأشكال والألوان ===== */
+function shapesPage(p){const N=8;let k=0,tgt=null,items=[],wig=-1,wt=0;
+ $('app').innerHTML=topBar()+`<div class=title><h1>🔺 الأشكال والألوان</h1></div><div class=stage><div id=sp>${prog(N,0)}</div><canvas class=play id=sc width=640 height=520></canvas><button class=big id=srep>🔁 اسمع مرة أخرى</button></div>`;
+ const c=$('sc'),x=c.getContext('2d');
+ function round(){const all=[];SHAPES.forEach((s,si)=>COLORS.forEach((cl,ci)=>all.push([si,ci])));const sel=shuf(all).slice(0,6);tgt=pick(sel);
+  items=sel.map((q,i)=>({si:q[0],ci:q[1],x:110+(i%3)*210,y:140+Math.floor(i/3)*240,s:0}));const ph=SHAPES[tgt[0]].say[tgt[1]];OWL('المس <b>'+SHAPES[tgt[0]].n+' '+COLORS[tgt[1]].n[SHAPES[tgt[0]].f]+'</b> 👆',ph)}
+ function shape(si,X,Y,r,col){x.fillStyle=col;x.beginPath();if(si===0)x.arc(X,Y,r,0,7);else if(si===1)x.rect(X-r,Y-r,2*r,2*r);else if(si===2){x.moveTo(X,Y-r);x.lineTo(X+r,Y+r*.8);x.lineTo(X-r,Y+r*.8)}else{for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*.45:r;x.lineTo(X+Math.cos(a)*rr,Y+Math.sin(a)*rr)}}x.closePath();x.fill()}
+ c.onpointerdown=e=>{const P=xy(c,e);items.forEach((it,i)=>{if(Math.hypot(P.x-it.x,P.y-it.y)<80){if(it.si===tgt[0]&&it.ci===tgt[1]){it.s=1;good();k++;$('sp').innerHTML=prog(N,k);SAY(pick(PRAISE),()=>{if(k>=N){FX.win();confetti();finishAct(p,'s',1);OWL('🎉 أنت بطل الأشكال والألوان!')}else round()})}else{wig=i;wt=1;bad();OWL('هذا '+SHAPES[it.si].n+' '+COLORS[it.ci].n[SHAPES[it.si].f]+' 🙂 حاول مرة أخرى',TRY)}}})};
+ $('srep').onclick=()=>SAY(SHAPES[tgt[0]].say[tgt[1]]);
+ loop2(t=>{x.clearRect(0,0,640,520);x.fillStyle='#fffdf5';x.fillRect(0,0,640,520);wt=Math.max(0,wt-.04);
+  items.forEach((it,i)=>{const sc=it.s?1.15+Math.sin(t*10)*.05:1+Math.sin(t*2+i)*.03,wx=i===wig?Math.sin(wt*30)*wt*12:0;x.save();x.translate(it.x+wx,it.y);x.scale(sc,sc);shape(it.si,0,0,70,COLORS[it.ci].c);if(it.s){x.font='40px serif';x.textAlign='center';x.fillText('⭐',0,10)}x.restore()})});
+ round()}
+/* ===== المراجعة ===== */
+function reviewPage(p){const L=p.letters.map(pg);
+ $('app').innerHTML=topBar()+`<div class=title><h1>🚂 قطار المراجعة</h1><p>${L.map(l=>l.ch).join(' · ')}</p></div>`+steps(p,RACTS,0)+`<div class=stage id=stg></div>`;
+ const fns=[()=>revHear(p,L),()=>revTrain(p)];bindSteps(p,RACTS,fns);fns[0]()}
+const RACTS=[['h','🎧','أين الحرف؟'],['w','🚂','قطار الكلمات']];
+function revHear(p,L){const S=$('stg'),N=8;let k=0,tg;S.innerHTML=`<h2>🎧 اسمع… وأين الحرف؟</h2><div id=hp>${prog(N,0)}</div><div class=cards id=hc></div><button class=big id=hr>🔁 اسمع مرة أخرى</button>`;
+ const cols=['#ff6b6b','#339af0','#51cf66','#cc5de8','#ff922b'];
+ function round(){tg=pick(L);const opts=shuf([tg,...shuf(L.filter(l=>l!==tg)).slice(0,3)]);$('hc').innerHTML=opts.map((l,i)=>`<button class=card style="background:${cols[i]};font-size:3.4rem;min-width:120px" data-id=${l.id}>${l.ch}</button>`).join('');
+  $('hc').querySelectorAll('.card').forEach(b=>b.onclick=()=>{if(b.dataset.id===tg.id){good();k++;$('hp').innerHTML=prog(N,k);b.animate([{transform:'scale(1.3) rotate(10deg)'},{transform:'scale(1)'}],{duration:400});SAY(pick(PRAISE),()=>{if(k>=N){FX.win();confetti();finishAct(p,'h',2);OWL('🎉 تعرف كل الحروف!')}else round()})}else{bad();b.animate([{transform:'translateX(10px)'},{transform:'translateX(-10px)'},{transform:'none'}],{duration:300});SAY(TRY)}});
+  OWL('أين <b>حرف '+tg.name+'</b>؟ 👂',tg.where)}
+ $('hr').onclick=()=>SAY(tg.where);round()}
+function autoWords(p){const L=p.letters.map(pg),strip=t=>t.replace(/[\u064B-\u0652]/g,''),o=[];L.forEach(l=>{const w=l.words.find(w=>strip(w[1]).startsWith(l.ch));if(!w)return;const others=shuf(L.filter(x=>x!==l)).slice(0,2).map(x=>x.ch);o.push([w[0],'_'+strip(w[1]).slice(1),l.ch,[l.ch,...others],w[1]])});return o}
+function revTrain(p){const S=$('stg'),W=shuf(p.words||autoWords(p)),N=Math.min(6,W.length);let k=0,tx=700;
+ S.innerHTML=`<h2>🚂 أكمل الكلمة بالحرف الناقص</h2><div id=wp>${prog(N,0)}</div><canvas class=play id=trc width=640 height=200></canvas><div class=word id=ww></div><div class=cards id=wc></div>`;
+ const c=$('trc'),x=c.getContext('2d');let cur;
+ function round(){cur=W[k];tx=700;$('ww').innerHTML=cur[1].replace('_','<span class=gap>?</span>');
+  $('wc').innerHTML=shuf(cur[3]).map(ch=>`<button class=card style="background:#7048e8;font-size:3rem;min-width:90px">${ch}</button>`).join('');
+  $('wc').querySelectorAll('.card').forEach(b=>b.onclick=()=>{if(b.textContent===cur[2]){good();$('ww').innerHTML=cur[1].replace('_','<span style="color:#f76707">'+cur[2]+'</span>');SAY(cur[4],()=>{k++;$('wp').innerHTML=prog(N,k);if(k>=N){FX.win();confetti();finishAct(p,'w',2);OWL('🎉 وصل القطار! أنت بطل الكلمات!')}else round()})}else{bad();SAY(TRY)}});
+  OWL('ما الحرف الناقص في الكلمة؟ 🤔')}
+ loop2(t=>{x.clearRect(0,0,640,200);x.fillStyle='#e7f5ff';x.fillRect(0,0,640,200);x.fillStyle='#adb5bd';x.fillRect(0,170,640,8);for(let i=0;i<14;i++)x.fillRect(i*50-(t*60%50),178,30,6);
+  tx=Math.max(220,tx-6);x.font='110px serif';x.textAlign='center';x.fillText('🚂',tx+Math.sin(t*20)*1,120);x.font='100px serif';x.fillText(cur?cur[0]:'',tx+150,120);
+  for(let i=0;i<3;i++){x.globalAlpha=.4;x.font='30px serif';x.fillText('💨',tx-60-i*30-((t*40)%30),60-i*8);x.globalAlpha=1}});
+ round()}
+addEventListener('hashchange',route);
+
+/* ===== محرك جزيرة الأرقام ===== */
+(function(){const st=document.createElement('style');st.textContent=`
+.mrow{direction:ltr;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+.mbox{background:#fff;border:4px solid #dee2e6;border-radius:22px;padding:10px;min-width:120px;min-height:90px;display:flex;flex-wrap:wrap;gap:4px;justify-content:center;align-content:center;font-size:2.3rem;cursor:pointer;transition:transform .15s;box-shadow:0 6px 0 #dee2e6}
+.mbox:active{transform:scale(.96)}.mbox.ok{border-color:#40c057;box-shadow:0 6px 0 #2f9e44;background:#ebfbee}.mbox.no{animation:shk .35s}
+.eq{font:900 3.4rem Cairo;direction:ltr;text-align:center;color:#343a40;margin:8px 0;letter-spacing:4px}.eq .q{display:inline-block;min-width:70px;border-bottom:6px dashed #f59f00;color:#f59f00;animation:bl 1s infinite alternate}
+@keyframes bl{to{opacity:.4}}@keyframes shk{0%,100%{transform:none}25%{transform:translateX(10px)}75%{transform:translateX(-10px)}}
+.field{position:relative;height:330px;background:linear-gradient(#d0ebff,#fff9db);border-radius:26px;overflow:hidden;margin:6px 0;box-shadow:inset 0 -30px 0 #b2f2bb}
+.it{position:absolute;font-size:3rem;cursor:pointer;transition:transform .2s;user-select:none}.it.c{transform:scale(1.25);filter:drop-shadow(0 0 8px #ffd43b)}.it .tag{position:absolute;top:-14px;right:-8px;background:#f59f00;color:#fff;border-radius:50%;width:34px;height:34px;font:900 1.2rem/34px Cairo;text-align:center}
+.it.fly{transition:transform 1.4s ease-in,opacity 1.4s;transform:translate(-60px,-260px) rotate(-20deg);opacity:0}
+.it.bob{animation:bob2 1.6s ease-in-out infinite}@keyframes bob2{50%{transform:translateY(-8px)}}
+.cup{position:absolute;font-size:5rem;transition:transform .6s}
+.tf{display:inline-grid;grid-template-columns:repeat(5,40px);gap:4px;background:#fff;padding:6px;border-radius:12px;border:3px solid #868e96;margin:4px;direction:ltr}.tf i{width:40px;height:40px;border-radius:8px;background:#f1f3f5;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:1.6rem}
+.line{position:relative;height:150px;margin:10px 0;direction:ltr}.line .tick{position:absolute;bottom:20px;width:36px;margin-left:-18px;text-align:center;font:900 1.4rem Cairo;color:#495057}.line .bar{position:absolute;left:3%;right:3%;bottom:52px;height:6px;background:#495057;border-radius:3px}
+.frog{position:absolute;bottom:58px;font-size:3.2rem;margin-left:-26px;transition:left .45s cubic-bezier(.3,1.8,.6,1)}
+.croc{font-size:5rem;display:inline-block;transition:transform .4s}
+.sym{font:900 3rem Cairo}
+.race{position:relative;height:300px;background:repeating-linear-gradient(0deg,#8ce99a 0 48px,#69db7c 48px 50px);border-radius:24px;overflow:hidden;margin:6px 0;direction:ltr}
+.race .fin{position:absolute;left:18px;top:0;bottom:0;width:16px;background:repeating-linear-gradient(0deg,#000 0 16px,#fff 16px 32px)}
+.runner{position:absolute;font-size:2.8rem;transition:left 1.2s ease-out;cursor:pointer}.runner b{position:absolute;top:-10px;left:-6px;font:900 1rem Cairo;background:#fff;border-radius:10px;padding:0 6px;color:#e8590c}
+.tbl{position:relative;height:330px;margin:6px 0;background:#fff9db;border-radius:26px;overflow:hidden}
+.tbl .top{position:absolute;left:25%;right:25%;top:150px;height:22px;background:#a0522d;border-radius:8px}.tbl .leg{position:absolute;top:172px;width:18px;height:120px;background:#8b4513}
+.pat{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;font-size:2.8rem;direction:ltr;margin:10px 0}.pat .q{border:4px dashed #f59f00;border-radius:14px;width:64px;text-align:center;color:#f59f00;font:900 2.4rem Cairo}
+.pv{display:flex;gap:16px;justify-content:center;align-items:flex-end;margin:10px 0;direction:ltr}.rod{display:flex;flex-direction:column-reverse;gap:2px}.rod i,.one{width:26px;height:26px;background:#4dabf7;border:2px solid #1c7ed6;border-radius:5px;display:block}.one{background:#ffa94d;border-color:#e8590c}
+`;document.head.appendChild(st)})();
+const SAYX=(x,cb)=>Array.isArray(x)?SAYS(x,cb):SAY(x,cb);
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const rep=(e,n)=>Array(n).fill(e).join('');
+function optsN(ans,lo,hi,k){const o=new Set([ans]);let g=0;while(o.size<(k||3)&&g++<50){const v=rnd(Math.max(lo,ans-3),Math.min(hi,ans+3));o.add(v)}while(o.size<(k||3))o.add(rnd(lo,hi));return shuf([...o])}
+/* إطار الجولات: كل لعبة = مولّد جولات */
+function rounds(p,k,title,N,gen){const S=$('stg');let i=0,r;const NA=p.acts?p.acts.length:4,cols=['#ff6b6b','#339af0','#51cf66','#cc5de8','#ff922b'];
+ S.innerHTML=`<h2><bdi>${title}</bdi></h2><div id=rp>${prog(N,0)}</div><div id=rq></div><div class=cards id=ro></div><button class=big id=rr>🔁 اسمع مرة أخرى</button>`;
+ function pickV(v,el){if(r.lock)return;if(String(v)===String(r.ans)){r.lock=1;good();el&&el.animate([{transform:'scale(1.25) rotate(-6deg)'},{transform:'scale(1)'}],{duration:400});const d=r.win?r.win(el)||0:0;
+   setTimeout(()=>{i++;$('rp').innerHTML=prog(N,i);SAYX(r.after||pick(PRAISE),()=>{if(i>=N){FX.win();confetti();finishAct(p,k,NA);OWL('🎉 '+pick(['أنت بطل!','رائع جدًا!','ممتاز!'])+' اختر لعبة أخرى 👆')}else next()})},d)}
+  else{bad();el&&(el.classList.remove('no'),el.offsetWidth,el.classList.add('no'));el&&el.animate([{transform:'translateX(10px)'},{transform:'translateX(-10px)'},{transform:'none'}],{duration:300});r.miss&&r.miss(el);SAY(TRY)}}
+ function next(){r=gen(i);$('rq').innerHTML=r.html||'';$('ro').innerHTML=(r.opts||[]).map((v,j)=>`<button class=card dir=auto data-v="${v}" style="background:${r.oc||cols[j%5]};font-size:${r.fs||'3rem'};min-width:96px">${r.lab?r.lab(v):v}</button>`).join('');
+  $('ro').querySelectorAll('.card').forEach(b=>b.onclick=()=>pickV(b.dataset.v,b));$('rq').querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>pickV(b.dataset.v,b));
+  r.init&&r.init($('rq'),pickV);OWL(r.txt,null);if(r.say)SAYX(r.say)}
+ $('rr').onclick=()=>r&&r.say&&SAYX(r.say);if(window.NOAUDIO)$('rr').style.display='none';next()}
+/* ===== كرّاسة التدريبات التفاعلية – رياضيات الصف السادس ===== */
+window.NOAUDIO=1;
+(function(){const st=document.createElement('style');st.textContent=`
+.qq{background:#fff;border-radius:22px;padding:14px 16px;margin:8px auto;max-width:560px;font:800 1.25rem/2 Cairo;text-align:center;box-shadow:0 6px 0 #e9ecef}
+.qq .m{direction:ltr;display:inline-block;font:900 1.5rem Cairo;color:#1971c2;unicode-bidi:isolate}
+.qq svg{display:block;margin:6px auto;max-width:100%}
+.lvl{display:inline-block;border-radius:99px;padding:0 12px;font:900 .85rem Cairo;color:#fff;margin-bottom:4px}
+.exp{background:#fff9db;border:3px dashed #fcc419;border-radius:16px;padding:8px 12px;margin:8px auto;max-width:560px;font:700 1.05rem/1.9 Cairo;display:none}
+`;document.head.appendChild(st)})();
+const fx=x=>{const r=Math.round(x*100)/100;return String(r)};
+const M=s=>`<span class=m>${s}</span>`;
+const gcd=(a,b)=>b?gcd(b,a%b):a;
+const pickN=a=>a[Math.floor(Math.random()*a.length)];
+function dopts(a,extra){if(typeof a==='string'&&!/^-?\d+(\.\d+)?$/.test(a))return shuf([a,...(extra||[])].filter((v,i,s)=>s.indexOf(v)===i)).slice(0,4);
+ const v=+a,o=new Set([fx(v)]);(extra||[]).forEach(e=>o.add(fx(+e)));const c=[v+1,v-1,v*2,v/2,v+10,v-10,v+5,v*10,v/10].filter(x=>x>0&&x!==v);shuf(c).forEach(x=>{if(o.size<4)o.add(fx(Number.isInteger(v)?Math.round(x):x))});return shuf([...o]).slice(0,4)}
+function drill(p,k,gen,N,lv){const LV={t:['🟢 تدريب','#2f9e44'],w:['🟠 مسائل لفظية','#e8590c'],c:['🔴 تحدٍّ','#c92a2a']}[lv];
+ rounds(p,k,LV[0]+' · '+p.t,N||8,()=>{const g=gen();const ans=typeof g.a==='number'?fx(g.a):g.a;
+  return{html:`<div class=qq><span class=lvl style="background:${LV[1]}">${LV[0]}</span><br>${g.q}${g.v||''}</div><div class=exp id=ex>💡 ${g.ex}</div>`,opts:g.o||dopts(ans,g.w),fs:g.fs||'1.5rem',oc:LV[1],ans,txt:g.hint||'احسب واختر الإجابة الصحيحة ✏️',
+   miss(){const e=$('ex');if(e)e.style.display='block';OWL('لا بأس! اقرأ طريقة الحل في المربع الأصفر ثم حاول مرة أخرى 💡')},win(){OWL('✅ '+g.ex)}}})}
+/* رسومات */
+function triSVG(A,B,C){return`<svg viewBox="0 0 260 150" width=260><polygon points="20,135 240,135 120,15" fill="#e7f5ff" stroke="#1971c2" stroke-width=3/><text x=38 y=128 font-size=16 font-weight=900 fill="#e8590c">${A}</text><text x=205 y=128 font-size=16 font-weight=900 fill="#e8590c">${B}</text><text x=112 y=48 font-size=16 font-weight=900 fill="#e8590c">${C}</text></svg>`}
+function lineSVG(a,b){return`<svg viewBox="0 0 260 110" width=260><line x1=10 y1=95 x2=250 y2=95 stroke="#343a40" stroke-width=4/><line x1=130 y1=95 x2=${130+100*Math.cos(Math.PI-0)} y2=95 stroke="none"/><line x1=130 y1=95 x2=190 y2=15 stroke="#1971c2" stroke-width=4/><text x=160 y=88 font-size=16 font-weight=900 fill="#e8590c">${a}</text><text x=85 y=88 font-size=16 font-weight=900 fill="#e8590c">${b}</text></svg>`}
+function circSVG(lbl){return`<svg viewBox="0 0 160 160" width=160><circle cx=80 cy=80 r=65 fill="#fff4e6" stroke="#e8590c" stroke-width=3/><line x1=80 y1=80 x2=145 y2=80 stroke="#1971c2" stroke-width=3/><circle cx=80 cy=80 r=4/><text x=90 y=72 font-size=15 font-weight=900 fill="#1971c2">${lbl}</text></svg>`}
+function boxSVG(l,w,h){return`<svg viewBox="0 0 240 150" width=240><polygon points="30,50 150,50 200,20 80,20" fill="#d0ebff" stroke="#1971c2" stroke-width=2/><polygon points="150,50 200,20 200,100 150,130" fill="#a5d8ff" stroke="#1971c2" stroke-width=2/><rect x=30 y=50 width=120 height=80 fill="#e7f5ff" stroke="#1971c2" stroke-width=2/><text x=80 y=146 font-size=14 font-weight=900>${l}</text><text x=182 y=125 font-size=14 font-weight=900>${w}</text><text x=4 y=95 font-size=14 font-weight=900>${h}</text></svg>`}
+function pieSVG(parts){let a=-Math.PI/2,s='';const C=['#ff8787','#74c0fc','#8ce99a','#ffd43b','#b197fc'];parts.forEach((p,i)=>{const b=a+p[0]*2*Math.PI,x1=80+70*Math.cos(a),y1=80+70*Math.sin(a),x2=80+70*Math.cos(b),y2=80+70*Math.sin(b);s+=`<path d="M80,80 L${x1},${y1} A70,70 0 ${p[0]>.5?1:0},1 ${x2},${y2}Z" fill="${C[i]}" stroke="#fff" stroke-width=2/>`;const m=(a+b)/2;s+=`<text x=${80+42*Math.cos(m)} y=${85+42*Math.sin(m)} font-size=11 font-weight=900 text-anchor=middle>${p[1]}</text>`;a=b});return`<svg viewBox="0 0 160 160" width=170>${s}</svg>`}
+const NAMES=['علي','سارة','محمد','مريم','أحمد','فاطمة','يوسف','هدى','عمر','سلمى'];
+const DR={
+ alg:{t(){const t=rnd(0,2);if(t===0){const a=rnd(2,9),b=rnd(1,20),x=rnd(2,9);return{q:`أوجد قيمة ${M(a+'x + '+b)} عندما ${M('x = '+x)}`,a:a*x+b,w:[a+x+b,a*(x+b)],ex:`نعوّض: ${a} × ${x} + ${b} = ${a*x} + ${b} = ${a*x+b}`}}
+   if(t===1){const a=rnd(2,7),b=rnd(2,7),c=rnd(1,9);return{q:`اختصر المقدار: ${M(a+'y + '+c+' + '+b+'y')}`,a:`${a+b}y + ${c}`,o:shuf([`${a+b}y + ${c}`,`${a+b+c}y`,`${a*b}y + ${c}`,`${a+b}y`]),fs:'1.3rem',ex:`نجمع الحدود المتشابهة: ${a}y + ${b}y = ${a+b}y، ويبقى العدد ${c}`}}
+   const b=rnd(2,6),x=rnd(2,5),a=b*x+rnd(1,20);return{q:`أوجد قيمة ${M(a+' − '+b+'m')} عندما ${M('m = '+x)}`,a:a-b*x,w:[a-b-x,(a-b)*x],ex:`${a} − ${b} × ${x} = ${a} − ${b*x} = ${a-b*x}`}},
+  w(){const t=rnd(0,2),n=pickN(NAMES);if(t===0){const k=rnd(2,9);return{q:`مع ${n} عدد من البطاقات هو n، ثم أخذ ${k} بطاقات أخرى. اكتب المقدار الجبري لعدد بطاقاته.`,a:`n + ${k}`,o:shuf([`n + ${k}`,`${k}n`,`n − ${k}`,`${k} − n`]),fs:'1.3rem',ex:`أخذ ${k} زيادة ← نجمع: n + ${k}`}}
+   if(t===1){const k=rnd(2,6);return{q:`ثمن القلم الواحد p دينار. ما ثمن ${k} أقلام؟`,a:`${k}p`,o:shuf([`${k}p`,`p + ${k}`,`p ÷ ${k}`,`${k} − p`]),fs:'1.3rem',ex:`${k} أقلام × p = ${k}p`}}
+   const k=rnd(2,5),x=rnd(3,12);return{q:`عمر ${n} يساوي a سنة، وعمر أبيه ${k} أضعاف عمره. إذا كان a = ${x}، كم عمر الأب؟`,a:k*x,w:[k+x,x],ex:`عمر الأب = ${k}a = ${k} × ${x} = ${k*x}`}},
+  c(){const a=rnd(2,6),x=rnd(2,6);return{q:`مستطيل طوله ${M('2x + '+a)} سم وعرضه ${M('x')} سم. إذا كانت ${M('x = '+x)} فما محيطه؟`,a:2*(2*x+a+x),w:[(2*x+a)*x,2*x+a+x],ex:`الطول = 2×${x}+${a} = ${2*x+a}، المحيط = 2 × (${2*x+a} + ${x}) = ${2*(3*x+a)}`}}},
+ ang:{t(){const t=rnd(0,2);if(t===0){const a=rnd(25,155);return{q:`زاويتان على خط مستقيم، إحداهما ${a}°. أوجد الأخرى.`,v:lineSVG(a+'°','?'),a:180-a,w:[360-a,90-a>0?90-a:a],ex:`مجموع الزوايا على خط مستقيم = 180°، إذن 180 − ${a} = ${180-a}°`}}
+   if(t===1){const a=rnd(30,90),b=rnd(30,80);return{q:`في المثلث زاويتان قياسهما ${a}° و ${b}°. أوجد الزاوية الثالثة.`,v:triSVG(a+'°',b+'°','?'),a:180-a-b,w:[360-a-b,a+b],ex:`مجموع زوايا المثلث = 180°: 180 − ${a} − ${b} = ${180-a-b}°`}}
+   const a=rnd(60,150),b=rnd(60,150);return{q:`ثلاث زوايا حول نقطة، اثنتان منها ${a}° و ${b}°. أوجد الثالثة.`,a:360-a-b,w:[180-a,a+b],ex:`مجموع الزوايا حول نقطة = 360°: 360 − ${a} − ${b} = ${360-a-b}°`}},
+  w(){const t=rnd(0,1);if(t===0){const b=rnd(30,80);return{q:`مثلث متطابق الضلعين، زاوية رأسه ${b}°. أوجد إحدى زاويتي القاعدة.`,v:triSVG('?','?',b+'°'),a:(180-b)/2,w:[180-b,b],ex:`زاويتا القاعدة متساويتان: (180 − ${b}) ÷ 2 = ${(180-b)/2}°`}}
+   const a=rnd(60,120),b=rnd(60,110),c=rnd(50,100);return{q:`شكل رباعي زواياه ${a}° و ${b}° و ${c}° والرابعة مجهولة. أوجدها.`,a:360-a-b-c,w:[180-a,a+b+c-180],ex:`مجموع زوايا الرباعي = 360°: 360 − ${a} − ${b} − ${c} = ${360-a-b-c}°`}},
+  c(){const a=rnd(40,70);return{q:`متوازي أضلاع إحدى زواياه ${a}°. أوجد الزاوية المجاورة لها.`,a:180-a,w:[a,360-a],ex:`الزاويتان المتجاورتان في متوازي الأضلاع مجموعهما 180°: 180 − ${a} = ${180-a}°`}}},
+ sol:{t(){const S=[['المكعب','🧊',6,12,8],['متوازي المستطيلات','📦',6,12,8],['المنشور الثلاثي','🔺',5,9,6],['الهرم الرباعي','🔼',5,8,5],['الهرم الثلاثي','🔻',4,6,4]];const s=pickN(S),w=pickN([['أوجه',2],['أحرف',3],['رؤوس',4]]);
+   return{q:`كم عدد <b>${w[0]}</b> ${s[0]} ${s[1]}؟`,a:s[w[1]],w:[s[2],s[3],s[4]],ex:`${s[0]}: ${s[2]} أوجه، ${s[3]} أحرف، ${s[4]} رؤوس`}},
+  w(){const N=[['6 مربعات متطابقة','المكعب'],['مستطيلان و3 مثلثات','—'],['مثلثان و3 مستطيلات','المنشور الثلاثي'],['مربع و4 مثلثات','الهرم الرباعي'],['دائرتان ومستطيل','الأسطوانة'],['4 مثلثات متطابقة','الهرم الثلاثي'],['6 مستطيلات (كل اثنين متقابلين متطابقان)','متوازي المستطيلات']].filter(x=>x[1]!=='—');const n=pickN(N);
+   return{q:`شبكة مجسم تتكون من: <b>${n[0]}</b>. ما هذا المجسم؟`,a:n[1],o:shuf([n[1],...shuf(N.filter(x=>x!==n).map(x=>x[1])).slice(0,3)]),fs:'1.1rem',ex:`عندما نطوي ${n[0]} نحصل على ${n[1]}`}},
+  c(){const f=rnd(5,9);return{q:`منشور قاعدته مضلع له ${f} أضلاع. كم عدد أوجهه؟`,a:f+2,w:[f,f*2,f+1],ex:`أوجه المنشور = عدد أضلاع القاعدة + 2 (القاعدتان) = ${f} + 2 = ${f+2}`}}},
+ rat:{t(){const t=rnd(0,1);if(t===0){const g=rnd(2,6),a=rnd(1,7),b=rnd(1,7);if(gcd(a,b)!==1||a===b)return this.t();return{q:`اكتب النسبة ${M(a*g+' : '+b*g)} في أبسط صورة`,a:`${a} : ${b}`,o:shuf([`${a} : ${b}`,`${b} : ${a}`,`${a*2} : ${b*2}`,`${a+1} : ${b}`]),fs:'1.4rem',ex:`نقسم الحدين على ${g}: ${a*g}÷${g} = ${a} و ${b*g}÷${g} = ${b}`}}
+   const a=rnd(1,6),b=rnd(1,6);return{q:`نسبة الأولاد إلى البنات ${M(a+' : '+b)}. ما الكسر الذي يمثّل الأولاد من الجميع؟`,a:`${a}/${a+b}`,o:shuf([`${a}/${a+b}`,`${a}/${b}`,`${b}/${a+b}`,`${b}/${a}`]).filter((v,i,s)=>s.indexOf(v)===i),fs:'1.4rem',ex:`عدد الأجزاء = ${a} + ${b} = ${a+b}، الأولاد ${a} أجزاء ← ${a}/${a+b}`}},
+  w(){const t=rnd(0,1),n=pickN(NAMES),m=pickN(NAMES.filter(x=>x!==n));if(t===0){const a=rnd(1,5),b=rnd(1,5),u=rnd(2,10),T=(a+b)*u;return{q:`تقاسم ${n} و${m} ${T} دينارًا بنسبة ${M(a+' : '+b)}. كم نصيب ${n}؟`,a:a*u,w:[b*u,T/2],ex:`الأجزاء = ${a+b}، الجزء = ${T} ÷ ${a+b} = ${u}، نصيب ${n} = ${a} × ${u} = ${a*u}`}}
+   const k=rnd(2,5),pr=rnd(2,6)*0.5,m2=k+rnd(1,4);return{q:`ثمن ${k} كراريس ${fx(k*pr)} دينار. كم ثمن ${m2} كراريس؟`,a:m2*pr,w:[k*pr+m2,m2*pr*2],ex:`ثمن الكراس = ${fx(k*pr)} ÷ ${k} = ${fx(pr)}، ثمن ${m2} = ${m2} × ${fx(pr)} = ${fx(m2*pr)}`}},
+  c(){const a=rnd(2,5),b=rnd(2,5),c=rnd(1,4),u=rnd(3,8);return{q:`وُزّعت حلوى بين 3 أطفال بنسبة ${M(a+' : '+b+' : '+c)}. إذا أخذ الثاني ${b*u} حبة، فكم عدد الحلوى كلها؟`,a:(a+b+c)*u,w:[b*u*3,(a+b+c)*b],ex:`الجزء = ${b*u} ÷ ${b} = ${u}، الكل = (${a}+${b}+${c}) × ${u} = ${(a+b+c)*u}`}}},
+ pc1:{t(){const F=[[1,2],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],[1,10],[3,10],[7,10],[1,20],[9,20],[1,25],[6,25],[1,50]];const f=pickN(F),p=f[0]/f[1]*100;
+   return{q:`حوّل الكسر ${M(f[0]+'/'+f[1])} إلى نسبة مئوية`,a:fx(p)+'%',o:dopts(fx(p),[f[0]*10,f[1]]).map(x=>x+'%'),ex:`نضرب في 100: ${f[0]}/${f[1]} × 100 = ${fx(p)}%`}},
+  w(){const t=rnd(0,1);if(t===0){const p=pickN([5,10,15,20,25,30,40,45,60,75,80]);const g=gcd(p,100);return{q:`اكتب ${M(p+'%')} ككسر في أبسط صورة`,a:`${p/g}/${100/g}`,o:shuf([`${p/g}/${100/g}`,`${p}/10`,`${100/g}/${p/g}`,`1/${p}`]).filter((v,i,s)=>s.indexOf(v)===i),fs:'1.4rem',ex:`${p}% = ${p}/100 = ${p/g}/${100/g} (بالقسمة على ${g})`}}
+   const d=pickN([0.05,0.12,0.25,0.4,0.07,0.6,0.85]);return{q:`حوّل العدد العشري ${M(d)} إلى نسبة مئوية`,a:fx(d*100)+'%',o:shuf([fx(d*100)+'%',fx(d*10)+'%',fx(d*1000)+'%',fx(d)+'%']),ex:`${d} × 100 = ${fx(d*100)}%`}},
+  c(){const a=rnd(1,9),b=pickN([20,25,50]);return{q:`في صف ${b} تلميذًا، منهم ${a} غائبون. ما النسبة المئوية للحاضرين؟`,a:fx((b-a)/b*100)+'%',o:shuf([fx((b-a)/b*100)+'%',fx(a/b*100)+'%',(b-a)+'%','50%']).filter((v,i,s)=>s.indexOf(v)===i),ex:`الحاضرون ${b-a} من ${b} = ${b-a}/${b} × 100 = ${fx((b-a)/b*100)}%`}}},
+ pc2:{t(){const p=pickN([10,20,25,50,75,5,30,40]),q=pickN([40,60,80,120,200,240,300,400]);return{q:`أوجد ${M(p+'%')} من ${M(q)}`,a:p*q/100,w:[p+q,q/p],ex:`${p}/100 × ${q} = ${fx(p*q/100)}`}},
+  w(){const p=pickN([10,20,25,30,50]),pr=pickN([40,60,80,120,150,200]);const t=rnd(0,1);return t?{q:`قميص سعره ${pr} دينارًا، عليه تخفيض ${p}%. كم دينارًا قيمة التخفيض؟`,a:pr*p/100,w:[pr-pr*p/100,p],ex:`التخفيض = ${p}% × ${pr} = ${fx(pr*p/100)} دينار`}:{q:`مدرسة فيها ${pr*5} تلميذ، ${p}% منهم يحبون الرياضيات. كم تلميذًا يحبها؟`,a:pr*5*p/100,w:[pr*5-pr*5*p/100,p*5],ex:`${p}% × ${pr*5} = ${fx(pr*5*p/100)}`}},
+  c(){const p=pickN([10,20,25]),pr=pickN([80,120,200,240]);return{q:`لعبة سعرها ${pr} دينارًا، خُفّض سعرها ${p}%. كم سعرها بعد التخفيض؟`,a:pr-pr*p/100,w:[pr*p/100,pr+pr*p/100],ex:`التخفيض ${fx(pr*p/100)}، السعر الجديد = ${pr} − ${fx(pr*p/100)} = ${fx(pr-pr*p/100)}`}}},
+ pc3:{t(){const w=pickN([20,25,40,50,80,200]),p=pickN([10,20,25,40,50,75]),a=w*p/100;return{q:`ما النسبة المئوية للعدد ${M(a)} من ${M(w)}؟`,a:p+'%',o:dopts(p,[a,w/a]).map(x=>x+'%'),ex:`${a}/${w} × 100 = ${p}%`}},
+  w(){const n=pickN(NAMES),T=pickN([20,25,40,50]),p=pickN([20,40,60,80]),a=T*p/100;return{q:`حلّ ${n} ${a} سؤالًا صحيحًا من ${T}. ما نسبته المئوية؟`,a:p+'%',o:dopts(p,[a]).map(x=>x+'%'),ex:`${a}/${T} × 100 = ${p}%`}},
+  c(){const o=pickN([40,50,80,200]),p=pickN([10,20,25,50]),nw=o+o*p/100;return{q:`ارتفع ثمن كتاب من ${o} إلى ${fx(nw)} دينارًا. ما النسبة المئوية للزيادة؟`,a:p+'%',o:dopts(p,[nw-o]).map(x=>x+'%'),ex:`الزيادة = ${fx(nw-o)}، النسبة = ${fx(nw-o)}/${o} × 100 = ${p}%`}}},
+ spd:{t(){const t=rnd(0,1);if(t===0){const h=rnd(1,11),m=pickN([0,15,30,45]);const s=`${h}:${String(m).padStart(2,'0')} مساءً`,a=`${h+12}:${String(m).padStart(2,'0')}`;return{q:`اكتب الوقت ${M(s)} بنظام 24 ساعة`,a,o:shuf([a,`${h}:${String(m).padStart(2,'0')}`,`${h+10}:${String(m).padStart(2,'0')}`,`${h+2}:${String(m).padStart(2,'0')}`]),fs:'1.4rem',ex:`بعد الظهر نضيف 12: ${h} + 12 = ${h+12}`}}
+   const v=pickN([40,50,60,80,90]),tt=rnd(2,5);return{q:`سيارة تسير بسرعة ${M(v+' كم/س')} لمدة ${M(tt+' ساعات')}. ما المسافة؟`,a:v*tt,w:[v+tt,v/tt],ex:`المسافة = السرعة × الزمن = ${v} × ${tt} = ${v*tt} كم`}},
+  w(){const t=rnd(0,1);if(t===0){const v=pickN([5,10,12,15,20]),tt=rnd(2,6);return{q:`قطع درّاج ${v*tt} كم في ${tt} ساعات. ما سرعته؟`,a:v,w:[v*tt*tt,v*tt],ex:`السرعة = المسافة ÷ الزمن = ${v*tt} ÷ ${tt} = ${v} كم/س`}}
+   const v=pickN([60,80,100]),d=v*pickN([2,3,4]);return{q:`كم ساعة تحتاج حافلة لقطع ${d} كم بسرعة ${v} كم/س؟`,a:d/v,w:[d*v,d-v],ex:`الزمن = المسافة ÷ السرعة = ${d} ÷ ${v} = ${d/v} ساعات`}},
+  c(){const d1=pickN([60,90,120]),t1=pickN([1,2]),d2=pickN([60,80,140]),t2=pickN([1,2]);const T=d1+d2,TT=t1+t2;if(T%TT)return this.c();return{q:`قطعت سيارة ${d1} كم في ${t1} ساعة، ثم ${d2} كم في ${t2} ساعة. ما سرعتها المتوسطة؟`,a:T/TT,w:[(d1/t1+d2/t2)/2,T],ex:`السرعة المتوسطة = المسافة الكلية ÷ الزمن الكلي = ${T} ÷ ${TT} = ${T/TT} كم/س`}}},
+ cir:{t(){const t=rnd(0,1),r=rnd(2,10);if(t===0)return{q:`دائرة نصف قطرها ${M(r+' سم')}. ما طول قطرها؟`,v:circSVG('r = '+r),a:2*r,w:[r/2,r*r],ex:`القطر = 2 × نصف القطر = 2 × ${r} = ${2*r} سم`};
+   return{q:`دائرة نصف قطرها ${M(r+' سم')}. احسب محيطها (π = 3.14)`,v:circSVG('r = '+r),a:2*3.14*r,w:[3.14*r,3.14*r*r],ex:`المحيط = 2 × π × r = 2 × 3.14 × ${r} = ${fx(2*3.14*r)} سم`}},
+  w(){const r=rnd(2,10);return{q:`احسب مساحة دائرة نصف قطرها ${M(r+' سم')} (π = 3.14)`,v:circSVG('r = '+r),a:3.14*r*r,w:[2*3.14*r,3.14*r],ex:`المساحة = π × r × r = 3.14 × ${r} × ${r} = ${fx(3.14*r*r)} سم²`}},
+  c(){const d=pickN([14,28,42,7]);return{q:`عجلة دراجة قطرها ${M(d+' سم')}. كم سنتيمترًا تقطع في دورة كاملة؟ (π = 22/7)`,a:22/7*d,w:[22/7*d/2,d*3],ex:`المسافة في دورة = المحيط = π × القطر = 22/7 × ${d} = ${fx(22/7*d)} سم`}}},
+ pie:{t(){const P=pickN([[[.5,'كرة القدم'],[.25,'السباحة'],[.25,'الجري']],[[.5,'التفاح'],[.25,'الموز'],[.125,'العنب'],[.125,'البرتقال']],[[.25,'الأحمر'],[.25,'الأزرق'],[.5,'الأخضر']]]),T=pickN([40,80,120,200]),i=rnd(0,P.length-1);
+   return{q:`سُئل ${T} تلميذًا عن المفضّل لديهم. كم تلميذًا اختار <b>${P[i][1]}</b>؟`,v:pieSVG(P.map(p=>[p[0],p[1]])),a:P[i][0]*T,w:[P[i][0]*100,T/2],ex:`القطاع = ${P[i][0]===.5?'نصف':P[i][0]===.25?'ربع':'ثُمن'} الدائرة: ${P[i][0]} × ${T} = ${P[i][0]*T}`}},
+  w(){const f=pickN([[.5,'نصف',180],[.25,'ربع',90],[.125,'ثُمن',45],[.75,'ثلاثة أرباع',270]]);return{q:`قطاع دائري يمثّل <b>${f[1]}</b> الدائرة. كم قياس زاويته؟`,v:pieSVG([[f[0],'?'],[1-f[0],'']]),a:f[2],w:[f[0]*100,360-f[2]],ex:`زاوية الدائرة 360°: ${f[0]} × 360 = ${f[2]}°`}},
+  c(){const T=pickN([60,120,180,240]),a=pickN([30,60,90,120]);return{q:`في تمثيل بالقطاعات لـ ${T} تلميذًا، قطاع زاويته ${a}°. كم تلميذًا يمثّل؟`,a:a/360*T,w:[a,T-a/360*T],ex:`${a}/360 × ${T} = ${fx(a/360*T)} تلميذًا`}}},
+ area:{t(){const t=rnd(0,1);if(t===0){const l=rnd(4,15),w=rnd(2,10);return{q:`مستطيل طوله ${l} سم وعرضه ${w} سم. احسب <b>مساحته</b>.`,a:l*w,w:[2*(l+w),l+w],ex:`المساحة = الطول × العرض = ${l} × ${w} = ${l*w} سم²`}}
+   const b=rnd(4,16)*1,h=rnd(3,12);return{q:`مثلث قاعدته ${b} سم وارتفاعه ${h} سم. احسب مساحته.`,v:triSVG('','',''),a:b*h/2,w:[b*h,b+h],ex:`مساحة المثلث = ½ × القاعدة × الارتفاع = ½ × ${b} × ${h} = ${fx(b*h/2)} سم²`}},
+  w(){const s=rnd(4,12),l=rnd(3,10),w=rnd(2,s);return{q:`شكل مكوّن من مربع طول ضلعه ${s} سم ومستطيل ${l} × ${w} سم ملتصقين. ما المساحة الكلية؟`,a:s*s+l*w,w:[s*4+l*w,s*s*l*w],ex:`مساحة المربع ${s*s} + مساحة المستطيل ${l*w} = ${s*s+l*w} سم²`}},
+  c(){const s=pickN([4,6,8,10]);const r=s/2;return{q:`مربع طول ضلعه ${s} سم، قُصّت منه دائرة قطرها ${s} سم. ما مساحة الجزء المتبقي؟ (π = 3.14)`,a:s*s-3.14*r*r,w:[3.14*r*r,s*s],ex:`مساحة المربع ${s*s} − مساحة الدائرة (3.14 × ${r} × ${r} = ${fx(3.14*r*r)}) = ${fx(s*s-3.14*r*r)} سم²`}}},
+ vol:{t(){const l=rnd(2,10),w=rnd(2,8),h=rnd(2,6);return{q:`احسب حجم متوازي المستطيلات`,v:boxSVG(l+' سم',w+' سم',h+' سم'),a:l*w*h,w:[l+w+h,l*w,2*(l*w+l*h+w*h)],ex:`الحجم = الطول × العرض × الارتفاع = ${l} × ${w} × ${h} = ${l*w*h} سم³`}},
+  w(){const t=rnd(0,1);if(t===0){const L=pickN([1,2,3,5,1.5,2.5]);return{q:`كم مليلترًا في ${L} لتر؟`,a:L*1000,w:[L*100,L*10],ex:`1 لتر = 1000 مل ← ${L} × 1000 = ${L*1000} مل`}}
+   const l=pickN([20,30,40,50]),w=pickN([10,20,30]),h=pickN([10,20,25]);return{q:`حوض سمك ${l} × ${w} × ${h} سم. كم لترًا من الماء يملؤه؟ (1 لتر = 1000 سم³)`,v:boxSVG(l,w,h),a:l*w*h/1000,w:[l*w*h,l*w*h/100],ex:`الحجم = ${l*w*h} سم³ ÷ 1000 = ${fx(l*w*h/1000)} لتر`}},
+  c(){const s=pickN([2,3,4,5]),n=pickN([2,3]);return{q:`كم مكعبًا طول ضلعه ${s} سم يلزم لملء صندوق مكعب طول ضلعه ${s*n} سم؟`,a:n*n*n,w:[n*n,n*3,s*n],ex:`حجم الصندوق ${(s*n)**3} ÷ حجم المكعب الصغير ${s**3} = ${n**3}`}}}
+};
+function dPage(p){$('app').innerHTML=topBar()+`<div class=title><h1>${p.icon} <bdi>${p.t}</bdi></h1><p>${p.sub||'تدريبات لا تنتهي… الأرقام تتغيّر كل مرة 🔄'}</p></div>`+steps(p,p.acts,0)+`<div class=stage id=stg></div>`;
+ const fns=p.acts.map(a=>()=>{if(a[3]==='mix'){const K=Object.keys(DR);return drill(p,a[0],()=>{const d=DR[pickN(K)];return d[pickN(['t','w','c'])].call(d)},12,'c')}const d=DR[p.g];drill(p,a[0],()=>d[a[3]].call(d),8,a[3])});bindSteps(p,p.acts,fns);fns[0]()}
+window.XT=Object.assign(window.XT||{},{drill:dPage});
+
+route();</script></body></html>
