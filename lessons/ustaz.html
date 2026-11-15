@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>الأستاذ نور – الكتاب الحي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{font-family:Cairo,Tahoma,sans-serif;min-height:100vh;background:linear-gradient(#e3fafc,#fff9db);color:#212529;overflow-x:hidden}
+.app{max-width:640px;margin:0 auto;padding:10px 12px 180px}
+.top{display:flex;justify-content:space-between;align-items:center;font-weight:900}
+.top select{font:800 .9rem Cairo;border:2px solid #74c0fc;border-radius:12px;padding:2px 8px;background:#fff}
+.stage{position:relative;display:flex;align-items:flex-end;gap:8px;margin-top:8px}
+#av{width:96px;flex:none;cursor:pointer}
+.board{flex:1;min-height:210px;background:#2b4a3a;border:10px solid #8b5a2b;border-radius:14px;color:#f8f9fa;padding:12px 14px;font:700 1.08rem/1.9 Cairo;box-shadow:inset 0 0 30px rgba(0,0,0,.4),0 8px 20px rgba(0,0,0,.15);overflow:auto;max-height:46vh}
+.board .ln{opacity:0;transform:translateY(6px);transition:.35s}.board .ln.on{opacity:1;transform:none}
+.board .ln.m{text-align:center;color:#ffe066;font-size:1.25rem}
+.state{text-align:center;font-weight:900;color:#1971c2;margin:8px 0;min-height:1.6em}
+.me{background:#fff;border-radius:16px;padding:8px 12px;margin:6px 0;font-weight:700;border:2px solid #d0ebff;display:none}
+.chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:6px 0}
+.chips button{border:2px solid #a5d8ff;background:#fff;color:#1971c2;border-radius:99px;padding:4px 12px;font:800 .9rem Cairo;cursor:pointer}
+.bar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.95);backdrop-filter:blur(6px);padding:10px 12px 14px;box-shadow:0 -6px 20px rgba(0,0,0,.08)}
+.bar .in{max-width:640px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:8px}
+#mic{width:86px;height:86px;border-radius:50%;border:0;font-size:2.4rem;color:#fff;cursor:pointer;background:linear-gradient(135deg,#4dabf7,#1971c2);box-shadow:0 8px 20px rgba(25,113,194,.45)}
+#mic.rec{background:linear-gradient(135deg,#ff8787,#e03131);animation:pu 1s infinite}@keyframes pu{50%{transform:scale(1.08)}}
+.row{display:flex;gap:6px;width:100%}.row input{flex:1;border:2px solid #dee2e6;border-radius:14px;padding:8px 10px;font:700 1rem Cairo}.row button{border:0;border-radius:14px;padding:0 14px;font:900 1rem Cairo;background:#1971c2;color:#fff;cursor:pointer}
+.tog{font:800 .85rem Cairo;color:#495057}
+.demo{background:#fff3bf;border:2px dashed #fab005;border-radius:14px;padding:6px 10px;font-weight:800;text-align:center;font-size:.9rem;margin:6px 0;display:none}
+</style></head><body>
+<div class="app">
+ <div class="top"><span>🧑‍🏫 الأستاذ نور</span><select id="les"></select></div>
+ <div class="stage"><svg id="av" viewBox="0 0 160 220">
+  <rect x="35" y="150" width="90" height="70" rx="30" fill="#1971c2"/><path d="M68 150 L80 172 L92 150Z" fill="#fff"/><rect x="76" y="160" width="8" height="40" fill="#e03131"/>
+  <ellipse cx="80" cy="92" rx="48" ry="56" fill="#f4c7a1"/><path d="M32 80 Q34 30 80 32 Q126 30 128 80 Q118 52 80 50 Q42 52 32 80Z" fill="#343a40"/>
+  <ellipse cx="33" cy="98" rx="7" ry="11" fill="#e8b48f"/><ellipse cx="127" cy="98" rx="7" ry="11" fill="#e8b48f"/>
+  <g id="eyes"><ellipse cx="62" cy="90" rx="6" ry="7" fill="#212529"/><ellipse cx="98" cy="90" rx="6" ry="7" fill="#212529"/><circle cx="64" cy="87" r="2" fill="#fff"/><circle cx="100" cy="87" r="2" fill="#fff"/></g>
+  <g fill="none" stroke="#495057" stroke-width="2.5"><circle cx="62" cy="90" r="13"/><circle cx="98" cy="90" r="13"/><line x1="75" y1="90" x2="85" y2="90"/></g>
+  <path id="brow" d="M50 72 Q62 66 74 72 M86 72 Q98 66 110 72" stroke="#343a40" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M80 96 Q76 110 82 112" stroke="#c98d69" stroke-width="2.5" fill="none"/>
+  <path d="M58 122 Q80 132 102 122 Q100 140 80 142 Q60 140 58 122Z" fill="#6b4226"/>
+  <ellipse id="mouth" cx="80" cy="125" rx="11" ry="2.5" fill="#7a2e2e"/>
+ </svg><div class="board" id="bd"><div class="ln on">👋 أهلًا! أنا <b>الأستاذ نور</b>.<br>اختر الدرس من فوق، ثم اضغط 🎤 وكلّمني… أو اكتب سؤالك تحت.</div></div></div>
+ <div class="demo" id="demo">🎬 وضع العرض: هذه محادثة نموذجية توضّح كيف سيعمل الأستاذ بعد تفعيل الذكاء الاصطناعي</div>
+ <div class="state" id="state"></div>
+ <div class="me" id="me"></div>
+ <div class="chips" id="chips"></div>
+</div>
+<div class="bar"><div class="in">
+ <button id="mic" title="اضغط وتكلّم">🎤</button>
+ <label class="tog"><input type="checkbox" id="hf" checked> محادثة مستمرة (بعد ما يجاوب، يسمعك من جديد)</label>
+ <div class="row"><input id="tx" placeholder="أو اكتب سؤالك هنا…"><button id="go">أرسل</button></div>
+</div></div>
+<script>
+const FN='https://jrhzqgapywgdblujyrns.supabase.co/functions/v1/ustaz';
+const $=id=>document.getElementById(id);
+let tok=null;try{tok=(JSON.parse(localStorage.getItem('livebook_v2'))||{}).tok}catch(e){}
+const LES=[['math9','l12','الفرق بين المربعات الكاملة','الصف التاسع'],['math9','l13','المكعب وجذره التكعيبي','الصف التاسع'],['math9','l11','المفكوك والتحليل','الصف التاسع']];
+$('les').innerHTML=LES.map((l,i)=>`<option value=${i}>📐 ${l[2]}</option>`).join('');
+let ctx='',hist=[],busy=false,demoMode=false,demoI=0;
+async function loadCtx(){const l=LES[+$('les').value];hist=[];try{const h=await (await fetch(l[0]+'.html')).text();const d=new DOMParser().parseFromString(h,'text/html');const s=d.getElementById(l[1]);if(s){s.querySelectorAll('button,script,style,svg,canvas,input').forEach(x=>x.remove());ctx=s.textContent.replace(/\s+/g,' ').trim().slice(0,2500)}}catch(e){ctx=''}}
+$('les').onchange=()=>{loadCtx();board('📖 جاهز لدرس «'+LES[+$('les').value][2]+'». اسألني!')};loadCtx();
+/* الرسم والحركة */
+setInterval(()=>{const e=$('eyes');e.style.transform='scaleY(.1)';e.style.transformOrigin='80px 90px';setTimeout(()=>e.style.transform='',140)},3800);
+let talkT=null;function talk(on){clearInterval(talkT);const m=$('mouth');if(!on){m.setAttribute('ry',2.5);return}talkT=setInterval(()=>m.setAttribute('ry',2+Math.random()*8),110)}
+function board(t){const b=$('bd');b.innerHTML='';t.split('\n').filter(x=>x.trim()).forEach((x,i)=>{const d=document.createElement('div');d.className='ln'+(/[=+×÷−]/.test(x)&&x.replace(/[^ء-ي]/g,'').length<=8?' m':'');d.textContent=x;b.appendChild(d);setTimeout(()=>d.classList.add('on'),250+i*700)})}
+/* الصوت */
+let V=null;function pickV(){const L=speechSynthesis.getVoices().filter(v=>/^ar/i.test(v.lang));V=L.find(v=>/google/i.test(v.name))||L[0]||null}
+if('speechSynthesis' in window){pickV();speechSynthesis.onvoiceschanged=pickV}
+function clean(t){return t.replace(/(\d)\s*\/\s*(\d)/g,'$1 على $2').replace(/×/g,' ضرب ').replace(/÷/g,' قسمة ').replace(/=/g,' يساوي ').replace(/\+/g,' زائد ').replace(/(\S)\s*[−-]\s*(?=\S)/g,'$1 ناقص ').replace(/°/g,' درجة ').replace(/%/g,' بالمئة ').replace(/√/g,' الجذر التربيعي ل ').replace(/²/g,' تربيع ').replace(/³/g,' تكعيب ').replace(/\p{Extended_Pictographic}/gu,'').replace(/[*_#`()]/g,' ').replace(/\s+/g,' ').trim()}
+function say(t,cb){if(!('speechSynthesis' in window)){cb&&cb();return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(clean(t));u.lang=V?V.lang:'ar-SA';if(V)u.voice=V;u.rate=.95;u.onstart=()=>talk(true);u.onend=()=>{talk(false);cb&&cb()};u.onerror=()=>{talk(false);cb&&cb()};speechSynthesis.speak(u)}
+/* عرض نموذجي (بدون ذكاء اصطناعي) */
+const DEMO=[
+ ['ما فهمتش الفرق بين المربعات','سؤال ممتاز! 😊\nخذ مثالًا: (س + 3)(س − 3)\nنضرب: س² − 3س + 3س − 9\nالحدّان في الوسط يختصران\n= س² − 9\nإذن: (أ + ب)(أ − ب) = أ² − ب²\nجرّب أنت: كم يساوي (س + 5)(س − 5)؟'],
+ ['س تربيع ناقص 25','ممتاز يا بطل! 🎯 إجابتك صحيحة:\n(س + 5)(س − 5) = س² − 25\nسؤال أصعب قليلًا:\nحلّل المقدار: س² − 49'],
+ ['س ناقص 7 ضرب س زائد 7','رائع جدًا! 👏\nس² − 49 = (س − 7)(س + 7)\nلأن 49 = 7²\nأنت فهمت الدرس تمامًا. هل تريد مثالًا بالأعداد مثل 101 × 99؟']];
+async function ask(q){if(busy||!q.trim())return;busy=true;$('me').style.display='block';$('me').textContent='🧑‍🎓 '+q;$('state').textContent='🤔 الأستاذ يفكّر…';
+ const l=LES[+$('les').value];hist.push({r:'k',t:q});let rep='';
+ if(!demoMode){try{if(tok){const r=await fetch(FN,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:tok,subject:'الرياضيات',grade:l[3],title:l[2],ctx,history:hist.slice(-12)})});const j=await r.json();if(j.reply)rep=j.reply;else if(j.err==='limit')rep='سألت كثيرًا اليوم يا بطل 🌟 نكمل غدًا!';else if(j.fallback)demoMode=true}else demoMode=true}catch(e){demoMode=true}}
+ if(!rep&&demoMode){$('demo').style.display='block';const d=DEMO[Math.min(demoI,DEMO.length-1)];demoI++;rep=d[1]}
+ hist.push({r:'t',t:rep});board(rep);$('state').textContent='🗣️ الأستاذ يشرح…';
+ say(rep,()=>{busy=false;$('state').textContent=$('hf').checked&&SR?'👂 دورك… أنا أسمعك':'اضغط 🎤 لتجيب';if($('hf').checked&&SR)setTimeout(listen,500)})}
+/* الاستماع */
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;let rec=null;
+function listen(){if(!SR){$('state').textContent='الميكروفون غير مدعوم في هذا المتصفح، اكتب سؤالك 🙂';return}if(rec){rec.stop();return}try{speechSynthesis.cancel()}catch(e){}
+ rec=new SR();rec.lang='ar-LY';rec.interimResults=true;$('mic').classList.add('rec');$('state').textContent='👂 أسمعك… تكلّم';
+ rec.onresult=e=>{let t='';for(const r of e.results)t+=r[0].transcript;$('me').style.display='block';$('me').textContent='🧑‍🎓 '+t;if(e.results[e.results.length-1].isFinal){rec.stop();ask(t)}};
+ rec.onend=()=>{$('mic').classList.remove('rec');rec=null};rec.onerror=()=>{$('mic').classList.remove('rec');rec=null;$('state').textContent='ما سمعتكش جيدًا… اضغط 🎤 وعاود'};rec.start()}
+$('mic').onclick=()=>{if(demoMode||!tok){demoMode=true;const d=DEMO[Math.min(demoI,DEMO.length-1)];if(!SR){ask(d[0]);return}}listen()};
+$('go').onclick=()=>{ask($('tx').value);$('tx').value=''};$('tx').onkeydown=e=>{if(e.key==='Enter'){ask($('tx').value);$('tx').value=''}};
+$('chips').innerHTML=['اشرحلي الدرس ببساطة','أعطني مثالًا محلولًا','اختبرني بسؤال'].map(c=>`<button>${c}</button>`).join('');$('chips').querySelectorAll('button').forEach(b=>b.onclick=()=>ask(b.textContent));
+$('av').onclick=()=>say('أنا الأستاذ نور، اسألني عن أي شيء في الدرس!');
+if(!tok){demoMode=true}
+</script><script>(function(){function s(t,q){try{parent.postMessage(q?{lbt:t,qq:q}:{lbt:t},'*')}catch(e){}}
+var seen=new WeakSet();
+function qinfo(b,cb){setTimeout(function(){try{var G=b.parentElement,opts=[].slice.call(G.children).filter(function(x){return x.classList.contains('opt')});if(opts.length<2)return cb(null);
+ var p=G,qEl=null;for(var i=0;i<4&&p&&!qEl;i++){qEl=[].slice.call(p.children).filter(function(c){return !c.classList.contains('opt')&&!c.querySelector('.opt')&&!c.classList.contains('fb')&&!c.classList.contains('sc')&&c.textContent.trim().length>2})[0];if(!qEl)p=p.parentElement}
+ if(!qEl||qEl.querySelector('canvas,svg,img,input,table'))return cb(null);
+ var o=opts.map(function(x){return x.textContent.trim()}),r=-1,w=opts.indexOf(b);opts.forEach(function(x,i){if(x.classList.contains('ok'))r=i});
+ cb({q:qEl.textContent.replace(/\s+/g,' ').trim().replace(/^\d+\)\s*/,'').slice(0,300),o:o,r:r,w:w})}catch(e){cb(null)}},60)}
+new MutationObserver(function(ms){ms.forEach(function(m){
+ if(m.type==='attributes'){var t=m.target,c=t.classList,o=' '+(m.oldValue||'')+' ';
+  if((c.contains('ok')||c.contains('good'))&&!/ (ok|good) /.test(o)){if(c.contains('opt')&&!t.parentElement.querySelector('.opt.no'))qinfo(t,function(q){s('ok',q)});else s('ok')}
+  if((c.contains('no')||c.contains('bad'))&&!/ (no|bad) /.test(o)){if(c.contains('opt'))qinfo(t,function(q){s('no',q)});else s('no')}}
+ else m.addedNodes.forEach(function(n){if(n.nodeType===1&&n.tagName==='SPAN'&&!seen.has(n)){seen.add(n);if(n.classList.contains('ok'))s('ok');if(n.classList.contains('no'))s('no')}});
+})}).observe(document.documentElement,{attributes:true,subtree:true,attributeOldValue:true,attributeFilter:['class'],childList:true});
+document.addEventListener('click',function(){s('act')},true);})();</script>
+</body></html>
