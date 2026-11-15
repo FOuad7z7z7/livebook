@@ -192,20 +192,21 @@ function actListen(p){const S=$('stg'),cols=['#ff6b6b','#339af0','#51cf66'],nm=[
  S.querySelectorAll('#fm .card').forEach(b=>b.onclick=()=>{FX.pop();b.animate([{transform:'translateY(-14px)'},{transform:'none'}],{duration:300})});
  function ask(){target=Math.random()*3|0;OWL('🎧 اسمع جيدًا… وأين هذا الصوت؟ ('+(qk+1)+'/4)',T("اِسْمَعْ وَاخْتَرْ"),()=>SAY(p.hk[target]))}
  OWL('المس كل بطاقة لتسمع الصوت 👂')}
-function actTrace(p){const S=$('stg');S.innerHTML=`<h2>🖍️ لوّن الحرف بإصبعك</h2><canvas class=play id=tc width=640 height=520></canvas><div id=tp style="height:16px;background:#f1f3f5;border-radius:9px;margin-top:8px;overflow:hidden"><i id=tpi style="display:block;height:100%;width:0;background:linear-gradient(90deg,#ff6b6b,#ffd43b,#51cf66,#339af0,#cc5de8)"></i></div><button class=big id=tclr style="background:linear-gradient(135deg,#adb5bd,#868e96);box-shadow:0 6px 0 #495057">🧽 امسح وابدأ من جديد</button>`;
+function actTrace(p){const S=$('stg');S.innerHTML=`<h2>🖍️ لوّن الحرف بإصبعك</h2><canvas class=play id=tc width=640 height=520></canvas><div id=tp style="height:16px;background:#f1f3f5;border-radius:9px;margin-top:8px;overflow:hidden"><i id=tpi style="display:block;height:100%;width:0;background:${p.c2}"></i></div><button class=big id=tclr style="background:linear-gradient(135deg,#adb5bd,#868e96);box-shadow:0 6px 0 #495057">🧽 امسح وابدأ من جديد</button>`;
  const c=$('tc'),x=c.getContext('2d'),off=document.createElement('canvas');off.width=640;off.height=520;const o=off.getContext('2d');
  glyph(o,p.ch,320,260,380);
  const D=o.getImageData(0,0,640,520).data,pts=[];for(let yy=0;yy<520;yy+=10)for(let xx=0;xx<640;xx+=10)if(D[(yy*640+xx)*4+3]>128)pts.push([xx,yy,0]);
  const paint=document.createElement('canvas');paint.width=640;paint.height=520;const pp=paint.getContext('2d');let hue=0,down=false,last=null,doneT=false,sp=[];
  function base(){x.clearRect(0,0,640,520);x.fillStyle='#fffdf5';x.fillRect(0,0,640,520);x.save();x.fillStyle='#e9ecef';glyph(x,p.ch,320,260,380);x.setLineDash([10,12]);x.lineWidth=6;x.strokeStyle='#adb5bd';glyph(x,p.ch,320,260,380,'s');x.restore()}
- function draw(){base();x.save();x.globalCompositeOperation='source-over';x.drawImage(paint,0,0);x.restore();sp=sp.filter(s=>(s.l-=.04)>0);sp.forEach(s=>{x.globalAlpha=s.l;x.font='28px serif';x.fillText('✨',s.x,s.y-=1.5);x.globalAlpha=1})}
- function dot(P){hue=(hue+6)%360;pp.fillStyle=`hsl(${hue},90%,60%)`;pp.beginPath();pp.arc(P.x,P.y,26,0,7);pp.fill();if(Math.random()<.3)sp.push({x:P.x,y:P.y,l:1});
+ const mk=document.createElement('canvas');mk.width=640;mk.height=520;const mx=mk.getContext('2d');
+ function draw(){base();mx.globalCompositeOperation='source-over';mx.clearRect(0,0,640,520);mx.drawImage(paint,0,0);mx.globalCompositeOperation='destination-in';mx.drawImage(off,0,0);x.drawImage(mk,0,0);sp=sp.filter(s=>(s.l-=.04)>0);sp.forEach(s=>{x.globalAlpha=s.l;x.font='28px serif';x.fillText('✨',s.x,s.y-=1.5);x.globalAlpha=1})}
+ function dot(P){pp.fillStyle=p.c2;pp.beginPath();pp.arc(P.x,P.y,26,0,7);pp.fill();if(Math.random()<.3)sp.push({x:P.x,y:P.y,l:1});
   pts.forEach(q=>{if(!q[2]&&(q[0]-P.x)**2+(q[1]-P.y)**2<30*30)q[2]=1});const r=pts.filter(q=>q[2]).length/pts.length;$('tpi').style.width=Math.min(100,r/.85*100)+'%';
   if(r>=.85&&!doneT){doneT=true;FX.win();confetti();good();finishAct(p,'t',4);OWL('🌈 واااو! لوّنت حرف '+p.name+'!',pick(PRAISE))}}
  function line(a,b){const d=Math.hypot(b.x-a.x,b.y-a.y),n=Math.max(1,d/8|0);for(let i=0;i<=n;i++)dot({x:a.x+(b.x-a.x)*i/n,y:a.y+(b.y-a.y)*i/n})}
  c.onpointerdown=e=>{down=true;c.setPointerCapture(e.pointerId);last=xy(c,e);dot(last)};c.onpointermove=e=>{if(!down)return;const P=xy(c,e);line(last,P);last=P;if(Math.random()<.15)tone(400+Math.random()*600,.05,'sine',.03)};c.onpointerup=()=>down=false;
  $('tclr').onclick=()=>{pp.clearRect(0,0,640,520);pts.forEach(q=>q[2]=0);doneT=false;$('tpi').style.width='0'};
- loop2(()=>{draw()});OWL('مرّر إصبعك على الحرف ولوّنه بألوان قوس قزح 🌈',T("لَوِّنِ الْحَرْفَ بِإِصْبَعِكَ"))}
+ loop2(()=>{draw()});OWL('مرّر إصبعك على الحرف ولوّنه كله 🖍️',T("لَوِّنِ الْحَرْفَ بِإِصْبَعِكَ"))}
 function actBalloons(p){const S=$('stg'),N=8;let got=0,B=[],parts=[],t0=0;S.innerHTML=`<h2>🎈 فرقع البالونات التي فيها حرف ${p.name}</h2><div id=bp>${prog(N,0)}</div><canvas class=play id=bc width=640 height=560></canvas>`;
  const c=$('bc'),x=c.getContext('2d');const CL=['#ff6b6b','#339af0','#51cf66','#fcc419','#cc5de8','#ff922b','#20c997'];
  function spawn(){const tg=Math.random()<.55;B.push({x:60+Math.random()*520,y:620,v:1.1+Math.random()*1.1,s:Math.random()*6,ch:tg?pick([p.ch,...p.forms]):pick(p.sim),tg,col:pick(CL),w:0})}
