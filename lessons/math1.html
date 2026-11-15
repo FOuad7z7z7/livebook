@@ -1,0 +1,418 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><title>رياضيات – الصف الأول – الكتاب الحي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800;900&display=swap" rel="stylesheet"><style>*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+body{margin:0;font-family:Cairo,Tahoma,sans-serif;direction:rtl;color:#2b2d42;min-height:100vh;
+ background:radial-gradient(circle at 20% 10%,#fff6d6 0,transparent 40%),radial-gradient(circle at 90% 30%,#d7f5ff 0,transparent 45%),linear-gradient(180deg,#e9f7ff,#fff4fb);overflow-x:hidden}
+#sky{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+#sky i{position:absolute;font-style:normal;opacity:.55;animation:drift linear infinite}
+@keyframes drift{from{transform:translateX(110vw)}to{transform:translateX(-30vw)}}
+#app{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:10px 12px 120px}
+.top{display:flex;align-items:center;gap:8px}
+.top .home{border:0;background:#fff;border-radius:18px;padding:8px 14px;font:inherit;font-weight:900;font-size:1.1rem;box-shadow:0 4px 0 #d0d7e2;cursor:pointer}
+.stars{margin-inline-start:auto;background:#fff;border-radius:18px;padding:6px 14px;font-weight:900;font-size:1.2rem;box-shadow:0 4px 0 #ffd43b}
+/* البومة */
+#owl{position:fixed;bottom:10px;left:10px;z-index:20;display:flex;align-items:flex-end;gap:6px;pointer-events:none;max-width:92vw}
+#owl .o{width:84px;height:84px;animation:bob 2.2s ease-in-out infinite;filter:drop-shadow(0 6px 6px rgba(0,0,0,.18));pointer-events:auto;cursor:pointer}
+#owl .o.talk{animation:talk .25s ease-in-out infinite alternate}
+#owl .b{background:#fff;border-radius:22px 22px 22px 4px;padding:10px 14px;font-weight:800;font-size:1.05rem;box-shadow:0 6px 16px rgba(0,0,0,.12);max-width:300px;transform-origin:bottom left;animation:pop .3s}
+@keyframes bob{50%{transform:translateY(-8px) rotate(-3deg)}}
+@keyframes talk{to{transform:scale(1.08) rotate(4deg)}}
+@keyframes pop{from{transform:scale(.3);opacity:0}}
+/* الخريطة */
+.title{text-align:center;margin:8px 0 4px}.title h1{margin:0;font-size:2rem;color:#7048e8;text-shadow:0 3px 0 #fff}.title p{margin:0;font-weight:700;color:#868e96}
+.map{position:relative;margin-top:10px;display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.map svg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.stop{position:relative;z-index:1;margin:0 auto 14px;text-align:center;cursor:pointer;animation:pop .4s backwards}
+.house{width:96px;height:96px;font-size:3rem!important;margin:0 auto;border-radius:36px;display:grid;place-items:center;font-size:3.6rem;font-weight:900;color:#fff;box-shadow:0 8px 0 rgba(0,0,0,.15),inset 0 -8px 0 rgba(0,0,0,.08);transition:transform .15s;position:relative}
+.stop:active .house{transform:scale(.92)}
+.house .st{position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);font-size:1.05rem;background:#fff;border-radius:12px;padding:0 6px;white-space:nowrap}
+.stop b{display:block;margin-top:18px;font-size:1.05rem}
+.album{background:#fff;border-radius:24px;padding:12px;margin-top:16px;box-shadow:0 6px 0 #e9ecef}
+.album h3{margin:0 0 6px}.album .s{display:inline-grid;place-items:center;width:52px;height:52px;margin:3px;border-radius:50%;background:#f1f3f5;font-size:1.8rem;filter:grayscale(1);opacity:.35}
+.album .s.on{filter:none;opacity:1;background:#fff3bf;animation:pop .4s}
+/* صفحة الحرف */
+.hero{position:relative;text-align:center}
+canvas.lt{width:min(320px,80vw);height:auto;display:block;margin:0 auto;cursor:pointer}
+.steps{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:8px 0}
+.steps button{border:0;border-radius:22px;padding:10px 12px;min-width:70px;font:inherit;font-weight:900;font-size:1rem;background:#fff;box-shadow:0 5px 0 #dee2e6;cursor:pointer;position:relative}
+.steps button .e{display:block;font-size:1.8rem}
+.steps button.on{background:#7048e8;color:#fff;box-shadow:0 5px 0 #4c2fb0}
+.steps button.done::after{content:"⭐";position:absolute;top:-10px;left:-6px;font-size:1.3rem}
+.stage{background:#fff;border-radius:30px;padding:14px;box-shadow:0 8px 0 #e9ecef;min-height:360px;position:relative;overflow:hidden}
+.stage h2{margin:0 0 8px;text-align:center;font-size:1.3rem}
+canvas.play{width:100%;display:block;border-radius:22px;touch-action:none}
+.cards{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.card{border:0;border-radius:26px;min-width:96px;padding:12px 10px;font:inherit;font-weight:900;font-size:2.6rem;cursor:pointer;color:#fff;box-shadow:0 6px 0 rgba(0,0,0,.18);transition:transform .12s}
+.card small{display:block;font-size:.9rem;font-weight:800;opacity:.95}
+.card:active{transform:scale(.92)}
+.pics{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pic{border:0;background:#f8f9fa;border-radius:24px;padding:10px 4px;font:inherit;cursor:pointer;box-shadow:0 5px 0 #e9ecef;transition:transform .15s}
+.pic .em{font-size:3.2rem;display:block}.pic b{font-size:1.1rem}
+.pic.ok{background:#d3f9d8;box-shadow:0 5px 0 #8ce99a;transform:scale(1.05)}.pic.no{animation:shk .4s;background:#ffe3e3}
+@keyframes shk{25%{transform:translateX(8px)}75%{transform:translateX(-8px)}}
+.big{display:block;width:100%;border:0;border-radius:24px;padding:14px;font:inherit;font-weight:900;font-size:1.25rem;color:#fff;background:linear-gradient(135deg,#ff922b,#f76707);box-shadow:0 6px 0 #d9480f;cursor:pointer;margin-top:12px}
+.big.g{background:linear-gradient(135deg,#51cf66,#2f9e44);box-shadow:0 6px 0 #2b8a3e}
+.prog{display:flex;justify-content:center;gap:5px;margin:6px 0}.prog i{width:14px;height:14px;border-radius:50%;background:#e9ecef}.prog i.on{background:#ffd43b;box-shadow:0 0 0 3px #fff3bf}
+.cf{position:fixed;top:-50px;font-size:2rem;pointer-events:none;z-index:50;animation:fall 1.8s ease-in forwards}
+@keyframes fall{to{transform:translateY(115vh) rotate(720deg)}}
+.reward{position:fixed;inset:0;z-index:40;background:rgba(43,45,66,.55);display:grid;place-items:center}
+.reward div{background:#fff;border-radius:36px;padding:24px 30px;text-align:center;animation:pop .4s}
+.reward .s{font-size:6rem;animation:bob 1.2s infinite}.reward h2{margin:6px 0}
+.word{font-size:2.6rem;font-weight:900;letter-spacing:2px;text-align:center;margin:6px 0}
+.word .gap{display:inline-block;min-width:56px;border-bottom:5px dashed #ffa94d;color:#ffa94d}
+</style></head><body><div id="app"></div>
+<script>const T=s=>s;
+const BOOK='math1',ABASE='audio-m1/',BOOKT='🏝️ جزيرة الأرقام',BOOKS='رياضيات الصف الأول · العب مع الأعداد الحيّة 😄';
+window.MINI0={ch:'5',c1:'#ffd43b',c2:'#f08c00'};
+const HELLO=T("أَهْلًا يَا بَطَلُ! أَنَا الْعَدَدُ خَمْسَةٌ، صَدِيقُكَ فِي جَزِيرَةِ الْأَرْقَامِ. هَيَّا نَعُدُّ وَنَلْعَبُ!");
+const PAGES=[
+ {id:'s1',type:'math',t:'أمام وخلف · يمين ويسار',icon:'🚶',col:'#ff922b',sticker:'🚦',acts:[['a','🚪','الطابور','line'],['b','🌳','يمين ويسار','side']]},
+ {id:'s2',type:'math',t:'فوق · على · تحت',icon:'🪑',col:'#f59f00',sticker:'🪑',acts:[['a','🪑','الطاولة','table']]},
+ {id:'s3',type:'math',t:'المجموعات',icon:'🧺',col:'#51cf66',sticker:'🧺',acts:[['a','🧺','كوّن مجموعة','sort'],['b','🕵️','من الغريب؟','odd']]},
+ {id:'s4',type:'math',t:'المزاوجة والتساوي',icon:'🔗',col:'#20c997',sticker:'🔗',acts:[['a','🔗','متساويتان؟','same'],['b','⚖️','الأكثر والأقل','more']]},
+ {id:'n1',type:'num',t:'العدد 1',icon:'1',ch:'1',num:1,name:'واحد',word:'واحد',e:'🐘',sticker:'🥇',col:'#e03131',c1:'#ff8787',c2:'#e03131',forms:[],sim:['0', '2', '3', '4', '5', '6'],intro:T("أَنَا الْعَدَدُ وَاحِدٌ! طَوِيلٌ وَنَحِيفٌ مِثْلَ الْقَلَمِ، وَلِكُلِّ وَاحِدٍ مِنَّا أَنْفٌ وَاحِدٌ")},
+ {id:'n2',type:'num',t:'العدد 2',icon:'2',ch:'2',num:2,name:'اثنان',word:'اثنان',e:'🦆',sticker:'🦆',col:'#e8590c',c1:'#ffa94d',c2:'#e8590c',forms:[],sim:['0', '1', '3', '4', '5', '6'],intro:T("أَنَا الْعَدَدُ اثْنَانِ! رَقَبَتِي مِثْلُ رَقَبَةِ الْبَطَّةِ، وَلَكَ عَيْنَانِ اثْنَتَانِ")},
+ {id:'n3',type:'num',t:'العدد 3',icon:'3',ch:'3',num:3,name:'ثلاثة',word:'ثلاثة',e:'🐞',sticker:'🔺',col:'#f08c00',c1:'#ffd43b',c2:'#f08c00',forms:[],sim:['0', '1', '2', '4', '5', '6'],intro:T("أَنَا الْعَدَدُ ثَلَاثَةٌ! لِي بَطْنَانِ صَغِيرَانِ، وَلِلْمُثَلَّثِ ثَلَاثَةُ أَضْلَاعٍ")},
+ {id:'n4',type:'num',t:'العدد 4',icon:'4',ch:'4',num:4,name:'أربعة',word:'أربعة',e:'🐱',sticker:'🐱',col:'#2f9e44',c1:'#8ce99a',c2:'#2f9e44',forms:[],sim:['0', '1', '2', '3', '5', '6'],intro:T("أَنَا الْعَدَدُ أَرْبَعَةٌ! لِلْكُرْسِيِّ أَرْبَعُ أَرْجُلٍ، وَلِلْقِطَّةِ أَرْبَعُ أَرْجُلٍ أَيْضًا")},
+ {id:'n5',type:'num',t:'العدد 5',icon:'5',ch:'5',num:5,name:'خمسة',word:'خمسة',e:'🍓',sticker:'🖐️',col:'#0c8599',c1:'#63e6be',c2:'#0c8599',forms:[],sim:['0', '1', '2', '3', '4', '6'],intro:T("أَنَا الْعَدَدُ خَمْسَةٌ! فِي يَدِكَ خَمْسَةُ أَصَابِعَ، هَيَّا نَعُدُّهَا مَعًا")},
+ {id:'n6',type:'num',t:'العدد 6',icon:'6',ch:'6',num:6,name:'ستة',word:'ستة',e:'🐝',sticker:'🐝',col:'#1971c2',c1:'#74c0fc',c2:'#1971c2',forms:[],sim:['0', '1', '2', '3', '4', '5'],intro:T("أَنَا الْعَدَدُ سِتَّةٌ! لِلنَّحْلَةِ سِتُّ أَرْجُلٍ تَمْشِي بِهَا عَلَى الزَّهْرَةِ")},
+ {id:'n7',type:'num',t:'العدد 7',icon:'7',ch:'7',num:7,name:'سبعة',word:'سبعة',e:'🎈',sticker:'🌈',col:'#6741d9',c1:'#b197fc',c2:'#6741d9',forms:[],sim:['0', '1', '2', '3', '4', '5'],intro:T("أَنَا الْعَدَدُ سَبْعَةٌ! فِي الْأُسْبُوعِ سَبْعَةُ أَيَّامٍ، وَفِي قَوْسِ قُزَحٍ سَبْعَةُ أَلْوَانٍ")},
+ {id:'n8',type:'num',t:'العدد 8',icon:'8',ch:'8',num:8,name:'ثمانية',word:'ثمانية',e:'🐙',sticker:'🐙',col:'#c2255c',c1:'#f783ac',c2:'#c2255c',forms:[],sim:['0', '1', '2', '3', '4', '5'],intro:T("أَنَا الْعَدَدُ ثَمَانِيَةٌ! لِلْأُخْطُبُوطِ ثَمَانِي أَذْرُعٍ يَلْعَبُ بِهَا فِي الْبَحْرِ")},
+ {id:'n9',type:'num',t:'العدد 9',icon:'9',ch:'9',num:9,name:'تسعة',word:'تسعة',e:'⭐',sticker:'⭐',col:'#d9480f',c1:'#ffc078',c2:'#d9480f',forms:[],sim:['0', '1', '2', '3', '4', '5'],intro:T("أَنَا الْعَدَدُ تِسْعَةٌ! أَنَا أَكْبَرُ عَدَدٍ يُكْتَبُ بِرَقْمٍ وَاحِدٍ")},
+ {id:'n10',type:'num',t:'العدد 10',icon:'10',ch:'10',num:10,name:'عشرة',word:'عشرة',e:'🍬',sticker:'👐',col:'#0b7285',c1:'#66d9e8',c2:'#0b7285',forms:[],sim:['2', '3', '4', '5', '6', '7'],intro:T("أَنَا الْعَدَدُ عَشَرَةٌ! فِي يَدَيْكَ عَشَرَةُ أَصَابِعَ، صَفِّقْ مَعِي")},
+ {id:'n0',type:'num',t:'العدد 0',icon:'0',ch:'0',num:0,name:'صفر',word:'صفر',e:'🫙',sticker:'🥚',col:'#495057',c1:'#ced4da',c2:'#495057',forms:[],sim:['1', '2', '3', '4', '5', '6'],intro:T("أَنَا الصِّفْرُ! شَكْلِي مِثْلُ الْبَيْضَةِ، وَمَعْنَايَ لَا شَيْءَ")},
+ {id:'c1',type:'math',t:'أكبر من وأصغر من',icon:'🐊',col:'#2f9e44',sticker:'🐊',sub:'التمساح الجائع يأكل دائمًا العدد الأكبر!',acts:[['a','🐊','التمساح','croc',{max:10,pic:1}],['b','⚖️','> < =','sym',{max:10}],['c','🏆','الأكبر والأصغر','big3',{max:10}]]},
+ {id:'b1',type:'math',t:'مكونات العدد',icon:'🎩',col:'#7048e8',sticker:'🎩',sub:'الكوب السحري يخبّئ جزءًا من العدد',acts:[['a','🎩','حتى 5','bond',{min:2,max:5}],['b','🎩','حتى 10','bond',{min:5,max:10}]]},
+ {id:'b2',type:'math',t:'الميزان الحسابي',icon:'⚖️',col:'#5c7cfa',sticker:'⚖️',acts:[['a','⚖️','وازن الميزان','balance',{min:3,max:10}],['b','🔟','أكمل العشرة','make10']]},
+ {id:'a1',type:'math',t:'الجمع حتى 10',icon:'🧺',col:'#e64980',sticker:'🍎',acts:[['a','🧺','السلة','addPic'],['b','🐸','الضفدع القافز','frog',{max:10}]]},
+ {id:'a2',type:'math',t:'جمع الأعداد',icon:'➕',col:'#d6336c',sticker:'➕',acts:[['a','➕','احسب','addEq',{max:10}],['b','📖','قصص الجمع','story',{op:'+'}]]},
+ {id:'m1',type:'math',t:'الطرح حتى 10',icon:'🐦',col:'#1c7ed6',sticker:'🐦',acts:[['a','🐦','العصافير','fly'],['b','👾','وحش الكعك','eat']]},
+ {id:'m2',type:'math',t:'طرح الأعداد',icon:'➖',col:'#1971c2',sticker:'➖',acts:[['a','➖','احسب','subEq',{max:10}],['b','📖','قصص الطرح','story',{op:'-'}],['c','👨‍👩‍👧','عائلة الجمل','fam']]},
+ {id:'g1',type:'math',t:'الأشكال',icon:'🔷',col:'#0ca678',sticker:'🔷',acts:[['a','🔷','أين الشكل؟','shape'],['b','🍕','ما شكله؟','real']]},
+ {id:'g2',type:'math',t:'الأنماط',icon:'🔁',col:'#099268',sticker:'🔁',acts:[['a','🔁','أكمل النمط','pattern']]},
+ {id:'o1',type:'math',t:'الأعداد الترتيبية',icon:'🏁',col:'#f76707',sticker:'🏆',sub:'الأول، الثاني، الثالث…',acts:[['a','🏁','السباق','race']]},
+ {id:'t1',type:'math',t:'الأعداد حتى 20',icon:'🔟',col:'#ae3ec9',sticker:'🔟',acts:[['a','🔟','عشرة وآحاد','tens'],['b','🔢','العدد الناقص','seq',{max:20}]]},
+ {id:'t2',type:'math',t:'المقارنة حتى 20',icon:'🐊',col:'#9c36b5',sticker:'🦖',acts:[['a','🐊','التمساح','croc',{min:5,max:20}],['b','⚖️','> < =','sym',{max:20}],['c','🏆','الأكبر والأصغر','big3',{min:5,max:20}]]},
+ {id:'t3',type:'math',t:'القيمة المكانية',icon:'🧱',col:'#862e9c',sticker:'🧱',acts:[['a','🧱','عشرات وآحاد','pv']]},
+ {id:'t4',type:'math',t:'الجمع حتى 20',icon:'➕',col:'#c2255c',sticker:'🚀',acts:[['a','🔟','أكمل العشرة','make10'],['b','➕','احسب','addEq',{min:8,max:20}],['c','🐸','الضفدع','frog',{max:20}]]},
+ {id:'t5',type:'math',t:'الطرح حتى 20',icon:'➖',col:'#1864ab',sticker:'🛸',acts:[['a','➖','احسب','subEq',{min:10,max:20}],['b','📖','قصص','story']]},
+ {id:'rvA',type:'math',t:'التحدي الكبير',icon:'🏆',col:'#e8590c',sticker:'👑',sub:'كل ما تعلّمته في تحدٍّ واحد!',acts:[['a','🏆','التحدي','mix']]}
+];
+
+const $=id=>document.getElementById(id)||{innerHTML:'',style:{},querySelectorAll:()=>[],animate(){},classList:{add(){},remove(){}}};
+
+const send=(t,q)=>{try{parent.postMessage(q?{lbt:t,qq:q}:{lbt:t},'*')}catch(e){}};
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const pick=a=>a[Math.random()*a.length|0];
+function fnv(s){let h=2166136261;for(const c of s){h^=c.codePointAt(0);h=Math.imul(h,16777619)>>>0}return h.toString(16).padStart(8,'0')}
+/* ===== الصوت ===== */
+let AU=new Audio(),qCb=null,AC;
+function SAY(t,cb){try{AU.pause()}catch(e){}AU=new Audio(ABASE+fnv(t)+'.mp3');const o=document.querySelector('#owl .o');o&&o.classList.add('talk');
+ const end=()=>{o&&o.classList.remove('talk');if(cb){const c=cb;cb=null;c()}};AU.onended=end;AU.onerror=end;AU.play().catch(end)}
+function SAYS(list,cb){let i=0;const nx=()=>{if(i>=list.length){cb&&cb();return}SAY(list[i++],nx)};nx()}
+function OWL(txt,say,cb){const b=document.querySelector('#owl .b');if(b){b.innerHTML=txt;b.style.animation='none';b.offsetWidth;b.style.animation=''}if(say)SAY(say,cb)}
+function tone(f,d,type,v,delay){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime+(delay||0),o=AC.createOscillator(),g=AC.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,t);g.gain.setValueAtTime(v||.08,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d+.02)}catch(e){}}
+const FX={pop(){tone(900,.08,'triangle',.12);tone(1400,.06,'sine',.06,.03)},ok(){tone(660,.12,'sine',.08);tone(990,.18,'sine',.08,.1)},no(){tone(200,.18,'sawtooth',.05);tone(150,.2,'sawtooth',.05,.12)},win(){[523,659,784,1047,1319].forEach((f,i)=>tone(f,.25,'triangle',.08,i*.1))},boing(){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.frequency.setValueAtTime(300,t);o.frequency.exponentialRampToValueAtTime(120,t+.3);g.gain.setValueAtTime(.08,t);g.gain.exponentialRampToValueAtTime(.001,t+.35);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+.36)}catch(e){}}};
+const PRAISE=[T("أَحْسَنْتَ!"),T("رَائِعٌ!"),T("مُمْتَازٌ!"),T("بَطَلٌ!"),T("شَاطِرٌ!")];
+const TRY=T("حَاوِلْ مَرَّةً أُخْرَى");
+function good(q){FX.ok();send('ok',q);addStar()}
+function bad(q){FX.no();send('no',q)}
+function confetti(n){for(let i=0;i<(n||30);i++){const s=document.createElement('span');s.className='cf';s.textContent=pick(['⭐','🎈','🎉','✨','🍬','🌈','💖']);s.style.left=Math.random()*100+'vw';s.style.animationDelay=Math.random()*.6+'s';document.body.appendChild(s);setTimeout(()=>s.remove(),2600)}}
+/* ===== الحالة ===== */
+let ST={};try{ST=JSON.parse(localStorage.getItem('k_'+BOOK)||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem('k_'+BOOK,JSON.stringify(ST))}catch(e){}};
+function addStar(){ST.stars=(ST.stars||0)+1;save();const e=$('stc');if(e){e.textContent='⭐ '+ST.stars;e.animate([{transform:'scale(1.4)'},{transform:'scale(1)'}],{duration:300})}}
+const pg=id=>PAGES.find(p=>p.id===id);
+/* ===== السماء ===== */
+(function(){const s=document.createElement('div');s.id='sky';for(let i=0;i<7;i++){const c=document.createElement('i');c.textContent=pick(['☁️','☁️','☁️','🎈','⭐']);c.style.top=(5+i*13)+'%';c.style.fontSize=(30+Math.random()*40)+'px';c.style.animationDuration=(30+Math.random()*40)+'s';c.style.animationDelay=(-Math.random()*60)+'s';s.appendChild(c)}document.body.prepend(s);
+ const o=document.createElement('div');o.id='owl';o.innerHTML='<canvas class="o" width=150 height=150></canvas><div class="b"></div>';document.body.appendChild(o);o.querySelector('.o').onclick=()=>{FX.boing();SAY(pick(PRAISE))};
+ const mc=o.querySelector('.o'),mx=mc.getContext('2d');setInterval(()=>{const t=performance.now()/1000,M=window.MINI||{ch:'أ',c1:'#ff8787',c2:'#e03131'};mx.clearRect(0,0,150,150);mx.save();mx.translate(75,82+Math.sin(t*3)*4);
+  const g=mx.createLinearGradient(0,-60,0,60);g.addColorStop(0,M.c1);g.addColorStop(1,M.c2);mx.fillStyle=g;mx.lineWidth=8;mx.strokeStyle='#fff';mx.lineJoin='round';glyph(mx,M.ch,0,0,110,'both');
+  const bl=(t%3.4)<.12;[-14,14].forEach(ex=>{mx.fillStyle='#fff';mx.beginPath();mx.ellipse(ex,-12,10,bl?2:11,0,0,7);mx.fill();if(!bl){mx.fillStyle='#212529';mx.beginPath();mx.arc(ex+Math.sin(t)*2,-10,4.5,0,7);mx.fill()}});
+  const talk=mc.classList.contains('talk');mx.fillStyle='#212529';mx.beginPath();if(talk){mx.ellipse(0,12,7,3+Math.abs(Math.sin(t*18))*6,0,0,7);mx.fill()}else{mx.strokeStyle='#212529';mx.lineWidth=3;mx.arc(0,6,9,.15*Math.PI,.85*Math.PI);mx.stroke()}mx.restore()},50)})();
+/* ===== التنقل ===== */
+function route(){const h=location.hash.slice(1)||'home';{const q=pg(h);window.MINI=q&&q.ch?{ch:q.ch,c1:q.c1,c2:q.c2}:(window.MINI0||{ch:'أ',c1:'#ff8787',c2:'#e03131'})}scrollTo(0,0);try{AU.pause()}catch(e){}cancelAnimationFrame(RAF);if(h==='home'||!pg(h))return home();const p=pg(h);(Object.assign({letter:letterPage,shapes:shapesPage,review:reviewPage},window.XT||{}))[p.type](p)}
+let RAF=0;const loop=f=>{const L=t=>{f(t/1000);RAF=requestAnimationFrame(L)};cancelAnimationFrame(RAF);RAF=requestAnimationFrame(L)};
+function topBar(){return `<div class=top><button class=home onclick="location.hash='home'">🗺️ الخريطة</button><div class=stars id=stc>⭐ ${ST.stars||0}</div></div>`}
+function home(){const C=['#ff6b6b','#f59f00','#51cf66','#339af0','#cc5de8','#ff922b','#20c997','#f06595'];
+ $('app').innerHTML=topBar()+`<div class=title><h1>${BOOKT}</h1><p>${BOOKS}</p></div><div class=map id=map>${PAGES.map((p,i)=>{const d=(ST.done||{})[p.id]||0;return `<div class=stop onclick="location.hash='${p.id}'"><div class=house style="background:${p.col||C[i%C.length]}">${p.icon}<span class=st>${'⭐'.repeat(d)||'☆'}</span></div><b>${p.t}</b></div>`}).join('')}</div>
+ <div class=album><h3>🏆 ألبوم ملصقاتي</h3>${PAGES.filter(p=>p.sticker).map(p=>`<span class="s ${(ST.stk||{})[p.id]?'on':''}">${p.sticker}</span>`).join('')}</div>`;
+ const first=!ST.seen;ST.seen=1;save();OWL('أهلًا يا بطل! 👋 اختر بيتًا من الخريطة ولنبدأ اللعب!',first?HELLO:null)}
+function finishAct(p,k,n){ST.acts=ST.acts||{};const a=ST.acts[p.id]=ST.acts[p.id]||{};if(!a[k]){a[k]=1}const cnt=Object.keys(a).length;ST.done=ST.done||{};ST.done[p.id]=Math.min(3,Math.ceil(cnt*3/n));save();
+ document.querySelectorAll('.steps button').forEach(b=>{if(a[b.dataset.k])b.classList.add('done')});
+ if(cnt>=n&&!(ST.stk||{})[p.id]){ST.stk=ST.stk||{};ST.stk[p.id]=1;save();setTimeout(()=>reward(p),900)}}
+function reward(p){FX.win();confetti(50);const r=document.createElement('div');r.className='reward';r.innerHTML=`<div><div class=s>${p.sticker}</div><h2>ربحت ملصقًا جديدًا!</h2><p>أنهيت كل ألعاب «${p.t}» 🎉</p><button class="big g">إلى الخريطة 🗺️</button></div>`;document.body.appendChild(r);SAY(T("أَحْسَنْتَ! رَبِحْتَ مُلْصَقًا جَدِيدًا"));r.querySelector('button').onclick=()=>{r.remove();location.hash='home'}}
+function steps(p,acts,cur){return `<div class=steps>${acts.map((a,i)=>`<button data-k="${a[0]}" class="${i===cur?'on':''} ${((ST.acts||{})[p.id]||{})[a[0]]?'done':''}"><span class=e>${a[1]}</span>${a[2]}</button>`).join('')}</div>`}
+function bindSteps(p,acts,fns){document.querySelectorAll('.steps button').forEach((b,i)=>b.onclick=()=>{FX.pop();document.querySelectorAll('.steps button').forEach(x=>x.classList.remove('on'));b.classList.add('on');cancelAnimationFrame(RAF2);fns[i]()})}
+let RAF2=0;const loop2=f=>{cancelAnimationFrame(RAF2);const L=t=>{if(f(t/1000)!==false)RAF2=requestAnimationFrame(L)};RAF2=requestAnimationFrame(L)};
+function prog(n,k){return '<div class=prog>'+Array.from({length:n},(_,i)=>`<i class="${i<k?'on':''}"></i>`).join('')+'</div>'}
+function xy(c,e){const r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}}
+
+function glyph(x,ch,cx,cy,H,mode){/* يرسم الحرف في المنتصف بارتفاع H */let fs=H;x.font='900 '+fs+'px Cairo, "Noto Naskh Arabic", Tahoma';x.textAlign='left';x.textBaseline='alphabetic';let m=x.measureText(ch);let h=m.actualBoundingBoxAscent+m.actualBoundingBoxDescent,w=m.actualBoundingBoxLeft+m.actualBoundingBoxRight;const k=Math.min(H/h,H*1.1/w);fs=fs*k;x.font='900 '+fs+'px Cairo, "Noto Naskh Arabic", Tahoma';m=x.measureText(ch);
+ const X=cx-(m.actualBoundingBoxRight-m.actualBoundingBoxLeft)/2,Y=cy+(m.actualBoundingBoxAscent-m.actualBoundingBoxDescent)/2;if(mode==='s')x.strokeText(ch,X,Y);else if(mode==='both'){x.strokeText(ch,X,Y);x.fillText(ch,X,Y)}else x.fillText(ch,X,Y);return{top:Y-m.actualBoundingBoxAscent,bot:Y+m.actualBoundingBoxDescent}}
+function heroLive(p,onTap){ const c=$('lt'),x=c.getContext('2d');let jump=0,blink=0;
+ if(!p.eye){const oc=document.createElement('canvas');oc.width=640;oc.height=440;const ox=oc.getContext('2d');ox.fillStyle='#000';glyph(ox,p.ch,320,220,280);const D=ox.getImageData(0,0,640,440).data;let sx=0,sy=0,n=0;for(let yy=0;yy<440;yy+=4)for(let xx=0;xx<640;xx+=4)if(D[(yy*640+xx)*4+3]>128){sx+=xx;sy+=yy;n++}p.eye=n?[sx/n-320,sy/n-220-8]:[0,0]}
+ c.onclick=()=>{jump=1;FX.boing();onTap()};
+ loop(t=>{x.clearRect(0,0,640,440);jump=Math.max(0,jump-.03);const by=Math.sin(t*2.2)*10-Math.sin(jump*Math.PI)*60,sq=1+Math.sin(t*2.2)*.03;
+  x.save();x.translate(320,250+by);x.scale(1/sq,sq);
+  const g=x.createLinearGradient(0,-150,0,150);g.addColorStop(0,p.c1);g.addColorStop(1,p.c2);x.lineWidth=18;x.strokeStyle='#fff';x.lineJoin='round';x.fillStyle=g;glyph(x,p.ch,0,0,280,'both');
+  /* عيون وفم */ const ey=p.eye||[-30,-60];blink=(t%3.2)<.12?1:0;
+  [[ey[0]-28,ey[1]],[ey[0]+28,ey[1]]].forEach(([ex,eyy])=>{x.fillStyle='#fff';x.beginPath();x.ellipse(ex,eyy,20,blink?3:22,0,0,7);x.fill();if(!blink){x.fillStyle='#212529';x.beginPath();x.arc(ex+Math.sin(t)*5,eyy+4,9,0,7);x.fill();x.fillStyle='#fff';x.beginPath();x.arc(ex+3+Math.sin(t)*5,eyy,3,0,7);x.fill()}});
+  x.strokeStyle='#212529';x.lineWidth=6;x.lineCap='round';x.beginPath();x.arc(ey[0],ey[1]+32,16,.15*Math.PI,.85*Math.PI);x.stroke();
+  x.fillStyle='rgba(255,135,135,.6)';x.beginPath();x.arc(ey[0]-46,ey[1]+30,10,0,7);x.arc(ey[0]+46,ey[1]+30,10,0,7);x.fill();
+  x.restore();x.font='800 26px Cairo';x.textAlign='center';x.fillStyle='#868e96';x.fillText('👆 المسني لأتكلم!',320,425)});
+}
+/* ===== صفحة الحرف ===== */
+function letterPage(p){
+ $('app').innerHTML=topBar()+`<div class=hero><canvas class=lt id=lt width=640 height=440></canvas></div>`+steps(p,ACTS,0)+`<div class=stage id=stg></div>`;
+ heroLive(p,()=>SAYS([p.intro,p.hk.join('، ')]));
+ const fns=[()=>actListen(p),()=>actTrace(p),()=>actBalloons(p),()=>actPics(p)];bindSteps(p,ACTS,fns);fns[0]();
+ OWL('هذا <b>حرف '+p.name+'</b>! المسه ليتكلم 😄',p.intro)}
+const ACTS=[['l','👂','اسمع'],['t','🖍️','لوّن'],['b','🎈','بالونات'],['p','🖼️','صور']];
+function actListen(p){const S=$('stg'),cols=['#ff6b6b','#339af0','#51cf66'],nm=['فَتْحَة','ضَمَّة','كَسْرَة'];let heard=new Set(),quiz=0,qk=0,target=-1;
+ S.innerHTML=`<h2>👂 اسمع الحرف مع الحركات</h2><div class=cards id=hk>${p.hk.map((h,i)=>`<button class=card style="background:${cols[i]}" data-i=${i}>${h}<small>${nm[i]}</small></button>`).join('')}</div>
+ <h2 style="margin-top:14px">🧩 أشكال الحرف في الكلمة</h2><div class=cards id=fm>${p.forms.map(f=>`<button class=card style="background:#ffa94d;font-size:2.2rem">${f}</button>`).join('')}</div><div id=lq></div>`;
+ S.querySelectorAll('#hk .card').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;b.animate([{transform:'scale(1.2) rotate(-6deg)'},{transform:'scale(1)'}],{duration:350});
+  if(quiz){if(i===target){good();qk++;OWL('✅ '+pick(['أحسنت!','رائع!','ممتاز!']),pick(PRAISE),()=>{if(qk>=4){($('lq')).innerHTML='<div style="text-align:center;font-size:2rem">🎉</div>';finishAct(p,'l',4);OWL('أحسنت! هيا إلى لعبة التلوين 🖍️');quiz=0}else ask()})}else{bad();OWL('حاول مرة أخرى 🙂',TRY,()=>SAY(p.hk[target]))}return}
+  SAY(p.hk[i]);heard.add(i);if(heard.size===3&&!quiz){setTimeout(()=>{quiz=1;($('lq')).innerHTML='<button class="big" id=rep>🔁 اسمع مرة أخرى</button>';$('rep').onclick=()=>SAY(p.hk[target]);ask()},900)}});
+ S.querySelectorAll('#fm .card').forEach(b=>b.onclick=()=>{FX.pop();b.animate([{transform:'translateY(-14px)'},{transform:'none'}],{duration:300})});
+ function ask(){target=Math.random()*3|0;OWL('🎧 اسمع جيدًا… وأين هذا الصوت؟ ('+(qk+1)+'/4)',T("اِسْمَعْ وَاخْتَرْ"),()=>SAY(p.hk[target]))}
+ OWL('المس كل بطاقة لتسمع الصوت 👂')}
+function actTrace(p){const S=$('stg');S.innerHTML=`<h2>🖍️ لوّن ${p.num!=null?'العدد':'الحرف'} بإصبعك</h2><canvas class=play id=tc width=640 height=520></canvas><div id=tp style="height:16px;background:#f1f3f5;border-radius:9px;margin-top:8px;overflow:hidden"><i id=tpi style="display:block;height:100%;width:0;background:${p.c2}"></i></div><button class=big id=tclr style="background:linear-gradient(135deg,#adb5bd,#868e96);box-shadow:0 6px 0 #495057">🧽 امسح وابدأ من جديد</button>`;
+ const c=$('tc'),x=c.getContext('2d'),off=document.createElement('canvas');off.width=640;off.height=520;const o=off.getContext('2d');
+ glyph(o,p.ch,320,260,380);
+ const D=o.getImageData(0,0,640,520).data,pts=[];for(let yy=0;yy<520;yy+=10)for(let xx=0;xx<640;xx+=10)if(D[(yy*640+xx)*4+3]>128)pts.push([xx,yy,0]);
+ const paint=document.createElement('canvas');paint.width=640;paint.height=520;const pp=paint.getContext('2d');let hue=0,down=false,last=null,doneT=false,sp=[];
+ function base(){x.clearRect(0,0,640,520);x.fillStyle='#fffdf5';x.fillRect(0,0,640,520);x.save();x.fillStyle='#e9ecef';glyph(x,p.ch,320,260,380);x.setLineDash([10,12]);x.lineWidth=6;x.strokeStyle='#adb5bd';glyph(x,p.ch,320,260,380,'s');x.restore()}
+ const mk=document.createElement('canvas');mk.width=640;mk.height=520;const mx=mk.getContext('2d');
+ function draw(){base();mx.globalCompositeOperation='source-over';mx.clearRect(0,0,640,520);mx.drawImage(paint,0,0);mx.globalCompositeOperation='destination-in';mx.drawImage(off,0,0);x.drawImage(mk,0,0);sp=sp.filter(s=>(s.l-=.04)>0);sp.forEach(s=>{x.globalAlpha=s.l;x.font='28px serif';x.fillText('✨',s.x,s.y-=1.5);x.globalAlpha=1})}
+ function dot(P){pp.fillStyle=p.c2;pp.beginPath();pp.arc(P.x,P.y,26,0,7);pp.fill();if(Math.random()<.3)sp.push({x:P.x,y:P.y,l:1});
+  pts.forEach(q=>{if(!q[2]&&(q[0]-P.x)**2+(q[1]-P.y)**2<30*30)q[2]=1});const r=pts.filter(q=>q[2]).length/pts.length;$('tpi').style.width=Math.min(100,r/.85*100)+'%';
+  if(r>=.85&&!doneT){doneT=true;FX.win();confetti();good();finishAct(p,'t',4);OWL('🌈 واااو! لوّنت '+(p.num!=null?'العدد ':'حرف ')+p.name+'!',pick(PRAISE))}}
+ function line(a,b){const d=Math.hypot(b.x-a.x,b.y-a.y),n=Math.max(1,d/8|0);for(let i=0;i<=n;i++)dot({x:a.x+(b.x-a.x)*i/n,y:a.y+(b.y-a.y)*i/n})}
+ c.onpointerdown=e=>{down=true;c.setPointerCapture(e.pointerId);last=xy(c,e);dot(last)};c.onpointermove=e=>{if(!down)return;const P=xy(c,e);line(last,P);last=P;if(Math.random()<.15)tone(400+Math.random()*600,.05,'sine',.03)};c.onpointerup=()=>down=false;
+ $('tclr').onclick=()=>{pp.clearRect(0,0,640,520);pts.forEach(q=>q[2]=0);doneT=false;$('tpi').style.width='0'};
+ loop2(()=>{draw()});p.num!=null?OWL('مرّر إصبعك على العدد ولوّنه كله 🖍️',T("لَوِّنِ الْعَدَدَ بِإِصْبَعِكَ")):OWL('مرّر إصبعك على الحرف ولوّنه كله 🖍️',T("لَوِّنِ الْحَرْفَ بِإِصْبَعِكَ"))}
+function actBalloons(p){const S=$('stg'),N=8;let got=0,B=[],parts=[],t0=0;S.innerHTML=`<h2>🎈 فرقع البالونات التي فيها ${p.num!=null?'العدد':'حرف'} ${p.name}</h2><div id=bp>${prog(N,0)}</div><canvas class=play id=bc width=640 height=560></canvas>`;
+ const c=$('bc'),x=c.getContext('2d');const CL=['#ff6b6b','#339af0','#51cf66','#fcc419','#cc5de8','#ff922b','#20c997'];
+ function spawn(){const tg=Math.random()<.55;B.push({x:60+Math.random()*520,y:620,v:1.1+Math.random()*1.1,s:Math.random()*6,ch:tg?pick([p.ch,...p.forms]):pick(p.sim),tg,col:pick(CL),w:0})}
+ c.onpointerdown=e=>{const P=xy(c,e);for(let i=B.length-1;i>=0;i--){const b=B[i];if((P.x-b.x)**2+(P.y-b.y)**2<58*58){if(b.tg){B.splice(i,1);FX.pop();for(let k=0;k<14;k++)parts.push({x:b.x,y:b.y,vx:(Math.random()-.5)*10,vy:(Math.random()-.5)*10,l:1,c:b.col});got++;send('ok');addStar();$('bp').innerHTML=prog(N,got);
+     if(got===N){FX.win();confetti();finishAct(p,'b',4);OWL('🎉 فرقعت كل البالونات!',pick(PRAISE))}}else{b.w=1;FX.boing();send('no');OWL('هذا ليس '+(p.num!=null?'العدد ':'حرف ')+p.name+' 🙂')}break}}};
+ loop2(t=>{if(!t0)t0=t;x.clearRect(0,0,640,560);const g=x.createLinearGradient(0,0,0,560);g.addColorStop(0,'#d0ebff');g.addColorStop(1,'#fff9db');x.fillStyle=g;x.fillRect(0,0,640,560);
+  if(got<N&&(B.length<5)&&Math.random()<.03)spawn();
+  B.forEach(b=>{b.y-=b.v;b.x+=Math.sin(t*1.5+b.s)*.6;b.w=Math.max(0,b.w-.04);const wx=Math.sin(b.w*30)*b.w*10;
+   x.strokeStyle='#868e96';x.lineWidth=2;x.beginPath();x.moveTo(b.x+wx,b.y+56);x.quadraticCurveTo(b.x+10,b.y+90,b.x,b.y+120);x.stroke();
+   x.fillStyle=b.col;x.beginPath();x.ellipse(b.x+wx,b.y,50,58,0,0,7);x.fill();x.fillStyle='rgba(255,255,255,.35)';x.beginPath();x.ellipse(b.x+wx-18,b.y-22,10,16,-.5,0,7);x.fill();
+   x.fillStyle='#fff';x.font='900 52px Cairo, Tahoma';x.textAlign='center';x.textBaseline='middle';x.fillText(b.ch,b.x+wx,b.y+4)});
+  B=B.filter(b=>b.y>-80);
+  parts=parts.filter(q=>(q.l-=.03)>0);parts.forEach(q=>{q.x+=q.vx;q.y+=q.vy;q.vy+=.3;x.globalAlpha=q.l;x.fillStyle=q.c;x.fillRect(q.x,q.y,8,8);x.globalAlpha=1})});
+ OWL('فرقع البالونات التي عليها '+(p.num!=null?'العدد':'حرف')+' <b>'+p.name+'</b> فقط! 🎈',T("فَرْقِعِ الْبَالُونَاتِ"))}
+function actPics(p){const S=$('stg');const strip=t=>t.replace(/[\u064B-\u0652]/g,''),bad_=new RegExp('['+p.ch+(p.alt||'')+(p.ex||'')+']');
+ const items=shuf(p.words.map(w=>[...w,1]).concat(shuf(OTHER.filter(w=>!bad_.test(strip(w[1])))).slice(0,9-p.words.length).map(w=>[...w,0])));
+ const need=items.filter(i=>i[2]).length;let got=0;
+ S.innerHTML=`<h2>🖼️ اصطد الصور التي في اسمها حرف ${p.name}</h2><div id=pp>${prog(need,0)}</div><div class=pics>${items.map((w,i)=>`<button class=pic data-i=${i}><span class=em>${w[0]}</span><b>${w[2]?'?':'?'}</b></button>`).join('')}</div>`;
+ S.querySelectorAll('.pic').forEach(b=>b.onclick=()=>{const w=items[+b.dataset.i];if(b.classList.contains('ok'))return;SAY(w[1]);
+  if(w[2]){b.classList.add('ok');b.querySelector('b').innerHTML=w[1].replace(new RegExp('['+p.ch+p.alt+']','g'),m=>'<span style="color:'+p.c2+';font-size:1.3em">'+m+'</span>');got++;good();$('pp').innerHTML=prog(need,got);if(got===need){setTimeout(()=>{FX.win();confetti();finishAct(p,'p',4);OWL('🎯 اصطدت كل الصور!',pick(PRAISE))},700)}}
+  else{b.classList.remove('no');b.offsetWidth;b.classList.add('no');b.querySelector('b').textContent=w[1].replace(/[ً-ْ]/g,'');bad()}});
+ OWL('المس الصور… أيّها فيه حرف <b>'+p.name+'</b>؟ 🤔',T("أَيُّ الصُّوَرِ فِيهَا هَذَا الْحَرْفُ؟"))}
+
+/* ===== التهيئة: الأشكال والألوان ===== */
+function shapesPage(p){const N=8;let k=0,tgt=null,items=[],wig=-1,wt=0;
+ $('app').innerHTML=topBar()+`<div class=title><h1>🔺 الأشكال والألوان</h1></div><div class=stage><div id=sp>${prog(N,0)}</div><canvas class=play id=sc width=640 height=520></canvas><button class=big id=srep>🔁 اسمع مرة أخرى</button></div>`;
+ const c=$('sc'),x=c.getContext('2d');
+ function round(){const all=[];SHAPES.forEach((s,si)=>COLORS.forEach((cl,ci)=>all.push([si,ci])));const sel=shuf(all).slice(0,6);tgt=pick(sel);
+  items=sel.map((q,i)=>({si:q[0],ci:q[1],x:110+(i%3)*210,y:140+Math.floor(i/3)*240,s:0}));const ph=SHAPES[tgt[0]].say[tgt[1]];OWL('المس <b>'+SHAPES[tgt[0]].n+' '+COLORS[tgt[1]].n[SHAPES[tgt[0]].f]+'</b> 👆',ph)}
+ function shape(si,X,Y,r,col){x.fillStyle=col;x.beginPath();if(si===0)x.arc(X,Y,r,0,7);else if(si===1)x.rect(X-r,Y-r,2*r,2*r);else if(si===2){x.moveTo(X,Y-r);x.lineTo(X+r,Y+r*.8);x.lineTo(X-r,Y+r*.8)}else{for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*.45:r;x.lineTo(X+Math.cos(a)*rr,Y+Math.sin(a)*rr)}}x.closePath();x.fill()}
+ c.onpointerdown=e=>{const P=xy(c,e);items.forEach((it,i)=>{if(Math.hypot(P.x-it.x,P.y-it.y)<80){if(it.si===tgt[0]&&it.ci===tgt[1]){it.s=1;good();k++;$('sp').innerHTML=prog(N,k);SAY(pick(PRAISE),()=>{if(k>=N){FX.win();confetti();finishAct(p,'s',1);OWL('🎉 أنت بطل الأشكال والألوان!')}else round()})}else{wig=i;wt=1;bad();OWL('هذا '+SHAPES[it.si].n+' '+COLORS[it.ci].n[SHAPES[it.si].f]+' 🙂 حاول مرة أخرى',TRY)}}})};
+ $('srep').onclick=()=>SAY(SHAPES[tgt[0]].say[tgt[1]]);
+ loop2(t=>{x.clearRect(0,0,640,520);x.fillStyle='#fffdf5';x.fillRect(0,0,640,520);wt=Math.max(0,wt-.04);
+  items.forEach((it,i)=>{const sc=it.s?1.15+Math.sin(t*10)*.05:1+Math.sin(t*2+i)*.03,wx=i===wig?Math.sin(wt*30)*wt*12:0;x.save();x.translate(it.x+wx,it.y);x.scale(sc,sc);shape(it.si,0,0,70,COLORS[it.ci].c);if(it.s){x.font='40px serif';x.textAlign='center';x.fillText('⭐',0,10)}x.restore()})});
+ round()}
+/* ===== المراجعة ===== */
+function reviewPage(p){const L=p.letters.map(pg);
+ $('app').innerHTML=topBar()+`<div class=title><h1>🚂 قطار المراجعة</h1><p>${L.map(l=>l.ch).join(' · ')}</p></div>`+steps(p,RACTS,0)+`<div class=stage id=stg></div>`;
+ const fns=[()=>revHear(p,L),()=>revTrain(p)];bindSteps(p,RACTS,fns);fns[0]()}
+const RACTS=[['h','🎧','أين الحرف؟'],['w','🚂','قطار الكلمات']];
+function revHear(p,L){const S=$('stg'),N=8;let k=0,tg;S.innerHTML=`<h2>🎧 اسمع… وأين الحرف؟</h2><div id=hp>${prog(N,0)}</div><div class=cards id=hc></div><button class=big id=hr>🔁 اسمع مرة أخرى</button>`;
+ const cols=['#ff6b6b','#339af0','#51cf66','#cc5de8','#ff922b'];
+ function round(){tg=pick(L);const opts=shuf([tg,...shuf(L.filter(l=>l!==tg)).slice(0,3)]);$('hc').innerHTML=opts.map((l,i)=>`<button class=card style="background:${cols[i]};font-size:3.4rem;min-width:120px" data-id=${l.id}>${l.ch}</button>`).join('');
+  $('hc').querySelectorAll('.card').forEach(b=>b.onclick=()=>{if(b.dataset.id===tg.id){good();k++;$('hp').innerHTML=prog(N,k);b.animate([{transform:'scale(1.3) rotate(10deg)'},{transform:'scale(1)'}],{duration:400});SAY(pick(PRAISE),()=>{if(k>=N){FX.win();confetti();finishAct(p,'h',2);OWL('🎉 تعرف كل الحروف!')}else round()})}else{bad();b.animate([{transform:'translateX(10px)'},{transform:'translateX(-10px)'},{transform:'none'}],{duration:300});SAY(TRY)}});
+  OWL('أين <b>حرف '+tg.name+'</b>؟ 👂',tg.where)}
+ $('hr').onclick=()=>SAY(tg.where);round()}
+function autoWords(p){const L=p.letters.map(pg),strip=t=>t.replace(/[\u064B-\u0652]/g,''),o=[];L.forEach(l=>{const w=l.words.find(w=>strip(w[1]).startsWith(l.ch));if(!w)return;const others=shuf(L.filter(x=>x!==l)).slice(0,2).map(x=>x.ch);o.push([w[0],'_'+strip(w[1]).slice(1),l.ch,[l.ch,...others],w[1]])});return o}
+function revTrain(p){const S=$('stg'),W=shuf(p.words||autoWords(p)),N=Math.min(6,W.length);let k=0,tx=700;
+ S.innerHTML=`<h2>🚂 أكمل الكلمة بالحرف الناقص</h2><div id=wp>${prog(N,0)}</div><canvas class=play id=trc width=640 height=200></canvas><div class=word id=ww></div><div class=cards id=wc></div>`;
+ const c=$('trc'),x=c.getContext('2d');let cur;
+ function round(){cur=W[k];tx=700;$('ww').innerHTML=cur[1].replace('_','<span class=gap>?</span>');
+  $('wc').innerHTML=shuf(cur[3]).map(ch=>`<button class=card style="background:#7048e8;font-size:3rem;min-width:90px">${ch}</button>`).join('');
+  $('wc').querySelectorAll('.card').forEach(b=>b.onclick=()=>{if(b.textContent===cur[2]){good();$('ww').innerHTML=cur[1].replace('_','<span style="color:#f76707">'+cur[2]+'</span>');SAY(cur[4],()=>{k++;$('wp').innerHTML=prog(N,k);if(k>=N){FX.win();confetti();finishAct(p,'w',2);OWL('🎉 وصل القطار! أنت بطل الكلمات!')}else round()})}else{bad();SAY(TRY)}});
+  OWL('ما الحرف الناقص في الكلمة؟ 🤔')}
+ loop2(t=>{x.clearRect(0,0,640,200);x.fillStyle='#e7f5ff';x.fillRect(0,0,640,200);x.fillStyle='#adb5bd';x.fillRect(0,170,640,8);for(let i=0;i<14;i++)x.fillRect(i*50-(t*60%50),178,30,6);
+  tx=Math.max(220,tx-6);x.font='110px serif';x.textAlign='center';x.fillText('🚂',tx+Math.sin(t*20)*1,120);x.font='100px serif';x.fillText(cur?cur[0]:'',tx+150,120);
+  for(let i=0;i<3;i++){x.globalAlpha=.4;x.font='30px serif';x.fillText('💨',tx-60-i*30-((t*40)%30),60-i*8);x.globalAlpha=1}});
+ round()}
+addEventListener('hashchange',route);
+
+/* ===== محرك جزيرة الأرقام ===== */
+(function(){const st=document.createElement('style');st.textContent=`
+.mrow{direction:ltr;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+.mbox{background:#fff;border:4px solid #dee2e6;border-radius:22px;padding:10px;min-width:120px;min-height:90px;display:flex;flex-wrap:wrap;gap:4px;justify-content:center;align-content:center;font-size:2.3rem;cursor:pointer;transition:transform .15s;box-shadow:0 6px 0 #dee2e6}
+.mbox:active{transform:scale(.96)}.mbox.ok{border-color:#40c057;box-shadow:0 6px 0 #2f9e44;background:#ebfbee}.mbox.no{animation:shk .35s}
+.eq{font:900 3.4rem Cairo;direction:ltr;text-align:center;color:#343a40;margin:8px 0;letter-spacing:4px}.eq .q{display:inline-block;min-width:70px;border-bottom:6px dashed #f59f00;color:#f59f00;animation:bl 1s infinite alternate}
+@keyframes bl{to{opacity:.4}}@keyframes shk{0%,100%{transform:none}25%{transform:translateX(10px)}75%{transform:translateX(-10px)}}
+.field{position:relative;height:330px;background:linear-gradient(#d0ebff,#fff9db);border-radius:26px;overflow:hidden;margin:6px 0;box-shadow:inset 0 -30px 0 #b2f2bb}
+.it{position:absolute;font-size:3rem;cursor:pointer;transition:transform .2s;user-select:none}.it.c{transform:scale(1.25);filter:drop-shadow(0 0 8px #ffd43b)}.it .tag{position:absolute;top:-14px;right:-8px;background:#f59f00;color:#fff;border-radius:50%;width:34px;height:34px;font:900 1.2rem/34px Cairo;text-align:center}
+.it.fly{transition:transform 1.4s ease-in,opacity 1.4s;transform:translate(-60px,-260px) rotate(-20deg);opacity:0}
+.it.bob{animation:bob2 1.6s ease-in-out infinite}@keyframes bob2{50%{transform:translateY(-8px)}}
+.cup{position:absolute;font-size:5rem;transition:transform .6s}
+.tf{display:inline-grid;grid-template-columns:repeat(5,40px);gap:4px;background:#fff;padding:6px;border-radius:12px;border:3px solid #868e96;margin:4px;direction:ltr}.tf i{width:40px;height:40px;border-radius:8px;background:#f1f3f5;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:1.6rem}
+.line{position:relative;height:150px;margin:10px 0;direction:ltr}.line .tick{position:absolute;bottom:20px;width:36px;margin-left:-18px;text-align:center;font:900 1.4rem Cairo;color:#495057}.line .bar{position:absolute;left:3%;right:3%;bottom:52px;height:6px;background:#495057;border-radius:3px}
+.frog{position:absolute;bottom:58px;font-size:3.2rem;margin-left:-26px;transition:left .45s cubic-bezier(.3,1.8,.6,1)}
+.croc{font-size:5rem;display:inline-block;transition:transform .4s}
+.sym{font:900 3rem Cairo}
+.race{position:relative;height:300px;background:repeating-linear-gradient(0deg,#8ce99a 0 48px,#69db7c 48px 50px);border-radius:24px;overflow:hidden;margin:6px 0;direction:ltr}
+.race .fin{position:absolute;left:18px;top:0;bottom:0;width:16px;background:repeating-linear-gradient(0deg,#000 0 16px,#fff 16px 32px)}
+.runner{position:absolute;font-size:2.8rem;transition:left 1.2s ease-out;cursor:pointer}.runner b{position:absolute;top:-10px;left:-6px;font:900 1rem Cairo;background:#fff;border-radius:10px;padding:0 6px;color:#e8590c}
+.tbl{position:relative;height:330px;margin:6px 0;background:#fff9db;border-radius:26px;overflow:hidden}
+.tbl .top{position:absolute;left:25%;right:25%;top:150px;height:22px;background:#a0522d;border-radius:8px}.tbl .leg{position:absolute;top:172px;width:18px;height:120px;background:#8b4513}
+.pat{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;font-size:2.8rem;direction:ltr;margin:10px 0}.pat .q{border:4px dashed #f59f00;border-radius:14px;width:64px;text-align:center;color:#f59f00;font:900 2.4rem Cairo}
+.pv{display:flex;gap:16px;justify-content:center;align-items:flex-end;margin:10px 0;direction:ltr}.rod{display:flex;flex-direction:column-reverse;gap:2px}.rod i,.one{width:26px;height:26px;background:#4dabf7;border:2px solid #1c7ed6;border-radius:5px;display:block}.one{background:#ffa94d;border-color:#e8590c}
+`;document.head.appendChild(st)})();
+const NUM=[T("صِفْرٌ"),T("وَاحِدٌ"),T("اِثْنَانِ"),T("ثَلَاثَةٌ"),T("أَرْبَعَةٌ"),T("خَمْسَةٌ"),T("سِتَّةٌ"),T("سَبْعَةٌ"),T("ثَمَانِيَةٌ"),T("تِسْعَةٌ"),T("عَشَرَةٌ"),T("أَحَدَ عَشَرَ"),T("اِثْنَا عَشَرَ"),T("ثَلَاثَةَ عَشَرَ"),T("أَرْبَعَةَ عَشَرَ"),T("خَمْسَةَ عَشَرَ"),T("سِتَّةَ عَشَرَ"),T("سَبْعَةَ عَشَرَ"),T("ثَمَانِيَةَ عَشَرَ"),T("تِسْعَةَ عَشَرَ"),T("عِشْرُونَ")];
+const NW=['صفر','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة'];
+const PLUS=T("زَائِدُ"),MINUS=T("نَاقِصُ"),EQ=T("يُسَاوِي"),HOWM=T("كَمْ عَدَدُهَا؟");
+const POOL=['🍎','🍌','🍓','🐣','🐟','⭐','🎈','🍪','🚗','🐞','🌸','⚽','🦋','🧁','🐠','🍩'];
+const SAYX=(x,cb)=>Array.isArray(x)?SAYS(x,cb):SAY(x,cb);
+const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const rep=(e,n)=>Array(n).fill(e).join('');
+function optsN(ans,lo,hi,k){const o=new Set([ans]);let g=0;while(o.size<(k||3)&&g++<50){const v=rnd(Math.max(lo,ans-3),Math.min(hi,ans+3));o.add(v)}while(o.size<(k||3))o.add(rnd(lo,hi));return shuf([...o])}
+/* إطار الجولات: كل لعبة = مولّد جولات */
+function rounds(p,k,title,N,gen){const S=$('stg');let i=0,r;const NA=p.acts?p.acts.length:4,cols=['#ff6b6b','#339af0','#51cf66','#cc5de8','#ff922b'];
+ S.innerHTML=`<h2>${title}</h2><div id=rp>${prog(N,0)}</div><div id=rq></div><div class=cards id=ro></div><button class=big id=rr>🔁 اسمع مرة أخرى</button>`;
+ function pickV(v,el){if(r.lock)return;if(String(v)===String(r.ans)){r.lock=1;good();el&&el.animate([{transform:'scale(1.25) rotate(-6deg)'},{transform:'scale(1)'}],{duration:400});const d=r.win?r.win(el)||0:0;
+   setTimeout(()=>{i++;$('rp').innerHTML=prog(N,i);SAYX(r.after||pick(PRAISE),()=>{if(i>=N){FX.win();confetti();finishAct(p,k,NA);OWL('🎉 '+pick(['أنت بطل!','رائع جدًا!','ممتاز!'])+' اختر لعبة أخرى 👆')}else next()})},d)}
+  else{bad();el&&(el.classList.remove('no'),el.offsetWidth,el.classList.add('no'));el&&el.animate([{transform:'translateX(10px)'},{transform:'translateX(-10px)'},{transform:'none'}],{duration:300});r.miss&&r.miss(el);SAY(TRY)}}
+ function next(){r=gen(i);$('rq').innerHTML=r.html||'';$('ro').innerHTML=(r.opts||[]).map((v,j)=>`<button class=card data-v="${v}" style="background:${r.oc||cols[j%5]};font-size:${r.fs||'3rem'};min-width:96px">${r.lab?r.lab(v):v}</button>`).join('');
+  $('ro').querySelectorAll('.card').forEach(b=>b.onclick=()=>pickV(b.dataset.v,b));$('rq').querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>pickV(b.dataset.v,b));
+  r.init&&r.init($('rq'),pickV);OWL(r.txt,null);if(r.say)SAYX(r.say)}
+ $('rr').onclick=()=>r&&r.say&&SAYX(r.say);next()}
+/* ===== صفحة العدد ===== */
+function numPage(p){$('app').innerHTML=topBar()+`<div class=hero><canvas class=lt id=lt width=640 height=440></canvas></div><div style="text-align:center;font:900 1.6rem Cairo;color:${p.c2};margin-top:-8px">${p.word} ${rep(p.e,Math.min(p.num,10))||'🫙'}</div>`+steps(p,NACTS,0)+`<div class=stage id=stg></div>`;
+ heroLive(p,()=>SAYS([p.intro,NUM[p.num]]));p.acts=NACTS;
+ const fns=[()=>gCount(p,'c',{n:p.num,e:p.e}),()=>actTrace(p),()=>actBalloons(p),()=>gFind(p,'f',{n:p.num})];bindSteps(p,NACTS,fns);fns[0]();OWL('أنا العدد <b>'+p.word+'</b>! المسني لأتكلم 😄',p.intro)}
+const NACTS=[['c','👆','عُدّ'],['t','🖍️','لوّن'],['b','🎈','بالونات'],['f','🔎','ابحث']];
+function gCount(p,k,o){const S=$('stg');const n=o.n;
+ if(n===0){S.innerHTML=`<h2>🫙 الصفر يعني: لا شيء!</h2><div class=field id=fd style="display:flex;align-items:center;justify-content:center;font-size:7rem">🫙</div><div class=cards id=zo></div>`;
+  const ops=shuf([0,1,2]);$('zo').innerHTML=ops.map(v=>`<button class=card style="background:#339af0;font-size:3rem;min-width:96px" data-v=${v}>${v}</button>`).join('');
+  $('zo').querySelectorAll('.card').forEach(b=>b.onclick=()=>{if(b.dataset.v==='0'){good();FX.win();confetti();finishAct(p,k,4);OWL('🎉 صحيح! الجرّة فارغة… صفر!',T("صَحِيحٌ! الْجَرَّةُ فَارِغَةٌ، لَا شَيْءَ فِيهَا. صِفْرٌ"))}else{bad();SAY(TRY)}});
+  OWL('كم حلوى في الجرّة؟ 🤔',T("كَمْ حَلْوَى فِي الْجَرَّةِ؟"));return}
+ let c=0;const P=shuf(Array.from({length:12},(_,i)=>i)).slice(0,n);
+ S.innerHTML=`<h2>👆 المس كل واحدة لتعدّها</h2><div class=field id=fd>${P.map((q,i)=>`<span class="it bob" data-i=${i} style="left:${8+(q%4)*22+Math.random()*6}%;top:${12+Math.floor(q/4)*30+Math.random()*6}%;animation-delay:${Math.random()}s">${o.e}</span>`).join('')}</div><div class=cards id=co></div>`;
+ S.querySelectorAll('.it').forEach(e=>e.onclick=()=>{if(e.classList.contains('c'))return;c++;e.classList.add('c');e.insertAdjacentHTML('beforeend',`<span class=tag>${c}</span>`);FX.pop();SAY(NUM[c]);
+  if(c===n)setTimeout(()=>{$('co').innerHTML=optsN(n,1,10).map(v=>`<button class=card style="background:#7048e8;font-size:3rem;min-width:96px" data-v=${v}>${v}</button>`).join('');OWL('كم عددها كلها؟ 🤔',HOWM);
+   $('co').querySelectorAll('.card').forEach(b=>b.onclick=()=>{if(+b.dataset.v===n){good();FX.win();confetti();finishAct(p,k,4);SAYS([NUM[n],pick(PRAISE)]);OWL('🎉 نعم! العدد '+NW[n])}else{bad();SAY(TRY)}})},700)});
+ OWL('المس الأشياء واحدة واحدة… وأنا أعدّ معك 👆',T("اِلْمَسْهَا وَاحِدَةً وَاحِدَةً، وَأَنَا أَعُدُّ مَعَكَ"))}
+function gFind(p,k,o){rounds(p,k,'🔎 أين المجموعة الصحيحة؟',4,i=>{const n=o.n!=null&&i%2===0?o.n:rnd(1,10),e=pick(POOL);const vs=optsN(n,0,10,3);
+ return{html:`<div class=eq>${n}</div><div class=mrow>${vs.map(v=>`<div class=mbox data-v=${v}>${rep(e,v)||'∅'}</div>`).join('')}</div>`,ans:n,txt:'المس المجموعة التي فيها <b>'+n+'</b> 👆',say:[T("أَيْنَ الْمَجْمُوعَةُ الَّتِي عَدَدُهَا"),NUM[n]]}})}
+/* ===== صفحة عامة ===== */
+function mathPage(p){$('app').innerHTML=topBar()+`<div class=title><h1>${p.icon} ${p.t}</h1>${p.sub?'<p>'+p.sub+'</p>':''}</div>`+steps(p,p.acts,0)+`<div class=stage id=stg></div>`;
+ const fns=p.acts.map(a=>()=>G[a[3]](p,a[0],a[4]||{}));bindSteps(p,p.acts,fns);fns[0]()}
+window.XT={num:numPage,math:mathPage};
+const ANI=[['🐰',T("الْأَرْنَبِ")],['🐢',T("السُّلَحْفَاةِ")],['🐘',T("الْفِيلِ")],['🦁',T("الْأَسَدِ")],['🐶',T("الْكَلْبِ")],['🐱',T("الْقِطَّةِ")],['🐻',T("الدُّبِّ")]];
+const ANW={'🐰':'الأرنب','🐢':'السلحفاة','🐘':'الفيل','🦁':'الأسد','🐶':'الكلب','🐱':'القطة','🐻':'الدب'};
+const ORD=[T("مَنِ الْأَوَّلُ؟"),T("مَنِ الثَّانِي؟"),T("مَنِ الثَّالِثُ؟"),T("مَنِ الرَّابِعُ؟"),T("مَنِ الْخَامِسُ؟"),T("مَنِ السَّادِسُ؟")];
+const ORW=['الأول','الثاني','الثالث','الرابع','الخامس','السادس'];
+const ORS=[T("الْأَوَّلُ"),T("الثَّانِي"),T("الثَّالِثُ"),T("الرَّابِعُ"),T("الْخَامِسُ"),T("السَّادِسُ")];
+const CATS=[{n:'الفواكه',say:T("اِلْمَسْ كُلَّ الْفَوَاكِهِ"),e:['🍎','🍌','🍇','🍓','🍊','🍉','🍐','🍒']},{n:'الحيوانات',say:T("اِلْمَسْ كُلَّ الْحَيَوَانَاتِ"),e:['🐶','🐱','🐰','🐻','🐸','🐵','🐔','🐟']},{n:'المركبات',say:T("اِلْمَسْ كُلَّ الْمَرْكَبَاتِ"),e:['🚗','🚌','🚲','✈️','🚂','🚀','🛵','🚢']},{n:'الأدوات المدرسية',say:T("اِلْمَسْ كُلَّ الْأَدَوَاتِ الْمَدْرَسِيَّةِ"),e:['✏️','📏','📚','🎒','✂️','🖍️','📐','📒']}];
+const SH=[{n:'الدائرة',say:T("أَيْنَ الدَّائِرَةُ؟"),nm:T("دَائِرَةٌ"),d:'<circle cx="50" cy="50" r="42"/>',real:['⚽','🍪','🕐','🍩','🌕']},{n:'المربع',say:T("أَيْنَ الْمُرَبَّعُ؟"),nm:T("مُرَبَّعٌ"),d:'<rect x="10" y="10" width="80" height="80" rx="4"/>',real:['🎲','🧇','🔲','🖼️']},{n:'المثلث',say:T("أَيْنَ الْمُثَلَّثُ؟"),nm:T("مُثَلَّثٌ"),d:'<polygon points="50,6 94,90 6,90"/>',real:['🍕','⛺','🔺','🧀']},{n:'المستطيل',say:T("أَيْنَ الْمُسْتَطِيلُ؟"),nm:T("مُسْتَطِيلٌ"),d:'<rect x="4" y="24" width="92" height="52" rx="4"/>',real:['🚪','📱','💵','📺','🧱']}];
+const SHC=['#ff6b6b','#339af0','#51cf66','#fcc419','#cc5de8','#ff922b'];
+const svgS=(s,c,z)=>`<svg viewBox="0 0 100 100" width=${z||86} height=${z||86} style="fill:${c}">${s.d}</svg>`;
+const G={
+ /* أمام وخلف: طابور */
+ line(p,k){rounds(p,k,'🚶 أمام وخلف',5,()=>{const A=shuf(ANI).slice(0,4),j=rnd(1,2),front=Math.random()<.5,ans=front?A[j-1]:A[j+1];
+  return{html:`<p style="text-align:center;font-weight:800;color:#868e96">⬅️ الطابور يمشي إلى الباب 🚪</p><div class=mrow style="direction:ltr;font-size:2.7rem;flex-wrap:nowrap;gap:6px">🚪 ${A.map((a,q)=>`<span data-v="${a[0]}" style="cursor:pointer;${q===j?'filter:drop-shadow(0 0 10px #ffd43b)':''}" class=bob2>${a[0]}</span>`).join(' ')}</div>`,ans:ans[0],txt:'من '+(front?'<b>أمام</b>':'<b>خلف</b>')+' '+ANW[A[j][0]]+'؟',say:[front?T("مَنْ أَمَامَ"):T("مَنْ خَلْفَ"),A[j][1]]}})},
+ side(p,k){rounds(p,k,'👐 يمين ويسار',6,()=>{const A=shuf(ANI).slice(0,2),r=Math.random()<.5,ans=r?A[0]:A[1];
+  return{html:`<div class=mrow style="direction:ltr;align-items:center;font-size:3.6rem;gap:30px"><span data-v="${A[1][0]}" style="cursor:pointer">${A[1][0]}</span><span style="font-size:5rem">🌳</span><span data-v="${A[0][0]}" style="cursor:pointer">${A[0][0]}</span></div><div style="display:flex;justify-content:space-between;max-width:420px;margin:0 auto;font-weight:900;color:#868e96;direction:ltr"><span>⬅️ يسار</span><span>يمين ➡️</span></div>`,ans:ans[0],txt:'أيّ حيوان على <b>'+(r?'اليمين':'اليسار')+'</b>؟',say:r?T("أَيُّ حَيَوَانٍ عَلَى الْيَمِينِ؟"):T("أَيُّ حَيَوَانٍ عَلَى الْيَسَارِ؟")}})},
+ /* فوق تحت على */
+ table(p,k){const POS=[['فوق',T("مَا الَّذِي فَوْقَ الطَّاوِلَةِ؟"),'left:45%;top:20px'],['على',T("مَا الَّذِي عَلَى الطَّاوِلَةِ؟"),'left:45%;top:92px'],['تحت',T("مَا الَّذِي تَحْتَ الطَّاوِلَةِ؟"),'left:45%;top:230px'],['يمين',T("مَا الَّذِي عَلَى يَمِينِ الطَّاوِلَةِ؟"),'left:82%;top:190px'],['يسار',T("مَا الَّذِي عَلَى يَسَارِ الطَّاوِلَةِ؟"),'left:6%;top:190px']];
+  rounds(p,k,'🪑 فوق · على · تحت',6,i=>{const E=shuf(['🎈','🐱','📚','🍎','🧸','⚽','🐦','🎁']).slice(0,5),q=i<3?[0,1,2][i]:rnd(0,4);
+  return{html:`<div class=tbl><div class=top></div><div class=leg style="left:27%"></div><div class=leg style="right:27%"></div>${POS.map((s,j)=>`<span class="it bob" data-v=${j} style="${s[2]}">${E[j]}</span>`).join('')}</div>`,ans:q,txt:'المس ما هو <b>'+POS[q][0]+'</b> الطاولة 👆',say:POS[q][1]}})},
+ /* تصنيف المجموعات */
+ sort(p,k){rounds(p,k,'🧺 كوّن المجموعة',4,i=>{const C=CATS[i%4],O=CATS.filter(c=>c!==C),need=4,items=shuf(shuf(C.e).slice(0,need).map(e=>[e,1]).concat(shuf(O.flatMap(c=>c.e)).slice(0,4).map(e=>[e,0])));let got=0;
+  return{html:`<div class=mrow>${items.map(([e,ok])=>`<div class=mbox style="min-width:76px;min-height:76px;font-size:2.6rem" data-ok=${ok}>${e}</div>`).join('')}</div><div class=mbox id=bk style="margin:8px auto;max-width:360px;min-height:80px;border-style:dashed">🧺</div>`,ans:'x',txt:'المس كل <b>'+C.n+'</b> لتضعها في السلة 🧺',say:C.say,
+   init(Q,pv){Q.querySelectorAll('[data-ok]').forEach(b=>b.onclick=()=>{if(b.classList.contains('ok'))return;if(b.dataset.ok==='1'){b.classList.add('ok');FX.pop();$('bk').insertAdjacentHTML('beforeend',' '+b.textContent);b.style.visibility='hidden';if(++got===need)pv('x',null)}else{bad();b.classList.remove('no');b.offsetWidth;b.classList.add('no')}})}}})},
+ odd(p,k){rounds(p,k,'🕵️ من الغريب؟',4,()=>{const C=pick(CATS),O=pick(CATS.filter(c=>c!==C)),odd=pick(O.e),its=shuf(shuf(C.e).slice(0,4).concat([odd]));
+  return{html:`<div class=mrow>${its.map(e=>`<div class=mbox data-v="${e}" style="min-width:80px;font-size:2.8rem">${e}</div>`).join('')}</div>`,ans:odd,txt:'أيّ شيء <b>ليس</b> من المجموعة؟ 🕵️',say:T("أَيُّ شَيْءٍ لَيْسَ مِنَ الْمَجْمُوعَةِ؟")}})},
+ /* تساوي المجموعتين */
+ same(p,k){rounds(p,k,'🔗 هل المجموعتان متساويتان؟',6,i=>{const a=rnd(2,6),eqq=i%2===0?Math.random()<.6:Math.random()<.4,b=eqq?a:Math.max(1,a+pick([-2,-1,1,2])),e1=pick(POOL),e2=pick(POOL);
+  return{html:`<div class=mrow><div class=mbox>${rep(e1,a)}</div><div class=mbox>${rep(e2,b)}</div></div>`,opts:['نعم','لا'],fs:'2rem',ans:a===b?'نعم':'لا',txt:'هل المجموعتان <b>متساويتان</b>؟ زاوِج كل واحدة بواحدة 🔗',say:T("هَلِ الْمَجْمُوعَتَانِ مُتَسَاوِيَتَانِ؟"),after:a===b?T("نَعَمْ، مُتَسَاوِيَتَانِ"):T("صَحِيحٌ، غَيْرُ مُتَسَاوِيَتَيْنِ")}})},
+ more(p,k){rounds(p,k,'⚖️ أيّ مجموعة أكثر؟',6,i=>{let a=rnd(1,7),b=rnd(1,7);while(a===b)b=rnd(1,7);const less=i%2===1,e1=pick(POOL),e2=pick(POOL),ans=less?(a<b?'A':'B'):(a>b?'A':'B');
+  return{html:`<div class=mrow><div class=mbox data-v=A>${rep(e1,a)}</div><div class=mbox data-v=B>${rep(e2,b)}</div></div>`,ans,txt:'المس المجموعة '+(less?'<b>الأقل</b>':'<b>الأكثر</b>')+' 👆',say:less?T("أَيُّ مَجْمُوعَةٍ أَقَلُّ؟"):T("أَيُّ مَجْمُوعَةٍ أَكْثَرُ؟")}})},
+ /* التمساح: أكبر وأصغر */
+ croc(p,k,o){const mx=o.max||10;rounds(p,k,'🐊 التمساح الجائع يأكل الأكبر!',6,i=>{let a=rnd(o.min||1,mx),b=rnd(o.min||1,mx);while(a===b)b=rnd(o.min||1,mx);const small=i%3===2,ans=small?Math.min(a,b):Math.max(a,b),g=o.pic&&mx<=10;
+  return{html:`<div class=mrow style="direction:ltr;align-items:center">${[a,b].map(v=>`<div class=mbox data-v=${v} style="flex-direction:column;min-width:130px"><span style="font:900 3.4rem Cairo;color:#1c7ed6">${v}</span>${g?`<span style="font-size:1.3rem">${rep('🐟',v)}</span>`:''}</div>`).join('')}</div><div style="text-align:center"><span class=croc id=cr>🐊</span></div>`,ans,txt:small?'أيّ العددين <b>أصغر</b>؟':'التمساح يأكل العدد <b>الأكبر</b>… أيّهما؟ 🐊',say:small?T("أَيُّ الْعَدَدَيْنِ أَصْغَرُ؟"):T("أَيُّ الْعَدَدَيْنِ أَكْبَرُ؟"),
+   win(el){const big=Math.max(a,b);$('cr').style.transform=(big===a?'scaleX(-1) ':'')+'scale(1.4)';FX.boing();return 300}}})},
+ sym(p,k,o){const mx=o.max||10;rounds(p,k,'🐊 اختر الإشارة: > أو < أو =',6,i=>{const a=rnd(1,mx),b=i===3?a:rnd(1,mx),ans=a>b?'>':a<b?'<':'=';
+  return{html:`<div class=eq>${a} <span class=q>?</span> ${b}</div><p style="text-align:center;color:#868e96;font-weight:800">فم التمساح 🐊 مفتوح دائمًا نحو العدد الأكبر</p>`,opts:['>','<','='],oc:'#20c997',ans,txt:'ضع الإشارة الصحيحة بين <b>'+a+'</b> و <b>'+b+'</b>',say:[NUM[a],T("وَ"),NUM[b],T("اِخْتَرِ الْإِشَارَةَ الصَّحِيحَةَ")],after:ans==='>'?[NUM[a],T("أَكْبَرُ مِنْ"),NUM[b]]:ans==='<'?[NUM[a],T("أَصْغَرُ مِنْ"),NUM[b]]:[NUM[a],EQ,NUM[b]]}})},
+ big3(p,k,o){const mx=o.max||10;rounds(p,k,'🏆 الأكبر والأصغر',6,i=>{const s=new Set();while(s.size<3)s.add(rnd(o.min||0,mx));const v=shuf([...s]),small=i%2===1,ans=small?Math.min(...v):Math.max(...v);
+  return{html:`<div class=mrow>${v.map(x=>`<div class=mbox data-v=${x} style="font:900 3.4rem Cairo;color:#7048e8">${x}</div>`).join('')}</div>`,ans,txt:'المس العدد '+(small?'<b>الأصغر</b>':'<b>الأكبر</b>'),say:small?T("أَيْنَ الْعَدَدُ الْأَصْغَرُ؟"):T("أَيْنَ الْعَدَدُ الْأَكْبَرُ؟")}})},
+ /* مكونات العدد: الكوب السحري */
+ bond(p,k,o){rounds(p,k,'🎩 الكوب السحري: كم تحته؟',6,()=>{const n=rnd(o.min||3,o.max||5),a=rnd(0,n),h=n-a,e=pick(['🍬','⚽','🍓','🐞','⭐']);
+  return{html:`<div class=eq style="font-size:2.4rem">المجموع: ${n}</div><div class=mrow style="align-items:flex-end;font-size:2.6rem"><div class=mbox>${rep(e,a)||'∅'}</div><div class=mbox id=cupb style="position:relative;min-width:140px">${rep(e,h)||'∅'}<span id=cupc style="position:absolute;inset:0;background:#fff;display:flex;align-items:center;justify-content:center;font-size:4.4rem;transition:transform .6s;border-radius:18px">🎩</span></div></div><div class=eq style="font-size:2.6rem">${n} = ${a} + <span class=q>?</span></div>`,opts:optsN(h,0,n),ans:h,txt:'عندي <b>'+n+'</b>… أرى '+a+'. كم تحت الكوب؟ 🎩',say:T("كَمْ تَحْتَ الْكُوبِ السِّحْرِيِّ؟"),
+   win(){$('cupc').style.transform='translateY(-120px) rotate(-20deg)';FX.boing();return 900}}})},
+ balance(p,k,o){rounds(p,k,'⚖️ الميزان الحسابي',6,()=>{const n=rnd(o.min||4,o.max||10),a=rnd(1,n-1),b=n-a;
+  return{html:`<div style="text-align:center;font-size:4rem">⚖️</div><div class=eq>${n} = ${a} + <span class=q>?</span></div><p style="text-align:center;color:#868e96;font-weight:800">اجعل الكفّتين متساويتين</p>`,opts:optsN(b,0,10),ans:b,txt:'ما العدد الذي يجعل الميزان متوازنًا؟ ⚖️',say:T("مَا الْعَدَدُ الَّذِي يُوَازِنُ الْمِيزَانَ؟"),after:[NUM[a],PLUS,NUM[b],EQ,NUM[n]]}})},
+ /* الجمع */
+ addPic(p,k){rounds(p,k,'🧺 اجمع في السلة',6,()=>{const a=rnd(1,5),b=rnd(1,5),e=pick(POOL);
+  return{html:`<div class=mrow style="align-items:center"><div class=mbox>${rep(e,a)}</div><span class=sym>+</span><div class=mbox>${rep(e,b)}</div></div><div class=eq style="font-size:2.8rem">${a} + ${b} = <span class=q>?</span></div>`,opts:optsN(a+b,1,10),ans:a+b,txt:'كم صاروا معًا؟ 🧺',say:[NUM[a],PLUS,NUM[b],EQ,T("كَمْ؟")],after:[NUM[a],PLUS,NUM[b],EQ,NUM[a+b]]}})},
+ frog(p,k,o){const mx=o.max||10;rounds(p,k,'🐸 الضفدع يقفز على خط الأعداد',6,()=>{const a=rnd(0,mx-3),b=rnd(1,Math.min(5,mx-a)),L=n=>3+n*94/mx;let at=a;
+  return{html:`<div class=eq style="font-size:2.8rem">${a} + ${b} = <span class=q>?</span></div><div class=line><div class=bar></div>${Array.from({length:mx+1},(_,n)=>`<div class=tick style="left:${L(n)}%;${mx>10?'font-size:.78rem':''}">|<br>${n}</div>`).join('')}<span class=frog id=fr style="left:${L(a)}%">🐸</span></div><button class=big id=hop style="background:linear-gradient(135deg,#51cf66,#2f9e44)">🐸 اقفز!</button>`,opts:optsN(a+b,0,mx),ans:a+b,txt:'الضفدع على <b>'+a+'</b>… يقفز '+b+' قفزات. اضغط «اقفز» 🐸',say:[T("الضِّفْدَعُ عَلَى"),NUM[a],T("وَيَقْفِزُ"),NUM[b],T("أَيْنَ يَصِلُ؟")],
+   init(){$('hop').onclick=()=>{if(at>=a+b)return;at++;$('fr').style.left=L(at)+'%';FX.boing();SAY(NUM[at])}}}})},
+ addEq(p,k,o){const mx=o.max||10;rounds(p,k,'➕ احسب الجمع',8,()=>{const s=rnd(o.min||2,mx),a=rnd(Math.max(0,s-9),Math.min(9,s)),b=s-a;
+  return{html:`<div class=eq>${a} + ${b} = <span class=q>?</span></div>${mx>10?`<div style="text-align:center">${tfr(a,'🔴')}${tfr(b,'🔵')}</div>`:`<div class=mrow style="font-size:2rem">${rep('🍎',a)} | ${rep('🍐',b)}</div>`}`,opts:optsN(s,0,mx),ans:s,txt:'كم '+a+' + '+b+' ؟',say:[NUM[a],PLUS,NUM[b],EQ,T("كَمْ؟")],after:[NUM[a],PLUS,NUM[b],EQ,NUM[s]]}})},
+ make10(p,k){rounds(p,k,'🔟 أكمل العشرة',6,()=>{const a=rnd(1,9),b=10-a;
+  return{html:`<div style="text-align:center">${tfr(a,'🟡')}</div><div class=eq>${a} + <span class=q>?</span> = 10</div>`,opts:optsN(b,0,10),ans:b,txt:'كم ينقص لنملأ العشرة؟ 🔟',say:T("كَمْ يَنْقُصُ لِنَمْلَأَ الْعَشَرَةَ؟"),after:[NUM[a],PLUS,NUM[b],EQ,NUM[10]]}})},
+ /* الطرح */
+ fly(p,k){rounds(p,k,'🐦 طارت العصافير!',6,()=>{const n=rnd(3,9),f=rnd(1,n-1),P=shuf(Array.from({length:12},(_,i)=>i)).slice(0,n);
+  return{html:`<div class=field>${P.map((q,i)=>`<span class="it ${i<f?'fl':''}" style="left:${8+(q%4)*22}%;top:${14+Math.floor(q/4)*28}%">🐦</span>`).join('')}<span style="position:absolute;bottom:4px;left:0;right:0;text-align:center;font-size:2.4rem">🌳🌳🌳</span></div><div class=eq style="font-size:2.8rem">${n} - ${f} = <span class=q>?</span></div>`,opts:optsN(n-f,0,10),ans:n-f,txt:'كان '+n+' عصافير… طار '+f+'. كم بقي؟ 🐦',say:[T("كَانَتْ هُنَا عَصَافِيرُ عَدَدُهَا"),NUM[n],T("طَارَ مِنْهَا"),NUM[f],T("كَمْ بَقِيَ؟")],after:[NUM[n],MINUS,NUM[f],EQ,NUM[n-f]],
+   init(Q){setTimeout(()=>{Q.querySelectorAll('.fl').forEach(e=>e.classList.add('fly'));FX.boing()},1300)}}})},
+ eat(p,k){rounds(p,k,'🍪 الوحش أكل الكعك!',6,()=>{const n=rnd(3,10),f=rnd(1,n-1);
+  return{html:`<div class=mrow style="font-size:2.6rem">${Array.from({length:n},(_,i)=>`<span style="${i<f?'opacity:.25;text-decoration:line-through':''}">${i<f?'❌':'🍪'}</span>`).join('')}</div><div style="text-align:center;font-size:3.4rem">👾😋</div><div class=eq style="font-size:2.8rem">${n} - ${f} = <span class=q>?</span></div>`,opts:optsN(n-f,0,10),ans:n-f,txt:'كان '+n+' كعكات… أكل الوحش '+f+'. كم بقي؟',say:[T("كَانَ الْكَعْكُ"),NUM[n],T("أَكَلَ الْوَحْشُ"),NUM[f],T("كَمْ بَقِيَ؟")],after:[NUM[n],MINUS,NUM[f],EQ,NUM[n-f]]}})},
+ subEq(p,k,o){const mx=o.max||10;rounds(p,k,'➖ احسب الطرح',8,()=>{const a=rnd(o.min||2,mx),b=rnd(0,Math.min(a,9));
+  return{html:`<div class=eq>${a} - ${b} = <span class=q>?</span></div>${mx>10?`<div style="text-align:center">${tfr(a,'🟣',b)}</div>`:`<div class=mrow style="font-size:2rem">${Array.from({length:a},(_,i)=>i>=a-b?'<span style="opacity:.3">🎈</span>':'🎈').join('')}</div>`}`,opts:optsN(a-b,0,mx),ans:a-b,txt:'كم '+a+' − '+b+' ؟',say:[NUM[a],MINUS,NUM[b],EQ,T("كَمْ؟")],after:[NUM[a],MINUS,NUM[b],EQ,NUM[a-b]]}})},
+ fam(p,k){rounds(p,k,'👨‍👩‍👧 عائلة الجمل العددية',6,()=>{const a=rnd(1,6),b=rnd(1,4),c=a+b,tw=Math.random()<.5;
+  return{html:`<div class=eq style="font-size:2.6rem;color:#2f9e44">${a} + ${b} = ${c}</div><div class=eq>${c} - ${tw?b:a} = <span class=q>?</span></div>`,opts:optsN(tw?a:b,0,10),ans:tw?a:b,txt:'استعمل جملة الجمع لتعرف الطرح 💡',say:T("اِسْتَعْمِلْ جُمْلَةَ الْجَمْعِ لِتَعْرِفَ الطَّرْحَ")}})},
+ story(p,k,o){const ST_=[
+  [()=>{const a=rnd(2,6),b=rnd(1,4);return{e:'🎈',v:[a,b],ans:a+b,op:'+',txt:'مع سارة '+a+' بالونات، وأعطتها أمها '+b+'. كم صار معها؟',say:[T("مَعَ سَارَةَ بَالُونَاتٌ عَدَدُهَا"),NUM[a],T("وَأَعْطَتْهَا أُمُّهَا"),NUM[b],T("كَمْ صَارَ مَعَهَا؟")]}}],
+  [()=>{const a=rnd(2,5),b=rnd(1,5);return{e:'🐟',v:[a,b],ans:a+b,op:'+',txt:'اصطاد علي '+a+' سمكات، ثم اصطاد '+b+'. كم سمكة اصطاد؟',say:[T("اِصْطَادَ عَلِيٌّ سَمَكَاتٍ عَدَدُهَا"),NUM[a],T("ثُمَّ اصْطَادَ"),NUM[b],T("كَمْ سَمَكَةً اصْطَادَ؟")]}}],
+  [()=>{const a=rnd(4,10),b=rnd(1,a-1);return{e:'🍎',v:[a,b],ans:a-b,op:'-',txt:'في السلة '+a+' تفاحات، أكلنا '+b+'. كم بقي؟',say:[T("فِي السَّلَّةِ تُفَّاحَاتٌ عَدَدُهَا"),NUM[a],T("أَكَلْنَا مِنْهَا"),NUM[b],T("كَمْ بَقِيَ فِي السَّلَّةِ؟")]}}],
+  [()=>{const a=rnd(4,10),b=rnd(1,a-1);return{e:'🚗',v:[a,b],ans:a-b,op:'-',txt:'في الموقف '+a+' سيارات، خرجت '+b+'. كم بقي؟',say:[T("فِي الْمَوْقِفِ سَيَّارَاتٌ عَدَدُهَا"),NUM[a],T("خَرَجَ مِنْهَا"),NUM[b],T("كَمْ سَيَّارَةً بَقِيَتْ؟")]}}]];
+  rounds(p,k,'📖 مسائل قصصية',6,i=>{const set=o.op==='+'?ST_.slice(0,2):o.op==='-'?ST_.slice(2):ST_;const s=pick(set)[0]();
+  return{html:`<div class=card style="background:#fff;color:#343a40;font-size:1.4rem;line-height:2;text-align:center;cursor:default;display:block;max-width:560px;margin:0 auto">📖 ${s.txt}<div style="font-size:2rem">${rep(s.e,s.v[0])} ${s.op==='+'?'➕ '+rep(s.e,s.v[1]):''}</div></div><div class=eq style="font-size:2.6rem">${s.v[0]} ${s.op} ${s.v[1]} = <span class=q>?</span></div>`,opts:optsN(s.ans,0,10),ans:s.ans,txt:'اسمع القصة… ثم احسب 📖',say:s.say,after:[NUM[s.v[0]],s.op==='+'?PLUS:MINUS,NUM[s.v[1]],EQ,NUM[s.ans]]}})},
+ /* الأشكال */
+ shape(p,k){rounds(p,k,'🔷 أين الشكل؟',8,()=>{const S4=shuf(SH),t=S4[0];
+  return{html:`<div class=mrow>${S4.map((s,j)=>`<div class=mbox data-v="${s.n}">${svgS(s,SHC[j])}</div>`).join('')}</div>`,ans:t.n,txt:'المس <b>'+t.n+'</b> 👆',say:t.say,after:t.nm}})},
+ real(p,k){rounds(p,k,'🍕 ما شكله؟',8,()=>{const t=pick(SH),e=pick(t.real);
+  return{html:`<div style="text-align:center;font-size:6rem">${e}</div><div class=mrow>${shuf(SH).map((s,j)=>`<div class=mbox data-v="${s.n}">${svgS(s,SHC[j+1],70)}</div>`).join('')}</div>`,ans:t.n,txt:'هذا الشيء يشبه أيّ شكل؟ 🤔',say:T("هَذَا الشَّيْءُ يُشْبِهُ أَيَّ شَكْلٍ؟"),after:t.nm}})},
+ pattern(p,k){const PT=[[0,1],[0,0,1],[0,1,1],[0,1,2]];rounds(p,k,'🔁 أكمل النمط',8,()=>{const pt=pick(PT),E=shuf(['🔴','🔵','🟡','🟢','⭐','🌙','🍎','🐟']).slice(0,3),L=pt.length*2+(Math.random()<.5?1:0),seq=Array.from({length:L},(_,i)=>E[pt[i%pt.length]]),ans=E[pt[L%pt.length]];
+  return{html:`<div class=pat>${seq.map(e=>`<span>${e}</span>`).join('')}<span class=q>?</span></div>`,opts:shuf(E),ans,txt:'ماذا يأتي بعد؟ 🔁',say:T("مَاذَا يَأْتِي بَعْدُ فِي النَّمَطِ؟")}})},
+ /* الترتيبية */
+ race(p,k){rounds(p,k,'🏁 السباق الكبير',6,()=>{const A=shuf(ANI).slice(0,5),q=rnd(0,4);
+  return{html:`<div class=race><div class=fin></div>${A.map((a,j)=>`<span class=runner data-v=${j} style="left:${88}%;top:${10+j*56}px">${a[0]}</span>`).join('')}</div><p style="text-align:center;font-weight:800;color:#868e96">🏁 خط النهاية على اليسار</p>`,ans:q,txt:'من وصل <b>'+ORW[q]+'</b>؟ 🏁',say:ORD[q],
+   init(Q){const order=shuf([0,1,2,3,4]),R=order.map(j=>Q.querySelector(`[data-v="${j}"]`));R.forEach((r,pos)=>{r.dataset.v=pos;r.style.transition='left '+(1.2+pos*.5)+'s ease-out';setTimeout(()=>{r.style.left=(6+pos*12)+'%';setTimeout(()=>r.insertAdjacentHTML('beforeend','<b>'+(pos+1)+'</b>'),(1.2+pos*.5)*1000)},300)});FX.boing()},
+   after:ORS[q]}})},
+ /* حتى 20 */
+ tens(p,k){rounds(p,k,'🔟 عشرة وآحاد: كم العدد؟',8,()=>{const n=rnd(10,20);
+  return{html:`<div style="text-align:center">${tfr(Math.min(n,10),'🔴')}${tfr(n-10,'🔵')}</div>`,opts:optsN(n,10,20),ans:n,txt:'عشرة 🔴 و '+(n-10)+' 🔵… كم المجموع؟',say:HOWM,after:NUM[n]}})},
+ seq(p,k,o){const mx=o.max||20;rounds(p,k,'🔢 العدد الناقص',8,()=>{const s=rnd(0,mx-4),m=rnd(1,3),L=[s,s+1,s+2,s+3,s+4];
+  return{html:`<div class=pat style="font:900 2.6rem Cairo">${L.map((v,i)=>i===m?'<span class=q>?</span>':`<span style="background:#fff;border-radius:14px;padding:0 12px;border:3px solid #dee2e6">${v}</span>`).join('')}</div>`,opts:optsN(L[m],0,mx),ans:L[m],txt:'ما العدد الناقص؟ 🤔',say:T("مَا الْعَدَدُ النَّاقِصُ؟"),after:NUM[L[m]]}})},
+ pv(p,k){rounds(p,k,'🧱 القيمة المكانية',8,i=>{const n=rnd(11,20),t=Math.floor(n/10),u=n%10,ask=i%2;
+  return{html:`<div class=pv><div class=rod>${'<i></i>'.repeat(10)}</div>${t>1?`<div class=rod>${'<i></i>'.repeat(10)}</div>`:''}<div style="display:flex;flex-wrap:wrap;width:120px;gap:3px">${'<span class=one></span>'.repeat(u)}</div></div><div class=eq style="font-size:2.4rem">${ask?`عشرات: ${t} · آحاد: <span class=q>?</span>`:`العدد = <span class=q>?</span>`}</div>`,opts:ask?optsN(u,0,9):optsN(n,10,20),ans:ask?u:n,txt:ask?'كم <b>آحاد</b> في العدد '+n+'؟ (المكعبات البرتقالية)':'عمود العشرة 🟦 + المكعبات 🟧… كم العدد؟',say:ask?T("كَمْ آحَادًا فِي الْعَدَدِ؟"):HOWM}})},
+ /* تحدي مختلط */
+ mix(p,k){const L=['addEq','subEq','croc','seq'];let gi=0;const S=G;rounds(p,k,'🏆 التحدي الكبير',10,i=>{const t=i%4;if(t===0){const a=rnd(1,9),b=rnd(1,10-a);return{html:`<div class=eq>${a} + ${b} = <span class=q>?</span></div>`,opts:optsN(a+b,0,10),ans:a+b,txt:'احسب 🧠',say:[NUM[a],PLUS,NUM[b],EQ,T("كَمْ؟")]}}
+  if(t===1){const a=rnd(3,10),b=rnd(1,a);return{html:`<div class=eq>${a} - ${b} = <span class=q>?</span></div>`,opts:optsN(a-b,0,10),ans:a-b,txt:'احسب 🧠',say:[NUM[a],MINUS,NUM[b],EQ,T("كَمْ؟")]}}
+  if(t===2){let a=rnd(0,20),b=rnd(0,20);while(a===b)b=rnd(0,20);return{html:`<div class=mrow>${[a,b].map(v=>`<div class=mbox data-v=${v} style="font:900 3.4rem Cairo;color:#1c7ed6">${v}</div>`).join('')}</div>`,ans:Math.max(a,b),txt:'أيّهما <b>أكبر</b>؟ 🐊',say:T("أَيُّ الْعَدَدَيْنِ أَكْبَرُ؟")}}
+  const n=rnd(1,10),e=pick(POOL);return{html:`<div class=mbox style="margin:0 auto;max-width:420px">${rep(e,n)}</div>`,opts:optsN(n,1,10),ans:n,txt:'كم عددها؟ 👀',say:HOWM}})}
+};
+function tfr(n,e,cross){const F=Math.max(1,Math.ceil(n/10));let o='';for(let f=0;f<F;f++)o+=`<div class=tf>${Array.from({length:10},(_,i)=>{const j=f*10+i;return`<i>${j<n?(cross&&j>=n-cross?'<span style="opacity:.3">'+e+'</span>':e):''}</i>`}).join('')}</div>`;return o}
+
+route();</script></body></html>
