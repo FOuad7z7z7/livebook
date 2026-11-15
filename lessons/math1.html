@@ -134,14 +134,14 @@ function route(){const h=location.hash.slice(1)||'home';{const q=pg(h);window.MI
 let RAF=0;const loop=f=>{const L=t=>{f(t/1000);RAF=requestAnimationFrame(L)};cancelAnimationFrame(RAF);RAF=requestAnimationFrame(L)};
 function topBar(){return `<div class=top><button class=home onclick="location.hash='home'">🗺️ الخريطة</button><div class=stars id=stc>⭐ ${ST.stars||0}</div></div>`}
 function home(){const C=['#ff6b6b','#f59f00','#51cf66','#339af0','#cc5de8','#ff922b','#20c997','#f06595'];
- $('app').innerHTML=topBar()+`<div class=title><h1>${BOOKT}</h1><p>${BOOKS}</p></div><div class=map id=map>${PAGES.map((p,i)=>{const d=(ST.done||{})[p.id]||0;return `<div class=stop onclick="location.hash='${p.id}'"><div class=house style="background:${p.col||C[i%C.length]}">${p.icon}<span class=st>${'⭐'.repeat(d)||'☆'}</span></div><b>${p.t}</b></div>`}).join('')}</div>
+ $('app').innerHTML=topBar()+`<div class=title><h1>${BOOKT}</h1><p>${BOOKS}</p></div><div class=map id=map>${PAGES.map((p,i)=>{const d=(ST.done||{})[p.id]||0;return `<div class=stop onclick="location.hash='${p.id}'"><div class=house style="background:${p.col||C[i%C.length]}">${p.icon}<span class=st>${'⭐'.repeat(d)||'☆'}</span></div><b><bdi>${p.t}</bdi></b></div>`}).join('')}</div>
  <div class=album><h3>🏆 ألبوم ملصقاتي</h3>${PAGES.filter(p=>p.sticker).map(p=>`<span class="s ${(ST.stk||{})[p.id]?'on':''}">${p.sticker}</span>`).join('')}</div>`;
  const first=!ST.seen;ST.seen=1;save();OWL('أهلًا يا بطل! 👋 اختر بيتًا من الخريطة ولنبدأ اللعب!',first?HELLO:null)}
 function finishAct(p,k,n){ST.acts=ST.acts||{};const a=ST.acts[p.id]=ST.acts[p.id]||{};if(!a[k]){a[k]=1}const cnt=Object.keys(a).length;ST.done=ST.done||{};ST.done[p.id]=Math.min(3,Math.ceil(cnt*3/n));save();
  document.querySelectorAll('.steps button').forEach(b=>{if(a[b.dataset.k])b.classList.add('done')});
  if(cnt>=n&&!(ST.stk||{})[p.id]){ST.stk=ST.stk||{};ST.stk[p.id]=1;save();setTimeout(()=>reward(p),900)}}
 function reward(p){FX.win();confetti(50);const r=document.createElement('div');r.className='reward';r.innerHTML=`<div><div class=s>${p.sticker}</div><h2>ربحت ملصقًا جديدًا!</h2><p>أنهيت كل ألعاب «${p.t}» 🎉</p><button class="big g">إلى الخريطة 🗺️</button></div>`;document.body.appendChild(r);SAY(T("أَحْسَنْتَ! رَبِحْتَ مُلْصَقًا جَدِيدًا"));r.querySelector('button').onclick=()=>{r.remove();location.hash='home'}}
-function steps(p,acts,cur){return `<div class=steps>${acts.map((a,i)=>`<button data-k="${a[0]}" class="${i===cur?'on':''} ${((ST.acts||{})[p.id]||{})[a[0]]?'done':''}"><span class=e>${a[1]}</span>${a[2]}</button>`).join('')}</div>`}
+function steps(p,acts,cur){return `<div class=steps>${acts.map((a,i)=>`<button data-k="${a[0]}" class="${i===cur?'on':''} ${((ST.acts||{})[p.id]||{})[a[0]]?'done':''}"><span class=e>${a[1]}</span><bdi>${a[2]}</bdi></button>`).join('')}</div>`}
 function bindSteps(p,acts,fns){document.querySelectorAll('.steps button').forEach((b,i)=>b.onclick=()=>{FX.pop();document.querySelectorAll('.steps button').forEach(x=>x.classList.remove('on'));b.classList.add('on');cancelAnimationFrame(RAF2);fns[i]()})}
 let RAF2=0;const loop2=f=>{cancelAnimationFrame(RAF2);const L=t=>{if(f(t/1000)!==false)RAF2=requestAnimationFrame(L)};RAF2=requestAnimationFrame(L)};
 function prog(n,k){return '<div class=prog>'+Array.from({length:n},(_,i)=>`<i class="${i<k?'on':''}"></i>`).join('')+'</div>'}
@@ -277,24 +277,24 @@ addEventListener('hashchange',route);
 .pat{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;font-size:2.8rem;direction:ltr;margin:10px 0}.pat .q{border:4px dashed #f59f00;border-radius:14px;width:64px;text-align:center;color:#f59f00;font:900 2.4rem Cairo}
 .pv{display:flex;gap:16px;justify-content:center;align-items:flex-end;margin:10px 0;direction:ltr}.rod{display:flex;flex-direction:column-reverse;gap:2px}.rod i,.one{width:26px;height:26px;background:#4dabf7;border:2px solid #1c7ed6;border-radius:5px;display:block}.one{background:#ffa94d;border-color:#e8590c}
 `;document.head.appendChild(st)})();
-const NUM=[T("صِفْرٌ"),T("وَاحِدٌ"),T("اِثْنَانِ"),T("ثَلَاثَةٌ"),T("أَرْبَعَةٌ"),T("خَمْسَةٌ"),T("سِتَّةٌ"),T("سَبْعَةٌ"),T("ثَمَانِيَةٌ"),T("تِسْعَةٌ"),T("عَشَرَةٌ"),T("أَحَدَ عَشَرَ"),T("اِثْنَا عَشَرَ"),T("ثَلَاثَةَ عَشَرَ"),T("أَرْبَعَةَ عَشَرَ"),T("خَمْسَةَ عَشَرَ"),T("سِتَّةَ عَشَرَ"),T("سَبْعَةَ عَشَرَ"),T("ثَمَانِيَةَ عَشَرَ"),T("تِسْعَةَ عَشَرَ"),T("عِشْرُونَ")];
-const NW=['صفر','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة'];
-const PLUS=T("زَائِدُ"),MINUS=T("نَاقِصُ"),EQ=T("يُسَاوِي"),HOWM=T("كَمْ عَدَدُهَا؟");
-const POOL=['🍎','🍌','🍓','🐣','🐟','⭐','🎈','🍪','🚗','🐞','🌸','⚽','🦋','🧁','🐠','🍩'];
 const SAYX=(x,cb)=>Array.isArray(x)?SAYS(x,cb):SAY(x,cb);
 const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
 const rep=(e,n)=>Array(n).fill(e).join('');
 function optsN(ans,lo,hi,k){const o=new Set([ans]);let g=0;while(o.size<(k||3)&&g++<50){const v=rnd(Math.max(lo,ans-3),Math.min(hi,ans+3));o.add(v)}while(o.size<(k||3))o.add(rnd(lo,hi));return shuf([...o])}
 /* إطار الجولات: كل لعبة = مولّد جولات */
 function rounds(p,k,title,N,gen){const S=$('stg');let i=0,r;const NA=p.acts?p.acts.length:4,cols=['#ff6b6b','#339af0','#51cf66','#cc5de8','#ff922b'];
- S.innerHTML=`<h2>${title}</h2><div id=rp>${prog(N,0)}</div><div id=rq></div><div class=cards id=ro></div><button class=big id=rr>🔁 اسمع مرة أخرى</button>`;
+ S.innerHTML=`<h2><bdi>${title}</bdi></h2><div id=rp>${prog(N,0)}</div><div id=rq></div><div class=cards id=ro></div><button class=big id=rr>🔁 اسمع مرة أخرى</button>`;
  function pickV(v,el){if(r.lock)return;if(String(v)===String(r.ans)){r.lock=1;good();el&&el.animate([{transform:'scale(1.25) rotate(-6deg)'},{transform:'scale(1)'}],{duration:400});const d=r.win?r.win(el)||0:0;
    setTimeout(()=>{i++;$('rp').innerHTML=prog(N,i);SAYX(r.after||pick(PRAISE),()=>{if(i>=N){FX.win();confetti();finishAct(p,k,NA);OWL('🎉 '+pick(['أنت بطل!','رائع جدًا!','ممتاز!'])+' اختر لعبة أخرى 👆')}else next()})},d)}
   else{bad();el&&(el.classList.remove('no'),el.offsetWidth,el.classList.add('no'));el&&el.animate([{transform:'translateX(10px)'},{transform:'translateX(-10px)'},{transform:'none'}],{duration:300});r.miss&&r.miss(el);SAY(TRY)}}
- function next(){r=gen(i);$('rq').innerHTML=r.html||'';$('ro').innerHTML=(r.opts||[]).map((v,j)=>`<button class=card data-v="${v}" style="background:${r.oc||cols[j%5]};font-size:${r.fs||'3rem'};min-width:96px">${r.lab?r.lab(v):v}</button>`).join('');
+ function next(){r=gen(i);$('rq').innerHTML=r.html||'';$('ro').innerHTML=(r.opts||[]).map((v,j)=>`<button class=card dir=auto data-v="${v}" style="background:${r.oc||cols[j%5]};font-size:${r.fs||'3rem'};min-width:96px">${r.lab?r.lab(v):v}</button>`).join('');
   $('ro').querySelectorAll('.card').forEach(b=>b.onclick=()=>pickV(b.dataset.v,b));$('rq').querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>pickV(b.dataset.v,b));
   r.init&&r.init($('rq'),pickV);OWL(r.txt,null);if(r.say)SAYX(r.say)}
  $('rr').onclick=()=>r&&r.say&&SAYX(r.say);next()}
+const NUM=[T("صِفْرٌ"),T("وَاحِدٌ"),T("اِثْنَانِ"),T("ثَلَاثَةٌ"),T("أَرْبَعَةٌ"),T("خَمْسَةٌ"),T("سِتَّةٌ"),T("سَبْعَةٌ"),T("ثَمَانِيَةٌ"),T("تِسْعَةٌ"),T("عَشَرَةٌ"),T("أَحَدَ عَشَرَ"),T("اِثْنَا عَشَرَ"),T("ثَلَاثَةَ عَشَرَ"),T("أَرْبَعَةَ عَشَرَ"),T("خَمْسَةَ عَشَرَ"),T("سِتَّةَ عَشَرَ"),T("سَبْعَةَ عَشَرَ"),T("ثَمَانِيَةَ عَشَرَ"),T("تِسْعَةَ عَشَرَ"),T("عِشْرُونَ")];
+const NW=['صفر','واحد','اثنان','ثلاثة','أربعة','خمسة','ستة','سبعة','ثمانية','تسعة','عشرة'];
+const PLUS=T("زَائِدُ"),MINUS=T("نَاقِصُ"),EQ=T("يُسَاوِي"),HOWM=T("كَمْ عَدَدُهَا؟");
+const POOL=['🍎','🍌','🍓','🐣','🐟','⭐','🎈','🍪','🚗','🐞','🌸','⚽','🦋','🧁','🐠','🍩'];
 /* ===== صفحة العدد ===== */
 function numPage(p){$('app').innerHTML=topBar()+`<div class=hero><canvas class=lt id=lt width=640 height=440></canvas></div><div style="text-align:center;font:900 1.6rem Cairo;color:${p.c2};margin-top:-8px">${p.word} ${rep(p.e,Math.min(p.num,10))||'🫙'}</div>`+steps(p,NACTS,0)+`<div class=stage id=stg></div>`;
  heroLive(p,()=>SAYS([p.intro,NUM[p.num]]));p.acts=NACTS;
