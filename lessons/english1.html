@@ -125,7 +125,7 @@ const pick=a=>a[Math.random()*a.length|0];
 function fnv(s){let h=2166136261;for(const c of s){h^=c.codePointAt(0);h=Math.imul(h,16777619)>>>0}return h.toString(16).padStart(8,'0')}
 /* ===== الصوت ===== */
 let AU=new Audio(),qCb=null,AC;
-function SAY(t,cb){try{AU.pause()}catch(e){}AU=new Audio(ABASE+fnv(t)+'.mp3');const o=document.querySelector('#owl .o');o&&o.classList.add('talk');
+function SAY(t,cb){if(window.NOAUDIO){const o=document.querySelector('#owl .o');o&&o.classList.add('talk');setTimeout(()=>{o&&o.classList.remove('talk');cb&&cb()},650);return}try{AU.pause()}catch(e){}AU=new Audio(ABASE+fnv(t)+'.mp3');const o=document.querySelector('#owl .o');o&&o.classList.add('talk');
  const end=()=>{o&&o.classList.remove('talk');if(cb){const c=cb;cb=null;c()}};AU.onended=end;AU.onerror=end;AU.play().catch(end)}
 function SAYS(list,cb){let i=0;const nx=()=>{if(i>=list.length){cb&&cb();return}SAY(list[i++],nx)};nx()}
 function OWL(txt,say,cb){const b=document.querySelector('#owl .b');if(b){b.innerHTML=txt;b.style.animation='none';b.offsetWidth;b.style.animation=''}if(say)SAY(say,cb)}
@@ -309,7 +309,7 @@ function rounds(p,k,title,N,gen){const S=$('stg');let i=0,r;const NA=p.acts?p.ac
  function next(){r=gen(i);$('rq').innerHTML=r.html||'';$('ro').innerHTML=(r.opts||[]).map((v,j)=>`<button class=card dir=auto data-v="${v}" style="background:${r.oc||cols[j%5]};font-size:${r.fs||'3rem'};min-width:96px">${r.lab?r.lab(v):v}</button>`).join('');
   $('ro').querySelectorAll('.card').forEach(b=>b.onclick=()=>pickV(b.dataset.v,b));$('rq').querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>pickV(b.dataset.v,b));
   r.init&&r.init($('rq'),pickV);OWL(r.txt,null);if(r.say)SAYX(r.say)}
- $('rr').onclick=()=>r&&r.say&&SAYX(r.say);next()}
+ $('rr').onclick=()=>r&&r.say&&SAYX(r.say);if(window.NOAUDIO)$('rr').style.display='none';next()}
 /* ===== محرك رحلة ABC ===== */
 const ENUM=[E("zero"),E("one"),E("two"),E("three"),E("four"),E("five"),E("six"),E("seven"),E("eight"),E("nine"),E("ten")];
 const lbl=w=>w.replace(/^en\|/,'');

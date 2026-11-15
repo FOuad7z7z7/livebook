@@ -126,7 +126,7 @@ const pick=a=>a[Math.random()*a.length|0];
 function fnv(s){let h=2166136261;for(const c of s){h^=c.codePointAt(0);h=Math.imul(h,16777619)>>>0}return h.toString(16).padStart(8,'0')}
 /* ===== الصوت ===== */
 let AU=new Audio(),qCb=null,AC;
-function SAY(t,cb){try{AU.pause()}catch(e){}AU=new Audio(ABASE+fnv(t)+'.mp3');const o=document.querySelector('#owl .o');o&&o.classList.add('talk');
+function SAY(t,cb){if(window.NOAUDIO){const o=document.querySelector('#owl .o');o&&o.classList.add('talk');setTimeout(()=>{o&&o.classList.remove('talk');cb&&cb()},650);return}try{AU.pause()}catch(e){}AU=new Audio(ABASE+fnv(t)+'.mp3');const o=document.querySelector('#owl .o');o&&o.classList.add('talk');
  const end=()=>{o&&o.classList.remove('talk');if(cb){const c=cb;cb=null;c()}};AU.onended=end;AU.onerror=end;AU.play().catch(end)}
 function SAYS(list,cb){let i=0;const nx=()=>{if(i>=list.length){cb&&cb();return}SAY(list[i++],nx)};nx()}
 function OWL(txt,say,cb){const b=document.querySelector('#owl .b');if(b){b.innerHTML=txt;b.style.animation='none';b.offsetWidth;b.style.animation=''}if(say)SAY(say,cb)}
