@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>فَنّوس – اكتب قصتك | الكتاب الحي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{font-family:Cairo,Tahoma,sans-serif;min-height:100vh;color:#fff;background:linear-gradient(#1b1464 0%,#4a1d8f 45%,#c2410c 100%);overflow-x:hidden}
+#sky{position:fixed;inset:0;pointer-events:none;z-index:0}
+#sky i{position:absolute;width:3px;height:3px;background:#fff;border-radius:50%;animation:tw 2.5s infinite alternate}
+@keyframes tw{to{opacity:.2}}
+.dunes{position:fixed;left:0;right:0;bottom:0;height:120px;z-index:0;background:radial-gradient(ellipse at 20% 100%,#f59f00 0 40%,transparent 41%),radial-gradient(ellipse at 75% 110%,#e8590c 0 45%,transparent 46%)}
+.app{position:relative;z-index:1;max-width:620px;margin:0 auto;padding:12px 12px 150px}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.top b{font-size:1.2rem}.stars{background:rgba(255,255,255,.18);padding:4px 12px;border-radius:99px;font-weight:900}
+.hero{display:flex;align-items:flex-end;gap:10px;margin:6px 0 10px}
+#fox{width:120px;flex:none;animation:bob 2.4s ease-in-out infinite;cursor:pointer}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.hero .say{background:#fff;color:#2b2464;border-radius:20px 20px 20px 4px;padding:10px 14px;font-weight:800;line-height:1.7;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+h2{text-align:center;margin:8px 0}
+.topics{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.topic{border:0;border-radius:20px;padding:16px 8px;font:800 1.1rem Cairo;color:#fff;cursor:pointer;box-shadow:0 6px 0 rgba(0,0,0,.25);transition:transform .15s}
+.topic:active{transform:translateY(4px);box-shadow:0 2px 0 rgba(0,0,0,.25)}.topic span{display:block;font-size:2.4rem}
+.lang{display:flex;gap:8px;justify-content:center;margin:10px 0}.lang button{border:2px solid #fff;background:transparent;color:#fff;border-radius:99px;padding:4px 16px;font:800 1rem Cairo;cursor:pointer}.lang button.on{background:#fff;color:#4a1d8f}
+#chat{display:flex;flex-direction:column;gap:8px}
+.m{max-width:85%;padding:10px 14px;border-radius:18px;line-height:1.8;font-weight:700;animation:pop .3s}
+.m.f{align-self:flex-start;background:#d3f9d8;color:#1b3a1f;border-radius:18px 18px 18px 4px}
+.m.k{align-self:flex-end;background:#fff;color:#2b2464;border-radius:18px 18px 4px 18px}
+.m.k.en,.m.f.en{direction:ltr;text-align:left}
+@keyframes pop{from{transform:scale(.8);opacity:0}}
+.typing{align-self:flex-start;background:#d3f9d8;color:#1b3a1f;border-radius:18px;padding:8px 16px;font-weight:900;letter-spacing:4px}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:2;background:rgba(27,20,100,.92);padding:10px;backdrop-filter:blur(6px)}
+.bar .in{max-width:620px;margin:0 auto;display:flex;gap:8px}
+textarea{flex:1;border:0;border-radius:16px;padding:10px 12px;font:700 1.05rem Cairo;resize:none;height:56px}
+.send{border:0;border-radius:16px;background:linear-gradient(135deg,#ffd43b,#f59f00);color:#4a1d8f;font:900 1.1rem Cairo;padding:0 18px;cursor:pointer}
+.done{display:none;max-width:620px;margin:8px auto 0;width:100%;border:0;border-radius:14px;background:#51cf66;color:#fff;font:900 1.05rem Cairo;padding:10px;cursor:pointer}
+.story{background:#fff9db;color:#3b2b00;border-radius:22px;padding:18px;margin-top:10px;line-height:2.1;font-size:1.15rem;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.story h3{text-align:center;color:#c2410c;font-size:1.4rem;margin-bottom:6px}
+.btn{display:block;width:100%;margin-top:10px;border:0;border-radius:16px;padding:12px;font:900 1.1rem Cairo;cursor:pointer;background:#7048e8;color:#fff}
+.cf{position:fixed;top:-40px;font-size:28px;z-index:9;animation:fall 2.6s linear forwards}@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+.hide{display:none!important}
+.note{font-size:.8rem;opacity:.8;text-align:center;margin-top:8px}
+</style></head><body>
+<div id="sky"></div><div class="dunes"></div>
+<div class="app">
+ <div class="top"><b>🦊 فَنّوس: اكتب قصتك</b><span class="stars" id="st">⭐ 0</span></div>
+ <div class="hero"><svg id="fox" viewBox="0 0 120 120" aria-label="فنوس">
+  <path d="M18 14 L44 52 L30 60Z" fill="#f08c00"/><path d="M24 22 L40 50 L33 54Z" fill="#ffc9c9"/>
+  <path d="M102 14 L76 52 L90 60Z" fill="#f08c00"/><path d="M96 22 L80 50 L87 54Z" fill="#ffc9c9"/>
+  <ellipse cx="60" cy="70" rx="36" ry="30" fill="#f59f00"/>
+  <path d="M60 100 Q40 96 34 78 Q48 88 60 88 Q72 88 86 78 Q80 96 60 100Z" fill="#fff4e6"/>
+  <g id="eyes"><ellipse cx="46" cy="66" rx="6" ry="7" fill="#212529"/><ellipse cx="74" cy="66" rx="6" ry="7" fill="#212529"/><circle cx="48" cy="63" r="2" fill="#fff"/><circle cx="76" cy="63" r="2" fill="#fff"/></g>
+  <ellipse cx="60" cy="82" rx="5" ry="3.5" fill="#212529"/>
+  <path id="mouth" d="M53 88 Q60 94 67 88" stroke="#212529" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <circle cx="38" cy="80" r="5" fill="#ff8787" opacity=".6"/><circle cx="82" cy="80" r="5" fill="#ff8787" opacity=".6"/>
+ </svg><div class="say" id="say">أهلًا! أنا فَنّوس 🦊 من الصحراء الليبية. أحبّ القصص كثيرًا… هيا نكتب قصة معًا! اختر موضوعًا 👇</div></div>
+ <div id="pick">
+  <div class="lang"><button class="on" data-l="ar">عربي</button><button data-l="en">English</button></div>
+  <div class="topics" id="topics"></div>
+ </div>
+ <div id="chat"></div>
+ <div id="out"></div>
+ <p class="note" id="note"></p>
+</div>
+<div class="bar hide" id="bar"><div class="in"><textarea id="tx" placeholder="اكتب جملتك هنا…"></textarea><button class="send" id="go">أرسل ✈️</button></div><button class="done" id="fin">📖 قصتي جاهزة!</button></div>
+<script>
+const SB='https://jrhzqgapywgdblujyrns.supabase.co/functions/v1/tabeer';
+const $=id=>document.getElementById(id);
+for(let i=0;i<60;i++){const s=document.createElement('i');s.style.left=Math.random()*100+'%';s.style.top=Math.random()*60+'%';s.style.animationDelay=Math.random()*2.5+'s';$('sky').appendChild(s)}
+const TOP={ar:[['🌊','رحلة إلى البحر','#1c7ed6'],['🎉','يوم العيد','#e64980'],['🐪','حيواني المفضّل','#f08c00'],['🏜️','مغامرة في الصحراء','#c2410c'],['🏫','يومي في المدرسة','#2f9e44'],['🚀','لو كنت رائد فضاء','#7048e8']],
+ en:[['🐶','My pet','#f08c00'],['🏖️','A day at the beach','#1c7ed6'],['👨‍👩‍👧','My family','#e64980'],['🎂','My birthday','#7048e8']]};
+const FALL={ar:{'رحلة إلى البحر':['جميل! مع من ذهبت إلى البحر؟','ماذا رأيت على الشاطئ؟','هل سبحت في الماء؟ كيف كان؟','ماذا أكلتم هناك؟','كيف شعرت في آخر اليوم؟'],'يوم العيد':['رائع! ماذا لبست يوم العيد؟','من زرت في العيد؟','ماذا أكلتم من الحلويات؟','ما أجمل لعبة لعبتها؟','ماذا فعلت بالعيدية؟'],'حيواني المفضّل':['ما لونه وما شكله؟','أين يعيش هذا الحيوان؟','ماذا يأكل؟','لماذا تحبّه؟','لو كان صديقك، ماذا ستفعلان معًا؟'],'مغامرة في الصحراء':['واو! ماذا أخذت معك في الرحلة؟','ماذا رأيت بين الكثبان؟','هل قابلت حيوانًا؟ ما هو؟','ماذا حدث عندما جاء الليل؟','كيف عدت إلى البيت؟'],'يومي في المدرسة':['ماذا تفعل أول ما تصل إلى المدرسة؟','ما الدرس الذي تحبه؟ لماذا؟','ماذا تلعب في الاستراحة؟','من صديقك المقرب في الفصل؟ (اسمه الأول فقط)','ماذا تعلمت اليوم؟'],'لو كنت رائد فضاء':['رائع! إلى أي كوكب ستسافر؟','ماذا ستأخذ معك في الصاروخ؟','ماذا رأيت من نافذة الصاروخ؟','هل قابلت مخلوقًا غريبًا؟ صفه!','كيف كانت العودة إلى الأرض؟']},
+ en:{'My pet':['Nice! What is its name?','What colour is it?','What does it eat?','What do you play together?','Why do you love it?'],'A day at the beach':['Great! Who went with you?','What did you see?','Did you swim?','What did you eat?','How did you feel?'],'My family':['Who is in your family?','What does your dad like?','What does your mum like?','What do you do together?','Why do you love your family?'],'My birthday':['How old are you now?','What cake did you have?','Who came to your party?','What gifts did you get?','What was the best part?']}};
+const PR={ar:['أحسنت! 👏','جملة جميلة! ✨','رائع جدًا! 🌟','ممتاز يا بطل! 💪','أعجبتني فكرتك! 😍'],en:['Great job! 👏','Nice sentence! ✨','Wonderful! 🌟','Well done! 💪','I love it! 😍']};
+let L='ar',topic='',hist=[],kids=[],stars=0,qi=0,busy=false;
+let tok=null;try{tok=(JSON.parse(localStorage.getItem('livebook_v2'))||{}).tok}catch(e){}
+function tops(){$('topics').innerHTML=TOP[L].map(t=>`<button class=topic style="background:${t[2]}" data-t="${t[1]}"><span>${t[0]}</span>${t[1]}</button>`).join('');document.querySelectorAll('.topic').forEach(b=>b.onclick=()=>start(b.dataset.t))}
+document.querySelectorAll('.lang button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.lang button').forEach(x=>x.classList.remove('on'));b.classList.add('on');L=b.dataset.l;tops()});tops();
+function talk(){const m=$('mouth');m.setAttribute('d','M53 87 Q60 97 67 87');setTimeout(()=>m.setAttribute('d','M53 88 Q60 94 67 88'),600)}
+function add(cls,t){const d=document.createElement('div');d.className='m '+cls+(L==='en'?' en':'');d.textContent=t;$('chat').appendChild(d);d.scrollIntoView({behavior:'smooth',block:'end'});return d}
+function fox(t){hist.push({r:'f',t});add('f',t);talk();$('say').textContent=t}
+function start(t){topic=t;$('pick').classList.add('hide');$('bar').classList.remove('hide');$('tx').placeholder=L==='en'?'Write your sentence here…':'اكتب جملتك هنا…';$('tx').dir=L==='en'?'ltr':'rtl';
+ const first=L==='en'?`Let's write about "${t}"! 🦊 Write your first sentence. How does your story start?`:`هيا نكتب عن «${t}»! 🦊 اكتب أول جملة في قصتك… كيف تبدأ؟`;fox(first);$('tx').focus()}
+async function send(){if(busy)return;const t=$('tx').value.trim();if(!t)return;
+ if(t.split(/\s+/).length<3){$('say').textContent=L==='en'?'Write a longer sentence, please! (3 words or more) 🙂':'اكتب جملة أطول قليلًا (ثلاث كلمات أو أكثر) 🙂';talk();return}
+ $('tx').value='';add('k',t);hist.push({r:'k',t});kids.push(t);stars++;$('st').textContent='⭐ '+stars;if(kids.length>=4)$('fin').style.display='block';
+ busy=true;const ty=document.createElement('div');ty.className='typing';ty.textContent='•••';$('chat').appendChild(ty);ty.scrollIntoView({behavior:'smooth',block:'end'});
+ let rep='';try{if(tok){const r=await fetch(SB,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:tok,topic,lang:L,history:hist.slice(-14)})});const j=await r.json();
+   if(j.reply)rep=j.reply;else if(j.err==='limit')rep=L==='en'?'You wrote a lot today! 🌟 Let\'s finish your story and continue tomorrow.':'كتبت كثيرًا اليوم يا بطل! 🌟 هيا ننهي قصتك ونكمل غدًا.'}}catch(e){}
+ if(!rep){const Q=FALL[L][topic]||[];rep=PR[L][Math.random()*5|0]+' '+(qi<Q.length?Q[qi++]:(L==='en'?'How does your story end?':'كيف تنتهي قصتك؟ اكتب الجملة الأخيرة ✨'))}
+ ty.remove();fox(rep);busy=false}
+$('go').onclick=send;$('tx').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}};
+$('fin').onclick=()=>{$('bar').classList.add('hide');const story=kids.map(k=>/[.!؟?،…]$/.test(k)?k:k+(L==='en'?'.':'.')).join(' ');
+ $('out').innerHTML=`<div class=story ${L==='en'?'dir=ltr':''}><h3>📖 ${topic}</h3>${story.replace(/[<>]/g,'')}</div><button class=btn id=again>✍️ قصة جديدة</button>`;
+ try{const S=JSON.parse(localStorage.getItem('tabeer_stories')||'[]');S.unshift({t:topic,l:L,s:story,d:Date.now()});localStorage.setItem('tabeer_stories',JSON.stringify(S.slice(0,30)))}catch(e){}
+ for(let i=0;i<40;i++){const c=document.createElement('span');c.className='cf';c.textContent=['⭐','🎉','✨','🌟','📖'][i%5];c.style.left=Math.random()*100+'vw';c.style.animationDelay=Math.random()*.6+'s';document.body.appendChild(c);setTimeout(()=>c.remove(),3000)}
+ fox(L==='en'?`WOW! You wrote a whole story with ${kids.length} sentences! 🏆 I'm so proud of you!`:`واااو! كتبت قصة كاملة من ${kids.length} جمل! 🏆 أنا فخور بك جدًا!`);
+ try{parent.postMessage({lbt:'ok',qq:'tabeer'},'*')}catch(e){}
+ $('again').onclick=()=>location.reload();$('out').scrollIntoView({behavior:'smooth'})};
+$('fox').onclick=()=>{talk();$('say').textContent=L==='en'?'I love stories! Keep writing! 🦊':'أنا أحبّ قصصك! استمر في الكتابة 🦊'};
+$('note').textContent=tok?'':'(وضع التجربة: سجّل الدخول في التطبيق ليرد عليك فنّوس الذكي)';
+</script></body></html>
