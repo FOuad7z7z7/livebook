@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>كلّم الأستاذ نور – الكتاب الحي</title>
+<style>
+body{margin:0;font-family:Cairo,Tahoma,sans-serif;min-height:100vh;background:linear-gradient(#e3fafc,#fff9db);color:#212529;text-align:center}
+.w{max-width:560px;margin:0 auto;padding:24px 16px 160px}
+h1{color:#1971c2;font-size:1.6rem;margin:10px 0}
+.card{background:#fff;border-radius:22px;padding:16px;margin:14px 0;box-shadow:0 8px 24px rgba(0,0,0,.08);line-height:2;font-weight:700}
+.av{font-size:5rem}
+ol{text-align:right;margin:0;padding-right:20px}
+</style></head><body><div class="w">
+<div class="av">🧑‍🏫</div>
+<h1>كلّم الأستاذ نور بصوتك</h1>
+<div class="card">مكالمة صوتية حقيقية: تتكلّم، والأستاذ يسمعك ويرد عليك فورًا، يشرح ويسألك ويصحّحلك.</div>
+<div class="card"><ol><li>اضغط زر <b>«ابدأ المكالمة»</b> تحت 👇</li><li>اسمح للمتصفح باستعمال <b>الميكروفون</b>.</li><li>قول للأستاذ صفّك والدرس… وابدأ!</li><li>لما تكمّل اضغط <b>إنهاء</b>.</li></ol></div>
+<p style="color:#868e96;font-size:.9rem">نسخة تجريبية · تحتاج إنترنت جيد</p>
+</div>
+<elevenlabs-convai agent-id="agent_3901m7gm5ntbf7radsfxetmc0981" variant="expanded" action-text="كلّم الأستاذ نور" start-call-text="ابدأ المكالمة" end-call-text="إنهاء" listening-text="أسمعك…" speaking-text="الأستاذ يتكلّم"></elevenlabs-convai>
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+<script>(function(){function s(t,q){try{parent.postMessage(q?{lbt:t,qq:q}:{lbt:t},'*')}catch(e){}}
+var seen=new WeakSet();
+function qinfo(b,cb){setTimeout(function(){try{var G=b.parentElement,opts=[].slice.call(G.children).filter(function(x){return x.classList.contains('opt')});if(opts.length<2)return cb(null);
+ var p=G,qEl=null;for(var i=0;i<4&&p&&!qEl;i++){qEl=[].slice.call(p.children).filter(function(c){return !c.classList.contains('opt')&&!c.querySelector('.opt')&&!c.classList.contains('fb')&&!c.classList.contains('sc')&&c.textContent.trim().length>2})[0];if(!qEl)p=p.parentElement}
+ if(!qEl||qEl.querySelector('canvas,svg,img,input,table'))return cb(null);
+ var o=opts.map(function(x){return x.textContent.trim()}),r=-1,w=opts.indexOf(b);opts.forEach(function(x,i){if(x.classList.contains('ok'))r=i});
+ cb({q:qEl.textContent.replace(/\s+/g,' ').trim().replace(/^\d+\)\s*/,'').slice(0,300),o:o,r:r,w:w})}catch(e){cb(null)}},60)}
+new MutationObserver(function(ms){ms.forEach(function(m){
+ if(m.type==='attributes'){var t=m.target,c=t.classList,o=' '+(m.oldValue||'')+' ';
+  if((c.contains('ok')||c.contains('good'))&&!/ (ok|good) /.test(o)){if(c.contains('opt')&&!t.parentElement.querySelector('.opt.no'))qinfo(t,function(q){s('ok',q)});else s('ok')}
+  if((c.contains('no')||c.contains('bad'))&&!/ (no|bad) /.test(o)){if(c.contains('opt'))qinfo(t,function(q){s('no',q)});else s('no')}}
+ else m.addedNodes.forEach(function(n){if(n.nodeType===1&&n.tagName==='SPAN'&&!seen.has(n)){seen.add(n);if(n.classList.contains('ok'))s('ok');if(n.classList.contains('no'))s('no')}});
+})}).observe(document.documentElement,{attributes:true,subtree:true,attributeOldValue:true,attributeFilter:['class'],childList:true});
+document.addEventListener('click',function(){s('act')},true);})();</script>
+</body></html>
