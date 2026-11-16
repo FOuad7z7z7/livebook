@@ -54,7 +54,7 @@ function play(b){const bin=atob(b),n=bin.length>>1,f=new Float32Array(n);for(let
  s.onended=()=>{playing.delete(s);if(!playing.size&&live)$('av').className='av listen'}}
 function stopPlay(){playing.forEach(s=>{try{s.stop()}catch(e){}});playing.clear();nextT=0}
 const WK=`class P extends AudioWorkletProcessor{constructor(){super();this.b=new Int16Array(1600);this.i=0}process(I){const c=I[0]&&I[0][0];if(c){for(let k=0;k<c.length;k++){let v=Math.max(-1,Math.min(1,c[k]));this.b[this.i++]=v<0?v*32768:v*32767;if(this.i===1600){this.port.postMessage(this.b.buffer.slice(0));this.i=0}}}return true}}registerProcessor('p',P)`;
-async function start(){
+async function start(){cued=false;
  if(!tok&&!GUEST){st('لازم تدخل لحسابك في «الكتاب الحي» أول 🙂','err');return}
  $('go').disabled=true;st('نجهّز المكالمة…');
  try{inCtx=new (window.AudioContext||window.webkitAudioContext)({sampleRate:16000});outCtx=new (window.AudioContext||window.webkitAudioContext)({sampleRate:24000});await inCtx.resume();await outCtx.resume()}catch(e){}
@@ -81,7 +81,10 @@ async function startMic(){
  node.port.onmessage=e=>{if(muted||!ws||ws.readyState!==1)return;ws.send(JSON.stringify({realtimeInput:{audio:{data:b64(e.data),mimeType:'audio/pcm;rate=16000'}}}))};
  srcN.connect(node);
 }
-function tick(){const s=Math.max(0,Math.round((endAt-Date.now())/1e3));$('tm').textContent='⏱️ '+Math.floor(s/60)+':'+String(s%60).padStart(2,'0');if(!s)end()}
+let cued=false;
+function tick(){const raw=Math.round((endAt-Date.now())/1e3),s=Math.max(0,raw);$('tm').textContent='⏱️ '+Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+ if(GUEST&&!cued&&s<=25&&ws&&ws.readyState===1){cued=true;ws.send(JSON.stringify({realtimeInput:{text:'[تنبيه من النظام وليس من الزائر: باقي 20 ثانية على نهاية المكالمة. أكمل جملتك ثم ودّع الزائر الآن بجملتين قصيرتين: لخّص له الخطوة الجاية، وقل له بالضبط: «وبعد ما تشترك، نكون معاك ومع ولدك داخل الدروس، نشرحله ونسأله.»]'}}))}
+ if(!s&&(!GUEST||!playing.size||raw<-10))end()}
 function end(){if(ws&&ws.readyState<2)ws.close();else cleanup()}
 function cleanup(){live=false;clearInterval(timer);stopPlay();try{node&&node.disconnect();srcN&&srcN.disconnect()}catch(e){}
  if(mic)mic.getTracks().forEach(t=>t.stop());try{inCtx&&inCtx.close();setTimeout(()=>{try{outCtx&&outCtx.close()}catch(e){}},300)}catch(e){}
