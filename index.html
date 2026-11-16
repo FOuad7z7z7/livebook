@@ -117,16 +117,6 @@ table.t td,table.t th{padding:6px;border-bottom:1px solid var(--line);text-align
 .chback{display:flex;align-items:center;gap:10px;background:linear-gradient(145deg,var(--c1),var(--c2));color:#fff;border-radius:20px;padding:12px 14px;margin:10px 0 6px;cursor:pointer;font-weight:900}
 .chback .e{font-size:2.2rem}.chback small{display:block;font-weight:700;opacity:.9}
 .chback .x{margin-right:auto;white-space:nowrap;background:rgba(255,255,255,.25);border-radius:99px;padding:2px 12px;font-size:.85rem}
-.dsh{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:10px}
-.dk{background:#fff;border-radius:16px;padding:10px 12px;box-shadow:0 2px 10px #1e2a5a0d}
-.dk small{display:block;color:var(--soft);font-weight:700;font-size:.78rem}.dk b{display:block;font-size:1.6rem;color:var(--ink);font-weight:900;line-height:1.3}.dk i{font-style:normal;font-size:.75rem;font-weight:700}
-.dcard{background:#fff;border-radius:18px;padding:12px 14px;margin-bottom:10px;box-shadow:0 2px 10px #1e2a5a0d}.dcard h4{margin:0 0 8px;color:var(--ink);font-size:1rem}
-.dcard .fbar{margin:8px 0;display:block!important}.fbh{display:flex;justify-content:space-between;font-size:.85rem;font-weight:700;color:var(--txt)}.fbt{display:block;width:100%;height:11px;border-radius:6px;background:#eef0f8;margin-top:4px;overflow:hidden}.fbt>i{display:block;height:100%;border-radius:6px;transition:width 1s}
-.drow{display:flex;align-items:center;gap:8px;padding:7px 0;border-top:1px solid #eef0f8;font-weight:700;color:var(--txt);font-size:.9rem}.drow:first-of-type{border-top:0}
-.drow .nm{flex:1;min-width:0}.drow .nm small{display:block;color:var(--soft);font-size:.75rem;font-weight:600}
-.wab{background:#25D366;color:#fff;border:0;border-radius:99px;padding:5px 12px;font-weight:800;font-family:inherit;font-size:.8rem;text-decoration:none;white-space:nowrap}
-.bell{display:inline-flex;align-items:center;gap:4px;border-radius:99px;padding:4px 12px;font-weight:800;font-size:.85rem;background:#eef0f8;color:var(--soft);cursor:pointer;border:0;font-family:inherit}.bell.on{background:#ffe3e3;color:#c92a2a;animation:tpulse 1.6s infinite}
-.sbadge{background:#d3f9d8;color:#2b8a3e;border-radius:8px;padding:1px 7px;font-size:.7rem;margin-right:4px}
 </style>
 <style>
 .grade{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid var(--line);border-radius:16px;padding:12px 14px;margin:8px 0;cursor:pointer}
@@ -438,8 +428,7 @@ function bye(){if(!s.parentNode)return;s.classList.add('out');setTimeout(functio
 <section class="scr" id="s-admin">
   <div class="top"><div class="logo"><i class="lg"><img src="icon-192.png" alt=""></i>إدارة الشركة</div><button class="ghost" data-out>خروج</button></div>
   <div class="wrap">
-    <div id="aDash"></div>
-    <div class="stat4" id="aStats" style="display:none"></div>
+    <div class="stat4" id="aStats"></div>
     <div class="tabs" id="aTabs"><button data-t="pays" class="on">💳 الطلبات <span id="aPend"></span></button><button data-t="gen">🎟️ أكواد</button><button data-t="codes">📋 الأكواد</button><button data-t="users">👥 المستخدمون</button></div>
 
     <div class="atab" id="at-pays">
@@ -1185,29 +1174,9 @@ let aTab='pays';
 $('aTabs').querySelectorAll('button').forEach(b=>b.onclick=()=>{aTab=b.dataset.t;$('aTabs').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));
  document.querySelectorAll('.atab').forEach(x=>x.style.display=x.id==='at-'+aTab?'block':'none');if(aTab==='codes')loadCodes();if(aTab==='users')loadUsers();if(aTab==='pays')loadPayReqs()});
 async function renderAdmin(){if(role()!=='admin'){home();return}
- loadDash();
  const r=await rpc('lb_admin_stats',{p_token:S.tok});if(r.err){$('aStats').innerHTML='<div style="grid-column:1/-1">'+esc(r.err)+'</div>';return}
  const it=[['pending','⏳ بانتظار التفعيل'],['active','مشترك فعّال'],['students','طالب'],['parents','ولي أمر'],['income_month','دخل الشهر (د.ل)'],['codes_used','كود مستخدم'],['codes_new','كود جديد'],['active_today','نشط اليوم']];$('aPend').textContent=r.pending?'('+r.pending+')':'';if(aTab==='pays')loadPayReqs();
  $('aStats').innerHTML=it.map(([k,t])=>'<div><b>'+(r[k]||0)+'</b><span>'+t+'</span></div>').join('')}
-
-function waLink(ph,txt){ph=String(ph||'').replace(/\D/g,'').replace(/^0+/,'');if(ph.length===9)ph='218'+ph;return 'https://wa.me/'+ph+'?text='+encodeURIComponent(txt)}
-async function loadDash(){const D=$('aDash');if(!D)return;const r=await rpc('lb_admin_dash',{p_token:S.tok});if(r.err){D.innerHTML='';return}
- const gn=g=>{try{return GN(g)}catch(e){return g||''}};const F=r.funnel||[0,0,0,0],base=Math.max(1,F[0]);
- const now=new Date().toLocaleDateString('ar-LY',{weekday:'long',day:'numeric',month:'long'});
- const k=(ic,t,v,sub,c)=>'<div class="dk"><small>'+ic+' '+t+'</small><b>'+v+'</b><i style="color:'+(c||'var(--soft)')+'">'+sub+'</i></div>';
- let h='<div style="display:flex;justify-content:space-between;align-items:center;margin:4px 0 10px"><div><b style="color:var(--ink);font-size:1.15rem">📊 لوحة اليوم</b><div style="color:var(--soft);font-size:.78rem;font-weight:700">'+now+'</div></div><button class="bell'+(r.pending?' on':'')+'" id="dBell">🔔 '+(r.pending?r.pending+' تفعيل':'لا طلبات')+'</button></div>';
- h+='<div class="dsh">'+k('🆕','سجّلوا اليوم',r.new_today,'دخلوا اليوم: '+r.seen_today,'var(--gr)')+k('📚','درسوا اليوم',r.studied_today,'من '+r.students+' طالب')+k('💰','دخل الشهر',r.income_month+' <small style="display:inline;font-size:.8rem">د.ل</small>',r.active_subs+' مشترك','var(--gr)')+k('🔁','رجعوا بعد التسجيل',r.returned,'من '+r.returned_base+' بداوا قبل اليوم','#e67700')+'</div>';
- const FN=[['سجّلوا',F[0],'#3b6fd8'],['فتحوا درس',F[1],'#2BA39A'],['درسوا 10 دقائق+',F[2],'#F28C38'],['اشتركوا',F[3],'#2e9e5b']];
- h+='<div class="dcard"><h4>🧭 مسار الطالب</h4>'+FN.map(([t,n,c])=>'<div class="fbar"><div class="fbh"><span>'+t+'</span><span>'+n+' <small style="color:var(--soft)">('+Math.round(n/base*100)+'%)</small></span></div><div class="fbt"><i data-w="'+Math.max(3,n/base*100)+'" style="width:0;background:'+c+'"></i></div></div>').join('')+'<div style="color:var(--soft);font-size:.78rem;font-weight:700;margin-top:6px">⏱️ مجموع دقائق التعلّم: '+r.minutes+' دقيقة</div></div>';
- const T=r.top||[];if(T.length)h+='<div class="dcard"><h4>🏆 أنشط الطلاب</h4>'+T.map((x,i)=>'<div class="drow"><span style="width:20px;color:var(--soft)">'+['🥇','🥈','🥉','4','5'][i]+'</span><span class="nm">'+esc(x.name)+(x.sub?'<span class="sbadge">مشترك</span>':'')+'<small>'+esc(gn(x.grade))+' · '+x.ok+' إجابة صحيحة</small></span><b>'+x.m+' د</b></div>').join('')+'</div>';
- const U=r.follow||[],N=r.nokids||[];
- if(U.length||N.length){h+='<div class="dcard"><h4>⚠️ تحتاج متابعة</h4>';
-  if(U.length)h+='<div style="color:var(--soft);font-size:.78rem;font-weight:700">أولادهم ما بداوش لتوّا ('+U.length+')</div>'+U.map(x=>'<div class="drow"><span class="nm">'+esc(x.name)+'<small>'+esc(x.kids)+'</small></span></div>').join('');
-  if(N.length)h+='<div style="color:var(--soft);font-size:.78rem;font-weight:700;margin-top:8px">سجّلوا وما ضافوش ولد ('+N.length+')</div>'+N.map(x=>'<div class="drow"><span class="nm">'+esc(x.name)+'</span></div>').join('');
-  h+='</div>'}
- D.innerHTML=h;$('dBell').onclick=()=>{const b=document.querySelector('#aTabs [data-t="pays"]');if(b)b.click();$('aTabs').scrollIntoView({behavior:'smooth'})};
- requestAnimationFrame(()=>setTimeout(()=>D.querySelectorAll('.fbt>i').forEach(i=>i.style.width=i.dataset.w+'%'),60))}
-setInterval(()=>{try{if(role()==='admin'&&document.querySelector('.scr.on').id==='s-admin'&&!document.hidden)loadDash()}catch(e){}},60000);
 $('aRefresh').onclick=()=>{renderAdmin();if(aTab==='pays')return;if(aTab==='codes')loadCodes();if(aTab==='users')loadUsers()};
 $('pSt').onchange=()=>loadPayReqs();
 async function loadPayReqs(){const L=$('pList');L.innerHTML='<div class="muted">⏳ جارٍ التحميل…</div>';
