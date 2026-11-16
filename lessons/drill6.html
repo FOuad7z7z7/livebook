@@ -361,4 +361,5 @@ function dPage(p){$('app').innerHTML=topBar()+`<div class=title><h1>${p.icon} <b
  const fns=p.acts.map(a=>()=>{if(a[3]==='mix'){const K=Object.keys(DR);return drill(p,a[0],()=>{const d=DR[pickN(K)];return d[pickN(['t','w','c'])].call(d)},12,'c')}const d=DR[p.g];drill(p,a[0],()=>d[a[3]].call(d),8,a[3])});bindSteps(p,p.acts,fns);fns[0]()}
 window.XT=Object.assign(window.XT||{},{drill:dPage});
 
-route();</script></body></html>
+route();</script><script src="nourbtn.js" defer></script>
+</body></html>

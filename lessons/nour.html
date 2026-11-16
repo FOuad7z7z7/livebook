@@ -23,7 +23,7 @@ button{font-family:inherit;font-weight:900;font-size:1.15rem;border:0;border-rad
 .note{color:#868e96;font-size:.85rem;margin-top:16px;line-height:1.8}
 .err{color:#c92a2a}
 </style></head><body><div class="w">
-<div class="top"><a href="javascript:history.back()">→ رجوع</a></div>
+<div class="top"><a href="#" id="back">→ رجوع للدرس</a></div>
 <h1>📞 كلّم الأستاذ نور</h1>
 <p class="sub" id="sub">تكلّم بصوتك، والأستاذ يسمعك ويشرحلك ويسألك</p>
 <div class="av" id="av">🧑‍🏫</div>
@@ -41,7 +41,7 @@ const $=id=>document.getElementById(id);
 let tok=null;try{tok=(JSON.parse(localStorage.getItem('livebook_v2'))||{}).tok}catch(e){}
 let ctxT='';try{ctxT=sessionStorage.getItem('lb_nour_ctx')||''}catch(e){}
 const LES={grade:Q.get('g')||'',subject:Q.get('s')||'',title:Q.get('t')||''};
-if(LES.title)$('sub').textContent='الدرس: '+LES.title;
+if(LES.title)$('sub').textContent='📖 '+LES.title;else if(LES.subject)$('sub').textContent='📖 '+LES.subject;
 let ws,mic,inCtx,outCtx,node,srcN,nextT=0,playing=new Set(),muted=false,live=false,timer,endAt,tIn='',tOut='',lastWho='';
 function st(t,c){$('st').textContent=t;$('st').className='st'+(c?' '+c:'')}
 function cap(who,txt){const c=$('cap');if(lastWho!==who||!c.lastChild||c.lastChild.nodeType!==1||!c.lastChild.dataset.w){const d=document.createElement('div');d.dataset.w=who;d.className=who;d.textContent=(who==='k'?'🧒 ':'🧑‍🏫 ');c.appendChild(d);if(c.firstChild&&c.firstChild.tagName==='SPAN')c.firstChild.remove();lastWho=who}c.lastChild.textContent+=txt;c.scrollTop=1e6}
@@ -58,7 +58,7 @@ async function start(){
  try{inCtx=new (window.AudioContext||window.webkitAudioContext)({sampleRate:16000});outCtx=new (window.AudioContext||window.webkitAudioContext)({sampleRate:24000});await inCtx.resume();await outCtx.resume()}catch(e){}
  try{mic=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true,channelCount:1}})}catch(e){st('لازم تسمح باستعمال الميكروفون 🎙️','err');$('go').disabled=false;return}
  let r;try{const x=await fetch(FN,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:tok,...LES,ctx:ctxT})});r=await x.json()}catch(e){r={err:'net'}}
- if(!r.tok){const m={auth:'لازم تدخل لحسابك في «الكتاب الحي» أول 🙂',limit:'خلصت مكالمات اليوم 🌙 نرجعوا بكرة!',nokey:'الأستاذ مش جاهز بعد (المفتاح ناقص)',net:'مشكلة في الإنترنت، جرّب مرة ثانية',gemini:'مشكلة في الاتصال بالأستاذ ('+(r.status||'')+')'};st(m[r.err]||('صار خطأ: '+r.err),'err');cleanup();return}
+ if(!r.tok){const m={auth:'لازم تدخل لحسابك في «الكتاب الحي» أول 🙂',limit:'خلصت مكالمات اليوم 🌙 نرجعوا بكرة!',nokey:'الأستاذ مش جاهز بعد (المفتاح ناقص)',net:'مشكلة في الإنترنت، جرّب مرة ثانية',closed:'الأستاذ نور لسّه في التجربة، قريباً يكون متاح لك 🙂',gemini:'مشكلة في الاتصال بالأستاذ ('+(r.status||'')+')'};st(m[r.err]||('صار خطأ: '+r.err),'err');cleanup();return}
  ws=new WebSocket(WSU+encodeURIComponent(r.tok));
  ws.onopen=()=>{ws.send(JSON.stringify({setup:{model:'models/'+r.model,generationConfig:{responseModalities:['AUDIO'],speechConfig:{voiceConfig:{prebuiltVoiceConfig:{voiceName:r.voice}}}},systemInstruction:{parts:[{text:r.sys}]},inputAudioTranscription:{},outputAudioTranscription:{}}}))};
  ws.onmessage=async ev=>{let m;try{m=JSON.parse(typeof ev.data==='string'?ev.data:await ev.data.text())}catch(e){return}
@@ -84,6 +84,7 @@ function end(){if(ws&&ws.readyState<2)ws.close();else cleanup()}
 function cleanup(){live=false;clearInterval(timer);stopPlay();try{node&&node.disconnect();srcN&&srcN.disconnect()}catch(e){}
  if(mic)mic.getTracks().forEach(t=>t.stop());try{inCtx&&inCtx.close();setTimeout(()=>{try{outCtx&&outCtx.close()}catch(e){}},300)}catch(e){}
  mic=null;$('av').className='av';$('end').style.display='none';$('mute').style.display='none';$('go').style.display='';$('go').disabled=false;$('go').textContent='🎙️ مكالمة جديدة';$('tm').textContent=''}
+$('back').onclick=e=>{e.preventDefault();end();if(window.parent!==window)parent.postMessage('nour-close',location.origin);else history.back()};
 $('go').onclick=start;$('end').onclick=end;
 $('mute').onclick=()=>{muted=!muted;$('mute').textContent=muted?'🎙️ رجّع الصوت':'🔇 كتم';st(muted?'الميكروفون مكتوم':'الأستاذ معاك… تكلّم 🎙️')};
 </script>

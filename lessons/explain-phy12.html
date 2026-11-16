@@ -105,4 +105,5 @@ $('ttl').textContent=LESSON.title;$('sub').textContent=LESSON.sub;$('n').textCon
 $('lst').innerHTML=S.map(s=>`<li>${s.t}</li>`).join('');
 try{if(localStorage.getItem('ex_'+LESSON.id))$('seen').style.display='block'}catch(e){}
 $('skip').href=LESSON.next;
-</script></body></html>
+</script><script src="nourbtn.js" defer></script>
+</body></html>
