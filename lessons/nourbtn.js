@@ -1,4 +1,4 @@
-/* 📞 زر «كلّم الأستاذ نور» داخل الدروس – الكتاب الحي */
+/* 📞 زر «كلّم الأستاذ رمزي» داخل الدروس – الكتاب الحي */
 (function(){
  const FN='https://jrhzqgapywgdblujyrns.supabase.co/functions/v1/nour';
  let tok=null;try{tok=(JSON.parse(localStorage.getItem('livebook_v2'))||{}).tok}catch(e){}
@@ -6,7 +6,7 @@
  const show=()=>{
   const st=document.createElement('style');st.textContent=`#nbtn{position:fixed;left:14px;bottom:78px;z-index:120;border:0;border-radius:99px;padding:10px 16px 10px 12px;font-weight:900;font-size:1rem;font-family:inherit;color:#fff;cursor:pointer;background:linear-gradient(135deg,#1971c2,#15aabf);box-shadow:0 8px 20px rgba(25,113,194,.4);display:flex;align-items:center;gap:6px;animation:npl 2.4s infinite}#nbtn span{font-size:1.4rem}@keyframes npl{50%{transform:translateY(-3px)}}#nfr{position:fixed;inset:0;width:100%;height:100%;border:0;z-index:9999;background:#fff}@media print{#nbtn{display:none}}`;
   document.head.appendChild(st);
-  const b=document.createElement('button');b.id='nbtn';b.innerHTML='<span>📞</span>الأستاذ نور';b.onclick=open;document.body.appendChild(b);
+  const b=document.createElement('button');b.id='nbtn';b.innerHTML='<span>📞</span>الأستاذ رمزي';b.onclick=open;document.body.appendChild(b);
  };
  function ctx(){
   const b=document.getElementById('nbtn');if(b)b.style.visibility='hidden';
