@@ -1,4 +1,4 @@
-const C='livebook-v79';
+const C='livebook-v80';
 self.addEventListener('install',e=>self.skipWaiting());
 self.addEventListener('activate',e=>e.waitUntil(self.clients.claim()));
 // يجد الملف في الذاكرة (التنزيل أو التصفح السابق)، ويدعم الصوت المقطّع (Range) في سفاري

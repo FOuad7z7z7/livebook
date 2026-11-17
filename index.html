@@ -117,6 +117,11 @@ table.t td,table.t th{padding:6px;border-bottom:1px solid var(--line);text-align
 .chback{display:flex;align-items:center;gap:10px;background:linear-gradient(145deg,var(--c1),var(--c2));color:#fff;border-radius:20px;padding:12px 14px;margin:10px 0 6px;cursor:pointer;font-weight:900}
 .chback .e{font-size:2.2rem}.chback small{display:block;font-weight:700;opacity:.9}
 .chback .x{margin-right:auto;white-space:nowrap;background:rgba(255,255,255,.25);border-radius:99px;padding:2px 12px;font-size:.85rem}
+.first{position:relative;overflow:hidden;border-radius:24px;padding:16px;margin:4px 0 12px;color:#fff;background:linear-gradient(135deg,#2329C9,#3FA9F5);box-shadow:0 10px 26px #2329c94d;cursor:pointer}
+.first .fi{font-size:3rem;line-height:1;float:left;margin:2px 0 0 4px;animation:fbob 1.6s ease-in-out infinite alternate}
+.first small{display:block;font-weight:800;opacity:.9;font-size:.82rem}.first b{display:block;font-size:1.2rem;font-weight:900;margin:2px 0 4px}.first span{display:block;font-weight:700;font-size:.85rem;opacity:.95}
+.first button{margin-top:12px;width:100%;border:0;border-radius:16px;padding:13px;background:#F7B23B;color:#1B1F5E;font-weight:900;font-size:1.1rem;font-family:inherit;box-shadow:0 5px 0 #c98a1c;cursor:pointer;animation:fpulse 1.8s infinite}
+@keyframes fbob{to{transform:translateY(-6px) rotate(-6deg)}}@keyframes fpulse{50%{transform:scale(1.03)}}
 </style>
 <style>
 .grade{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid var(--line);border-radius:16px;padding:12px 14px;margin:8px 0;cursor:pointer}
@@ -368,6 +373,7 @@ function bye(){if(!s.parentNode)return;s.classList.add('out');setTimeout(functio
       <div class="chips"><span class="chip" id="hGrade"></span><span class="chip" id="hPts"></span><span class="chip" id="hStreak"></span></div>
     </div>
     <div id="hParent"><span id="hParentT"></span><button class="btn ink" id="hBack" style="padding:6px 10px;font-size:.85rem">↩ رجوع لولي الأمر</button></div>
+    <div id="hFirst"></div>
     <div class="plan" id="hPlan" style="margin-bottom:10px"></div>
     <div class="offc" id="hOff"></div>
     <div id="feat"></div>
@@ -1006,10 +1012,18 @@ function planBox(el,w){const sb=subOf(who());if(subOk(who())&&stale()){el.classN
  el.innerHTML=og?'<b>🔒 الاشتراك خاص بـ«'+esc(GN(og))+'»</b><div>'+(w==='p'?'اشتراك ابنك خاص بـ«'+esc(GN(og))+'» فقط.':'اشتراكك خاص بـ«'+esc(GN(og))+'» فقط. ارجع لصفك من «تغيير الصف» لتفتح كتبك، أو راسل الإدارة لنقل الاشتراك.')+'</div>':active()?'<b>✅ '+esc(sb.plan)+'</b> · باقي '+daysLeft()+' يوم'+(sb.plan==='تجربة مجانية'?'<button class="btn" style="background:#fff;color:#22867f;margin-top:8px;width:100%" data-pay>اشترك الآن</button>':'')
   :'<b>🔒 '+(sb.until?'انتهى الاشتراك':'غير مشترك')+'</b><div>'+(w==='p'?'ابنك يرى الدروس المجانية فقط':'عندك 5 دروس مجانية في كل مادة، وللباقي اشترك')+'</div><button class="btn" style="background:#fff;color:#b33636;margin-top:8px;width:100%" data-pay>اشترك الآن</button>';
  const pp=payOf(who());if(pp)el.innerHTML+=payBadge(pp);el.querySelectorAll('[data-pay]').forEach(b=>b.onclick=openPay)}
+
+function pickStarter(g){const stt=S.stats||{};const L=Object.values(ALL).filter(l=>l.grade===g&&l.free&&l.f&&!/#home|3d/.test(l.f)&&!((stt[l.id]||{}).opened));
+ const rank=l=>(l.star?0:2)+(/\(/.test(l.t)?0:1.5)+(/^(sci|bio)/.test(l.sub.id)?0:/^math/.test(l.sub.id)?1:3);return L.sort((a,b)=>rank(a)-rank(b))[0]}
+function firstChallenge(g){const box=$('hFirst');if(!box)return;const secs=Object.values(S.stats||{}).reduce((a,x)=>a+(x.sec||0),0);
+ const l=secs<300?pickStarter(g):null;if(!l){box.innerHTML='';return}
+ const started=Object.values(S.stats||{}).some(x=>x.opened);
+ box.innerHTML='<div class="first"><div class="fi">🎮</div><small>'+(started?'تحدّي جديد ينتظرك':'تحدّيك الأول')+' · '+l.sub.icon+' '+esc(l.sub.name)+'</small><b>'+esc(l.t.replace(/^[\d\-\s و]+/,''))+'</b><span>جرّب، حرّك، وجاوب واجمع النجوم ⭐</span><button>▶ ابدأ التحدّي</button></div>';
+ box.firstChild.onclick=()=>openLesson(l.id)}
 function renderHome(){if(role()!=='student'){home();return}setTimeout(()=>window.offRender&&offRender(),0);const g=grade(),h=new Date().getHours();
  $('hGreet').textContent=h<12?'صباح الخير ☀️':'مساء الخير 🌙';$('hName').textContent='أهلًا '+S.user.name+'!';
  $('hGrade').textContent=g.icon+' '+g.name;$('hPts').textContent='⭐ '+points()+' نقطة';$('hStreak').textContent='🔥 '+streak()+' يوم';
- planBox($('hPlan'),'s');{const pp=parentSaved();$('hParent').classList.toggle('on',!!pp);if(pp)$('hParentT').textContent='👨‍👩‍👧 حساب '+S.user.name}
+ firstChallenge(g);planBox($('hPlan'),'s');{const pp=parentSaved();$('hParent').classList.toggle('on',!!pp);if(pp)$('hParentT').textContent='👨‍👩‍👧 حساب '+S.user.name}
  const stars=Object.values(ALL).filter(l=>l.grade===g&&l.star&&l.f.includes('3d'));$('feat').innerHTML='';
  stars.forEach(l=>{const d=document.createElement('div');d.className='feat';d.innerHTML='<div class="ic">'+(l.t.match(/^\S+/)[0])+'</div><div><b>'+l.t.replace(/^\S+\s/,'')+'</b><span>تجربة ثلاثية الأبعاد – جرّبها الآن!</span></div>';d.onclick=()=>openLesson(l.id);$('feat').appendChild(d)});
  const G=$('subs');G.innerHTML='';(g.subjects||[]).forEach(s=>{const d=document.createElement('div');d.className='sub cardx'+(s.soon?' soon':'');const cc=subCol(s);d.style.setProperty('--c1',cc[0]);d.style.setProperty('--c2',cc[1]);
