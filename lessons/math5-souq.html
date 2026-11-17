@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>سوق الملايين 💰 – رياضيات الخامس</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:Cairo,Tahoma,sans-serif;background:#FFF8E7;color:#1B1F5E;min-height:100vh;user-select:none}
+.top{background:linear-gradient(135deg,#F28C38,#F7B23B);color:#fff;padding:14px 16px 18px;border-radius:0 0 26px 26px;box-shadow:0 6px 18px #f28c3855}
+.top h1{margin:0;font-size:1.35rem;font-weight:900}.top p{margin:2px 0 0;font-weight:700;opacity:.95;font-size:.9rem}
+.stars{display:inline-block;background:#fff3;border-radius:99px;padding:3px 12px;font-weight:900;margin-top:8px}
+.w{max-width:520px;margin:0 auto;padding:14px}
+.map{display:grid;gap:12px;margin-top:6px}
+.st{display:flex;align-items:center;gap:12px;background:#fff;border-radius:20px;padding:14px;box-shadow:0 4px 0 #f0d9a8;cursor:pointer;border:3px solid transparent;transition:transform .15s}
+.st:active{transform:scale(.97)}.st .ic{font-size:2.4rem;width:58px;height:58px;display:flex;align-items:center;justify-content:center;background:#FFF1D6;border-radius:16px}
+.st b{display:block;font-size:1.05rem}.st small{color:#7a6a4a;font-weight:700}.st .sv{margin-right:auto;font-size:1.1rem;letter-spacing:2px}
+.st.lock{opacity:.5;filter:grayscale(.8)}.st.next{border-color:#F28C38;animation:glow 1.4s infinite alternate}
+@keyframes glow{to{box-shadow:0 4px 0 #f0d9a8,0 0 0 6px #f28c3833}}
+.story{background:#fff;border-radius:20px;padding:12px 14px;margin-bottom:12px;display:flex;gap:10px;align-items:center;font-weight:800;box-shadow:0 3px 0 #f0d9a8}
+.story .fc{font-size:2.6rem}
+.bar{height:12px;background:#f0e3c4;border-radius:9px;overflow:hidden;margin:8px 0 12px}.bar i{display:block;height:100%;background:linear-gradient(90deg,#2BA39A,#46C9A8);width:0;transition:width .4s}
+.hd{display:flex;justify-content:space-between;align-items:center;font-weight:900}
+.btn{border:0;border-radius:16px;padding:13px 18px;font-family:inherit;font-weight:900;font-size:1.05rem;cursor:pointer;box-shadow:0 5px 0 #0002}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #0002}
+.go{background:#2BA39A;color:#fff}.ghost{background:#fff;color:#1B1F5E}
+.num{font-size:2.3rem;font-weight:900;text-align:center;letter-spacing:2px;direction:ltr;margin:6px 0}
+.num em{font-style:normal;color:#E8590C;background:#FFE8CC;border-radius:8px;padding:0 4px}
+.card{background:#fff;border-radius:20px;padding:14px;box-shadow:0 3px 0 #f0d9a8;margin-bottom:12px}
+.cols{display:flex;flex-direction:row-reverse;gap:4px;direction:ltr;justify-content:center}
+.col{flex:1;min-width:0;background:#FFF8E7;border-radius:12px;padding:4px 2px;text-align:center;border:2px solid transparent}
+.col.bad{border-color:#e03131;background:#fff0f0}.col.good{border-color:#2f9e44}
+.col .lb{font-size:.62rem;font-weight:800;color:#7a6a4a;height:28px;line-height:1.15;display:flex;align-items:center;justify-content:center}
+.col .e{font-size:1.3rem}.col .n{font-size:1.5rem;font-weight:900}
+.col button{width:100%;border:0;background:#FFE3B3;border-radius:8px;font-weight:900;font-size:1rem;padding:5px 0;margin:2px 0;cursor:pointer;font-family:inherit;color:#1B1F5E}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{background:#fff;border:3px solid #f0d9a8;border-radius:16px;padding:14px 6px;font-size:1.3rem;font-weight:900;font-family:inherit;color:#1B1F5E;cursor:pointer;direction:ltr}
+.opt.ok{background:#d3f9d8;border-color:#2f9e44}.opt.no{background:#ffe3e3;border-color:#e03131;animation:shk .35s}
+@keyframes shk{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.ex{background:#E7F5FF;border-radius:16px;padding:12px;font-weight:800;line-height:1.9;margin-top:12px;display:none}
+.ex.on{display:block;animation:pop .3s}
+@keyframes pop{from{transform:scale(.9);opacity:0}}
+.ord{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.oc{background:#fff;border:3px solid #f0d9a8;border-radius:16px;padding:14px 6px;font-size:1.25rem;font-weight:900;text-align:center;cursor:pointer;direction:ltr;position:relative}
+.oc.done{background:#d3f9d8;border-color:#2f9e44}.oc.done::after{content:attr(data-k);position:absolute;top:-10px;right:-6px;background:#2f9e44;color:#fff;border-radius:99px;width:26px;height:26px;font-size:.9rem;line-height:26px}
+.oc.no{animation:shk .35s;border-color:#e03131}
+.safe{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;font-size:1.6rem;min-height:60px}
+.safe span{background:#FFF1D6;border-radius:12px;padding:4px 8px;font-size:1rem;font-weight:900;display:flex;align-items:center;gap:4px}
+.safe span i{font-style:normal;font-size:1.5rem}
+.fin{text-align:center;padding:20px 0}.fin .big{font-size:5rem;animation:pop .5s}
+.legend{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;font-size:.75rem;font-weight:800;color:#7a6a4a;margin-top:8px}
+.legend span{background:#fff;border-radius:99px;padding:2px 8px}
+#cf{position:fixed;inset:0;pointer-events:none;z-index:9}
+</style></head><body>
+<div class="top"><h1>💰 سوق الملايين</h1><p>ساعد العم سالم يعدّ فلوس محلّه، وتعلّم الأعداد حتى 10 ملايين</p><span class="stars" id="tot">⭐ 0 من 12</span></div>
+<div class="w" id="app"></div>
+<canvas id="cf"></canvas>
+<script>
+const $=id=>document.getElementById(id),A=$('app');
+const U=[{e:'🪙',n:'آحاد',v:1},{e:'💵',n:'عشرات',v:10},{e:'💰',n:'مئات',v:100},{e:'📦',n:'آلاف',v:1e3},{e:'🧳',n:'عشرات الآلاف',v:1e4},{e:'🗄️',n:'مئات الآلاف',v:1e5},{e:'🏦',n:'ملايين',v:1e6}];
+const F=n=>'\u2066'+String(n).replace(/\B(?=(\d{3})+(?!\d))/g,' ')+'\u2069';
+const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const SH=a=>{for(let i=a.length-1;i>0;i--){const j=R(0,i);[a[i],a[j]]=[a[j],a[i]]}return a};
+let P={};try{P=JSON.parse(localStorage.getItem('m5souq')||'{}')}catch(e){}
+const save=()=>{try{localStorage.setItem('m5souq',JSON.stringify(P))}catch(e){}};
+const rep=t=>{try{parent.postMessage({lbt:t},'*')}catch(e){}};
+let AC;const tone=(f,d=.12,t='sine',v=.08,w=0)=>{try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type=t;o.frequency.value=f;g.gain.value=v;o.connect(g);g.connect(AC.destination);const s=AC.currentTime+w;o.start(s);g.gain.exponentialRampToValueAtTime(.0001,s+d);o.stop(s+d+.02)}catch(e){}};
+const yay=()=>{tone(660,.1,'triangle',.1);tone(880,.12,'triangle',.1,.09);tone(1320,.18,'triangle',.08,.18)},boo=()=>{tone(220,.18,'sawtooth',.05);tone(180,.22,'sawtooth',.04,.12)};
+function confetti(){const c=$('cf'),x=c.getContext('2d');c.width=innerWidth;c.height=innerHeight;const ps=[...Array(90)].map(()=>({x:Math.random()*c.width,y:-20-Math.random()*200,v:2+Math.random()*4,r:Math.random()*6.3,c:['#F28C38','#2BA39A','#F7B23B','#3b6fd8','#e64980'][R(0,4)]}));let t=0;(function f(){x.clearRect(0,0,c.width,c.height);ps.forEach(p=>{p.y+=p.v;p.r+=.1;x.fillStyle=p.c;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillRect(-4,-6,8,12);x.restore()});if(++t<140)requestAnimationFrame(f);else x.clearRect(0,0,c.width,c.height)})()}
+const LV=[{ic:'🏪',t:'ابنِ المبلغ',d:'حط الفلوس في الخانات الصحيحة',k:'build'},{ic:'🔍',t:'قيمة الرقم',d:'قداش يسوى الرقم الملوّن؟',k:'val'},{ic:'🧾',t:'عدّ الخزنة',d:'شوف الفلوس واختار المبلغ',k:'safe'},{ic:'📊',t:'رتّب الفواتير',d:'من الأصغر للأكبر',k:'ord'}];
+const ROUNDS=5;
+function totStars(){return LV.reduce((a,l)=>a+(P[l.k]||0),0)}
+function map(){$('tot').textContent='⭐ '+totStars()+' من 12';let nx=LV.findIndex(l=>!P[l.k]);
+ A.innerHTML='<div class="story"><span class="fc">👳‍♂️</span><div>العم سالم عنده محل في سوق الجمعة، ويبي حد شاطر يساعده يعدّ فلوسه. أنت جاهز؟ 😄</div></div><div class="map">'+LV.map((l,i)=>{const lock=i>0&&!P[LV[i-1].k];return '<div class="st'+(lock?' lock':'')+(i===nx?' next':'')+'" data-i="'+i+'"><span class="ic">'+(lock?'🔒':l.ic)+'</span><div><b>'+(i+1)+'. '+l.t+'</b><small>'+l.d+'</small></div><span class="sv">'+('⭐'.repeat(P[l.k]||0)||'☆☆☆')+'</span></div>'}).join('')+'</div>'+(totStars()>=12?'<div class="fin"><div class="big">🏆</div><b>بطل سوق الملايين!</b></div>':'');
+ A.querySelectorAll('.st').forEach(s=>s.onclick=()=>{const i=+s.dataset.i;if(i>0&&!P[LV[i-1].k]){boo();return}play(i)})}
+let G;
+function play(i){G={i,l:LV[i],r:0,miss:0};next()}
+function head(){return '<div class="hd"><button class="btn ghost" id="bk" style="padding:8px 12px;font-size:.9rem">🗺️ الخريطة</button><span>'+G.l.ic+' '+G.l.t+'</span><span>'+(G.r+1)+' / '+ROUNDS+'</span></div><div class="bar"><i style="width:'+(G.r/ROUNDS*100)+'%"></i></div>'}
+function bindBk(){$('bk').onclick=map}
+function next(){if(G.r>=ROUNDS)return done();({build,val,safe,ord})[G.l.k]();bindBk()}
+function win(msg){yay();rep('ok');G.r++;setTimeout(next,msg?1300:700)}
+function done(){const s=G.miss===0?3:G.miss<=2?2:1;P[G.l.k]=Math.max(P[G.l.k]||0,s);save();confetti();yay();
+ A.innerHTML='<div class="fin"><div class="big">'+['','🙂','😃','🤩'][s]+'</div><h2>'+['','كمّلت!','ممتاز!','بطل!'][s]+'</h2><div style="font-size:2.4rem">'+'⭐'.repeat(s)+'☆'.repeat(3-s)+'</div><p style="font-weight:800">'+(s<3?'جرّب مرة ثانية بدون أخطاء وخذ 3 نجوم 💪':'العم سالم فرحان بيك 👏')+'</p><div style="display:flex;gap:10px;justify-content:center"><button class="btn ghost" id="again">🔁 مرة ثانية</button><button class="btn go" id="tomap">🗺️ المحطة الجاية</button></div></div>';
+ $('again').onclick=()=>play(G.i);$('tomap').onclick=map;$('tot').textContent='⭐ '+totStars()+' من 12'}
+function digits(n){return U.map((u,i)=>Math.floor(n/u.v)%10)}
+function target(){const max=G.r<2?99999:G.r<4?999999:9999999;let n=R(Math.max(1000,max/10|0),max);if(Math.random()<.4){const d=String(n).split('');d[R(1,d.length-1)]='0';n=+d.join('')}return n}
+function build(){const t=target(),len=String(t).length,cur=Array(7).fill(0);
+ A.innerHTML=head()+'<div class="story"><span class="fc">👳‍♂️</span><div>زبون دفع <b dir="ltr">'+F(t)+'</b> دينار. حطّهم في الخانات!</div></div><div class="card"><div class="num" id="now">0</div><div class="cols" id="cols"></div><div class="legend">'+U.slice(0,len).map(u=>'<span>'+u.e+' = '+F(u.v)+'</span>').join('')+'</div></div><button class="btn go" style="width:100%" id="chk">✔ تأكّد</button><div class="ex" id="ex"></div>';
+ const draw=bad=>{$('cols').innerHTML=U.slice(0,Math.max(len,4)).map((u,i)=>'<div class="col'+(bad&&bad[i]===1?' bad':bad&&bad[i]===2?' good':'')+'"><div class="lb">'+u.n+'</div><div class="e">'+u.e+'</div><button data-i="'+i+'" data-d="1">▲</button><div class="n">'+cur[i]+'</div><button data-i="'+i+'" data-d="-1">▼</button></div>').join('');
+  $('now').textContent=F(cur.reduce((a,c,i)=>a+c*U[i].v,0));$('cols').querySelectorAll('button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;cur[i]=(cur[i]+ +b.dataset.d+10)%10;tone(500+i*90,.05,'sine',.05);draw()})};
+ draw();let tried=false;
+ $('chk').onclick=()=>{const want=digits(t),bad=want.map((w,i)=>i<Math.max(len,4)?(w===cur[i]?2:1):0);
+  if(want.every((w,i)=>w===cur[i])){draw(bad);$('ex').className='ex on';$('ex').innerHTML='✅ صح! '+want.map((w,i)=>w?w+' '+U[i].e:'').filter(Boolean).reverse().join(' + ');win(1)}
+  else{boo();rep('no');if(!tried){G.miss++;tried=true}draw(bad);const i=want.findIndex((w,k)=>w!==cur[k]);$('ex').className='ex on';$('ex').innerHTML='🤔 قريب! شوف خانة <b>'+U[i].n+'</b> '+U[i].e+': المطلوب <b>'+want[i]+'</b> وأنت حاطّ <b>'+cur[i]+'</b>.<br>💡 اقرأ الرقم من اليمين: كل خانة = رقم واحد.'}}}
+function val(){const t=target(),s=String(t),len=s.length;let pos=R(0,len-1);while(s[len-1-pos]==='0')pos=R(0,len-1);const d=+s[len-1-pos],right=d*U[pos].v;
+ const opts=SH([...new Set([right,d*U[Math.min(6,pos+1)].v,d*U[Math.max(0,pos-1)].v,d,d*U[Math.min(6,pos+2)].v])].filter(x=>x!==undefined)).slice(0,4);if(!opts.includes(right))opts[0]=right;SH(opts);
+ const html=s.split('').map((c,k)=>(k===len-1-pos?'<em>'+c+'</em>':c)+((len-1-k)%3===0&&k<len-1?' ':'')).join('');
+ A.innerHTML=head()+'<div class="card"><div style="text-align:center;font-weight:800">في الفاتورة هذي:</div><div class="num">'+html+'</div><div style="text-align:center;font-weight:800">قداش يسوى الرقم الملوّن؟</div></div><div class="opts">'+opts.map(o=>'<button class="opt" data-v="'+o+'">'+F(o)+'</button>').join('')+'</div><div class="ex" id="ex"></div>';
+ let tried=false;A.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(+b.dataset.v===right){b.classList.add('ok');$('ex').className='ex on';$('ex').innerHTML='✅ الرقم '+d+' في خانة <b>'+U[pos].n+'</b> '+U[pos].e+'، يعني '+d+' × '+F(U[pos].v)+' = <b dir="ltr">'+F(right)+'</b>';win(1)}
+  else{b.classList.add('no');boo();rep('no');if(!tried){G.miss++;tried=true}$('ex').className='ex on';$('ex').innerHTML='🤔 عدّ الخانات من اليمين: آحاد ← عشرات ← مئات ← آلاف...<br>الرقم الملوّن في الخانة رقم <b>'+(pos+1)+'</b> من اليمين، يعني خانة <b>'+U[pos].n+'</b>. جرّب مرة ثانية!'}})}
+function safe(){const t=target(),dg=digits(t);const right=t;const sw=n=>{const a=String(n).split('');const i=R(0,a.length-2);[a[i],a[i+1]]=[a[i+1],a[i]];return +a.join('')};
+ let o=new Set([right]);let g=0;while(o.size<4&&g++<40){const r=[sw(right),right+U[R(0,3)].v*R(1,3),Math.abs(right-U[R(1,4)].v),+(String(right)+'0').slice(0,String(right).length+(Math.random()<.5?0:1))][R(0,3)];if(r>0&&r!==right)o.add(r)}
+ const opts=SH([...o]);
+ A.innerHTML=head()+'<div class="story"><span class="fc">🔐</span><div>فتحنا خزنة العم سالم. قداش فيها؟</div></div><div class="card"><div class="safe">'+dg.map((c,i)=>c?'<span><i>'+U[i].e+'</i>× '+c+'</span>':'').reverse().join('')+'</div><div class="legend">'+U.filter((u,i)=>dg[i]).map(u=>'<span>'+u.e+' = '+F(u.v)+'</span>').reverse().join('')+'</div></div><div class="opts">'+opts.map(x=>'<button class="opt" data-v="'+x+'">'+F(x)+'</button>').join('')+'</div><div class="ex" id="ex"></div>';
+ let tried=false;A.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(+b.dataset.v===right){b.classList.add('ok');$('ex').className='ex on';$('ex').innerHTML='✅ '+dg.map((c,i)=>c?F(c*U[i].v):'').filter(Boolean).reverse().join(' + ')+' = <b dir="ltr">'+F(right)+'</b>';win(1)}
+  else{b.classList.add('no');boo();rep('no');if(!tried){G.miss++;tried=true}$('ex').className='ex on';$('ex').innerHTML='🤔 كل رمز يحط رقمه في خانته. والخانة اللي ما فيهاش فلوس نحطوا فيها <b>0</b>.'}})}
+function ord(){const base=target();let ns=new Set([base]);let g=0;while(ns.size<4&&g++<50){const k=[base+R(1,9)*U[R(0,4)].v,Math.max(1000,base-R(1,9)*U[R(1,4)].v),+String(base).split('').reverse().join('')%9999999||base+7,R(1000,9999999)][R(0,3)];if(k>0)ns.add(k)}
+ const arr=SH([...ns]);const sorted=[...arr].sort((a,b)=>a-b);let k=0;
+ A.innerHTML=head()+'<div class="story"><span class="fc">🧾</span><div>رتّب الفواتير: اضغط عليها <b>من الأصغر للأكبر</b></div></div><div class="ord">'+arr.map(x=>'<div class="oc" data-v="'+x+'">'+F(x)+'</div>').join('')+'</div><div class="ex" id="ex"></div>';
+ let tried=false;A.querySelectorAll('.oc').forEach(c=>c.onclick=()=>{if(c.classList.contains('done'))return;if(+c.dataset.v===sorted[k]){c.classList.add('done');c.dataset.k=++k;tone(600+k*120,.1,'triangle',.08);if(k===4){$('ex').className='ex on';$('ex').innerHTML='✅ <span dir="ltr">'+sorted.map(F).join(' < ')+'</span>';win(1)}}
+  else{c.classList.remove('no');void c.offsetWidth;c.classList.add('no');boo();rep('no');if(!tried){G.miss++;tried=true}$('ex').className='ex on';$('ex').innerHTML='🤔 الأصغر الجاي هو <b dir="ltr">'+F(sorted[k])+'</b>.<br>💡 قارن <b>عدد الأرقام</b> أول، واللي أرقامه أقل هو الأصغر. لو نفس العدد، قارن من الشمال رقم برقم.'}})}
+map();
+</script>
+</body></html>
