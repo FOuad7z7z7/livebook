@@ -1,0 +1,260 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>مختبر زِرّ العجيب 🤖 – علوم الرابع</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{overflow-x:hidden}body{margin:0;font-family:Cairo,Tahoma,sans-serif;background:#EEF6FF;color:#1B2A5E;min-height:100vh;user-select:none;overflow-x:hidden}
+.top{background:linear-gradient(135deg,#5B5BF0,#8E5CF7);color:#fff;padding:12px 16px 16px;border-radius:0 0 28px 28px;box-shadow:0 6px 18px #5b5bf044;position:relative}
+.top h1{margin:0;font-size:1.3rem;font-weight:900}.top p{margin:2px 0 0;font-weight:700;opacity:.95;font-size:.88rem}
+.chips{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}.chip{background:#fff3;border-radius:99px;padding:3px 12px;font-weight:900;font-size:.95rem}
+.w{max-width:540px;margin:0 auto;padding:14px}
+.robot{font-size:3.4rem;line-height:1;filter:drop-shadow(0 4px 6px #0003);transition:transform .3s}
+.robot.hop{animation:hop .5s}@keyframes hop{50%{transform:translateY(-14px) rotate(-8deg)}}
+.crys{display:flex;gap:4px;justify-content:center;margin:6px 0 0;font-size:1.25rem}
+.crys span{opacity:.22;filter:grayscale(1)}.crys span.on{opacity:1;filter:none;animation:pop .4s}
+@keyframes pop{50%{transform:scale(1.6)}}
+.hero{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#fff;border-radius:22px;padding:12px;box-shadow:0 4px 0 #cfdcf5;margin-bottom:12px}
+.bub{background:#F3F0FF;border-radius:16px;padding:10px 12px;font-weight:800;line-height:1.7;flex:1;min-width:200px;position:relative}
+.map{display:grid;gap:11px}
+.st{display:flex;align-items:center;gap:12px;background:#fff;border-radius:20px;padding:12px;box-shadow:0 4px 0 #cfdcf5;cursor:pointer;border:3px solid transparent}
+.st:active{transform:scale(.97)}.st .ic{font-size:2.2rem;width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:#EEF0FF;border-radius:16px;flex:none}
+.st b{display:block;font-size:1.02rem}.st small{color:#6a6f93;font-weight:700}.st .sv{margin-right:auto;font-size:1rem;letter-spacing:1px;white-space:nowrap}
+.st.lock{opacity:.45;filter:grayscale(.9)}.st.next{border-color:#8E5CF7;animation:glow 1.3s infinite alternate}
+@keyframes glow{to{box-shadow:0 4px 0 #cfdcf5,0 0 0 7px #8e5cf733}}
+.btn{border:0;border-radius:16px;padding:13px 18px;font-family:inherit;font-weight:900;font-size:1.05rem;cursor:pointer;box-shadow:0 5px 0 #0002;color:#1B2A5E}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 #0002}
+.go{background:#22B07D;color:#fff}.pu{background:#8E5CF7;color:#fff}.ghost{background:#fff}.or{background:#FF9F1C;color:#fff}
+.card{background:#fff;border-radius:22px;padding:14px;box-shadow:0 4px 0 #cfdcf5;margin-bottom:12px}
+.hd{display:flex;justify-content:space-between;align-items:center;font-weight:900;margin-bottom:8px;gap:8px}
+.bar{height:10px;background:#dfe6f7;border-radius:9px;overflow:hidden;margin:4px 0 12px}.bar i{display:block;height:100%;background:linear-gradient(90deg,#22B07D,#5EDBA4);width:0;transition:width .4s}
+.q{font-size:1.15rem;font-weight:900;line-height:1.7;margin:4px 0 10px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}.opts.one{grid-template-columns:1fr}
+.opt{background:#fff;border:3px solid #dfe6f7;border-radius:16px;padding:12px 6px;font-size:1.08rem;font-weight:900;font-family:inherit;cursor:pointer;color:#1B2A5E;line-height:1.5}
+.opt:active{transform:scale(.97)}.opt.ok{border-color:#22B07D;background:#E6FBF2}.opt.no{border-color:#E5484D;background:#FFF0F0;animation:shake .35s}
+@keyframes shake{25%{transform:translateX(6px)}75%{transform:translateX(-6px)}}
+.why{margin-top:10px;background:#FFF7E0;border-radius:14px;padding:10px 12px;font-weight:800;line-height:1.7;display:none}
+.spk{border:0;background:#EEF0FF;border-radius:12px;font-size:1.2rem;padding:4px 9px;cursor:pointer;flex:none}
+.center{text-align:center}.big{font-size:3rem}
+.lab{background:linear-gradient(#fff,#F4F7FF);border-radius:18px;padding:10px;position:relative;min-height:190px;overflow:hidden}
+.pick{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+.pk{background:#fff;border:3px solid #dfe6f7;border-radius:16px;padding:6px 10px;font-weight:900;cursor:pointer;text-align:center;min-width:76px;font-family:inherit;color:#1B2A5E;font-size:.9rem}
+.pk .e{font-size:2rem;display:block}.pk.sel{border-color:#8E5CF7;background:#F3F0FF}.pk.used{opacity:.35}.pk.done{border-color:#22B07D;background:#E6FBF2}
+.bins{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.bin{border:3px dashed #b8c4e6;border-radius:18px;min-height:90px;padding:8px;text-align:center;font-weight:900;cursor:pointer;background:#fff}
+.bin .items{font-size:1.6rem;margin-top:4px}
+svg text{font-family:Cairo,Tahoma,sans-serif;font-weight:900}
+.fx{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+.fx i{position:absolute;top:-40px;font-style:normal;font-size:1.6rem;animation:fall 1.6s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#1B2A5E;color:#fff;border-radius:99px;padding:10px 20px;font-weight:900;z-index:60;opacity:0;transition:.3s;white-space:nowrap}
+.toast.on{opacity:1}
+.win{text-align:center;padding:18px 10px;overflow:hidden}.win .big{font-size:4.2rem;animation:pop .6s;display:inline-block}
+.alb{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.alb div{background:#fff;border-radius:16px;padding:8px 2px;text-align:center;font-weight:800;font-size:.72rem;box-shadow:0 3px 0 #cfdcf5}
+.alb div b{display:block;font-size:2rem}.alb div.off{opacity:.3;filter:grayscale(1)}
+.cert{border:6px double #FF9F1C;border-radius:22px;padding:18px;background:#FFFDF5;text-align:center}
+input.nm{width:100%;border:3px solid #dfe6f7;border-radius:14px;padding:10px;font-family:inherit;font-size:1.1rem;font-weight:800;text-align:center}
+.lv{transition:all 1s ease}
+.fact{background:linear-gradient(135deg,#FFF3C4,#FFE29A);border-radius:18px;padding:12px 14px;font-weight:900;line-height:1.8;margin:10px 0;box-shadow:0 3px 0 #f0d27a}
+</style></head><body>
+<div class="top"><div class="hd" style="margin:0"><div><h1>🤖 مختبر زِرّ العجيب</h1><p>علوم الصف الرابع · الوحدة الأولى: المواد</p></div><div class="robot" id="rb">🤖</div></div>
+<div class="chips"><span class="chip" id="cS">⭐ 0 من 24</span><span class="chip" id="cC">💎 0 من 8</span></div></div>
+<div class="w" id="app"></div>
+<div class="fx" id="fx"></div><div class="toast" id="tt"></div>
+<script>
+const $=id=>document.getElementById(id);
+const rep=t=>{try{parent.postMessage({lbt:t},'*')}catch(e){}};
+let D={s:{},nm:''};try{D=Object.assign(D,JSON.parse(localStorage.getItem('sci4lab')||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem('sci4lab',JSON.stringify(D))}catch(e){}};
+let VO=null;const pickV=()=>{try{const vs=speechSynthesis.getVoices()||[];VO=vs.find(v=>/^ar/i.test(v.lang))||null}catch(e){}};try{pickV();speechSynthesis.onvoiceschanged=pickV}catch(e){}
+const clean=t=>String(t).replace(/<[^>]+>/g,' ').replace(/[🤖⭐💎🎉👏🔥✨⚖️🧪🌡️❄️☁️🎈🥤🧊🧮👀👇✅❌💡🥳🏆]/gu,'');
+function say(t,cb){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(clean(t));u.lang='ar-SA';if(VO)u.voice=VO;u.rate=.85;u.pitch=1.1;if(cb)u.onend=cb;speechSynthesis.speak(u)}catch(e){cb&&cb()}}
+const hush=()=>{try{speechSynthesis.cancel()}catch(e){}};
+let AC=null;function tone(fs,d=.12,type='sine',v=.18){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();let t=AC.currentTime;fs.forEach(f=>{const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d);t+=d*.9})}catch(e){}}
+const sOk=()=>tone([660,880,1100],.11,'triangle'),sNo=()=>tone([220,180],.18,'sawtooth',.08),sPop=()=>tone([500],.07,'square',.06),sWin=()=>tone([523,659,784,1046,1318],.13,'triangle');
+function confetti(n=26,set='⭐✨🎉💎🎈'){const fx=$('fx'),a=[...set];for(let i=0;i<n;i++){const e=document.createElement('i');e.textContent=a[i%a.length];e.style.left=Math.random()*100+'vw';e.style.animationDelay=Math.random()*.5+'s';e.style.animationDuration=1.2+Math.random()*1.2+'s';fx.appendChild(e);setTimeout(()=>e.remove(),3000)}}
+function toast(t){const e=$('tt');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),1600)}
+const hop=()=>{const r=$('rb');r.classList.remove('hop');void r.offsetWidth;r.classList.add('hop')};
+const PRAISE=['برافو عليك! 👏','ممتاز! يا عالِم 🔥','صح! شاطر ✨','هايل! كمّل 💪','وااو! جواب العلماء 🤓'];
+const NUDGE=['قريب! جرّب مرة ثانية 🙂','فكّر شوية… تقدر! 💡','مش هذي، حاول تاني 👀'];
+const rnd=a=>a[Math.floor(Math.random()*a.length)];
+
+/* ============ STATIONS ============ */
+const ST=[
+{id:1,ic:'⚖️',t:'الميزان العجيب',s:'مين كتلته أكبر؟',cr:'🔴'},
+{id:2,ic:'🧮',t:'جرام ولا كيلوجرام؟',s:'نقيس الكتلة بالأرقام',cr:'🟠'},
+{id:3,ic:'🪨',t:'لغز الحجرة الغارقة',s:'حجم الأجسام الصلبة',cr:'🟡'},
+{id:4,ic:'🥤',t:'دكّان السوائل',s:'مليلتر ولا لتر؟',cr:'🟢'},
+{id:5,ic:'🎈',t:'الهواء الخفي',s:'هل الهواء مادة؟',cr:'🔵'},
+{id:6,ic:'🌡️',t:'سخون وبارد',s:'تكتسب وتفقد الحرارة',cr:'🟣'},
+{id:7,ic:'❄️',t:'مصنع الثلج',s:'التجمّد والانصهار',cr:'⚪'},
+{id:8,ic:'☁️',t:'الماء السحري',s:'التبخّر والتكاثف',cr:'💎'}];
+const total=()=>Object.values(D.s).reduce((a,b)=>a+b,0);
+function chips(){$('cS').textContent='⭐ '+total()+' من 24';$('cC').textContent='💎 '+Object.keys(D.s).length+' من 8'}
+
+function home(){hush();chips();const done=Object.keys(D.s).length;const nx=ST.find(s=>!D.s[s.id]);
+ const msg=!done?'أهلاً يا بطل! 👋 أنا زِرّ، روبوت المختبر. انطفت بلّوراتي الثمانية وتفرّقت في غرف المختبر 😢 ساعدني نرجّعها! كل غرفة فيها تجربة ممتعة.':
+  done<8?'رجّعت '+done+' بلّورات من 8! 🔋 باقي شوية وأرجع نشتغل بكامل قوتي. يلا للغرفة الجاية!':'رجّعت كل البلّورات! 🥳 أنا مشحون 100%. شكراً يا عالِم المواد! خوذ شهادتك 🏆';
+ $('app').innerHTML=`<div class="hero"><div class="robot" style="font-size:3rem">${done>=8?'🤩':'🤖'}</div><div class="bub">${msg} <button class="spk" id="sp">🔊</button></div><div style="width:100%"><div style="font-weight:900;font-size:.85rem;text-align:center;color:#6a6f93">🔋 بلّورات زِرّ</div><div class="crys">${ST.map(s=>`<span class="${D.s[s.id]?'on':''}">${s.cr}</span>`).join('')}</div></div></div>
+ <div class="map">${ST.map((s,i)=>{const lock=i>0&&!D.s[ST[i-1].id]&&!D.s[s.id];const st=D.s[s.id]||0;
+ return `<div class="st ${lock?'lock':''} ${nx&&nx.id===s.id&&!lock?'next':''}" data-i="${i}"><div class="ic">${lock?'🔒':s.ic}</div><div><b>${s.id}. ${s.t}</b><small>${s.s}</small></div><div class="sv">${st?'⭐'.repeat(st)+'☆'.repeat(3-st):(lock?'':'▶')}</div></div>`}).join('')}</div>
+ <div style="display:flex;gap:10px;margin-top:14px"><button class="btn ghost" style="flex:1" id="alb">📒 ألبوم البلّورات</button>${done>=8?'<button class="btn or" style="flex:1" id="crt">🏆 شهادتي</button>':''}</div>`;
+ $('sp').onclick=()=>say(msg);
+ document.querySelectorAll('.st').forEach(e=>e.onclick=()=>{if(e.classList.contains('lock')){sNo();toast('🔒 كمّل الغرفة اللي قبلها أول');return}sPop();run(ST[+e.dataset.i])});
+ $('alb').onclick=album;if($('crt'))$('crt').onclick=cert;
+ if(!done&&!home._s){home._s=1;setTimeout(()=>say(msg),400)}}
+
+function album(){const names={1:'بلّورة الكتلة',2:'بلّورة الميزان الرقمي',3:'بلّورة الحجم',4:'بلّورة السوائل',5:'بلّورة الهواء',6:'بلّورة الحرارة',7:'بلّورة الثلج',8:'البلّورة الماسية'};
+ $('app').innerHTML=`<div class="hd"><button class="btn ghost" id="bk">→ رجوع</button><span>📒 ألبوم البلّورات</span></div>
+ <div class="alb">${ST.map(s=>`<div class="${D.s[s.id]?'':'off'}"><b>${s.cr}</b>${names[s.id]}<br>${D.s[s.id]?'⭐'.repeat(D.s[s.id]):'🔒'}</div>`).join('')}</div>
+ <div class="card center" style="margin-top:12px;font-weight:800">اجمع 3 نجوم في كل غرفة باش تولّي <b>«عالِم مواد ذهبي»</b> 🥇<br>تقدر تعاود أي غرفة وتحسّن نجومك.</div>`;
+ $('bk').onclick=home}
+
+function cert(){$('app').innerHTML=`<div class="hd"><button class="btn ghost" id="bk">→ رجوع</button><span>🏆 الشهادة</span></div>
+ <div class="card"><div style="font-weight:900;margin-bottom:6px">اكتب اسمك يطلع في الشهادة:</div><input class="nm" id="nm" value="${(D.nm||'').replace(/"/g,'')}" placeholder="اسمك هنا"></div>
+ <div class="cert"><div class="big">🏆</div><div style="font-size:1.4rem;font-weight:900">شهادة «عالِم المواد»</div><div style="font-weight:800;margin:8px 0">يشهد مختبر زِرّ العجيب إن البطل/ة</div><div style="font-size:1.6rem;font-weight:900;color:#8E5CF7" id="cn">${D.nm||'…'}</div><div style="font-weight:800;margin-top:8px;line-height:1.8">رجّع البلّورات الثمانية، وعرف الكتلة والحجم والحرارة وحالات الماء 🌟<br>مجموع النجوم: ${total()} من 24 ${total()>=24?'🥇':total()>=18?'🥈':'🥉'}</div></div>`;
+ $('nm').oninput=e=>{D.nm=e.target.value.slice(0,30);$('cn').textContent=D.nm||'…';save()};$('bk').onclick=home;confetti(30);sWin()}
+
+/* ============ RUNNER ============ */
+let CUR=null,MIS=0;
+function run(s){CUR=s;MIS=0;const steps=SCN[s.id]();let k=0;
+ const shell=()=>{$('app').innerHTML=`<div class="hd"><button class="btn ghost" id="bk">→ الخريطة</button><span>${s.ic} ${s.t}</span></div><div class="bar"><i id="pb"></i></div><div id="box"></div>`;$('bk').onclick=()=>{hush();home()}};
+ shell();const next=()=>{if(k>=steps.length)return finish();$('pb').style.width=(k/steps.length*100)+'%';const f=steps[k++];$('box').innerHTML='';window.scrollTo({top:0,behavior:'smooth'});f($('box'),next)};next()}
+function finish(){const s=CUR;const st=MIS<=1?3:MIS<=4?2:1;const old=D.s[s.id]||0;D.s[s.id]=Math.max(old,st);save();chips();rep('ok');sWin();confetti(34);hop();
+ const last=Object.keys(D.s).length>=8;
+ const m=`رجّعت ${s.cr} ${'بلّورة '+s.t}! خذيت ${st} ${st===1?'نجمة':'نجوم'}${st<3?'. عاود الغرفة باش تاخذ 3 نجوم!':' كاملين! يا سلام!'}`;
+ $('box').innerHTML=`<div class="card win"><div class="big">${s.cr}</div><div style="font-size:2rem;margin:6px 0">${'⭐'.repeat(st)}${'☆'.repeat(3-st)}</div><div style="font-weight:900;font-size:1.15rem;line-height:1.8">${m}</div>
+ <div style="display:flex;gap:10px;margin-top:14px"><button class="btn ghost" style="flex:1" id="ag">🔁 عاود</button><button class="btn go" style="flex:1" id="nx">${last?'🏆 الشهادة':'➡ الغرفة الجاية'}</button></div></div>`;
+ say(m);$('pb').style.width='100%';$('ag').onclick=()=>run(s);$('nx').onclick=()=>{if(last)return cert();const n=ST.find(x=>!D.s[x.id])||ST[Math.min(ST.indexOf(s)+1,7)];run(n)}}
+
+/* ============ STEP BUILDERS ============ */
+const talk=(face,txt,btn='يلا! 👉')=>(b,n)=>{b.innerHTML=`<div class="hero"><div class="robot">${face}</div><div class="bub">${txt} <button class="spk">🔊</button></div></div><button class="btn pu" style="width:100%">${btn}</button>`;
+ b.querySelector('.spk').onclick=()=>say(txt);b.querySelector('.pu').onclick=()=>{hush();sPop();n()};say(txt)};
+const fact=(txt)=>(b,n)=>{b.innerHTML=`<div class="fact">💡 ${txt} <button class="spk">🔊</button></div><button class="btn go" style="width:100%">فهمت! ✅</button>`;b.querySelector('.spk').onclick=()=>say(txt);b.querySelector('.go').onclick=()=>{hush();sPop();n()};say(txt)};
+function quiz(q,opts,ans,why,one){return(b,n)=>{const o=opts.map((t,i)=>({t,i})).sort(()=>Math.random()-.5);
+ b.innerHTML=`<div class="card"><div style="display:flex;gap:8px;align-items:flex-start"><div class="q" style="flex:1">${q}</div><button class="spk">🔊</button></div><div class="opts ${one||opts.some(t=>String(t).length>22)?'one':''}">${o.map(x=>`<button class="opt" data-i="${x.i}">${x.t}</button>`).join('')}</div><div class="why"></div></div>`;
+ b.querySelector('.spk').onclick=()=>say(q);say(q);let done=false;
+ b.querySelectorAll('.opt').forEach(e=>e.onclick=()=>{if(done)return;if(+e.dataset.i===ans){done=true;e.classList.add('ok');sOk();hop();const w=b.querySelector('.why');const p=rnd(PRAISE);w.innerHTML=p+(why?'<br>'+why:'')+'<br><button class="btn go" style="margin-top:8px;width:100%">التالي ➡</button>';w.style.display='block';say(p.replace(/[!]/g,'')+'. '+(why||''));w.querySelector('.go').onclick=()=>{hush();n()};rep('ok')}
+ else{MIS++;e.classList.add('no');sNo();toast(rnd(NUDGE));rep('no');setTimeout(()=>e.classList.remove('no'),500)}})}}
+// sort items into two bins: items [{e,t,k}] k=0/1
+function bins(title,labels,items){return(b,n)=>{let sel=null,left=items.length;
+ b.innerHTML=`<div class="card"><div style="display:flex;gap:8px"><div class="q" style="flex:1">${title}</div><button class="spk">🔊</button></div><div class="pick">${items.map((x,i)=>`<button class="pk" data-i="${i}"><span class="e">${x.e}</span>${x.t}</button>`).join('')}</div>
+ <div style="text-align:center;font-weight:800;color:#6a6f93;font-size:.9rem">👆 اختار شي، وبعدين اضغط على السلّة المناسبة</div><div class="bins">${labels.map((l,k)=>`<div class="bin" data-k="${k}">${l}<div class="items"></div></div>`).join('')}</div></div>`;
+ b.querySelector('.spk').onclick=()=>say(title);say(title);
+ b.querySelectorAll('.pk').forEach(e=>e.onclick=()=>{if(e.classList.contains('done'))return;b.querySelectorAll('.pk').forEach(x=>x.classList.remove('sel'));e.classList.add('sel');sel=+e.dataset.i;sPop();say(items[sel].t)});
+ b.querySelectorAll('.bin').forEach(e=>e.onclick=()=>{if(sel==null){toast('👆 اختار شي أول');return}const x=items[sel];const pk=b.querySelector(`.pk[data-i="${sel}"]`);
+  if(+e.dataset.k===x.k){sOk();pk.classList.remove('sel');pk.classList.add('done');e.querySelector('.items').textContent+=x.e;sel=null;rep('ok');if(--left===0){hop();confetti(14);setTimeout(n,900)}}
+  else{MIS++;sNo();rep('no');toast(x.h||rnd(NUDGE));e.style.borderColor='#E5484D';setTimeout(()=>e.style.borderColor='',500)}})}}
+// tap in order
+function order(title,items,hint){return(b,n)=>{let k=0;const sh=items.map((x,i)=>({...x,i})).sort(()=>Math.random()-.5);
+ b.innerHTML=`<div class="card"><div style="display:flex;gap:8px"><div class="q" style="flex:1">${title}</div><button class="spk">🔊</button></div><div class="pick">${sh.map(x=>`<button class="pk" data-i="${x.i}"><span class="e">${x.e}</span>${x.t}</button>`).join('')}</div><div class="center" style="font-weight:900;font-size:1.4rem;min-height:40px" id="seq"></div></div>`;
+ b.querySelector('.spk').onclick=()=>say(title);say(title);
+ b.querySelectorAll('.pk').forEach(e=>e.onclick=()=>{if(e.classList.contains('done'))return;if(+e.dataset.i===k){k++;e.classList.add('done');sOk();b.querySelector('#seq').textContent+=(k>1?' ← ':'')+items[+e.dataset.i].e;if(k===items.length){hop();confetti(14);rep('ok');setTimeout(n,1000)}}else{MIS++;sNo();rep('no');toast(hint||rnd(NUDGE))}})}}
+
+/* ============ SVG helpers ============ */
+function balanceSVG(L,R,tilt){// tilt deg: + => left side down (RTL visual: left pan)
+ return `<svg viewBox="0 0 320 190" width="100%"><rect x="150" y="60" width="20" height="110" rx="6" fill="#9aa6c8"/><rect x="100" y="166" width="120" height="16" rx="8" fill="#7d89ad"/><circle cx="160" cy="58" r="10" fill="#5B5BF0"/>
+ <g class="lv" style="transform-origin:160px 58px;transform:rotate(${-tilt}deg)"><rect x="40" y="53" width="240" height="10" rx="5" fill="#5B5BF0"/>
+ <g><line x1="55" y1="58" x2="40" y2="110" stroke="#888" stroke-width="2"/><line x1="55" y1="58" x2="90" y2="110" stroke="#888" stroke-width="2"/><g style="transform-origin:65px 112px;transform:rotate(${tilt}deg)"><path d="M25 110 h80 a40 14 0 0 1 -80 0z" fill="#c9d3f0"/><text x="65" y="104" font-size="34" text-anchor="middle">${L||''}</text></g></g>
+ <g><line x1="265" y1="58" x2="230" y2="110" stroke="#888" stroke-width="2"/><line x1="265" y1="58" x2="280" y2="110" stroke="#888" stroke-width="2"/><g style="transform-origin:255px 112px;transform:rotate(${tilt}deg)"><path d="M215 110 h80 a40 14 0 0 1 -80 0z" fill="#c9d3f0"/><text x="255" y="104" font-size="34" text-anchor="middle">${R||''}</text></g></g></g></svg>`}
+function cylSVG(ml,obj){// 0..700 scale, ml level
+ const y0=200,top=30,h=y0-top,max=700,ly=y0-ml/max*h;let ticks='';for(let v=100;v<=700;v+=100){const y=y0-v/max*h;ticks+=`<line x1="118" y1="${y}" x2="134" y2="${y}" stroke="#4a5788" stroke-width="2"/><text x="112" y="${y+5}" font-size="12" text-anchor="end" fill="#4a5788">${v}</text>`}
+ for(let v=50;v<=650;v+=100){const y=y0-v/max*h;ticks+=`<line x1="122" y1="${y}" x2="130" y2="${y}" stroke="#4a5788"/>`}
+ return `<svg viewBox="0 0 260 220" width="100%" style="max-height:260px"><text x="40" y="20" font-size="11" fill="#6a6f93">مليلتر</text><rect x="120" y="${ly}" width="80" height="${y0-ly}" fill="#7cc4ff" opacity=".8" class="lv"/><line x1="120" y1="${ly}" x2="200" y2="${ly}" stroke="#E5484D" stroke-width="3" class="lv"/>
+ ${obj?`<text x="160" y="${y0-8}" font-size="30" text-anchor="middle">${obj}</text>`:''}<rect x="118" y="${top}" width="84" height="${y0-top+2}" rx="6" fill="none" stroke="#4a5788" stroke-width="4"/>${ticks}<rect x="104" y="${y0+2}" width="112" height="10" rx="4" fill="#4a5788"/>
+ <text x="235" y="${ly+5}" font-size="15" fill="#E5484D" text-anchor="middle">${ml}</text></svg>`}
+function thermoSVG(t,label){const y0=200,top=20,max=110,ly=y0-(t+10)/max*(y0-top);let tk='';for(let v=0;v<=100;v+=10){const y=y0-(v+10)/max*(y0-top);tk+=`<line x1="58" y1="${y}" x2="${v%50?66:72}" y2="${y}" stroke="#4a5788" stroke-width="2"/>${v%20===0?`<text x="78" y="${y+5}" font-size="12" fill="#4a5788">${v}</text>`:''}`}
+ return `<svg viewBox="0 0 120 250" width="100%" style="max-height:230px"><rect x="40" y="${top-8}" width="18" height="${y0-top+20}" rx="9" fill="#fff" stroke="#4a5788" stroke-width="3"/><rect x="45" y="${ly}" width="8" height="${y0+10-ly}" fill="#E5484D" class="lv"/><circle cx="49" cy="${y0+18}" r="15" fill="#E5484D" stroke="#4a5788" stroke-width="3"/>${tk}
+ <text x="60" y="244" font-size="13" text-anchor="middle" fill="#1B2A5E">${label||''}</text></svg>`}
+
+/* ============ SCENES ============ */
+const SCN={
+1:()=>{const B={p:{e:'🟡',t:'بوليستيرين',m:1},r:{e:'🔴',t:'مطاط',m:4},i:{e:'⚫',t:'حديد',m:9}};
+ const round=(a,c,ask,ans,why)=>(b,n)=>{let L=null,R=null;const draw=()=>{const tilt=L&&R?Math.max(-14,Math.min(14,(B[L].m-B[R].m)*2.2)):(L?10:R?-10:0);
+  b.querySelector('#lab').innerHTML=balanceSVG(L?B[L].e:'',R?B[R].e:'',tilt)};
+  b.innerHTML=`<div class="card"><div class="q">حط ${B[a].e} كرة ${B[a].t} و ${B[c].e} كرة ${B[c].t} على الميزان 👇</div><div class="lab" id="lab"></div><div class="pick">${[a,c].map(k=>`<button class="pk" data-k="${k}"><span class="e">${B[k].e}</span>${B[k].t}</button>`).join('')}</div><div id="qq"></div></div>`;
+  say('حط الكرتين على الميزان، وشوف شني يصير!');draw();
+  b.querySelectorAll('.pk').forEach(e=>e.onclick=()=>{if(e.classList.contains('used'))return;e.classList.add('used');sPop();if(!L)L=e.dataset.k;else R=e.dataset.k;draw();
+   if(L&&R)setTimeout(()=>{tone([300,200],.25,'triangle');const qq=b.querySelector('#qq');const f=quiz(ask,[B[a].e+' '+B[a].t,B[c].e+' '+B[c].t],ans,why);const d=document.createElement('div');qq.appendChild(d);f(d,n)},1100)})};
+ return[talk('🤖','أول بلّورة مخبّية في <b>غرفة الميزان</b>! ⚖️<br>الميزان ذو الكفّتين يقولنا شني الأثقل: الكفّة اللي فيها الجسم الأثقل <b>تنزل لتحت</b>. عندنا 3 كرات بنفس الحجم: بوليستيرين (الفلّين الأبيض)، ومطاط، وحديد.'),
+ round('p','i','أي كفّة نزلت؟ يعني أي كرة كتلتها أكبر؟',1,'كرة الحديد نزلت، لأن كتلتها أكبر.'),
+ round('r','i','أيهم كتلته أكبر؟',1,'الحديد مرة ثانية أثقل!'),
+ round('p','r','وتوّا، أيهم كتلته أكبر؟',1,'المطاط أثقل من البوليستيرين.'),
+ fact('<b>الكتلة</b> هي كمية المادة اللي في الجسم. الكرات كان عندها نفس الحجم ونفس الشكل، لكن <b>المادة مختلفة</b>، فالكتلة طلعت مختلفة!'),
+ order('رتّب الكرات من <b>الأخف</b> للأثقل 👆',[{e:'🟡',t:'بوليستيرين'},{e:'🔴',t:'مطاط'},{e:'⚫',t:'حديد'}],'تذكّر: البوليستيرين أخف وحدة!'),
+ quiz('كرتين بنفس الحجم، وحدة من حديد ووحدة من بوليستيرين. ليش كتلتهم مختلفة؟',['لأن المادة المصنوعين منها مختلفة','لأن لونهم مختلف','لأن شكلهم مختلف'],0,'نوع المادة هو اللي فرق، مش اللون ولا الشكل.'),
+ quiz('لما نحط جسمين في الميزان، الكفّة اللي <b>تنزل</b> فيها الجسم…',['الأخف','الأثقل (كتلته أكبر)','الأصغر'],1)]},
+2:()=>{const scale=(b,n)=>{let st=0;b.innerHTML=`<div class="card"><div class="q">لغز الميزان الرقمي 🧮: عندنا كاس فيه عصير. كيف نعرف كتلة <b>العصير بروحه</b>؟</div>
+ <div class="lab center"><div style="font-size:4rem" id="obj">🥛</div><div style="background:#1B2A5E;color:#7CFFB2;font-family:monospace;font-size:2rem;font-weight:900;border-radius:12px;padding:6px 16px;display:inline-block;direction:ltr" id="dsp">0 g</div><div style="width:200px;height:14px;background:#9aa6c8;border-radius:8px;margin:6px auto 0"></div></div>
+ <div class="center" id="sb"><button class="btn pu" id="s1">1️⃣ حط الكاس فاضي</button></div><div id="qq"></div></div>`;say('حط الكاس فاضي على الميزان أول');
+ const go=(v)=>{let x=+$('dsp').textContent.replace(/\D/g,'')||0;const t=setInterval(()=>{x+=Math.ceil((v-x)/4)||1;if(x>=v){x=v;clearInterval(t)}$('dsp').textContent=x+' g'},50)};
+ $('s1').onclick=()=>{sPop();go(180);$('obj').textContent='🥛';$('sb').innerHTML='<div style="font-weight:900">الكاس فاضي = 180 جرام</div><button class="btn pu" id="s2" style="margin-top:8px">2️⃣ صب العصير 🧃</button>';say('الكاس فاضي مية وثمانين جرام. توّا صب العصير.');
+  $('s2').onclick=()=>{sPop();$('obj').textContent='🧃';go(250);$('sb').innerHTML='<div style="font-weight:900">الكاس + العصير = 250 جرام</div>';setTimeout(()=>{const d=document.createElement('div');$('qq').appendChild(d);quiz('كم كتلة العصير بروحه؟ 🤔 (250 − 180)',['70 جرام','430 جرام','250 جرام','180 جرام'],0,'نطرح كتلة الكاس الفاضي: 250 − 180 = 70 جرام.')(d,n)},900)}}};
+ return[talk('🤖','نقيس الكتلة بوحدتين: <b>الجرام</b> للأشياء الخفيفة، و<b>الكيلوجرام</b> للأشياء الثقيلة.<br>والكيلوجرام = <b>1000 جرام</b>! 😮'),
+ bins('وين نقيس كتلة كل شي؟ 🧺',['⚖️ بالجرام<br><small>(خفيف)</small>','🏋️ بالكيلوجرام<br><small>(ثقيل)</small>'],[{e:'🍬',t:'حبة حلوى',k:0},{e:'🥔',t:'شوال بطاطا',k:1,h:'شوال البطاطا ثقيل! بالكيلوجرام'},{e:'✏️',t:'قلم',k:0},{e:'🍉',t:'دلاعة',k:1},{e:'🧒',t:'ولد',k:1},{e:'🥄',t:'ملعقة سكر',k:0}]),
+ scale,
+ quiz('2 كيلوجرام = كم جرام؟',['2000 جرام','200 جرام','20 جرام'],0,'كل كيلوجرام 1000 جرام، يعني 2 كيلو = 2000 جرام.'),
+ quiz('علبة أرز مكتوب عليها «1 كيلوجرام»، وكيس سكر «500 جرام». أيهم أثقل؟',['علبة الأرز','كيس السكر','نفس الشي'],0,'1 كيلوجرام = 1000 جرام، وهذا أكثر من 500 جرام.')]},
+3:()=>{const drop=(obj,from,to,ans,opts)=>(b,n)=>{b.innerHTML=`<div class="card"><div class="q">المخبار المدرّج فيه ماء. اضغط على ${obj} باش تطيّحها في الماء 👇</div><div class="lab center" id="lab">${cylSVG(from)}</div><div class="center"><button class="pk" id="ob"><span class="e">${obj}</span>طيّحها!</button></div><div id="qq"></div></div>`;
+ say('شوف وين مستوى الماء، وبعدين طيّح الجسم.');
+ $('ob').onclick=()=>{if($('ob').classList.contains('used'))return;$('ob').classList.add('used');tone([700,400,200],.12,'sine');$('lab').innerHTML=cylSVG(from,obj);setTimeout(()=>{$('lab').innerHTML=cylSVG(to,obj);tone([300,500],.15,'triangle')},250);
+  setTimeout(()=>{const d=document.createElement('div');$('qq').appendChild(d);quiz(`الماء طلع من ${from} لـ ${to} مليلتر. كم حجم ${obj}؟`,opts,0,`الحجم = ${to} − ${from} = ${to-from} سنتيمتر مكعب.`)(d,n)},1500)}};
+ return[talk('🤖','البلّورة الصفراء طاحت في المخبار وغرقت! 🪨<br><b>الحجم</b> هو المكان (الحيّز) اللي يشغله الجسم. الحجرة شكلها غريب، ما نقدروش نقيسوها بالمسطرة… فكيف نعرف حجمها؟ 🤔 عندي فكرة!'),
+ drop('🪨',500,550,0,['50 سم³','550 سم³','500 سم³','5 سم³']),
+ fact('لما نطيّحوا جسم صلب في الماء، <b>يزيح الماء ويطلّعه لفوق</b> بقدر حجمه!<br>حجم الجسم = (الماء مع الجسم) − (الماء بروحه).<br>و 1 مليلتر = 1 سنتيمتر مكعب (سم³).'),
+ drop('🔩',300,320,0,['20 سم³','320 سم³','300 سم³','2 سم³']),
+ drop('🍎',400,480,0,['80 سم³','480 سم³','40 سم³','400 سم³']),
+ quiz('حجرتين: الأولى طلّعت الماء 30 مليلتر، والثانية 60 مليلتر. أيهم حجمها أكبر؟',['الثانية','الأولى','نفس الحجم'],0,'اللي تزيح ماء أكثر حجمها أكبر.')]},
+4:()=>[talk('🤖','مرحبا بيك في <b>دكّان السوائل</b> 🥤! السوائل نقيسوا حجمها بوحدتين:<br><b>المليلتر</b> للكميات الصغيرة، و<b>اللتر</b> للكميات الكبيرة.<br>واللتر = <b>1000 مليلتر</b>.'),
+ bins('كل حاجة في الدكّان، حجمها بالمليلتر ولا باللتر؟ 🛒',['💧 مليلتر<br><small>(كمية صغيرة)</small>','🛢️ لتر<br><small>(كمية كبيرة)</small>'],[{e:'🧃',t:'علبة عصير',k:0},{e:'🚰',t:'قارورة ماء كبيرة',k:1},{e:'💉',t:'دواء في حقنة',k:0},{e:'🥛',t:'علبة حليب صغيرة',k:0},{e:'⛽',t:'بنزين السيارة',k:1},{e:'🛁',t:'ماء الحوض',k:1}]),
+ order('رتّب أدوات القياس من <b>الأصغر</b> سِعة للأكبر 👆',[{e:'💉',t:'حقنة'},{e:'🧪',t:'مخبار مدرّج'},{e:'🫙',t:'كاس قياس'}],'الحقنة أصغر وحدة!'),
+ quiz('علبة عصير برتقال حجمها…',['200 مليلتر','200 لتر','2000 لتر'],0,'علبة العصير صغيرة، فنقيسها بالمليلتر.'),
+ quiz('قارورة فيها 1 لتر. كم مليلتر هذا؟',['1000 مليلتر','100 مليلتر','10 مليلتر'],0),
+ quiz('نبي نقيس ملعقة دواء صغيرة بالضبط. شني نستعمل؟',['حقنة صغيرة','سطل','قارورة 5 لتر'],0,'الحقنة دقيقة للكميات الصغيرة.')],
+5:()=>{const cup=(b,n)=>{let s=0;b.innerHTML=`<div class="card"><div class="q">تجربة المحرمة الناشفة 🧻: لصقنا محرمة في قاع كاس، وبنقلبوا الكاس ونغطسوه في الماء!</div>
+ <div class="lab"><svg viewBox="0 0 300 200" width="100%"><rect x="20" y="110" width="260" height="80" rx="10" fill="#7cc4ff" opacity=".7"/><g id="cp" class="lv" style="transform:translateY(0)"><path d="M120 20 h60 l12 80 h-84z" fill="#ffffffaa" stroke="#4a5788" stroke-width="4"/><rect x="128" y="22" width="44" height="14" fill="#ffd6e8" id="ts"/><rect id="wt" x="118" y="100" width="64" height="0" fill="#7cc4ff" opacity=".9"/></g><g id="bb"></g></svg></div>
+ <div class="center" id="sb"><button class="btn pu" id="a1">⬇ غطّس الكاس</button></div><div id="qq"></div></div>`;say('غطّس الكاس المقلوب في الماء');
+ $('a1').onclick=()=>{sPop();$('cp').style.transform='translateY(70px)';$('sb').innerHTML='';setTimeout(()=>{const d=document.createElement('div');$('qq').appendChild(d);quiz('المحرمة في قاع الكاس… شني صار ليها؟',['بقت ناشفة 😲','تبلّلت'],0,'ما تبلّلتش! لأن <b>الهواء</b> اللي في الكاس مالي المكان، وما خلّاش الماء يدخل.')(d,()=>{$('qq').innerHTML='';$('sb').innerHTML='<button class="btn or" id="a2">📍 اثقب قاع الكاس</button>';say('توّا اثقب قاع الكاس وشوف');
+  $('a2').onclick=()=>{tone([900,700,500,300],.08,'sine');let k=0;const t=setInterval(()=>{$('bb').innerHTML+=`<circle cx="${145+Math.random()*10}" cy="${80-k*9}" r="5" fill="#fff" stroke="#7cc4ff"/>`;if(++k>7)clearInterval(t)},120);$('wt').setAttribute('y',40);$('wt').setAttribute('height',60);$('ts').setAttribute('fill','#9ecbff');$('sb').innerHTML='';
+   setTimeout(()=>{const d2=document.createElement('div');$('qq').appendChild(d2);quiz('ليش دخل الماء وتبلّلت المحرمة؟',['الهواء طلع من الثقب، والماء خذا مكانه','الماء سخن','الكاس تكسّر'],0,'الهواء طلع من الثقب (شفت الفقاعات؟) فالماء دخل مكانه. يعني الهواء <b>يشغل حيّز</b>!')(d2,n)},1400)}})},1200)}};
+ const bal=(b,n)=>{let p=0;b.innerHTML=`<div class="card"><div class="q">عندنا بالونتين فاضيات على الميزان. انفخ وحدة منهم! 🎈 (اضغط 3 مرات)</div><div class="lab" id="lab"></div><div class="center"><button class="btn pu" id="pm">💨 انفخ</button></div><div id="qq"></div></div>`;
+  const dr=()=>{$('lab').innerHTML=balanceSVG(p?'🎈':'➰','➰',p>=3?8:p*2)};dr();say('اضغط انفخ ثلاث مرات');
+  $('pm').onclick=()=>{if(p>=3)return;p++;tone([300+p*150],.15,'sawtooth',.05);dr();if(p===3){$('pm').style.display='none';setTimeout(()=>{const d=document.createElement('div');$('qq').appendChild(d);quiz('الكفّة اللي فيها البالونة المنفوخة نزلت! شني نفهموا؟',['الهواء عنده كتلة','الهواء ما عندهش كتلة','البالونة ضعيفة'],0,'البالونة زادت كتلتها بالهواء اللي داخلها. يعني الهواء <b>له كتلة</b>!')(d,n)},1100)}}};
+ return[talk('🤖','البلّورة الزرقاء مخبّية في… <b>الهواء</b>! 🎈<br>الهواء ما نشوفوهش… هل هو <b>مادة</b> زي الماء والحجر؟ <br>المادة لازم: <b>تشغل حيّز</b> و<b>يكون عندها كتلة</b>. يلا نجرّبوا!'),cup,bal,
+ fact('<b>الهواء مادة!</b> 🌬️ لأنه:<br>1️⃣ يشغل حيّز (مكان) — تجربة الكاس.<br>2️⃣ له كتلة — تجربة البالونة.'),
+ quiz('لما ننفخ بالونة، شني اللي يملاها ويكبّرها؟',['الهواء','الماء','لا شي'],0)]},
+6:()=>{const exp=(b,n)=>{b.innerHTML=`<div class="card"><div class="q">حطّينا أنبوبة فيها ماء سخون 🔥 (70°) داخل كاس فيه ماء بارد 🧊 (25°). شن يصير بعد 5 دقائق؟</div>
+ <div class="lab" style="display:flex;justify-content:space-around"><div style="width:42%" id="t1">${thermoSVG(70,'🧪 الأنبوبة')}</div><div style="width:42%" id="t2">${thermoSVG(25,'🥛 الكاس')}</div></div>
+ <div class="center"><button class="btn or" id="wt">⏳ استنّى 5 دقائق</button></div><div id="qq"></div></div>`;say('اضغط استنّى خمس دقائق، وراقب الترمومترات');
+ $('wt').onclick=()=>{$('wt').style.display='none';let a=70,c=25;tone([400,450,500,550,600],.2,'triangle',.05);const t=setInterval(()=>{if(a>60)a--;if(c<30&&a%2===0)c++;$('t1').innerHTML=thermoSVG(a,'🧪 الأنبوبة');$('t2').innerHTML=thermoSVG(c,'🥛 الكاس');if(a<=60&&c>=30){clearInterval(t);go()}},180)};
+ const go=()=>{const d=document.createElement('div');$('qq').appendChild(d);quiz('كم صارت حرارة الماء في <b>الأنبوبة</b>؟ (اقرا الترمومتر الأول)',['60 درجة','70 درجة','30 درجة'],0,'نزلت من 70 لـ 60.')(d,()=>{$('qq').innerHTML='';const d2=document.createElement('div');$('qq').appendChild(d2);quiz('وكم صارت حرارة الماء في <b>الكاس</b>؟',['30 درجة','25 درجة','60 درجة'],0,'طلعت من 25 لـ 30.')(d2,n)})}};
+ return[talk('🤖','نقيسوا الحرارة بجهاز اسمه <b>الترمومتر</b> 🌡️. الخط الأحمر يطلع لما الشي يسخن، وينزل لما يبرد. والوحدة اسمها <b>درجة سيليزية °س</b>.'),
+ quiz('كوب شاهي سخون وكوب ماء من الثلاجة. في أي واحد الخط الأحمر في الترمومتر يكون أعلى؟',['كوب الشاهي ☕','كوب الماء البارد 🧊'],0),exp,
+ quiz('الماء السخون في الأنبوبة…',['فقد حرارة، فبرد','اكتسب حرارة، فسخن'],0,'الحرارة طلعت منه للماء البارد.'),
+ quiz('الماء البارد في الكاس…',['اكتسب حرارة، فسخن شوية','فقد حرارة'],0,'الحرارة جاته من الأنبوبة السخونة.'),
+ fact('الحرارة تنتقل من <b>الشي السخون</b> للشي <b>البارد</b> 🔥➡🧊<br>لما الماء <b>يكتسب</b> حرارة، درجته <b>تزيد</b>.<br>ولما <b>يفقد</b> حرارة، درجته <b>تقل</b>.')]},
+7:()=>{const freeze=(b,n)=>{b.innerHTML=`<div class="card"><div class="q">مصنع الثلج ❄️: كاس فيه ثلج وملح، وداخله أنبوبة فيها شوية ماء. حرّك الأنبوبة وراقب!</div>
+ <div class="lab" style="display:flex;align-items:center;justify-content:space-around"><div style="width:40%" id="th">${thermoSVG(10,'🧪')}</div><div class="center" style="font-size:4rem" id="tb">💧</div></div>
+ <div class="center"><button class="btn pu" id="mx">🔄 حرّك! (اضغط بسرعة)</button></div><div id="qq"></div></div>`;let t=10;say('اضغط حرّك بسرعة لين الماء يتجمّد');
+ $('mx').onclick=()=>{if(t<=0)return;t-=2;tone([800-t*20],.06,'square',.04);$('th').innerHTML=thermoSVG(t,'🧪');if(t<=0){$('tb').textContent='🧊';$('mx').style.display='none';sOk();confetti(10,'❄️🧊');setTimeout(()=>{const d=document.createElement('div');$('qq').appendChild(d);quiz('الماء ولّى ثلج! كم كانت درجة الحرارة؟',['صفر درجة','10 درجات','100 درجة'],0,'الماء يتجمّد عند <b>صفر</b> درجة سيليزية.')(d,n)},800)}}};
+ const melt=(b,n)=>{const T=[0,0,1,2,3,4,6];b.innerHTML=`<div class="card"><div class="q">طلّعنا أنبوبة الثلج برّا الكاس. نقيسوا حرارتها كل دقيقتين ⏱️</div><div class="lab" style="display:flex;align-items:center;gap:8px"><div style="width:34%" id="th">${thermoSVG(0,'')}</div><div style="flex:1"><div class="center" style="font-size:3rem" id="ic">🧊</div><table style="width:100%;border-collapse:collapse;font-weight:900;text-align:center" id="tbl"><tr style="background:#EEF0FF"><td>الزمن (دقيقة)</td><td>الحرارة</td></tr></table></div></div><div class="center"><button class="btn or" id="tk">⏱️ مرّت دقيقتين</button></div><div id="qq"></div></div>`;
+ let k=0;const add=()=>{$('tbl').innerHTML+=`<tr><td>${k*2}</td><td>${T[k]}°</td></tr>`;$('th').innerHTML=thermoSVG(T[k],'');$('ic').textContent=k<2?'🧊':k<4?'🧊💧':'💧';};add();say('اضغط مرّت دقيقتين، وسجّل الحرارة');
+ $('tk').onclick=()=>{k++;tone([500],.08);add();if(k>=6){$('tk').style.display='none';setTimeout(()=>{const d=document.createElement('div');$('qq').appendChild(d);quiz('شن لاحظت؟ الحرارة <b>بقت صفر</b> في الأول… ليش؟',['لأن الثلج كان قاعد يذوب','لأن الترمومتر خربان','لأن الماء سخن'],0,'وهو يذوب، الحرارة تبقى صفر. ولما يذوب كله، تبدأ تزيد.')(d,n)},600)}}};
+ return[talk('🤖','الغرفة السابعة باردة برشا! 🥶 هنا بنصنعوا <b>ثلج</b> بدون فريزر! السر: ثلج + ملح يخلّوا الكاس بارد بزاف.'),freeze,
+ fact('تحوّل الماء من <b>سائل 💧 إلى صلب 🧊</b> اسمه: <b>التجمّد</b>.'),melt,
+ quiz('الثلج وهو يذوب… من وين جاته الحرارة؟',['من الهواء اللي حواليه','من الثلاجة','من الملح'],0,'الهواء الدافي حوالين الأنبوبة عطاه حرارة.'),
+ fact('تحوّل الماء من <b>صلب 🧊 إلى سائل 💧</b> اسمه: <b>الانصهار</b> (الذوبان).'),
+ quiz('مكعب ثلج تحت الشمس يولّي ماء. هذا اسمه…',['انصهار','تجمّد'],0)]},
+8:()=>{const boil=(b,n)=>{b.innerHTML=`<div class="card"><div class="q">سخّن الماء على النار 🔥 وراقب الترمومتر!</div><div class="lab" style="display:flex;align-items:center;justify-content:space-around"><div style="width:36%" id="th">${thermoSVG(25,'')}</div><div class="center"><div style="font-size:2.4rem;min-height:44px" id="st"></div><div style="font-size:4rem">🫕</div><div style="font-size:2rem" id="fr"></div></div></div><div class="center"><button class="btn or" id="ht">🔥 سخّن (اضغط بزاف)</button></div><div id="qq"></div></div>`;let t=25;say('اضغط سخّن لين الماء يغلي');
+ $('ht').onclick=()=>{if(t>=100)return;t=Math.min(100,t+15);$('fr').textContent='🔥';tone([200+t*4],.07,'triangle',.05);$('th').innerHTML=thermoSVG(t,'');if(t>70)$('st').textContent='💨';if(t>=100){$('st').textContent='💨💨💨';$('ht').style.display='none';tone([300,600,300,600],.1,'sine',.05);setTimeout(()=>{const d=document.createElement('div');$('qq').appendChild(d);quiz('الماء بدا يغلي ويطلع منه بخار! كم درجة الحرارة؟',['100 درجة','50 درجة','صفر'],0,'الماء <b>يغلي عند 100</b> درجة، ويتحوّل لبخار ماء.')(d,n)},700)}}};
+ const spoon=(b,n)=>{b.innerHTML=`<div class="card"><div class="q">حط ملعقة معدن <b>باردة</b> فوق البخار الطالع 🥄</div><div class="lab center"><div style="font-size:3rem" id="sp">🥄</div><div style="font-size:2.4rem">💨💨</div><div style="font-size:3.4rem">🫕</div></div><div class="center"><button class="btn pu" id="pt">🥄 حطّ الملعقة</button></div><div id="qq"></div></div>`;say('حط الملعقة الباردة فوق البخار');
+ $('pt').onclick=()=>{$('pt').style.display='none';sPop();setTimeout(()=>{$('sp').textContent='🥄💧💧';tone([900,700],.1)},700);setTimeout(()=>{const d=document.createElement('div');$('qq').appendChild(d);quiz('شنو اللي تكوّن على الملعقة الباردة؟',['قطرات ماء','ملح','ثلج'],0,'البخار لمس الملعقة الباردة، <b>فقد حرارته</b>، ورجع قطرات ماء!')(d,n)},1500)}};
+ return[talk('🤖','آخر غرفة! 🎉 فيها <b>البلّورة الماسية</b> 💎. هنا بنشوفوا الماء كيف يتحوّل لـ<b>بخار</b>… وكيف البخار يرجع <b>ماء</b>!'),boil,
+ fact('تحوّل الماء من <b>سائل 💧 إلى غاز 💨</b> (بخار) اسمه: <b>التبخّر</b>. ولما يغلي عند 100° يتبخّر بسرعة.'),spoon,
+ fact('تحوّل بخار الماء من <b>غاز 💨 إلى سائل 💧</b> لما يبرد اسمه: <b>التكاثف</b>. زي القطرات على شبّاك السيارة في الشتاء!'),
+ bins('صنّف التحوّلات: الماء <b>يكتسب</b> حرارة ولا <b>يفقد</b> حرارة؟ 🔥🧊',['🔥 يكتسب حرارة','🧊 يفقد حرارة'],[{e:'🧊➡💧',t:'انصهار',k:0},{e:'💧➡💨',t:'تبخّر',k:0},{e:'💧➡🧊',t:'تجمّد',k:1},{e:'💨➡💧',t:'تكاثف',k:1}]),
+ quiz('مرايا الحمّام تتغطّى بقطرات ماء بعد الدوش السخون. هذا اسمه…',['تكاثف','انصهار','تجمّد'],0,'بخار الدوش لمس المراية الباردة وتكاثف.'),
+ quiz('صحن فيه ماء تحت الشمس، بعد يومين الماء اختفى! وين مشى؟',['تبخّر وطلع للهواء','تجمّد','غطس في الصحن'],0)]}
+};
+home();
+</script>
+<script src="nourbtn.js" defer></script>
+</body></html>
