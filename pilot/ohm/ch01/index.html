@@ -22,7 +22,8 @@
 'use strict';
 // Pilot for «الكتاب الحي»: Physics, 3rd secondary, lesson 4-2, Ohm's law. Electrons blue, current I blue,
 // voltage V amber, resistance R pink, heat red (the science book's colours). Formulas stay left to right.
-const CHAPTER = { number: 1, title: 'قانون أوم', minutes: 4, language: 'ar' };
+const BACK = '../../../lessons/phy12.html#c4';   // back to the lesson in «الكتاب الحي»
+const CHAPTER = { number: 1, title: 'قانون أوم', minutes: 4, language: 'ar', next: BACK };
 const V0 = 120;                                   // electrons' drift at the base current, px/s
 const BOX = '#16221f';
 const sm = (t, a, b) => io(ramp(t, a, b));
@@ -221,6 +222,7 @@ const BEATS = [
 ].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
 
 boot();
+{ const b = document.getElementById('bHome'); if (b) b.href = BACK; }
 </script>
 </body>
 </html>
