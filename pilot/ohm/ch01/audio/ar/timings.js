@@ -64,7 +64,7 @@ window.TIMINGS = {
   "dur": 22.128,
   "marks": {
    "eq": 2.926,
-   "down": 7.088,
+   "down": 9.774,
    "rise": 13.763,
    "cond": 17.766
   },

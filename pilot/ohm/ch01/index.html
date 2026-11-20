@@ -22,7 +22,7 @@
 'use strict';
 // Pilot for «الكتاب الحي»: Physics, 3rd secondary, lesson 4-2, Ohm's law. Electrons blue, current I blue,
 // voltage V amber, resistance R pink, heat red (the science book's colours). Formulas stay left to right.
-const CHAPTER = { number: 1, title: 'قانون أوم', minutes: 3, language: 'ar' };
+const CHAPTER = { number: 1, title: 'قانون أوم', minutes: 4, language: 'ar' };
 const V0 = 120;                                   // electrons' drift at the base current, px/s
 const BOX = '#16221f';
 const sm = (t, a, b) => io(ramp(t, a, b));
@@ -111,7 +111,7 @@ const BEATS = [
   const p = panel(0), te = m('eq'), td = m('down'), tr = m('rise'), tc = m('cond');
   line(p, [['V', VOLT], [' = '], ['I', AMPS], [' × '], ['R', OHMS]], 800, 110, .3, { size: 60 });
   say(p, 'فرق الجهد = التيار × المقاومة', 800, 175, te + .2, { size: 34, fill: COL.dim });
-  const Rof = t => t < td + .8 ? 4 : t < tr + .6 ? 2 : 6;
+  const Rof = t => t < td + .3 ? 4 : t < tr + .6 ? 2 : 6;
   const c = loopCircuit(p, { x0: 360, y0: 385, x1: 1240, y1: 700, bw: 200, bh: 84, gap: 50 });
   const b = bulb(p, { x: 800, y: 385, s: .8 });
   phLabel(p, '6 V', { x: 265, y: 555, size: 42, fill: VOLT });
@@ -119,10 +119,10 @@ const BEATS = [
   rl.setAttribute('direction', 'ltr');
   mk('rect', { x: 720, y: 680, width: 160, height: 40, fill: COL.board }, p);
   const am = ammeter(p, 800, 700, { r: 56 });
-  say(p, 'مقاومة أصغر ⟸ تيار أكبر', 800, 510, td + .8, { size: 34 });
+  say(p, 'مقاومة أصغر ⟸ تيار أكبر', 800, 510, td + .4, { size: 34 });
   say(p, 'مقاومة أكبر ⟸ تيار أقل', 800, 560, tr + .6, { size: 34 });
   say(p, 'بشرط ثبوت درجة الحرارة', 1380, 860, tc, { size: 32, fill: COL.task });
-  const keys = [[0, 1.5], [td + .8, 1.5], [td + 1.3, 3], [tr + .6, 3], [tr + 1.1, 1]].map(([a, i]) => [a, 60 * i]);
+  const keys = [[0, 1.5], [td + .3, 1.5], [td + .8, 3], [tr + .6, 3], [tr + 1.1, 1]].map(([a, i]) => [a, 60 * i]);
   clockRun(t => {
     c.set(phaseOf(t, keys));
     const cur = (phaseOf(t + .001, keys) - phaseOf(t, keys)) / .001 / 60;
