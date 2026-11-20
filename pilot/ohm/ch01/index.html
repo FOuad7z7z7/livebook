@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>قانون أوم – الكتاب الحي</title>
+<link rel="stylesheet" href="../lib/engine.css">
+<link rel="expect" href="#bar" blocking="render">
+</head>
+<body>
+<script src="../lib/engine.js"></script>
+<script src="../lib/figures.js"></script>
+<script src="../lib/actors.js"></script>
+<script src="../lib/physics.js"></script>
+<script src="../lib/machines.js"></script>
+<script src="../lib/energy.js"></script>
+<script src="../lib/thermal.js"></script>
+<script src="../lib/waves.js"></script>
+<script src="../lib/electric.js"></script>
+<script src="audio/ar/timings.js"></script>
+<script>
+'use strict';
+// Pilot for «الكتاب الحي»: Physics, 3rd secondary, lesson 4-2, Ohm's law. Electrons blue, current I blue,
+// voltage V amber, resistance R pink, heat red (the science book's colours). Formulas stay left to right.
+const CHAPTER = { number: 1, title: 'قانون أوم', minutes: 3, language: 'ar' };
+const V0 = 120;                                   // electrons' drift at the base current, px/s
+const BOX = '#16221f';
+const sm = (t, a, b) => io(ramp(t, a, b));
+const lerp = (a, b, k) => a + (b - a) * k;
+const rtl = e => { e.setAttribute('direction', 'rtl'); return e; };
+const say = (p, s, x, y, t0, o = {}) => { const e = rtl(phLabel(p, s, { x, y, size: 34, ...o, o: 0 })); show(e, t0); return e; };
+const line = (p, parts, x, y, t0, o = {}) => { const e = runs(p, parts, { x, y, size: 42, ...o }); e.setAttribute('direction', 'ltr'); show(e, t0); return e; };
+const frameBox = (p, x, y, w, h) => mk('rect', { x, y, width: w, height: h, rx: 18, fill: BOX, stroke: COL.faint, 'stroke-width': 3 }, p);
+
+// A rectangular circuit with the battery on the left side (+ end up); c.set(s) moves the electrons.
+function loopCircuit(p, { x0, y0, x1, y1, bw = 160, bh = 70, gap = 56, r = 8, w = 12 }) {
+  const ym = (y0 + y1) / 2, R = route([[x0, ym + bw / 2], [x0, y1], [x1, y1], [x1, y0], [x0, y0], [x0, ym - bw / 2]], true);
+  const g = G(p); wire(g, R, { w });
+  const flow = eFlow(g, R, { gap, r });
+  const bat = battery(g, { x: x0, y: ym, w: bw, h: bh, r: -90 });
+  return Object.assign(g, { R, flow, bat, set(s) { flow.set(s); return g; } });
+}
+// A dial ammeter: a.set(I) swings the needle (0..max A) and writes the reading.
+function ammeter(p, x, y, { r = 64, max = 4 } = {}) {
+  const g = G(p, { x, y });
+  mk('circle', { r: r + 8, fill: '#4a5458', ...phLine() }, g); mk('circle', { r, fill: '#ebe6d8' }, g);
+  path(g, Array.from({ length: 9 }, (_, i) => { const a = (-150 + i * 15) * Math.PI / 180; return `M${(Math.cos(a) * r * .72).toFixed(1)} ${(Math.sin(a) * r * .72 + 14).toFixed(1)}L${(Math.cos(a) * r * .88).toFixed(1)} ${(Math.sin(a) * r * .88 + 14).toFixed(1)}`; }).join(''), { stroke: '#7d8a86', 'stroke-width': 3 });
+  T(g, 'A', { y: 42, size: 26, weight: 800, fill: '#2f3a3d', anchor: 'middle' });
+  const nd = G(g, { y: 14 }); path(nd, `M0 0L${r * .82} 0`, { stroke: '#e2553f', 'stroke-width': 4 }); mk('circle', { cy: 14, r: 6, fill: '#2f3a3d' }, g);
+  const lab = phLabel(p, '', { x, y: y + r + 52, size: 34, fill: AMPS });
+  return Object.assign(g, { lab, set(I) { put(nd, { r: -150 + 120 * Math.min(1, I / max) }); phText(lab, `I = ${+I.toFixed(1)} A`); return g; } });
+}
+// The graph of V against I: origin (GX, GY), px per amp and per volt.
+const GX = 300, GY = 770, KX = 150, KY = 8.2;
+const gpt = (I, V) => [GX + I * KX, GY - V * KY];
+
+/* ---------- beats ---------- */
+const BEATS = [
+['intro', 'قانون أوم', (m, D) => {
+  const p = panel(0);
+  const c = loopCircuit(p, { x0: 1000, y0: 300, x1: 1440, y1: 660 }), b = bulb(p, { x: 1220, y: 300 });
+  b.set(1); clockRun(t => c.set(V0 * t), D);
+  const g = G(p, { o: 0, y: 24 });
+  rtl(phLabel(g, 'الفيزياء · الثالث الثانوي · الدرس ⁦4-2⁩', { x: 520, y: 330, size: 30, fill: COL.dim, weight: 600 }));
+  rtl(phLabel(g, 'قانون أوم', { x: 520, y: 450, size: 110, weight: 700 }));
+  tw(g, { o: 1, y: 0 }, .2, 1.1, out);
+  line(p, [['V', VOLT], [' = '], ['I', AMPS], [' × '], ['R', OHMS]], 520, 560, m('sub'), { size: 52 });
+}, { lead: false }],
+
+['push', 'الجهد يدفع الإلكترونات', (m, D) => {
+  const p = panel(0), tb = m('bat'), tu = m('up'), tf = m('fast');
+  const c = loopCircuit(p, { x0: 380, y0: 280, x1: 1220, y1: 700, bw: 200, bh: 84, gap: 52 });
+  const b = bulb(p, { x: 800, y: 280 });
+  const vl = phLabel(p, '1.5 V', { x: 270, y: 505, size: 46, fill: VOLT });
+  say(p, 'البطارية تدفع الإلكترونات', 800, 470, tb + .3, { size: 36, fill: CHG_N });
+  say(p, 'فرق جهد أكبر ⟸ تيار أكبر ⟸ ضوء أشد', 800, 560, tf + .4, { size: 36, fill: VOLT });
+  const keys = [[0, V0 * .6], [tu, V0 * .6], [tf, V0 * 2.4], [tf + 1, V0 * 2.4]];
+  clockRun(t => {
+    c.set(phaseOf(t, keys));
+    phText(vl, t < tu + .3 ? '1.5 V' : '9 V');
+    b.set(lerp(.25, 1, sm(t, tf, tf + 1)));
+  }, D);
+}, { lead: false }],
+
+['resist', 'المقاومة', (m, D) => {
+  const p = panel(0), tz = m('zoom'), th = m('hit'), tn = m('name'), tu = m('unit');
+  // Left: a wire with a magnifier on it. Right: inside the wire, electrons zigzag between the atoms and heat them.
+  const W = route([[120, 560], [620, 560]]); wire(p, W, { w: 22 }); const wf = eFlow(p, W, { gap: 40, r: 7 });
+  const lens = G(p, { o: 0 }); show(lens, tz - .2);
+  mk('circle', { cx: 400, cy: 560, r: 70, fill: 'none', stroke: COL.chalk, 'stroke-width': 6 }, lens);
+  path(lens, 'M450 610L520 680', { stroke: COL.chalk, 'stroke-width': 12, 'stroke-linecap': 'round' });
+  path(lens, 'M400 490L760 170M400 630L760 640', { stroke: COL.faint, 'stroke-width': 3, 'stroke-dasharray': '8 8' });
+  const B = G(p, { o: 0 }); show(B, tz);
+  frameBox(B, 760, 170, 740, 470);
+  const at = molField(B, { x: 780, y: 190, w: 700, h: 430, n: 18, cols: 6, r: 24, color: '#9aa5a8', lattice: true, seed: 3 });
+  const zz = route([[760, 270], [880, 430], [990, 260], [1110, 520], [1220, 300], [1330, 540], [1440, 360], [1500, 410]]);
+  const ze = eFlow(B, zz, { gap: 95, r: 10 });
+  rtl(phLabel(B, 'داخل السلك', { x: 1130, y: 150, size: 30, fill: COL.dim }));
+  say(B, 'تصادمات ⟸ حرارة', 1130, 690, th + .6, { size: 36, fill: HEAT });
+  say(p, 'المقاومة ⁦R⁩: إعاقة حركة الإلكترونات', 800, 780, tn, { size: 40, fill: OHMS });
+  say(p, 'وحدتها: الأوم (⁦Ω⁩)', 800, 850, tu + .1, { size: 38 });
+  clockRun(t => {
+    wf.set(90 * t);
+    const heat = sm(t, th, th + 2.5);
+    at.set(t, 3 + 9 * heat); thAtt(at.dots, 'fill', mix('#9aa5a8', HEAT, heat));
+    ze.set(150 * Math.max(0, t - tz));
+  }, D);
+}, { lead: false }],
+
+['law', 'القانون', (m, D) => {
+  const p = panel(0), te = m('eq'), td = m('down'), tr = m('rise'), tc = m('cond');
+  line(p, [['V', VOLT], [' = '], ['I', AMPS], [' × '], ['R', OHMS]], 800, 110, .3, { size: 60 });
+  say(p, 'فرق الجهد = التيار × المقاومة', 800, 175, te + .2, { size: 34, fill: COL.dim });
+  const Rof = t => t < td + .8 ? 4 : t < tr + .6 ? 2 : 6;
+  const c = loopCircuit(p, { x0: 360, y0: 385, x1: 1240, y1: 700, bw: 200, bh: 84, gap: 50 });
+  const b = bulb(p, { x: 800, y: 385, s: .8 });
+  phLabel(p, '6 V', { x: 265, y: 555, size: 42, fill: VOLT });
+  const rl = phLabel(p, '', { x: 900, y: 330, size: 42, fill: OHMS, anchor: 'start' });
+  rl.setAttribute('direction', 'ltr');
+  mk('rect', { x: 720, y: 680, width: 160, height: 40, fill: COL.board }, p);
+  const am = ammeter(p, 800, 700, { r: 56 });
+  say(p, 'مقاومة أصغر ⟸ تيار أكبر', 800, 510, td + .8, { size: 34 });
+  say(p, 'مقاومة أكبر ⟸ تيار أقل', 800, 560, tr + .6, { size: 34 });
+  say(p, 'بشرط ثبوت درجة الحرارة', 1380, 860, tc, { size: 32, fill: COL.task });
+  const keys = [[0, 1.5], [td + .8, 1.5], [td + 1.3, 3], [tr + .6, 3], [tr + 1.1, 1]].map(([a, i]) => [a, 60 * i]);
+  clockRun(t => {
+    c.set(phaseOf(t, keys));
+    const cur = (phaseOf(t + .001, keys) - phaseOf(t, keys)) / .001 / 60;
+    am.set(cur); b.set(.2 + .8 * cur / 3);
+    phText(rl, `R = ${Rof(t)} Ω`);
+  }, D);
+}, { lead: false }],
+
+['graph', 'منحنى (V – I)', (m, D) => {
+  const p = panel(0), tp = m('pts'), tl = m('line'), ts = m('slope'), tm = m('lamp');
+  const ax = G(p, { o: 0 }); show(ax, .2);
+  path(ax, `M${GX} ${GY}H${GX + 7 * KX}M${GX} ${GY}V${GY - 72 * KY}`, { stroke: COL.chalk, 'stroke-width': 4 });
+  for (let i = 1; i <= 6; i++) { T(ax, String(i), { x: GX + i * KX, y: GY + 40, size: 26, fill: COL.dim, anchor: 'middle' }); path(ax, `M${GX + i * KX} ${GY}v10`, { stroke: COL.chalk, 'stroke-width': 3 }); }
+  for (let v = 10; v <= 70; v += 10) { T(ax, String(v), { x: GX - 18, y: GY - v * KY + 9, size: 26, fill: COL.dim, anchor: 'end' }); path(ax, `M${GX} ${GY - v * KY}h-10`, { stroke: COL.chalk, 'stroke-width': 3 }); }
+  T(ax, 'I (A)', { x: GX + 7 * KX + 20, y: GY + 10, size: 32, fill: AMPS, weight: 700 });
+  T(ax, 'V (V)', { x: GX, y: GY - 72 * KY - 22, size: 32, fill: VOLT, weight: 700, anchor: 'middle' });
+  phLabel(p, 'سلك فلزي', { x: 1400, y: 200, size: 34, fill: OHMS });
+  [1, 2, 3, 4, 5, 6].forEach((I, i) => {
+    const [x, y] = gpt(I, 10 * I), d = mk('circle', { cx: x, cy: y, r: 11, fill: OHMS, ...phLine(2) }, p);
+    put(d, { o: 0 }); show(d, tp + .3 + i * .35, .3);
+  });
+  const [x6, y6] = gpt(6.6, 66);
+  draw(path(p, `M${GX} ${GY}L${x6} ${y6}`, { stroke: OHMS, 'stroke-width': 5 }, { d: 0 }), tl + .2, 1.2);
+  say(p, 'خط مستقيم يمر بنقطة الأصل', 1330, 430, tl + 1, { size: 32 });
+  // slope triangle from I = 2 to I = 5
+  const [ax2, ay2] = gpt(2, 20), [ax5, ay5] = gpt(5, 50);
+  const tri = path(p, `M${ax2} ${ay2}H${ax5}V${ay5}`, { stroke: COL.task, 'stroke-width': 4, fill: 'none', 'stroke-dasharray': '10 8' }, { d: 0 });
+  draw(tri, ts, .9);
+  line(p, [['ΔI = 3 A', AMPS]], (ax2 + ax5) / 2, ay2 + 44, ts + .7, { size: 30 });
+  line(p, [['ΔV = 30 V', VOLT]], ax5 + 110, (ay2 + ay5) / 2 + 10, ts + .9, { size: 30 });
+  line(p, [['R', OHMS], [' = ΔV ÷ ΔI = 30 ÷ 3 = '], ['10 Ω', OHMS]], 1220, 140, ts + 1.4, { size: 38 });
+  // the lamp: a curve that bends up (its resistance grows as it heats)
+  const lampD = Array.from({ length: 31 }, (_, i) => { const I = i * 0.12, V = 4 * I + 3.2 * I * I; const [x, y] = gpt(I, V); return `${i ? 'L' : 'M'}${x.toFixed(1)} ${y.toFixed(1)}`; }).join('');
+  draw(path(p, lampD, { stroke: COL.int, 'stroke-width': 5, fill: 'none' }, { d: 0 }), tm + .2, 1.4);
+  say(p, 'مصباح فتيلي: غير أومي', 560, 160, tm + 1.2, { size: 34, fill: COL.int });
+}, { lead: false }],
+
+['q1', 'سؤال سريع', (m, D) => {
+  const p = panel(0);
+  const c = loopCircuit(p, { x0: 520, y0: 140, x1: 1080, y1: 560, bw: 180, bh: 76 });
+  const b = bulb(p, { x: 800, y: 140, s: .85 }); b.set(.6);
+  phLabel(p, '6 V', { x: 420, y: 365, size: 42, fill: VOLT });
+  const r = phLabel(p, 'R = 10 Ω', { x: 1180, y: 365, size: 40, fill: OHMS }); r.setAttribute('direction', 'ltr');
+  clockRun(t => c.set(V0 * .7 * t), D, { tail: true });
+}, { ask: done => quiz(BAND, [{
+  id: 'c-current', prompt: ['مصباح مقاومته 10 أوم، وفرق الجهد بين طرفيه 6 فولت. ما شدة التيار؟'],
+  build: blanks([{ parts: ['I = V ÷ R = 6 ÷ 10 = ', { box: '0.6' }, ' أمبير'], why: 'I = V ÷ R = 6 ÷ 10 = 0.6 A', hint: 'اقسم فرق الجهد على المقاومة.' }]),
+}], done, 'سؤال سريع') }],
+
+['example', 'مثال محلول', (m, D) => {
+  const p = panel(0), tg = m('given'), tc = m('conv'), tsub = m('sub'), tr = m('res'), tt = m('trap');
+  frameBox(p, 160, 110, 1280, 150);
+  say(p, 'مقاومة ⁦20 Ω⁩ يمر بها تيار ⁦250 mA⁩. احسب فرق الجهد.', 800, 200, tg, { size: 38 });
+  const rows = [
+    [[['1)  250 mA = 250 ÷ 1000 = '], ['0.25 A', AMPS]], tc + .2],
+    [[['2)  V = '], ['I', AMPS], [' × '], ['R', OHMS], [' = 0.25 × 20']], tsub + .1],
+    [[['3)  V = '], ['5 V', COL.good]], tr + .1],
+  ];
+  rows.forEach(([parts, t0], i) => line(p, parts, 800, 360 + i * 95, t0, { size: 44 }));
+  const box = mk('rect', { x: 620, y: 500, width: 360, height: 72, rx: 14, fill: 'none', stroke: COL.good, 'stroke-width': 4 }, p);
+  put(box, { o: 0 }); show(box, tr + .4);
+  const bad = G(p, { o: 0 }); show(bad, tt + .2);
+  line(bad, [['250 × 20 = 5000 V', COL.bad]], 800, 760, tt + .2, { size: 40 });
+  draw(path(bad, 'M630 748H970', { stroke: COL.bad, 'stroke-width': 6 }, { d: 0 }), tt + .9, .5);
+  say(bad, 'نسيت التحويل!', 800, 840, tt + 1, { size: 34, fill: COL.bad });
+}, { lead: false }],
+
+['wrap', 'الخلاصة', (m, D) => {
+  const p = panel(0);
+  [['المقاومة تعيق حركة الإلكترونات، ووحدتها الأوم (⁦Ω⁩)', 'w1', OHMS],
+   ['فرق الجهد = التيار × المقاومة (⁦V = I × R⁩)، عند ثبوت درجة الحرارة', 'w2', VOLT],
+   ['منحنى الموصل الأومي خط مستقيم، وميله هو المقاومة', 'w3', AMPS]].forEach(([s, mark, col], i) => {
+    const g = G(p, { x: 16, y: 260 + i * 160, o: 0 });
+    mk('circle', { cx: 1380, cy: -12, r: 30, fill: col }, g);
+    T(g, String(i + 1), { x: 1380, y: -1, size: 32, fill: COL.board, weight: 700, anchor: 'middle' });
+    rtl(T(g, s, { x: 1320, size: 38, weight: 600, anchor: 'start' }));
+    tw(g, { o: 1, x: 0 }, m(mark), .6);
+  });
+  say(p, 'والآن: تمارين الدرس', 800, 820, m('end'), { size: 32, fill: COL.dim });
+}],
+
+['final1', 'تمارين الدرس', () => { panel(0); }, { ask: done => quiz(SCREEN, [
+  { id: 'p-nonohmic', prompt: ['أي مما يلي موصل لا يخضع لقانون أوم؟'],
+    build: choice([['المصباح الفتيلي'], ['سلك نحاس عند درجة حرارة ثابتة'], ['سلك كونستانتان']], 0,
+      'مقاومة الفتيل تزيد عندما يسخن، فمنحناه ليس خطًا مستقيمًا.',
+      [null, 'عند ثبوت درجة الحرارة يخضع النحاس لقانون أوم.', 'الكونستانتان مقاومته شبه ثابتة، فهو أومي.']) },
+  { id: 'p-volt', prompt: ['مقاومة فتيل مصباح 1.2 كيلو أوم، ويحتاج تيارًا 0.2 أمبير ليضيء. ما فرق الجهد؟'],
+    build: blanks([{ parts: ['V = 0.2 × 1200 = ', { box: '240' }, ' فولت'], why: 'نحوّل 1.2 kΩ إلى 1200 Ω، ثم V = I × R = 0.2 × 1200 = 240 V', hint: 'حوّل الكيلو أوم إلى أوم أولًا: اضرب في 1000.' }]) },
+  { id: 'p-double', prompt: ['موصل أومي، ضاعفنا فرق الجهد بين طرفيه. ماذا يحدث للتيار؟'],
+    build: choice([['يتضاعف'], ['يبقى ثابتًا'], ['يقلّ إلى النصف']], 0,
+      'R ثابتة، فالتيار يتناسب طرديًا مع فرق الجهد.',
+      [null, 'التيار يتغير مع فرق الجهد ما دامت المقاومة ثابتة.', 'هذا يحدث لو ضاعفنا المقاومة، لا فرق الجهد.']) },
+], done, 'تمارين الدرس') }],
+
+['finish', 'النهاية', () => { panel(0); }, { ask: finishCard }],
+].map(([id, title, run, extra]) => ({ id, title, run, ...extra }));
+
+boot();
+</script>
+</body>
+</html>
